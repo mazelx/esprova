@@ -66,7 +66,7 @@ class Race(models.Model):
     event = models.ForeignKey(Event)
     title = models.CharField(max_length=100, blank=True, null=True)
     edition = models.PositiveSmallIntegerField()
-    date = models.DateTimeField(auto_now_add=True, auto_now=False)
+    date = models.DateTimeField()
     distance_cat = models.ForeignKey(DistanceCategory)
     price = models.PositiveIntegerField()
     federation = models.ForeignKey(Federation, blank=True, null=True)
