@@ -1,0 +1,13 @@
+<h1>Race generic list</h1>
+
+{% for race in object_list %}
+    <div class="race">
+       <h3>{{ race.event.name }} - Distance {{ race.distance_cat.name }}</h3>
+       {{race.sport.name}}
+       <ul>
+       {% for sd in race.stagedistancespecific_set.all %}
+          <li>{{sd.stage.name}} : {{sd.distance}}m </li>
+       {% endfor%}
+        </ul>
+    </div>
+{% endfor %}

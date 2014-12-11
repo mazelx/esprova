@@ -20,9 +20,7 @@ class SportStage(models.Model):
         ordering = ['sport', 'default_order']
 
     def __str__(self):
-        return "{0}/{1} : {2}".format(
-            self.sport, self.default_order, self.name
-            )
+        return "{0}/{1} : {2}".format(self.sport, self.default_order, self.name)
 
 
 class Event(models.Model):
@@ -62,10 +60,6 @@ class DistanceCategory(models.Model):
     def __str__(self):
         return "{0} - {1} ({2})".format(self.sport.name, self.name, self.long_name)
 
-
-# class Distance(models.Model):
-#     combinedDistance = models.BooleanField(default=False)
-#     distance = models.PositiveIntegerField()
 
 class Race(models.Model):
     sport = models.ForeignKey(Sport)
@@ -133,6 +127,3 @@ class EntryFee(models.Model):
     from_date = models.DateField(null=True)
     to_date = models.DateField(null=True)
     Price = models.DecimalField(max_digits=6, decimal_places=2)
-
-
-    
