@@ -8,6 +8,7 @@ class Sport(models.Model):
     def __str__(self):
         return self.name
 
+
 class SportStage(models.Model):
     sport = models.ForeignKey(Sport)
     name = models.CharField(max_length=20)
@@ -16,10 +17,13 @@ class SportStage(models.Model):
     class Meta:
         verbose_name = "Sport Stage"
         verbose_name_plural = "Sport Stages"
-        ordering = ['sport','default_order']
+        ordering = ['sport', 'default_order']
 
     def __str__(self):
-        return "{0}/{1} : {2}".format(self.sport, self.default_order, self.name)
+        return "{0}/{1} : {2}".format(
+            self.sport, self.default_order, self.name
+            )
+
 
 class Event(models.Model):
     name = models.CharField(max_length=150)
@@ -27,12 +31,14 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
+
 class Federation(models.Model):
     name = models.CharField(max_length=150)
     sport = models.ManyToManyField(Sport)
-    
+
     def __str__(self):
         return self.name
+
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
@@ -40,11 +46,13 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+
 class Label(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
 
 class DistanceCategory(models.Model):
     sport = models.ForeignKey(Sport)
@@ -52,7 +60,7 @@ class DistanceCategory(models.Model):
     long_name = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
-        return "{0} - {1} ({2})".format(self.sport.name, self.name, self.long_name) 
+        return "{0} - {1} ({2})".format(self.sport.name, self.name, self.long_name)
 
 
 # class Distance(models.Model):
@@ -72,21 +80,20 @@ class Race(models.Model):
     contact = models.ForeignKey(Contact)
     description = models.TextField(blank=True, null=True)
 
-
     def save(self, *args, **kwargs):
         super(Race, self).save(*args, **kwargs)
         self.initStageSpecific()
         super(Race, self).save(*args, **kwargs)
 
-
     def __str__(self):
-        return "{0} - {1}".format(self.event.name, self.distance_cat.name) 
+        return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
     def initStageSpecific(self):
         if not self.stagedistancespecific_set.all():
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
                 rs.save()
+
 
 class StageDistance(models.Model):
     order = models.PositiveSmallIntegerField()
@@ -96,18 +103,17 @@ class StageDistance(models.Model):
     class Meta:
         abstract = True
 
+
 class StageDistanceSpecific(StageDistance):
     race = models.ForeignKey(Race)
-    
+
     class Meta:
         verbose_name = "Stage distance (for a race)"
-        verbose_name_plural = "Stages distance (for a race)" 
+        verbose_name_plural = "Stages distance (for a race)"
         ordering = ['pk']
-
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.race, self.order, self.stage.name, self.distance)
-
 
 
 class StageDistanceDefault(StageDistance):
@@ -115,9 +121,8 @@ class StageDistanceDefault(StageDistance):
 
     class Meta:
         verbose_name = "Stage distance (default)"
-        verbose_name_plural = "Stages distance (default)"   
+        verbose_name_plural = "Stages distance (default)"
         ordering = ['pk']
-
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)
