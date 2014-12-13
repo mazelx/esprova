@@ -1,0 +1,207 @@
+[{
+    "fields": {
+        "combinedSport": true,
+        "name": "Triathlon"
+    },
+    "model": "core.sport",
+    "pk": 2
+}, {
+    "fields": {
+        "name": "Natation",
+        "default_order": 1,
+        "sport": 2
+    },
+    "model": "core.sportstage",
+    "pk": 4
+}, {
+    "fields": {
+        "name": "Cyclisme",
+        "default_order": 1,
+        "sport": 2
+    },
+    "model": "core.sportstage",
+    "pk": 5
+}, {
+    "fields": {
+        "name": "Course \u00e0 Pied",
+        "default_order": 1,
+        "sport": 2
+    },
+    "model": "core.sportstage",
+    "pk": 6
+}, {
+    "fields": {
+        "name": "XS",
+        "long_name": null,
+        "sport": 2
+    },
+    "model": "core.distancecategory",
+    "pk": 4
+}, {
+    "fields": {
+        "name": "S",
+        "long_name": null,
+        "sport": 2
+    },
+    "model": "core.distancecategory",
+    "pk": 5
+}, {
+    "fields": {
+        "name": "M",
+        "long_name": null,
+        "sport": 2
+    },
+    "model": "core.distancecategory",
+    "pk": 6
+}, {
+    "fields": {
+        "name": "L",
+        "long_name": null,
+        "sport": 2
+    },
+    "model": "core.distancecategory",
+    "pk": 7
+}, {
+    "fields": {
+        "name": "XL",
+        "long_name": null,
+        "sport": 2
+    },
+    "model": "core.distancecategory",
+    "pk": 8
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 4,
+        "distance_cat": 4,
+        "distance": 400
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 7
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 5,
+        "distance_cat": 4,
+        "distance": 10000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 8
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 6,
+        "distance_cat": 4,
+        "distance": 2500
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 9
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 4,
+        "distance_cat": 5,
+        "distance": 750
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 10
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 5,
+        "distance_cat": 5,
+        "distance": 20000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 11
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 6,
+        "distance_cat": 5,
+        "distance": 5000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 12
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 4,
+        "distance_cat": 6,
+        "distance": 1500
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 13
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 5,
+        "distance_cat": 6,
+        "distance": 40000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 14
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 6,
+        "distance_cat": 6,
+        "distance": 10000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 15
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 4,
+        "distance_cat": 7,
+        "distance": 3000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 16
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 5,
+        "distance_cat": 7,
+        "distance": 80000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 17
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 6,
+        "distance_cat": 7,
+        "distance": 20000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 18
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 4,
+        "distance_cat": 8,
+        "distance": 4000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 19
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 5,
+        "distance_cat": 8,
+        "distance": 120000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 20
+}, {
+    "fields": {
+        "order": 1,
+        "stage": 6,
+        "distance_cat": 8,
+        "distance": 30000
+    },
+    "model": "core.stagedistancedefault",
+    "pk": 21
+}]

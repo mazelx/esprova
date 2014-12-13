@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Sport(models.Model):
@@ -60,6 +61,10 @@ class DistanceCategory(models.Model):
     def __str__(self):
         return "{0} - {1} ({2})".format(self.sport.name, self.name, self.long_name)
 
+    class Meta:
+        verbose_name = "Distance Category"
+        verbose_name_plural = "Distance Categories"
+
 
 class Race(models.Model):
     sport = models.ForeignKey(Sport)
@@ -76,13 +81,14 @@ class Race(models.Model):
 
     def save(self, *args, **kwargs):
         super(Race, self).save(*args, **kwargs)
-        self.initStageSpecific()
+        self.initDistancesFromDefault()
         super(Race, self).save(*args, **kwargs)
 
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
-    def initStageSpecific(self):
+    def initDistancesFromDefault(self):
+        """ Initialize the distances from default distances for this category on race creation """
         if not self.stagedistancespecific_set.all():
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
@@ -117,6 +123,12 @@ class StageDistanceDefault(StageDistance):
         verbose_name = "Stage distance (default)"
         verbose_name_plural = "Stages distance (default)"
         ordering = ['pk']
+
+    def clean(self):
+        if not self.distance_cat.sport.combinedSport:
+            if self.distance_cat.stagedistance_set.all().count() > 1:
+                raise ValidationError('Only combined sport should be able to have multiple stages')
+
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)
