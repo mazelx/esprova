@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container-fluid">
+    <div class="racebanner row">
+        <p class="text-right">
+            <q>{{ race.description }}</q>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <header class="page-header row">
+        <div class="col-md-9">
+            <h1>{{ race.event.name }}
+                    <small><p>f:Saint-Martin-d'Ardèche, France</p></small>
+                </h1>
+        </div>
+        <div class="col-md-3">
+            <h1>
+                {% for distance in race.sport.distancecategory_set.all %}
+                    <button type="button" class="btn btn-default"  disabled="disabled">{{ distance.name }}</button>
+                {% endfor %}
+                </h1>
+        </div>
+    </header>
+</div>
+{% endblock %} {# -------------------------------------------------------------------------------------------------------------------- #}
+<div class="container">
+    <header class="page-header row">
+        <div class="col-md-9">
+            <h1>Triathlon des Gorges de l'Ardèche
+                    <small><p>Saint-Martin-d'Ardèche, France</p></small>
+                </h1>
+        </div>
+        <div class="col-md-3">
+            <h1>
+                <button type="button" class="btn btn-default"  disabled="disabled">XS</button>
+                <button type="button" class="btn btn-default">S</button>
+                <button type="button" class="btn btn-primary">M</button>
+                <button type="button" class="btn btn-default" disabled="disabled">L</button>
+                <button type="button" class="btn btn-default" disabled="disabled">XL</button>
+                </h1>
+        </div>
+    </header>
+    <section class="panel panel-default">
+        <dl class="dl-horizontal panel-body">
+            <dt>Départ</dt>
+            <dd>
+                <time datetime="2015-07-14 18:00">25/07/2014 à 18h</time>
+            </dd>
+            <dt>Adresse</dt>
+            <dd>
+                <address>Quai des Pascadous, Saint-Martin-d'Ardèche</address>
+            </dd>
+            <dt>Web</dt>
+            <dd><a href="www.triathlondesgorges.com">www.triathlondesgorges.com</a>
+            </dd>
+        </dl>
+    </section>
+    <section class="panel panel-default">
+        <dl class="dl-horizontal panel-body">
+            <dt>Organisateur</dt>
+            <dd>Ardèche Sport Attitude</dd>
+            <dt>Contact</dt>
+            <dd>
+                <address>
+                    <strong>Bruno Damiens</strong>
+                    <br> 06 98 62 64 11
+                    <br>
+                    <a href="mailto:#">bruno.damiens@trigorgesardeche.com</a>
+                </address>
+            </dd>
+        </dl>
+    </section>
+    <section class="panel panel-default">
+        <dl class="dl-horizontal panel-body">
+            <dt>Tarif</dt>
+            <dd>35€ avant le 01/06/2014 puis 45€</dd>
+            <dt>Cloture inscriptions</dt>
+            <dd>20/07/2015</dd>
+            <dt>Places disponibles</dt>
+            <dd>300</dd>
+        </dl>
+    </section>
+    <section class="panel panel-default">
+        <dl class="dl-horizontal panel-body">
+            <dt>Distance</dt>
+            <dd>M (Courte Distance)</dd>
+            <dt>Natation</dt>
+            <dd>1,5 Km</dd>
+            <dt>Vélo</dt>
+            <dd>40 Km</dd>
+            <dt>Course à Pied</dt>
+            <dd>10 Km</dd>
+            <dt>Dénivelé</dt>
+            <dd>600m positif, 1500m total</dd>
+        </dl>
+    </section>
+    <section class="panel panel-default">
+        <dl class="dl-horizontal panel-body">
+            <dt>Challenge</dt>
+            <dd>Challenge Tri Dromardèche</dd>
+            <dt>Temps limite</dt>
+            <dd>3h</dd>
+        </dl>
+    </section>
+    <section class="panel panel-default">
+        <dl class="dl-horizontal panel-body">
+            <dt>Limite d'age</dt>
+            <dd>Aucun</dd>
+            <dt>Accessibles handicap</dt>
+            <dd>Oui</dd>
+        </dl>
+    </section>
+</div>

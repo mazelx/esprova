@@ -6,6 +6,9 @@ class Sport(models.Model):
     name = models.CharField(max_length=100)
     combinedSport = models.BooleanField(default=False)
 
+    def natural_key(self):
+        return (self.name)
+
     def __str__(self):
         return self.name
 
@@ -20,12 +23,18 @@ class SportStage(models.Model):
         verbose_name_plural = "Sport Stages"
         ordering = ['sport', 'default_order']
 
+    def natural_key(self):
+        return (self.sport, self.name)
+
     def __str__(self):
         return "{0}/{1} : {2}".format(self.sport, self.default_order, self.name)
 
 
 class Event(models.Model):
     name = models.CharField(max_length=150)
+
+    def natural_key(self):
+        return (self.name)
 
     def __str__(self):
         return self.name
@@ -35,6 +44,9 @@ class Federation(models.Model):
     name = models.CharField(max_length=150)
     sport = models.ManyToManyField(Sport)
 
+    def natural_key(self):
+        return (self.name)
+
     def __str__(self):
         return self.name
 
@@ -42,12 +54,18 @@ class Federation(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=100)
 
+    def natural_key(self):
+        return (self.name)
+
     def __str__(self):
         return self.name
 
 
 class Label(models.Model):
     name = models.CharField(max_length=100)
+
+    def natural_key(self):
+        return (self.name)
 
     def __str__(self):
         return self.name
@@ -60,6 +78,9 @@ class DistanceCategory(models.Model):
 
     def __str__(self):
         return "{0} - {1} ({2})".format(self.sport.name, self.name, self.long_name)
+
+    def natural_key(self):
+        return (self.sport, self.name)
 
     class Meta:
         verbose_name = "Distance Category"
@@ -84,6 +105,9 @@ class Race(models.Model):
         self.initDistancesFromDefault()
         super(Race, self).save(*args, **kwargs)
 
+    def natural_key(self):
+        return (self.event, self.sport, self.distance_cat)
+
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
@@ -93,7 +117,6 @@ class Race(models.Model):
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
                 rs.save()
-
 
 class StageDistance(models.Model):
     order = models.PositiveSmallIntegerField()
@@ -112,6 +135,13 @@ class StageDistanceSpecific(StageDistance):
         verbose_name_plural = "Stages distance (for a race)"
         ordering = ['pk']
 
+    def natural_key(self):
+        return (self.race, self.order)
+
+    def clean(self):
+        if (not self.race.sport.combinedSport) & (self.race.stagedistancespecific_set.all().count() > 1):
+            raise ValidationError('Only combined sport should be able to have multiple stages')
+
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.race, self.order, self.stage.name, self.distance)
 
@@ -125,10 +155,11 @@ class StageDistanceDefault(StageDistance):
         ordering = ['pk']
 
     def clean(self):
-        if not self.distance_cat.sport.combinedSport:
-            if self.distance_cat.stagedistance_set.all().count() > 1:
-                raise ValidationError('Only combined sport should be able to have multiple stages')
+        if (not self.distance_cat.sport.combinedSport) & (self.distance_cat.stagedistancedefault_set.all().count() > 1):
+            raise ValidationError('Only combined sport should be able to have multiple stages')
 
+    def natural_key(self):
+        return (self.race, self.order)
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)

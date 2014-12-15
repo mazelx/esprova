@@ -2,7 +2,7 @@
 
 {% for race in object_list %}
     <div class="race">
-       <h3>{{ race.event.name }} - Distance {{ race.distance_cat.name }}</h3>
+       <h3><a href="{% url "raceview" race.id %}">{{ race.event.name }} - Distance {{ race.distance_cat.name }}</a></h3>
        {{race.sport.name}} le {{race.date}}
        <ul>
        {% for sd in race.stagedistancespecific_set.all %}

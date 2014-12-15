@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static "css/bootstrap.css" %}"rel="stylesheet">
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-theme.css" %}" rel="stylesheet">
+    {% endblock %}
+</head>
+
+<body>
+    {%block navbar %}
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Afficher navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ReadySteady</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Triathlon<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li><a href="#">Triathlon Nature</a>
+                    </li>
+                    <li><a href="#">Course à Pied</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button type="button" class="btn btn-primary navbar-btn ">Ajouter une épreuve</button>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">mazelx <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Ma Page</a>
+                            </li>
+                            <li><a href="#">Mes Epreuves</a>
+                            </li>
+                            <li><a href="#">Mes Amis</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#">Se deconnecter</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% block js %}
+    <script src="{% static "/js/jquery.js" %}"></script>
+    <script src="{% static "/js/bootstrap.js" %}"></script>
+    {% endblock %}
+
+</body>
+
+</html>
