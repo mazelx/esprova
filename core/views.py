@@ -8,10 +8,12 @@ class RaceList(ListView):
     context_object_name = "derniers_articles"
     template_name = "blog/accueil.html"
 
+
 class RaceView(DetailView):
     context_object_name = "race"
     model = Race
     template_name = "core/race.html"
+
 
     # def get_object(self):
     #     # Nous récupérons l'objet, via la super-classe
