@@ -117,7 +117,7 @@ class Race(models.Model):
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
                 rs.save()
-                
+
 
 class StageDistance(models.Model):
     order = models.PositiveSmallIntegerField()
