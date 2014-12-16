@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from core.utils import geocode
+from django_countries.fields import CountryField
 
 
 class Sport(models.Model):
@@ -11,6 +13,32 @@ class Sport(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Location(models.Model):
+    address1 = models.CharField(max_length=200, blank=True, null=True)
+    address2 = models.CharField(max_length=200, blank=True, null=True)
+    zipcode = models.CharField(max_length=16, blank=True, null=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    country = CountryField()
+    latlng = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return "{0}, {1}, {2}".format(self.address1, self.city, self.country)
+
+    def save(self, *args, **kwargs):
+        # Add + between fields with values:
+        location = '+'.join(filter(None,
+                                   (self.address1,
+                                    self.address2,
+                                    self.city,
+                                    self.state,
+                                    self.zipcode,
+                                    self.country.code)))
+        # Attempt to get latitude/longitude from Google Geocoder service v.3:
+        self.latlng = geocode(location)
+        super(Location, self).save(*args, **kwargs)
 
 
 class SportStage(models.Model):
@@ -99,6 +127,7 @@ class Race(models.Model):
     label = models.ForeignKey(Label, blank=True, null=True)
     contact = models.ForeignKey(Contact)
     description = models.TextField(blank=True, null=True)
+    location = models.OneToOneField(Location)
 
     def save(self, *args, **kwargs):
         super(Race, self).save(*args, **kwargs)

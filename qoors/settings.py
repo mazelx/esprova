@@ -39,7 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    # External modules
+    'django_countries',
+    # Qoors applications
+    'core',
 )
 
 MIDDLEWARE_CLASSES = (
