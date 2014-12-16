@@ -52,6 +52,20 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    #  Gestion de l'i18n
+    "django.core.context_processors.i18n",
+
+    'core.context_processors.global_settings',
+) 
+
 ROOT_URLCONF = 'qoors.urls'
 
 WSGI_APPLICATION = 'qoors.wsgi.application'
@@ -89,3 +103,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     '/var/www/qoors/static/',
 )
+
+
+ # ------ Project Specific Settings ------
+
+GOOGLE_API_KEY = "AIzaSyCA3YCeUu02CRg_QPLS8GUhIx2fgX4is24"
