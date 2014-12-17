@@ -54,7 +54,7 @@
                 {% for race in object_list %}
                     <a href="{% url "raceview" race.id %}" class="list-group-item">
                         <h4 class="list-group-item-heading">{{ race.event.name }} - {{ race.distance_cat.name }} </h4>
-                        <p class="list-group-item-text">{{race.date}} à f:Saint-Lunaire (35)</p>
+                        <p class="list-group-item-text">{{race.date}} à {{race.location.city}} ( {{race.location.zipcode|slice:":2"}})</p>
                     </a>
                 {% endfor%}
                     
