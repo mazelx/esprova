@@ -9,10 +9,12 @@ def geocode(location):
     response = request.urlopen(url).read()
     result = loads(response.decode('utf-8'))
 
+    latlng = {}
+
     if result['status'] == 'OK':
-        lat = str(result['results'][0]['geometry']['location']['lat'])
-        lng = str(result['results'][0]['geometry']['location']['lng'])
-        return '{0},{1}'.format(lat, lng)
+        latlng['lat'] = str(result['results'][0]['geometry']['location']['lat'])
+        latlng['lng'] = str(result['results'][0]['geometry']['location']['lng'])
+        return latlng
     else:
         return ''
 

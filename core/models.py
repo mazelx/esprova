@@ -38,7 +38,8 @@ class Location(models.Model):
                                     self.zipcode,
                                     self.country.code)))
         # Attempt to get latitude/longitude from Google Geocoder service v.3:
-        self.latlng = geocode(location)
+        self.lat = geocode(location)["lat"]
+        self.lng = geocode(location)["lng"]
         super(Location, self).save(*args, **kwargs)
 
 
