@@ -11,8 +11,7 @@ function initialize() {
       mapOptions);
 
   google.maps.event.addListener(map, 'bounds_changed', function() {
-    maps.getBounds()
-    getRacesFromMapBounds()
+    getRacesFromMapBounds(map.getBounds().toUrlValue())
   });
 
 }
@@ -27,12 +26,12 @@ function addRaceMarker(_name, _ltlng) {
   });
 }
 
-function getRacesFromMapBounds(_lat_lo, _lng_lo, _lat_hi, _lng_hi) {
-  var debug;
+function getRacesFromMapBounds(mapbounds) {
+  boundsarray = mapbounds.split(',')
   $.ajax({
     url : '/racejson/?',
     type : 'GET', // Le type de la requête HTTP, ici devenu POST
-    data : 'lat_lo=' + _lat_lo + '&lng_lo=' + _lng_lo + '&lat_hi=' + _lat_hi + '&lng_hi=' + _lng_hi,
+    data : 'lat_lo=' + boundsarray[0] + '&lng_lo=' + boundsarray[1] + '&lat_hi=' + boundsarray[2] + '&lng_hi=' + boundsarray[3],
     dataType : 'html',
     success : function(response, statut){
       fillRacesOnResults(response);
