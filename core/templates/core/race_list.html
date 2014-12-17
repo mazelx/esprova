@@ -5,7 +5,26 @@
     {# Initialize Google maps canvas #}
     <script type="text/javascript" src = "https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}" ></script>
     <script type="text/javascript" src="{% static "js/maps_test.js" %}"></script>
+    <script>
+        google.maps.event.addDomListener(window, 'load', initialize);
 
+
+        // Code jQuery Ici
+        $(document).ready(function(){
+        
+        // Lien GET AJAX
+        $("#ajax1").click(function(e){
+            var lien = $(this).attr('href');
+            $('#reponse-get').fadeOut('fast', function(){
+                $('#reponse-get').load(lien, function() {
+                    $('#reponse-get').fadeIn('fast');
+                });
+            });
+            e.preventDefault()
+        });
+    
+
+    </script>
     <div class="container-fluid content">
         <div class="row">
 
@@ -47,6 +66,8 @@
                             </div>
                         </div>
                     </form>
+                    <a href="/racejson/race?=1" id="ajax1">Test Get</a></p>
+                    <p id="reponse-get"></p>
                 </div>
 
                 <div class="list-group row">

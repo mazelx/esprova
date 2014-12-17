@@ -1,40 +1,20 @@
 function initialize() {
   var mapOptions = {
-    zoom: 6
+    center: { lat: 44.301683, lng: 4.5656561},
+    zoom: 8,
+    panControl: false,
+    streetViewControl: false
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
-
-
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
 }
 
-function handleNoGeolocation(errorFlag) {
-  if (errorFlag) {
-    var content = 'Error: The Geolocation service failed.';
-  } else {
-    var content = 'Error: Your browser doesn\'t support geolocation.';
-  }
 
-  var options = {
+function addRaceMarker(_name, _ltlng) {
+  var myLatlng = new google.maps.LatLng(_latlng);
+  var marker = new google.maps.Marker({
+    position: myLatlng,
     map: map,
-    position: new google.maps.LatLng(60, 105),
-    content: content
-  };
-
+    title: _name
+  });
 }
-
-google.maps.event.addDomListener(window, 'load', initialize);
