@@ -25,7 +25,7 @@ class Location(models.Model):
     latlng = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{0}, {1}, {2}".format(self.address1, self.city, self.country)
+        return "{0}:{1}, {2}, {3}".format(self.race, self.address1, self.city, self.country)
 
     def save(self, *args, **kwargs):
         # Add + between fields with values:
