@@ -1,90 +1,82 @@
 {% extends "base.html" %} 
-{% load static %}
-{% block content %}
-    
-    {# Initialize Google maps canvas #}
-    <script type="text/javascript" src = "https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}" ></script>
-    <script type="text/javascript" src = "{% static "js/maps_test.js" %}"></script>
-    <script type="text/javascript" src = "{% static "js/jquery.js" %}"></script>
-    <script>
-        google.maps.event.addDomListener(window, 'load', initialize);
+{% load static %} 
 
+{% block head_extra %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
+<script type="text/javascript">
+    google.maps.event.addDomListener(window, 'load', initialize);
 
-        // Code jQuery Ici
-        $(document).ready(function(){
-            
-            // Lien GET AJAX
-            $("#ajax1").click(function(e){
-                var lien = $(this).attr('href');
-                $('#reponse-get').fadeOut('fast', function(){
-                    $('#reponse-get').load(lien, function() {
-                        $('#reponse-get').fadeIn('fast');
-                    });
-                });
-                e.preventDefault()
-            });
+    $(document).ready(function(){
+        $('#ajax1').click(function(){
+            getRacesFromMapBounds(0,0,1,1);
         });
-    
+    });
 
-    </script>
-    <div class="container-fluid content">
-        <div class="row">
 
-            <div class="mapbox col-sm-8 hidden-xs" id="map-canvas">
-                mapbox
-            </div>
+</script>
+{% endblock %}
 
-            <div class="sidebox col-sm-4">
+{% block content %} 
 
-                <div class="placesearchbox col-sm-8 visible-xs">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Lieu">
-                        <span class="input-group-btn">
+<div class="container-fluid content">
+    <div class="row">
+
+        <div class="mapbox col-sm-8 hidden-xs" id="map-canvas">
+            mapbox
+        </div>
+
+        <div class="sidebox col-sm-4">
+
+            <div class="placesearchbox col-sm-8 visible-xs">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Lieu">
+                    <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
                         </span>
+                </div>
+                <!-- /input-group -->
+            </div>
+            <div class="row searchbox well">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inStartDate" class="col-xs-4 control-label">Période</label>
+                        <div class="col-xs-4">
+                            <input type="date" class="form-control" id="inStartDate" placeholder="Date début">
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="date" class="form-control" id="inEndDate" placeholder="Date fin">
+                        </div>
                     </div>
-                    <!-- /input-group -->
-                </div>
-                <div class="row searchbox well">
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="inStartDate" class="col-xs-4 control-label">Période</label>
-                            <div class="col-xs-4">
-                                <input type="date" class="form-control" id="inStartDate" placeholder="Date début">
-                            </div>
-                            <div class="col-xs-4">
-                                <input type="date" class="form-control" id="inEndDate" placeholder="Date fin">
-                            </div>
+                    <div class="form-group">
+                        <label for="inDistances" class="col-xs-4 control-label">Distances</label>
+                        <div class="col-xs-8">
+                            <button type="button" class="btn btn-default">XS</button>
+                            <button type="button" class="btn btn-default">S</button>
+                            <button type="button" class="btn btn-default">M</button>
+                            <button type="button" class="btn btn-default">L</button>
+                            <button type="button" class="btn btn-default">XL</button>
+
                         </div>
-                        <div class="form-group">
-                            <label for="inDistances" class="col-xs-4 control-label">Distances</label>
-                            <div class="col-xs-8">
-                                <button type="button" class="btn btn-default">XS</button>
-                                <button type="button" class="btn btn-default">S</button>
-                                <button type="button" class="btn btn-default">M</button>
-                                <button type="button" class="btn btn-default">L</button>
-                                <button type="button" class="btn btn-default">XL</button>
+                    </div>
+                </form>
+                <a href="#" id="ajax1">Test Get</a>
+                </p>
+                <p id="reponse-get">toto</p>
+            </div>
 
-                            </div>
-                        </div>
-                    </form>
-                    <a href="/racejson/?race=1" id="ajax1">Test Get</a></p>
-                    <p id="reponse-get">toto</p>
-                </div>
-
-                <div class="list-group row">
-
-                {% for race in object_list %}
+            <div id="racelist" class="list-group row">
+                {% block racelist %} 
+                    {% for race in race_list %}
                     <a href="{% url "raceview" race.id %}" class="list-group-item">
                         <h4 class="list-group-item-heading">{{ race.event.name }} - {{ race.distance_cat.name }} </h4>
-                        <p class="list-group-item-text">{{race.date}} à {{race.location.city}} ( {{race.location.zipcode|slice:":2"}})</p>
+                        <p class="list-group-item-text">{{race.date}} à {{race.location.city}} ({{race.location.zipcode|slice:":2"}})</p>
                     </a>
-                {% endfor%}
-                    
-                </div>
+                    {% endfor%} 
+                {%endblock%}
             </div>
+
         </div>
     </div>
+</div>
 {%endblock%}
-
-
