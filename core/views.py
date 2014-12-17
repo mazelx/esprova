@@ -11,11 +11,14 @@ class RaceList(ListView):
     template_name = "blog/accueil.html"
 
     def getRacesFromLatLng(request):
-        race_id = request.GET.get('race', '')
-        race = get_object_or_404(Race, pk=race_id)
-        if race_id is None or race_id == "":
-            race_id = 'Aucune course transmise'
-        return HttpResponse("Race : " + race.event.name)
+        if request.is_ajax():
+            race_id = request.GET.get('race', '')
+            race = get_object_or_404(Race, pk=race_id)
+            if race_id is None or race_id == "":
+                race_id = 'Aucune course transmise'
+            return HttpResponse("Race : " + race.event.name)
+        return HttpResponse('')
+        
 
 class RaceView(DetailView):
     context_object_name = "race"
