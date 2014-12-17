@@ -60,6 +60,7 @@ class SportStage(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=150)
+    edition = models.PositiveSmallIntegerField()
 
     def natural_key(self):
         return (self.name)
@@ -119,7 +120,6 @@ class Race(models.Model):
     sport = models.ForeignKey(Sport)
     event = models.ForeignKey(Event)
     title = models.CharField(max_length=100, blank=True, null=True)
-    edition = models.PositiveSmallIntegerField()
     date = models.DateTimeField()
     distance_cat = models.ForeignKey(DistanceCategory)
     price = models.PositiveIntegerField()
