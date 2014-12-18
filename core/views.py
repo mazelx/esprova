@@ -25,10 +25,11 @@ class RaceList(ListView):
                                           location__lat__lte=_lat_hi,
                                           location__lng__lte=_lng_hi)
             context = Context({"race_list": raceSet})
-            return_str = render_block_to_string('core/race_list.html', 'racelist', context)
-            # return HttpResponse(serializers.serialize('json', raceSet))
-            return HttpResponse(return_str)
-            # return HttpResponse(context["race_list"])
+            response = {"html": render_block_to_string('core/race_list.html', 'racelist', context),
+                        "results": serializers.serialize('json', raceSet)
+                        }
+            return HttpResponse(dumps(response), content_type="application/json")
+
         return HttpResponse('404')
 
 
