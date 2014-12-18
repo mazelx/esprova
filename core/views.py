@@ -14,7 +14,7 @@ class RaceList(ListView):
     context_object_name = "race_list"
     template_name = "core/race_list.html'"
 
-    def getRacesFromLatLng(request):
+    def getRacesFromMapBounds(request):
         if request.is_ajax() or settings.DEBUG:
             _lat_lo = request.GET.get('lat_lo')
             _lng_lo = request.GET.get('lng_lo')

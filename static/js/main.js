@@ -16,7 +16,6 @@ function initialize() {
 
 }
 
-
 function addRaceMarker(_name, _ltlng) {
   var myLatlng = new google.maps.LatLng(_latlng);
   var marker = new google.maps.Marker({
@@ -27,25 +26,25 @@ function addRaceMarker(_name, _ltlng) {
 }
 
 function getRacesFromMapBounds(mapbounds) {
+  // returns a HTML of races results
   boundsarray = mapbounds.split(',')
   $.ajax({
-    url : '/racejson/?',
+    url : '/search/?',
     type : 'GET', // Le type de la requête HTTP, ici devenu POST
     data : 'lat_lo=' + boundsarray[0] + '&lng_lo=' + boundsarray[1] + '&lat_hi=' + boundsarray[2] + '&lng_hi=' + boundsarray[3],
     dataType : 'html',
     success : function(response, statut){
       fillRacesOnResults(response);
-      setRacesOnMap(response);
       ;
     },
   });
 }
 
-function fillRacesOnResults(json) {
-  $("#racelist").html(json);
+function fillRacesOnResults(results) {
+  $("#racelist").html(results);
 }
 
-function setRacesOnMap(json) {
+function setRacesOnMap(results) {
   // var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
   var myLatlng = new google.maps.LatLng(44.301683, 4.5656561);
 
