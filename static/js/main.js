@@ -2,9 +2,9 @@ var map;
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-$(document).ready(function(){
-    $('#ajax1').click(function(){
-        getRacesFromMapBounds(0,0,1,1);
+$(document).ready(function() {
+    $('#ajax1').click(function() {
+        getRacesFromMapBounds(0, 0, 1, 1);
     });
 });
 
@@ -37,31 +37,32 @@ function addRaceMarker(_name, _ltlng) {
 }
 
 function getRacesFromMapBounds(mapbounds) {
-        // returns a HTML of races results
-        boundsarray = mapbounds.split(',')
-        $.ajax({
-                url: '/search/?',
-                type: 'GET', // Le type de la requête HTTP, ici devenu POST
-                data: 'lat_lo=' + boundsarray[0] + '&lng_lo=' + boundsarray[1] + '&lat_hi=' + boundsarray[2] + '&lng_hi=' + boundsarray[3],
-                dataType: 'json',
-                success: function(response, statut) {
-                            fillRacesOnResults(response.html);
-                    },
-                });
-        }
+    // returns a HTML of races results
+    boundsarray = mapbounds.split(',')
+    $.ajax({
+        url: '/search/?',
+        type: 'GET', // Le type de la requête HTTP, ici devenu POST
+        data: 'lat_lo=' + boundsarray[0] + '&lng_lo=' + boundsarray[1] + '&lat_hi=' + boundsarray[2] + '&lng_hi=' + boundsarray[3],
+        dataType: 'json',
+        success: function(response, statut) {
+            fillRacesOnResults(response.html);
+            setRacesOnMap(response.races)
+        },
+    });
+}
 
-        function fillRacesOnResults(results) {
-            $("#racelist").html(results);
-        }
+function fillRacesOnResults(html_races) {
+    $("#racelist").html(html_races);
+}
 
-        function setRacesOnMap(results) {
-            // var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-            var myLatlng = new google.maps.LatLng(44.301683, 4.5656561);
+function setRacesOnMap(races) {
 
-            // To add the marker to the map, use the 'map' property
-            var marker = new google.maps.Marker({
-                position: myLatlng,
-                map: map,
-                title: "Hello World!"
-            });
-        }
+    $.each(races, function(i,race) {
+      var latlng = new google.maps.LatLng(race.lat, race.lng);
+      var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+      });
+    });
+
+}
