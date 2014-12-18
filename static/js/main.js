@@ -1,5 +1,13 @@
 var map;
 
+google.maps.event.addDomListener(window, 'load', initialize);
+
+$(document).ready(function(){
+    $('#ajax1').click(function(){
+        getRacesFromMapBounds(0,0,1,1);
+    });
+});
+
 function initialize() {
     var mapOptions = {
         center: {
