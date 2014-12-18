@@ -1,4 +1,5 @@
 var map;
+var markers =[];
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -56,13 +57,15 @@ function fillRacesOnResults(html_races) {
 }
 
 function setRacesOnMap(races) {
-
+    markers = [];
     $.each(races, function(i,race) {
       var latlng = new google.maps.LatLng(race.lat, race.lng);
       var marker = new google.maps.Marker({
         position: latlng,
         map: map,
+        pk: race.pk
       });
+      markers.push(marker);
     });
 
 }
