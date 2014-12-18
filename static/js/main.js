@@ -17,7 +17,9 @@ function initialize() {
         mapOptions);
 
     google.maps.event.addListener(map, 'idle', function() {
-        getRacesFromMapBounds(map.getBounds().toUrlValue())
+        if($('#follow_map_bounds').prop('checked')){
+          getRacesFromMapBounds(map.getBounds().toUrlValue())
+        }
     });
 
 }
