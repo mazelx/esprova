@@ -29,7 +29,7 @@ class RaceList(ListView):
 
             races = []
             for race in raceset:
-                race_data = {'pk': race.pk,
+                race_data = {'id': race.pk,
                              'lat': str(race.location.lat),
                              'lng': str(race.location.lng)
                              }
