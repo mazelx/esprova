@@ -3,12 +3,6 @@ var markers =[];
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
-$(document).ready(function() {
-    $('#ajax1').click(function() {
-        getRacesFromMapBounds(0, 0, 1, 1);
-    });
-});
-
 function initialize() {
     var mapOptions = {
         center: {
@@ -22,7 +16,7 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
-    google.maps.event.addListener(map, 'bounds_changed', function() {
+    google.maps.event.addListener(map, 'idle', function() {
         getRacesFromMapBounds(map.getBounds().toUrlValue())
     });
 
@@ -57,13 +51,16 @@ function fillRacesOnResults(html_races) {
 }
 
 function setRacesOnMap(races) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
     markers = [];
     $.each(races, function(i,race) {
       var latlng = new google.maps.LatLng(race.lat, race.lng);
       var marker = new google.maps.Marker({
         position: latlng,
         map: map,
-        pk: race.pk
+        id: race.pk
       });
       markers.push(marker);
     });
