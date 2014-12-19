@@ -4,6 +4,7 @@
 {% block head_extra %}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
 <script type="text/javascript" src="{% static "js/main.js" %}"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %} 
@@ -30,6 +31,14 @@
                 <input id="follow_map_bounds" type="checkbox" name="terms" checked="checked" />
                 </p>
                 <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label for="inStartDate" class="col-xs-4 control-label">Recherche</label>
+                        <div class="col-xs-8">
+                            <input type="search" class="form-control" id="inStartDate" placeholder="Recherche">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="inStartDate" class="col-xs-4 control-label">Période</label>
                         <div class="col-xs-4">
@@ -39,6 +48,7 @@
                             <input type="date" class="form-control" id="inEndDate" placeholder="Date fin">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="inDistances" class="col-xs-4 control-label">Distances</label>
                         <div class="col-xs-8">
