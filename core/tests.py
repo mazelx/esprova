@@ -52,3 +52,7 @@ class RaceTest(TestCase):
     def test_db_has_one_race(self):
         print(Race.objects.all()[0])
         self.assertIsNotNone(Race.objects.all()[0])
+
+    # Todo
+    # course existe déja
+    

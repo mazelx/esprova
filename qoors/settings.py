@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # External modules
     'django_countries',
+    'haystack',
     # Qoors applications
     'core',
 )
