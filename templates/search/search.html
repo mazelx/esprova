@@ -1,0 +1,17 @@
+{# {% extends 'base.html' %} #}
+
+{% block content %}
+<form type="get" action="/cherche/">
+<input type="text" name="q">
+<button type="submit">Search</button>
+</form>
+
+{% for race in races %}
+<h1>{{ race.name }}</h1>
+<p>
+distance = {{ race.distance_cat }}
+city = {{ race.city }}
+contact = {{ race.contact }}
+</p>
+{% endfor %}
+{% endblock %}

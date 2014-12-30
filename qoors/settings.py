@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # External modules
     'django_countries',
+    'haystack',
     # Qoors applications
     'core',
 )
@@ -111,3 +112,11 @@ STATICFILES_DIRS = (
  # ------ Project Specific Settings ------
 
 GOOGLE_API_KEY = "AIzaSyCA3YCeUu02CRg_QPLS8GUhIx2fgX4is24"
+
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}

@@ -1,0 +1,4 @@
+{{ object.name }}
+{{ object.distance_cat }}
+{{ object.city }}
+{{ object.contact }}

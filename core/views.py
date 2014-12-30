@@ -1,4 +1,4 @@
-from django.shortcuts import get_list_or_404
+from django.shortcuts import get_list_or_404, render
 from django.views.generic import ListView, DetailView
 from core.models import Race
 from django.http import HttpResponse
@@ -7,6 +7,7 @@ from django.core import serializers
 from django.template import Context
 from core.utils import render_block_to_string
 from json import dumps
+from core.forms import RaceSearchForm
 
 
 class RaceList(ListView):
@@ -50,3 +51,21 @@ class RaceView(DetailView):
     model = Race
     template_name = "core/race.html"
 
+
+class HSSearch():
+    
+    def search(request):
+        """
+        Search > Root
+        """
+
+        # we retrieve the query to display it in the template
+        form = RaceSearchForm(request.GET)
+
+        # we call the search method from the NotesSearchForm. Haystack do the work!
+        results = form.search()
+
+        return render(request, 'search/search.html', {
+            # 'search_query' : search_query,
+            'races' : results,
+            })
