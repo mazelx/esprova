@@ -1,4 +1,4 @@
-{{ object.name }}
-{{ object.distance_cat }}
-{{ object.city }}
+{{ object.event.name }}
+{{ object.distance_cat.name }}
+{{ object.location.city }}
 {{ object.contact }}
