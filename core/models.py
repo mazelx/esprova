@@ -2,6 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from core.utils import geocode
 from django_countries.fields import CountryField
+from haystack.utils.geo import Point
 
 
 class Sport(models.Model):
@@ -26,7 +27,7 @@ class Location(models.Model):
     lng = models.DecimalField(max_digits=8, decimal_places=5)
 
     def __str__(self):
-        return "{0}:{1}, {2}, {3}".format(self.race, self.address1, self.city, self.country)
+        return "{0}, {1}, {2} ({3}, {4})".format(self.address1, self.city, self.country, self.lat, self.lng)
 
     def save(self, *args, **kwargs):
         # Add + between fields with values:
@@ -41,7 +42,6 @@ class Location(models.Model):
         self.lat = geocode(location)["lat"]
         self.lng = geocode(location)["lng"]
         super(Location, self).save(*args, **kwargs)
-
 
 class SportStage(models.Model):
     sport = models.ForeignKey(Sport)
@@ -148,6 +148,9 @@ class Race(models.Model):
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
                 rs.save()
+
+    def get_point(self):
+        return Point(float(self.location.lng), float(self.location.lat))
 
 
 class StageDistance(models.Model):

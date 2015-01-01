@@ -7,11 +7,6 @@
 </form>
 
 {% for race in races %}
-<h1>{{ race.name }}</h1>
-<p>
-distance = {{ race.distance_cat }}
-city = {{ race.city }}
-contact = {{ race.contact }}
-</p>
+    {{ race.rendered|safe }}
 {% endfor %}
 {% endblock %}

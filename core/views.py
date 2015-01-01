@@ -8,6 +8,8 @@ from django.template import Context
 from core.utils import render_block_to_string
 from json import dumps
 from core.forms import RaceSearchForm
+from haystack.query import SearchQuerySet
+from haystack.utils.geo import Point
 
 
 class RaceList(ListView):
@@ -16,42 +18,30 @@ class RaceList(ListView):
     template_name = "core/race_list.html'"
 
     def getRacesFromMapBounds(request):
-        race_context = []
 
         if request.is_ajax() or settings.DEBUG:
             _lat_lo = request.GET.get('lat_lo')
             _lng_lo = request.GET.get('lng_lo')
             _lat_hi = request.GET.get('lat_hi')
             _lng_hi = request.GET.get('lng_hi')
-            raceset = Race.objects.filter(location__lat__gte=_lat_lo,
-                                          location__lng__gte=_lng_lo,
-                                          location__lat__lte=_lat_hi,
-                                          location__lng__lte=_lng_hi)
 
-            for r in raceset:
-                race_info = {"id": r.id,
-                             "name": r.event.name,
-                             "distance": r.distance_cat.name,
-                             "date": r.date,
-                             "city": r.location.city,
-                             "zip": r.location.zipcode
-                             }
+            downtown_bottom_left = Point(float(_lng_lo), float(_lat_lo))
+            downtown_top_right = Point(float(_lng_hi), float(_lat_hi))
 
-                race_context.append(race_info)
-
-            context = Context({"race_list": race_context})
-            race_html = render_block_to_string('core/race_list.html', 'racelist', context)
+            sqs = SearchQuerySet().within('location', downtown_bottom_left, downtown_top_right)
 
             races = []
-            for race in raceset:
-                race_data = {'id': race.pk,
-                             'lat': str(race.location.lat),
-                             'lng': str(race.location.lng)
+            result_html = []
+            for sr in sqs:
+                race_data = {'id': int(sr.pk),
+                             'lat': str(sr.get_stored_fields()["location"].get_coords()[0]),
+                             'lng': str(sr.get_stored_fields()["location"].get_coords()[1])
                              }
 
                 races.append(race_data)
+                result_html.append(sr.get_stored_fields()["rendered"])
 
-            response = {"html": race_html,
+            response = {"html": result_html,
                         "races": races
                         }
 
@@ -64,11 +54,11 @@ class RaceList(ListView):
         form = RaceSearchForm(request.GET)
 
         # we call the search method from the NotesSearchForm. Haystack do the work!
-        results = form.search()
+        sqs = form.search()
 
         return render(request, 'search/search.html', {
             # 'search_query' : search_query,
-            'races' : results,
+            'races': sqs,
             })
 
 
