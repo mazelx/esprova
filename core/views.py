@@ -45,21 +45,8 @@ class RaceList(ListView):
 
         return HttpResponse('404')
 
-
-class RaceView(DetailView):
-    context_object_name = "race"
-    model = Race
-    template_name = "core/race.html"
-
-
-class HSSearch():
-    
-    def search(request):
-        """
-        Search > Root
-        """
-
-        # we retrieve the query to display it in the template
+    def getRacesFromSearch(request):
+         # we retrieve the query to display it in the template
         form = RaceSearchForm(request.GET)
 
         # we call the search method from the NotesSearchForm. Haystack do the work!
@@ -69,3 +56,11 @@ class HSSearch():
             # 'search_query' : search_query,
             'races' : results,
             })
+
+
+
+class RaceView(DetailView):
+    context_object_name = "race"
+    model = Race
+    template_name = "core/race.html"
+

@@ -274,7 +274,7 @@ function getRacesFromMapBounds(mapbounds) {
     // returns a HTML of races results
     boundsarray = mapbounds.split(',')
     $.ajax({
-        url: '/search/?',
+        url: '/geosearch/?',
         type: 'GET', // Le type de la requête HTTP, ici devenu POST
         data: 'lat_lo=' + boundsarray[0] + '&lng_lo=' + boundsarray[1] + '&lat_hi=' + boundsarray[2] + '&lng_hi=' + boundsarray[3],
         dataType: 'json',
