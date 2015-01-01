@@ -16,6 +16,8 @@ class RaceList(ListView):
     template_name = "core/race_list.html'"
 
     def getRacesFromMapBounds(request):
+        race_context = []
+
         if request.is_ajax() or settings.DEBUG:
             _lat_lo = request.GET.get('lat_lo')
             _lng_lo = request.GET.get('lng_lo')
@@ -25,7 +27,19 @@ class RaceList(ListView):
                                           location__lng__gte=_lng_lo,
                                           location__lat__lte=_lat_hi,
                                           location__lng__lte=_lng_hi)
-            context = Context({"race_list": raceset})
+
+            for r in raceset:
+                race_info = {"id": r.id,
+                             "name": r.event.name,
+                             "distance": r.distance_cat.name,
+                             "date": r.date,
+                             "city": r.location.city,
+                             "zip": r.location.zipcode
+                             }
+
+                race_context.append(race_info)
+
+            context = Context({"race_list": race_context})
             race_html = render_block_to_string('core/race_list.html', 'racelist', context)
 
             races = []
