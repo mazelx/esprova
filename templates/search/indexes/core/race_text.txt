@@ -1,4 +1,6 @@
+{% autoescape off %}
 {{ object.event.name }}
 {{ object.distance_cat.name }}
 {{ object.location.city }}
 {{ object.contact }}
+{% endautoescape %}

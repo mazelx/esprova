@@ -1,7 +1,8 @@
 from django.test import TestCase
 from core.models import Race, Sport, Event, Contact, DistanceCategory
 from datetime import datetime
-
+from django.test.client import RequestFactory
+from core.forms import RaceSearchForm
 
 # Create your tests here.
 class RaceTest(TestCase):
@@ -52,3 +53,10 @@ class RaceTest(TestCase):
     def test_db_has_one_race(self):
         print(Race.objects.all()[0])
         self.assertIsNotNone(Race.objects.all()[0])
+
+    def test_search_triathlon(self):
+        rf = RequestFactory()
+        req = rf.get('http://localhost:8000/cherche/?q=triathlon+gorges')
+        form = RaceSearchForm(req.GET)
+        form.search()
+        # Todo: assert is empty
