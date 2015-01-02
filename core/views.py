@@ -1,15 +1,31 @@
-from django.shortcuts import get_list_or_404, render
 from django.views.generic import ListView, DetailView
 from core.models import Race
 from django.http import HttpResponse
 from django.conf import settings
-from django.core import serializers
-from django.template import Context
-from core.utils import render_block_to_string
 from json import dumps
 from core.forms import RaceSearchForm
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
+
+
+# Comment mettre cette putain de fonction dans la classe RaceList ???
+def render_search_result(sqs):
+    races = []
+    result_html = []
+    for sr in sqs:
+        race_data = {'id': int(sr.pk),
+                     'lat': str(sr.get_stored_fields()["location"].get_coords()[1]),
+                     'lng': str(sr.get_stored_fields()["location"].get_coords()[0])
+                     }
+
+        races.append(race_data)
+        result_html.append(sr.get_stored_fields()["rendered"])
+
+    response = {"html": result_html,
+                "races": races
+                }
+
+    return HttpResponse(dumps(response), content_type="application/json")
 
 
 class RaceList(ListView):
@@ -18,7 +34,6 @@ class RaceList(ListView):
     template_name = "core/race_list.html'"
 
     def getRacesFromMapBounds(request):
-
         if request.is_ajax() or settings.DEBUG:
             _lat_lo = request.GET.get('lat_lo')
             _lng_lo = request.GET.get('lng_lo')
@@ -30,37 +45,21 @@ class RaceList(ListView):
 
             sqs = SearchQuerySet().within('location', downtown_bottom_left, downtown_top_right)
 
-            races = []
-            result_html = []
-            for sr in sqs:
-                race_data = {'id': int(sr.pk),
-                             'lat': str(sr.get_stored_fields()["location"].get_coords()[0]),
-                             'lng': str(sr.get_stored_fields()["location"].get_coords()[1])
-                             }
-
-                races.append(race_data)
-                result_html.append(sr.get_stored_fields()["rendered"])
-
-            response = {"html": result_html,
-                        "races": races
-                        }
-
-            return HttpResponse(dumps(response), content_type="application/json")
+            return render_search_result(sqs)
 
         return HttpResponse('404')
 
     def getRacesFromSearch(request):
-         # we retrieve the query to display it in the template
-        form = RaceSearchForm(request.GET)
+        if request.is_ajax() or settings.DEBUG:
+             # we retrieve the query to display it in the template
+            form = RaceSearchForm(request.GET)
 
-        # we call the search method from the NotesSearchForm. Haystack do the work!
-        sqs = form.search()
+            # we call the search method from the NotesSearchForm. Haystack do the work!
+            sqs = form.search()
 
-        return render(request, 'search/search.html', {
-            # 'search_query' : search_query,
-            'races': sqs,
-            })
+            return render_search_result(sqs)
 
+        return HttpResponse('404')
 
 
 class RaceView(DetailView):

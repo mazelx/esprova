@@ -30,12 +30,12 @@
                 <p>Rechercher quand je déplace la carte
                 <input id="follow_map_bounds" type="checkbox" name="terms" checked="checked" />
                 </p>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="searchform">
 
                     <div class="form-group">
-                        <label for="inStartDate" class="col-xs-4 control-label">Recherche</label>
+                        <label for="search_expr" class="col-xs-4 control-label">Recherche</label>
                         <div class="col-xs-8">
-                            <input type="search" class="form-control" id="inStartDate" placeholder="Recherche">
+                            <input type="search" class="form-control" id="search_expr" placeholder="Recherche">
                         </div>
                     </div>
 
@@ -60,6 +60,7 @@
 
                         </div>
                     </div>
+                      <input type="submit" value="Submit">
                 </form>
             </div>
 

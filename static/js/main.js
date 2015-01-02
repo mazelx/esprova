@@ -268,6 +268,24 @@ function initialize() {
         }
     });
 
+    $( "#searchform" ).submit(function( event ) {
+        event.preventDefault();
+        getRacesFromSearch($("#search_expr").val());
+    });
+
+}
+
+function getRacesFromSearch(q){
+     $.ajax({
+        url: '/search/?',
+        type: 'GET',
+        data: 'q=' + q ,
+        dataType: 'json',
+        success: function(response, statut) {
+            refreshRacesOnSidebar(response.html);
+            refreshRacesOnMap(response.races)
+        },
+    });
 }
 
 function getRacesFromMapBounds(mapbounds) {
@@ -275,7 +293,7 @@ function getRacesFromMapBounds(mapbounds) {
     boundsarray = mapbounds.split(',')
     $.ajax({
         url: '/geosearch/?',
-        type: 'GET', // Le type de la requête HTTP, ici devenu POST
+        type: 'GET', 
         data: 'lat_lo=' + boundsarray[0] + '&lng_lo=' + boundsarray[1] + '&lat_hi=' + boundsarray[2] + '&lng_hi=' + boundsarray[3],
         dataType: 'json',
         success: function(response, statut) {

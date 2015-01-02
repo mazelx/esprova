@@ -7,5 +7,5 @@ urlpatterns = patterns('',
                        url(r'^$', RaceList.as_view(), name='racelist'),
                        url(r'^race/(?P<pk>\d+)$', RaceView.as_view(), name='raceview'),
                        url(r'^geosearch/$', RaceList.getRacesFromMapBounds, name='racegeosearch'),
-                       url(r'^search/$',RaceList.getRacesFromSearch, name='racesearch'),
+                       url(r'^search/$', RaceList.getRacesFromSearch, name='racesearch'),
                        )
