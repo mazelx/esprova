@@ -268,16 +268,35 @@ function initialize() {
         }
     });
 
-    $( "#searchform" ).submit(function( event ) {
+    $( "#race_quicksearch_form" ).submit(function( event ) {
         event.preventDefault();
-        getRacesFromSearch($("#search_expr").val());
+        getRacesFromQuickSearch($("#search_expr").val());
+    });
+
+
+    $( "#race_search_form" ).submit(function( event ) {
+        event.preventDefault();
+        getRacesFromSearch($("#start_date").val(), $("#end_date").val());
     });
 
 }
 
-function getRacesFromSearch(q){
+function getRacesFromSearch(start_date, end_date){
      $.ajax({
         url: '/search/?',
+        type: 'GET',
+        data: 'start_date=' + start_date + '&end_date=' + end_date ,
+        dataType: 'json',
+        success: function(response, statut) {
+            refreshRacesOnSidebar(response.html);
+            refreshRacesOnMap(response.races)
+        },
+    });
+}
+
+function getRacesFromQuickSearch(q){
+     $.ajax({
+        url: '/quicksearch/?',
         type: 'GET',
         data: 'q=' + q ,
         dataType: 'json',

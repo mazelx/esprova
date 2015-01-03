@@ -1,7 +1,8 @@
+from django import forms
 from haystack.forms import SearchForm
 
 
-class RaceSearchForm(SearchForm):
+class RaceQuickSearchForm(SearchForm):
 
     def no_query_found(self):
         return self.searchqueryset.all()
@@ -9,7 +10,7 @@ class RaceSearchForm(SearchForm):
     def search(self):
         # First, store the SearchQuerySet received from other processing.
         # (the main work is run internally by Haystack here).
-        sqs = super(RaceSearchForm, self).search()
+        sqs = super(RaceQuickSearchForm, self).search()
 
         # if something goes wrong
         if not self.is_valid():
@@ -19,3 +20,8 @@ class RaceSearchForm(SearchForm):
         # sqs = sqs.order_by('title')
 
         return sqs
+
+
+class RaceSearchForm(forms.Form):
+    start_date = forms.DateField(required=False, localize=True)
+    end_date = forms.DateField(required=False, localize=True)

@@ -4,6 +4,7 @@ from haystack import indexes
 
 class RaceIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
+    date = indexes.DateField(model_attr='date')
     location = indexes.LocationField(model_attr='get_point')
     rendered = indexes.CharField(use_template=True, indexed=False)
 

@@ -3,7 +3,7 @@ from core.models import Race
 from django.http import HttpResponse
 from django.conf import settings
 from json import dumps
-from core.forms import RaceSearchForm
+from core.forms import RaceQuickSearchForm, RaceSearchForm
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 
@@ -49,13 +49,30 @@ class RaceList(ListView):
 
         return HttpResponse('404')
 
-    def getRacesFromSearch(request):
+    def getRacesFromQuickSearch(request):
         if request.is_ajax() or settings.DEBUG:
              # we retrieve the query to display it in the template
-            form = RaceSearchForm(request.GET)
+            form = RaceQuickSearchForm(request.GET)
 
             # we call the search method from the NotesSearchForm. Haystack do the work!
             sqs = form.search()
+
+            return render_search_result(sqs)
+
+        return HttpResponse('404')
+
+    def getRacesFromSearch(request):
+        if request.method == 'GET':
+            form = RaceSearchForm(request.GET)
+
+            if form.is_valid():
+                sqs = SearchQuerySet()
+                if form.cleaned_data['start_date']:
+                    sqs = sqs.filter(date__gte=form.cleaned_data['start_date'])
+
+                # Check to see if an end_date was chosen.
+                if form.cleaned_data['end_date']:
+                    sqs = sqs.filter(date__lte=form.cleaned_data['end_date'])
 
             return render_search_result(sqs)
 
