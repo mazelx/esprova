@@ -250,7 +250,7 @@ function initialize() {
         streetViewControl: false
     };
 
-
+    // initialize the map
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
@@ -261,31 +261,32 @@ function initialize() {
         getRacesFromMapBounds(map.getBounds().toUrlValue());
     });
 
-
+    // LISTENER : retrieve races when map moves
     google.maps.event.addListener(map, 'idle', function() {
         if ($('#follow_map_bounds').prop('checked')) {
             getRacesFromMapBounds(map.getBounds().toUrlValue())
         }
     });
 
+    // LISTENER : retrieve races from quick search 
     $( "#race_quicksearch_form" ).submit(function( event ) {
         event.preventDefault();
         getRacesFromQuickSearch($("#search_expr").val());
     });
 
-
+    // LISTENER : retrieve races from basic search
     $( "#race_search_form" ).submit(function( event ) {
         event.preventDefault();
-        getRacesFromSearch($("#start_date").val(), $("#end_date").val());
+        getRacesFromSearch($(this).serialize());
     });
 
 }
 
-function getRacesFromSearch(start_date, end_date){
+function getRacesFromSearch(data){
      $.ajax({
         url: '/search/?',
         type: 'GET',
-        data: 'start_date=' + start_date + '&end_date=' + end_date ,
+        data: data,
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);

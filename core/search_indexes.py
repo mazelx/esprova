@@ -6,6 +6,7 @@ class RaceIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     date = indexes.DateField(model_attr='date')
     location = indexes.LocationField(model_attr='get_point')
+    distance_cat = indexes.CharField(model_attr='distance_cat__name')
     rendered = indexes.CharField(use_template=True, indexed=False)
 
     def get_model(self):

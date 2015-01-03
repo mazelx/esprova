@@ -35,25 +35,36 @@
                     <div class="form-group">
                         <label for="start_date" class="col-xs-4 control-label">Période</label>
                         <div class="col-xs-4">
-                            <input type="date" class="form-control" id="start_date" placeholder="Date début">
+                            <input type="date" name="start_date" class="form-control" id="start_date" placeholder="Date début">
                         </div>
                         <div class="col-xs-4">
-                            <input type="date" class="form-control" id="end_date" placeholder="Date fin">
+                            <input type="date" name="end_date" class="form-control" id="end_date" placeholder="Date fin">
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="inDistances" class="col-xs-4 control-label">Distances</label>
-                        <div class="col-xs-8">
-                            <button type="button" class="btn btn-default">XS</button>
-                            <button type="button" class="btn btn-default">S</button>
-                            <button type="button" class="btn btn-default">M</button>
-                            <button type="button" class="btn btn-default">L</button>
-                            <button type="button" class="btn btn-default">XL</button>
-
+                        <div class="col-xs-8 btn-group" data-toggle="buttons">
+                            <label type="button" class="btn btn-default distance_selector" id="dist1">XS
+                                <input type="checkbox" autocomplete="off" name="distances" value="XS">
+                            </label>
+                            <label type="button" class="btn btn-default distance_selector" id="dist2">S
+                                <input type="checkbox" autocomplete="off" name="distances" value="S">
+                            </label>
+                            <label type="button" class="btn btn-default distance_selector" id="dist3">M
+                                <input type="checkbox" autocomplete="off" name="distances" value="M">
+                            </label>
+                            <label type="button" class="btn btn-default distance_selector" id="dist4">L
+                                <input type="checkbox" autocomplete="off" name="distances" value="L">
+                            </label>
+                            <label type="button" class="btn btn-default distance_selector" id="dist5">XL
+                                <input type="checkbox" autocomplete="off" name="distances" value="XL">
+                            </label>
                         </div>
                     </div>
-                      <input type="submit" value="Submit">
+                    <div class="col-xs-12">
+                        <input type="submit" value="Submit">
+                    </div>
                 </form>
             </div>
 

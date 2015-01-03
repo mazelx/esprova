@@ -3,7 +3,7 @@ from core.models import Race
 from django.http import HttpResponse
 from django.conf import settings
 from json import dumps
-from core.forms import RaceQuickSearchForm, RaceSearchForm
+from core.forms import RaceQuickSearchForm
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 
@@ -21,8 +21,9 @@ def render_search_result(sqs):
         races.append(race_data)
         result_html.append(sr.get_stored_fields()["rendered"])
 
-    response = {"html": result_html,
-                "races": races
+    response = {"results": sqs.count(),
+                "races": races,
+                "html": result_html
                 }
 
     return HttpResponse(dumps(response), content_type="application/json")
@@ -33,7 +34,37 @@ class RaceList(ListView):
     context_object_name = "race_list"
     template_name = "core/race_list.html'"
 
-    def getRacesFromMapBounds(request):
+    def getRacesFromQuickSearch(request):
+        if request.is_ajax() or settings.DEBUG:
+            form = RaceQuickSearchForm(request.GET)
+            sqs = form.search()
+
+            return render_search_result(sqs)
+
+        return HttpResponse('404')
+
+    def getRacesFromSearch(request):
+        if request.method == 'GET':
+            sqs = SearchQuerySet()
+
+            start_date = request.GET.get('start_date')
+            end_date = request.GET.get('end_date')
+            distances = request.GET.getlist('distances')
+
+            if start_date:
+                sqs = sqs.filter(date__gte=start_date)
+
+            if end_date:
+                sqs = sqs.filter(date__lte=end_date)
+
+            if distances:
+                sqs = sqs.filter(distance_cat__in=distances)
+
+            return render_search_result(sqs)
+
+        return HttpResponse('404')
+
+  def getRacesFromMapBounds(request):
         if request.is_ajax() or settings.DEBUG:
             _lat_lo = request.GET.get('lat_lo')
             _lng_lo = request.GET.get('lng_lo')
@@ -48,36 +79,6 @@ class RaceList(ListView):
             return render_search_result(sqs)
 
         return HttpResponse('404')
-
-    def getRacesFromQuickSearch(request):
-        if request.is_ajax() or settings.DEBUG:
-             # we retrieve the query to display it in the template
-            form = RaceQuickSearchForm(request.GET)
-
-            # we call the search method from the NotesSearchForm. Haystack do the work!
-            sqs = form.search()
-
-            return render_search_result(sqs)
-
-        return HttpResponse('404')
-
-    def getRacesFromSearch(request):
-        if request.method == 'GET':
-            form = RaceSearchForm(request.GET)
-
-            if form.is_valid():
-                sqs = SearchQuerySet()
-                if form.cleaned_data['start_date']:
-                    sqs = sqs.filter(date__gte=form.cleaned_data['start_date'])
-
-                # Check to see if an end_date was chosen.
-                if form.cleaned_data['end_date']:
-                    sqs = sqs.filter(date__lte=form.cleaned_data['end_date'])
-
-            return render_search_result(sqs)
-
-        return HttpResponse('404')
-
 
 class RaceView(DetailView):
     context_object_name = "race"

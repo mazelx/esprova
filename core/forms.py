@@ -21,7 +21,3 @@ class RaceQuickSearchForm(SearchForm):
 
         return sqs
 
-
-class RaceSearchForm(forms.Form):
-    start_date = forms.DateField(required=False, localize=True)
-    end_date = forms.DateField(required=False, localize=True)
