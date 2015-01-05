@@ -262,7 +262,6 @@ function initialize() {
         getRacesFromMapBounds(map.getBounds().toUrlValue());
     });
 
-    // TODO : do not search trough all races but results instead
     // LISTENER : retrieve races when map moves
     google.maps.event.addListener(map, 'idle', function() {
         if (refresh_on_move) {
@@ -326,6 +325,11 @@ function getRacesFromMapBounds(mapbounds) {
 }
 
 function refreshRacesOnSidebar(races_html) {
+    if(races_html == "") {
+        // rendering should be handled by django 
+        races_html = 
+        "<div class='alert alert-danger' role='alert'>Nous n'avons pas trouvé de courses correspondant à vos critères</div>";   
+    }
     $("#racelist").html(races_html);
 }
 
@@ -346,13 +350,14 @@ function refreshRacesOnMap(races) {
 }
 
 function ajdust_bounds_from_markers() {
-    var bound = new google.maps.LatLngBounds();
-    
-    // refresh_on_move = false;
 
-    for(var i in markers) {
-        bound.extend(markers[i].getPosition());
+    if(markers.length > 0) {
+        var bound = new google.maps.LatLngBounds();
+        
+        for(var i in markers) {
+            bound.extend(markers[i].getPosition());
+        }
+
+        map.fitBounds(bound);
     }
-
-    map.fitBounds(bound);
 }

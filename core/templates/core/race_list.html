@@ -69,14 +69,7 @@
             </div>
 
             <div id="racelist" class="list-group row">
-                {% block racelist %} 
-                    {% for race in race_list %}
-                    <a href="{% url "raceview" race.id %}" class="list-group-item">
-                        <h4 class="list-group-item-heading">{{ race.name }} - {{ race.distance }} </h4>
-                        <p class="list-group-item-text">{{race.date}} à {{race.city}} ({{race.zipcode|slice:":2"}})</p>
-                    </a>
-                    {% endfor%} 
-                {%endblock%}
+                {# here goes race results through ajax #}
             </div>
 
         </div>
