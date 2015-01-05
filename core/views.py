@@ -64,7 +64,7 @@ class RaceList(ListView):
 
         return HttpResponse('404')
 
-  def getRacesFromMapBounds(request):
+    def getRacesFromMapBounds(request):
         if request.is_ajax() or settings.DEBUG:
             _lat_lo = request.GET.get('lat_lo')
             _lng_lo = request.GET.get('lng_lo')

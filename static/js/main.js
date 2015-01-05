@@ -1,5 +1,6 @@
 var map;
 var markers = [];
+var refresh_on_move = true;
     var styles =[
     {
         "featureType": "administrative",
@@ -261,11 +262,18 @@ function initialize() {
         getRacesFromMapBounds(map.getBounds().toUrlValue());
     });
 
+    // TODO : do not search trough all races but results instead
     // LISTENER : retrieve races when map moves
     google.maps.event.addListener(map, 'idle', function() {
-        if ($('#follow_map_bounds').prop('checked')) {
-            getRacesFromMapBounds(map.getBounds().toUrlValue())
+        if (refresh_on_move) {
+            getRacesFromMapBounds(map.getBounds().toUrlValue());
+            refresh_on_move = true
         }
+    });
+
+    // LISTENER : enable / disable refresh on map moves
+    $('#follow_map_bounds').change(function( ) {
+        refresh_on_move = $(this).is(':checked');
     });
 
     // LISTENER : retrieve races from quick search 
@@ -290,7 +298,8 @@ function getRacesFromSearch(data){
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
-            refreshRacesOnMap(response.races)
+            refreshRacesOnMap(response.races);
+            ajdust_bounds_from_markers();
         },
     });
 }
@@ -303,7 +312,8 @@ function getRacesFromQuickSearch(q){
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
-            refreshRacesOnMap(response.races)
+            refreshRacesOnMap(response.races);
+            ajdust_bounds_from_markers();
         },
     });
 }
@@ -314,7 +324,10 @@ function getRacesFromMapBounds(mapbounds) {
     $.ajax({
         url: '/geosearch/?',
         type: 'GET', 
-        data: 'lat_lo=' + boundsarray[0] + '&lng_lo=' + boundsarray[1] + '&lat_hi=' + boundsarray[2] + '&lng_hi=' + boundsarray[3],
+        data: 'lat_lo=' + boundsarray[0] + 
+              '&lng_lo=' + boundsarray[1] + 
+              '&lat_hi=' + boundsarray[2] + 
+              '&lng_hi=' + boundsarray[3],
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
@@ -341,5 +354,16 @@ function refreshRacesOnMap(races) {
         });
         markers.push(marker);
     });
+}
 
+function ajdust_bounds_from_markers() {
+    var bound = new google.maps.LatLngBounds();
+    
+    refresh_on_move = false;
+
+    for(var i in markers) {
+        bound.extend(markers[i].getPosition());
+    }
+
+    map.fitBounds(bound);
 }
