@@ -1,6 +1,7 @@
 var map;
 var markers = [];
-var refresh_on_move = true;
+var selected_race_id;
+
     var styles =[
     {
         "featureType": "administrative",
@@ -264,16 +265,11 @@ function initialize() {
 
     // LISTENER : retrieve races when map moves
     google.maps.event.addListener(map, 'idle', function() {
-        if (refresh_on_move) {
+        if ($("#follow_map_bounds").is(':checked')) {
             getRacesFromMapBounds(map.getBounds().toUrlValue());
-            refresh_on_move = true
         }
     });
 
-    // LISTENER : enable / disable refresh on map moves
-    $('#follow_map_bounds').change(function( ) {
-        refresh_on_move = $(this).is(':checked');
-    });
 
     // LISTENER : retrieve races from quick search 
     $( "#race_quicksearch_form" ).submit(function( event ) {
@@ -325,12 +321,23 @@ function getRacesFromMapBounds(mapbounds) {
 }
 
 function refreshRacesOnSidebar(races_html) {
+    // no result handler
     if(races_html == "") {
         // rendering should be handled by django 
         races_html = 
-        "<div class='alert alert-danger' role='alert'>Nous n'avons pas trouvé de courses correspondant à vos critères</div>";   
+        "<div class='alert alert-danger' role='alert'>Nous n'avons pas trouvé de course correspondant à vos critères</div>";   
     }
+    // replace HTML by ajax provided code
     $("#racelist").html(races_html);
+
+    // display the selected race
+    console.log("active race_" + selected_race_id);
+    if($("#race_" + selected_race_id).length){
+        $("#race_" + selected_race_id).addClass("active");
+    } else {
+        selected_race_id = null;
+    }
+
 }
 
 function refreshRacesOnMap(races) {
@@ -343,9 +350,20 @@ function refreshRacesOnMap(races) {
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            id: race.pk
+            id: race.id
         });
         markers.push(marker);
+        // select the race in the sidebar when marker clicked
+        google.maps.event.addListener(marker, 'click', function () {
+            $("#race_" + selected_race_id).removeClass("active");
+            selected_race_id = marker.get("id")
+            console.log(selected_race_id);
+            $("#race_" + selected_race_id).addClass("active"); 
+            $(".sidebox").animate({
+                // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
+                        scrollTop: $(".sidebox").scrollTop() + $("#race_" + selected_race_id).offset().top - 150
+            }, 500);
+        });
     });
 }
 
