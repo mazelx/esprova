@@ -64,17 +64,42 @@ class RaceList(ListView):
 
         return HttpResponse('404')
 
-    def getRacesFromMapBounds(request):
-        if request.is_ajax() or settings.DEBUG:
-            _lat_lo = request.GET.get('lat_lo')
-            _lng_lo = request.GET.get('lng_lo')
-            _lat_hi = request.GET.get('lat_hi')
-            _lng_hi = request.GET.get('lng_hi')
+    def getRacesAjax(request):
+        if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
-            downtown_bottom_left = Point(float(_lng_lo), float(_lat_lo))
-            downtown_top_right = Point(float(_lng_hi), float(_lat_hi))
+            sqs = SearchQuerySet()
 
-            sqs = SearchQuerySet().within('location', downtown_bottom_left, downtown_top_right)
+            # search from map bounds
+            lat_lo = request.GET.get('lat_lo')
+            lng_lo = request.GET.get('lng_lo')
+            lat_hi = request.GET.get('lat_hi')
+            lng_hi = request.GET.get('lng_hi')
+
+            if lat_lo and lng_lo and lat_hi and lng_hi:
+                downtown_bottom_left = Point(float(lng_lo), float(lat_lo))
+                downtown_top_right = Point(float(lng_hi), float(lat_hi))
+
+                sqs = sqs.within('location', downtown_bottom_left, downtown_top_right)
+
+            # search from search form
+            start_date = request.GET.get('start_date')
+            end_date = request.GET.get('end_date')
+            distances = request.GET.getlist('distances')
+
+            if start_date:
+                sqs = sqs.filter(date__gte=start_date)
+
+            if end_date:
+                sqs = sqs.filter(date__lte=end_date)
+
+            if distances:
+                sqs = sqs.filter(distance_cat__in=distances)
+
+            # search from quick search form
+            q = request.GET.get('q')
+
+            if q:
+                sqs = sqs.filter(content=q)
 
             return render_search_result(sqs)
 

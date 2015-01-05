@@ -279,13 +279,13 @@ function initialize() {
     // LISTENER : retrieve races from quick search 
     $( "#race_quicksearch_form" ).submit(function( event ) {
         event.preventDefault();
-        getRacesFromQuickSearch($("#search_expr").val());
+        getRacesFromSearch();
     });
 
     // LISTENER : retrieve races from basic search
     $( "#race_search_form" ).submit(function( event ) {
         event.preventDefault();
-        getRacesFromSearch($(this).serialize());
+        getRacesFromSearch();
     });
 
 }
@@ -294,21 +294,8 @@ function getRacesFromSearch(data){
      $.ajax({
         url: '/search/?',
         type: 'GET',
-        data: data,
-        dataType: 'json',
-        success: function(response, statut) {
-            refreshRacesOnSidebar(response.html);
-            refreshRacesOnMap(response.races);
-            ajdust_bounds_from_markers();
-        },
-    });
-}
-
-function getRacesFromQuickSearch(q){
-     $.ajax({
-        url: '/quicksearch/?',
-        type: 'GET',
-        data: 'q=' + q ,
+        data: '&' + $( "#race_search_form" ).serialize() +
+              '&q=' + $("#search_expr").val() ,
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
@@ -322,12 +309,14 @@ function getRacesFromMapBounds(mapbounds) {
     // returns a HTML of races results
     boundsarray = mapbounds.split(',')
     $.ajax({
-        url: '/geosearch/?',
+        url: '/search/?',
         type: 'GET', 
         data: 'lat_lo=' + boundsarray[0] + 
               '&lng_lo=' + boundsarray[1] + 
               '&lat_hi=' + boundsarray[2] + 
-              '&lng_hi=' + boundsarray[3],
+              '&lng_hi=' + boundsarray[3] +
+              '&' + $( "#race_search_form" ).serialize() +
+              '&q=' + $("#search_expr").val() ,
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
@@ -359,7 +348,7 @@ function refreshRacesOnMap(races) {
 function ajdust_bounds_from_markers() {
     var bound = new google.maps.LatLngBounds();
     
-    refresh_on_move = false;
+    // refresh_on_move = false;
 
     for(var i in markers) {
         bound.extend(markers[i].getPosition());
