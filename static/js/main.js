@@ -278,7 +278,7 @@ function initialize() {
     });
 
     // LISTENER : retrieve races from basic search
-    $( "#race_search_form" ).submit(function( event ) {
+    $( "#race_search_form" ).change(function( event ) {
         event.preventDefault();
         getRacesFromSearch();
     });
