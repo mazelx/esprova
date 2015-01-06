@@ -39,9 +39,15 @@ class Location(models.Model):
                                     self.zipcode,
                                     self.country.code)))
         # Attempt to get latitude/longitude from Google Geocoder service v.3:
-        self.lat = geocode(location)["lat"]
-        self.lng = geocode(location)["lng"]
+        geo_data = geocode(location)
+        if (geo_data):
+            self.lat = geo_data["lat"]
+            self.lng = geo_data["lng"]
+        else:
+            raise Exception("Address cannot be found")
+
         super(Location, self).save(*args, **kwargs)
+
 
 class SportStage(models.Model):
     sport = models.ForeignKey(Sport)
