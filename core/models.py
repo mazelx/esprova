@@ -23,8 +23,8 @@ class Location(models.Model):
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100, blank=True, null=True)
     country = CountryField()
-    lat = models.DecimalField(max_digits=8, decimal_places=5)
-    lng = models.DecimalField(max_digits=8, decimal_places=5)
+    lat = models.DecimalField(max_digits=8, decimal_places=5, blank=True)
+    lng = models.DecimalField(max_digits=8, decimal_places=5, blank=True)
 
     def __str__(self):
         return "{0}, {1}, {2} ({3}, {4})".format(self.address1, self.city, self.country, self.lat, self.lng)

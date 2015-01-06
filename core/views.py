@@ -1,10 +1,11 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from core.models import Race
 from django.http import HttpResponse
 from django.conf import settings
 from json import dumps
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
+from core.forms import RaceForm
 
 
 def getRacesAjax(request):
@@ -78,3 +79,8 @@ class RaceView(DetailView):
     context_object_name = "race"
     template_name = "core/race.html"
 
+
+class RaceCreate(CreateView):
+    model = Race
+    template_name = 'core/create_race.html'
+    form_class = RaceForm

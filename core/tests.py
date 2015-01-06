@@ -80,7 +80,7 @@ class RaceTest(TestCase):
                                   name="Triathlon Test de Thionville",
                                   city="ZZZZZZZ"
                                   )
-        self.assertIsNone(r)
+        self.assertIsNone(r)    
 
     # VIEWS
 

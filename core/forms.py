@@ -1,5 +1,7 @@
-from django import forms
+from django import forms, ModelForm
 from haystack.forms import SearchForm
+
+from core.models import Race, Event
 
 
 class RaceQuickSearchForm(SearchForm):
@@ -20,4 +22,9 @@ class RaceQuickSearchForm(SearchForm):
         # sqs = sqs.order_by('title')
 
         return sqs
+
+
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
 
