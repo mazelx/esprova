@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     # External modules
     'django_countries',
     'haystack',
+    'django_nose',
     # Qoors applications
     'core',
 )
@@ -114,6 +115,7 @@ STATICFILES_DIRS = (
 GOOGLE_API_KEY = "AIzaSyCA3YCeUu02CRg_QPLS8GUhIx2fgX4is24"
 
 
+# Haystack
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -122,3 +124,13 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# Nose
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=core.views, core.models',
+]
