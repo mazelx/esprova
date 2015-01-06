@@ -1,5 +1,5 @@
  {% load static %} 
- <a href="{% url "raceview" object.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
+ <a href="{% url "view_race" object.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
     <h4 class="list-group-item-heading">{{ object.event.name }} - {{ object.distance_cat.name }} </h4>
     <p class="list-group-item-text">{{ object.date }} à {{ object.location.city }} ({{ object.location.zipcode|slice:":2"}})</p>
 </a>
