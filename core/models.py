@@ -91,6 +91,8 @@ class Federation(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=10, blank=True, null=True)
 
     def natural_key(self):
         return (self.name)
@@ -134,6 +136,7 @@ class Race(models.Model):
     price = models.PositiveIntegerField()
     federation = models.ForeignKey(Federation, blank=True, null=True)
     label = models.ForeignKey(Label, blank=True, null=True)
+    contact = models.ForeignKey(Contact)
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
 
