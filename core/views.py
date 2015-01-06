@@ -1,11 +1,11 @@
 from django.views.generic import ListView, DetailView, CreateView
 from core.models import Race
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from json import dumps
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
-from core.forms import RaceForm
+from core.forms import RaceForm, LocationFormSet, ContactFormSet, EventFormSet
 
 
 def getRacesAjax(request):
@@ -84,3 +84,69 @@ class RaceCreate(CreateView):
     model = Race
     template_name = 'core/create_race.html'
     form_class = RaceForm
+
+    def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests and instantiates blank versions of the form
+        and its inline formsets.
+        """
+
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        location_form = LocationFormSet()
+        event_form = EventFormSet()
+        contact_form = ContactFormSet()
+
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  location_form=location_form,
+                                  event_form=event_form,
+                                  contact_form=contact_form))
+    def post(self, request, *args, **kwargs):
+        """
+        Handles POST requests, instantiating a form instance and its inline
+        formsets with the passed POST variables and then checking them for
+        validity.
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        location_form = LocationFormSet(self.request.POST)
+        event_form = EventFormSet(self.request.POST)
+        contact_form = ContactFormSet(self.request.POST)
+
+        if(form.is_valid() and
+           location_form.is_valid() and
+           event_form.is_valid() and
+           contact_form.is_valid()):
+            return self.form_valid(form, location_form, event_form, contact_form)
+        else:
+            return self.form_invalid(form, location_form, event_form, contact_form)
+
+    def form_valid(self, form, location_form, event_form, contact_form):
+        """
+        Called if all forms are valid. Creates a Recipe instance along with
+        associated Ingredients and Instructions and then redirects to a
+        success page.
+        """
+        self.object = form.save()
+        location_form.instance = self.object
+        location_form.save()
+        event_form.instance = self.object
+        event_form.save()
+        contact_form.instance = self.object
+        contact_form.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, location_form, event_form, contact_form):
+        """
+        Called if a form is invalid. Re-renders the context data with the
+        data-filled forms and errors.
+        """
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  location_form=location_form,
+                                  event_form=event_form,
+                                  contact_form=contact_form))

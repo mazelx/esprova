@@ -69,6 +69,7 @@ class SportStage(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=150)
     edition = models.PositiveSmallIntegerField()
+    website = models.URLField(blank=True, null=True)
 
     def natural_key(self):
         return (self.name)
@@ -133,7 +134,6 @@ class Race(models.Model):
     price = models.PositiveIntegerField()
     federation = models.ForeignKey(Federation, blank=True, null=True)
     label = models.ForeignKey(Label, blank=True, null=True)
-    contact = models.ForeignKey(Contact)
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
 
@@ -205,9 +205,3 @@ class StageDistanceDefault(StageDistance):
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)
 
-
-class EntryFee(models.Model):
-    race = models.ForeignKey(Race)
-    from_date = models.DateField(null=True)
-    to_date = models.DateField(null=True)
-    Price = models.DecimalField(max_digits=6, decimal_places=2)

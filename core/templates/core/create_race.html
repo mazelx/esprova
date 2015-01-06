@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div>
+        <h1>Add Race</h1>
+        <form action="." method="post">
+            {% csrf_token %}
+            <div class="toto">
+                {{ form.as_p }}
+                {# {{ location_form.as_table }} #}
+            </div>
+            <input type="submit" value="Add race" class="submit" />
+        </form>
+    </div>
+</body>
+</html>
