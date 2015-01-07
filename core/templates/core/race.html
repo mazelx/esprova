@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% block content %}
 
-<div class="container-fluid content">
+<div class="container-fluid">
     <div class="racebanner row">
         <p class="text-right">
             <q>{{ race.description }}</q>
@@ -38,10 +38,66 @@
             </dd>
         </dl>
     </section>
+    <section class="panel panel-default">
+    <dl class="dl-horizontal panel-body">
+        <dt>Organisateur</dt>
+        <dd>Ardèche Sport Attitude</dd>
+        <dt>Contact</dt>
+        <dd>
+            <address>
+                <strong>Bruno Damiens</strong>
+                <br> 06 98 62 64 11
+                <br>
+                <a href="mailto:#">bruno.damiens@trigorgesardeche.com</a>
+            </address>
+        </dd>
+    </dl>
+</section>
+<section class="panel panel-default">
+    <dl class="dl-horizontal panel-body">
+        <dt>Tarif</dt>
+        <dd>35€ avant le 01/06/2014 puis 45€</dd>
+        <dt>Cloture inscriptions</dt>
+        <dd>20/07/2015</dd>
+        <dt>Places disponibles</dt>
+        <dd>300</dd>
+    </dl>
+</section>
+<section class="panel panel-default">
+    <dl class="dl-horizontal panel-body">
+        <dt>Distance</dt>
+        <dd>M (Courte Distance)</dd>
+        <dt>Natation</dt>
+        <dd>1,5 Km</dd>
+        <dt>Vélo</dt>
+        <dd>40 Km</dd>
+        <dt>Course à Pied</dt>
+        <dd>10 Km</dd>
+        <dt>Dénivelé</dt>
+        <dd>600m positif, 1500m total</dd>
+    </dl>
+</section>
+<section class="panel panel-default">
+    <dl class="dl-horizontal panel-body">
+        <dt>Challenge</dt>
+        <dd>Challenge Tri Dromardèche</dd>
+        <dt>Temps limite</dt>
+        <dd>3h</dd>
+    </dl>
+</section>
+<section class="panel panel-default">
+    <dl class="dl-horizontal panel-body">
+        <dt>Limite d'age</dt>
+        <dd>Aucun</dd>
+        <dt>Accessibles handicap</dt>
+        <dd>Oui</dd>
+    </dl>
+</section>
 </div>
 {% endblock %}
 
 {# -------------------------------------------------------------------------------------------------------------------- #} 
+{# old #}
 <div class="container">
     <header class="page-header row">
         <div class="col-md-9">

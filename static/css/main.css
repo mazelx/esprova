@@ -55,6 +55,7 @@ html, body {
     /*margin: 20px 0;*/
     /*width: 100%;*/
     vertical-align: text-bottom;
+    top:51px;
     height: 400px;
     background-color: lightgray;
 }

@@ -6,24 +6,26 @@ class EventForm(ModelForm):
 
     class Meta:
         model = Event
+        exclude = []
 
 
 class RaceForm(ModelForm):
 
     class Meta:
         model = Race
-        fields = ['sport', 'distance_cat']
+        fields = ['sport', 'distance_cat', 'date']
 
 
 class LocationForm(ModelForm):
 
     class Meta:
         model = Location
-        fields = ['address1', 'address2', 'zipcode', 'city', 'state', 'country']
+        exclude = ['lat', 'lng']
 
 
 class ContactForm(ModelForm):
 
     class Meta:
         model = Contact
+        exclude = []
 

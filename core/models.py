@@ -133,7 +133,7 @@ class Race(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateTimeField()
     distance_cat = models.ForeignKey(DistanceCategory)
-    price = models.PositiveIntegerField()
+    price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True)
     label = models.ForeignKey(Label, blank=True, null=True)
     contact = models.ForeignKey(Contact)
