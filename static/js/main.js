@@ -244,10 +244,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function initialize() {
     var mapOptions = {
         center: {
-            lat: 44.301683,
-            lng: 4.5656561
+            lat: 46.9,
+            lng: 2.6
         },
-        zoom: 8,
+        zoom: 6,
         maxZoom: 15,
         minZoom:5,
         panControl: false,
