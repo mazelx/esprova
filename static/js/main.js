@@ -248,6 +248,8 @@ function initialize() {
             lng: 4.5656561
         },
         zoom: 8,
+        maxZoom: 15,
+        minZoom:5,
         panControl: false,
         streetViewControl: false
     };
