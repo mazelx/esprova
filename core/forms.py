@@ -1,31 +1,31 @@
-from django.forms import ModelForm
-from core.models import Race, Event, Location, Contact
+from django import forms
+from core.models import Race, Event, Location, Contact, Sport, DistanceCategory
+from django_countries import countries
 
 
-class EventForm(ModelForm):
-
-    class Meta:
-        model = Event
-        exclude = []
-
-
-class RaceForm(ModelForm):
-
-    class Meta:
-        model = Race
-        fields = ['sport', 'distance_cat', 'date']
+class EventForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    edition = forms.IntegerField()
+    website = forms.URLField(required=False)
 
 
-class LocationForm(ModelForm):
+class RaceForm(forms.Form):
+    date = forms.DateField()
+    sport = forms.ModelChoiceField(Sport.objects.all())
+    # TODO : cascading select box to choose distances corresponding to a sport
+    distance_cat = forms.ModelChoiceField(DistanceCategory.objects.all())
 
-    class Meta:
-        model = Location
-        exclude = ['lat', 'lng']
+
+class LocationForm(forms.Form):
+    address1 = forms.CharField(max_length=200, required=False)
+    address2 = forms.CharField(max_length=200, required=False)
+    zipcode = forms.CharField(max_length=16, required=False)
+    city = forms.CharField(max_length=100)
+    state = forms.CharField(max_length=100, required=False)
+    country = forms.ChoiceField(list(countries))
 
 
-class ContactForm(ModelForm):
-
-    class Meta:
-        model = Contact
-        exclude = []
-
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField(required=False)
+    phone = forms.CharField(max_length=10, required=False)

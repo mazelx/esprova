@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView
-from core.models import Race
+from core.models import Race, Contact, Location, Event
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -7,6 +7,10 @@ from json import dumps
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 from core.forms import RaceForm, ContactForm, EventForm, LocationForm
+from django.shortcuts import render, render_to_response
+from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView
+from django.contrib import messages
+from django.template import RequestContext
 
 
 def getRacesAjax(request):
@@ -88,64 +92,115 @@ class RaceCreate(CreateView):
 
     def get(self, request, *args, **kwargs):
         """
-        Handles GET requests and instantiates blank versions of the form
-        and its inline formsets.
+        Handles GET requests and instantiates blank versions of the forms
         """
         self.object = None
-        form = RaceForm(prefix='race')
+        race_form = RaceForm(prefix='race')
         event_form = EventForm(prefix='event')
         location_form = LocationForm(prefix='location')
         contact_form = ContactForm(prefix='contact')
 
         return self.render_to_response(
-            self.get_context_data(form=form,
+            self.get_context_data(race_form=race_form,
                                   contact_form=contact_form,
                                   event_form=event_form,
                                   location_form=location_form))
 
     def post(self, request, *args, **kwargs):
         """
-        Handles POST requests, instantiating a form instance and its inline
-        formsets with the passed POST variables and then checking them for
-        validity.
+        Handles POST requests, instantiating the form instances with the passed
+        POST variables and then checking them for validity.
         """
-        self.object = None
-        form = RaceForm(self.request.POST, prefix='race')
+        race_form = RaceForm(self.request.POST, prefix='race')
         event_form = EventForm(self.request.POST, prefix='event')
         location_form = LocationForm(self.request.POST, prefix='location')
         contact_form = ContactForm(self.request.POST, prefix='contact')
-        if(form.is_valid() and event_form.is_valid() and
-           location_form.is_valid() and contact_form.is_valid()):
-            return self.form_valid(form, event_form, location_form, contact_form)
+
+        if race_form.is_valid() and event_form.is_valid() and location_form.is_valid() and contact_form.is_valid():
+            race = Race()
+            race.date = race_form.cleaned_data["date"]
+            race.distance_cat = race_form.cleaned_data["distance_cat"]
+            race.sport = race_form.cleaned_data["sport"]
+
+
+            contact = Contact()
+            contact.name = contact_form.cleaned_data["name"]
+            contact.email = contact_form.cleaned_data["email"]
+            contact.phone = contact_form.cleaned_data["phone"]
+            contact.save()
+
+
+
+            race.location = location
+            race.event = event
+            race.contact = contact
+            race.save()
+
+            return HttpResponseRedirect(reverse('list_race'))
         else:
-            return self.form_invalid(form, event_form, location_form, contact_form)
+            return render(request, 'contact_form.html', {'race': race_form.error})
 
-    def form_valid(self, form, event_form, location_form, contact_form):
-        """
-        Called if all forms are valid. Creates a Recipe instance along with
-        associated Ingredients and Instructions and then redirects to a
-        success page.
-        """
-        rl = location_form.save()
-        re = event_form.save()
-        rc = contact_form.save()
 
-        self.object = form.save(commit=False)
+class RaceWizard(NamedUrlSessionWizardView):
+    template_name = 'core/create_race_wizard.html'
 
-        self.object.contact = rc
-        self.object.event = re
-        self.object.location = rl
-        self.object.save()
+    # TEMPLATES = [("event", 'core/create_race_wizard.html'),
+    #              ("race", 'core/create_race_wizard.html'),
+    #              ("location", 'core/create_race_wizard.html'),
+    #              ("contact", 'core/create_race_wizard.html')]
 
-        return HttpResponseRedirect(reverse('list_race'))
+    def create_event(self, event_form):
+        event = Event()
+        event.name = event_form.cleaned_data["name"]
+        event.website = event_form.cleaned_data["website"]
+        event.edition = event_form.cleaned_data["edition"]
+        event.save()
+        return event
 
-    def form_invalid(self, form, event_form, location_form, contact_form):
-        """
-        Called if a form is invalid. Re-renders the context data with the
-        data-filled forms and errors.
-        """
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  location_form=location_form,
-                                  event_form=event_form,
-                                  contact_form=contact_form))
+    def create_location(self, location_form):
+        location = Location()
+        location.address1 = location_form.cleaned_data["address1"]
+        location.address2 = location_form.cleaned_data["address2"]
+        location.zipcode = location_form.cleaned_data["zipcode"]
+        location.city = location_form.cleaned_data["city"]
+        location.state = location_form.cleaned_data["state"]
+        location.country = location_form.cleaned_data["country"]
+        location.save()
+        return location
+
+    def create_contact(self, contact_form):
+        contact = Contact()
+        contact.name = contact_form.cleaned_data["name"]
+        contact.email = contact_form.cleaned_data["email"]
+        contact.phone = contact_form.cleaned_data["phone"]
+        contact.save()
+        return contact
+
+    def create_race(self, race_form, event, location, contact):
+        race = Race()
+        race.date = race_form.cleaned_data["date"]
+        race.distance_cat = race_form.cleaned_data["distance_cat"]
+        race.sport = race_form.cleaned_data["sport"]
+        race.location = location
+        race.event = event
+        race.contact = contact
+        race.save()
+        return race
+
+    def done(self, form_list, form_dict, **kwargs):
+        event_form = form_dict['event']
+        race_form = form_dict['race']
+        location_form = form_dict['location']
+        contact_form = form_dict['contact']
+
+        if all([event_form, race_form, location_form, contact_form]):
+            event = self.create_event(event_form)
+            location = self.create_location(location_form)
+            contact = self.create_contact(contact_form)
+            race = self.create_race(race_form=race_form, event=event, contact=contact, location=location)
+            if race:
+                messages.success(self.request, ("La course {0} a bien été créée".format(event.name)))
+                return HttpResponseRedirect(reverse('list_race'))
+
+        messages.error(self.request, ("Something went wrong creating your product."))
+        return HttpResponseRedirect(reverse('race_wizard'))
