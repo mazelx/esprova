@@ -93,3 +93,9 @@ html, body {
 .distance_checkbox {
     display: none;
 }
+
+.alert {
+    position:absolute;
+    top:50px;
+    z-index: 1;
+}
