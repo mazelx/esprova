@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from core.models import Race, Contact, Location, Event
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -145,3 +145,7 @@ class RaceWizard(NamedUrlSessionWizardView):
 
         messages.error(self.request, ("Something went wrong creating your product."))
         return HttpResponseRedirect(reverse('create_race'))
+
+
+class GeocodeView(TemplateView):
+        template_name = 'core/geocode.html'

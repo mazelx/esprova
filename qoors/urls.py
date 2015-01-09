@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from core.views import RaceView, RaceList, getRacesAjax, RaceWizard
+from core.views import RaceView, RaceList, getRacesAjax, RaceWizard, GeocodeView
 from core.forms import ContactForm, RaceForm, LocationForm, EventForm
 
 race_named_forms = (
@@ -20,4 +20,5 @@ urlpatterns = patterns('',
                        url(r'^search/$', getRacesAjax, name='search_race'),
                        url(r'^create/$', create_race, name="create_race"),
                        url(r'^create/(?P<step>[-\w]+)/$', create_race, name="create_race_step"),
+                       url(r'^geocode/$', GeocodeView.as_view())
                        )
