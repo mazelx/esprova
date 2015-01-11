@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django_countries',
     'haystack',
     'django_nose',
+    'django_extensions',
     # Qoors applications
     'core',
 )

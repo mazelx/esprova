@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from core.utils import geocode
 from django_countries.fields import CountryField
 from haystack.utils.geo import Point
+from django.db.models import Min, Max
 
 
 class Sport(models.Model):
@@ -48,6 +49,11 @@ class Location(models.Model):
 
         super(Location, self).save(*args, **kwargs)
 
+    def get_FR_departement_code(self):
+        if self.zipcode:
+            return self.zipcode[:2]
+        return ''
+
 
 class SportStage(models.Model):
     sport = models.ForeignKey(Sport)
@@ -71,11 +77,25 @@ class Event(models.Model):
     edition = models.PositiveSmallIntegerField()
     website = models.URLField(blank=True, null=True)
 
+    # def __init__(self):
+    #     self. distance_category_set = self._get_event_distance_category()
+
     def natural_key(self):
         return (self.name)
 
     def __str__(self):
         return self.name
+
+    def get_start_date(self):
+        return self.race_set.all().aggregate(Min('date'))['date__min']
+
+    def get_end_date(self):
+        return self.race_set.all().aggregate(Max('date'))['date__max']
+
+    def _get_event_distance_category(self):
+        if self.race_set:
+            return self.race_set.all() 
+        return None
 
 
 class Federation(models.Model):

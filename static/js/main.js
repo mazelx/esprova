@@ -297,7 +297,7 @@ function getRacesFromSearch(data){
      $.ajax({
         url: '/search/?',
         type: 'GET',
-        data: '&' + $( "#race_search_form" ).serialize() +
+        data: $( "#race_search_form" ).serialize() +
               '&q=' + $("#search_expr").val() ,
         dataType: 'json',
         success: function(response, statut) {

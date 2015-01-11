@@ -2,4 +2,6 @@
 {{ object.event.name }}
 {{ object.distance_cat.name }}
 {{ object.location.city }}
+{{ object.location.get_FR_departement_code }}
+{{ object.location.zipcode }}
 {% endautoescape %}
