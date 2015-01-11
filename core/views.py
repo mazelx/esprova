@@ -50,14 +50,25 @@ def getRacesAjax(request):
         # build the JSON response
         races = []
         result_html = []
+
+        # Uniqfy the event list (multiple races from an event)
+        seen = {}
         for sr in sqs:
-            race_data = {'id': int(sr.pk),
-                         'lat': str(sr.get_stored_fields()['location'].get_coords()[1]),
-                         'lng': str(sr.get_stored_fields()['location'].get_coords()[0])
+            event_id = sr.get_stored_fields()['event_id']
+            location = sr.get_stored_fields()['location']
+            rendered = sr.get_stored_fields()['rendered']
+
+            if event_id in seen:
+                continue
+
+            seen[event_id] = 1
+            race_data = {'id': int(event_id),
+                         'lat': str(location.get_coords()[1]),
+                         'lng': str(location.get_coords()[0])
                          }
 
             races.append(race_data)
-            result_html.append(sr.get_stored_fields()['rendered'])
+            result_html.append(rendered)
 
         response = {'count': sqs.count(),
                     'races': races,

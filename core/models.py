@@ -92,10 +92,11 @@ class Event(models.Model):
     def get_end_date(self):
         return self.race_set.all().aggregate(Max('date'))['date__max']
 
-    def _get_event_distance_category(self):
-        if self.race_set:
-            return self.race_set.all() 
-        return None
+    def get_distance_cat_set(self):
+        distance_cat_set = []
+        for r in self.race_set.all().order_by('distance_cat__order'):
+            distance_cat_set.append(r.distance_cat)
+        return distance_cat_set
 
 
 class Federation(models.Model):
@@ -135,6 +136,7 @@ class DistanceCategory(models.Model):
     sport = models.ForeignKey(Sport)
     name = models.CharField(max_length=2)
     long_name = models.CharField(max_length=20, blank=True, null=True)
+    order = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return "{0} - {1} ({2})".format(self.sport.name, self.name, self.long_name)

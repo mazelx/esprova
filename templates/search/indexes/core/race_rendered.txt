@@ -1,9 +1,10 @@
  {% load static %} 
- <a href="{% url "view_race" object.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
-    <h4 class="list-group-item-heading">{{ object.event.name }}</h4>
-    {% for r in object.event.race_set.all %}
-        {{ r.distance_cat.name }}
+ <a href="{% url "view_race" object.event.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
+    <h4 class="list-group-item-heading">{{ object.event.name }}
+    {% for d in object.event.get_distance_cat_set %}
+        <span class="badge">{{ d.name }}</span>
     {% endfor %}
+    </h4>
 
     <p class="list-group-item-text">{{ object.date }} à {{ object.location.city }} ({{ object.location.zipcode|slice:":2"}})</p>
 </a>
