@@ -15,8 +15,16 @@ class DistanceCategoryAdmin(admin.ModelAdmin):
     # search_fields  = ('titre', 'contenu')
 
 
+class RaceAdmin(admin.ModelAdmin):
+    list_display = ('sport', 'event', 'date', 'distance_cat', 'location')
+    list_filter = ('sport', 'event', 'date', 'distance_cat', 'location')
+    date_hierarchy = 'date'
+    ordering = ('date', )
+    search_fields = ('event', 'distance_cat')
+
+
 admin.site.register(DistanceCategory, DistanceCategoryAdmin)
-admin.site.register(Race)
+admin.site.register(Race, RaceAdmin)
 admin.site.register(Event)
 # admin.site.register(Sport)
 admin.site.register(Contact)
