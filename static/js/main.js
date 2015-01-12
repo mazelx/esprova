@@ -342,7 +342,8 @@ function refreshRacesOnSidebar(races_html) {
     // display the selected race
     console.log("active event_" + selected_event_id);
     if($("#event_" + selected_event_id).length){
-        $("#event_" + selected_event_id).addClass("active");
+        $("#event_" + selected_event_id).addClass("panel-primary");
+        $("#event_" + selected_event_id + "_races").addClass("in");
     } else {
         selected_event_id = null;
     }
@@ -364,10 +365,12 @@ function refreshRacesOnMap(races) {
         markers.push(marker);
         // select the race in the sidebar when marker clicked
         google.maps.event.addListener(marker, 'click', function () {
-            $("#event_" + selected_event_id).removeClass("active");
+            $("#event_" + selected_event_id).removeClass("panel-primary");
+            $("#event_" + selected_event_id + "_races").removeClass("in");
             selected_event_id = marker.get("id")
             console.log(selected_event_id);
-            $("#event_" + selected_event_id).addClass("active"); 
+            $("#event_" + selected_event_id).addClass("panel-primary"); 
+            $("#event_" + selected_event_id + "_races").addClass("in");
             $(".sidebox").animate({
                 // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
                         scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150

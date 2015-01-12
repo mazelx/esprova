@@ -1,7 +1,6 @@
  {% load static %} 
  <div class="panel panel-default" id="event_{{ object.event.pk }}">
     <div class="panel-heading" role="tab">
-         <div data-parent="#racelist">
             <h4 class="panel-title">
                 {{ object.event.name }}
                 {% for d in object.event.get_distance_cat_set %}
@@ -11,11 +10,10 @@
             </h4>
 
             <p class="list-group-item-text">{{ object.location.city }} ({{ object.location.zipcode|slice:":2"}})</p>
-        </div>
 
     </div> <!-- panel heading -->
 
-    <div id="event_{{ object.event.pk }}_races" class="list-group">
+    <div id="event_{{ object.event.pk }}_races" class="list-group collapse">
         {% for r in object.event.get_race_set %}
             <a href="{% url "view_race" r.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
                 {{ r.distance_cat.name }} - {{ r.date |date:"l d/m à H:i" }}
