@@ -28,7 +28,7 @@ class Location(models.Model):
     lng = models.DecimalField(max_digits=8, decimal_places=5, blank=True)
 
     def __str__(self):
-        return "{0}, {1}, {2} ({3}, {4})".format(self.address1, self.city, self.country, self.lat, self.lng)
+        return "{0}, {1}, {2} ({3}, {4})".format(self.zipcode, self.city, self.country, self.lat, self.lng)
 
     def save(self, *args, **kwargs):
         # Add + between fields with values:
@@ -97,6 +97,12 @@ class Event(models.Model):
         for r in self.race_set.all().order_by('distance_cat__order'):
             distance_cat_set.append(r.distance_cat)
         return distance_cat_set
+
+    def get_race_set(self):
+        race_set = []
+        for r in self.race_set.all().order_by('distance_cat__order'):
+            race_set.append(r)
+        return race_set
 
 
 class Federation(models.Model):

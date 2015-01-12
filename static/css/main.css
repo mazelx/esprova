@@ -99,3 +99,7 @@ html, body {
     top:50px;
     z-index: 1;
 }
+
+.event-result.active {
+    background-color: blue;
+}

@@ -1,6 +1,6 @@
 var map;
 var markers = [];
-var selected_race_id;
+var selected_event_id;
 
     var styles =[
     {
@@ -285,6 +285,7 @@ function initialize() {
         getRacesFromSearch();
     });
 
+    // Fade out for alert messages
     window.setTimeout(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove(); 
@@ -339,15 +340,15 @@ function refreshRacesOnSidebar(races_html) {
     $("#racelist").html(races_html);
 
     // display the selected race
-    console.log("active race_" + selected_race_id);
-    if($("#race_" + selected_race_id).length){
-        $("#race_" + selected_race_id).addClass("active");
+    console.log("active event_" + selected_event_id);
+    if($("#event_" + selected_event_id).length){
+        $("#event_" + selected_event_id).addClass("active");
     } else {
-        selected_race_id = null;
+        selected_event_id = null;
     }
 
 }
-
+        
 function refreshRacesOnMap(races) {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -363,13 +364,13 @@ function refreshRacesOnMap(races) {
         markers.push(marker);
         // select the race in the sidebar when marker clicked
         google.maps.event.addListener(marker, 'click', function () {
-            $("#race_" + selected_race_id).removeClass("active");
-            selected_race_id = marker.get("id")
-            console.log(selected_race_id);
-            $("#race_" + selected_race_id).addClass("active"); 
+            $("#event_" + selected_event_id).removeClass("active");
+            selected_event_id = marker.get("id")
+            console.log(selected_event_id);
+            $("#event_" + selected_event_id).addClass("active"); 
             $(".sidebox").animate({
                 // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
-                        scrollTop: $(".sidebox").scrollTop() + $("#race_" + selected_race_id).offset().top - 150
+                        scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
             }, 500);
         });
     });
