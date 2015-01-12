@@ -1,5 +1,5 @@
  {% load static %} 
- <div class="panel panel-default" id="event_{{ object.event.pk }}">
+ <div class="panel panel-default event-result" id="event_{{ object.event.pk }}">
     <div class="panel-heading" role="tab">
             <h4 class="panel-title">
                 {{ object.event.name }}
