@@ -1,6 +1,7 @@
 var map;
 var markers = {};
 var selected_event_id;
+var highestZIndex = 10;
 
 var defaultMarkerIcon = {
         url: 'static/images/marker_icon.svg',
@@ -413,7 +414,8 @@ function refreshRacesOnMap(races) {
             position: latlng,
             map: map,
             id: race.id,
-            icon : defaultMarkerIcon
+            icon : defaultMarkerIcon,
+            zIndex : 1
         });
         markers[race.id]=marker;
         
@@ -448,7 +450,8 @@ function selectEvent(event_id){
             scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
         }, 500);
         markers[selected_event_id].setIcon(selectedMarkerIcon);
-
+        markers[selected_event_id].setZIndex(highestZIndex+1)
+        highestZIndex += 1;
     }
    
 }
