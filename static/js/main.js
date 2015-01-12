@@ -422,7 +422,7 @@ function refreshRacesOnMap(races) {
         addListMarkerClick(marker);
     });
 
-    if (!(markers.hasOwnProperty(selected_event_id))) {
+    if (!(selected_event_id in markers)) {
         selected_event_id = null;
     }
 
