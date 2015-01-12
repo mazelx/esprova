@@ -406,7 +406,6 @@ function refreshRacesOnMap(races) {
 
     // reinitialize markers associative array
     markers = {};
-    selected_event_id = null;
 
     $.each(races, function(i, race) {
         var latlng = new google.maps.LatLng(race.lat, race.lng);
@@ -422,6 +421,11 @@ function refreshRacesOnMap(races) {
         // Listener : select event on marker click
         addListMarkerClick(marker);
     });
+
+    if (!(markers.hasOwnProperty(selected_event_id))) {
+        selected_event_id = null;
+    }
+
     selectEvent(selected_event_id);
 }
 
