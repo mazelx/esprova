@@ -1,26 +1,24 @@
  {% load static %} 
- <a href="#" class="list-group-item event-result" id="event_{{ object.event.pk }}">
-    
+ <div href="#" class="list-group-item event-result" id="event_{{ object.event.pk }}">
+
     <div class="list-group-item-heading" role="tab">
-        <div data-toggle="collapse" data-parent="#racelist" href="#event_{{ object.event.pk }}_races" aria-expanded="true" aria-controls="event_{{ object.event.pk }}_races">
+        <a data-toggle="collapse" data-parent="#racelist" href="#event_{{ object.event.pk }}_races" aria-expanded="true" aria-controls="event_{{ object.event.pk }}_races">
             <h4 class="panel-title">
                 {{ object.event.name }}
                 {% for d in object.event.get_distance_cat_set %}
                     <span class="badge">{{ d.name }}</span>
                 {% endfor %}
-
             </h4>
 
             <p class="list-group-item-text">{{ object.location.city }} ({{ object.location.zipcode|slice:":2"}})</p>
-        </div>
-
+        </a>
     </div> <!-- panel heading -->
 
-    <div id="event_{{ object.event.pk }}_races" class="panel-collapse collapse list-group" role="tabpanel" aria-labelledby="Event races">
+    <div id="event_{{ object.event.pk }}_races" class="collapse" role="tabpanel" aria-labelledby="Event races">
         {% for r in object.event.get_race_set %}
-            <a href="{% url "view_race" r.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
+            <a href="{% url "view_race" r.pk %}" class="race-result" id="race_{{ object.pk }}">
                 {{ r.distance_cat.name }} - {{ r.date |date:"l d/m à H:i" }}
             </a>
         {% endfor %}
     </div> <!-- panel-collapse -->
-</a>
+</div>
