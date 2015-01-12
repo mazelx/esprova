@@ -1,6 +1,20 @@
 var map;
-var markers = [];
+var markers = {};
 var selected_event_id;
+
+// var selectedMarkerIcon = 'static/images/marker_icon_selected.png'
+// var defaultMarkerIcon = 'static/images/marker_icon.png'
+
+
+var defaultMarkerIcon = {
+        url: 'static/images/marker_icon.svg',
+        size: new google.maps.Size(28,42),
+};
+
+var selectedMarkerIcon = {
+        url: 'static/images/marker_icon_selected.svg',
+        size: new google.maps.Size(28,42),
+};
 
     var styles =[
     {
@@ -239,6 +253,11 @@ var selected_event_id;
     }
 ];
 
+
+// ----------------------
+// Document initialization
+// ----------------------
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function initialize() {
@@ -265,34 +284,69 @@ function initialize() {
         getRacesFromMapBounds(map.getBounds().toUrlValue());
     });
 
-    // LISTENER : retrieve races when map moves
+
+    // Add custom event listeners
+    addListMapMoves();
+    addListQuickSearch();
+    addListSearch();
+    addListAlertMessages();
+
+}
+
+
+// ----------------------
+// LISTENERS
+// ----------------------
+
+// LISTENER : retrieve races when map moves
+function addListMapMoves(){
     google.maps.event.addListener(map, 'idle', function() {
         if ($("#follow_map_bounds").is(':checked')) {
             getRacesFromMapBounds(map.getBounds().toUrlValue());
         }
     });
+}
 
+function addListMarkerClick(marker){
+    google.maps.event.addListener(marker, 'click', function () {
+        selectEvent(marker.get("id"));
+    });
+}
 
-    // LISTENER : retrieve races from quick search 
+function addListResultClick(event_id){
+    $( "#event" + event_id ).click(function( event ) {
+        selected_event_id = event_id;
+    });
+}
+
+// LISTENER : retrieve races from quick search
+function addListQuickSearch(){ 
     $( "#race_quicksearch_form" ).submit(function( event ) {
         event.preventDefault();
         getRacesFromSearch();
     });
-
-    // LISTENER : retrieve races from basic search
+}
+    
+// LISTENER : retrieve races from basic search
+function addListSearch(){
     $( "#race_search_form" ).change(function( event ) {
         event.preventDefault();
         getRacesFromSearch();
     });
-
-    // Fade out for alert messages
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-  });
-}, 3000);
-
 }
+
+function addListAlertMessages(){
+    window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+      });
+    }, 3000);
+}
+
+
+// ----------------------
+// Ajax Handling
+// ----------------------
 
 function getRacesFromSearch(data){
      $.ajax({
@@ -304,7 +358,7 @@ function getRacesFromSearch(data){
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
             refreshRacesOnMap(response.races);
-            ajdust_bounds_from_markers();
+            setMapBoundsFromResults();
         },
     });
 }
@@ -329,6 +383,10 @@ function getRacesFromMapBounds(mapbounds) {
     });
 }
 
+
+// ----------------------
+// Display results
+// ----------------------
 function refreshRacesOnSidebar(races_html) {
     // no result handler
     if(races_html == "") {
@@ -339,55 +397,85 @@ function refreshRacesOnSidebar(races_html) {
     // replace HTML by ajax provided code
     $("#racelist").html(races_html);
 
-    // display the selected race
-    console.log("active event_" + selected_event_id);
-    if($("#event_" + selected_event_id).length){
-        $("#event_" + selected_event_id).addClass("panel-primary");
-        $("#event_" + selected_event_id + "_races").addClass("in");
-    } else {
-        selected_event_id = null;
-    }
-
+    selectEvent(selected_event_id);
 }
         
 function refreshRacesOnMap(races) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(null);
+    for(var key in markers){
+        markers[key].setMap(null);
     }
-    markers = [];
+
+    // for (var i = 0; i < markers.length; i++) {
+    //     markers[i].setMap(null);
+    // }
+
+    // reinitialize markers associative array
+    markers = {};
     $.each(races, function(i, race) {
         var latlng = new google.maps.LatLng(race.lat, race.lng);
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
-            id: race.id
+            id: race.id,
+            icon : defaultMarkerIcon
         });
-        markers.push(marker);
-        // select the race in the sidebar when marker clicked
-        google.maps.event.addListener(marker, 'click', function () {
-            $("#event_" + selected_event_id).removeClass("panel-primary");
-            $("#event_" + selected_event_id + "_races").removeClass("in");
-            selected_event_id = marker.get("id")
-            console.log(selected_event_id);
-            $("#event_" + selected_event_id).addClass("panel-primary"); 
-            $("#event_" + selected_event_id + "_races").addClass("in");
-            $(".sidebox").animate({
-                // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
-                        scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
-            }, 500);
-        });
+        markers[race.id]=marker;
+        
+        // Listener : select event on marker click
+        addListMarkerClick(marker);
     });
 }
 
-function ajdust_bounds_from_markers() {
 
-    if(markers.length > 0) {
-        var bound = new google.maps.LatLngBounds();
-        
-        for(var i in markers) {
-            bound.extend(markers[i].getPosition());
-        }
-
-        map.fitBounds(bound);
+// ----------------------
+// Dynamic display
+// ----------------------
+function selectEvent(event_id){
+    // unselect old event
+    if($("#event_" + selected_event_id).length){
+        $("#event_" + selected_event_id).removeClass("panel-primary");
+        $("#event_" + selected_event_id + "_races").removeClass("in");
+        markers[selected_event_id].setIcon(defaultMarkerIcon);
     }
+
+    // select new event
+    selected_event_id = event_id;
+    console.log("active event_" + event_id);
+
+    if($("#event_" + selected_event_id).length){
+        $("#event_" + selected_event_id).addClass("panel-primary");
+        $("#event_" + selected_event_id + "_races").addClass("in");
+        
+        // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
+        $(".sidebox").animate({
+            scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
+        }, 500);
+        markers[selected_event_id].setIcon(selectedMarkerIcon);
+
+    } else {
+        selected_event_id = null;
+    }
+   
+}
+
+
+function setMapBoundsFromResults() {
+
+    var bound = new google.maps.LatLngBounds();
+
+    for(var key in markers) {
+        bound.extend(markers[key].getPosition());
+    }
+
+    map.fitBounds(bound);
+
+    // if(markers.length > 0) {
+    //     var bound = new google.maps.LatLngBounds();
+        
+    //     for(var i in markers) {
+    //         bound.extend(markers[i].getPosition());
+    //     }
+
+    //     map.fitBounds(bound);
+    // }
 }
