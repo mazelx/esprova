@@ -25,11 +25,11 @@ TEMPLATE_DIRS = (
 SECRET_KEY = 'oq3@gp%)8=x((h3%#d-v39dj#53foldi#akg_)m)(jicpohoyf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['esprova.herokuapp.com', '.esprova.com']
 
 
 # Application definition
@@ -74,7 +74,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
 
     'core.context_processors.global_settings',
-) 
+)
 
 ROOT_URLCONF = 'esprova.urls'
 
@@ -84,25 +84,17 @@ WSGI_APPLICATION = 'esprova.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 # Django settings.py
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'esprova',
-        'USER': 'mazelx',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'd7bils84pgrji8',
+        'USER': 'smymkxetydqacu',
+        'PASSWORD': 'MsuTJ6e_EYO_-nMhFzPgV2f6_W',
+        'HOST': 'ec2-54-217-238-179.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -118,15 +110,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    '/www/esprova/static/',
-)
-
  # ------ Project Specific Settings ------
 
 GOOGLE_API_KEY = "AIzaSyCA3YCeUu02CRg_QPLS8GUhIx2fgX4is24"
@@ -136,7 +119,7 @@ GOOGLE_API_KEY = "AIzaSyCA3YCeUu02CRg_QPLS8GUhIx2fgX4is24"
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'URL': 'https://8vq0uifr:to2z8sa47tplzs1x@myrtle-3593425.eu-west-1.bonsai.io:443/',
         'INDEX_NAME': 'haystack',
     },
 }
@@ -153,8 +136,34 @@ NOSE_ARGS = [
     '--cover-package=core.views, core.models',
 ]
 
+# AWS -----------
+
+# # Amazon Web Services header, see http://developer.yahoo.com/performance/rules.html#expires
+AWS_HEADERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'Cache-Control': 'max-age=94608000',
+}
+
+AWS_STORAGE_BUCKET_NAME = 'esprova-static'
+AWS_ACCESS_KEY_ID = 'AKIAIBSDSZFEOYKIWZTA'
+AWS_SECRET_ACCESS_KEY = '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'
+
+# Tell django-storages that when coming up with the URL for an item in S3 storage, keep
+# it simple - just use this domain plus the path. (If this isn't set, things get complicated).
+# This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
+# We also use it in the next setting.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# This is used by the `static` template tag from `static`, if you're using that. Or if anything else
+# refers directly to STATIC_URL. So it's safest to always set it.
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+# Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
+# you run `collectstatic`).
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 # Development settings :
-# local_settings.py only exists on live hosts and contains live specific settings
+# local_settings.py only exists on dev hosts and contains dev specific settings
 try:
     from esprova.local_settings import *
 except ImportError as e:

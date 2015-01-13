@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from core.views import RaceView, RaceList, getRacesAjax, RaceWizard
 from core.forms import ContactForm, RaceForm, LocationForm, EventForm
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 race_named_forms = (
     ("event", EventForm),
@@ -21,3 +22,6 @@ urlpatterns = patterns('',
                        url(r'^create/$', create_race, name="create_race"),
                        url(r'^create/(?P<step>[-\w]+)/$', create_race, name="create_race_step"),
                        )
+
+# serve static files on dev
+urlpatterns += staticfiles_urlpatterns()
