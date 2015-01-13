@@ -1,5 +1,5 @@
 """
-Django settings for qoors project.
+Django settings for esprova project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'haystack',
     'django_nose',
     'django_extensions',
-    # Qoors applications
+    # esprova applications
     'core',
 )
 
@@ -73,9 +73,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'core.context_processors.global_settings',
 ) 
 
-ROOT_URLCONF = 'qoors.urls'
+ROOT_URLCONF = 'esprova.urls'
 
-WSGI_APPLICATION = 'qoors.wsgi.application'
+WSGI_APPLICATION = 'esprova.wsgi.application'
 
 
 # Database
@@ -108,7 +108,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    '/var/www/qoors/static/',
+    '/var/www/esprova/static/',
 )
 
 
