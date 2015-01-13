@@ -4,12 +4,12 @@ var selected_event_id;
 var highestZIndex = 10;
 
 var defaultMarkerIcon = {
-        url: 'static/images/marker_icon.svg',
+        url: 'https://esprova-static.s3.amazonaws.com/images/marker_icon.svg',
         size: new google.maps.Size(28,42),
 };
 
 var selectedMarkerIcon = {
-        url: 'static/images/marker_icon_selected.svg',
+        url: 'https://esprova-static.s3.amazonaws.com/images/marker_icon_selected.svg',
         size: new google.maps.Size(28,42),
 };
 
