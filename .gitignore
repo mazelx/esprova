@@ -1,3 +1,4 @@
 .Python/
 extras/
 .coverage
+esprova/settings.py
