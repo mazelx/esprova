@@ -9,14 +9,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 
-# Development settings :
-# local_settings.py only exists on live hosts and contains live specific settings
-try:
-    from local_settings import *
-except ImportError as e:
-    pass
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -130,10 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "static"),
-#     '/www/esprova/static/',
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    '/www/esprova/static/',
+)
 
  # ------ Project Specific Settings ------
 
@@ -161,12 +153,9 @@ NOSE_ARGS = [
     '--cover-package=core.views, core.models',
 ]
 
-# AWS -----------
-
-# Amazon Web Services header, see http://developer.yahoo.com/performance/rules.html#expires
-AWS_HEADERS = {
-    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-    'Cache-Control': 'max-age=94608000',
-}
-
-
+# Development settings :
+# local_settings.py only exists on live hosts and contains live specific settings
+try:
+    from esprova.local_settings import *
+except ImportError as e:
+    pass
