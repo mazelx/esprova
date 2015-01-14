@@ -300,7 +300,8 @@ function initialize() {
 // LISTENER : retrieve races when map moves
 function addListMapMoves(){
     google.maps.event.addListener(map, 'idle', function() {
-        if ($("#follow_map_bounds").is(':checked')) {
+        // Do not refresh races if the map is not visible or "follow map bounds" not checked
+        if ($("#follow_map_bounds").is(':checked') && $(".mapbox").is(":visible") ) {
             getRacesFromMapBounds(map.getBounds().toUrlValue());
         }
     });
