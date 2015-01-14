@@ -288,6 +288,7 @@ function initialize() {
     addListSearch();
     addListAlertMessages();
     addListResultClick();
+    addListResetForm()
 
     createDatePickerComponent();
 
@@ -335,6 +336,13 @@ function addListSearch(){
     });
 }
 
+function addListResetForm(){
+     $( "#reset-search-form" ).click(function( event ) {
+        resetSearchForm();
+    });
+}
+
+
 // En CSS ??
 function addListAlertMessages(){
     window.setTimeout(function() {
@@ -343,6 +351,8 @@ function addListAlertMessages(){
       });
     }, 3000);
 }
+
+
 
 // initialize bootstrap-datepicker component
 function createDatePickerComponent() {
@@ -480,4 +490,11 @@ function setMapBoundsFromResults() {
         map.fitBounds(bound);
     }
 
+}
+
+function resetSearchForm(){
+    $("#race_quicksearch_form")[0].reset()
+    $("#race_search_form")[0].reset();
+    $(".distance_selector").removeClass("active");
+    getRacesFromSearch();
 }

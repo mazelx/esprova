@@ -14,19 +14,6 @@
 
 <div class="container-fluid content">
 
-<!--
-{% if messages %}
-    {% for message in messages %}
-        <div class="mapalert alert alert-info " role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Info : </strong> {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
--->
-
 {% if messages %}
     {% for message in messages %}
         <div class="mapalert alert alert-info  alert-dismissible" role="alert">
@@ -93,6 +80,7 @@
                             </div>
                         </div>
                     </div>
+                        <a href="#" id="reset-search-form">Réinitialiser les critères de recherche</a>
                 </form>
             </div>
 
