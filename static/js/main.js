@@ -472,10 +472,12 @@ function setMapBoundsFromResults() {
 
     var bound = new google.maps.LatLngBounds();
 
-    for(var key in markers) {
-        bound.extend(markers[key].getPosition());
-    }
+    if(!($.isEmptyObject(markers))){
+        for(var key in markers) {
+            bound.extend(markers[key].getPosition());
+        }
 
-    map.fitBounds(bound);
+        map.fitBounds(bound);
+    }
 
 }
