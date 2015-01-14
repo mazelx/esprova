@@ -289,8 +289,9 @@ function initialize() {
     addListAlertMessages();
     addListResultClick();
 
-}
+    createDatePickerComponent();
 
+}
 
 // ----------------------
 // LISTENERS
@@ -342,6 +343,17 @@ function addListAlertMessages(){
     }, 3000);
 }
 
+// initialize bootstrap-datepicker component
+function createDatePickerComponent() {
+    $('.input-daterange').datepicker({
+        format: "yyyy-mm-dd",
+        language: "fr",
+        autoclose: true,
+        clearBtn: true,
+        todayHighlight: true,
+        todayHighlight: true
+    });
+}
 
 // ----------------------
 // Ajax Handling
@@ -438,7 +450,6 @@ function selectEvent(event_id){
 
     // select new event
     selected_event_id = event_id;
-    console.log("active event_" + event_id);
 
     if($("#event_" + selected_event_id).length){
         $("#event_" + selected_event_id).addClass("panel-primary");
