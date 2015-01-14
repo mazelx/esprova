@@ -96,11 +96,6 @@ class RaceView(DetailView):
 class RaceWizard(NamedUrlSessionWizardView):
     template_name = 'core/create_race.html'
 
-    # TEMPLATES = [("event", 'core/create_race.html'),
-    #              ("race", 'core/create_race.html'),
-    #              ("location", 'core/create_race.html'),
-    #              ("contact", 'core/create_race.html')]
-
     def create_event(self, event_form):
         event = Event()
         event.name = event_form.cleaned_data["name"]
