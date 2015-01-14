@@ -108,3 +108,7 @@ html, body {
   margin-bottom: 0;
   margin-top: 10px;
 }
+
+.event-result.mouseover{
+    border-color:  gray;
+}

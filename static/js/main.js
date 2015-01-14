@@ -13,6 +13,11 @@ var selectedMarkerIcon = {
         size: new google.maps.Size(28,42),
 };
 
+var hoveredMarkerIcon = {
+        url: 'https://esprova-static.s3.amazonaws.com/images/marker_icon_hover.svg',
+        size: new google.maps.Size(28,42),
+};
+
 var styles =[
 {
     "featureType": "administrative",
@@ -288,7 +293,7 @@ function initialize() {
     addListSearch();
     addListAlertMessages();
     addListResultClick();
-    addListResetForm()
+    addListResetForm();
 
     createDatePickerComponent();
 
@@ -352,7 +357,23 @@ function addListAlertMessages(){
     }, 3000);
 }
 
+function addListHoverSideboxResult(){
+    $(".event-result").hover(function() {
+        highlightResult($(this)[0].id.replace("event_",""))
+    }, function() {
+        deHighlightResult($(this)[0].id.replace("event_",""))
+    }
+    );
+}
 
+function addListHoverMapResult(marker){
+    google.maps.event.addListener(marker, 'mouseover', function() {
+        highlightResult(marker.get("id"));
+    });
+    google.maps.event.addListener(marker, 'mouseout', function() {
+        deHighlightResult(marker.get("id"));
+    });
+}
 
 // initialize bootstrap-datepicker component
 function createDatePickerComponent() {
@@ -400,7 +421,7 @@ function getRacesFromMapBounds(mapbounds) {
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
-            refreshRacesOnMap(response.races)
+            refreshRacesOnMap(response.races);
         },
     });
 }
@@ -414,6 +435,7 @@ function refreshRacesOnSidebar(races_html) {
     $("#racelist").html(races_html);
 
     addListResultClick();
+    addListHoverSideboxResult();
     selectEvent(selected_event_id);
 }
         
@@ -438,6 +460,7 @@ function refreshRacesOnMap(races) {
         
         // Listener : select event on marker click
         addListMarkerClick(marker);
+        addListHoverMapResult(marker);
     });
 
     if (!(selected_event_id in markers)) {
@@ -471,7 +494,7 @@ function selectEvent(event_id){
             scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
         }, 500);
         markers[selected_event_id].setIcon(selectedMarkerIcon);
-        markers[selected_event_id].setZIndex(highestZIndex+1)
+        markers[selected_event_id].setZIndex(highestZIndex+1);
         highestZIndex += 1;
     }
    
@@ -479,9 +502,7 @@ function selectEvent(event_id){
 
 
 function setMapBoundsFromResults() {
-
     var bound = new google.maps.LatLngBounds();
-
     if(!($.isEmptyObject(markers))){
         for(var key in markers) {
             bound.extend(markers[key].getPosition());
@@ -489,7 +510,6 @@ function setMapBoundsFromResults() {
 
         map.fitBounds(bound);
     }
-
 }
 
 function resetSearchForm(){
@@ -497,4 +517,14 @@ function resetSearchForm(){
     $("#race_search_form")[0].reset();
     $(".distance_selector").removeClass("active");
     getRacesFromSearch();
+}
+
+function highlightResult(event_id){
+    $("#event_" + event_id).addClass("mouseover");
+    markers[event_id].setIcon(hoveredMarkerIcon);
+}
+
+function deHighlightResult(event_id){
+    $("#event_" + event_id).removeClass("mouseover");
+    markers[event_id].setIcon(defaultMarkerIcon);
 }
