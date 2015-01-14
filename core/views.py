@@ -8,7 +8,7 @@ from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView
 from django.contrib import messages
-
+from django.template.loader import render_to_string
 
 def getRacesAjax(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
@@ -68,7 +68,11 @@ def getRacesAjax(request):
                          }
 
             races.append(race_data)
+
             result_html.append(rendered)
+
+        if not races:
+            result_html = render_to_string('core/search_no_result_alert.html')
 
         response = {'count': sqs.count(),
                     'races': races,

@@ -333,6 +333,7 @@ function addListSearch(){
     });
 }
 
+// En CSS ??
 function addListAlertMessages(){
     window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -386,12 +387,6 @@ function getRacesFromMapBounds(mapbounds) {
 // Display results
 // ----------------------
 function refreshRacesOnSidebar(races_html) {
-    // no result handler
-    if(races_html == "") {
-        // rendering should be handled by django 
-        races_html = 
-        "<div class='alert alert-danger' role='alert'>Nous n'avons pas trouvé de course correspondant à vos critères</div>";   
-    }
     // replace HTML by ajax provided code
     $("#racelist").html(races_html);
 
