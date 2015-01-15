@@ -260,15 +260,16 @@ function refreshRacesOnMap(races) {
     markers = {};
 
     $.each(races, function(i, race) {
+        var rankClass = race.rankClass;
         var latlng = new google.maps.LatLng(race.lat, race.lng);
         var marker = new google.maps.Marker({
             position: latlng,
             map: map,
             id: race.id,
-            icon : markerIcons["secondary"]["default"],
+            icon : markerIcons[rankClass]["default"],
             zIndex : 1,
             // own property
-            rankClass : "secondary",
+            rankClass : rankClass,
         });
         markers[race.id]=marker;
         

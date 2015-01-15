@@ -65,7 +65,7 @@ def getRacesAjax(request):
 
             seen[event_id] = 1
             race_data = {'id': int(event_id),
-                         'rank': int(rank),
+                         'rankClass': "primary" if (rank <= 10) else "secondary",
                          'lat': str(location.get_coords()[1]),
                          'lng': str(location.get_coords()[0])
                          }
