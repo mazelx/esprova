@@ -170,6 +170,8 @@ class RaceWizard(NamedUrlSessionWizardView):
         messages.error(self.request, ("Something went wrong creating your product."))
         return HttpResponseRedirect(reverse('create_race'))
 
+class IntroView(LoginRequiredMixin, TemplateView):
+    template_name = 'core/introduction.html'
 
 class GeocodeView(LoginRequiredMixin, TemplateView):
         template_name = 'core/geocode.html'
