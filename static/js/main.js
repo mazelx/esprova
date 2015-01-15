@@ -25,7 +25,7 @@ var hoveredMarkerIcon = {
 
 
 // ----------------------
-// Document initialization
+// JS Init
 // ----------------------
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -55,6 +55,8 @@ function initialize() {
         getRacesFromMapBounds(map.getBounds().toUrlValue());
     });
 
+    // initialize search date
+    setDefaultSearchDates();
 
     // Add custom event listeners
     addListMapMoves();
@@ -67,6 +69,32 @@ function initialize() {
     createDatePickerComponent();
 
 }
+
+
+
+// ----------------------
+// DOM Initialization 
+// ----------------------
+
+// initialize bootstrap-datepicker component
+function createDatePickerComponent() {
+    $('.input-daterange').datepicker({
+        format: "yyyy-mm-dd",
+        language: "fr",
+        autoclose: true,
+        clearBtn: true,
+        todayHighlight: true,
+        todayBtn: "linked"
+    });
+}
+
+function setDefaultSearchDates(){
+    dt = new Date();
+    $("#start_date").attr("value", dt.toJSON().slice(0,10));
+    dt.setFullYear(dt.getFullYear()+1);
+    $("#end_date").attr("value", dt.toJSON().slice(0,10));
+}
+
 
 // ----------------------
 // LISTENERS
@@ -144,17 +172,7 @@ function addListHoverMapResult(marker){
     });
 }
 
-// initialize bootstrap-datepicker component
-function createDatePickerComponent() {
-    $('.input-daterange').datepicker({
-        format: "yyyy-mm-dd",
-        language: "fr",
-        autoclose: true,
-        clearBtn: true,
-        todayHighlight: true,
-        todayHighlight: true
-    });
-}
+
 
 // ----------------------
 // Ajax Handling
@@ -276,7 +294,6 @@ function setMapBoundsFromResults() {
         for(var key in markers) {
             bound.extend(markers[key].getPosition());
         }
-
         map.fitBounds(bound);
     }
 }
@@ -284,6 +301,8 @@ function setMapBoundsFromResults() {
 function resetSearchForm(){
     $("#race_quicksearch_form")[0].reset()
     $("#race_search_form")[0].reset();
+    $('#start_date').datepicker('update')
+    $('#end_date').datepicker('update')
     $(".distance_selector").removeClass("active");
     getRacesFromSearch();
 }
