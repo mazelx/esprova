@@ -48,6 +48,7 @@ def getRacesAjax(request):
         if q:
             sqs = sqs.filter(content=q)
 
+        sqs.order_by('score')
         # build the JSON response
         races = []
         result_html = []
@@ -65,6 +66,7 @@ def getRacesAjax(request):
 
             seen[event_id] = 1
             race_data = {'id': int(event_id),
+                         'score': str(sr.score),
                          'rankClass': "primary" if (rank <= 10) else "secondary",
                          'lat': str(location.get_coords()[1]),
                          'lng': str(location.get_coords()[0])

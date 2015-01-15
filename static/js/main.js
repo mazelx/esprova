@@ -7,8 +7,8 @@ var markerIcons = {};
 var primaryIcons = {};
 var secondaryIcons = {};
 
-// var static_url = 'https://esprova-static.s3.amazonaws.com/';
-var static_url = 'http://localhost:8000/static/'
+var static_url = 'https://esprova-static.s3.amazonaws.com/';
+// var static_url = 'http://localhost:8000/static/'
 
 primaryIcons['default']= {
     url: static_url + 'images/primary_marker_default.svg',
