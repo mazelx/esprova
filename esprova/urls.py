@@ -4,7 +4,7 @@ from core.views import RaceView, RaceList, getRacesAjax, RaceWizard
 from core.forms import ContactForm, RaceForm, LocationForm, EventForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
-from django.contrib.auth.decorators import login_required
+
 
 race_named_forms = (
     ("event", EventForm),
@@ -17,6 +17,9 @@ create_race = RaceWizard.as_view(race_named_forms, url_name="create_race_step")
 
 
 urlpatterns = patterns('',
+                       url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
+                           name="login"),
+                       url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name="logout"),
                        url(r'^robots\.txt$', TemplateView.as_view(
                            template_name='robots.txt',
                            content_type='text/plain')),

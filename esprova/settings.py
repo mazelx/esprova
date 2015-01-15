@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 TEMPLATE_DIRS = (
@@ -69,6 +70,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
+    "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     #  Gestion de l'i18n
     "django.core.context_processors.i18n",
@@ -109,6 +111,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/"
 
  # ------ Project Specific Settings ------
 

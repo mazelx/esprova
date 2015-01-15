@@ -9,6 +9,14 @@ from haystack.utils.geo import Point
 from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView
 from django.contrib import messages
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
+
+
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)
 
 
 def getRacesAjax(request):
@@ -91,13 +99,13 @@ def getRacesAjax(request):
 
 
 # Should be heriting View ... or function not based on a class
-class RaceList(ListView):
+class RaceList(LoginRequiredMixin, ListView):
     model = Race
     context_object_name = "race_list"
     template_name = "core/race_list.html'"
 
 
-class RaceView(DetailView):
+class RaceView(LoginRequiredMixin, DetailView):
     model = Race
     context_object_name = "race"
     template_name = "core/race.html"
@@ -163,5 +171,5 @@ class RaceWizard(NamedUrlSessionWizardView):
         return HttpResponseRedirect(reverse('create_race'))
 
 
-class GeocodeView(TemplateView):
+class GeocodeView(LoginRequiredMixin, TemplateView):
         template_name = 'core/geocode.html'
