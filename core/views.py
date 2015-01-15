@@ -10,6 +10,7 @@ from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView
 from django.contrib import messages
 from django.template.loader import render_to_string
 
+
 def getRacesAjax(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
@@ -53,6 +54,7 @@ def getRacesAjax(request):
 
         # Uniqfy the event list (multiple races from an event)
         seen = {}
+        rank = 1
         for sr in sqs:
             event_id = sr.get_stored_fields()['event_id']
             location = sr.get_stored_fields()['location']
@@ -63,13 +65,15 @@ def getRacesAjax(request):
 
             seen[event_id] = 1
             race_data = {'id': int(event_id),
+                         'rank': int(rank),
                          'lat': str(location.get_coords()[1]),
                          'lng': str(location.get_coords()[0])
                          }
 
             races.append(race_data)
-
             result_html.append(rendered)
+
+            rank += 1
 
         if not races:
             result_html = render_to_string('core/search_no_result_alert.html')

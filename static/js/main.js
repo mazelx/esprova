@@ -3,25 +3,50 @@ var markers = {};
 var selected_event_id;
 var highestZIndex = 10;
 
+var markerIcons = {};
+var primaryIcons = {};
+var secondaryIcons = {};
+
+// var static_url = 'https://esprova-static.s3.amazonaws.com/';
+var static_url = 'http://localhost:8000/static/'
+
+primaryIcons['default']= {
+    url: static_url + 'images/primary_marker_default.svg',
+    size: new google.maps.Size(28,42),
+};
+
+primaryIcons['selected']={
+    url: static_url + 'images/primary_marker_selected.svg',
+    size: new google.maps.Size(28,42),
+};
+
+primaryIcons['hover']= {
+    url: static_url + 'images/primary_marker_hover.svg',
+    size: new google.maps.Size(28,42),
+};
+
+secondaryIcons['default']= {
+    url: static_url + 'images/secondary_marker_default.svg',
+    size: new google.maps.Size(28,42),
+};
+
+secondaryIcons['selected']={
+    url: static_url + 'images/secondary_marker_selected.svg',
+    size: new google.maps.Size(28,42),
+};
+
+secondaryIcons['hover']= {
+    url: static_url + 'images/secondary_marker_hover.svg',
+    size: new google.maps.Size(28,42),
+};
+markerIcons["primary"]=primaryIcons;
+markerIcons["secondary"]=secondaryIcons;
+
+
 // if the map style has not been provided
 if (typeof map_styles === 'undefined'){
     map_styles = [];
 }
-
-var defaultMarkerIcon = {
-        url: 'https://esprova-static.s3.amazonaws.com/images/marker_icon.svg',
-        size: new google.maps.Size(28,42),
-};
-
-var selectedMarkerIcon = {
-        url: 'https://esprova-static.s3.amazonaws.com/images/marker_icon_selected.svg',
-        size: new google.maps.Size(28,42),
-};
-
-var hoveredMarkerIcon = {
-        url: 'https://esprova-static.s3.amazonaws.com/images/marker_icon_hover.svg',
-        size: new google.maps.Size(28,42),
-};
 
 
 // ----------------------
@@ -240,8 +265,10 @@ function refreshRacesOnMap(races) {
             position: latlng,
             map: map,
             id: race.id,
-            icon : defaultMarkerIcon,
-            zIndex : 1
+            icon : markerIcons["secondary"]["default"],
+            zIndex : 1,
+            // own property
+            rankClass : "secondary",
         });
         markers[race.id]=marker;
         
@@ -266,7 +293,8 @@ function selectEvent(event_id){
     if($("#event_" + selected_event_id).length){
         $("#event_" + selected_event_id).removeClass("panel-primary");
         $("#event_" + selected_event_id + "_races").removeClass("in");
-        markers[selected_event_id].setIcon(defaultMarkerIcon);
+        marker = markers[selected_event_id];
+        marker.setIcon(markerIcons[marker.rankClass]["default"]);
     }
 
     // select new event
@@ -280,8 +308,9 @@ function selectEvent(event_id){
         $(".sidebox").animate({
             scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
         }, 500);
-        markers[selected_event_id].setIcon(selectedMarkerIcon);
-        markers[selected_event_id].setZIndex(highestZIndex+1);
+        marker = markers[selected_event_id];
+        marker.setIcon(markerIcons[marker.rankClass]["selected"]);
+        marker.setZIndex(highestZIndex+1);
         highestZIndex += 1;
     }
    
@@ -309,10 +338,19 @@ function resetSearchForm(){
 
 function highlightResult(event_id){
     $("#event_" + event_id).addClass("mouseover");
-    markers[event_id].setIcon(hoveredMarkerIcon);
+    if(event_id != selected_event_id){
+        marker = markers[event_id]
+        marker.setIcon(markerIcons[marker.rankClass]["hover"]);
+    } 
 }
 
 function deHighlightResult(event_id){
     $("#event_" + event_id).removeClass("mouseover");
-    markers[event_id].setIcon(defaultMarkerIcon);
+    if(event_id != selected_event_id){
+        marker = markers[event_id]
+        marker.setIcon(markerIcons[marker.rankClass]["default"]);
+    } else {
+        marker = markers[event_id]
+        marker.setIcon(markerIcons[marker.rankClass]["selected"]);
+    }
 }
