@@ -27,17 +27,20 @@ primaryIcons['hover']= {
 
 secondaryIcons['default']= {
     url: static_url + 'images/secondary_marker_default.svg',
-    size: new google.maps.Size(28,42),
+    size: new google.maps.Size(26,26),
+    anchor: new google.maps.Point(13,13),
 };
 
 secondaryIcons['selected']={
     url: static_url + 'images/secondary_marker_selected.svg',
-    size: new google.maps.Size(28,42),
+    size: new google.maps.Size(26,26),
+    anchor: new google.maps.Point(13,13),
 };
 
 secondaryIcons['hover']= {
     url: static_url + 'images/secondary_marker_hover.svg',
-    size: new google.maps.Size(28,42),
+    size: new google.maps.Size(26,26),
+    anchor: new google.maps.Point(13,13),
 };
 markerIcons["primary"]=primaryIcons;
 markerIcons["secondary"]=secondaryIcons;
