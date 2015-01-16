@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     # External modules
     'django_countries',
     'haystack',
-    'elasticstack',
+    # 'elasticstack',
     'django_nose',
     'django_extensions',
     'storages',
