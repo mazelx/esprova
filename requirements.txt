@@ -6,6 +6,7 @@ PyYAML==3.11
 boto==2.35.1
 certifi==14.05.14
 coverage==3.7.1
+django-appconf==0.6
 django-countries==3.0.1
 django-extensions==1.4.9
 django-haystack==2.3.1
