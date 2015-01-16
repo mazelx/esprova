@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.views.generic import ListView, DetailView, TemplateView
 from core.models import Race, Contact, Location, Event
 from django.http import HttpResponse, HttpResponseRedirect
@@ -95,7 +96,7 @@ def getRacesAjax(request):
 
         return HttpResponse(dumps(response), content_type="application/json")
 
-    return HttpResponse('404')
+    raise Http404
 
 
 # Should be heriting View ... or function not based on a class
@@ -170,8 +171,10 @@ class RaceWizard(NamedUrlSessionWizardView):
         messages.error(self.request, ("Something went wrong creating your product."))
         return HttpResponseRedirect(reverse('create_race'))
 
+
 class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
+
 
 class GeocodeView(LoginRequiredMixin, TemplateView):
         template_name = 'core/geocode.html'
