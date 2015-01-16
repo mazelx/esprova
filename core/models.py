@@ -170,7 +170,7 @@ class Race(models.Model):
 
     def save(self, *args, **kwargs):
         super(Race, self).save(*args, **kwargs)
-        self.initDistancesFromDefault()
+        self.init_distances_from_default()
         super(Race, self).save(*args, **kwargs)
 
     def natural_key(self):
@@ -179,7 +179,7 @@ class Race(models.Model):
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
-    def initDistancesFromDefault(self):
+    def init_distances_from_default(self):
         """ Initialize the distances from default distances for this category on race creation """
         if not self.stagedistancespecific_set.all():
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
