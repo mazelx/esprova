@@ -1,9 +1,14 @@
 from core.models import Race
 from haystack import indexes
+from search_backends.elastic_backend import CustomEdgeNgramField
+# from elasticstack.fields import CharField
 
 
 class RaceIndex(indexes.SearchIndex, indexes.Indexable):
-    text = indexes.CharField(document=True, use_template=True)
+    # text = CharField(document=True, use_template=True, analyzer='esprova_analyzer')
+    text = CustomEdgeNgramField(document=True, use_template=True,
+                                index_analyzer="edgengram_analyzer",
+                                search_analyzer="search_analyzer")
     event_id = indexes.CharField(indexed=False, model_attr='event__id')
     date = indexes.DateField(model_attr='date')
     location = indexes.LocationField(model_attr='get_point')

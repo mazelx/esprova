@@ -13,6 +13,7 @@ class RaceTest(TestCase):
     """
     Create an event and a single race
     """
+    # fixtures = ['live_test_20140116.yaml']
     fixtures = ['triathlon.json']
     race = Race
 
@@ -83,7 +84,6 @@ class RaceTest(TestCase):
         self.assertIsNone(r)    
 
     # VIEWS
-
     def test_basic_quick_search(self):
         " Test if a basic quick search return something "
 
@@ -97,6 +97,16 @@ class RaceTest(TestCase):
     def test_date_search(self):
         res = Client().get(reverse('search_race'),
                            {'start_date': timezone.now().strftime('%Y-%m-%d')},
+                           HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        data = json.loads(res.content.decode('utf-8'))
+        self.assertGreater(data['count'], 0)
+
+    def test_location_search(self):
+        res = Client().get(reverse('search_race'),
+                           {'lat_lo': 0.024653,
+                            'lng_lo': 0.933466,
+                            'lat_hi': 50.298241,
+                            'lng_hi': 50.10351},
                            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         data = json.loads(res.content.decode('utf-8'))
         self.assertGreater(data['count'], 0)

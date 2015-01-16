@@ -1,0 +1,974 @@
+- fields: {combinedSport: true, name: Triathlon}
+  model: core.sport
+  pk: 2
+- fields: {address1: '', address2: '', city: "Saint Martin d'Ard\xE8che", country: FR,
+    lat: '44.30168', lng: '4.56566', state: '', zipcode: '07120'}
+  model: core.location
+  pk: 1
+- fields: {address1: '', address2: '', city: "Saint Martin d'Ard\xE8che", country: FR,
+    lat: '44.30234', lng: '4.56624', state: '', zipcode: '07700'}
+  model: core.location
+  pk: 2
+- fields: {address1: '', address2: '', city: Le Teil, country: FR, lat: '44.55061',
+    lng: '4.68379', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 3
+- fields: {address1: '', address2: '', city: Le Teil, country: FR, lat: '44.55061',
+    lng: '4.68379', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 4
+- fields: {address1: '', address2: '', city: Montpellier, country: FR, lat: '43.60473',
+    lng: '3.90117', state: '', zipcode: '34000'}
+  model: core.location
+  pk: 5
+- fields: {address1: '', address2: '', city: "Mont\xE9limar", country: FR, lat: '44.55694',
+    lng: '4.74950', state: '', zipcode: '26200'}
+  model: core.location
+  pk: 6
+- fields: {address1: '', address2: '', city: "Mont\xE9limar", country: FR, lat: '44.55694',
+    lng: '4.74950', state: '', zipcode: '26200'}
+  model: core.location
+  pk: 7
+- fields: {address1: '', address2: '', city: "Mont\xE9limar", country: FR, lat: '44.55694',
+    lng: '4.74950', state: '', zipcode: '26200'}
+  model: core.location
+  pk: 8
+- fields: {address1: '', address2: '', city: "Mont\xE9limar", country: FR, lat: '44.55694',
+    lng: '4.74950', state: '', zipcode: '26200'}
+  model: core.location
+  pk: 9
+- fields: {address1: '', address2: '', city: Lyon, country: FR, lat: '44.70628', lng: '-0.06623',
+    state: '', zipcode: '69000'}
+  model: core.location
+  pk: 10
+- fields: {address1: '', address2: '', city: Lyon, country: FR, lat: '44.70628', lng: '-0.06623',
+    state: '', zipcode: '69000'}
+  model: core.location
+  pk: 11
+- fields: {address1: '', address2: '', city: Lyon, country: FR, lat: '44.70628', lng: '-0.06623',
+    state: '', zipcode: '69000'}
+  model: core.location
+  pk: 12
+- fields: {address1: '', address2: '', city: Beaune, country: FR, lat: '47.02603',
+    lng: '4.84000', state: '', zipcode: '21200'}
+  model: core.location
+  pk: 13
+- fields: {address1: '', address2: '', city: Beaune, country: FR, lat: '47.02603',
+    lng: '4.84000', state: '', zipcode: '21200'}
+  model: core.location
+  pk: 14
+- fields: {address1: '', address2: '', city: Clermont-Ferrand, country: FR, lat: '45.77126',
+    lng: '3.11980', state: '', zipcode: '63000'}
+  model: core.location
+  pk: 15
+- fields: {address1: '', address2: '', city: Paris, country: FR, lat: '48.82936',
+    lng: '2.42654', state: '', zipcode: '75012'}
+  model: core.location
+  pk: 16
+- fields: {address1: '', address2: '', city: Paris, country: FR, lat: '48.82936',
+    lng: '2.42654', state: '', zipcode: '75012'}
+  model: core.location
+  pk: 17
+- fields: {address1: '', address2: '', city: Nice, country: FR, lat: '43.69604', lng: '7.26559',
+    state: '', zipcode: '06000'}
+  model: core.location
+  pk: 18
+- fields: {address1: '', address2: '', city: Embrun, country: FR, lat: '44.56416',
+    lng: '6.49586', state: '', zipcode: '05200'}
+  model: core.location
+  pk: 19
+- fields: {address1: '', address2: '', city: Riez, country: FR, lat: '43.81739', lng: '6.09334',
+    state: '', zipcode: '04500'}
+  model: core.location
+  pk: 20
+- fields: {address1: '', address2: '', city: Aix-en-Provence, country: FR, lat: '43.53383',
+    lng: '5.50925', state: '', zipcode: '13100'}
+  model: core.location
+  pk: 21
+- fields: {address1: '', address2: '', city: Aix-en-Provence, country: FR, lat: '43.53383',
+    lng: '5.50925', state: '', zipcode: '13100'}
+  model: core.location
+  pk: 22
+- fields: {address1: '', address2: '', city: Aix-en-Provence, country: FR, lat: '43.53383',
+    lng: '5.50925', state: '', zipcode: '13100'}
+  model: core.location
+  pk: 23
+- fields: {address1: '', address2: '', city: Aix-en-Provence, country: FR, lat: '43.53383',
+    lng: '5.50925', state: '', zipcode: '13100'}
+  model: core.location
+  pk: 24
+- fields: {address1: '', address2: '', city: Les Vans, country: FR, lat: '44.40469',
+    lng: '4.13192', state: '', zipcode: '07140'}
+  model: core.location
+  pk: 25
+- fields: {address1: '', address2: '', city: Millau, country: FR, lat: '44.34178',
+    lng: '2.58455', state: '', zipcode: '12000'}
+  model: core.location
+  pk: 26
+- fields: {address1: '', address2: '', city: Bordeaux, country: FR, lat: '44.83501',
+    lng: '-0.58727', state: '', zipcode: '33000'}
+  model: core.location
+  pk: 27
+- fields: {address1: '', address2: '', city: Bordeaux, country: FR, lat: '44.83501',
+    lng: '-0.58727', state: '', zipcode: '33000'}
+  model: core.location
+  pk: 28
+- fields: {address1: '', address2: '', city: "Berz\xE8me", country: FR, lat: '44.65150',
+    lng: '4.56526', state: '', zipcode: 07580}
+  model: core.location
+  pk: 29
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 30
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 31
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 32
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 33
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 34
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 35
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 36
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 37
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 38
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 39
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 40
+- fields: {address1: 3 impasse des argelas, address2: '', city: Le Teil, country: FR,
+    lat: '44.55234', lng: '4.67553', state: '', zipcode: '07400'}
+  model: core.location
+  pk: 41
+- fields: {address1: '', address2: '', city: Mulhouse, country: FR, lat: '47.78490',
+    lng: '7.28481', state: '', zipcode: '68120'}
+  model: core.location
+  pk: 42
+- fields: {address1: '', address2: '', city: Nantes, country: FR, lat: '47.21850',
+    lng: '-1.54466', state: '', zipcode: '44000'}
+  model: core.location
+  pk: 43
+- fields: {address1: '', address2: '', city: Brest, country: FR, lat: '48.39039',
+    lng: '-4.48608', state: '', zipcode: '29200'}
+  model: core.location
+  pk: 44
+- fields: {address1: '', address2: '', city: Bergerac, country: FR, lat: '45.17739',
+    lng: '0.72561', state: '', zipcode: '24000'}
+  model: core.location
+  pk: 45
+- fields: {address1: '', address2: '', city: Lyon, country: FR, lat: '44.70628', lng: '-0.06623',
+    state: '', zipcode: '69000'}
+  model: core.location
+  pk: 46
+- fields: {address1: '', address2: '', city: "Montlu\xE7on", country: FR, lat: '46.34155',
+    lng: '2.60199', state: '', zipcode: '03100'}
+  model: core.location
+  pk: 47
+- fields: {address1: '', address2: '', city: Lamastre, country: FR, lat: '44.98513',
+    lng: '4.57914', state: '', zipcode: '07270'}
+  model: core.location
+  pk: 48
+- fields: {address1: '', address2: '', city: Cestas, country: FR, lat: '44.74116',
+    lng: '-0.68435', state: '', zipcode: '33610'}
+  model: core.location
+  pk: 49
+- fields: {address1: '', address2: '', city: Quincy, country: FR, lat: '48.67119',
+    lng: '2.54075', state: '', zipcode: '91480'}
+  model: core.location
+  pk: 50
+- fields: {address1: '', address2: '', city: Thionville, country: FR, lat: '49.35757',
+    lng: '6.16843', state: '', zipcode: '57100'}
+  model: core.location
+  pk: 51
+- fields: {address1: '', address2: '', city: Rennes, country: FR, lat: '48.11734',
+    lng: '-1.70752', state: '', zipcode: '35000'}
+  model: core.location
+  pk: 52
+- fields: {address1: '', address2: '', city: Nancy, country: FR, lat: '48.69205',
+    lng: '6.18442', state: '', zipcode: '54000'}
+  model: core.location
+  pk: 53
+- fields: {address1: '', address2: '', city: Tours, country: FR, lat: '47.38327',
+    lng: '0.68980', state: '', zipcode: '37000'}
+  model: core.location
+  pk: 54
+- fields: {address1: '', address2: '', city: Douai, country: FR, lat: '50.36787',
+    lng: '3.08060', state: '', zipcode: '59500'}
+  model: core.location
+  pk: 55
+- fields: {default_order: 1, name: Natation, sport: 2}
+  model: core.sportstage
+  pk: 4
+- fields: {default_order: 1, name: Cyclisme, sport: 2}
+  model: core.sportstage
+  pk: 5
+- fields: {default_order: 1, name: "Course \xE0 Pied", sport: 2}
+  model: core.sportstage
+  pk: 6
+- fields: {edition: 1, name: "Triathlon des Gorges de l'Ard\xE8che", website: null}
+  model: core.event
+  pk: 5
+- fields: {edition: 1, name: Triathlon du Teil, website: null}
+  model: core.event
+  pk: 6
+- fields: {edition: 1, name: Montpellier Agglo Triathlon, website: null}
+  model: core.event
+  pk: 7
+- fields: {edition: 1, name: "Triathlon de Mont\xE9limar", website: null}
+  model: core.event
+  pk: 10
+- fields: {edition: 1, name: Tri des Gones, website: null}
+  model: core.event
+  pk: 12
+- fields: {edition: 1, name: Beaujotri, website: null}
+  model: core.event
+  pk: 15
+- fields: {edition: 1, name: IronMan de Clermont, website: null}
+  model: core.event
+  pk: 17
+- fields: {edition: 1, name: TriParis, website: null}
+  model: core.event
+  pk: 18
+- fields: {edition: 1, name: IronMan de Nice, website: null}
+  model: core.event
+  pk: 20
+- fields: {edition: 1, name: Embrunman, website: null}
+  model: core.event
+  pk: 21
+- fields: {edition: 1, name: Tri Ekiden l'Occitane, website: null}
+  model: core.event
+  pk: 22
+- fields: {edition: 1, name: Tri international des Vans, website: null}
+  model: core.event
+  pk: 27
+- fields: {edition: 1, name: "Triathlon espoirs f\xE9minin de Millau en Aveyron",
+    website: null}
+  model: core.event
+  pk: 28
+- fields: {edition: 2, name: Triathlon des Girondins de Bordeaux, website: null}
+  model: core.event
+  pk: 29
+- fields: {edition: 1, name: Triathlon de Nantes, website: 'http://www.trinantes.com/'}
+  model: core.event
+  pk: 44
+- fields: {edition: 1, name: TriBrest, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 45
+- fields: {edition: 2, name: Animatri, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 47
+- fields: {edition: 1, name: Triatlon de Montlucon, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 48
+- fields: {edition: 4, name: Triathlon de Lamastre, website: 'http://www.lamastri.com/'}
+  model: core.event
+  pk: 49
+- fields: {edition: 3, name: Tri Cestas, website: 'http://www.tricestas.com/'}
+  model: core.event
+  pk: 50
+- fields: {edition: 2, name: Triathlon de Quincy, website: 'http://www.trinantes.com/'}
+  model: core.event
+  pk: 51
+- fields: {edition: 3, name: Trithionville, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 52
+- fields: {edition: 2, name: Tri Rennes, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 53
+- fields: {edition: 2, name: Tri Nancy, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 54
+- fields: {edition: 2, name: Tourstri, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 55
+- fields: {edition: 2, name: Triathlon international de Douai, website: 'http://www.chtitri.com/'}
+  model: core.event
+  pk: 56
+- fields:
+    name: FFTri
+    sport: [2]
+  model: core.federation
+  pk: 2
+- fields: {email: null, name: Bruno Damiens, phone: null}
+  model: core.contact
+  pk: 8
+- fields: {email: null, name: Xavier Mazellier, phone: null}
+  model: core.contact
+  pk: 9
+- fields: {email: null, name: Jean Dupont, phone: null}
+  model: core.contact
+  pk: 10
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 11
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 12
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 13
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 14
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 15
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 16
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 17
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 18
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 19
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 20
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 21
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 22
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 23
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 24
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 25
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 26
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 27
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 28
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 29
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 30
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 31
+- fields: {email: null, name: "Georges Br\xE9and", phone: null}
+  model: core.contact
+  pk: 32
+- fields: {email: j.martin@hotmail.com, name: "Georges Br\xE9and", phone: 0651955187}
+  model: core.contact
+  pk: 33
+- fields: {email: xm@toto.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 34
+- fields: {email: xm@toto.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 35
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 36
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 37
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 38
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 39
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 40
+- fields: {email: mazelx@gmail.com, name: "Triatlon de la Sabli\xE8re", phone: 0651955187}
+  model: core.contact
+  pk: 41
+- fields: {email: null, name: toto, phone: null}
+  model: core.contact
+  pk: 42
+- fields: {email: sdsddsd@dlkflkdf.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 43
+- fields: {email: sdsddsd@dlkflkdf.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 44
+- fields: {email: '', name: dsdd, phone: ''}
+  model: core.contact
+  pk: 45
+- fields: {email: jdupont@gmail.com, name: Jean Dupont, phone: '064131425'}
+  model: core.contact
+  pk: 46
+- fields: {email: sok@yahoo.com, name: Soazig Kermalec, phone: 061888282}
+  model: core.contact
+  pk: 47
+- fields: {email: jdupont@gmail.com, name: sdsds, phone: 0651955187}
+  model: core.contact
+  pk: 48
+- fields: {email: mazelx@gmail.com, name: Jean Denis, phone: 0651955187}
+  model: core.contact
+  pk: 49
+- fields: {email: mazelx@gmail.com, name: Frank Sinatri, phone: 0651955187}
+  model: core.contact
+  pk: 50
+- fields: {email: mazelx@gmail.com, name: JM Lacroix, phone: 0651955187}
+  model: core.contact
+  pk: 51
+- fields: {email: mazelx@gmail.com, name: "Julie Mauz\xE9", phone: 0651955187}
+  model: core.contact
+  pk: 52
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 53
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 54
+- fields: {email: jdupont@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 55
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: ''}
+  model: core.contact
+  pk: 56
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 57
+- fields: {long_name: null, name: XS, order: 1, sport: 2}
+  model: core.distancecategory
+  pk: 4
+- fields: {long_name: '', name: S, order: 2, sport: 2}
+  model: core.distancecategory
+  pk: 5
+- fields: {long_name: '', name: M, order: 3, sport: 2}
+  model: core.distancecategory
+  pk: 6
+- fields: {long_name: '', name: L, order: 4, sport: 2}
+  model: core.distancecategory
+  pk: 7
+- fields: {long_name: '', name: XL, order: 5, sport: 2}
+  model: core.distancecategory
+  pk: 8
+- fields: {contact: 8, date: !!timestamp '2015-07-25 14:00:00+00:00', description: '',
+    distance_cat: 6, event: 5, federation: null, label: null, location: 1, price: 40,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 1
+- fields: {contact: 8, date: !!timestamp '2015-07-26 07:00:00+00:00', description: '',
+    distance_cat: 5, event: 5, federation: null, label: null, location: 2, price: 30,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 2
+- fields: {contact: 9, date: !!timestamp '2015-06-06 14:00:00+00:00', description: '',
+    distance_cat: 6, event: 6, federation: null, label: null, location: 3, price: 40,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 3
+- fields: {contact: 9, date: !!timestamp '2015-06-06 07:00:00+00:00', description: '',
+    distance_cat: 4, event: 6, federation: null, label: null, location: 4, price: 10,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 4
+- fields: {contact: 10, date: !!timestamp '2015-07-25 07:00:00+00:00', description: '',
+    distance_cat: 8, event: 7, federation: null, label: null, location: 5, price: 50,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 5
+- fields: {contact: 13, date: !!timestamp '2015-06-24 20:00:00+00:00', description: null,
+    distance_cat: 4, event: 10, federation: null, label: null, location: 8, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 6
+- fields: {contact: 14, date: !!timestamp '2015-04-09 20:00:00+00:00', description: '',
+    distance_cat: 5, event: 10, federation: null, label: null, location: 9, price: 40,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 7
+- fields: {contact: 15, date: !!timestamp '2015-03-01 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 12, federation: null, label: null, location: 10, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 8
+- fields: {contact: 16, date: !!timestamp '2015-03-01 22:00:00+00:00', description: '',
+    distance_cat: 6, event: 12, federation: null, label: null, location: 46, price: 40,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 9
+- fields: {contact: 17, date: !!timestamp '2015-03-02 22:00:00+00:00', description: '',
+    distance_cat: 7, event: 12, federation: null, label: null, location: 12, price: 40,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 10
+- fields: {contact: 18, date: !!timestamp '2015-03-02 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 15, federation: null, label: null, location: 13, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 11
+- fields: {contact: 20, date: !!timestamp '2015-07-02 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 17, federation: null, label: null, location: 15, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 13
+- fields: {contact: 21, date: !!timestamp '2015-07-04 20:00:00+00:00', description: null,
+    distance_cat: 4, event: 18, federation: null, label: null, location: 16, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 14
+- fields: {contact: 22, date: !!timestamp '2015-07-04 20:00:00+00:00', description: '',
+    distance_cat: 5, event: 18, federation: null, label: null, location: 17, price: 40,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 15
+- fields: {contact: 23, date: !!timestamp '2015-05-24 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 20, federation: null, label: null, location: 18, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 16
+- fields: {contact: 24, date: !!timestamp '2015-06-09 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 21, federation: null, label: null, location: 19, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 17
+- fields: {contact: 25, date: !!timestamp '2015-06-09 20:00:00+00:00', description: null,
+    distance_cat: 6, event: 22, federation: null, label: null, location: 20, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 18
+- fields: {contact: 30, date: !!timestamp '2015-08-14 20:00:00+00:00', description: null,
+    distance_cat: 6, event: 27, federation: null, label: null, location: 25, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 22
+- fields: {contact: 31, date: !!timestamp '2015-08-04 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 28, federation: null, label: null, location: 26, price: 40,
+    sport: 2, title: null}
+  model: core.race
+  pk: 23
+- fields: {contact: 32, date: !!timestamp '2015-04-24 14:00:00+00:00', description: '',
+    distance_cat: 5, event: 29, federation: 2, label: null, location: 28, price: 30,
+    sport: 2, title: ''}
+  model: core.race
+  pk: 24
+- fields: {contact: 46, date: !!timestamp '2015-07-29 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 44, federation: null, label: null, location: 43, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 35
+- fields: {contact: 47, date: !!timestamp '2015-07-29 20:00:00+00:00', description: null,
+    distance_cat: 4, event: 45, federation: null, label: null, location: 44, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 36
+- fields: {contact: 48, date: !!timestamp '2015-07-29 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 47, federation: null, label: null, location: 45, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 37
+- fields: {contact: 49, date: !!timestamp '2015-06-09 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 48, federation: null, label: null, location: 47, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 38
+- fields: {contact: 50, date: !!timestamp '2015-06-09 22:00:00+00:00', description: null,
+    distance_cat: 4, event: 49, federation: null, label: null, location: 48, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 39
+- fields: {contact: 51, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 50, federation: null, label: null, location: 49, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 40
+- fields: {contact: 52, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 51, federation: null, label: null, location: 50, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 41
+- fields: {contact: 53, date: !!timestamp '2015-04-30 22:00:00+00:00', description: null,
+    distance_cat: 7, event: 52, federation: null, label: null, location: 51, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 42
+- fields: {contact: 54, date: !!timestamp '2015-04-30 22:00:00+00:00', description: null,
+    distance_cat: 8, event: 53, federation: null, label: null, location: 52, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 43
+- fields: {contact: 55, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 54, federation: null, label: null, location: 53, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 44
+- fields: {contact: 56, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 55, federation: null, label: null, location: 54, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 45
+- fields: {contact: 57, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 56, federation: null, label: null, location: 55, price: null,
+    sport: 2, title: null}
+  model: core.race
+  pk: 46
+- fields: {distance: 1500, order: 1, race: 1, stage: 4}
+  model: core.stagedistancespecific
+  pk: 16
+- fields: {distance: 40000, order: 1, race: 1, stage: 5}
+  model: core.stagedistancespecific
+  pk: 17
+- fields: {distance: 10000, order: 1, race: 1, stage: 6}
+  model: core.stagedistancespecific
+  pk: 18
+- fields: {distance: 750, order: 1, race: 2, stage: 4}
+  model: core.stagedistancespecific
+  pk: 19
+- fields: {distance: 20000, order: 1, race: 2, stage: 5}
+  model: core.stagedistancespecific
+  pk: 20
+- fields: {distance: 5000, order: 1, race: 2, stage: 6}
+  model: core.stagedistancespecific
+  pk: 21
+- fields: {distance: 1500, order: 1, race: 3, stage: 4}
+  model: core.stagedistancespecific
+  pk: 22
+- fields: {distance: 40000, order: 1, race: 3, stage: 5}
+  model: core.stagedistancespecific
+  pk: 23
+- fields: {distance: 10000, order: 1, race: 3, stage: 6}
+  model: core.stagedistancespecific
+  pk: 24
+- fields: {distance: 400, order: 1, race: 4, stage: 4}
+  model: core.stagedistancespecific
+  pk: 25
+- fields: {distance: 10000, order: 1, race: 4, stage: 5}
+  model: core.stagedistancespecific
+  pk: 26
+- fields: {distance: 2500, order: 1, race: 4, stage: 6}
+  model: core.stagedistancespecific
+  pk: 27
+- fields: {distance: 4000, order: 1, race: 5, stage: 4}
+  model: core.stagedistancespecific
+  pk: 28
+- fields: {distance: 120000, order: 1, race: 5, stage: 5}
+  model: core.stagedistancespecific
+  pk: 29
+- fields: {distance: 30000, order: 1, race: 5, stage: 6}
+  model: core.stagedistancespecific
+  pk: 30
+- fields: {distance: 400, order: 1, race: 6, stage: 4}
+  model: core.stagedistancespecific
+  pk: 31
+- fields: {distance: 10000, order: 1, race: 6, stage: 5}
+  model: core.stagedistancespecific
+  pk: 32
+- fields: {distance: 2500, order: 1, race: 6, stage: 6}
+  model: core.stagedistancespecific
+  pk: 33
+- fields: {distance: 750, order: 1, race: 7, stage: 4}
+  model: core.stagedistancespecific
+  pk: 34
+- fields: {distance: 20000, order: 1, race: 7, stage: 5}
+  model: core.stagedistancespecific
+  pk: 35
+- fields: {distance: 5000, order: 1, race: 7, stage: 6}
+  model: core.stagedistancespecific
+  pk: 36
+- fields: {distance: 750, order: 1, race: 8, stage: 4}
+  model: core.stagedistancespecific
+  pk: 37
+- fields: {distance: 20000, order: 1, race: 8, stage: 5}
+  model: core.stagedistancespecific
+  pk: 38
+- fields: {distance: 5000, order: 1, race: 8, stage: 6}
+  model: core.stagedistancespecific
+  pk: 39
+- fields: {distance: 1500, order: 1, race: 9, stage: 4}
+  model: core.stagedistancespecific
+  pk: 40
+- fields: {distance: 40000, order: 1, race: 9, stage: 5}
+  model: core.stagedistancespecific
+  pk: 41
+- fields: {distance: 10000, order: 1, race: 9, stage: 6}
+  model: core.stagedistancespecific
+  pk: 42
+- fields: {distance: 3000, order: 1, race: 10, stage: 4}
+  model: core.stagedistancespecific
+  pk: 43
+- fields: {distance: 80000, order: 1, race: 10, stage: 5}
+  model: core.stagedistancespecific
+  pk: 44
+- fields: {distance: 20000, order: 1, race: 10, stage: 6}
+  model: core.stagedistancespecific
+  pk: 45
+- fields: {distance: 1500, order: 1, race: 11, stage: 4}
+  model: core.stagedistancespecific
+  pk: 46
+- fields: {distance: 40000, order: 1, race: 11, stage: 5}
+  model: core.stagedistancespecific
+  pk: 47
+- fields: {distance: 10000, order: 1, race: 11, stage: 6}
+  model: core.stagedistancespecific
+  pk: 48
+- fields: {distance: 4000, order: 1, race: 13, stage: 4}
+  model: core.stagedistancespecific
+  pk: 52
+- fields: {distance: 120000, order: 1, race: 13, stage: 5}
+  model: core.stagedistancespecific
+  pk: 53
+- fields: {distance: 30000, order: 1, race: 13, stage: 6}
+  model: core.stagedistancespecific
+  pk: 54
+- fields: {distance: 400, order: 1, race: 14, stage: 4}
+  model: core.stagedistancespecific
+  pk: 55
+- fields: {distance: 10000, order: 1, race: 14, stage: 5}
+  model: core.stagedistancespecific
+  pk: 56
+- fields: {distance: 2500, order: 1, race: 14, stage: 6}
+  model: core.stagedistancespecific
+  pk: 57
+- fields: {distance: 750, order: 1, race: 15, stage: 4}
+  model: core.stagedistancespecific
+  pk: 58
+- fields: {distance: 20000, order: 1, race: 15, stage: 5}
+  model: core.stagedistancespecific
+  pk: 59
+- fields: {distance: 5000, order: 1, race: 15, stage: 6}
+  model: core.stagedistancespecific
+  pk: 60
+- fields: {distance: 4000, order: 1, race: 16, stage: 4}
+  model: core.stagedistancespecific
+  pk: 61
+- fields: {distance: 120000, order: 1, race: 16, stage: 5}
+  model: core.stagedistancespecific
+  pk: 62
+- fields: {distance: 30000, order: 1, race: 16, stage: 6}
+  model: core.stagedistancespecific
+  pk: 63
+- fields: {distance: 4000, order: 1, race: 17, stage: 4}
+  model: core.stagedistancespecific
+  pk: 64
+- fields: {distance: 120000, order: 1, race: 17, stage: 5}
+  model: core.stagedistancespecific
+  pk: 65
+- fields: {distance: 30000, order: 1, race: 17, stage: 6}
+  model: core.stagedistancespecific
+  pk: 66
+- fields: {distance: 1500, order: 1, race: 18, stage: 4}
+  model: core.stagedistancespecific
+  pk: 67
+- fields: {distance: 40000, order: 1, race: 18, stage: 5}
+  model: core.stagedistancespecific
+  pk: 68
+- fields: {distance: 10000, order: 1, race: 18, stage: 6}
+  model: core.stagedistancespecific
+  pk: 69
+- fields: {distance: 1500, order: 1, race: 22, stage: 4}
+  model: core.stagedistancespecific
+  pk: 79
+- fields: {distance: 40000, order: 1, race: 22, stage: 5}
+  model: core.stagedistancespecific
+  pk: 80
+- fields: {distance: 10000, order: 1, race: 22, stage: 6}
+  model: core.stagedistancespecific
+  pk: 81
+- fields: {distance: 4000, order: 1, race: 23, stage: 4}
+  model: core.stagedistancespecific
+  pk: 82
+- fields: {distance: 120000, order: 1, race: 23, stage: 5}
+  model: core.stagedistancespecific
+  pk: 83
+- fields: {distance: 30000, order: 1, race: 23, stage: 6}
+  model: core.stagedistancespecific
+  pk: 84
+- fields: {distance: 750, order: 1, race: 24, stage: 4}
+  model: core.stagedistancespecific
+  pk: 85
+- fields: {distance: 20000, order: 1, race: 24, stage: 5}
+  model: core.stagedistancespecific
+  pk: 86
+- fields: {distance: 5000, order: 1, race: 24, stage: 6}
+  model: core.stagedistancespecific
+  pk: 87
+- fields: {distance: 4000, order: 1, race: 35, stage: 4}
+  model: core.stagedistancespecific
+  pk: 115
+- fields: {distance: 120000, order: 1, race: 35, stage: 5}
+  model: core.stagedistancespecific
+  pk: 116
+- fields: {distance: 30000, order: 1, race: 35, stage: 6}
+  model: core.stagedistancespecific
+  pk: 117
+- fields: {distance: 400, order: 1, race: 36, stage: 4}
+  model: core.stagedistancespecific
+  pk: 118
+- fields: {distance: 10000, order: 1, race: 36, stage: 5}
+  model: core.stagedistancespecific
+  pk: 119
+- fields: {distance: 2500, order: 1, race: 36, stage: 6}
+  model: core.stagedistancespecific
+  pk: 120
+- fields: {distance: 4000, order: 1, race: 37, stage: 4}
+  model: core.stagedistancespecific
+  pk: 121
+- fields: {distance: 120000, order: 1, race: 37, stage: 5}
+  model: core.stagedistancespecific
+  pk: 122
+- fields: {distance: 30000, order: 1, race: 37, stage: 6}
+  model: core.stagedistancespecific
+  pk: 123
+- fields: {distance: 1500, order: 1, race: 38, stage: 4}
+  model: core.stagedistancespecific
+  pk: 124
+- fields: {distance: 40000, order: 1, race: 38, stage: 5}
+  model: core.stagedistancespecific
+  pk: 125
+- fields: {distance: 10000, order: 1, race: 38, stage: 6}
+  model: core.stagedistancespecific
+  pk: 126
+- fields: {distance: 400, order: 1, race: 39, stage: 4}
+  model: core.stagedistancespecific
+  pk: 127
+- fields: {distance: 10000, order: 1, race: 39, stage: 5}
+  model: core.stagedistancespecific
+  pk: 128
+- fields: {distance: 2500, order: 1, race: 39, stage: 6}
+  model: core.stagedistancespecific
+  pk: 129
+- fields: {distance: 1500, order: 1, race: 40, stage: 4}
+  model: core.stagedistancespecific
+  pk: 130
+- fields: {distance: 40000, order: 1, race: 40, stage: 5}
+  model: core.stagedistancespecific
+  pk: 131
+- fields: {distance: 10000, order: 1, race: 40, stage: 6}
+  model: core.stagedistancespecific
+  pk: 132
+- fields: {distance: 750, order: 1, race: 41, stage: 4}
+  model: core.stagedistancespecific
+  pk: 133
+- fields: {distance: 20000, order: 1, race: 41, stage: 5}
+  model: core.stagedistancespecific
+  pk: 134
+- fields: {distance: 5000, order: 1, race: 41, stage: 6}
+  model: core.stagedistancespecific
+  pk: 135
+- fields: {distance: 3000, order: 1, race: 42, stage: 4}
+  model: core.stagedistancespecific
+  pk: 136
+- fields: {distance: 80000, order: 1, race: 42, stage: 5}
+  model: core.stagedistancespecific
+  pk: 137
+- fields: {distance: 20000, order: 1, race: 42, stage: 6}
+  model: core.stagedistancespecific
+  pk: 138
+- fields: {distance: 4000, order: 1, race: 43, stage: 4}
+  model: core.stagedistancespecific
+  pk: 139
+- fields: {distance: 120000, order: 1, race: 43, stage: 5}
+  model: core.stagedistancespecific
+  pk: 140
+- fields: {distance: 30000, order: 1, race: 43, stage: 6}
+  model: core.stagedistancespecific
+  pk: 141
+- fields: {distance: 750, order: 1, race: 44, stage: 4}
+  model: core.stagedistancespecific
+  pk: 142
+- fields: {distance: 20000, order: 1, race: 44, stage: 5}
+  model: core.stagedistancespecific
+  pk: 143
+- fields: {distance: 5000, order: 1, race: 44, stage: 6}
+  model: core.stagedistancespecific
+  pk: 144
+- fields: {distance: 1500, order: 1, race: 45, stage: 4}
+  model: core.stagedistancespecific
+  pk: 145
+- fields: {distance: 40000, order: 1, race: 45, stage: 5}
+  model: core.stagedistancespecific
+  pk: 146
+- fields: {distance: 10000, order: 1, race: 45, stage: 6}
+  model: core.stagedistancespecific
+  pk: 147
+- fields: {distance: 750, order: 1, race: 46, stage: 4}
+  model: core.stagedistancespecific
+  pk: 148
+- fields: {distance: 20000, order: 1, race: 46, stage: 5}
+  model: core.stagedistancespecific
+  pk: 149
+- fields: {distance: 5000, order: 1, race: 46, stage: 6}
+  model: core.stagedistancespecific
+  pk: 150
+- fields: {distance: 400, distance_cat: 4, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 7
+- fields: {distance: 10000, distance_cat: 4, order: 1, stage: 5}
+  model: core.stagedistancedefault
+  pk: 8
+- fields: {distance: 2500, distance_cat: 4, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 9
+- fields: {distance: 750, distance_cat: 5, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 10
+- fields: {distance: 20000, distance_cat: 5, order: 1, stage: 5}
+  model: core.stagedistancedefault
+  pk: 11
+- fields: {distance: 5000, distance_cat: 5, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 12
+- fields: {distance: 1500, distance_cat: 6, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 13
+- fields: {distance: 40000, distance_cat: 6, order: 1, stage: 5}
+  model: core.stagedistancedefault
+  pk: 14
+- fields: {distance: 10000, distance_cat: 6, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 15
+- fields: {distance: 3000, distance_cat: 7, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 16
+- fields: {distance: 80000, distance_cat: 7, order: 1, stage: 5}
+  model: core.stagedistancedefault
+  pk: 17
+- fields: {distance: 20000, distance_cat: 7, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 18
+- fields: {distance: 4000, distance_cat: 8, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 19
+- fields: {distance: 120000, distance_cat: 8, order: 1, stage: 5}
+  model: core.stagedistancedefault
+  pk: 20
+- fields: {distance: 30000, distance_cat: 8, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 21

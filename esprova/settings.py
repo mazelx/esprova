@@ -46,11 +46,13 @@ INSTALLED_APPS = (
     # External modules
     'django_countries',
     'haystack',
+    'elasticstack',
     'django_nose',
     'django_extensions',
     'storages',
     # project applications
-    'core',
+    'search_backends',
+    'core'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -123,13 +125,75 @@ GOOGLE_API_KEY = "AIzaSyCA3YCeUu02CRg_QPLS8GUhIx2fgX4is24"
 # Haystack -----------
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'ENGINE': 'search_backends.elastic_backend.CustomElasticSearchEngine',
         'URL': 'https://8vq0uifr:to2z8sa47tplzs1x@myrtle-3593425.eu-west-1.bonsai.io:443/',
         'INDEX_NAME': 'haystack',
     },
 }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+
+# Haystack -----------
+ELASTICSEARCH_INDEX_SETTINGS = {
+    'settings': {
+        "analysis": {
+            "analyzer": {
+                "search_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "whitespace",
+                    "filter": ["lowercase", "asciifolding"]
+                },
+                "ngram_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "whitespace",
+                    "filter": ["haystack_ngram"]
+                },
+                "edgengram_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "whitespace",
+                    "filter": ["haystack_edgengram", "lowercase", "asciifolding"],
+                }
+            },
+            "tokenizer": {
+                "haystack_ngram_tokenizer": {
+                    "type": "nGram",
+                    "min_gram": 3,
+                    "max_gram": 15,
+                },
+                "haystack_edgengram_tokenizer": {
+                    "type": "edgeNGram",
+                    "min_gram": 2,
+                    "max_gram": 15,
+                    "side": "front"
+                }
+            },
+            "filter": {
+                "frsnowball": {
+                    "type": "snowball",
+                    "language": "French"
+                },
+                "haystack_ngram": {
+                    "type": "nGram",
+                    "min_gram": 3,
+                    "max_gram": 15,
+                    "token_chars": [
+                        "letter",
+                        "digit",
+                        "punctuation",
+                        "symbol"
+                    ]
+                },
+                "haystack_edgengram": {
+                    "type": "edgeNGram",
+                    "min_gram": 2,
+                    "max_gram": 15
+                }
+            }
+        }
+    }
+}
+
 
 # Nose -----------
 # Use nose to run all tests
@@ -150,7 +214,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_out")
 
 # AWS -----------
 
-# # Amazon Web Services header, see http://developer.yahoo.com/performance/rules.html#expires
+# Amazon Web Services header, see http://developer.yahoo.com/performance/rules.html#expires
 AWS_HEADERS = {
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
     'Cache-Control': 'max-age=94608000',
