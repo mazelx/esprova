@@ -131,20 +131,6 @@ class RaceWizard(SessionWizardView):
 
     def get_form_initial(self, step):
         if 'pk' in self.kwargs:
-            # pk = self.kwargs['pk']
-            # if step == "event":
-            #     race = Race.objects.get(pk=pk)
-            #     _initial_dict = model_to_dict(race.event)
-            # elif step == "race":
-            #     race = Race.objects.get(pk=pk)
-            #     _initial_dict = model_to_dict(race)
-            # elif step == "location":
-            #     race = Race.objects.get(pk=pk)
-            #     _initial_dict = model_to_dict(race.location)
-            # elif step == "contact":
-            #     race = Race.objects.get(pk=pk)
-            #     _initial_dict = model_to_dict(race.contact)
-            # return _initial_dict
             return {}
         else:
             return self.initial_dict.get(step, {})
@@ -167,7 +153,6 @@ class RaceWizard(SessionWizardView):
             return instance
         
         else:
-            # self.instance_dict[step] = Event()
             return self.instance_dict.get(step, None)
 
 
@@ -187,7 +172,6 @@ class RaceWizard(SessionWizardView):
         logging.debug("race {0}".format(race))
         race.save()
 
-        # race_resul = self.create_race(race=race, event=event, contact=contact, location=location)
         if race.pk:
             messages.success(self.request, ("La course {0} a bien été créée".format(race.event.name)))
             return HttpResponseRedirect(reverse('list_race'))
