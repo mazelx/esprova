@@ -34,7 +34,7 @@ function fillInAddress() {
   var place = autocomplete.getPlace();
 
 
-  document.getElementById('location-form').reset();
+  $("#location-form :input:not(:hidden)").val('');
 
   // Get each component of the address from the place details
   // and fill the corresponding field on the form.

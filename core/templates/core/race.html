@@ -1,4 +1,6 @@
 {% extends "base.html" %} 
+{% load static from staticfiles %} 
+
 {% block content %}
 
 <div class="container-fluid">
@@ -6,7 +8,7 @@
         <p class="text-right">
             <q>{{ race.description }}</q>
         </p>
-    </div>
+    </div> 
 </div>
 <div class="container">
     <header class="page-header row">
@@ -93,7 +95,12 @@
         <dd>Oui</dd>
     </dl>
 </section>
+
+<a class="btn btn-warning" href="{% url "edit_race" race.pk %}">Modifier</a>
+<a class="btn btn-danger" href="{% url "delete_race" race.pk %}">Supprimer</a>
+
 </div>
+
 {% endblock %}
 
 {# -------------------------------------------------------------------------------------------------------------------- #} 

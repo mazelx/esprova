@@ -1,16 +1,20 @@
 from django.http import Http404
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, DeleteView
 from core.models import Race, Contact, Location, Event
 from django.http import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
 from json import dumps
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
-from django.contrib.formtools.wizard.views import NamedUrlSessionWizardView
+from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
+from django.shortcuts import get_object_or_404
+
+import logging
 
 
 class LoginRequiredMixin(object):
@@ -112,7 +116,7 @@ class RaceView(LoginRequiredMixin, DetailView):
     template_name = "core/race.html"
 
 
-class RaceWizard(NamedUrlSessionWizardView):
+class RaceWizard(SessionWizardView):
 
     TEMPLATES = {"event": "core/create_race.html",
                  "race": "core/create_race.html",
@@ -121,75 +125,90 @@ class RaceWizard(NamedUrlSessionWizardView):
 
     # template_name = 'core/create_race.html'
 
+    # Define template files trough TEMPLATES dict
     def get_template_names(self):
         return [self.TEMPLATES[self.steps.current]]
 
-    def create_event(self, event_form):
-        event = Event()
-        event.name = event_form.cleaned_data["name"]
-        event.website = event_form.cleaned_data["website"]
-        event.edition = event_form.cleaned_data["edition"]
-        event.save()
-        return event
+    def get_form_initial(self, step):
+        if 'pk' in self.kwargs:
+            # pk = self.kwargs['pk']
+            # if step == "event":
+            #     race = Race.objects.get(pk=pk)
+            #     _initial_dict = model_to_dict(race.event)
+            # elif step == "race":
+            #     race = Race.objects.get(pk=pk)
+            #     _initial_dict = model_to_dict(race)
+            # elif step == "location":
+            #     race = Race.objects.get(pk=pk)
+            #     _initial_dict = model_to_dict(race.location)
+            # elif step == "contact":
+            #     race = Race.objects.get(pk=pk)
+            #     _initial_dict = model_to_dict(race.contact)
+            # return _initial_dict
+            return {}
+        else:
+            return self.initial_dict.get(step, {})
 
-    def create_location(self, location_form):
-        location = Location()
-        location.street_number = location_form.cleaned_data["street_number"]
-        location.route = location_form.cleaned_data["route"]
-        location.locality = location_form.cleaned_data["locality"]
-        location.administrative_area_level_1 = location_form.cleaned_data["administrative_area_level_1"]
-        location.administrative_area_level_1_short_name = location_form.cleaned_data["administrative_area_level_1_short_name"]
-        location.administrative_area_level_2 = location_form.cleaned_data["administrative_area_level_2"]
-        location.administrative_area_level_2_short_name = location_form.cleaned_data["administrative_area_level_2_short_name"]
-        location.postal_code = location_form.cleaned_data["postal_code"]
-        location.country = location_form.cleaned_data["country"]
-        location.lat = location_form.cleaned_data["lat"]
-        location.lng = location_form.cleaned_data["lng"]
-        location.save()
+    def get_form_instance(self, step):
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            race = Race.objects.get(pk=pk)
 
-        return location
+            if (step == "event"):
+                instance = race.event
+            elif (step == "race"):
+                instance = race
+            elif (step == "location"):
+                instance = race.location
+            elif (step == "contact"):
+                instance = race.contact
 
-    def create_contact(self, contact_form):
-        contact = Contact()
-        contact.name = contact_form.cleaned_data["name"]
-        contact.email = contact_form.cleaned_data["email"]
-        contact.phone = contact_form.cleaned_data["phone"]
-        contact.save()
-        return contact
+            logging.debug("instance {0}".format(instance))
+            return instance
+        
+        else:
+            # self.instance_dict[step] = Event()
+            return self.instance_dict.get(step, None)
 
-    def create_race(self, race_form, event, location, contact):
-        race = Race()
-        race.date = race_form.cleaned_data["date"]
-        race.distance_cat = race_form.cleaned_data["distance_cat"]
-        race.sport = race_form.cleaned_data["sport"]
+
+
+
+    def done(self, form_list, form_dict, **kwargs):
+        event = form_dict['event'].save()
+        logging.debug("event {0}".format(event))
+        location = form_dict['location'].save()
+        logging.debug("event {0}".format(location))
+        contact = form_dict['contact'].save()
+        logging.debug("event {0}".format(contact))
+        race = form_dict['race'].save(commit=False)
         race.location = location
         race.event = event
         race.contact = contact
+        logging.debug("race {0}".format(race))
         race.save()
-        return race
 
-    def done(self, form_list, form_dict, **kwargs):
-        event_form = form_dict['event']
-        race_form = form_dict['race']
-        location_form = form_dict['location']
-        contact_form = form_dict['contact']
+        # race_resul = self.create_race(race=race, event=event, contact=contact, location=location)
+        if race.pk:
+            messages.success(self.request, ("La course {0} a bien été créée".format(race.event.name)))
+            return HttpResponseRedirect(reverse('list_race'))
 
-        if all([event_form, race_form, location_form, contact_form]):
-            event = self.create_event(event_form)
-            location = self.create_location(location_form)
-            contact = self.create_contact(contact_form)
-            race = self.create_race(race_form=race_form, event=event, contact=contact, location=location)
-            if race:
-                messages.success(self.request, ("La course {0} a bien été créée".format(event.name)))
-                return HttpResponseRedirect(reverse('list_race'))
-
-        messages.error(self.request, ("Something went wrong creating your product."))
+        messages.error(self.request, ("Il y a eu un problème lors de la création de la course"))
         return HttpResponseRedirect(reverse('create_race'))
+
 
 
 class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
 
 
-class GeocodeView(LoginRequiredMixin, TemplateView):
-        template_name = 'core/geocode.html'
+class raceDelete(DeleteView):
+    model = Race
+    template_name = 'core/confirm_delete.html'
+    success_url = reverse_lazy('list_race')
+    context_object_name = "race"
+
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk', None)
+        return get_object_or_404(Race, pk=pk)
+

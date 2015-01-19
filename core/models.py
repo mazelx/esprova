@@ -28,10 +28,10 @@ class Location(models.Model):
     
     # region / state
     administrative_area_level_1 = models.CharField(max_length=100)
-    administrative_area_level_1_short_name = models.CharField(max_length=10)
+    administrative_area_level_1_short_name = models.CharField(max_length=100)
     # departement
     administrative_area_level_2 = models.CharField(max_length=100)
-    administrative_area_level_2_short_name = models.CharField(max_length=10)
+    administrative_area_level_2_short_name = models.CharField(max_length=100)
     
     postal_code = models.CharField(max_length=16)
     country = CountryField()
@@ -40,7 +40,7 @@ class Location(models.Model):
     lng = models.DecimalField(max_digits=8, decimal_places=5)
 
     def __str__(self):
-        return "{0}, {1}, {2} ({3}, {4})".format(self.zipcode, self.city, self.country, self.lat, self.lng)
+        return "{0}, {1}, {2} ({3}, {4})".format(self.postal_code, self.locality, self.country, self.lat, self.lng)
 
 
 class SportStage(models.Model):
