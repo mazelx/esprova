@@ -9,7 +9,7 @@
 
             </h4>
 
-            <p class="list-group-item-text">{{ object.location.city }} ({{ object.location.zipcode|slice:":2"}})</p>
+            <p class="list-group-item-text">{{ object.location.locality }} ({{ object.location.administrative_area_level_2_short_name}})</p>
 
     </div> <!-- panel heading -->
 

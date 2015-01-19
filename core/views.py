@@ -113,7 +113,16 @@ class RaceView(LoginRequiredMixin, DetailView):
 
 
 class RaceWizard(NamedUrlSessionWizardView):
-    template_name = 'core/create_race.html'
+
+    TEMPLATES = {"event": "core/create_race.html",
+                 "race": "core/create_race.html",
+                 "location": "core/create_race_location.html",
+                 "contact": "core/create_race.html"}
+
+    # template_name = 'core/create_race.html'
+
+    def get_template_names(self):
+        return [self.TEMPLATES[self.steps.current]]
 
     def create_event(self, event_form):
         event = Event()
@@ -125,13 +134,19 @@ class RaceWizard(NamedUrlSessionWizardView):
 
     def create_location(self, location_form):
         location = Location()
-        location.address1 = location_form.cleaned_data["address1"]
-        location.address2 = location_form.cleaned_data["address2"]
-        location.zipcode = location_form.cleaned_data["zipcode"]
-        location.city = location_form.cleaned_data["city"]
-        location.state = location_form.cleaned_data["state"]
+        location.street_number = location_form.cleaned_data["street_number"]
+        location.route = location_form.cleaned_data["route"]
+        location.locality = location_form.cleaned_data["locality"]
+        location.administrative_area_level_1 = location_form.cleaned_data["administrative_area_level_1"]
+        location.administrative_area_level_1_short_name = location_form.cleaned_data["administrative_area_level_1_short_name"]
+        location.administrative_area_level_2 = location_form.cleaned_data["administrative_area_level_2"]
+        location.administrative_area_level_2_short_name = location_form.cleaned_data["administrative_area_level_2_short_name"]
+        location.postal_code = location_form.cleaned_data["postal_code"]
         location.country = location_form.cleaned_data["country"]
+        location.lat = location_form.cleaned_data["lat"]
+        location.lng = location_form.cleaned_data["lng"]
         location.save()
+
         return location
 
     def create_contact(self, contact_form):

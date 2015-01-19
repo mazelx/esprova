@@ -16,43 +16,31 @@ class Sport(models.Model):
     def __str__(self):
         return self.name
 
-
+# That class is inspired by the google address types
+# see https://developers.google.com/maps/documentation/javascript/geocoding
 class Location(models.Model):
-    address1 = models.CharField(max_length=200, blank=True, null=True)
-    address2 = models.CharField(max_length=200, blank=True, null=True)
-    zipcode = models.CharField(max_length=16, blank=True, null=True)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100, blank=True, null=True)
+
+    street_number = models.CharField(max_length=10, blank=True, null=True)
+    route = models.CharField(max_length=200, blank=True, null=True)
+    
+    # city/town
+    locality = models.CharField(max_length=100)
+    
+    # region / state
+    administrative_area_level_1 = models.CharField(max_length=100)
+    administrative_area_level_1_short_name = models.CharField(max_length=10)
+    # departement
+    administrative_area_level_2 = models.CharField(max_length=100)
+    administrative_area_level_2_short_name = models.CharField(max_length=10)
+    
+    postal_code = models.CharField(max_length=16)
     country = CountryField()
-    lat = models.DecimalField(max_digits=8, decimal_places=5, blank=True)
-    lng = models.DecimalField(max_digits=8, decimal_places=5, blank=True)
+
+    lat = models.DecimalField(max_digits=8, decimal_places=5)
+    lng = models.DecimalField(max_digits=8, decimal_places=5)
 
     def __str__(self):
         return "{0}, {1}, {2} ({3}, {4})".format(self.zipcode, self.city, self.country, self.lat, self.lng)
-
-    def save(self, *args, **kwargs):
-        # Add + between fields with values:
-        location = '+'.join(filter(None,
-                                   (self.address1,
-                                    self.address2,
-                                    self.city,
-                                    self.state,
-                                    self.zipcode,
-                                    self.country.code)))
-        # Attempt to get latitude/longitude from Google Geocoder service v.3:
-        geo_data = geocode(location)
-        if (geo_data):
-            self.lat = geo_data["lat"]
-            self.lng = geo_data["lng"]
-        else:
-            raise Exception("Address cannot be found")
-
-        super(Location, self).save(*args, **kwargs)
-
-    def get_FR_departement_code(self):
-        if self.zipcode:
-            return self.zipcode[:2]
-        return ''
 
 
 class SportStage(models.Model):

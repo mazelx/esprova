@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from core.views import RaceView, RaceList, getRacesAjax, RaceWizard, IntroView
+from core.views import RaceView, RaceList, getRacesAjax, RaceWizard, IntroView, GeocodeView
 from core.forms import ContactForm, RaceForm, LocationForm, EventForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
