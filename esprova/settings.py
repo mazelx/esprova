@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'storages',
     # project applications
     'search_backends',
-    'core'
+    'core',
 )
 
 MIDDLEWARE_CLASSES = (
