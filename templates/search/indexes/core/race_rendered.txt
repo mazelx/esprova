@@ -9,14 +9,14 @@
 
             </h4>
 
-            <p class="list-group-item-text">{{ object.location.locality }} ({{ object.location.administrative_area_level_2_short_name}})</p>
+            <p class="list-group-item-text">du {{ object.event.get_start_date|date:"d/m/Y"  }}  au {{ object.event.get_end_date|date:"d/m/Y" }} à {{ object.location.locality }} ({{ object.location.administrative_area_level_2_short_name}})</p>
 
     </div> <!-- panel heading -->
 
     <div id="event_{{ object.event.pk }}_races" class="list-group collapse">
         {% for r in object.event.get_race_set %}
             <a href="{% url "view_race" r.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
-                {{ r.distance_cat.name }} - {{ r.date |date:"l d/m à H:i" }}
+                {{ r.distance_cat.name }} - {{ r.date |date:"l d/m/Y à H:i" }}
             </a>
         {% endfor %}
     </div> <!-- panel-collapse -->
