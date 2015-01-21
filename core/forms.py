@@ -30,10 +30,7 @@ class RaceForm(forms.ModelForm):
         widgets = {
             'date': forms.DateInput(attrs={'class': 'input-group datepicker'}),
         }
-    # date = forms.DateField()
-    # sport = forms.ModelChoiceField(Sport.objects.all())
     # # TODO : cascading select box to choose distances corresponding to a sport
-    # distance_cat = forms.ModelChoiceField(DistanceCategory.objects.all())
 
 
 class LocationForm(forms.ModelForm):
@@ -52,20 +49,6 @@ class LocationForm(forms.ModelForm):
             'lat',
             'lng',
         ]
-
-# class LocationForm(forms.Form):
-#     street_number = forms.CharField(max_length=10, required=False)
-#     route = forms.CharField(max_length=200, required=False)
-#     locality = forms.CharField(max_length=100)
-#     administrative_area_level_1 = forms.CharField(max_length=100)
-#     administrative_area_level_1_short_name = forms.CharField(max_length=10)
-#     administrative_area_level_2 = forms.CharField(max_length=100)
-#     administrative_area_level_2_short_name = forms.CharField(max_length=10)
-#     postal_code = forms.CharField(max_length=16)
-#     country = forms.ChoiceField(list(countries))
-
-#     lat = forms.DecimalField(max_digits=8, decimal_places=5)
-#     lng = forms.DecimalField(max_digits=8, decimal_places=5)
 
 
 class ContactForm(forms.ModelForm):

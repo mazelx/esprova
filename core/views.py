@@ -161,12 +161,9 @@ class RaceWizard(SessionWizardView):
 
             logging.debug("instance {0}".format(instance))
             return instance
-        
+
         else:
             return self.instance_dict.get(step, None)
-
-
-
 
     def done(self, form_list, form_dict, **kwargs):
         event = form_dict['event'].save()
@@ -193,7 +190,6 @@ class RaceWizard(SessionWizardView):
         return HttpResponseRedirect(reverse('create_race'))
 
 
-
 class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
 
@@ -215,4 +211,3 @@ class RaceValidationList(ListView):
     queryset = Race.objects.filter(validated=False)
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
-
