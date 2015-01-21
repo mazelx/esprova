@@ -155,6 +155,7 @@ class Race(models.Model):
     contact = models.ForeignKey(Contact)
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
+    validated = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         super(Race, self).save(*args, **kwargs)

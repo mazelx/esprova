@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from core.views import RaceView, RaceList, getRacesAjax, RaceWizard, IntroView, raceDelete
+from core.views import *
 from core.forms import ContactForm, RaceForm, LocationForm, EventForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
@@ -28,10 +28,10 @@ urlpatterns = patterns('',
                        url(r'^race/(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
                        url(r'^search/$', getRacesAjax, name='search_race'),
                        url(r'^create/$', racewizard, name="create_race"),
-                       # url(r'^create/(?P<step>[-\w]+)/$', create_race, name="create_race_step"),
                        url(r'^update/(?P<pk>\d+)$', racewizard, name="edit_race"),
-                       url(r'^delete/(?P<pk>\d+)$', raceDelete.as_view(), name="delete_race"),
-                       # url(r'^update/(?<pk>\d+)$', RaceWizard.update_race(), name="create_race"),
+                       url(r'^delete/(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
+                       url(r'^tobevalidated/$', RaceValidationList.as_view(), name="validate_racelist"),
+                       url(r'^validate/(?P<pk>\d+)$', validateRace, name="validate_race"),
                        )
 
 # serve static files on dev

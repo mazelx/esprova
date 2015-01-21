@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.views.generic import ListView, DetailView, TemplateView, DeleteView
-from core.models import Race, Contact, Location, Event
+from core.models import Race
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
@@ -11,7 +11,6 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
 
 import logging
@@ -24,10 +23,21 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
+@login_required
+def validateRace(request, pk):
+    race = get_object_or_404(Race, pk=pk)
+    race.validated = True
+    race.save()
+    return HttpResponseRedirect(reverse('validate_racelist'))
+
+
+
+@login_required
 def getRacesAjax(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
         sqs = SearchQuerySet()
+        sqs = sqs.filter(validated="true")
 
         # search from map bounds
         lat_lo = request.GET.get('lat_lo')
@@ -173,7 +183,10 @@ class RaceWizard(SessionWizardView):
         race.save()
 
         if race.pk:
-            messages.success(self.request, ("La course {0} a bien été créée".format(race.event.name)))
+            messages.success(self.request, (
+                "La course {0} a bien été créée et sera publiée "
+                "après validation par nos services".format(race.event.name))
+            )
             return HttpResponseRedirect(reverse('list_race'))
 
         messages.error(self.request, ("Il y a eu un problème lors de la création de la course"))
@@ -185,14 +198,21 @@ class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
 
 
-class raceDelete(DeleteView):
+class RaceDelete(DeleteView):
     model = Race
     template_name = 'core/confirm_delete.html'
     success_url = reverse_lazy('list_race')
     context_object_name = "race"
 
-
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk', None)
         return get_object_or_404(Race, pk=pk)
+
+
+class RaceValidationList(ListView):
+
+    model = Race
+    queryset = Race.objects.filter(validated=False)
+    template_name = 'core/tovalidate.html'
+    context_object_name = "race_list"
 
