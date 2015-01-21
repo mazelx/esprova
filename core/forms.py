@@ -27,6 +27,9 @@ class RaceForm(forms.ModelForm):
             'sport',
             'distance_cat'
         ]
+        widgets = {
+            'date': forms.DateInput(attrs={'class': 'input-group datepicker'}),
+        }
     # date = forms.DateField()
     # sport = forms.ModelChoiceField(Sport.objects.all())
     # # TODO : cascading select box to choose distances corresponding to a sport

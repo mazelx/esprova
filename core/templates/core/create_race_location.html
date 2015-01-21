@@ -3,7 +3,7 @@
 
 
 {% block head_extra %}
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key={{ GOOGLE_API_KEY }}"></script>
 <script type="text/javascript" src="{% static "js/create.js" %}"></script>
 {% endblock %}
 
@@ -36,6 +36,7 @@
                     </div>
                 {% endfor %}
             {% endfor %}
+
 
         {% else %}
     

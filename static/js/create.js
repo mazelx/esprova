@@ -12,21 +12,41 @@
     ],
   country : [{id: "id_location-country", selector: "short_name"}],
   postal_code : [{id: "id_location-postal_code", selector: "short_name"}],
-}     
+};
 
-google.maps.event.addDomListener(window, 'load', initialize);
+$(document).ready(function() {
+  initialize();
+});
 
 function initialize() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
-  autocomplete = new google.maps.places.Autocomplete(
-      (document.getElementById('autocompleteInput')),{ types: ['geocode'] });
-  // When the user selects an address from the dropdown,
-  // populate the address fields in the form.
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    fillInAddress();
-  });
+  if (typeof google === 'object' && typeof google.maps === 'object'){
+    autocomplete = new google.maps.places.Autocomplete(
+        (document.getElementById('autocompleteInput')),{ types: ['geocode'] });
+    // When the user selects an address from the dropdown,
+    // populate the address fields in the form.
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      fillInAddress();
+    });
+  }
+
+  createDatePickerComponent();
+
 }
+
+// initialize bootstrap-datepicker component
+function createDatePickerComponent() {
+    $('.datepicker').datepicker({
+        format: "yyyy-mm-dd",
+        language: "fr",
+        autoclose: true,
+        clearBtn: true,
+        todayHighlight: true,
+        todayBtn: "linked"
+    });
+}
+
 
 // [START region_fillform]
 function fillInAddress() {

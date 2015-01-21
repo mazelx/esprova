@@ -106,7 +106,7 @@ function initialize() {
 
 // initialize bootstrap-datepicker component
 function createDatePickerComponent() {
-    $('.input-daterange').datepicker({
+    $('.datepicker').datepicker({
         format: "yyyy-mm-dd",
         language: "fr",
         autoclose: true,

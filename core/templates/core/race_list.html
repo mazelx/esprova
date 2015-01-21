@@ -7,6 +7,7 @@
 <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
 <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
 <script type="text/javascript" src="{% static "js/main.js" %}"></script>
+
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="{% static "css/datepicker3.css" %}" rel="stylesheet"></script>
 {% endblock %}
@@ -51,7 +52,7 @@
                     <div class="form-group">
                         <label for="start_date" class="col-xs-4 control-label">Période</label>
                         <div class= "col-xs-8">
-                            <div class="input-daterange input-group" id="datepicker">
+                            <div class="input-daterange datepicker input-group" id="datepicker">
                               <input type="text" class="input-sm form-control" name="start_date" id="start_date"/>
                             <span class="input-group-addon"> à </span>
                               <input type="text" class="input-sm form-control" name="end_date" id="end_date"/>
