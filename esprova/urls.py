@@ -4,6 +4,17 @@ from core.views import *
 from core.forms import ContactForm, RaceForm, LocationForm, EventForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
+from rest_framework import routers
+from api import views
+
+router = routers.DefaultRouter()
+router.register(r'api/race', views.RaceViewSet)
+router.register(r'api/sport', views.SportViewSet)
+router.register(r'api/event', views.EventViewSet)
+router.register(r'api/distancecat', views.DistanceCategoryViewSet)
+router.register(r'api/contact', views.ContactViewSet)
+router.register(r'api/location', views.LocationViewSet)
+
 
 
 race_named_forms = (
@@ -16,6 +27,7 @@ race_named_forms = (
 racewizard = RaceWizard.as_view(race_named_forms)
 
 urlpatterns = patterns('',
+                       url(r'^', include(router.urls)),
                        url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
                            name="login"),
                        url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name="logout"),
@@ -32,6 +44,7 @@ urlpatterns = patterns('',
                        url(r'^delete/(?P<slug>.+)$', RaceDelete.as_view(), name="delete_race"),
                        url(r'^tobevalidated/$', RaceValidationList.as_view(), name="validate_racelist"),
                        url(r'^validate/(?P<slug>.+)$', validateRace, name="validate_race"),
+                       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
                        )
 
 # serve static files on dev

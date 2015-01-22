@@ -185,6 +185,8 @@ class Race(models.Model):
     def get_point(self):
         return Point(float(self.location.lng), float(self.location.lat))
 
+    
+
 
 class StageDistance(models.Model):
     order = models.PositiveSmallIntegerField()

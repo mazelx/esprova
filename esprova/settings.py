@@ -44,9 +44,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.formtools',
     # External modules
+    'rest_framework',
     'django_countries',
     'haystack',
-    # 'elasticstack',
     'django_nose',
     'django_extensions',
     'storages',
@@ -238,6 +238,17 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 # This is used by the `static` template tag from `static`, if you're using that. Or if anything else
 # refers directly to STATIC_URL. So it's safest to always set it.
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+
+# Django REST Framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 
 
 # Development settings :
