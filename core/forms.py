@@ -1,6 +1,5 @@
 from django import forms
-from core.models import Sport, DistanceCategory, Event, Race, Location, Contact
-from django_countries import countries
+from core.models import Event, Race, Location, Contact
 
 
 # model forms ????
@@ -9,11 +8,12 @@ class ConnexionForm(forms.Form):
     username = forms.CharField(label="Nom d'utilisateur", max_length=30)
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
 
+
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = [
-            'name', 
+            'name',
             'edition',
             'website',
         ]

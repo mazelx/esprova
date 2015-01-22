@@ -23,17 +23,17 @@ class Location(models.Model):
 
     street_number = models.CharField(max_length=10, blank=True, null=True)
     route = models.CharField(max_length=200, blank=True, null=True)
-    
+
     # city/town
     locality = models.CharField(max_length=100)
-    
+
     # region / state
     administrative_area_level_1 = models.CharField(max_length=100)
     administrative_area_level_1_short_name = models.CharField(max_length=100)
     # departement
     administrative_area_level_2 = models.CharField(max_length=100)
     administrative_area_level_2_short_name = models.CharField(max_length=100)
-    
+
     postal_code = models.CharField(max_length=16)
     country = CountryField()
 
@@ -165,7 +165,8 @@ class Race(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk:
             # Newly created object, so set slug
-            self.slug = slugify("-".join(self.event.name + self.distance_cat.name + self.pk))
+            seq = (str(self.pk), self.event.name, self.distance_cat.name)
+            self.slug = slugify("-".join(seq))
             super(Race, self).save(*args, **kwargs)
             self.init_distances_from_default()
 

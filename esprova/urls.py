@@ -25,13 +25,13 @@ urlpatterns = patterns('',
                        url(r'^$', IntroView.as_view(), name="intro"),
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^list$', RaceList.as_view(), name='list_race'),
-                       url(r'^race/(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
+                       url(r'^race/(?P<slug>.+)$', RaceView.as_view(), name='view_race'),
                        url(r'^search/$', getRacesAjax, name='search_race'),
                        url(r'^create/$', racewizard, name="create_race"),
-                       url(r'^update/(?P<pk>\d+)$', racewizard, name="edit_race"),
-                       url(r'^delete/(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
+                       url(r'^update/(?P<slug>.+)$', racewizard, name="edit_race"),
+                       url(r'^delete/(?P<slug>.+)$', RaceDelete.as_view(), name="delete_race"),
                        url(r'^tobevalidated/$', RaceValidationList.as_view(), name="validate_racelist"),
-                       url(r'^validate/(?P<pk>\d+)$', validateRace, name="validate_race"),
+                       url(r'^validate/(?P<slug>.+)$', validateRace, name="validate_race"),
                        )
 
 # serve static files on dev

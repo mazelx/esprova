@@ -24,8 +24,8 @@ class LoginRequiredMixin(object):
 
 
 @login_required
-def validateRace(request, pk):
-    race = get_object_or_404(Race, pk=pk)
+def validateRace(request, slug):
+    race = get_object_or_404(Race, slug=slug)
     race.validated = True
     race.save()
     return HttpResponseRedirect(reverse('validate_racelist'))
@@ -140,15 +140,15 @@ class RaceWizard(SessionWizardView):
         return [self.TEMPLATES[self.steps.current]]
 
     def get_form_initial(self, step):
-        if 'pk' in self.kwargs:
+        if 'slug' in self.kwargs:
             return {}
         else:
             return self.initial_dict.get(step, {})
 
     def get_form_instance(self, step):
-        if 'pk' in self.kwargs:
-            pk = self.kwargs['pk']
-            race = Race.objects.get(pk=pk)
+        if 'slug' in self.kwargs:
+            slug = self.kwargs['slug']
+            race = Race.objects.get(slug=slug)
 
             if (step == "event"):
                 instance = race.event
@@ -201,8 +201,8 @@ class RaceDelete(DeleteView):
     context_object_name = "race"
 
     def get_object(self, queryset=None):
-        pk = self.kwargs.get('pk', None)
-        return get_object_or_404(Race, pk=pk)
+        slug = self.kwargs.get('slug', None)
+        return get_object_or_404(Race, slug=slug)
 
 
 class RaceValidationList(ListView):

@@ -99,11 +99,11 @@
 {%if request.user.is_superuser %}
 
     {% if not race.validated %}
-        <a class="btn btn-success" href="{% url "validate_race" race.pk %}">Valider le brouillon</a>
+        <a class="btn btn-success" href="{% url "validate_race" race.slug %}">Valider le brouillon</a>
     {% endif %}
 
-    <a class="btn btn-warning" href="{% url "edit_race" race.pk %}">Modifier</a>
-    <a class="btn btn-danger" href="{% url "delete_race" race.pk %}">Supprimer</a>
+    <a class="btn btn-warning" href="{% url "edit_race" race.slug %}">Modifier</a>
+    <a class="btn btn-danger" href="{% url "delete_race" race.slug %}">Supprimer</a>
 {% endif %}
 
 </div>

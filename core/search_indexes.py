@@ -15,6 +15,7 @@ class RaceIndex(indexes.SearchIndex, indexes.Indexable):
     distance_cat = indexes.CharField(model_attr='distance_cat__name')
     rendered = indexes.CharField(use_template=True, indexed=False)
     validated = indexes.BooleanField(indexed=False, model_attr='validated')
+    slug = indexes.CharField(indexed=False, model_attr='slug')
 
     def get_model(self):
         return Race
