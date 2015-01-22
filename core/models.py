@@ -1,9 +1,9 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-from core.utils import geocode
 from django_countries.fields import CountryField
 from haystack.utils.geo import Point
 from django.db.models import Min, Max
+from django.template.defaultfilters import slugify
 
 
 class Sport(models.Model):
@@ -15,6 +15,7 @@ class Sport(models.Model):
 
     def __str__(self):
         return self.name
+
 
 # That class is inspired by the google address types
 # see https://developers.google.com/maps/documentation/javascript/geocoding
@@ -144,6 +145,7 @@ class DistanceCategory(models.Model):
 
 
 class Race(models.Model):
+    slug = models.SlugField(max_length=100)
     sport = models.ForeignKey(Sport)
     event = models.ForeignKey(Event)
     title = models.CharField(max_length=100, blank=True, null=True)
@@ -157,16 +159,20 @@ class Race(models.Model):
     location = models.OneToOneField(Location)
     validated = models.BooleanField(default=False)
 
+    def __str__(self):
+        return "{0} - {1}".format(self.event.name, self.distance_cat.name)
+
     def save(self, *args, **kwargs):
-        super(Race, self).save(*args, **kwargs)
-        self.init_distances_from_default()
+        if not self.pk:
+            # Newly created object, so set slug
+            self.slug = slugify("-".join(self.event.name + self.distance_cat.name + self.pk))
+            super(Race, self).save(*args, **kwargs)
+            self.init_distances_from_default()
+
         super(Race, self).save(*args, **kwargs)
 
     def natural_key(self):
         return (self.event, self.sport, self.distance_cat)
-
-    def __str__(self):
-        return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
     def init_distances_from_default(self):
         """ Initialize the distances from default distances for this category on race creation """
