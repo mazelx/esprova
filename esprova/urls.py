@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from api import views
 
+
 router = routers.DefaultRouter()
 router.register(r'api/race', views.RaceViewSet)
 router.register(r'api/sport', views.SportViewSet)
@@ -44,7 +45,7 @@ urlpatterns = patterns('',
                        url(r'^delete/(?P<slug>.+)$', RaceDelete.as_view(), name="delete_race"),
                        url(r'^tobevalidated/$', RaceValidationList.as_view(), name="validate_racelist"),
                        url(r'^validate/(?P<slug>.+)$', validateRace, name="validate_race"),
-                       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+                       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
                        )
 
 # serve static files on dev

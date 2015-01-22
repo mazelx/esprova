@@ -1,25 +1,8 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from core.models import Sport, Race, Location, Event, Contact, DistanceCategory
+from core.models import Sport, Race, Location, Event, Contact, DistanceCategory, StageDistanceSpecific, SportStage
 
 
-class RaceSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Race
-        fields = ('sport',
-                  'event',
-                  'title',
-                  'date',
-                  'distance_cat',
-                  'price',
-                  'contact',
-                  'description',
-                  'location',
-                  'validated',
-                  )
-
-
-class SportSerializer(serializers.HyperlinkedModelSerializer):
+class SportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sport
         fields = ('name',
@@ -27,7 +10,7 @@ class SportSerializer(serializers.HyperlinkedModelSerializer):
                   )
 
 
-class EventSerializer(serializers.HyperlinkedModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ('name',
@@ -36,7 +19,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
                   )
 
 
-class DistanceCategorySerializer(serializers.HyperlinkedModelSerializer):
+class DistanceCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = DistanceCategory
         fields = ('sport',
@@ -46,7 +29,7 @@ class DistanceCategorySerializer(serializers.HyperlinkedModelSerializer):
                   )
 
 
-class ContactSerializer(serializers.HyperlinkedModelSerializer):
+class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ('name',
@@ -55,7 +38,7 @@ class ContactSerializer(serializers.HyperlinkedModelSerializer):
                   )
 
 
-class LocationSerializer(serializers.HyperlinkedModelSerializer):
+class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = ('street_number',
@@ -70,3 +53,49 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
                   'lat',
                   'lng',
                   )
+
+
+class StageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SportStage
+        fields = ('name')
+
+
+class DistanceSerializer(serializers.ModelSerializer):
+    stage = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = StageDistanceSpecific
+        fields = ('order',
+                  'stage',
+                  'distance'
+                  )
+
+
+class RaceSerializer(serializers.ModelSerializer):
+    sport = serializers.StringRelatedField(read_only=True)
+    event = serializers.StringRelatedField(read_only=True)
+    distance_cat = serializers.StringRelatedField(read_only=True)
+
+    distances = DistanceSerializer(many=True)
+    contact = ContactSerializer()
+    location = LocationSerializer()
+
+    class Meta:
+        model = Race
+        fields = ('sport',
+                  'event',
+                  'title',
+                  'date',
+                  'distance_cat',
+                  'distances',
+                  'price',
+                  'contact',
+                  'description',
+                  'location',
+                  'validated',
+                  )
+
+        read_only_fields = ('validated',)
+

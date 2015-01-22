@@ -58,7 +58,7 @@ class SportStage(models.Model):
         return (self.sport, self.name)
 
     def __str__(self):
-        return "{0}/{1} : {2}".format(self.sport, self.default_order, self.name)
+        return "{0}".format(self.name)
 
 
 class Event(models.Model):
@@ -134,7 +134,7 @@ class DistanceCategory(models.Model):
     order = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return "{0} - {1} ({2})".format(self.sport.name, self.name, self.long_name)
+        return "{0}".format(self.name)
 
     def natural_key(self):
         return (self.sport, self.name)
@@ -177,7 +177,7 @@ class Race(models.Model):
 
     def init_distances_from_default(self):
         """ Initialize the distances from default distances for this category on race creation """
-        if not self.stagedistancespecific_set.all():
+        if not self.distances.all():
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
                 rs.save()
@@ -198,7 +198,7 @@ class StageDistance(models.Model):
 
 
 class StageDistanceSpecific(StageDistance):
-    race = models.ForeignKey(Race)
+    race = models.ForeignKey(Race, related_name='distances')
 
     class Meta:
         verbose_name = "Stage distance (for a race)"
@@ -209,7 +209,7 @@ class StageDistanceSpecific(StageDistance):
         return (self.race, self.order)
 
     def clean(self):
-        if (not self.race.sport.combinedSport) & (self.race.stagedistancespecific_set.all().count() > 1):
+        if (not self.race.sport.combinedSport) & (self.race.distances.all().count() > 1):
             raise ValidationError('Only combined sport should be able to have multiple stages')
 
     def __str__(self):
