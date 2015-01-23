@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from core.models import Sport, Race, Location, Event, Contact, DistanceCategory, StageDistanceSpecific, SportStage
+from rest_framework.exceptions import ParseError
+
+import logging
 
 
 class SportSerializer(serializers.ModelSerializer):
@@ -8,6 +11,7 @@ class SportSerializer(serializers.ModelSerializer):
         fields = ('name',
                   'combinedSport',
                   )
+        read_only_fields = ('combinedSport',)
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -27,6 +31,10 @@ class DistanceCategorySerializer(serializers.ModelSerializer):
                   'long_name',
                   'order',
                   )
+        read_only_fields = ('sport',
+                            'long_name',
+                            'order',
+                            )
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -63,7 +71,7 @@ class StageSerializer(serializers.ModelSerializer):
 
 
 class DistanceSerializer(serializers.ModelSerializer):
-    stage = serializers.StringRelatedField(read_only=True)
+    stage = serializers.StringRelatedField()
 
     class Meta:
         model = StageDistanceSpecific
@@ -74,22 +82,22 @@ class DistanceSerializer(serializers.ModelSerializer):
 
 
 class RaceSerializer(serializers.ModelSerializer):
-    sport = serializers.StringRelatedField(read_only=True)
-    event = serializers.StringRelatedField(read_only=True)
-    distance_cat = serializers.StringRelatedField(read_only=True)
+    sport = SportSerializer()
+    event = serializers.StringRelatedField()
+    distance_cat = DistanceCategorySerializer()
 
-    distances = DistanceSerializer(many=True)
+    # distances = DistanceSerializer()
     contact = ContactSerializer()
     location = LocationSerializer()
 
     class Meta:
         model = Race
-        fields = ('sport',
-                  'event',
+        fields = ('event',
+                  'sport',
+                  'distance_cat',
                   'title',
                   'date',
-                  'distance_cat',
-                  'distances',
+                  # 'distances',
                   'price',
                   'contact',
                   'description',
@@ -97,5 +105,35 @@ class RaceSerializer(serializers.ModelSerializer):
                   'validated',
                   )
 
-        read_only_fields = ('validated',)
+        read_only_fields = ('validated', 'distances')
 
+    def create(self, validated_data):
+        event = Event.objects.all()[0]
+        sport_data = validated_data.pop('sport')
+        try:
+            sport = Sport.objects.get(**sport_data)
+        except Sport.DoesNotExist:
+            raise ParseError(
+                '{0} is not a known sport, please refer to the API documentation'.format(sport_data['name'])
+                )
+        distance_cat_data = validated_data.pop('distance_cat')
+        try:
+            distance_cat = DistanceCategory.objects.get(**distance_cat_data)
+        except DistanceCategory.DoesNotExist:
+            raise ParseError(
+                '{0} is not a known distance category, please refer to the API documentation'.format(
+                    distance_cat_data['name']
+                    )
+                )
+
+        contact_data = validated_data.pop('contact')
+        contact, contact_created = Contact.objects.get_or_create(**contact_data)
+        location_data = validated_data.pop('location')
+        location = Location.objects.create(**location_data)
+        race = Race.objects.create(event=event,
+                                   contact=contact,
+                                   sport=sport,
+                                   location=location,
+                                   distance_cat=distance_cat,
+                                   **validated_data)
+        return race

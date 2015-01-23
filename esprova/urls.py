@@ -9,12 +9,12 @@ from api import views
 
 
 router = routers.DefaultRouter()
-router.register(r'api/race', views.RaceViewSet)
-router.register(r'api/sport', views.SportViewSet)
-router.register(r'api/event', views.EventViewSet)
-router.register(r'api/distancecat', views.DistanceCategoryViewSet)
-router.register(r'api/contact', views.ContactViewSet)
-router.register(r'api/location', views.LocationViewSet)
+router.register(r'/race', views.RaceViewSet)
+router.register(r'/sport', views.SportViewSet)
+router.register(r'/event', views.EventViewSet)
+router.register(r'/distancecat', views.DistanceCategoryViewSet)
+router.register(r'/contact', views.ContactViewSet)
+router.register(r'/location', views.LocationViewSet)
 
 
 
@@ -28,7 +28,6 @@ race_named_forms = (
 racewizard = RaceWizard.as_view(race_named_forms)
 
 urlpatterns = patterns('',
-                       url(r'^', include(router.urls)),
                        url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
                            name="login"),
                        url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name="logout"),
@@ -46,6 +45,7 @@ urlpatterns = patterns('',
                        url(r'^tobevalidated/$', RaceValidationList.as_view(), name="validate_racelist"),
                        url(r'^validate/(?P<slug>.+)$', validateRace, name="validate_race"),
                        url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+                       url(r'^api', include(router.urls)),
                        )
 
 # serve static files on dev

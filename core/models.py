@@ -5,6 +5,7 @@ from haystack.utils.geo import Point
 from django.db.models import Min, Max
 from django.template.defaultfilters import slugify
 
+import logging
 
 class Sport(models.Model):
     name = models.CharField(max_length=100)
@@ -65,9 +66,6 @@ class Event(models.Model):
     name = models.CharField(max_length=150)
     edition = models.PositiveSmallIntegerField()
     website = models.URLField(blank=True, null=True)
-
-    # def __init__(self):
-    #     self. distance_category_set = self._get_event_distance_category()
 
     def natural_key(self):
         return (self.name)
@@ -145,7 +143,7 @@ class DistanceCategory(models.Model):
 
 
 class Race(models.Model):
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, blank=True, null=True)
     sport = models.ForeignKey(Sport)
     event = models.ForeignKey(Event)
     title = models.CharField(max_length=100, blank=True, null=True)
@@ -163,14 +161,17 @@ class Race(models.Model):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        if self.pk is None:
             # Newly created object, so set slug
-            seq = (str(self.pk), self.event.name, self.distance_cat.name)
+            seq = (self.event.name, self.distance_cat.name)
             self.slug = slugify("-".join(seq))
+            logging.debug(args, kwargs)
             super(Race, self).save(*args, **kwargs)
             self.init_distances_from_default()
 
-        super(Race, self).save(*args, **kwargs)
+        # do not insert the same instance if a force_insert has been set to true
+        kwargs.pop('force_insert')
+        super(Race, self).save(force_update=True, *args, **kwargs)
 
     def natural_key(self):
         return (self.event, self.sport, self.distance_cat)
@@ -184,8 +185,6 @@ class Race(models.Model):
 
     def get_point(self):
         return Point(float(self.location.lng), float(self.location.lat))
-
-    
 
 
 class StageDistance(models.Model):
