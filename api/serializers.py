@@ -14,15 +14,6 @@ class SportSerializer(serializers.ModelSerializer):
         read_only_fields = ('combinedSport',)
 
 
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        fields = ('name',
-                  'edition',
-                  'website',
-                  )
-
-
 class DistanceCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = DistanceCategory
@@ -82,8 +73,8 @@ class DistanceSerializer(serializers.ModelSerializer):
 
 
 class RaceSerializer(serializers.ModelSerializer):
+    event = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=Event.objects.all(), default="")
     sport = SportSerializer()
-    event = serializers.StringRelatedField()
     distance_cat = DistanceCategorySerializer()
 
     # distances = DistanceSerializer()
@@ -108,7 +99,7 @@ class RaceSerializer(serializers.ModelSerializer):
         read_only_fields = ('validated', 'distances')
 
     def create(self, validated_data):
-        event = Event.objects.all()[0]
+        # event = Event.objects.all()[0]
         sport_data = validated_data.pop('sport')
         try:
             sport = Sport.objects.get(**sport_data)
@@ -130,10 +121,35 @@ class RaceSerializer(serializers.ModelSerializer):
         contact, contact_created = Contact.objects.get_or_create(**contact_data)
         location_data = validated_data.pop('location')
         location = Location.objects.create(**location_data)
-        race = Race.objects.create(event=event,
-                                   contact=contact,
+        race = Race.objects.create(contact=contact,
                                    sport=sport,
                                    location=location,
                                    distance_cat=distance_cat,
                                    **validated_data)
         return race
+
+
+class EventSerializer(serializers.ModelSerializer):
+    races = RaceSerializer(many=True)
+
+    class Meta:
+        model = Event
+        fields = ('name',
+                  'edition',
+                  'website',
+                  'races'
+                  )
+
+    def create(self, validated_data):
+        logging.debug('create event')
+        races_dict = validated_data.pop('races')
+        event = Event.objects.create(**validated_data)
+        for race_data in races_dict:
+            race_data.update({'event': event.pk})
+            logging.debug(race_data)
+            race_serializer = RaceSerializer(data=race_data)
+            if race_serializer.is_valid():
+                logging.debug('the race is going to be saved yo')
+                race_serializer.save()
+
+        return event
