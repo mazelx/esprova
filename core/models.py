@@ -4,6 +4,7 @@ from django_countries.fields import CountryField
 from haystack.utils.geo import Point
 from django.db.models import Min, Max
 from django.template.defaultfilters import slugify
+from geopy.geocoders import GoogleV3
 
 import logging
 
@@ -41,8 +42,51 @@ class Location(models.Model):
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lng = models.DecimalField(max_digits=8, decimal_places=5)
 
+    geocode_mapping = [{'field': 'street_number',
+                        'geo_field': {'name': 'street_number', 'type': 'short_name'}
+                        },
+                       {'field': 'route',
+                        'geo_field': {'name': 'route', 'type': 'short_name'}
+                        },
+                       {'field': 'locality',
+                        'geo_field': {'name': 'locality', 'type': 'short_name'}
+                        },
+                       {'field': 'administrative_area_level_1',
+                        'geo_field': {'name': 'administrative_area_level_1', 'type': 'long_name'}
+                        },
+                       {'field': 'administrative_area_level_1_short_name',
+                        'geo_field': {'name': 'administrative_area_level_1', 'type': 'short_name'}
+                        },
+                       {'field': 'administrative_area_level_2',
+                        'geo_field': {'name': 'administrative_area_level_2', 'type': 'long_name'}
+                        },
+                       {'field': 'administrative_area_level_2_short_name',
+                        'geo_field': {'name': 'administrative_area_level_2', 'type': 'short_name'}
+                        },
+                       {'field': 'postal_code',
+                        'geo_field': {'name': 'postal_code', 'type': 'short_name'}
+                        },
+                       {'field': 'country',
+                        'geo_field': {'name': 'country', 'type': 'short_name'}
+                        }]
+
     def __str__(self):
         return "{0}, {1}, {2} ({3}, {4})".format(self.postal_code, self.locality, self.country, self.lat, self.lng)
+
+    def geocode_raw_address(self, raw_address):
+        g = GoogleV3()
+        loc = g.geocode(raw_address)
+        if loc:
+            # list comprehension to retrieve data
+            for f in self._meta.fields:
+                for line in loc.raw['address_components']:
+                    fmap = [i.get('geo_field', None) for i in self.geocode_mapping if i.get('field', None) == f.attname]
+                    if fmap:
+                        if fmap[0].get('name', None) in line['types']:
+                            setattr(self, f.name, line[fmap[0]['type']])
+
+            self.lat = loc.latitude
+            self.lng = loc.longitude
 
 
 class SportStage(models.Model):
@@ -74,22 +118,22 @@ class Event(models.Model):
         return self.name
 
     def get_start_date(self):
-        return self.race_set.all().aggregate(Min('date'))['date__min']
+        return self.races.all().aggregate(Min('date'))['date__min']
 
     def get_end_date(self):
-        return self.race_set.all().aggregate(Max('date'))['date__max']
+        return self.races.all().aggregate(Max('date'))['date__max']
 
     def get_distance_cat_set(self):
         distance_cat_set = []
-        for r in self.race_set.all().order_by('distance_cat__order'):
+        for r in self.races.order_by('distance_cat__order'):
             distance_cat_set.append(r.distance_cat)
         return distance_cat_set
 
-    def get_race_set(self):
-        race_set = []
-        for r in self.race_set.all().order_by('distance_cat__order'):
-            race_set.append(r)
-        return race_set
+    def get_races(self):
+        races = []
+        for r in self.races.order_by('distance_cat__order'):
+            races.append(r)
+        return races
 
 
 class Federation(models.Model):
@@ -145,7 +189,7 @@ class DistanceCategory(models.Model):
 class Race(models.Model):
     slug = models.SlugField(max_length=100, blank=True, null=True)
     sport = models.ForeignKey(Sport)
-    event = models.ForeignKey(Event)
+    event = models.ForeignKey(Event, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateTimeField()
     distance_cat = models.ForeignKey(DistanceCategory)
