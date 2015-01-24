@@ -8,6 +8,7 @@ from geopy.geocoders import GoogleV3
 
 import logging
 
+
 class Sport(models.Model):
     name = models.CharField(max_length=100)
     combinedSport = models.BooleanField(default=False)
@@ -214,7 +215,8 @@ class Race(models.Model):
             self.init_distances_from_default()
 
         # do not insert the same instance if a force_insert has been set to true
-        kwargs.pop('force_insert')
+            if kwargs.get('force_insert', None):
+                kwargs.pop('force_insert')
         super(Race, self).save(force_update=True, *args, **kwargs)
 
     def natural_key(self):
