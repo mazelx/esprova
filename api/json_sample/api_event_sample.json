@@ -1,0 +1,64 @@
+{
+    "name": "Tri Test API",
+    "edition": 3,
+    "website": "http://tricherbourg.com/",
+    "races": [{
+            "sport": {
+                "name": "Triathlon"
+            },
+            "distance_cat": {
+                "name": "XS"
+            },
+            "title": "",
+            "date": "2015-07-31T22:00:00Z",
+            "price": 50,
+            "contact": {
+                "name": "Jean Toto",
+                "email": "jtoto@gmail.com",
+                "phone": "0651955176"
+            },
+            "description": "toto",
+            "location": {
+                "street_number": "3",
+                "route": "Impasse des Argelas",
+                "locality": "Le Teil",
+                "administrative_area_level_1": "Rhône-Alpes",
+                "administrative_area_level_1_short_name": "RA",
+                "administrative_area_level_2": "Ardèche",
+                "administrative_area_level_2_short_name": "07",
+                "postal_code": "07400",
+                "country": "FR",
+                "lat": 10.00,
+                "lng": 10.00
+            }
+        }, {
+            "sport": {
+                "name": "Triathlon"
+            },
+            "distance_cat": {
+                "name": "M"
+            },
+            "title": "",
+            "date": "2015-07-31T15:00:00Z",
+            "price": 50,
+            "contact": {
+                "name": "Jean Toto",
+                "email": "jtoto@gmail.com",
+                "phone": "0651955176"
+            },
+            "description": "toto",
+            "location": {
+                "street_number": "3",
+                "route": "Impasse des Argelas",
+                "locality": "Le Teil",
+                "administrative_area_level_1": "Rhône-Alpes",
+                "administrative_area_level_1_short_name": "RA",
+                "administrative_area_level_2": "Ardèche",
+                "administrative_area_level_2_short_name": "07",
+                "postal_code": "07400",
+                "country": "FR",
+                "lat": 10.00,
+                "lng": 10.00
+            }
+        }]
+}

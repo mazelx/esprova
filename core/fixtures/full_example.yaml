@@ -1,0 +1,1717 @@
+- fields: {combinedSport: true, name: Triathlon}
+  model: core.sport
+  pk: 2
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.30168', lng: '4.56566', locality: "Saint Martin d'Ard\xE8\
+      che", postal_code: '07400', route: '', street_number: null}
+  model: core.location
+  pk: 1
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.30234', lng: '4.56624', locality: "Saint Martin d'Ard\xE8\
+      che", postal_code: '07400', route: '', street_number: null}
+  model: core.location
+  pk: 2
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55061', lng: '4.68379', locality: Le Teil, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 3
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55061', lng: '4.68379', locality: Le Teil, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 4
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '43.60473', lng: '3.90117', locality: Montpellier, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 5
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55694', lng: '4.74950', locality: "Mont\xE9limar", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 6
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55694', lng: '4.74950', locality: "Mont\xE9limar", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 7
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55694', lng: '4.74950', locality: "Mont\xE9limar", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 8
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55694', lng: '4.74950', locality: "Mont\xE9limar", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 9
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.70628', lng: '-0.06623', locality: Lyon, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 10
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.70628', lng: '-0.06623', locality: Lyon, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 11
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.70628', lng: '-0.06623', locality: Lyon, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 12
+- fields: {administrative_area_level_1: Bourgogne, administrative_area_level_1_short_name: Bourgogne,
+    administrative_area_level_2: "C\xF4te-d'Or", administrative_area_level_2_short_name: '21',
+    country: FR, lat: '47.02428', lng: '4.83495', locality: Beaune, postal_code: '21200',
+    route: "Avenue de la R\xE9publique", street_number: ''}
+  model: core.location
+  pk: 13
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '47.02603', lng: '4.84000', locality: Beaune, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 14
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '45.77126', lng: '3.11980', locality: Clermont-Ferrand, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 15
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '48.82936', lng: '2.42654', locality: Paris, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 16
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '48.82936', lng: '2.42654', locality: Paris, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 17
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '43.69604', lng: '7.26559', locality: Nice, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 18
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.56416', lng: '6.49586', locality: Embrun, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 19
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '43.81739', lng: '6.09334', locality: Riez, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 20
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '43.53383', lng: '5.50925', locality: Aix-en-Provence, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 21
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '43.53383', lng: '5.50925', locality: Aix-en-Provence, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 22
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '43.53383', lng: '5.50925', locality: Aix-en-Provence, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 23
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '43.53383', lng: '5.50925', locality: Aix-en-Provence, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 24
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.40469', lng: '4.13192', locality: Les Vans, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 25
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.34178', lng: '2.58455', locality: Millau, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 26
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.83501', lng: '-0.58727', locality: Bordeaux, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 27
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.83501', lng: '-0.58727', locality: Bordeaux, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 28
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.65150', lng: '4.56526', locality: "Berz\xE8me", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 29
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 30
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 31
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 32
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 33
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 34
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 35
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 36
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 37
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 38
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 39
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 40
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55234', lng: '4.67553', locality: Le Teil, postal_code: '07400',
+    route: 3 impasse des argelas, street_number: null}
+  model: core.location
+  pk: 41
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '47.78490', lng: '7.28481', locality: Mulhouse, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 42
+- fields: {administrative_area_level_1: Pays de la Loire, administrative_area_level_1_short_name: Pays
+      de la Loire, administrative_area_level_2: Loire-Atlantique, administrative_area_level_2_short_name: '44',
+    country: FR, lat: '47.21837', lng: '-1.55362', locality: Nantes, postal_code: '44000',
+    route: '', street_number: ''}
+  model: core.location
+  pk: 43
+- fields: {administrative_area_level_1: Bretagne, administrative_area_level_1_short_name: Bretagne,
+    administrative_area_level_2: "Finist\xE8re", administrative_area_level_2_short_name: '29',
+    country: FR, lat: '48.39248', lng: '-4.48204', locality: Brest, postal_code: '29200',
+    route: Rue Victor Hugo, street_number: '1'}
+  model: core.location
+  pk: 44
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '45.17739', lng: '0.72561', locality: Bergerac, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 45
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.70628', lng: '-0.06623', locality: Lyon, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 46
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '46.34155', lng: '2.60199', locality: "Montlu\xE7on", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 47
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.98513', lng: '4.57914', locality: Lamastre, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 48
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.74116', lng: '-0.68435', locality: Cestas, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 49
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '48.67119', lng: '2.54075', locality: Quincy, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 50
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '49.35757', lng: '6.16843', locality: Thionville, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 51
+- fields: {administrative_area_level_1: Bretagne, administrative_area_level_1_short_name: Bretagne,
+    administrative_area_level_2: Ille-et-Vilaine, administrative_area_level_2_short_name: '35',
+    country: FR, lat: '48.10889', lng: '-1.69751', locality: Rennes, postal_code: '35000',
+    route: Rue de Lorient, street_number: '1'}
+  model: core.location
+  pk: 52
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '48.69205', lng: '6.18442', locality: Nancy, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 53
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '47.38327', lng: '0.68980', locality: Tours, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 54
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '50.36787', lng: '3.08060', locality: Douai, postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 55
+- fields: {administrative_area_level_1: Corse, administrative_area_level_1_short_name: Corse,
+    administrative_area_level_2: Corse-du-Sud, administrative_area_level_2_short_name: 2A,
+    country: FR, lat: '41.71326', lng: '8.80288', locality: Serra-di-Ferro, postal_code: '20140',
+    route: Porticcio, street_number: ''}
+  model: core.location
+  pk: 56
+- fields: {administrative_area_level_1: "Midi-Pyr\xE9n\xE9es", administrative_area_level_1_short_name: "Midi-Pyr\xE9\
+      n\xE9es", administrative_area_level_2: Haute-Garonne, administrative_area_level_2_short_name: '31',
+    country: FR, lat: '43.59843', lng: '1.43406', locality: Toulouse, postal_code: '31300',
+    route: "Rue de la R\xE9publique", street_number: ''}
+  model: core.location
+  pk: 57
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Paris, administrative_area_level_2_short_name: '75',
+    country: FR, lat: '48.84893', lng: '2.34017', locality: Paris, postal_code: '75006',
+    route: Rue de Vaugirard, street_number: '5'}
+  model: core.location
+  pk: 58
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Rh\xF4ne", administrative_area_level_2_short_name: '69',
+    country: FR, lat: '45.76416', lng: '4.78638', locality: Lyon, postal_code: '69160',
+    route: "Avenue de la R\xE9publique", street_number: '1'}
+  model: core.location
+  pk: 59
+- fields: {administrative_area_level_1: "Midi-Pyr\xE9n\xE9es", administrative_area_level_1_short_name: "Midi-Pyr\xE9\
+      n\xE9es", administrative_area_level_2: Haute-Garonne, administrative_area_level_2_short_name: '31',
+    country: FR, lat: '43.59843', lng: '1.43406', locality: Toulouse, postal_code: '31300',
+    route: "Rue de la R\xE9publique", street_number: ''}
+  model: core.location
+  pk: 60
+- fields: {administrative_area_level_1: "Midi-Pyr\xE9n\xE9es", administrative_area_level_1_short_name: "Midi-Pyr\xE9\
+      n\xE9es", administrative_area_level_2: Haute-Garonne, administrative_area_level_2_short_name: '31',
+    country: FR, lat: '43.59843', lng: '1.43406', locality: Toulouse, postal_code: '31300',
+    route: "Rue de la R\xE9publique", street_number: ''}
+  model: core.location
+  pk: 61
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Marne, administrative_area_level_2_short_name: '51',
+    country: FR, lat: '49.22780', lng: '4.03012', locality: Reims, postal_code: '51100',
+    route: Avenue de Champagne, street_number: ''}
+  model: core.location
+  pk: 62
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Marne, administrative_area_level_2_short_name: '51',
+    country: FR, lat: '49.22780', lng: '4.03012', locality: Reims, postal_code: '51100',
+    route: Avenue de Champagne, street_number: ''}
+  model: core.location
+  pk: 63
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Marne, administrative_area_level_2_short_name: '51',
+    country: FR, lat: '49.22780', lng: '4.03012', locality: Reims, postal_code: '51100',
+    route: Avenue de Champagne, street_number: ''}
+  model: core.location
+  pk: 64
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Marne, administrative_area_level_2_short_name: '51',
+    country: FR, lat: '49.22780', lng: '4.03012', locality: Reims, postal_code: '51100',
+    route: Avenue de Champagne, street_number: ''}
+  model: core.location
+  pk: 65
+- fields: {administrative_area_level_1: Aquitaine, administrative_area_level_1_short_name: Aquitaine,
+    administrative_area_level_2: "Pyr\xE9n\xE9es-Atlantiques", administrative_area_level_2_short_name: '64',
+    country: FR, lat: '43.30001', lng: '-0.35552', locality: Pau, postal_code: '64000',
+    route: "Avenue de B\xE9arn", street_number: ''}
+  model: core.location
+  pk: 66
+- fields: {administrative_area_level_1: Centre, administrative_area_level_1_short_name: Centre,
+    administrative_area_level_2: Loiret, administrative_area_level_2_short_name: '45',
+    country: FR, lat: '47.90034', lng: '1.91183', locality: "Orl\xE9ans", postal_code: '45000',
+    route: Rue de Bourgogne, street_number: ''}
+  model: core.location
+  pk: 67
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Val-de-Marne, administrative_area_level_2_short_name: '94',
+    country: FR, lat: '48.80421', lng: '2.48071', locality: "Saint-Maur-des-Foss\xE9\
+      s", postal_code: '94100', route: Rue du Temple, street_number: ''}
+  model: core.location
+  pk: 68
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Ile de France, administrative_area_level_2_short_name: IDF,
+    country: FR, lat: '48.84317', lng: '2.24488', locality: Boulogne-Billancourt,
+    postal_code: '92100', route: "Rue du Ch\xE2teau", street_number: ''}
+  model: core.location
+  pk: 69
+- fields: {administrative_area_level_1: Bretagne, administrative_area_level_1_short_name: Bretagne,
+    administrative_area_level_2: Morbihan, administrative_area_level_2_short_name: '56',
+    country: FR, lat: '47.74025', lng: '-3.36529', locality: Lorient, postal_code: '56100',
+    route: Rue Victor Hugo, street_number: ''}
+  model: core.location
+  pk: 70
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Aube, administrative_area_level_2_short_name: '10',
+    country: FR, lat: '48.29834', lng: '4.07389', locality: Troyes, postal_code: '10000',
+    route: "Rue de la R\xE9publique", street_number: ''}
+  model: core.location
+  pk: 71
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 72
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 73
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 74
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 75
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 76
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 77
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 78
+- fields: {administrative_area_level_1: aa, administrative_area_level_1_short_name: aaa,
+    administrative_area_level_2: aaa, administrative_area_level_2_short_name: aaa,
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Montpellier, postal_code: '07400',
+    route: '', street_number: '3 impasse '}
+  model: core.location
+  pk: 79
+- fields: {administrative_area_level_1: Zuzu, administrative_area_level_1_short_name: Zuzu,
+    administrative_area_level_2: Zuzu, administrative_area_level_2_short_name: Zuzu,
+    country: AF, lat: '10.00000', lng: '10.00000', locality: Zuzu, postal_code: Zuzu,
+    route: '', street_number: ''}
+  model: core.location
+  pk: 80
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 81
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 82
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 83
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 84
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 85
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 86
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55694', lng: '4.74950', locality: "Mont\xE9limar", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 87
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55694', lng: '4.74950', locality: "Mont\xE9limar", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 88
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '44.55694', lng: '4.74950', locality: "Mont\xE9limar", postal_code: '07400',
+    route: '', street_number: null}
+  model: core.location
+  pk: 89
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 90
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 91
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 92
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 93
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 94
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 95
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 96
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 97
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 98
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 99
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 100
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 101
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 102
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 103
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 104
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 105
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 106
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 107
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 108
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Ard\xE8che", administrative_area_level_2_short_name: '07',
+    country: FR, lat: '10.00000', lng: '10.00000', locality: Le Teil, postal_code: '07400',
+    route: Impasse des Argelas, street_number: '3'}
+  model: core.location
+  pk: 109
+- fields: {default_order: 1, name: Natation, sport: 2}
+  model: core.sportstage
+  pk: 4
+- fields: {default_order: 1, name: Cyclisme, sport: 2}
+  model: core.sportstage
+  pk: 5
+- fields: {default_order: 1, name: "Course \xE0 Pied", sport: 2}
+  model: core.sportstage
+  pk: 6
+- fields: {edition: 1, name: "Triathlon des Gorges de l'Ard\xE8che", website: null}
+  model: core.event
+  pk: 5
+- fields: {edition: 1, name: Triathlon du Teil, website: null}
+  model: core.event
+  pk: 6
+- fields: {edition: 1, name: Montpellier Agglo Triathlon, website: null}
+  model: core.event
+  pk: 7
+- fields: {edition: 1, name: "Triathlon de Mont\xE9limar", website: null}
+  model: core.event
+  pk: 10
+- fields: {edition: 1, name: Tri des Gones, website: null}
+  model: core.event
+  pk: 12
+- fields: {edition: 1, name: Beaujotri, website: ''}
+  model: core.event
+  pk: 15
+- fields: {edition: 1, name: IronMan de Clermont, website: null}
+  model: core.event
+  pk: 17
+- fields: {edition: 1, name: TriParis, website: null}
+  model: core.event
+  pk: 18
+- fields: {edition: 1, name: IronMan de Nice, website: null}
+  model: core.event
+  pk: 20
+- fields: {edition: 1, name: Embrunman, website: null}
+  model: core.event
+  pk: 21
+- fields: {edition: 1, name: Tri Ekiden l'Occitane, website: null}
+  model: core.event
+  pk: 22
+- fields: {edition: 1, name: Tri international des Vans, website: null}
+  model: core.event
+  pk: 27
+- fields: {edition: 1, name: "Triathlon espoirs f\xE9minin de Millau en Aveyron",
+    website: null}
+  model: core.event
+  pk: 28
+- fields: {edition: 2, name: Triathlon des Girondins de Bordeaux, website: null}
+  model: core.event
+  pk: 29
+- fields: {edition: 4, name: Triathlon de Nantes, website: 'http://www.trinantes.com/'}
+  model: core.event
+  pk: 44
+- fields: {edition: 1, name: TriBrest, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 45
+- fields: {edition: 2, name: Animatri, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 47
+- fields: {edition: 1, name: Triatlon de Montlucon, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 48
+- fields: {edition: 4, name: Triathlon de Lamastre, website: 'http://www.lamastri.com/'}
+  model: core.event
+  pk: 49
+- fields: {edition: 3, name: Tri Cestas, website: 'http://www.tricestas.com/'}
+  model: core.event
+  pk: 50
+- fields: {edition: 2, name: Triathlon de Quincy, website: 'http://www.trinantes.com/'}
+  model: core.event
+  pk: 51
+- fields: {edition: 3, name: Trithionville, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 52
+- fields: {edition: 2, name: Tri Rennes, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 53
+- fields: {edition: 2, name: Tri Nancy, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 54
+- fields: {edition: 2, name: Tourstri, website: 'http://tribrest.com/'}
+  model: core.event
+  pk: 55
+- fields: {edition: 2, name: Triathlon international de Douai, website: 'http://www.chtitri.com/'}
+  model: core.event
+  pk: 56
+- fields: {edition: 1, name: Corsicatri, website: 'http://www.corsicatri.fr/'}
+  model: core.event
+  pk: 57
+- fields: {edition: 1, name: Corsicatri, website: 'http://www.corsicatri.fr/'}
+  model: core.event
+  pk: 58
+- fields: {edition: 1, name: Corsicatri, website: 'http://www.corsicatri.fr/'}
+  model: core.event
+  pk: 59
+- fields: {edition: 3, name: Tri Toulousain, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 60
+- fields: {edition: 1, name: Tri test, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 61
+- fields: {edition: 1, name: Tri des Gones, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 62
+- fields: {edition: 3, name: Tri Toulousaing, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 63
+- fields: {edition: 3, name: Tri Toulousaingue, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 64
+- fields: {edition: 3, name: Tri Troyes, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 65
+- fields: {edition: 3, name: Tri Troyes, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 67
+- fields: {edition: 5, name: Tri Troyes, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 69
+- fields: {edition: 1, name: Reims International Triathlon, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 71
+- fields: {edition: 1, name: Reims International Triathlon, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 72
+- fields: {edition: 1, name: Reims International Triathlon, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 73
+- fields: {edition: 3, name: Triade Tri Troyes, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 74
+- fields: {edition: 2, name: "Tri Pau Teur B\xE9arnais", website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 75
+- fields: {edition: 1, name: "Tri Orl\xE9ans", website: ''}
+  model: core.event
+  pk: 76
+- fields: {edition: 1, name: Test 1, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 77
+- fields: {edition: 2, name: Test2, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 78
+- fields: {edition: 1, name: Triathlon de Lorient, website: ''}
+  model: core.event
+  pk: 79
+- fields: {edition: 3, name: TriTroyes, website: 'http://www.sablieretri.com/'}
+  model: core.event
+  pk: 80
+- fields: {edition: 3, name: Tri Toulousain, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 82
+- fields: {edition: 3, name: Tri Toulousain, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 83
+- fields: {edition: 3, name: Tri Toulousain, website: 'http://tricherbourg.com/'}
+  model: core.event
+  pk: 84
+- fields:
+    name: FFTri
+    sport: [2]
+  model: core.federation
+  pk: 2
+- fields: {email: null, name: Bruno Damiens, phone: null}
+  model: core.contact
+  pk: 8
+- fields: {email: null, name: Xavier Mazellier, phone: null}
+  model: core.contact
+  pk: 9
+- fields: {email: null, name: Jean Dupont, phone: null}
+  model: core.contact
+  pk: 10
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 11
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 12
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 13
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 14
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 15
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 16
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 17
+- fields: {email: '', name: Pierre Dupont, phone: ''}
+  model: core.contact
+  pk: 18
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 19
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 20
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 21
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 22
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 23
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 24
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 25
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 26
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 27
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 28
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 29
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 30
+- fields: {email: null, name: Pierre Dupont, phone: null}
+  model: core.contact
+  pk: 31
+- fields: {email: null, name: "Georges Br\xE9and", phone: null}
+  model: core.contact
+  pk: 32
+- fields: {email: j.martin@hotmail.com, name: "Georges Br\xE9and", phone: 0651955187}
+  model: core.contact
+  pk: 33
+- fields: {email: xm@toto.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 34
+- fields: {email: xm@toto.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 35
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 36
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 37
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 38
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 39
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 40
+- fields: {email: mazelx@gmail.com, name: "Triatlon de la Sabli\xE8re", phone: 0651955187}
+  model: core.contact
+  pk: 41
+- fields: {email: null, name: toto, phone: null}
+  model: core.contact
+  pk: 42
+- fields: {email: sdsddsd@dlkflkdf.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 43
+- fields: {email: sdsddsd@dlkflkdf.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 44
+- fields: {email: '', name: dsdd, phone: ''}
+  model: core.contact
+  pk: 45
+- fields: {email: jdupont@gmail.com, name: Thomas Dupont, phone: '064131425'}
+  model: core.contact
+  pk: 46
+- fields: {email: sok@yahoo.com, name: Soazig Kermalec, phone: 061888282}
+  model: core.contact
+  pk: 47
+- fields: {email: jdupont@gmail.com, name: sdsds, phone: 0651955187}
+  model: core.contact
+  pk: 48
+- fields: {email: mazelx@gmail.com, name: Jean Denis, phone: 0651955187}
+  model: core.contact
+  pk: 49
+- fields: {email: mazelx@gmail.com, name: Frank Sinatri, phone: 0651955187}
+  model: core.contact
+  pk: 50
+- fields: {email: mazelx@gmail.com, name: JM Lacroix, phone: 0651955187}
+  model: core.contact
+  pk: 51
+- fields: {email: mazelx@gmail.com, name: "Julie Mauz\xE9", phone: 0651955187}
+  model: core.contact
+  pk: 52
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 53
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 54
+- fields: {email: jdupont@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 55
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: ''}
+  model: core.contact
+  pk: 56
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 57
+- fields: {email: mazelx@gmail.com, name: Marco Antoneggi, phone: 0651955187}
+  model: core.contact
+  pk: 58
+- fields: {email: gbazu@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 59
+- fields: {email: mazelx@gmail.com, name: Toto Jean, phone: 0651955187}
+  model: core.contact
+  pk: 60
+- fields: {email: mazelx@gmail.com, name: Jean Bossuet, phone: 0651955187}
+  model: core.contact
+  pk: 61
+- fields: {email: gbazu@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 62
+- fields: {email: gbazu@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 63
+- fields: {email: mazelx@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 64
+- fields: {email: mazelx@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 65
+- fields: {email: mazelx@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 66
+- fields: {email: mazelx@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 67
+- fields: {email: mazelx@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 68
+- fields: {email: jdupont@gmail.com, name: Jean Denis, phone: ''}
+  model: core.contact
+  pk: 69
+- fields: {email: mazelx@gmail.com, name: Pierre Dupont, phone: 0651955187}
+  model: core.contact
+  pk: 70
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 71
+- fields: {email: mazelx@gmail.com, name: Xavix Mazelix, phone: 0651955187}
+  model: core.contact
+  pk: 72
+- fields: {email: mazelx@gmail.com, name: Georges Bazu, phone: 0651955187}
+  model: core.contact
+  pk: 73
+- fields: {email: jtoto@gmail.com, name: Jean Toto, phone: 0651955187}
+  model: core.contact
+  pk: 74
+- fields: {email: jtoto@gmail.com, name: Jean Toto, phone: 0651955176}
+  model: core.contact
+  pk: 75
+- fields: {long_name: '', name: XS, order: 1, sport: 2}
+  model: core.distancecategory
+  pk: 4
+- fields: {long_name: '', name: S, order: 2, sport: 2}
+  model: core.distancecategory
+  pk: 5
+- fields: {long_name: '', name: M, order: 3, sport: 2}
+  model: core.distancecategory
+  pk: 6
+- fields: {long_name: '', name: L, order: 4, sport: 2}
+  model: core.distancecategory
+  pk: 7
+- fields: {long_name: '', name: XL, order: 5, sport: 2}
+  model: core.distancecategory
+  pk: 8
+- fields: {contact: 8, date: !!timestamp '2015-07-25 14:00:00+00:00', description: '',
+    distance_cat: 6, event: 5, federation: null, label: null, location: 1, price: 40,
+    slug: 1-triathlon-des-gorges-de-lardeche-m, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 1
+- fields: {contact: 8, date: !!timestamp '2015-07-26 07:00:00+00:00', description: '',
+    distance_cat: 5, event: 5, federation: null, label: null, location: 2, price: 30,
+    slug: 2-triathlon-des-gorges-de-lardeche-s, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 2
+- fields: {contact: 9, date: !!timestamp '2015-06-06 14:00:00+00:00', description: '',
+    distance_cat: 6, event: 6, federation: null, label: null, location: 3, price: 40,
+    slug: 3-triathlon-du-teil-m, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 3
+- fields: {contact: 9, date: !!timestamp '2015-06-06 07:00:00+00:00', description: '',
+    distance_cat: 4, event: 6, federation: null, label: null, location: 4, price: 10,
+    slug: 4-triathlon-du-teil-xs, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 4
+- fields: {contact: 10, date: !!timestamp '2015-07-25 07:00:00+00:00', description: '',
+    distance_cat: 8, event: 7, federation: null, label: null, location: 5, price: 50,
+    slug: 5-montpellier-agglo-triathlon-xl, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 5
+- fields: {contact: 13, date: !!timestamp '2015-06-24 20:00:00+00:00', description: null,
+    distance_cat: 4, event: 10, federation: null, label: null, location: 8, price: 40,
+    slug: 6-triathlon-de-montelimar-xs, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 6
+- fields: {contact: 14, date: !!timestamp '2015-04-09 20:00:00+00:00', description: '',
+    distance_cat: 5, event: 10, federation: null, label: null, location: 9, price: 40,
+    slug: 7-triathlon-de-montelimar-s, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 7
+- fields: {contact: 15, date: !!timestamp '2015-03-01 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 12, federation: null, label: null, location: 10, price: 40,
+    slug: 8-tri-des-gones-s, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 8
+- fields: {contact: 16, date: !!timestamp '2015-03-01 22:00:00+00:00', description: '',
+    distance_cat: 6, event: 12, federation: null, label: null, location: 46, price: 40,
+    slug: 9-tri-des-gones-m, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 9
+- fields: {contact: 17, date: !!timestamp '2015-03-02 22:00:00+00:00', description: '',
+    distance_cat: 7, event: 12, federation: null, label: null, location: 12, price: 40,
+    slug: 10-tri-des-gones-l, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 10
+- fields: {contact: 18, date: !!timestamp '2015-03-02 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 15, federation: null, label: null, location: 13, price: 40,
+    slug: 11-beaujotri-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 11
+- fields: {contact: 20, date: !!timestamp '2015-07-02 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 17, federation: null, label: null, location: 15, price: 40,
+    slug: 13-ironman-de-clermont-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 13
+- fields: {contact: 21, date: !!timestamp '2015-07-04 20:00:00+00:00', description: null,
+    distance_cat: 4, event: 18, federation: null, label: null, location: 16, price: 40,
+    slug: 14-triparis-xs, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 14
+- fields: {contact: 22, date: !!timestamp '2015-07-04 20:00:00+00:00', description: '',
+    distance_cat: 5, event: 18, federation: null, label: null, location: 17, price: 40,
+    slug: 15-triparis-s, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 15
+- fields: {contact: 23, date: !!timestamp '2015-05-24 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 20, federation: null, label: null, location: 18, price: 40,
+    slug: 16-ironman-de-nice-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 16
+- fields: {contact: 24, date: !!timestamp '2015-06-09 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 21, federation: null, label: null, location: 19, price: 40,
+    slug: 17-embrunman-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 17
+- fields: {contact: 25, date: !!timestamp '2015-06-09 20:00:00+00:00', description: null,
+    distance_cat: 6, event: 22, federation: null, label: null, location: 20, price: 40,
+    slug: 18-tri-ekiden-loccitane-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 18
+- fields: {contact: 30, date: !!timestamp '2015-08-14 20:00:00+00:00', description: null,
+    distance_cat: 6, event: 27, federation: null, label: null, location: 25, price: 40,
+    slug: 22-tri-international-des-vans-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 22
+- fields: {contact: 31, date: !!timestamp '2015-08-04 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 28, federation: null, label: null, location: 26, price: 40,
+    slug: 23-triathlon-espoirs-feminin-de-millau-en-aveyron-xl, sport: 2, title: null,
+    validated: true}
+  model: core.race
+  pk: 23
+- fields: {contact: 32, date: !!timestamp '2015-04-24 14:00:00+00:00', description: '',
+    distance_cat: 5, event: 29, federation: 2, label: null, location: 28, price: 30,
+    slug: 24-triathlon-des-girondins-de-bordeaux-s, sport: 2, title: '', validated: true}
+  model: core.race
+  pk: 24
+- fields: {contact: 46, date: !!timestamp '2015-07-29 16:00:00+00:00', description: null,
+    distance_cat: 6, event: 44, federation: null, label: null, location: 43, price: null,
+    slug: 35-triathlon-de-nantes-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 35
+- fields: {contact: 47, date: !!timestamp '2015-07-29 20:00:00+00:00', description: null,
+    distance_cat: 4, event: 45, federation: null, label: null, location: 44, price: null,
+    slug: 36-tribrest-xs, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 36
+- fields: {contact: 48, date: !!timestamp '2015-07-29 20:00:00+00:00', description: null,
+    distance_cat: 8, event: 47, federation: null, label: null, location: 45, price: null,
+    slug: 37-animatri-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 37
+- fields: {contact: 49, date: !!timestamp '2015-06-09 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 48, federation: null, label: null, location: 47, price: null,
+    slug: 38-triatlon-de-montlucon-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 38
+- fields: {contact: 50, date: !!timestamp '2015-06-09 22:00:00+00:00', description: null,
+    distance_cat: 4, event: 49, federation: null, label: null, location: 48, price: null,
+    slug: 39-triathlon-de-lamastre-xs, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 39
+- fields: {contact: 51, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 50, federation: null, label: null, location: 49, price: null,
+    slug: 40-tri-cestas-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 40
+- fields: {contact: 52, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 51, federation: null, label: null, location: 50, price: null,
+    slug: 41-triathlon-de-quincy-s, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 41
+- fields: {contact: 53, date: !!timestamp '2015-04-30 22:00:00+00:00', description: null,
+    distance_cat: 7, event: 52, federation: null, label: null, location: 51, price: null,
+    slug: 42-trithionville-l, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 42
+- fields: {contact: 54, date: !!timestamp '2015-05-01 06:00:00+00:00', description: null,
+    distance_cat: 8, event: 53, federation: null, label: null, location: 52, price: null,
+    slug: 43-tri-rennes-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 43
+- fields: {contact: 55, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 54, federation: null, label: null, location: 53, price: null,
+    slug: 44-tri-nancy-s, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 44
+- fields: {contact: 56, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 55, federation: null, label: null, location: 54, price: null,
+    slug: 45-tourstri-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 45
+- fields: {contact: 57, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 56, federation: null, label: null, location: 55, price: null,
+    slug: 46-triathlon-international-de-douai-s, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 46
+- fields: {contact: 58, date: !!timestamp '2015-10-24 22:00:00+00:00', description: null,
+    distance_cat: 7, event: 59, federation: null, label: null, location: 56, price: null,
+    slug: 47-corsicatri-l, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 47
+- fields: {contact: 59, date: !!timestamp '2015-07-31 22:00:00+00:00', description: null,
+    distance_cat: 8, event: 60, federation: null, label: null, location: 57, price: null,
+    slug: 48-tri-toulousaing-wesh-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 48
+- fields: {contact: 61, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 62, federation: null, label: null, location: 59, price: null,
+    slug: 50-tri-des-gones-s, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 50
+- fields: {contact: 62, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 8, event: 63, federation: null, label: null, location: 60, price: null,
+    slug: 51-tri-toulousaing-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 51
+- fields: {contact: 63, date: !!timestamp '2015-07-29 22:00:00+00:00', description: null,
+    distance_cat: 8, event: 64, federation: null, label: null, location: 61, price: null,
+    slug: 52-tri-toulousaingue-xl, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 52
+- fields: {contact: 66, date: !!timestamp '2015-04-30 22:00:00+00:00', description: null,
+    distance_cat: 6, event: 73, federation: null, label: null, location: 64, price: null,
+    slug: 55-reims-international-triathlon-m, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 55
+- fields: {contact: 68, date: !!timestamp '2015-07-29 16:00:00+00:00', description: null,
+    distance_cat: 7, event: 75, federation: null, label: null, location: 66, price: null,
+    slug: 57-tri-pau-teur-bearnais-l, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 57
+- fields: {contact: 69, date: !!timestamp '2015-07-17 22:00:00+00:00', description: null,
+    distance_cat: 5, event: 76, federation: null, label: null, location: 67, price: null,
+    slug: 58-tri-orleans-s, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 58
+- fields: {contact: 72, date: !!timestamp '2015-01-20 23:00:00+00:00', description: null,
+    distance_cat: 7, event: 79, federation: null, label: null, location: 70, price: null,
+    slug: 61-triathlon-de-lorient-l, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 61
+- fields: {contact: 73, date: !!timestamp '2015-02-26 23:00:00+00:00', description: null,
+    distance_cat: 4, event: 80, federation: null, label: null, location: 71, price: null,
+    slug: 62-tritroyes-xs, sport: 2, title: null, validated: true}
+  model: core.race
+  pk: 62
+- fields: {contact: 10, date: !!timestamp '2015-06-20 16:00:00+00:00', description: '',
+    distance_cat: 4, event: 7, federation: 2, label: null, location: 79, price: null,
+    slug: none-montpellier-agglo-triathlon-xs, sport: 2, title: test, validated: false}
+  model: core.race
+  pk: 65
+- fields: {contact: 10, date: !!timestamp '2015-03-02 17:00:00+00:00', description: '',
+    distance_cat: 5, event: 6, federation: 2, label: null, location: 80, price: null,
+    slug: 66-triathlon-du-teil-s, sport: 2, title: '', validated: false}
+  model: core.race
+  pk: 66
+- fields: {contact: 75, date: !!timestamp '2015-07-31 22:00:00+00:00', description: toto,
+    distance_cat: 4, event: 5, federation: null, label: null, location: 109, price: 50,
+    slug: triathlon-des-gorges-de-lardeche-xs, sport: 2, title: '', validated: false}
+  model: core.race
+  pk: 92
+- fields: {distance: 1500, order: 1, race: 1, stage: 4}
+  model: core.stagedistancespecific
+  pk: 16
+- fields: {distance: 40000, order: 1, race: 1, stage: 5}
+  model: core.stagedistancespecific
+  pk: 17
+- fields: {distance: 10000, order: 1, race: 1, stage: 6}
+  model: core.stagedistancespecific
+  pk: 18
+- fields: {distance: 750, order: 1, race: 2, stage: 4}
+  model: core.stagedistancespecific
+  pk: 19
+- fields: {distance: 20000, order: 1, race: 2, stage: 5}
+  model: core.stagedistancespecific
+  pk: 20
+- fields: {distance: 5000, order: 1, race: 2, stage: 6}
+  model: core.stagedistancespecific
+  pk: 21
+- fields: {distance: 1500, order: 1, race: 3, stage: 4}
+  model: core.stagedistancespecific
+  pk: 22
+- fields: {distance: 40000, order: 1, race: 3, stage: 5}
+  model: core.stagedistancespecific
+  pk: 23
+- fields: {distance: 10000, order: 1, race: 3, stage: 6}
+  model: core.stagedistancespecific
+  pk: 24
+- fields: {distance: 400, order: 1, race: 4, stage: 4}
+  model: core.stagedistancespecific
+  pk: 25
+- fields: {distance: 10000, order: 1, race: 4, stage: 5}
+  model: core.stagedistancespecific
+  pk: 26
+- fields: {distance: 2500, order: 1, race: 4, stage: 6}
+  model: core.stagedistancespecific
+  pk: 27
+- fields: {distance: 4000, order: 1, race: 5, stage: 4}
+  model: core.stagedistancespecific
+  pk: 28
+- fields: {distance: 120000, order: 1, race: 5, stage: 5}
+  model: core.stagedistancespecific
+  pk: 29
+- fields: {distance: 30000, order: 1, race: 5, stage: 6}
+  model: core.stagedistancespecific
+  pk: 30
+- fields: {distance: 400, order: 1, race: 6, stage: 4}
+  model: core.stagedistancespecific
+  pk: 31
+- fields: {distance: 10000, order: 1, race: 6, stage: 5}
+  model: core.stagedistancespecific
+  pk: 32
+- fields: {distance: 2500, order: 1, race: 6, stage: 6}
+  model: core.stagedistancespecific
+  pk: 33
+- fields: {distance: 750, order: 1, race: 7, stage: 4}
+  model: core.stagedistancespecific
+  pk: 34
+- fields: {distance: 20000, order: 1, race: 7, stage: 5}
+  model: core.stagedistancespecific
+  pk: 35
+- fields: {distance: 5000, order: 1, race: 7, stage: 6}
+  model: core.stagedistancespecific
+  pk: 36
+- fields: {distance: 750, order: 1, race: 8, stage: 4}
+  model: core.stagedistancespecific
+  pk: 37
+- fields: {distance: 20000, order: 1, race: 8, stage: 5}
+  model: core.stagedistancespecific
+  pk: 38
+- fields: {distance: 5000, order: 1, race: 8, stage: 6}
+  model: core.stagedistancespecific
+  pk: 39
+- fields: {distance: 1500, order: 1, race: 9, stage: 4}
+  model: core.stagedistancespecific
+  pk: 40
+- fields: {distance: 40000, order: 1, race: 9, stage: 5}
+  model: core.stagedistancespecific
+  pk: 41
+- fields: {distance: 10000, order: 1, race: 9, stage: 6}
+  model: core.stagedistancespecific
+  pk: 42
+- fields: {distance: 3000, order: 1, race: 10, stage: 4}
+  model: core.stagedistancespecific
+  pk: 43
+- fields: {distance: 80000, order: 1, race: 10, stage: 5}
+  model: core.stagedistancespecific
+  pk: 44
+- fields: {distance: 20000, order: 1, race: 10, stage: 6}
+  model: core.stagedistancespecific
+  pk: 45
+- fields: {distance: 1500, order: 1, race: 11, stage: 4}
+  model: core.stagedistancespecific
+  pk: 46
+- fields: {distance: 40000, order: 1, race: 11, stage: 5}
+  model: core.stagedistancespecific
+  pk: 47
+- fields: {distance: 10000, order: 1, race: 11, stage: 6}
+  model: core.stagedistancespecific
+  pk: 48
+- fields: {distance: 4000, order: 1, race: 13, stage: 4}
+  model: core.stagedistancespecific
+  pk: 52
+- fields: {distance: 120000, order: 1, race: 13, stage: 5}
+  model: core.stagedistancespecific
+  pk: 53
+- fields: {distance: 30000, order: 1, race: 13, stage: 6}
+  model: core.stagedistancespecific
+  pk: 54
+- fields: {distance: 400, order: 1, race: 14, stage: 4}
+  model: core.stagedistancespecific
+  pk: 55
+- fields: {distance: 10000, order: 1, race: 14, stage: 5}
+  model: core.stagedistancespecific
+  pk: 56
+- fields: {distance: 2500, order: 1, race: 14, stage: 6}
+  model: core.stagedistancespecific
+  pk: 57
+- fields: {distance: 750, order: 1, race: 15, stage: 4}
+  model: core.stagedistancespecific
+  pk: 58
+- fields: {distance: 20000, order: 1, race: 15, stage: 5}
+  model: core.stagedistancespecific
+  pk: 59
+- fields: {distance: 5000, order: 1, race: 15, stage: 6}
+  model: core.stagedistancespecific
+  pk: 60
+- fields: {distance: 4000, order: 1, race: 16, stage: 4}
+  model: core.stagedistancespecific
+  pk: 61
+- fields: {distance: 120000, order: 1, race: 16, stage: 5}
+  model: core.stagedistancespecific
+  pk: 62
+- fields: {distance: 30000, order: 1, race: 16, stage: 6}
+  model: core.stagedistancespecific
+  pk: 63
+- fields: {distance: 4000, order: 1, race: 17, stage: 4}
+  model: core.stagedistancespecific
+  pk: 64
+- fields: {distance: 120000, order: 1, race: 17, stage: 5}
+  model: core.stagedistancespecific
+  pk: 65
+- fields: {distance: 30000, order: 1, race: 17, stage: 6}
+  model: core.stagedistancespecific
+  pk: 66
+- fields: {distance: 1500, order: 1, race: 18, stage: 4}
+  model: core.stagedistancespecific
+  pk: 67
+- fields: {distance: 40000, order: 1, race: 18, stage: 5}
+  model: core.stagedistancespecific
+  pk: 68
+- fields: {distance: 10000, order: 1, race: 18, stage: 6}
+  model: core.stagedistancespecific
+  pk: 69
+- fields: {distance: 1500, order: 1, race: 22, stage: 4}
+  model: core.stagedistancespecific
+  pk: 79
+- fields: {distance: 40000, order: 1, race: 22, stage: 5}
+  model: core.stagedistancespecific
+  pk: 80
+- fields: {distance: 10000, order: 1, race: 22, stage: 6}
+  model: core.stagedistancespecific
+  pk: 81
+- fields: {distance: 4000, order: 1, race: 23, stage: 4}
+  model: core.stagedistancespecific
+  pk: 82
+- fields: {distance: 120000, order: 1, race: 23, stage: 5}
+  model: core.stagedistancespecific
+  pk: 83
+- fields: {distance: 30000, order: 1, race: 23, stage: 6}
+  model: core.stagedistancespecific
+  pk: 84
+- fields: {distance: 750, order: 1, race: 24, stage: 4}
+  model: core.stagedistancespecific
+  pk: 85
+- fields: {distance: 20000, order: 1, race: 24, stage: 5}
+  model: core.stagedistancespecific
+  pk: 86
+- fields: {distance: 5000, order: 1, race: 24, stage: 6}
+  model: core.stagedistancespecific
+  pk: 87
+- fields: {distance: 4000, order: 1, race: 35, stage: 4}
+  model: core.stagedistancespecific
+  pk: 115
+- fields: {distance: 120000, order: 1, race: 35, stage: 5}
+  model: core.stagedistancespecific
+  pk: 116
+- fields: {distance: 30000, order: 1, race: 35, stage: 6}
+  model: core.stagedistancespecific
+  pk: 117
+- fields: {distance: 400, order: 1, race: 36, stage: 4}
+  model: core.stagedistancespecific
+  pk: 118
+- fields: {distance: 10000, order: 1, race: 36, stage: 5}
+  model: core.stagedistancespecific
+  pk: 119
+- fields: {distance: 2500, order: 1, race: 36, stage: 6}
+  model: core.stagedistancespecific
+  pk: 120
+- fields: {distance: 4000, order: 1, race: 37, stage: 4}
+  model: core.stagedistancespecific
+  pk: 121
+- fields: {distance: 120000, order: 1, race: 37, stage: 5}
+  model: core.stagedistancespecific
+  pk: 122
+- fields: {distance: 30000, order: 1, race: 37, stage: 6}
+  model: core.stagedistancespecific
+  pk: 123
+- fields: {distance: 1500, order: 1, race: 38, stage: 4}
+  model: core.stagedistancespecific
+  pk: 124
+- fields: {distance: 40000, order: 1, race: 38, stage: 5}
+  model: core.stagedistancespecific
+  pk: 125
+- fields: {distance: 10000, order: 1, race: 38, stage: 6}
+  model: core.stagedistancespecific
+  pk: 126
+- fields: {distance: 400, order: 1, race: 39, stage: 4}
+  model: core.stagedistancespecific
+  pk: 127
+- fields: {distance: 10000, order: 1, race: 39, stage: 5}
+  model: core.stagedistancespecific
+  pk: 128
+- fields: {distance: 2500, order: 1, race: 39, stage: 6}
+  model: core.stagedistancespecific
+  pk: 129
+- fields: {distance: 1500, order: 1, race: 40, stage: 4}
+  model: core.stagedistancespecific
+  pk: 130
+- fields: {distance: 40000, order: 1, race: 40, stage: 5}
+  model: core.stagedistancespecific
+  pk: 131
+- fields: {distance: 10000, order: 1, race: 40, stage: 6}
+  model: core.stagedistancespecific
+  pk: 132
+- fields: {distance: 750, order: 1, race: 41, stage: 4}
+  model: core.stagedistancespecific
+  pk: 133
+- fields: {distance: 20000, order: 1, race: 41, stage: 5}
+  model: core.stagedistancespecific
+  pk: 134
+- fields: {distance: 5000, order: 1, race: 41, stage: 6}
+  model: core.stagedistancespecific
+  pk: 135
+- fields: {distance: 3000, order: 1, race: 42, stage: 4}
+  model: core.stagedistancespecific
+  pk: 136
+- fields: {distance: 80000, order: 1, race: 42, stage: 5}
+  model: core.stagedistancespecific
+  pk: 137
+- fields: {distance: 20000, order: 1, race: 42, stage: 6}
+  model: core.stagedistancespecific
+  pk: 138
+- fields: {distance: 4000, order: 1, race: 43, stage: 4}
+  model: core.stagedistancespecific
+  pk: 139
+- fields: {distance: 120000, order: 1, race: 43, stage: 5}
+  model: core.stagedistancespecific
+  pk: 140
+- fields: {distance: 30000, order: 1, race: 43, stage: 6}
+  model: core.stagedistancespecific
+  pk: 141
+- fields: {distance: 750, order: 1, race: 44, stage: 4}
+  model: core.stagedistancespecific
+  pk: 142
+- fields: {distance: 20000, order: 1, race: 44, stage: 5}
+  model: core.stagedistancespecific
+  pk: 143
+- fields: {distance: 5000, order: 1, race: 44, stage: 6}
+  model: core.stagedistancespecific
+  pk: 144
+- fields: {distance: 1500, order: 1, race: 45, stage: 4}
+  model: core.stagedistancespecific
+  pk: 145
+- fields: {distance: 40000, order: 1, race: 45, stage: 5}
+  model: core.stagedistancespecific
+  pk: 146
+- fields: {distance: 10000, order: 1, race: 45, stage: 6}
+  model: core.stagedistancespecific
+  pk: 147
+- fields: {distance: 750, order: 1, race: 46, stage: 4}
+  model: core.stagedistancespecific
+  pk: 148
+- fields: {distance: 20000, order: 1, race: 46, stage: 5}
+  model: core.stagedistancespecific
+  pk: 149
+- fields: {distance: 5000, order: 1, race: 46, stage: 6}
+  model: core.stagedistancespecific
+  pk: 150
+- fields: {distance: 3000, order: 1, race: 47, stage: 4}
+  model: core.stagedistancespecific
+  pk: 151
+- fields: {distance: 80000, order: 1, race: 47, stage: 5}
+  model: core.stagedistancespecific
+  pk: 152
+- fields: {distance: 20000, order: 1, race: 47, stage: 6}
+  model: core.stagedistancespecific
+  pk: 153
+- fields: {distance: 4000, order: 1, race: 48, stage: 4}
+  model: core.stagedistancespecific
+  pk: 154
+- fields: {distance: 120000, order: 1, race: 48, stage: 5}
+  model: core.stagedistancespecific
+  pk: 155
+- fields: {distance: 30000, order: 1, race: 48, stage: 6}
+  model: core.stagedistancespecific
+  pk: 156
+- fields: {distance: 750, order: 1, race: 50, stage: 4}
+  model: core.stagedistancespecific
+  pk: 160
+- fields: {distance: 20000, order: 1, race: 50, stage: 5}
+  model: core.stagedistancespecific
+  pk: 161
+- fields: {distance: 5000, order: 1, race: 50, stage: 6}
+  model: core.stagedistancespecific
+  pk: 162
+- fields: {distance: 4000, order: 1, race: 51, stage: 4}
+  model: core.stagedistancespecific
+  pk: 163
+- fields: {distance: 120000, order: 1, race: 51, stage: 5}
+  model: core.stagedistancespecific
+  pk: 164
+- fields: {distance: 30000, order: 1, race: 51, stage: 6}
+  model: core.stagedistancespecific
+  pk: 165
+- fields: {distance: 4000, order: 1, race: 52, stage: 4}
+  model: core.stagedistancespecific
+  pk: 166
+- fields: {distance: 120000, order: 1, race: 52, stage: 5}
+  model: core.stagedistancespecific
+  pk: 167
+- fields: {distance: 30000, order: 1, race: 52, stage: 6}
+  model: core.stagedistancespecific
+  pk: 168
+- fields: {distance: 1500, order: 1, race: 55, stage: 4}
+  model: core.stagedistancespecific
+  pk: 169
+- fields: {distance: 40000, order: 1, race: 55, stage: 5}
+  model: core.stagedistancespecific
+  pk: 170
+- fields: {distance: 10000, order: 1, race: 55, stage: 6}
+  model: core.stagedistancespecific
+  pk: 171
+- fields: {distance: 3000, order: 1, race: 57, stage: 4}
+  model: core.stagedistancespecific
+  pk: 175
+- fields: {distance: 80000, order: 1, race: 57, stage: 5}
+  model: core.stagedistancespecific
+  pk: 176
+- fields: {distance: 20000, order: 1, race: 57, stage: 6}
+  model: core.stagedistancespecific
+  pk: 177
+- fields: {distance: 750, order: 1, race: 58, stage: 4}
+  model: core.stagedistancespecific
+  pk: 178
+- fields: {distance: 20000, order: 1, race: 58, stage: 5}
+  model: core.stagedistancespecific
+  pk: 179
+- fields: {distance: 5000, order: 1, race: 58, stage: 6}
+  model: core.stagedistancespecific
+  pk: 180
+- fields: {distance: 3000, order: 1, race: 61, stage: 4}
+  model: core.stagedistancespecific
+  pk: 187
+- fields: {distance: 80000, order: 1, race: 61, stage: 5}
+  model: core.stagedistancespecific
+  pk: 188
+- fields: {distance: 20000, order: 1, race: 61, stage: 6}
+  model: core.stagedistancespecific
+  pk: 189
+- fields: {distance: 400, order: 1, race: 62, stage: 4}
+  model: core.stagedistancespecific
+  pk: 190
+- fields: {distance: 10000, order: 1, race: 62, stage: 5}
+  model: core.stagedistancespecific
+  pk: 191
+- fields: {distance: 2500, order: 1, race: 62, stage: 6}
+  model: core.stagedistancespecific
+  pk: 192
+- fields: {distance: 400, order: 1, race: 65, stage: 4}
+  model: core.stagedistancespecific
+  pk: 199
+- fields: {distance: 10000, order: 2, race: 65, stage: 5}
+  model: core.stagedistancespecific
+  pk: 200
+- fields: {distance: 2500, order: 3, race: 65, stage: 6}
+  model: core.stagedistancespecific
+  pk: 201
+- fields: {distance: 750, order: 1, race: 66, stage: 4}
+  model: core.stagedistancespecific
+  pk: 202
+- fields: {distance: 20000, order: 2, race: 66, stage: 5}
+  model: core.stagedistancespecific
+  pk: 203
+- fields: {distance: 5000, order: 3, race: 66, stage: 6}
+  model: core.stagedistancespecific
+  pk: 204
+- fields: {distance: 400, order: 1, race: 92, stage: 4}
+  model: core.stagedistancespecific
+  pk: 241
+- fields: {distance: 10000, order: 2, race: 92, stage: 5}
+  model: core.stagedistancespecific
+  pk: 242
+- fields: {distance: 2500, order: 3, race: 92, stage: 6}
+  model: core.stagedistancespecific
+  pk: 243
+- fields: {distance: 400, distance_cat: 4, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 7
+- fields: {distance: 10000, distance_cat: 4, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 8
+- fields: {distance: 2500, distance_cat: 4, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 9
+- fields: {distance: 750, distance_cat: 5, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 10
+- fields: {distance: 20000, distance_cat: 5, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 11
+- fields: {distance: 5000, distance_cat: 5, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 12
+- fields: {distance: 1500, distance_cat: 6, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 13
+- fields: {distance: 40000, distance_cat: 6, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 14
+- fields: {distance: 10000, distance_cat: 6, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 15
+- fields: {distance: 3000, distance_cat: 7, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 16
+- fields: {distance: 80000, distance_cat: 7, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 17
+- fields: {distance: 20000, distance_cat: 7, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 18
+- fields: {distance: 4000, distance_cat: 8, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 19
+- fields: {distance: 120000, distance_cat: 8, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 20
+- fields: {distance: 30000, distance_cat: 8, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 21

@@ -14,7 +14,7 @@
     </div> <!-- panel heading -->
 
     <div id="event_{{ object.event.pk }}_races" class="list-group collapse">
-        {% for r in object.event.get_race_set %}
+        {% for r in object.event.get_races %}
             <a href="{% url "view_race" r.slug %}" class="list-group-item race-result" id="race_{{ object.pk }}">
                 {{ r.distance_cat.name }} - {{ r.date |date:"l d/m/Y à H:i" }}
             </a>

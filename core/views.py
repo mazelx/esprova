@@ -197,7 +197,7 @@ class IntroView(LoginRequiredMixin, TemplateView):
 class RaceDelete(DeleteView):
     model = Race
     template_name = 'core/confirm_delete.html'
-    success_url = reverse_lazy('list_race')
+    success_url = reverse_lazy('validate_racelist')
     context_object_name = "race"
 
     def get_object(self, queryset=None):
@@ -206,7 +206,6 @@ class RaceDelete(DeleteView):
 
 
 class RaceValidationList(ListView):
-
     model = Race
     queryset = Race.objects.filter(validated=False)
     template_name = 'core/tovalidate.html'
