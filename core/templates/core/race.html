@@ -13,9 +13,8 @@
 <div class="container">
     <header class="page-header row">
         <div class="col-md-9">
-            <h1>{{ race.event.name }}
-                    <small><p>f:Saint-Martin-d'Ardèche, France</p></small>
-                </h1>
+            <h1>{{ race.event.name }}</h1>
+            <h1><small> {{ race.location.locality }} ({{ race.administrative_area_level_2_short_name }})</small></h1>
         </div>
         <div class="col-md-3">
             <h1>
@@ -33,24 +32,28 @@
             </dd>
             <dt>Adresse</dt>
             <dd>
-                <address>f:Quai des Pascadous, Saint-Martin-d'Ardèche</address>
+                <address>
+                {% for address_line in race.location.get_address_lines %}
+                    {{ address_line|linebreaks }}
+                {% endfor %}
+
+                </address>
             </dd>
             <dt>Web</dt>
-            <dd><a href="www.triathlondesgorges.com">f:www.triathlondesgorges.com</a>
+            <dd><a href="race.website">{{race.website}}</a>
             </dd>
         </dl>
     </section>
     <section class="panel panel-default">
     <dl class="dl-horizontal panel-body">
         <dt>Organisateur</dt>
-        <dd>Ardèche Sport Attitude</dd>
+        <dd>f:Ardèche Sport Attitude</dd>
         <dt>Contact</dt>
         <dd>
             <address>
-                <strong>Bruno Damiens</strong>
-                <br> 06 98 62 64 11
-                <br>
-                <a href="mailto:#">bruno.damiens@trigorgesardeche.com</a>
+                <strong>{{ race.contact.name }}</strong>
+                <br> {{ race.contact.phone }}
+                <a href="mailto:{{ race.contact.email }}">{{ race.contact.email }}</a>
             </address>
         </dd>
     </dl>
@@ -58,41 +61,39 @@
 <section class="panel panel-default">
     <dl class="dl-horizontal panel-body">
         <dt>Tarif</dt>
-        <dd>35€ avant le 01/06/2014 puis 45€</dd>
+        <dd>f:35€ avant le 01/06/2014 puis 45€</dd>
         <dt>Clôture des inscriptions</dt>
-        <dd>20/07/2015</dd>
+        <dd>f:20/07/2015</dd>
         <dt>Places disponibles</dt>
-        <dd>300</dd>
+        <dd>f:300</dd>
     </dl>
 </section>
 <section class="panel panel-default">
     <dl class="dl-horizontal panel-body">
         <dt>Distance</dt>
-        <dd>M (Courte Distance)</dd>
-        <dt>Natation</dt>
-        <dd>1,5 Km</dd>
-        <dt>Vélo</dt>
-        <dd>40 Km</dd>
-        <dt>Course à Pied</dt>
-        <dd>10 Km</dd>
+        <dd>{{ race.distance_cat.get_formatted_name }}</dd>
+        {% for distance in race.distances.all %}
+            <dt>{{ distance.stage.name }}</dt>
+            <dd>{{ distance.get_formatted_distance }}</dd>
+        {% endfor %}
         <dt>Dénivelé</dt>
-        <dd>600m positif, 1500m total</dd>
+        <dd>f:600m positif, 1500m total</dd>
     </dl>
 </section>
 <section class="panel panel-default">
     <dl class="dl-horizontal panel-body">
         <dt>Challenge</dt>
-        <dd>Challenge Tri Dromardèche</dd>
+        <dd>f:Challenge Tri Dromardèche</dd>
         <dt>Temps limite</dt>
-        <dd>3h</dd>
+        <dd>f:3h</dd>
     </dl>
 </section>
 <section class="panel panel-default">
     <dl class="dl-horizontal panel-body">
         <dt>Limite d'âge</dt>
-        <dd>Aucun</dd>
+        <dd>f:Aucun</dd>
         <dt>Accessible handicap</dt>
-        <dd>Oui</dd>
+        <dd>f:Oui</dd>
     </dl>
 </section>
 
