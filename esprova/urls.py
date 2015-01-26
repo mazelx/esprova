@@ -28,24 +28,42 @@ race_named_forms = (
 racewizard = RaceWizard.as_view(race_named_forms)
 
 urlpatterns = patterns('',
+                       # Login
                        url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
                            name="login"),
                        url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name="logout"),
+
+                       # Introduction
+                       url(r'^$', IntroView.as_view(), name="intro"),
+
+                       # Race list (main page)
+                       url(r'^list$', RaceList.as_view(), name='list_race'),
+
+                       # CRUD
+                       url(r'^create/$', racewizard, name="create_race"),
+                       url(r'^race/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
+                       url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
+                       url(r'^delete/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
+
+                       url(r'^validate/$', RaceValidationList.as_view(), name="validate_racelist"),
+
+                       # Ajax views
+                       url(r'^ajx/search/$', ajx_get_races, name='ajx_search_race'),
+                       url(r'^ajx/delete/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
+                       url(r'^ajx/validate/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', ajx_validate_race, name="ajx_validate_race"),
+
+                       # API
+                       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+                       url(r'^api', include(router.urls)),
+
+                       # Admin
+                       url(r'^admin/', include(admin.site.urls)),
+
+                       # Robots
                        url(r'^robots\.txt$', TemplateView.as_view(
                            template_name='robots.txt',
                            content_type='text/plain')),
-                       url(r'^$', IntroView.as_view(), name="intro"),
-                       url(r'^admin/', include(admin.site.urls)),
-                       url(r'^list$', RaceList.as_view(), name='list_race'),
-                       url(r'^race/(?P<slug>.+)$', RaceView.as_view(), name='view_race'),
-                       url(r'^search/$', getRacesAjax, name='search_race'),
-                       url(r'^create/$', racewizard, name="create_race"),
-                       url(r'^update/(?P<slug>.+)$', racewizard, name="edit_race"),
-                       url(r'^delete/(?P<slug>.+)$', RaceDelete.as_view(), name="delete_race"),
-                       url(r'^tobevalidated/$', RaceValidationList.as_view(), name="validate_racelist"),
-                       url(r'^validate/(?P<slug>.+)$', validateRace, name="validate_race"),
-                       url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-                       url(r'^api', include(router.urls)),
+
                        )
 
 # serve static files on dev
