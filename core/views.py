@@ -22,6 +22,12 @@ class LoginRequiredMixin(object):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
 
+@login_required
+def validate_all_events(request):
+    for r in Race.objects.filter(validated=False):
+        r.validated = True
+        r.save()
+    return HttpResponse('OK')
 
 @login_required
 def validateRace(request, slug):
@@ -29,7 +35,6 @@ def validateRace(request, slug):
     race.validated = True
     race.save()
     return HttpResponseRedirect(reverse('validate_racelist'))
-
 
 
 @login_required
