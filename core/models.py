@@ -6,6 +6,10 @@ from django.db.models import Min, Max
 from django.template.defaultfilters import slugify
 from geopy.geocoders import GoogleV3
 
+from haystack.query import SearchQuerySet
+from haystack.utils.geo import D
+
+import datetime
 import logging
 
 
@@ -88,6 +92,9 @@ class Location(models.Model):
 
             self.lat = loc.latitude
             self.lng = loc.longitude
+
+    def get_point(self):
+        return Point(float(self.lng), float(self.lat))
 
 
 class SportStage(models.Model):
@@ -195,8 +202,8 @@ class Race(models.Model):
     date = models.DateTimeField()
     distance_cat = models.ForeignKey(DistanceCategory)
     price = models.PositiveIntegerField(blank=True, null=True)
-    federation = models.ForeignKey(Federation, blank=True, null=True)
-    label = models.ForeignKey(Label, blank=True, null=True)
+    federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
+    label = models.ForeignKey(Label, blank=True, null=True, related_name='races')
     contact = models.ForeignKey(Contact)
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
@@ -204,6 +211,20 @@ class Race(models.Model):
 
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
+
+    def pre_delete(self, *args, **kwargs):
+        if len(self.contact.races) < 2:
+            self.contact.delete()
+        if len(self.location.races) < 2:
+            self.location.delete()
+
+        # delete event that will not have any race remaining
+        if len(self.event.races) < 2:
+            self.event.delete()
+
+        # # delete label that will not have any race remaining
+        # if len(self.label.races) < 2:
+        #     self.label.delete()
 
     def save(self, *args, **kwargs):
         if self.pk is None:
@@ -229,8 +250,21 @@ class Race(models.Model):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
                 rs.save()
 
-    def get_point(self):
-        return Point(float(self.location.lng), float(self.location.lat))
+    def get_potential_doubles(self):
+        sqs = SearchQuerySet()
+
+        pk = self.pk
+        if pk:
+            sqs = sqs.exclude(django_id=pk)
+
+        sqs = sqs.dwithin('location', self.location.get_point(), D(km=10))
+        sqs = sqs.filter(date__gte=self.date + datetime.timedelta(days=-1),
+                         date__lte=self.date + datetime.timedelta(days=1),
+                         distance_cat=self.distance_cat
+                         )
+
+        # return race objects instead of haystack searchresul
+        return [sr.object for sr in sqs]
 
 
 class StageDistance(models.Model):
