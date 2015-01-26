@@ -208,7 +208,7 @@ function addListHoverMapResult(marker){
 
 function getRacesFromSearch(data){
      $.ajax({
-        url: '/search/?',
+        url: 'ajx/search/?',
         type: 'GET',
         data: $( "#race_search_form" ).serialize() +
               '&q=' + $("#search_expr").val() ,
@@ -225,7 +225,7 @@ function getRacesFromMapBounds(mapbounds) {
     // returns a HTML of races results
     boundsarray = mapbounds.split(',')
     $.ajax({
-        url: '/search/?',
+        url: 'ajx/search/?',
         type: 'GET', 
         data: 'lat_lo=' + boundsarray[0] + 
               '&lng_lo=' + boundsarray[1] + 
