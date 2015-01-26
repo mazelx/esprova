@@ -22,23 +22,41 @@ class LoginRequiredMixin(object):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
 
-@login_required
-def validate_all_events(request):
-    for r in Race.objects.filter(validated=False):
-        r.validated = True
-        r.save()
-    return HttpResponse('OK')
+# Ajax calls
 
 @login_required
-def validateRace(request, slug):
-    race = get_object_or_404(Race, slug=slug)
-    race.validated = True
-    race.save()
-    return HttpResponseRedirect(reverse('validate_racelist'))
+def ajx_validate_all(request):
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+        for r in Race.validated_objects.all():
+            r.validated = True
+            r.save()
+        return HttpResponse('')
+    return Http404
 
 
 @login_required
-def getRacesAjax(request):
+def ajx_validate_race(request, slug, pk):
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+        race = get_object_or_404(Race, pk=pk)
+        logging.debug('validate ' + str(race))
+        race.validated = True
+        race.save()
+        return HttpResponse('')
+    return Http404
+
+
+@login_required
+def ajx_delete_race(request, slug, pk):
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+        race = get_object_or_404(Race, pk=pk)
+        race.validated = True
+        race.save()
+        return HttpResponse('')
+    return Http404
+
+
+@login_required
+def ajx_get_races(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
         sqs = SearchQuerySet()
@@ -212,6 +230,6 @@ class RaceDelete(DeleteView):
 
 class RaceValidationList(ListView):
     model = Race
-    queryset = Race.objects.filter(validated=False)
+    queryset = Race.validated_objects.all()
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
