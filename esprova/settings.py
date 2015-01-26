@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.formtools',
+    'django.contrib.humanize',
     # External modules
     'rest_framework',
     'django_countries',
