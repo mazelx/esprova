@@ -8,10 +8,12 @@
             <a href="{% url 'view_race' race.slug %}" class="list-group-item">
                 <h4 class="list-group-item-heading">{{ race.event.name }} - {{race.distance_cat.name}}</h4>
                 <p class="list-group-item-text">{{race.date}} - {{race.location}}</p>
-                <a class="btn btn-success" href="{% url "validate_race" race.slug %}">Valider le brouillon</a>
-                <a class="btn btn-warning" href="{% url "edit_race" race.slug %}">Modifier</a>
-                <a class="btn btn-danger" href="{% url "delete_race" race.slug %}">Supprimer</a>
             </a>
+
+            <a class="btn btn-success" href="{% url "validate_race" race.slug %}">Valider le brouillon</a>
+            <a class="btn btn-warning" href="{% url "edit_race" race.slug %}">Modifier</a>
+            <a class="btn btn-danger" href="{% url "delete_race" race.slug %}">Supprimer</a>
+                
         {% endfor %}
     </div>
 
