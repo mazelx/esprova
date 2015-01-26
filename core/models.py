@@ -102,6 +102,32 @@ class Location(models.Model):
     def get_point(self):
         return Point(float(self.lng), float(self.lat))
 
+    def get_address_lines(self):
+        result = []
+        tmp_addr = ""
+        # First line : [Street number,] Route
+        if self.street_number:
+            tmp_addr = self.street_number + ", "
+        if self.route:
+            tmp_addr += self.route
+            result.append(tmp_addr)
+        
+        # Second line : Locality [(area2)]
+        tmp_addr = self.locality
+        if self.administrative_area_level_2_short_name:
+            tmp_addr += " ({0})".format(self.administrative_area_level_2_short_name)
+        result.append(tmp_addr)
+
+        # Third line : [Area 1]
+        if self.administrative_area_level_1:
+            tmp_addr = self.administrative_area_level_1
+            result.append(tmp_addr)
+
+        # Fourth line : Country
+        result.append(str(self.country.name))
+
+        return result
+
 
 class SportStage(models.Model):
     sport = models.ForeignKey(Sport)
@@ -189,15 +215,21 @@ class DistanceCategory(models.Model):
     long_name = models.CharField(max_length=20, blank=True, null=True)
     order = models.PositiveSmallIntegerField()
 
+    class Meta:
+        verbose_name = "Distance Category"
+        verbose_name_plural = "Distance Categories"
+
     def __str__(self):
         return "{0}".format(self.name)
 
     def natural_key(self):
         return (self.sport, self.name)
 
-    class Meta:
-        verbose_name = "Distance Category"
-        verbose_name_plural = "Distance Categories"
+    def get_formatted_name(self):
+        var = self.name
+        if self.long_name:
+            var += "({0})".format(self.long_name)
+        return var
 
 
 class Race(models.Model):
@@ -282,6 +314,12 @@ class StageDistance(models.Model):
 
     class Meta:
         abstract = True
+
+    def get_formatted_distance(self):
+        n = self.distance + 0.0
+        if n > 1000:
+            return '{0} km'.format(str(n/1000).rstrip('0').rstrip('.'))
+        return '{:.0f} m'.format(n)
 
 
 class StageDistanceSpecific(StageDistance):
