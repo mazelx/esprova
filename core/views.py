@@ -230,6 +230,6 @@ class RaceDelete(DeleteView):
 
 class RaceValidationList(ListView):
     model = Race
-    queryset = Race.validated_objects.all()
+    queryset = Race.objects.filter(validated=False)
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
