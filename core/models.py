@@ -13,6 +13,12 @@ import datetime
 import logging
 
 
+# First, define the Manager subclass.
+class RaceValidatedManager(models.Manager):
+    def get_queryset(self):
+        return super(RaceValidatedManager, self).get_queryset().filter(validated=True)
+
+
 class Sport(models.Model):
     name = models.CharField(max_length=100)
     combinedSport = models.BooleanField(default=False)
@@ -126,20 +132,20 @@ class Event(models.Model):
         return self.name
 
     def get_start_date(self):
-        return self.races.all().aggregate(Min('date'))['date__min']
+        return self.races.filter(validated=True).aggregate(Min('date'))['date__min']
 
     def get_end_date(self):
-        return self.races.all().aggregate(Max('date'))['date__max']
+        return self.races.filter(validated=True).aggregate(Max('date'))['date__max']
 
     def get_distance_cat_set(self):
         distance_cat_set = []
-        for r in self.races.order_by('distance_cat__order'):
+        for r in self.races.filter(validated=True).order_by('distance_cat__order'):
             distance_cat_set.append(r.distance_cat)
         return distance_cat_set
 
     def get_races(self):
         races = []
-        for r in self.races.order_by('distance_cat__order'):
+        for r in self.races.filter(validated=True).order_by('distance_cat__order'):
             races.append(r)
         return races
 
@@ -209,6 +215,9 @@ class Race(models.Model):
     location = models.OneToOneField(Location)
     validated = models.BooleanField(default=False)
 
+    objects = models.Manager()  # The default manager.
+    validated_objects = RaceValidatedManager()  # Validated race manager
+
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
@@ -228,11 +237,10 @@ class Race(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk is None:
-            # Newly created object, so set slug
             seq = (self.event.name, self.distance_cat.name)
             self.slug = slugify("-".join(seq))
-            logging.debug(args, kwargs)
             super(Race, self).save(*args, **kwargs)
+
             self.init_distances_from_default()
 
         # do not insert the same instance if a force_insert has been set to true
