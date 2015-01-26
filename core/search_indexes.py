@@ -10,8 +10,9 @@ class RaceIndex(indexes.SearchIndex, indexes.Indexable):
                                 index_analyzer="edgengram_analyzer",
                                 search_analyzer="search_analyzer")
     event_id = indexes.CharField(indexed=False, model_attr='event__id')
+    event_title = indexes.CharField(model_attr='event__name', boost=1.5)
     date = indexes.DateField(model_attr='date')
-    location = indexes.LocationField(model_attr='get_point')
+    location = indexes.LocationField(model_attr='location__get_point')
     distance_cat = indexes.CharField(model_attr='distance_cat__name')
     rendered = indexes.CharField(use_template=True, indexed=False)
     validated = indexes.BooleanField(indexed=False, model_attr='validated')
