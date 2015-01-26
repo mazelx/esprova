@@ -2,12 +2,18 @@ import requests
 import json
 import re
 from operator import itemgetter
-from datetime import datetime
 import pytz
+from datetime import datetime
 import warnings
 
-from core.models import *
+from core.models import Race, Event, Location, Contact, DistanceCategory, Sport
 
+class RaceDoubleException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+    def __str__(self):
+        return self.msg
 
 class FFTri:
     race_list = []
@@ -61,6 +67,8 @@ class FFTri:
             e, s, c, l, dc, r = ({} for i in range(6))
             distance_cat, sport, event, contact, location, race = (None for i in range(6))
 
+            race_src_id = race_src.get('id', None)
+
             e['name'] = event_regexp.match(race_src.get('nom', None)).group(0)
             e['edition'] = 1
             e['website'] = race_src.get('site')
@@ -74,7 +82,7 @@ class FFTri:
 
             r['title'] = race_src.get('nom', None)
 
-            d = race_src.get('date')  # need converting
+            d = race_src.get('date') 
             r['date'] = pytz.utc.localize(datetime.strptime(d, '%d/%m/%Y'))
 
             r['price'] = None
@@ -87,6 +95,7 @@ class FFTri:
             l['lng'] = race_src.get('longitude', None)
 
             try:
+                has_error = False
                 distance_cat = DistanceCategory.objects.get(**dc)
                 sport = Sport.objects.get(**s)
                 event, event_created = Event.objects.get_or_create(**e)
@@ -103,22 +112,38 @@ class FFTri:
                 race.sport = sport
                 race.contact = contact
                 race.location = location
-                race.save()
-            except:
-                if event:
-                    if event.pk:
-                        event.delete()
-                if contact:
-                    if contact.pk:
-                        contact.delete()
-                if location:
-                    if location.pk:
-                        location.delete()
-                if race:
-                    if race.pk:
-                        race.delete()
+                if race.get_potential_doubles():
+                    raise RaceDoubleException("Double detected")
 
-                warnings.warn('cannot save race : {0}'.format(e['name']))
+                race.save()
+
+            except Sport.DoesNotExist:
+                has_error = True
+                print ("[ERR][REF] [{0}] : Sport {1} does not exist".format(race_src_id, s['name']))
+            except DistanceCategory.DoesNotExist:
+                has_error = True
+                print ("[ERR][REF] [{0}] : Distance {1} does not exist".format(race_src_id, dc['name']))
+            except RaceDoubleException:
+                has_error = True
+                print ("[WAR][DBL] [{0}] : Race already exists in DB".format(race_src_id))
+
+            except Exception as e:
+                print ("[ERR][UNK] [{0}] : {1}".format(race_src_id, str(e)))
+
+            finally:
+                if has_error:
+                    if event:
+                        if event.pk:
+                            event.delete()
+                    if contact:
+                        if contact.pk:
+                            contact.delete()
+                    if location:
+                        if location.pk:
+                            location.delete()
+                    if race:
+                        if race.pk:
+                            race.delete()
 
 
 
