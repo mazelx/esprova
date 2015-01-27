@@ -146,10 +146,22 @@ class SportStage(models.Model):
         return "{0}".format(self.name)
 
 
+class Organizer(models.Model):
+    name = models.CharField(max_length=100)
+    website = models.URLField(blank=True, null=True)
+
+    def natural_key(self):
+        return (self.name)
+
+    def __str__(self):
+        return self.name
+
+
 class Event(models.Model):
     name = models.CharField(max_length=150)
     edition = models.PositiveSmallIntegerField()
     website = models.URLField(blank=True, null=True)
+    organizer = models.ForeignKey(Organizer, blank=True, null=True)
 
     def natural_key(self):
         return (self.name)
@@ -254,18 +266,12 @@ class Race(models.Model):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
     def pre_delete(self, *args, **kwargs):
-        if len(self.contact.races) < 2:
+        if len(self.contact.races.all()) < 2:
             self.contact.delete()
-        if len(self.location.races) < 2:
+        if len(self.location.races.all()) < 2:
             self.location.delete()
-
-        # delete event that will not have any race remaining
-        if len(self.event.races) < 2:
+        if len(self.event.races.all()) < 2:
             self.event.delete()
-
-        # # delete label that will not have any race remaining
-        # if len(self.label.races) < 2:
-        #     self.label.delete()
 
     def save(self, *args, **kwargs):
         if self.pk is None:
@@ -358,4 +364,5 @@ class StageDistanceDefault(StageDistance):
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)
+
 
