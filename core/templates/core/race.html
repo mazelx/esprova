@@ -115,11 +115,11 @@
 {%if request.user.is_superuser %}
 
     {% if not race.validated %}
-        <a class="btn btn-success" href="{% url "ajx_validate_race" race.slug race.pk %}">Valider le brouillon</a>
+        <a class="btn btn-success" href="{% url "ajx_validate_race" race.pk %}">Valider le brouillon</a>
     {% endif %}
 
     <a class="btn btn-warning" href="{% url "edit_race" race.slug race.pk %}">Modifier</a>
-    <a class="btn btn-danger" href="{% url "delete_race" race.slug race.pk %}">Supprimer</a>
+    <a class="btn btn-danger" href="{% url "ajx_delete_race" race.pk %}">Supprimer</a>
 {% endif %}
 
 </div>

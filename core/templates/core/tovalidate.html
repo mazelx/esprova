@@ -3,19 +3,50 @@
 
 {% block head_extra %}
 <script>
+// using jQuery
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 function validateRace(pk) {
-     $.ajax({
+    // TODO : Propose a cancel link and delay for few seconds
+    $.ajax({
         url: '/ajx/validate/'+pk,
-        type: 'GET',
+        type: 'PUT',
         success: function(response, statut) {
             $("#race_"+pk).hide('slow', function(){ $("#race_"+pk).remove(); });
         },
     });
 }
 function deleteRace(pk) {
+    // TODO : Propose a cancel link and delay for few seconds
      $.ajax({
         url: '/ajx/delete/'+pk,
-        type: 'GET',
+        type: 'DELETE',
         success: function(response, statut) {
             $("#race_"+pk).hide('slow', function(){ $("#race_"+pk).remove(); });
         },
@@ -29,6 +60,7 @@ function deleteRace(pk) {
 {% block content %}
 <div class="container-fluid content">
     <div class="list-group">
+    {% csrf_token %}
         {% for race in race_list %}
             <div id="race_{{race.pk}}">
                 <a href="{% url 'view_race' race.slug race.pk %}" class="list-group-item">
@@ -37,8 +69,8 @@ function deleteRace(pk) {
                 </a>
 
                 <a onclick="validateRace({{race.pk}})" class="btn btn-success" href='#'>Valider le brouillon</a>
-                <a onclick="validateRace({{race.pk}})" class="btn btn-warning" href="{% url "edit_race" race.slug race.pk %}">Modifier</a>
-                <a onclick="validateRace({{race.pk}})" class="btn btn-danger" href="#">Supprimer</a>
+                <a class="btn btn-warning" href="{% url "edit_race" race.slug race.pk %}">Modifier</a>
+                <a onclick="deleteRace({{race.pk}})" class="btn btn-danger" href="#">Supprimer</a>
             </div>
         {% endfor %}
     </div>

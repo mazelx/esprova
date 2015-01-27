@@ -36,7 +36,7 @@ def ajx_validate_all(request):
 
 @login_required
 def ajx_validate_race(request, pk):
-    if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'PUT':
         race = get_object_or_404(Race, pk=pk)
         logging.debug('validate ' + str(race))
         race.validated = True
@@ -46,8 +46,8 @@ def ajx_validate_race(request, pk):
 
 
 @login_required
-def ajx_delete_race(request, slug, pk):
-    if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+def ajx_delete_race(request, pk):
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'DELETE':
         race = get_object_or_404(Race, pk=pk)
         race.validated = True
         race.save()
