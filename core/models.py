@@ -111,7 +111,7 @@ class Location(models.Model):
         if self.route:
             tmp_addr += self.route
             result.append(tmp_addr)
-        
+
         # Second line : Locality [(area2)]
         tmp_addr = self.locality
         if self.administrative_area_level_2_short_name:
@@ -258,6 +258,9 @@ class Race(models.Model):
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
     validated = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True)
+    created_by = models.CharField(max_length=100)
+    modified_date = models.DateTimeField(auto_now=True)
 
     objects = models.Manager()  # The default manager.
     validated_objects = RaceValidatedManager()  # Validated race manager
