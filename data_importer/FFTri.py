@@ -6,7 +6,8 @@ import pytz
 from datetime import datetime
 import warnings
 
-from core.models import Race, Event, Location, Contact, DistanceCategory, Sport
+from core.models import Race, Event, Location, Contact, DistanceCategory, Sport, Organizer, Federation
+
 
 class RaceDoubleException(Exception):
     def __init__(self, msg):
@@ -14,6 +15,7 @@ class RaceDoubleException(Exception):
 
     def __str__(self):
         return self.msg
+
 
 class FFTri:
     race_list = []
@@ -60,16 +62,21 @@ class FFTri:
 
         return sorted_list
 
-    def save_events(self):
-        event_regexp = re.compile('.+(?=\s-\s)')
+    def save_events(self, geocode=True):
+        event_re = re.compile('.+(?=\s-\s)')
+        address_re = re.compile('(.+)(?=\s-\s\D)')
+        locality_re = re.compile('(?<=\s-\s)(.+)(?=\s-\s\w)')
+        federation_name = "FFTri"
 
         for race_src in self.race_list:
-            e, s, c, l, dc, r = ({} for i in range(6))
-            distance_cat, sport, event, contact, location, race = (None for i in range(6))
+            e, s, c, l, dc, r, o, f = ({} for i in range(8))
+            distance_cat, sport, event, contact, location, race, organizer, federation = (None for i in range(8))
 
             race_src_id = race_src.get('id', None)
 
-            e['name'] = event_regexp.match(race_src.get('nom', None)).group(0)
+            f['name'] = federation_name
+
+            e['name'] = event_re.search(race_src.get('nom', None)).group(0)
             e['edition'] = 1
             e['website'] = race_src.get('site')
             # event = Event(**e)
@@ -86,11 +93,13 @@ class FFTri:
             r['date'] = pytz.utc.localize(datetime.strptime(d, '%d/%m/%Y'))
 
             r['price'] = None
+            o['name'] = race_src.get('nom_orga', None)
             c['name'] = race_src.get('nom_orga', None)
             c['email'] = race_src.get('email', None)
             c['phone'] = race_src.get('telephone', None)
             r['description'] = None
             l['raw'] = race_src.get('adresse', None) + ', FR'
+            l['postal_code'] = race_src.get('cp', None)
             l['lat'] = race_src.get('latitude', None)
             l['lng'] = race_src.get('longitude', None)
 
@@ -98,20 +107,39 @@ class FFTri:
                 has_error = False
                 distance_cat = DistanceCategory.objects.get(**dc)
                 sport = Sport.objects.get(**s)
-                event, event_created = Event.objects.get_or_create(**e)
+                organizer, organizer_created = Organizer.objects.get_or_create(**o)
+                event, event_created = Event.objects.get_or_create(organizer=organizer, **e)
                 contact, contact_created = Contact.objects.get_or_create(**c)
+                federation, federation_created = Federation.objects.get_or_create(**f)
 
                 location = Location()
-                location.geocode_raw_address(l['raw'])
+                if geocode:
+                    location.geocode_raw_address(l['raw'])
+                else:
+                    location.lat = l['lat']
+                    location.lng = l['lng']
+                    location.postal_code = l['postal_code']
+                    address = race_src.get('adresse', None)
+                    if not address:
+                        raise Exception("no address provided")
+
+                    if address_re.search(race_src.get('adresse', None)):
+                        location.route = address_re.search(address).group(0)
+                    if locality_re.search(race_src.get('adresse', None)):
+                        location.locality = locality_re.search(address).group(0)
+
                 # check that location is near lat/lng provided
                 location.save()
 
                 race = Race(**r)
-                race.distance_cat = distance_cat
                 race.event = event
+
+                race.distance_cat = distance_cat
+                race.federation = federation
                 race.sport = sport
                 race.contact = contact
                 race.location = location
+
                 if race.get_potential_doubles():
                     raise RaceDoubleException("Double detected")
 
@@ -128,10 +156,12 @@ class FFTri:
                 print ("[WAR][DBL] [{0}] : Race already exists in DB".format(race_src_id))
 
             except Exception as e:
+                has_error = True
                 print ("[ERR][UNK] [{0}] : {1}".format(race_src_id, str(e)))
 
             finally:
                 if has_error:
+                    # NO ! Cannot just delete event if a race is not ok...
                     if event:
                         if event.pk:
                             event.delete()
@@ -144,6 +174,8 @@ class FFTri:
                     if race:
                         if race.pk:
                             race.delete()
+                else:
+                    print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
 
 
 
