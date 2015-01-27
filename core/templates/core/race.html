@@ -13,8 +13,15 @@
 <div class="container">
     <header class="page-header row">
         <div class="col-md-9">
-            <h1>{{ race.event.name }}</h1>
-            <h1><small> {{ race.location.locality }} ({{ race.location.administrative_area_level_2_short_name }})</small></h1>
+            <h1>{{ race.event.name }}
+            <p>
+                <small> {{ race.location.locality }} 
+                {% if race.location.administrative_area_level_2_short_name %}
+                ({{ race.location.administrative_area_level_2_short_name }})
+                {%endif%}
+                </small>
+            </p>
+            </h1>
         </div>
         <div class="col-md-3">
             <h1>
@@ -47,7 +54,15 @@
     <section class="panel panel-default">
     <dl class="dl-horizontal panel-body">
         <dt>Organisateur</dt>
-        <dd>f:Ardèche Sport Attitude</dd>
+        <dd>
+        {% if race.event.organizer.website %}
+            <a href="{{ race.event.organizer.website }}">
+                {{ race.event.organizer.name }}
+            </a>
+        {% else %}
+            {{ race.event.organizer.name }}
+        {%endif%}
+        </dd>
         <dt>Contact</dt>
         <dd>
             <address>
