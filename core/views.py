@@ -35,7 +35,7 @@ def ajx_validate_all(request):
 
 
 @login_required
-def ajx_validate_race(request, slug, pk):
+def ajx_validate_race(request, pk):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
         race = get_object_or_404(Race, pk=pk)
         logging.debug('validate ' + str(race))

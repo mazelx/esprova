@@ -49,8 +49,8 @@ urlpatterns = patterns('',
 
                        # Ajax views
                        url(r'^ajx/search/$', ajx_get_races, name='ajx_search_race'),
-                       url(r'^ajx/delete/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
-                       url(r'^ajx/validate/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', ajx_validate_race, name="ajx_validate_race"),
+                       url(r'^ajx/delete/(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
+                       url(r'^ajx/validate/(?P<pk>\d+)$', ajx_validate_race, name="ajx_validate_race"),
 
                        # API
                        url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
