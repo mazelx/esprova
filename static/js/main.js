@@ -78,11 +78,16 @@ function initialize() {
 
     map.setOptions({styles: map_styles});
 
+    // Initialize results
+    if($('#map-canvas').is(':hidden') == true) {    
+        resetSearchForm();
+    } else {
     // On Firefox (others?), a refresh would not display markers
-    google.maps.event.addListenerOnce(map, 'idle', function() {
-        getRacesFromMapBounds(map.getBounds().toUrlValue());
-    });
-
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+            getRacesFromMapBounds(map.getBounds().toUrlValue());
+        });
+    }
+    
     // initialize search date
     setDefaultSearchDates();
 
