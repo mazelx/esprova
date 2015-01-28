@@ -6,7 +6,7 @@ import pytz
 from datetime import datetime
 import warnings
 
-from core.models import Race, Event, Location, Contact, DistanceCategory, Sport, Organizer, Federation
+from core.models import Race, EventReference, EventEdition, Location, Contact, DistanceCategory, Sport, Organizer, Federation
 
 
 class RaceDoubleException(Exception):
@@ -18,37 +18,43 @@ class RaceDoubleException(Exception):
 
 
 class FFTri:
+    """
+        Interface with the FFTri.com race data
+        The data DOES NOT come from a public API, therefore the data structure will probably change over time
+
+    """
     race_list = []
+    url = 'http://www.fftri.com/sites/all/themes/fftri_artev/templates/pages/includes/carte_epreuve/data.php'
+    post_param = {
+        'epreuve_id': '',
+        'search_type': 'epreuve',
+        'discipline': '',
+        'periode_1': 'undefined',
+        'periode_2': 'undefined',
+        'code_postal': '',
+        'annee': '2015',
+        'mois': '',
+        'nbr_checkbox': '0',
+        'format_courte_dist': 'false',
+        'format_longue_dist': 'false',
+        'format_sprint': 'false',
+        'format_super_sprint': 'false',
+        'format_decouverte': 'false',
+        'format_trail': 'false',
+        'format_animation': 'false',
+        'format_avenir': 'false',
+        'field_club_localite': '',
+        'field_club_ligue': '',
+    }
 
     def __init__(self, *args, **kwargs):
         self.race_list = self.__get_race_list_from_provider()
 
+
     def __get_race_list_from_provider(self):
-        post_param = {
-            'epreuve_id': '',
-            'search_type': 'epreuve',
-            'discipline': '',
-            'periode_1': 'undefined',
-            'periode_2': 'undefined',
-            'code_postal': '',
-            'annee': '2015',
-            'mois': '',
-            'nbr_checkbox': '0',
-            'format_courte_dist': 'false',
-            'format_longue_dist': 'false',
-            'format_sprint': 'false',
-            'format_super_sprint': 'false',
-            'format_decouverte': 'false',
-            'format_trail': 'false',
-            'format_animation': 'false',
-            'format_avenir': 'false',
-            'field_club_localite': '',
-            'field_club_ligue': '',
-        }
+        
 
-        url = 'http://www.fftri.com/sites/all/themes/fftri_artev/templates/pages/includes/carte_epreuve/data.php'
-
-        response = requests.post(url, data=post_param)
+        response = requests.post(self.url, data=self.post_param)
         resp_formatted = response.text
 
         # Replace response stupid encoding ... blame them !
@@ -63,22 +69,24 @@ class FFTri:
         return sorted_list
 
     def save_events(self, geocode=True):
+        nb_created, nb_failed = 0, 0
         event_re = re.compile('.+(?=\s-\s)')
         address_re = re.compile('(.+)(?=\s-\s\D)')
         locality_re = re.compile('(?<=\s-\s)(.+)(?=\s-\s\w)')
         federation_name = "FFTri"
+        edition_no = 1
 
         for race_src in self.race_list:
-            e, s, c, l, dc, r, o, f = ({} for i in range(8))
-            distance_cat, sport, event, contact, location, race, organizer, federation = (None for i in range(8))
+            e, eref, s, c, l, dc, r, o, f = ({} for i in range(9))
+            distance_cat, sport, event, event_ref, contact, location, race, organizer, federation = (None for i in range(9))
 
             race_src_id = race_src.get('id', None)
 
             f['name'] = federation_name
 
-            e['name'] = event_re.search(race_src.get('nom', None)).group(0)
-            e['edition'] = 1
-            e['website'] = race_src.get('site')
+            eref['name'] = event_re.search(race_src.get('nom', None)).group(0)
+            eref['website'] = race_src.get('site')
+            e['edition'] = edition_no
             # event = Event(**e)
 
             s['name'] = race_src.get('discipline', None)
@@ -108,7 +116,8 @@ class FFTri:
                 distance_cat = DistanceCategory.objects.get(**dc)
                 sport = Sport.objects.get(**s)
                 organizer, organizer_created = Organizer.objects.get_or_create(**o)
-                event, event_created = Event.objects.get_or_create(organizer=organizer, **e)
+                event_ref, event_created = EventReference.objects.get_or_create(organizer=organizer, **eref)
+                event, event_created = EventEdition.objects.get_or_create(event_ref=event_ref, **e)
                 contact, contact_created = Contact.objects.get_or_create(**c)
                 federation, federation_created = Federation.objects.get_or_create(**f)
 
@@ -144,6 +153,7 @@ class FFTri:
                     raise RaceDoubleException("Double detected")
 
                 race.save()
+                nb_created += 1
 
             except Sport.DoesNotExist:
                 has_error = True
@@ -161,6 +171,7 @@ class FFTri:
 
             finally:
                 if has_error:
+                    nb_failed += 1
                     # NO ! Cannot just delete event if a race is not ok...
                     if event:
                         if event.pk:
@@ -179,7 +190,7 @@ class FFTri:
 
 
 
-
+        print ('finished !  created: {0}, failed: {1}'.format(nb_created, nb_failed))
 
 
 #

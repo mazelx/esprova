@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from core.views import *
-from core.forms import ContactForm, RaceForm, LocationForm, EventForm
+from core.forms import ContactForm, RaceForm, LocationForm, EventReferenceForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from rest_framework import routers
@@ -11,7 +11,7 @@ from api import views
 router = routers.DefaultRouter()
 router.register(r'/race', views.RaceViewSet)
 router.register(r'/sport', views.SportViewSet)
-router.register(r'/event', views.EventViewSet)
+router.register(r'/event', views.EventReferenceViewSet)
 router.register(r'/distancecat', views.DistanceCategoryViewSet)
 router.register(r'/contact', views.ContactViewSet)
 router.register(r'/location', views.LocationViewSet)
@@ -19,7 +19,7 @@ router.register(r'/location', views.LocationViewSet)
 
 
 race_named_forms = (
-    ("event", EventForm),
+    ("event", EventReferenceForm),
     ("race", RaceForm),
     ("location", LocationForm),
     ("contact", ContactForm)

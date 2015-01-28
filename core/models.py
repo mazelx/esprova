@@ -13,13 +13,12 @@ import datetime
 import logging
 
 
-# First, define the Manager subclass.
-class RaceValidatedManager(models.Manager):
-    def get_queryset(self):
-        return super(RaceValidatedManager, self).get_queryset().filter(validated=True)
-
-
 class Sport(models.Model):
+    """
+        Represent a sport : "Triathlon" / "Duathlon" / "Trail" ...
+        Sports that contains multiple stages are defined with combinedSport = true
+
+    """
     name = models.CharField(max_length=100)
     combinedSport = models.BooleanField(default=False)
 
@@ -30,9 +29,16 @@ class Sport(models.Model):
         return self.name
 
 
-# That class is inspired by the google address types
-# see https://developers.google.com/maps/documentation/javascript/geocoding
 class Location(models.Model):
+
+    """
+        Represent a race location, built upon the Google maps V3 data structure as
+        it is supposed to be geocoded by Google maps.
+        more here : https://developers.google.com/maps/documentation/javascript/geocoding
+
+        Note that a location may be used by multiple races
+
+    """
 
     street_number = models.CharField(max_length=10, blank=True, null=True)
     route = models.CharField(max_length=200, blank=True, null=True)
@@ -85,6 +91,10 @@ class Location(models.Model):
         return "{0}, {1}, {2} ({3}, {4})".format(self.postal_code, self.locality, self.country, self.lat, self.lng)
 
     def geocode_raw_address(self, raw_address):
+        """
+            Geocode using the Google maps V3 geocoder
+
+        """
         g = GoogleV3()
         loc = g.geocode(raw_address)
         if loc:
@@ -130,6 +140,11 @@ class Location(models.Model):
 
 
 class SportStage(models.Model):
+    """
+        Represent a sport stage (ie. Run / Swim) for a sport.
+        Only combined sport may have multiple stages
+
+    """
     sport = models.ForeignKey(Sport)
     name = models.CharField(max_length=20)
     default_order = models.PositiveSmallIntegerField()
@@ -147,6 +162,9 @@ class SportStage(models.Model):
 
 
 class Organizer(models.Model):
+    """
+        Represent the event organizer
+    """
     name = models.CharField(max_length=100)
     website = models.URLField(blank=True, null=True)
 
@@ -157,11 +175,65 @@ class Organizer(models.Model):
         return self.name
 
 
-class Event(models.Model):
+class Season(models.Model):
+    """
+        Represent a season (year). As sport are not played the whole year in most place in the world,
+        it often not refers to a calendar year
+    """
+
+    name = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    def __str__(self):
+        return self.name
+
+
+class EventReference(models.Model):
+    """
+        Represent an event (accross all seasons)
+    """
     name = models.CharField(max_length=150)
-    edition = models.PositiveSmallIntegerField()
     website = models.URLField(blank=True, null=True)
     organizer = models.ForeignKey(Organizer, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class EventEdition(models.Model):
+    """
+        Represent an edition of an event
+        Races instances are direcly tied to an event distance. 
+        For simplicity purpose, the eventmaster data can be directly accessed with properties
+    """
+
+    event_ref = models.ForeignKey(EventReference)
+    edition = models.PositiveSmallIntegerField()
+
+    @property
+    def name(self):
+        return self.event_ref.name
+
+    @name.setter
+    def name(self, value):
+        self.event_ref.name = value
+
+    @property
+    def website(self):
+        return self.event_ref.website
+
+    @website.setter
+    def website(self, value):
+        self.event_ref.website = value
+
+    @property
+    def organizer(self):
+        return self.event_ref.organizer
+
+    @organizer.setter
+    def organizer(self, value):
+        self.event_ref.organizer = value
 
     def natural_key(self):
         return (self.name)
@@ -189,6 +261,10 @@ class Event(models.Model):
 
 
 class Federation(models.Model):
+    """
+        Represent a sport Federation
+    
+    """
     name = models.CharField(max_length=150)
     sport = models.ManyToManyField(Sport)
 
@@ -200,6 +276,10 @@ class Federation(models.Model):
 
 
 class Contact(models.Model):
+    """
+        Represent a race contact
+
+    """
     name = models.CharField(max_length=100)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=10, blank=True, null=True)
@@ -212,6 +292,10 @@ class Contact(models.Model):
 
 
 class Label(models.Model):
+    """
+        Represent a race label
+
+    """
     name = models.CharField(max_length=100)
 
     def natural_key(self):
@@ -222,6 +306,10 @@ class Label(models.Model):
 
 
 class DistanceCategory(models.Model):
+    """
+        Represent a distance category (ie: XS, S, M, L, XL)
+
+    """
     sport = models.ForeignKey(Sport)
     name = models.CharField(max_length=2)
     long_name = models.CharField(max_length=20, blank=True, null=True)
@@ -244,10 +332,23 @@ class DistanceCategory(models.Model):
         return var
 
 
+class RaceValidatedManager(models.Manager):
+    """
+        Model manager for retrieving valided races only
+    """
+    def get_queryset(self):
+        return super(RaceValidatedManager, self).get_queryset().filter(validated=True)
+
+
 class Race(models.Model):
+    """
+        Represent a race, main model of the application
+        If the validated flag is set to False, the race will not be displayed in search result
+
+    """
     slug = models.SlugField(max_length=100, blank=True, null=True)
     sport = models.ForeignKey(Sport)
-    event = models.ForeignKey(Event, related_name='races')
+    event = models.ForeignKey(EventEdition, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateTimeField()
     distance_cat = models.ForeignKey(DistanceCategory)
@@ -269,6 +370,10 @@ class Race(models.Model):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
     def pre_delete(self, *args, **kwargs):
+        """
+            Do a cascade delete on contact, location and event instance if this is their last race
+        """
+        logging.debug("entering pre_delete")
         if len(self.contact.races.all()) < 2:
             self.contact.delete()
         if len(self.location.races.all()) < 2:
@@ -277,6 +382,10 @@ class Race(models.Model):
             self.event.delete()
 
     def save(self, *args, **kwargs):
+        """
+            Define the slug and initial stage distances when the instance is about to be created in the db
+
+        """
         if self.pk is None:
             seq = (self.event.name, self.distance_cat.name)
             self.slug = slugify("-".join(seq))
@@ -284,7 +393,7 @@ class Race(models.Model):
 
             self.init_distances_from_default()
 
-        # do not insert the same instance if a force_insert has been set to true
+            # The instance has just been inserted thus do not insert again even if forced on save() call
             if kwargs.get('force_insert', None):
                 kwargs.pop('force_insert')
         super(Race, self).save(force_update=True, *args, **kwargs)
@@ -293,13 +402,22 @@ class Race(models.Model):
         return (self.event, self.sport, self.distance_cat)
 
     def init_distances_from_default(self):
-        """ Initialize the distances from default distances for this category on race creation """
+        """
+            Initialize the distances from default distances for this category on race creation
+
+        """
         if not self.distances.all():
             for rs in StageDistanceDefault.objects.filter(distance_cat=self.distance_cat):
                 rs = StageDistanceSpecific(race=self, order=rs.order, stage=rs.stage, distance=rs.distance)
                 rs.save()
 
     def get_potential_doubles(self):
+        """
+            Returns an instance list of potential double for this race, based on :
+            - distance (<10km)
+            - date (+- 1 day)
+            - samed distance category
+        """
         sqs = SearchQuerySet()
 
         pk = self.pk
@@ -317,14 +435,23 @@ class Race(models.Model):
 
 
 class StageDistance(models.Model):
+    """
+        Abstract model that contains stage distance structure and to be inherited by either
+        the stage distance specific (race) or stage distance default (category)
+
+    """
     order = models.PositiveSmallIntegerField()
     stage = models.ForeignKey(SportStage)
+    # TODO : use geopy.D for units conversion
     distance = models.PositiveIntegerField()
 
     class Meta:
         abstract = True
 
     def get_formatted_distance(self):
+        """
+            Return a distance string formatted in meters if distance < 1km, and in km if above
+        """
         n = self.distance + 0.0
         if n > 1000:
             return '{0} km'.format(str(n/1000).rstrip('0').rstrip('.'))
@@ -332,6 +459,9 @@ class StageDistance(models.Model):
 
 
 class StageDistanceSpecific(StageDistance):
+    """
+        Distance for a stage (in meters) to be defined in races
+    """
     race = models.ForeignKey(Race, related_name='distances')
 
     class Meta:
@@ -351,6 +481,9 @@ class StageDistanceSpecific(StageDistance):
 
 
 class StageDistanceDefault(StageDistance):
+    """
+        Distance for a stage (in meters) to be defined in category distance
+    """
     distance_cat = models.ForeignKey(DistanceCategory)
 
     class Meta:

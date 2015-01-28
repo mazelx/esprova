@@ -1,5 +1,5 @@
 from django import forms
-from core.models import Event, Race, Location, Contact
+from core.models import EventEdition, EventReference, Race, Location, Contact
 
 
 # model forms ????
@@ -9,13 +9,23 @@ class ConnexionForm(forms.Form):
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
 
 
-class EventForm(forms.ModelForm):
+class EventReferenceForm(forms.ModelForm):
     class Meta:
-        model = Event
+        model = EventReference
         fields = [
             'name',
-            'edition',
+            # 'edition',
             'website',
+        ]
+
+
+class EventEditionForm(forms.ModelForm):
+    class Meta:
+        model = EventEdition
+        fields = [
+            # 'name',
+            'edition',
+            # 'website',
         ]
 
 

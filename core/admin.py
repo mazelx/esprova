@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import DistanceCategory, StageDistanceDefault, Race, Sport, Contact, Federation, Label, Event, Location, Organizer
+from core.models import Season, EventReference, EventEdition, DistanceCategory, StageDistanceDefault, Race, Sport, Contact, Federation, Label, Location, Organizer
 
 
 class StageDistanceDefaultInline(admin.StackedInline):
@@ -25,7 +25,9 @@ class RaceAdmin(admin.ModelAdmin):
 
 admin.site.register(DistanceCategory, DistanceCategoryAdmin)
 admin.site.register(Race, RaceAdmin)
-admin.site.register(Event)
+admin.site.register(EventEdition)
+admin.site.register(EventReference)
+admin.site.register(Season)
 admin.site.register(Sport)
 admin.site.register(Contact)
 admin.site.register(Federation)
