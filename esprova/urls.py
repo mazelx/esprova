@@ -7,6 +7,10 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from api import views
 
+from haystack.forms import FacetedSearchForm
+from haystack.query import SearchQuerySet
+from haystack.views import FacetedSearchView
+
 
 router = routers.DefaultRouter()
 router.register(r'/race', views.RaceViewSet)
@@ -27,6 +31,9 @@ race_named_forms = (
 
 racewizard = RaceWizard.as_view(race_named_forms)
 
+sqs = SearchQuerySet().facet('distance_cat')
+
+
 urlpatterns = patterns('',
                        # Login
                        url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
@@ -38,6 +45,13 @@ urlpatterns = patterns('',
 
                        # Race list (main page)
                        url(r'^list$', RaceList.as_view(), name='list_race'),
+                       # url(r'^facet$', FacetTest.as_view(), name='list_facet_race'),
+
+                       url(r'^facet$', FacetedSearchView(form_class=FacetedSearchForm, 
+                                                         searchqueryset=sqs,
+                                                         template="core/test_facet.html"
+                                                         ), name='list_facet_race'),
+
 
                        # CRUD
                        url(r'^create/$', racewizard, name="create_race"),

@@ -72,20 +72,25 @@ function initialize() {
         streetViewControl: false
     };
 
-    // initialize the map
-    map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
+    if($('#map-canvas').length ==! 0){
 
-    map.setOptions({styles: map_styles});
+        // initialize the map
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
 
-    // Initialize results
-    if($('#map-canvas').is(':hidden') == true) {    
-        resetSearchForm();
+        map.setOptions({styles: map_styles});
+
+        // Initialize results
+        if($('#map-canvas').is(':hidden') == true) {    
+            resetSearchForm();
+        } else {
+            // On Firefox (others?), a refresh would not display markers
+            google.maps.event.addListenerOnce(map, 'idle', function() {
+                getRacesFromMapBounds(map.getBounds().toUrlValue());
+            });
+        }
     } else {
-    // On Firefox (others?), a refresh would not display markers
-        google.maps.event.addListenerOnce(map, 'idle', function() {
-            getRacesFromMapBounds(map.getBounds().toUrlValue());
-        });
+        resetSearchForm();
     }
     
     // initialize search date
@@ -135,18 +140,22 @@ function setDefaultSearchDates(){
 
 // LISTENER : retrieve races when map moves
 function addListMapMoves(){
-    google.maps.event.addListener(map, 'idle', function() {
-        // Do not refresh races if the map is not visible or "follow map bounds" not checked
-        if ($("#follow_map_bounds").is(':checked') && $(".mapbox").is(":visible") ) {
-            getRacesFromMapBounds(map.getBounds().toUrlValue());
-        }
-    });
+    if (map !== undefined) {
+        google.maps.event.addListener(map, 'idle', function() {
+            // Do not refresh races if the map is not visible or "follow map bounds" not checked
+            if ($("#follow_map_bounds").is(':checked') && $(".mapbox").is(":visible") ) {
+                getRacesFromMapBounds(map.getBounds().toUrlValue());
+            }
+        });
+    }
 }
 
 function addListMarkerClick(marker){
-    google.maps.event.addListener(marker, 'click', function () {
-        selectEvent(marker.get("id"));
-    });
+    if (map !== undefined) {
+        google.maps.event.addListener(marker, 'click', function () {
+            selectEvent(marker.get("id"));
+        });
+    }
 }
 
 function addListResultClick(){
@@ -197,12 +206,14 @@ function addListHoverSideboxResult(){
 }
 
 function addListHoverMapResult(marker){
-    google.maps.event.addListener(marker, 'mouseover', function() {
-        highlightResult(marker.get("id"));
-    });
-    google.maps.event.addListener(marker, 'mouseout', function() {
-        deHighlightResult(marker.get("id"));
-    });
+    if (map !== undefined) {
+        google.maps.event.addListener(marker, 'mouseover', function() {
+            highlightResult(marker.get("id"));
+        });
+        google.maps.event.addListener(marker, 'mouseout', function() {
+            deHighlightResult(marker.get("id"));
+        });
+    }
 }
 
 
@@ -327,12 +338,14 @@ function selectEvent(event_id){
 
 
 function setMapBoundsFromResults() {
-    var bound = new google.maps.LatLngBounds();
-    if(!($.isEmptyObject(markers))){
-        for(var key in markers) {
-            bound.extend(markers[key].getPosition());
+    if (map !== undefined) {
+        var bound = new google.maps.LatLngBounds();
+        if(!($.isEmptyObject(markers))){
+            for(var key in markers) {
+                bound.extend(markers[key].getPosition());
+            }
+            map.fitBounds(bound);
         }
-        map.fitBounds(bound);
     }
 }
 

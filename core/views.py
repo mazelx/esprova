@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+import datetime
 
 import logging
 
@@ -95,6 +96,17 @@ def ajx_get_races(request):
             sqs = sqs.filter(content=q)
 
         sqs.order_by('score')
+
+
+        sqs = sqs.facet('distance_cat').facet('administrative_area_level_1').facet('administrative_area_level_2')
+        # if start_date and end_date:
+        #     sqs = sqs.date_facet(field='date', 
+        #                      start_date=datetime.datetime.strptime(start_date,'%Y-%m-%d'),
+        #                      end_date=datetime.datetime.strptime(end_date,'%Y-%m-%d'),
+        #                      gap_by='month')
+
+        facet = sqs.facet_counts()
+
         # build the JSON response
         races = []
         result_html = []
@@ -128,7 +140,8 @@ def ajx_get_races(request):
 
         response = {'count': sqs.count(),
                     'races': races,
-                    'html': result_html
+                    'html': result_html,
+                    'facet': facet,
                     }
 
         return HttpResponse(dumps(response), content_type="application/json")
@@ -136,11 +149,16 @@ def ajx_get_races(request):
     raise Http404
 
 
+class FacetTest(LoginRequiredMixin, ListView):
+    model = Race
+    context_object_name = "race_listp"
+    template_name = "core/test_facet.html"
+
 # Should be heriting View ... or function not based on a class
 class RaceList(LoginRequiredMixin, ListView):
     model = Race
     context_object_name = "race_list"
-    template_name = "core/race_list.html'"
+    template_name = "core/race_list.html"
 
 
 class RaceView(LoginRequiredMixin, DetailView):

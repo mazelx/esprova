@@ -247,9 +247,12 @@ class EventEdition(models.Model):
     def get_end_date(self):
         return self.races.filter(validated=True).aggregate(Max('date'))['date__max']
 
-    def get_distance_cat_set(self):
+    def get_distance_cat_set(self, unique=False):
         distance_cat_set = []
+        already_added = {}
         for r in self.races.filter(validated=True).order_by('distance_cat__order'):
+            if r.distance_cat in already_added and unique == True: continue
+            already_added[r.distance_cat] = 1
             distance_cat_set.append(r.distance_cat)
         return distance_cat_set
 
