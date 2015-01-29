@@ -67,7 +67,7 @@ function initialize() {
         },
         zoom: 6,
         maxZoom: 15,
-        minZoom:5,
+        // minZoom:5,   
         panControl: false,
         streetViewControl: false
     };
