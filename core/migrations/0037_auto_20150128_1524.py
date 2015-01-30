@@ -25,14 +25,14 @@ class Migration(migrations.Migration):
             old_name='EventMaster',
             new_name='EventReference',
         ),
-        migrations.RemoveField(
-            model_name='event',
-            name='event_master',
-        ),
-        migrations.RemoveField(
-            model_name='event',
-            name='season',
-        ),
+        # migrations.RemoveField(
+        #     model_name='event',
+        #     name='event_master',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='event',
+        #     name='season',
+        # ),
         migrations.AddField(
             model_name='eventedition',
             name='event_ref',
