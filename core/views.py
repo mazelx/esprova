@@ -100,13 +100,19 @@ def ajx_get_races(request):
 
 
         sqs = sqs.facet('distance_cat').facet('administrative_area_level_1').facet('administrative_area_level_2')
-        # if start_date and end_date:
-        #     sqs = sqs.date_facet(field='date', 
-        #                      start_date=datetime.datetime.strptime(start_date,'%Y-%m-%d'),
-        #                      end_date=datetime.datetime.strptime(end_date,'%Y-%m-%d'),
-        #                      gap_by='month')
+        if start_date and end_date:
+            sqs = sqs.date_facet(field='date', 
+                             start_date=datetime.datetime.strptime(start_date,'%Y-%m-%d'),
+                             end_date=datetime.datetime.strptime(end_date,'%Y-%m-%d'),
+                             gap_by='month')
 
         facet = sqs.facet_counts()
+
+        # convert datetime into serializable isoformat
+        facet_dates = []
+        for f in facet['dates']['date']:
+            facet_dates.append((f[0].isoformat(), f[1]))
+        facet['dates']['date'] = facet_dates
 
         # build the JSON response
         races = []
@@ -116,6 +122,7 @@ def ajx_get_races(request):
         seen = {}
         rank = 1
         prev_month = cur_month = 0
+        month_iterator = 0
 
         for sr in sqs:
             cur_month = sr.date.strftime('%m%Y')
@@ -138,8 +145,10 @@ def ajx_get_races(request):
 
             if prev_month != cur_month:
                 result_html.append(render_to_string('core/result_month_spacer.html',
-                                                    {'last_date': sr.date})
-                                   )
+                                                    {'last_date': sr.date,
+                                                     'count': facet['dates']['date'][month_iterator][1]}))
+                month_iterator += 1
+
             result_html.append(rendered)
 
             prev_month = cur_month
