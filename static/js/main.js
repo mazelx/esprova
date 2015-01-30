@@ -226,13 +226,17 @@ function getRacesFromSearch(data){
      $.ajax({
         url: 'ajx/search/?',
         type: 'GET',
-        data: $( "#race_search_form" ).serialize() +
+        data: 'lat_lo=' + boundsarray[0] + 
+              '&lng_lo=' + boundsarray[1] + 
+              '&lat_hi=' + boundsarray[2] + 
+              '&lng_hi=' + boundsarray[3] +
+              '&' + $( "#race_search_form" ).serialize() +
               '&q=' + $("#search_expr").val() ,
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
             refreshRacesOnMap(response.races);
-            setMapBoundsFromResults();
+            // setMapBoundsFromResults();
         },
     });
 }
