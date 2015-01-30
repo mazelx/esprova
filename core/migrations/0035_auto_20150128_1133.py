@@ -14,13 +14,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='event_master',
-            field=models.ForeignKey(default=1, to='core.EventMaster'),
+            field=models.ForeignKey(default=None, to='core.EventMaster'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='event',
             name='season',
-            field=models.ForeignKey(default=1, to='core.Season'),
+            field=models.ForeignKey(default=None, to='core.Season'),
             preserve_default=False,
         ),
     ]
