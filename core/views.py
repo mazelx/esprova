@@ -95,7 +95,8 @@ def ajx_get_races(request):
         if q:
             sqs = sqs.filter(content=q)
 
-        sqs.order_by('score')
+        # sqs.order_by('score')
+        sqs = sqs.order_by('date')
 
 
         sqs = sqs.facet('distance_cat').facet('administrative_area_level_1').facet('administrative_area_level_2')
@@ -114,7 +115,10 @@ def ajx_get_races(request):
         # Uniqfy the event list (multiple races from an event)
         seen = {}
         rank = 1
+        prev_month = cur_month = 0
+
         for sr in sqs:
+            cur_month = sr.date.strftime('%m%Y')
             event_id = sr.get_stored_fields()['event_id']
             location = sr.get_stored_fields()['location']
             rendered = sr.get_stored_fields()['rendered']
@@ -131,8 +135,14 @@ def ajx_get_races(request):
                          }
 
             races.append(race_data)
+
+            if prev_month != cur_month:
+                result_html.append(render_to_string('core/result_month_spacer.html',
+                                                    {'last_date': sr.date})
+                                   )
             result_html.append(rendered)
 
+            prev_month = cur_month
             rank += 1
 
         if not races:
