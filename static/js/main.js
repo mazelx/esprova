@@ -106,6 +106,8 @@ function initialize() {
 
     createDatePickerComponent();
 
+    initializeFieldsFromURL();
+
 }
 
 
@@ -127,11 +129,21 @@ function createDatePickerComponent() {
 }
 
 function setDefaultSearchDates(){
-    dt = new Date();
-    $("#start_date").attr("value", dt.toJSON().slice(0,10));
-    dt.setFullYear(dt.getFullYear()+1);
-    $("#end_date").attr("value", dt.toJSON().slice(0,10));
+    // dt = new Date();
+    // $("#start_date").attr("value", dt.toJSON().slice(0,10));
+    // dt.setFullYear(dt.getFullYear()+1);
+    // $("#end_date").attr("value", dt.toJSON().slice(0,10));
 }
+
+// function initializeFieldsFromURL(){
+//     var sPageURL = window.location.search.substring(1);
+//     var sURLVariables = sPageURL.split('&');
+//     for (var i = 0; i < sURLVariables.length; i++) 
+//     {
+//         var param = sURLVariables[i].split('=');
+//         $('#' + param[0]).val(param[1])
+//     }
+// }
 
 
 // ----------------------
@@ -380,3 +392,5 @@ function deHighlightResult(event_id){
         marker.setIcon(markerIcons[marker.rankClass]["selected"]);
     }
 }
+
+

@@ -175,11 +175,22 @@ class FacetTest(LoginRequiredMixin, ListView):
     context_object_name = "race_listp"
     template_name = "core/test_facet.html"
 
+
 # Should be heriting View ... or function not based on a class
-class RaceList(LoginRequiredMixin, ListView):
-    model = Race
+class RaceList(LoginRequiredMixin, TemplateView):
+    # model = Race
     context_object_name = "race_list"
     template_name = "core/race_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(RaceList, self).get_context_data(**kwargs)
+        context['params'] = self.request.GET.dict()
+        context['params']['distances'] = {}
+        for dist in self.request.GET.getlist('distances'):
+            context['params']['distances'][dist] = True
+        logging.debug(context)
+
+        return context
 
 
 class RaceView(LoginRequiredMixin, DetailView):
