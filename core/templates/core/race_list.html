@@ -77,19 +77,19 @@
                         <div class="col-xs-8">
                             <div class="btn-group" data-toggle="buttons">
                                 <label type="button" class="btn btn-default distance_selector {{ params.distances.XS |yesno:"active," }}" id="dist1">XS
-                                    <input type="checkbox" autocomplete="off" name="distances" value="XS">
+                                    <input type="checkbox" autocomplete="off" name="distances" value="XS" {{ params.distances.XS |yesno:"checked," }}>
                                 </label>
                                 <label type="button" class="btn btn-default distance_selector {{ params.distances.S |yesno:"active," }}" id="dist2">S
-                                    <input type="checkbox" autocomplete="off" name="distances" value="S">
+                                    <input type="checkbox" autocomplete="off" name="distances" value="S" {{ params.distances.S |yesno:"checked," }}>
                                 </label>
                                 <label type="button" class="btn btn-default distance_selector {{ params.distances.M |yesno:"active," }}" id="dist3">M
-                                    <input type="checkbox" autocomplete="off" name="distances" value="M">
+                                    <input type="checkbox" autocomplete="off" name="distances" value="M" {{ params.distances.M |yesno:"checked," }}>
                                 </label>
                                 <label type="button" class="btn btn-default distance_selector {{ params.distances.L |yesno:"active," }}" id="dist4">L
-                                    <input type="checkbox" autocomplete="off" name="distances" value="L">
+                                    <input type="checkbox" autocomplete="off" name="distances" value="L" {{ params.distances.L |yesno:"checked," }}>
                                 </label>
                                 <label type="button" class="btn btn-default distance_selector {{ params.distances.XL |yesno:"active," }}" id="dist5">XL
-                                    <input type="checkbox" autocomplete="off" name="distances" value="XL">
+                                    <input type="checkbox" autocomplete="off" name="distances" value="XL" {{ params.distances.XL |yesno:"checked," }}>
                                 </label>
                             </div>
                         </div>
