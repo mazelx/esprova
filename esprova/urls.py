@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from core.views import *
-from core.forms import ContactForm, RaceForm, LocationForm, EventReferenceForm
+from core.forms import ContactForm, RaceForm, LocationForm, EventReferenceForm, EventEditionForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from rest_framework import routers
@@ -23,7 +23,8 @@ router.register(r'/location', views.LocationViewSet)
 
 
 race_named_forms = (
-    ("event", EventReferenceForm),
+    ("eventReference", EventReferenceForm),
+    ("eventEdition", EventEditionForm),
     ("race", RaceForm),
     ("location", LocationForm),
     ("contact", ContactForm)

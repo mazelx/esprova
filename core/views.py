@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.views.generic import ListView, DetailView, TemplateView, DeleteView
 from core.models import Race
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
 from json import dumps
@@ -48,12 +48,12 @@ def ajx_validate_race(request, pk):
 
 @login_required
 def ajx_delete_race(request, pk):
+    logging.debug(str(request.is_ajax()) + '-' + str(settings.DEBUG) + '-' + str(request.method))
     if (request.is_ajax() or settings.DEBUG) and request.method == 'DELETE':
         race = get_object_or_404(Race, pk=pk)
-        race.validated = True
-        race.save()
+        race.delete()
         return HttpResponse('')
-    return Http404
+    return HttpResponseBadRequest
 
 
 @login_required
@@ -80,11 +80,13 @@ def ajx_get_races(request):
         end_date = request.GET.get('end_date')
         distances = request.GET.getlist('distances')
 
-        if start_date:
-            sqs = sqs.filter(date__gte=start_date)
+        if not start_date:
+            start_date = "2015-01-07"
+        sqs = sqs.filter(date__gte=start_date)
 
-        if end_date:
-            sqs = sqs.filter(date__lte=end_date)
+        if not end_date:
+            end_date = "2016-01-06"
+        sqs = sqs.filter(date__lte=end_date)
 
         if distances:
             sqs = sqs.filter(distance_cat__in=distances)
@@ -98,12 +100,12 @@ def ajx_get_races(request):
         # sqs.order_by('score')
         sqs = sqs.order_by('date')
 
-
         sqs = sqs.facet('distance_cat').facet('administrative_area_level_1').facet('administrative_area_level_2')
-        if start_date and end_date:
-            sqs = sqs.date_facet(field='date', 
-                             start_date=datetime.datetime.strptime(start_date,'%Y-%m-%d'),
-                             end_date=datetime.datetime.strptime(end_date,'%Y-%m-%d'),
+
+        # facet for dates if defined
+        sqs = sqs.date_facet(field='date',
+                             start_date=datetime.datetime.strptime(start_date, '%Y-%m-%d'),
+                             end_date=datetime.datetime.strptime(end_date, '%Y-%m-%d'),
                              gap_by='month')
 
         facet = sqs.facet_counts()
@@ -188,7 +190,8 @@ class RaceView(LoginRequiredMixin, DetailView):
 
 class RaceWizard(SessionWizardView):
 
-    TEMPLATES = {"event": "core/create_race.html",
+    TEMPLATES = {"eventReference": "core/create_race.html",
+                 "eventEdition": "core/create_race.html",
                  "race": "core/create_race.html",
                  "location": "core/create_race_location.html",
                  "contact": "core/create_race.html"}
@@ -210,7 +213,9 @@ class RaceWizard(SessionWizardView):
             slug = self.kwargs['slug']
             race = Race.objects.get(slug=slug)
 
-            if (step == "event"):
+            if (step == "eventReference"):
+                instance = race.event.event_ref
+            elif (step == "eventEdition"):
                 instance = race.event
             elif (step == "race"):
                 instance = race
@@ -226,15 +231,19 @@ class RaceWizard(SessionWizardView):
             return self.instance_dict.get(step, None)
 
     def done(self, form_list, form_dict, **kwargs):
-        event = form_dict['event'].save()
-        logging.debug("event {0}".format(event))
+        eventReference = form_dict['eventReference'].save()
+        logging.debug("event reference {0} saved , pk:{1}".format(eventReference, eventReference.pk))
+        eventEdition = form_dict['eventEdition'].save(commit=False)
+        eventEdition.event_ref = eventReference
+        eventEdition.save()
+        logging.debug("event {0}".format(eventReference))
         location = form_dict['location'].save()
         logging.debug("event {0}".format(location))
         contact = form_dict['contact'].save()
         logging.debug("event {0}".format(contact))
         race = form_dict['race'].save(commit=False)
         race.location = location
-        race.event = event
+        race.event = eventEdition
         race.contact = contact
         logging.debug("race {0}".format(race))
         race.save()
