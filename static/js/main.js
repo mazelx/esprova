@@ -7,6 +7,9 @@ var markerIcons = {};
 var primaryIcons = {};
 var secondaryIcons = {};
 
+var default_lat = 46.9;
+var default_lng = 2.6;
+
 var static_url = 'https://esprova-static.s3.amazonaws.com/';
 // var static_url = 'http://localhost:8000/static/'
 
@@ -59,11 +62,14 @@ if (typeof map_styles === 'undefined'){
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function initialize() {
+    var lat = parseFloat(getParameterByName('lat') || default_lat);
+    var lng = parseFloat(getParameterByName('lng') || default_lng);
+
     var mapOptions = {
         mapTypeId: google.maps.MapTypeId.TERRAIN,
         center: {
-            lat: 46.9,
-            lng: 2.6
+            lat: lat ,
+            lng: lng
         },
         zoom: 6,
         maxZoom: 15,
@@ -106,8 +112,6 @@ function initialize() {
 
     createDatePickerComponent();
 
-    initializeFieldsFromURL();
-
 }
 
 
@@ -134,16 +138,6 @@ function setDefaultSearchDates(){
     // dt.setFullYear(dt.getFullYear()+1);
     // $("#end_date").attr("value", dt.toJSON().slice(0,10));
 }
-
-// function initializeFieldsFromURL(){
-//     var sPageURL = window.location.search.substring(1);
-//     var sURLVariables = sPageURL.split('&');
-//     for (var i = 0; i < sURLVariables.length; i++) 
-//     {
-//         var param = sURLVariables[i].split('=');
-//         $('#' + param[0]).val(param[1])
-//     }
-// }
 
 
 // ----------------------
@@ -394,3 +388,12 @@ function deHighlightResult(event_id){
 }
 
 
+// ----------------------
+// Utils
+// ----------------------
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
