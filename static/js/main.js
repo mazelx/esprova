@@ -178,7 +178,7 @@ function addListResultClick(){
 
 // LISTENER : retrieve races from quick search
 function addListQuickSearch(){ 
-    $( "#race_quicksearch_form" ).submit(function( event ) {
+    $( "#search_expr_go" ).click(function( event ) {
         event.preventDefault();
         getRacesFromSearch();
     });
@@ -242,8 +242,8 @@ function getRacesFromSearch(data){
               '&lng_lo=' + boundsarray[1] + 
               '&lat_hi=' + boundsarray[2] + 
               '&lng_hi=' + boundsarray[3] +
-              '&' + $( "#race_search_form" ).serialize() +
-              '&q=' + $("#search_expr").val() ,
+              '&' + $( "#race_search_form" ).serialize(),
+              // '&search_expr=' + $("#search_expr").val() ,
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
@@ -263,8 +263,8 @@ function getRacesFromMapBounds(mapbounds) {
               '&lng_lo=' + boundsarray[1] + 
               '&lat_hi=' + boundsarray[2] + 
               '&lng_hi=' + boundsarray[3] +
-              '&' + $( "#race_search_form" ).serialize() +
-              '&q=' + $("#search_expr").val() ,
+              '&' + $( "#race_search_form" ).serialize(),
+              // '&search_expr=' + $("#search_expr").val() ,
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);

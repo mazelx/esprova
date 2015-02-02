@@ -92,10 +92,10 @@ def ajx_get_races(request):
             sqs = sqs.filter(distance_cat__in=distances)
 
         # search from quick search form
-        q = request.GET.get('q')
+        search_expr = request.GET.get('search_expr')
 
-        if q:
-            sqs = sqs.filter(content=q)
+        if search_expr:
+            sqs = sqs.filter(content=search_expr)
 
         # sqs.order_by('score')
         sqs = sqs.order_by('date')
