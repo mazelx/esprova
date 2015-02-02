@@ -184,11 +184,21 @@ class RaceList(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(RaceList, self).get_context_data(**kwargs)
+
+        # GET parameters and convert directly to dict for better handling in the templates
         context['params'] = self.request.GET.dict()
+
+        # TODO : get from season model
+        if not self.request.GET.get('start_date'):
+            context['params']['start_date'] = "2015-01-01"
+        if not self.request.GET.get('end_date'):
+            context['params']['end_date'] = "2015-12-31"
+
+        # Loop through distances parameters as it is a list of values
         context['params']['distances'] = {}
         for dist in self.request.GET.getlist('distances'):
+            # directly assign into params.distances.XS for example
             context['params']['distances'][dist] = True
-        logging.debug(context)
 
         return context
 
