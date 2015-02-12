@@ -1,6 +1,9 @@
 var map;
+var mapbounds;
+var last_query;
 var markers = {};
-var selected_event_id;
+var selected_event_id="";
+
 var highestZIndex = 10;
 
 var markerIcons = {};
@@ -55,6 +58,21 @@ if (typeof map_styles === 'undefined'){
 }
 
 
+window.onpopstate = function(event){
+    // window.location.href = event.state
+    console.log(event)
+    ajaxLoad(event.state)
+
+    // disable map move listener to avoid refresh upon initialization
+    google.maps.event.clearListeners(map, 'idle');
+    // initialize document from URL parameters
+    initializeFromURL();
+    // enable map move listener
+    google.maps.event.addListenerOnce(map, 'idle', function() {
+            addListMapMoves();
+        });
+}
+
 // ----------------------
 // JS Init
 // ----------------------
@@ -62,14 +80,12 @@ if (typeof map_styles === 'undefined'){
 google.maps.event.addDomListener(window, 'load', initialize);
 
 function initialize() {
-    var lat = parseFloat(getParameterByName('lat') || default_lat);
-    var lng = parseFloat(getParameterByName('lng') || default_lng);
 
     var mapOptions = {
         mapTypeId: google.maps.MapTypeId.TERRAIN,
         center: {
-            lat: lat ,
-            lng: lng
+            lat: default_lat ,
+            lng: default_lng
         },
         zoom: 6,
         maxZoom: 15,
@@ -86,22 +102,21 @@ function initialize() {
 
         map.setOptions({styles: map_styles});
 
+        // If map is not displayed (for mobile access)
         // Initialize results
         if($('#map-canvas').is(':hidden') == true) {    
             resetSearchForm();
         } else {
             // On Firefox (others?), a refresh would not display markers
-            google.maps.event.addListenerOnce(map, 'idle', function() {
-                getRacesFromMapBounds(map.getBounds().toUrlValue());
+            google.maps.event.addListenerOnce(map, 'idle', function () {
+                 mapbounds = map.getBounds().toUrlValue();
+                 getRaces();
             });
         }
     } else {
         resetSearchForm();
     }
     
-    // initialize search date
-    setDefaultSearchDates();
-
     // Add custom event listeners
     addListMapMoves();
     addListQuickSearch();
@@ -112,9 +127,8 @@ function initialize() {
 
     createDatePickerComponent();
 
+    initializeFromURL();
 }
-
-
 
 // ----------------------
 // DOM Initialization 
@@ -132,13 +146,46 @@ function createDatePickerComponent() {
     });
 }
 
-function setDefaultSearchDates(){
-    // dt = new Date();
-    // $("#start_date").attr("value", dt.toJSON().slice(0,10));
-    // dt.setFullYear(dt.getFullYear()+1);
-    // $("#end_date").attr("value", dt.toJSON().slice(0,10));
-}
 
+function initializeFromURL(){
+    
+    // set map to provided bounds
+    lat_lo = getParameterByName('lat_lo')
+    lat_hi = getParameterByName('lat_hi')
+    lng_lo = getParameterByName('lng_lo')
+    lng_hi = getParameterByName('lng_hi')
+
+    if(lat_lo !== "" && lat_hi !== "" && lng_lo !== "" && lng_hi !== "") {
+        sw = new google.maps.LatLng(parseFloat(lat_hi), parseFloat(lng_lo));
+        ne = new google.maps.LatLng(parseFloat(lat_lo), parseFloat(lng_hi));
+        bounds = new google.maps.LatLngBounds(sw, ne);
+        map.setCenter(bounds.getCenter());
+        map.setZoom(parseInt(getParameterByName('z')))
+    }
+
+    // set dates
+    start_date = getParameterByName('start_date');
+    end_date = getParameterByName('end_date');
+    search_expr = getParameterByName('search_expr');
+
+    if (start_date !== "") {
+        $("#start_date").val(start_date);
+    }
+    if (end_date !== "") {
+        $("#end_date").val(end_date);
+    }
+    if (search_expr !== "") {
+        $("#search_expr").val(search_expr);
+    }
+
+    // set active
+    active = getParameterByName('active')
+    if (active !== "") {
+        selected_event_id = parseInt(active);    
+    }
+
+    getRaces(false);
+}
 
 // ----------------------
 // LISTENERS
@@ -150,7 +197,8 @@ function addListMapMoves(){
         google.maps.event.addListener(map, 'idle', function() {
             // Do not refresh races if the map is not visible or "follow map bounds" not checked
             if ($("#follow_map_bounds").is(':checked') && $(".mapbox").is(":visible") ) {
-                getRacesFromMapBounds(map.getBounds().toUrlValue());
+                mapbounds = map.getBounds().toUrlValue()
+                getRaces();
             }
         });
     }
@@ -160,6 +208,8 @@ function addListMarkerClick(marker){
     if (map !== undefined) {
         google.maps.event.addListener(marker, 'click', function () {
             selectEvent(marker.get("id"));
+            param_query = getParamQuery();
+            history.pushState(param_query, 'index', '/list?' + param_query);
         });
     }
 }
@@ -167,6 +217,8 @@ function addListMarkerClick(marker){
 function addListResultClick(){
     $(".event-result").click(function( event ) {
         selectEvent(event.currentTarget.id.replace("event_",""));
+        param_query = getParamQuery();
+        history.pushState(param_query, 'index', '/list?' + param_query);
     });
 }
 
@@ -174,7 +226,7 @@ function addListResultClick(){
 function addListQuickSearch(){ 
     $( "#search_expr_go" ).click(function( event ) {
         event.preventDefault();
-        getRacesFromSearch();
+        getRaces();
     });
 }
     
@@ -182,9 +234,14 @@ function addListQuickSearch(){
 function addListSearch(){
     $( "#race_search_form" ).change(function( event ) {
         event.preventDefault();
-        getRacesFromSearch();
+        getRaces();
     });
 }
+
+
+// function addListSearch() {
+//     // $('#start_date').datepicker().on('hide', getRaces);
+// }
 
 function addListResetForm(){
      $( "#reset-search-form" ).click(function( event ) {
@@ -222,43 +279,47 @@ function addListHoverMapResult(marker){
     }
 }
 
-
-
 // ----------------------
 // Ajax Handling
 // ----------------------
 
-function getRacesFromSearch(data){
-     $.ajax({
-        url: 'ajx/search/?',
-        type: 'GET',
-        data: 'lat_lo=' + boundsarray[0] + 
-              '&lng_lo=' + boundsarray[1] + 
-              '&lat_hi=' + boundsarray[2] + 
-              '&lng_hi=' + boundsarray[3] +
-              '&' + $( "#race_search_form" ).serialize(),
-              // '&search_expr=' + $("#search_expr").val() ,
-        dataType: 'json',
-        success: function(response, statut) {
-            refreshRacesOnSidebar(response.html);
-            refreshRacesOnMap(response.races);
-            // setMapBoundsFromResults();
-        },
-    });
+
+function getParamQuery(){
+    param_query = 'z=' + map.getZoom() +
+                      '&active=' + selected_event_id +
+                      '&lat_lo=' + boundsarray[0] + 
+                      '&lng_lo=' + boundsarray[1] + 
+                      '&lat_hi=' + boundsarray[2] + 
+                      '&lng_hi=' + boundsarray[3] +
+                      '&' + $( "#race_search_form" ).serialize()
+
+    return param_query;
 }
 
-function getRacesFromMapBounds(mapbounds) {
+function getRaces(recordState) {
+    recordState = (typeof recordState === "undefined") ? true : recordState;
     // returns a HTML of races results
-    boundsarray = mapbounds.split(',')
+    if (mapbounds !== undefined) {
+        boundsarray = mapbounds.split(',')
+        
+        param_query = getParamQuery();
+
+        if (param_query !== last_query) {
+            ajaxLoad(param_query);
+            if (recordState === true) {
+                history.pushState(param_query, 'index', '/list?' + param_query)
+                last_query = param_query
+            }
+        }
+    }
+}
+
+function ajaxLoad(params) {
+    console.log(params)
     $.ajax({
-        url: 'ajx/search/?',
+        url: 'ajx/search/',
         type: 'GET', 
-        data: 'lat_lo=' + boundsarray[0] + 
-              '&lng_lo=' + boundsarray[1] + 
-              '&lat_hi=' + boundsarray[2] + 
-              '&lng_hi=' + boundsarray[3] +
-              '&' + $( "#race_search_form" ).serialize(),
-              // '&search_expr=' + $("#search_expr").val() ,
+        data: params,
         dataType: 'json',
         success: function(response, statut) {
             refreshRacesOnSidebar(response.html);
@@ -307,9 +368,9 @@ function refreshRacesOnMap(races) {
         addListHoverMapResult(marker);
     });
 
-    if (!(selected_event_id in markers)) {
-        selected_event_id = null;
-    }
+    // if (!(selected_event_id in markers)) {
+    //     selected_event_id = null;
+    // }
 
     selectEvent(selected_event_id);
 }
@@ -319,31 +380,34 @@ function refreshRacesOnMap(races) {
 // Dynamic display
 // ----------------------
 function selectEvent(event_id){
-    // unselect old event
-    if($("#event_" + selected_event_id).length){
-        $("#event_" + selected_event_id).removeClass("panel-primary");
-        $("#event_" + selected_event_id + "_races").removeClass("in");
-        marker = markers[selected_event_id];
-        marker.setIcon(markerIcons[marker.rankClass]["default"]);
+    if ( markers[selected_event_id] !== undefined ) {
+        // unselect old event
+        if($("#event_" + selected_event_id).length) {
+            $("#event_" + selected_event_id).removeClass("panel-primary");
+            $("#event_" + selected_event_id + "_races").removeClass("in");
+            marker = markers[selected_event_id];
+            marker.setIcon(markerIcons[marker.rankClass]["default"]);
+        }
     }
-
+    
     // select new event
     selected_event_id = event_id;
 
-    if($("#event_" + selected_event_id).length){
-        $("#event_" + selected_event_id).addClass("panel-primary");
-        $("#event_" + selected_event_id + "_races").addClass("in");
-        
-        // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
-        $(".sidebox").animate({
-            scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
-        }, 500);
-        marker = markers[selected_event_id];
-        marker.setIcon(markerIcons[marker.rankClass]["selected"]);
-        marker.setZIndex(highestZIndex+1);
-        highestZIndex += 1;
+    if ( markers[selected_event_id] !== undefined ) {
+        if($("#event_" + selected_event_id).length) {
+            $("#event_" + selected_event_id).addClass("panel-primary");
+            $("#event_" + selected_event_id + "_races").addClass("in");
+            
+            // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
+            $(".sidebox").animate({
+                scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
+            }, 500);
+            marker = markers[selected_event_id];
+            marker.setIcon(markerIcons[marker.rankClass]["selected"]);
+            marker.setZIndex(highestZIndex+1);
+            highestZIndex += 1;
+        }
     }
-   
 }
 
 
@@ -360,12 +424,11 @@ function setMapBoundsFromResults() {
 }
 
 function resetSearchForm(){
-    $("#race_quicksearch_form")[0].reset()
     $("#race_search_form")[0].reset();
     $('#start_date').datepicker('update')
     $('#end_date').datepicker('update')
     $(".distance_selector").removeClass("active");
-    getRacesFromSearch();
+    getRaces();
 }
 
 function highlightResult(event_id){
