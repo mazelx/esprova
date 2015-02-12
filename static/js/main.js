@@ -110,7 +110,7 @@ function initialize() {
             // On Firefox (others?), a refresh would not display markers
             google.maps.event.addListenerOnce(map, 'idle', function () {
                  mapbounds = map.getBounds().toUrlValue();
-                 getRaces();
+                 // getRaces();
             });
         }
     } else {
@@ -209,7 +209,7 @@ function addListMarkerClick(marker){
         google.maps.event.addListener(marker, 'click', function () {
             selectEvent(marker.get("id"));
             param_query = getParamQuery();
-            history.pushState(param_query, 'index', '/list?' + param_query);
+            pushState(param_query);
         });
     }
 }
@@ -218,7 +218,7 @@ function addListResultClick(){
     $(".event-result").click(function( event ) {
         selectEvent(event.currentTarget.id.replace("event_",""));
         param_query = getParamQuery();
-        history.pushState(param_query, 'index', '/list?' + param_query);
+        pushState(param_query);
     });
 }
 
@@ -283,19 +283,6 @@ function addListHoverMapResult(marker){
 // Ajax Handling
 // ----------------------
 
-
-function getParamQuery(){
-    param_query = 'z=' + map.getZoom() +
-                      '&active=' + selected_event_id +
-                      '&lat_lo=' + boundsarray[0] + 
-                      '&lng_lo=' + boundsarray[1] + 
-                      '&lat_hi=' + boundsarray[2] + 
-                      '&lng_hi=' + boundsarray[3] +
-                      '&' + $( "#race_search_form" ).serialize()
-
-    return param_query;
-}
-
 function getRaces(recordState) {
     recordState = (typeof recordState === "undefined") ? true : recordState;
     // returns a HTML of races results
@@ -307,7 +294,7 @@ function getRaces(recordState) {
         if (param_query !== last_query) {
             ajaxLoad(param_query);
             if (recordState === true) {
-                history.pushState(param_query, 'index', '/list?' + param_query)
+                pushState(param_query);
                 last_query = param_query
             }
         }
@@ -459,4 +446,24 @@ function getParameterByName(name) {
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function getParamQuery(){
+    param_query = 'z=' + map.getZoom() +
+                      '&active=' + selected_event_id +
+                      '&lat_lo=' + boundsarray[0] + 
+                      '&lng_lo=' + boundsarray[1] + 
+                      '&lat_hi=' + boundsarray[2] + 
+                      '&lng_hi=' + boundsarray[3] +
+                      '&' + $( "#race_search_form" ).serialize()
+
+    return param_query;
+}
+
+function pushState(param_query){
+    if (param_query !== last_query && typeof last_query !== "undefined"){
+        history.pushState(param_query, 'index', '/list?' + param_query);
+        last_query = param_query
+        console.log('push')    
+    }
 }
