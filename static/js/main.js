@@ -58,21 +58,6 @@ if (typeof map_styles === 'undefined'){
 }
 
 
-window.onpopstate = function(event){
-    // window.location.href = event.state
-    console.log(event)
-    ajaxLoad(event.state)
-
-    // disable map move listener to avoid refresh upon initialization
-    google.maps.event.clearListeners(map, 'idle');
-    // initialize document from URL parameters
-    initializeFromURL();
-    // enable map move listener
-    google.maps.event.addListenerOnce(map, 'idle', function() {
-            addListMapMoves();
-        });
-}
-
 // ----------------------
 // JS Init
 // ----------------------
@@ -182,9 +167,11 @@ function initializeFromURL(){
     active = getParameterByName('active')
     if (active !== "") {
         selected_event_id = parseInt(active);    
+    } else {
+        selected_event_id = ""
     }
 
-    getRaces(false);
+    // getRaces(false);
 }
 
 // ----------------------
@@ -209,7 +196,7 @@ function addListMarkerClick(marker){
         google.maps.event.addListener(marker, 'click', function () {
             selectEvent(marker.get("id"));
             param_query = getParamQuery();
-            pushState(param_query);
+            pushState(param_query, false);
         });
     }
 }
@@ -218,7 +205,7 @@ function addListResultClick(){
     $(".event-result").click(function( event ) {
         selectEvent(event.currentTarget.id.replace("event_",""));
         param_query = getParamQuery();
-        pushState(param_query);
+        pushState(param_query, false);
     });
 }
 
@@ -302,7 +289,7 @@ function getRaces(recordState) {
 }
 
 function ajaxLoad(params) {
-    console.log(params)
+    console.log("ajaxload: "+params)
     $.ajax({
         url: 'ajx/search/',
         type: 'GET', 
@@ -461,9 +448,39 @@ function getParamQuery(){
 }
 
 function pushState(param_query){
+    stateObj = { param_query: param_query
+                }
+
     if (param_query !== last_query && typeof last_query !== "undefined"){
-        history.pushState(param_query, 'index', '/list?' + param_query);
+        history.pushState(stateObj, 'index', '/list?' + param_query);
         last_query = param_query
-        console.log('push')    
+        console.log('push') 
+        console.log(stateObj)   
+    } else if (location.search === ""){
+        history.replaceState(stateObj, 'index', '/list?' + param_query);
+        last_query = param_query
+        console.log('push initial')    
+        console.log(stateObj)
     }
 }
+
+window.onpopstate = function(event){
+    // window.location.href = event.state
+    console.log("history pop")
+    console.log(event.state)
+
+    if(true) {
+        ajaxLoad(event.state["param_query"])    
+    }
+
+    // disable map move listener to avoid refresh upon initialization
+    google.maps.event.clearListeners(map, 'idle');
+    // initialize document from URL parameters
+    initializeFromURL();
+    // enable map move listener
+    google.maps.event.addListenerOnce(map, 'idle', function() {
+            addListMapMoves();
+        });
+
+}
+
