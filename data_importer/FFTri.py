@@ -124,6 +124,11 @@ class FFTri:
                 location = Location()
                 if geocode:
                     location.geocode_raw_address(l['raw'])
+
+                    # fix for google geocoder bug for some french departments
+                    # replace postal code and departement with API value
+                    location.postal_code = l['postal_code']
+                    location.administrative_area_level_2_short_name = l['postal_code'][:2]
                 else:
                     location.lat = l['lat']
                     location.lng = l['lng']
@@ -136,7 +141,6 @@ class FFTri:
                         location.route = address_re.search(address).group(0)
                     if locality_re.search(race_src.get('adresse', None)):
                         location.locality = locality_re.search(address).group(0)
-
                 # check that location is near lat/lng provided
                 location.save()
 
