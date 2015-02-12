@@ -142,17 +142,17 @@ ELASTICSEARCH_INDEX_SETTINGS = {
             "analyzer": {
                 "search_analyzer": {
                     "type": "custom",
-                    "tokenizer": "whitespace",
+                    "tokenizer": "standard",
                     "filter": ["lowercase", "asciifolding"]
                 },
                 "ngram_analyzer": {
                     "type": "custom",
-                    "tokenizer": "whitespace",
+                    "tokenizer": "standard",
                     "filter": ["haystack_ngram"]
                 },
                 "edgengram_analyzer": {
                     "type": "custom",
-                    "tokenizer": "whitespace",
+                    "tokenizer": "standard",
                     "filter": ["haystack_edgengram", "lowercase", "asciifolding"],
                 }
             },
