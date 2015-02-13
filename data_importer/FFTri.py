@@ -5,6 +5,9 @@ from operator import itemgetter
 import pytz
 from datetime import datetime
 import warnings
+import sys
+import traceback
+
 
 from core.models import Race, EventReference, EventEdition, Location, Contact, DistanceCategory, Sport, Organizer, Federation
 
@@ -68,7 +71,7 @@ class FFTri:
 
         return sorted_list
 
-    def save_events(self, geocode=True):
+    def save_events(self, geocode=True, limit=0):
         nb_created, nb_failed = 0, 0
         event_re = re.compile('.+(?=\s-\s)')
         address_re = re.compile('(.+)(?=\s-\s\D)')
@@ -123,44 +126,56 @@ class FFTri:
 
                 location = Location()
                 if geocode:
-                    g_country = 'FR'
-                    if postal_code[:3] == '971':
-                        # guadeloupe
-                        g_country = 'GP'
-                    elif postal_code[:3] == '972':
-                        # martinique
-                        g_country = 'MQ'
-                    elif postal_code[:3] == '973':
-                        # guyane
-                        g_country = 'GF'
-                    elif postal_code[:3] == '974':
-                        # réunion
-                        g_country = 'RE'
-                    elif postal_code[:3] == '975':
-                        # saint pierre et miquelon
-                        g_country = 'PM'
-                    elif postal_code[:3] == '976':
-                        # mayotte
-                        g_country = 'YT'
-                    elif postal_code[:3] == '984':
-                        # terres australes ... on sait jamais
-                        g_country = 'TF'
-                    elif postal_code[:3] == '986':
-                        # wallis et futuna
-                        g_country = 'WF'
-                    elif postal_code[:3] == '987':
-                        # polynesie francaise
-                        g_country = 'PF'
-                    elif postal_code[:3] == '988':
-                        # nouvelle caledonie
-                        g_country = 'NC'
+                    country = 'FR'
+                    adm2_short = l['postal_code'][:2]
 
-                    location.geocode_raw_address(query=l['raw'], postal_code=l['postal_code'], country=g_country)
+                    if l['postal_code'][:3] == '971':
+                        # guadeloupe
+                        country = 'GP'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '972':
+                        # martinique
+                        country = 'MQ'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '973':
+                        # guyane
+                        country = 'GF'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '974':
+                        # réunion
+                        country = 'RE'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '975':
+                        # saint pierre et miquelon
+                        country = 'PM'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '976':
+                        # mayotte
+                        country = 'YT'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '984':
+                        # terres australes ... on sait jamais
+                        country = 'TF'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '986':
+                        # wallis et futuna
+                        country = 'WF'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '987':
+                        # polynesie francaise
+                        country = 'PF'
+                        adm2_short = l['postal_code'][:3]
+                    elif l['postal_code'][:3] == '988':
+                        # nouvelle caledonie
+                        country = 'NC'
+                        adm2_short = l['postal_code'][:3]
+
+                    location.geocode_raw_address(raw_address=l['raw'], postal_code=l['postal_code'], country=country)
 
                     # fix for google geocoder bug for some french departments
                     # replace postal code and departement with API value
                     location.postal_code = l['postal_code']
-                    location.administrative_area_level_2_short_name = l['postal_code'][:2]
+                    location.administrative_area_level_2_short_name = adm2_short
                 else:
                     location.lat = l['lat']
                     location.lng = l['lng']
@@ -203,7 +218,10 @@ class FFTri:
 
             except Exception as e:
                 has_error = True
-                print ("[ERR][UNK] [{0}] : {1}".format(race_src_id, str(e)))
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
+                print ("[ERR][UNK] [{0}] :".format(race_src_id))
+                print (''.join('!! ' + line for line in lines))
 
             finally:
                 if has_error:
@@ -223,6 +241,9 @@ class FFTri:
                             race.delete()
                 else:
                     print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
+                    if limit == 1:
+                        break
+                    limit -= 1
 
 
 

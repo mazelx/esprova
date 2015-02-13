@@ -95,3 +95,17 @@ def direct_block_to_template(request, template, block, extra_context=None, mimet
     t = get_template(template)
     t.render(c)
     return HttpResponse(render_template_block(t, block, c), mimetype=mimetype)
+
+
+# clean db
+
+from core.models import Race, EventReference, EventEdition, Contact, Location, Organizer
+
+def delete_all_races_and_cascade():
+    Race.objects.all().delete()
+    EventEdition.objects.all().delete()
+    EventReference.objects.all().delete()
+    Contact.objects.all().delete()
+    Location.objects.all().delete()
+    Organizer.objects.all().delete()
+
