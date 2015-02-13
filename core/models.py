@@ -90,13 +90,13 @@ class Location(models.Model):
     def __str__(self):
         return "{0}, {1}, {2} ({3}, {4})".format(self.postal_code, self.locality, self.country, self.lat, self.lng)
 
-    def geocode_raw_address(self, raw_address):
+    def geocode_raw_address(self, raw_address, postal_code, country='FR'):
         """
             Geocode using the Google maps V3 geocoder
 
         """
         g = GoogleV3()
-        loc = g.geocode(raw_address)
+        loc = g.geocode(query=raw_address, components={'postal_code': postal_code, 'country': country})
         if loc:
             # list comprehension to retrieve data
             for f in self._meta.fields:

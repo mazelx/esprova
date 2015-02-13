@@ -106,7 +106,7 @@ class FFTri:
             c['email'] = race_src.get('email', None)
             c['phone'] = race_src.get('telephone', None)
             r['description'] = None
-            l['raw'] = race_src.get('adresse', None) + ', FR'
+            l['raw'] = race_src.get('adresse', None)
             l['postal_code'] = race_src.get('cp', None)
             l['lat'] = race_src.get('latitude', None)
             l['lng'] = race_src.get('longitude', None)
@@ -123,7 +123,39 @@ class FFTri:
 
                 location = Location()
                 if geocode:
-                    location.geocode_raw_address(l['raw'])
+                    g_country = 'FR'
+                    if postal_code[:3] == '971':
+                        # guadeloupe
+                        g_country = 'GP'
+                    elif postal_code[:3] == '972':
+                        # martinique
+                        g_country = 'MQ'
+                    elif postal_code[:3] == '973':
+                        # guyane
+                        g_country = 'GF'
+                    elif postal_code[:3] == '974':
+                        # réunion
+                        g_country = 'RE'
+                    elif postal_code[:3] == '975':
+                        # saint pierre et miquelon
+                        g_country = 'PM'
+                    elif postal_code[:3] == '976':
+                        # mayotte
+                        g_country = 'YT'
+                    elif postal_code[:3] == '984':
+                        # terres australes ... on sait jamais
+                        g_country = 'TF'
+                    elif postal_code[:3] == '986':
+                        # wallis et futuna
+                        g_country = 'WF'
+                    elif postal_code[:3] == '987':
+                        # polynesie francaise
+                        g_country = 'PF'
+                    elif postal_code[:3] == '988':
+                        # nouvelle caledonie
+                        g_country = 'NC'
+
+                    location.geocode_raw_address(query=l['raw'], postal_code=l['postal_code'], country=g_country)
 
                     # fix for google geocoder bug for some french departments
                     # replace postal code and departement with API value
