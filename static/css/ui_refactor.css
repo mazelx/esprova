@@ -1,0 +1,26 @@
+.mapbox {
+    height: 100%;
+    min-height: 100%;
+    background-color: lightgray;
+    /*display:inline-block;*/
+    margin:auto;
+}
+.sidebox {
+    height: 100%;
+    min-height: 100%;
+    overflow-y: scroll;
+    /*display:inline-block;*/
+}
+
+.content {
+    top: 51px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    height: auto;
+}
+
+.content>.row {
+    height: 100%;
+}

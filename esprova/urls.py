@@ -79,6 +79,9 @@ urlpatterns = patterns('',
                            template_name='robots.txt',
                            content_type='text/plain')),
 
+                       # UI refactor
+                       url(r'^ui/$', TemplateView.as_view(template_name='core/ui_refactor.html')),
+
                        )
 
 # serve static files on dev

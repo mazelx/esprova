@@ -1,0 +1,106 @@
+.content {
+    top: 51px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    height: auto;
+}
+
+.content>.row {
+    height: 100%;
+}
+.navbar {
+    margin-bottom: 0;
+    width:100%;
+    position:fixed;
+}
+.mapbox {
+    height: 100%;
+    min-height: 100%;
+    background-color: lightgray;
+    margin:auto;
+}
+.sidebox {
+    height: 100%;
+    overflow-y: scroll;
+    border: 1px solid transparent;
+    border-width: 0 0 0 1px;
+    border-color: @esprova-gray;
+
+    .shadow(-2px, 0);
+}
+.searchbox {
+    /*min-height:150px;*/
+    /*background-color: lightyellow;*/
+    
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+.placesearchbox {
+    position: relative;
+    padding: 20px 0px;
+    /*background-color: red;*/
+}
+.racebanner {
+    /*margin: 20px 0;*/
+    /*width: 100%;*/
+    vertical-align: text-bottom;
+    top:51px;
+    height: 400px;
+    background-color: lightgray;
+}
+
+.racebanner > p {
+    margin-top:370px;
+    margin-right: 20px;
+    font-style: italic;
+    color: white;
+}
+
+.presentation {
+    /*background: #F8F8F8;  /*navbar color*/
+    /*display:table;*/
+    position: absolute;
+    height: 100%;
+    /*width: 100%;*/
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+.sport-presentation{
+    /*display: table-cell;*/
+    /*vertical-align: middle;*/
+    margin-top: 120px;
+}
+
+.sport-selecter{
+    text-align: center;
+    border: 1px solid red;
+}
+
+.distance_checkbox {
+    display: none;
+}
+
+.sidealert {
+    position:relative;
+    z-index: 1;
+}
+
+.mapalert {
+    position:absolute;
+    z-index: 1;
+}
+
+.event-result {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.event-result.mouseover{
+    border-color:  gray;
+}
+
