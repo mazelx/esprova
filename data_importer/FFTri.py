@@ -166,7 +166,7 @@ class FFTri:
                         country = 'PF'
                         adm2_short = l['postal_code'][:3]
                     elif l['postal_code'][:3] == '988':
-                        # nouvelle caledonie
+                        # nouvellae caledonie
                         country = 'NC'
                         adm2_short = l['postal_code'][:3]
 
