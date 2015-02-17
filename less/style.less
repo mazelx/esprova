@@ -1,3 +1,9 @@
+// .navbar {
+//     margin-bottom: 0;
+//     width:100%;
+//     position:fixed;
+// }
+
 .content {
     top: 51px;
     left: 0;
@@ -7,14 +13,10 @@
     height: auto;
 }
 
-.content>.row {
+.searchpage {
     height: 100%;
 }
-.navbar {
-    margin-bottom: 0;
-    width:100%;
-    position:fixed;
-}
+
 .mapbox {
     height: 100%;
     min-height: 100%;
@@ -24,24 +26,46 @@
 .sidebox {
     height: 100%;
     overflow-y: scroll;
-    border: 1px solid transparent;
+    border: 1px solid;
     border-width: 0 0 0 1px;
     border-color: @esprova-gray;
 
     .shadow(-2px, 0);
 }
-.searchbox {
-    /*min-height:150px;*/
-    /*background-color: lightyellow;*/
-    
-    margin-bottom: 0;
-    border-bottom: 0;
+.searchbox {    
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    border: 1px solid @esprova-lightgray;
+    border-width: 0 0 1px 0;
 }
-.placesearchbox {
-    position: relative;
-    padding: 20px 0px;
-    /*background-color: red;*/
+
+.month-spacer {
+    font-size: 18px;
+    color: @esprova-red;
+    font-weight: 500;
+    line-height: 1.1;
 }
+
+.distance_selector {
+    width: 20%;
+    padding: 6px 6px;
+}
+
+.help-search {
+    font-size: 24px;
+    margin-top: 3px;
+}
+
+// not used so far
+
+
+// .placesearchbox {
+//     position: relative;
+//     padding: 20px 0px;
+//     /*background-color: red;*/
+// }
+
 .racebanner {
     /*margin: 20px 0;*/
     /*width: 100%;*/
