@@ -6643,11 +6643,20 @@ button.close {
 .search-result .result-content .result-distances > button:disabled {
   visibility: hidden;
 }
-.search-result .result-content .result-detail {
-  display: none;
-}
 .search-result .result-content .result-detail .result-detail-distance {
   margin-top: 3px;
+  display: inline;
+}
+.search-result .result-content .result-detail .result-detail-distance.disabled {
+  visibility: hidden;
+}
+.search-result .result-content .result-detail .result-detail-date {
+  display: none;
+}
+.search-result .result-content .result-detail .distance-icon {
+  background-color: #b3b3b3;
+  color: white;
+  cursor: inherit;
 }
 .search-result.active {
   background-color: #e6e6e6;
@@ -6656,12 +6665,18 @@ button.close {
 .search-result.active .result-date-preview {
   color: #e35252;
 }
-.search-result.active .result-content .result-distances {
-  display: none;
-}
 .search-result.active .result-content .result-detail {
   display: initial;
   color: #e35252;
+}
+.search-result.active .result-content .result-detail .result-detail-distance {
+  display: block;
+}
+.search-result.active .result-content .result-detail .result-detail-distance .result-detail-date {
+  display: inline;
+}
+.search-result.active .result-content .result-detail .result-detail-distance.disabled {
+  display: none;
 }
 .search-result.active .result-content .distance-icon {
   background-color: #e35252;

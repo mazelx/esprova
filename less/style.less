@@ -143,28 +143,53 @@
         }
 
         .result-detail {
-            display:none;
+
             .result-detail-distance {
                 margin-top: 3px;
+                display:inline;
+                 &.disabled {
+                        visibility: hidden;
+                    }
             }
+            .result-detail-date {
+                display: none;
+            }
+
+            .distance-icon {
+                background-color: @esprova-gray;
+                color:white;
+                cursor: inherit;
+            }
+
         }
 
     }
 
+// when result selected ("active")
     &.active {
         background-color: @esprova-lightgray;
         padding-bottom: 20px;
+
         .result-date-preview {
             color: @esprova-red;
         }
-        .result-content {
-            .result-distances {
-                display:none;
-            }
 
+        .result-content {
             .result-detail {
                 display: initial;
                 color: @esprova-red;
+                .result-detail-distance {
+                    display: block;
+                    .result-detail-date {
+                        display: inline;
+                    }
+                    &.disabled {
+                        display: none;
+                    }
+
+                }
+
+
             }
 
             .distance-icon {
