@@ -6631,18 +6631,6 @@ button.close {
   color: #b3b3b3;
   letter-spacing: 0.075em;
 }
-.search-result .result-content .distance-icon {
-  width: 40px;
-  border: 0;
-}
-.search-result .result-content .result-distances > button {
-  background-color: #b3b3b3;
-  color: white;
-  cursor: inherit;
-}
-.search-result .result-content .result-distances > button:disabled {
-  visibility: hidden;
-}
 .search-result .result-content .result-detail .result-detail-distance {
   margin-top: 3px;
   display: inline;
@@ -6650,13 +6638,15 @@ button.close {
 .search-result .result-content .result-detail .result-detail-distance.disabled {
   visibility: hidden;
 }
-.search-result .result-content .result-detail .result-detail-date {
+.search-result .result-content .result-detail .result-detail-distance .result-detail-date {
   display: none;
 }
-.search-result .result-content .result-detail .distance-icon {
+.search-result .result-content .result-detail .result-detail-distance .distance-icon {
   background-color: #b3b3b3;
   color: white;
   cursor: inherit;
+  width: 40px;
+  border: 0;
 }
 .search-result.active {
   background-color: #e6e6e6;
@@ -6672,13 +6662,13 @@ button.close {
 .search-result.active .result-content .result-detail .result-detail-distance {
   display: block;
 }
-.search-result.active .result-content .result-detail .result-detail-distance .result-detail-date {
-  display: inline;
-}
 .search-result.active .result-content .result-detail .result-detail-distance.disabled {
   display: none;
 }
-.search-result.active .result-content .distance-icon {
+.search-result.active .result-content .result-detail .result-detail-distance .result-detail-date {
+  display: inline;
+}
+.search-result.active .result-content .result-detail .result-detail-distance .distance-icon {
   background-color: #e35252;
   color: white;
   margin-right: 20px;

@@ -113,33 +113,14 @@
     .result-content {
         margin-left: 100px;
 
-
-
         .result-title {
             letter-spacing: 0.075em;
-            // font-weight: 300;
             margin: 0;
         }
 
         .result-location {
             color: @esprova-gray;
             letter-spacing: 0.075em;
-            // font-weight: 200;
-        }
-
-        .distance-icon {
-            width: 40px;
-            border: 0;
-        }
-
-        .result-distances>button {
-            background-color: @esprova-gray;
-            color:white;
-            cursor: inherit;
-        }
-
-        .result-distances>button:disabled {
-            visibility: hidden;
         }
 
         .result-detail {
@@ -147,18 +128,21 @@
             .result-detail-distance {
                 margin-top: 3px;
                 display:inline;
-                 &.disabled {
+                &.disabled {
                         visibility: hidden;
                     }
-            }
-            .result-detail-date {
-                display: none;
-            }
+                .result-detail-date {
+                    display: none;
+                }
 
-            .distance-icon {
-                background-color: @esprova-gray;
-                color:white;
-                cursor: inherit;
+                .distance-icon {
+                    background-color: @esprova-gray;
+                    color:white;
+                    cursor: inherit;
+                    width: 40px;
+                    border: 0;
+                }
+
             }
 
         }
@@ -180,41 +164,25 @@
                 color: @esprova-red;
                 .result-detail-distance {
                     display: block;
-                    .result-detail-date {
-                        display: inline;
-                    }
                     &.disabled {
                         display: none;
                     }
-
+                    .result-detail-date {
+                        display: inline;
+                    }
+                    .distance-icon {
+                        background-color: @esprova-red;
+                        color: white;
+                        margin-right: 20px;
+                    }
                 }
-
-
-            }
-
-            .distance-icon {
-                background-color: @esprova-red;
-                color: white;
-                margin-right: 20px;
             }
         }
     }
 }
 
-// .result-spacer {
-//     border: 1px solid @esprova-lightgray;
-//     border-width: 0 0 1px 0;
-//     margin: 0 -15px 0 -15px;
-// }
 
 // not used so far
-
-
-// .placesearchbox {
-//     position: relative;
-//     padding: 20px 0px;
-//     /*background-color: red;*/
-// }
 
 .racebanner {
     /*margin: 20px 0;*/
