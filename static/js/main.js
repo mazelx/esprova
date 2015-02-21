@@ -76,6 +76,7 @@ function initialize() {
         maxZoom: 15,
         // minZoom:5,   
         panControl: false,
+        zoomControl: false,
         streetViewControl: false
     };
 
@@ -110,14 +111,28 @@ function initialize() {
     addListResultClick();
     addListResetForm();
 
-    createDatePickerComponent();
+    // createDatePickerComponent();
 
+    initializeMapZoomControl();
     initializeFromURL();
 }
 
 // ----------------------
 // DOM Initialization 
 // ----------------------
+
+
+// initialize map zoom controls
+function initializeMapZoomControl() {
+    // Setup the click event listeners and zoom-in or out according to the clicked element
+    $('#cd-zoom-in').click( function(event) {
+        map.setZoom(map.getZoom()+1)
+    });
+    $('#cd-zoom-out').click( function(event) {
+        map.setZoom(map.getZoom()-1)
+    });
+}
+    
 
 // initialize bootstrap-datepicker component
 function createDatePickerComponent() {
