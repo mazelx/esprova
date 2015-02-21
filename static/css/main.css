@@ -6565,10 +6565,10 @@ button.close {
   line-height: 32px;
 }
 #cd-zoom-in {
-  top: 40px;
+  top: 15px;
 }
 #cd-zoom-out {
-  top: 72px;
+  top: 48px;
 }
 .sidebox {
   height: 100%;
@@ -6633,16 +6633,21 @@ button.close {
 }
 .search-result .result-content .distance-icon {
   width: 40px;
+  border: 0;
 }
 .search-result .result-content .result-distances > button {
   background-color: #b3b3b3;
   color: white;
+  cursor: inherit;
 }
 .search-result .result-content .result-distances > button:disabled {
   visibility: hidden;
 }
 .search-result .result-content .result-detail {
   display: none;
+}
+.search-result .result-content .result-detail .result-detail-distance {
+  margin-top: 3px;
 }
 .search-result.active {
   background-color: #e6e6e6;

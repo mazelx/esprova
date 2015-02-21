@@ -217,8 +217,10 @@ function addListMarkerClick(marker){
 }
 
 function addListResultClick(){
-    $(".event-result").click(function( event ) {
+    $(".search-result").click(function( event ) {
         selectEvent(event.currentTarget.id.replace("event_",""));
+        $(".search-result").removeClass("active");
+        $(event.currentTarget).addClass("active");
         param_query = getParamQuery();
         pushState(param_query, false);
     });
@@ -262,7 +264,7 @@ function addListAlertMessages(){
 }
 
 function addListHoverSideboxResult(){
-    $(".event-result").hover(function() {
+    $(".search-result").hover(function() {
         highlightResult($(this)[0].id.replace("event_",""))
     }, function() {
         deHighlightResult($(this)[0].id.replace("event_",""))

@@ -40,10 +40,10 @@
 }
 
 #cd-zoom-in {
-    top: 40px;
+    top: 15px;
 }
 #cd-zoom-out {
-    top: 72px;
+    top: 48px;
 }
 
 .sidebox {
@@ -129,11 +129,13 @@
 
         .distance-icon {
             width: 40px;
+            border: 0;
         }
-    
+
         .result-distances>button {
             background-color: @esprova-gray;
             color:white;
+            cursor: inherit;
         }
 
         .result-distances>button:disabled {
@@ -142,7 +144,11 @@
 
         .result-detail {
             display:none;
+            .result-detail-distance {
+                margin-top: 3px;
+            }
         }
+
     }
 
     &.active {
