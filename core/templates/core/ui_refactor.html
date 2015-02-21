@@ -1,15 +1,16 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %} 
 
-<head>
+{% block head_extra %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <link href="{% static "css/main.css" %}" rel="stylesheet">
-
     <script src="{% static "js/jquery.js" %}"></script>
-    <script src="{% static "js/bootstrap.js" %}"></script>
-</head>
+
+    <!--<script src="{% static "js/bootstrap.js" %}"></script>-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+{% endblock %}
 
 {% block content %} 
 
@@ -19,8 +20,7 @@
     <div class='row searchpage'>
 
         {# mapbox #}
-        <div class='col-md-7 mapbox'>
-            
+        <div class='col-md-7 mapbox hidden-xs' id="map-canvas">
         </div>
 
         {# sidebox #}
@@ -36,7 +36,7 @@
                         <label for="start_date" class="col-xs-3 control-label">Recherche :</label>
                         <div class="col-xs-8">
                             <div class="input-group">
-                                <input type="text" id="search_expr" name="search_expr" class="form-control" placeholder="Recherche rapide ..." value="{{ params.search_expr }}"/>
+                                <input type="text" id="search_expr" name="search_expr" class="form-control" placeholder="Epreuve, lieu, organisateur..." value="{{ params.search_expr }}"/>
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" id="search_expr_go"> 
                                         <span class="glyphicon glyphicon-search" aria-hidden="true">
