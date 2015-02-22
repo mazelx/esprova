@@ -1,24 +1,19 @@
  {% load static from staticfiles %} 
- <div class="panel panel-default event-result" id="event_{{ object.event.pk }}">
-    <div class="panel-heading" role="tab">
-            <h4 class="panel-title">
-                {{ object.event.name }}
-                {% for d in object.event.get_distance_cat_set %}
-                    <span class="badge">{{ d.name }}</span>
-                {% endfor %}
 
-            </h4>
-
-            <p class="list-group-item-text">du {{ object.event.get_start_date|date:"d/m/Y"  }}  au {{ object.event.get_end_date|date:"d/m/Y" }} à {{ object.location.locality }} ({{ object.location.administrative_area_level_2_short_name}})</p>
-
-    </div> <!-- panel heading -->
-
-    <div id="event_{{ object.event.pk }}_races" class="list-group collapse">
-        {% for r in object.event.get_races %}
-            <a href="{% url "view_race" r.slug r.pk %}" class="list-group-item race-result" id="race_{{ object.pk }}">
-                {{ r.distance_cat.name }} - {{ r.date |date:"l d/m/Y à H:i" }}
-            </a>
-        {% endfor %}
-    </div> <!-- panel-collapse -->
-
-</div> <!-- panel -->
+<div class="search-result" id="event_{{ object.event.pk }}">
+    <div class="result-date-preview">{{ object.event.get_start_date|date:"d"  }}</div>
+    <div class="result-content">
+        <p class="result-title">{{ object.event.name }}</p>
+        <p class="result-location">{{ object.location.locality }}  ({{ object.location.administrative_area_level_2_short_name}})</p>
+        <div class="result-detail" id="event_{{ object.event.pk }}_races">
+            {% for r in object.event.get_races %}
+            <div class="result-detail-distance" >
+                <button type="button" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</button>
+                <span class="result-detail-date">
+                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date |date:"l d/m/Y à H:i" }}</a>
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

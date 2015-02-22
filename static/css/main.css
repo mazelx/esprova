@@ -6673,6 +6673,9 @@ button.close {
   color: white;
   margin-right: 20px;
 }
+.datepicker-switch {
+  color: #e35252;
+}
 .racebanner {
   /*margin: 20px 0;*/
   /*width: 100%;*/

@@ -111,7 +111,7 @@ function initialize() {
     addListResultClick();
     addListResetForm();
 
-    // createDatePickerComponent();
+    createDatePickerComponent();
 
     initializeMapZoomControl();
     initializeFromURL();
@@ -124,13 +124,15 @@ function initialize() {
 
 // initialize map zoom controls
 function initializeMapZoomControl() {
-    // Setup the click event listeners and zoom-in or out according to the clicked element
-    $('#cd-zoom-in').click( function(event) {
-        map.setZoom(map.getZoom()+1)
-    });
-    $('#cd-zoom-out').click( function(event) {
-        map.setZoom(map.getZoom()-1)
-    });
+    if (map !== undefined) {
+        // Setup the click event listeners and zoom-in or out according to the clicked element
+        $('#cd-zoom-in').click( function(event) {
+            map.setZoom(map.getZoom()+1)
+        });
+        $('#cd-zoom-out').click( function(event) {
+            map.setZoom(map.getZoom()-1)
+        });
+    }
 }
     
 

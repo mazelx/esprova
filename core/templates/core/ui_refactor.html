@@ -2,14 +2,11 @@
 {% load static from staticfiles %} 
 
 {% block head_extra %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static "css/main.css" %}" rel="stylesheet">
-    <script src="{% static "js/jquery.js" %}"></script>
+    {# <link href="{% static "css/datepicker3.css" %}" rel="stylesheet"> #}
+    <script type="text/javascript" src="{% static "js/bootstrap-datepicker.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
 
-    <!--<script src="{% static "js/bootstrap.js" %}"></script>-->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
-    <script src="{% static "js/main.js" %}"></script>
 {% endblock %}
 
 {% block content %} 
@@ -20,11 +17,9 @@
     <div class='row searchpage'>
 
         {# mapbox #}
-        <div id="cd-zoom-in">+</div>
-        <div id="cd-zoom-out">-</div>
-        <div class='col-md-7 mapbox hidden-xs' id="map-canvas">
-        </div>
-
+        <div id="cd-zoom-in" class="hidden-xs">+</div>
+        <div id="cd-zoom-out" class="hidden-xs">-</div>
+        <div class='col-md-7 mapbox hidden-xs' id="map-canvas-disabled"></div>
 
         
         {# sidebox #}
