@@ -4031,7 +4031,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
   border: 1px solid transparent;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
@@ -6543,14 +6543,14 @@ button.close {
 .searchpage {
   height: 100%;
 }
-.mapbox {
+.searchpage .mapbox {
   height: 100%;
   min-height: 100%;
   background-color: lightgray;
   margin: auto;
 }
-#cd-zoom-in,
-#cd-zoom-out {
+.searchpage #cd-zoom-in,
+.searchpage #cd-zoom-out {
   height: 32px;
   width: 32px;
   cursor: pointer;
@@ -6564,13 +6564,13 @@ button.close {
   vertical-align: middle;
   line-height: 32px;
 }
-#cd-zoom-in {
+.searchpage #cd-zoom-in {
   top: 15px;
 }
-#cd-zoom-out {
+.searchpage #cd-zoom-out {
   top: 48px;
 }
-.sidebox {
+.searchpage .sidebox {
   height: 100%;
   overflow-y: scroll;
   border: 1px solid;
@@ -6578,20 +6578,20 @@ button.close {
   border-color: #b3b3b3;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.15);
 }
-.searchbox {
+.searchpage .searchbox {
   min-height: 20px;
   padding: 19px;
   margin-bottom: -20px;
 }
-.distance_selector {
+.searchpage .distance_selector {
   width: 20%;
   padding: 6px 6px;
 }
-.help-search {
+.searchpage .help-search {
   font-size: 24px;
   margin-top: 3px;
 }
-.month-spacer {
+.searchpage .month-spacer {
   font-size: 18px;
   color: #e35252;
   font-weight: 500;
@@ -6600,19 +6600,19 @@ button.close {
   margin-top: 50px;
   margin-bottom: 30px;
 }
-.search-result {
+.searchpage .search-result {
   padding: 15px 0 15px 0;
   margin: 0 -15px 0 -15px;
   border: 1px solid #f1f1f1;
   border-width: 0 0 1px 0;
 }
-.search-result.first {
+.searchpage .search-result.first {
   border-width: 1px 0 1px 0;
 }
-.search-result:hover {
+.searchpage .search-result:hover {
   background-color: #f1f1f1;
 }
-.search-result .result-date-preview {
+.searchpage .search-result .result-date-preview {
   width: 100px;
   height: 70px;
   float: left;
@@ -6620,58 +6620,120 @@ button.close {
   text-align: center;
   color: #e6e6e6;
 }
-.search-result .result-content {
+.searchpage .search-result .result-content {
   margin-left: 100px;
 }
-.search-result .result-content .result-title {
+.searchpage .search-result .result-content .result-title {
   letter-spacing: 0.075em;
   margin: 0;
 }
-.search-result .result-content .result-location {
+.searchpage .search-result .result-content .result-location {
   color: #b3b3b3;
   letter-spacing: 0.075em;
 }
-.search-result .result-content .result-detail .result-detail-distance {
+.searchpage .search-result .result-content .result-detail .result-detail-distance {
   margin-top: 3px;
   display: inline;
 }
-.search-result .result-content .result-detail .result-detail-distance.disabled {
+.searchpage .search-result .result-content .result-detail .result-detail-distance.disabled {
   visibility: hidden;
 }
-.search-result .result-content .result-detail .result-detail-distance .result-detail-date {
+.searchpage .search-result .result-content .result-detail .result-detail-distance .result-detail-date {
   display: none;
 }
-.search-result .result-content .result-detail .result-detail-distance .distance-icon {
+.searchpage .search-result .result-content .result-detail .result-detail-distance .distance-icon {
   background-color: #b3b3b3;
   color: white;
   cursor: inherit;
   width: 40px;
   border: 0;
 }
-.search-result.active {
+.searchpage .search-result.active {
   background-color: #e6e6e6;
   padding-bottom: 20px;
 }
-.search-result.active .result-date-preview {
+.searchpage .search-result.active .result-date-preview {
   color: #e35252;
 }
-.search-result.active .result-content .result-detail {
+.searchpage .search-result.active .result-content .result-detail {
   display: initial;
   color: #e35252;
 }
-.search-result.active .result-content .result-detail .result-detail-distance {
+.searchpage .search-result.active .result-content .result-detail .result-detail-distance {
   display: block;
 }
-.search-result.active .result-content .result-detail .result-detail-distance.disabled {
+.searchpage .search-result.active .result-content .result-detail .result-detail-distance.disabled {
   display: none;
 }
-.search-result.active .result-content .result-detail .result-detail-distance .result-detail-date {
+.searchpage .search-result.active .result-content .result-detail .result-detail-distance .result-detail-date {
   display: inline;
 }
-.search-result.active .result-content .result-detail .result-detail-distance .distance-icon {
+.searchpage .search-result.active .result-content .result-detail .result-detail-distance .distance-icon {
   background-color: #e35252;
   color: white;
   margin-right: 20px;
+}
+.racepage .race-header {
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+.racepage .race-header .event-name {
+  font-size: 40px;
+  color: black;
+}
+.racepage .race-header .event-location {
+  font-size: 24px;
+  color: #b3b3b3;
+}
+.racepage .race-distances {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+.racepage .race-distances .distance-icon {
+  width: 50px;
+  font-size: 25px;
+  padding: 0;
+  color: #e35252;
+  border: solid 1px #e35252;
+  margin: 0 2px;
+}
+.racepage .race-distances .distance-icon.active {
+  color: white;
+  border: solid 1px white;
+  background-color: #e35252;
+}
+.racepage .race-content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.racepage .race-content .race-infogroup {
+  margin-bottom: 70px;
+}
+.racepage .race-content .race-infogroup .race-infogroup-icon {
+  font-size: 70px;
+  margin-top: -20px;
+  color: #e35252;
+  text-align: center;
+}
+.racepage .race-content .race-infogroup .race-infogroup-details dt {
+  color: #b3b3b3;
+  margin-bottom: 5px;
+  font-weight: normal;
+  padding-right: 10px;
+}
+.racepage .race-command {
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.racepage .race-command .btn {
+  width: 140px;
 }
 .datepicker-switch {
   color: #e35252;

@@ -209,6 +209,12 @@ class RaceView(LoginRequiredMixin, DetailView):
     template_name = "core/race.html"
 
 
+class RaceViewv2(LoginRequiredMixin, DetailView):
+    model = Race
+    context_object_name = "race"
+    template_name = "core/ui_refactor_race.html"
+
+
 class RaceWizard(SessionWizardView):
 
     TEMPLATES = {"eventReference": "core/create_race.html",

@@ -1,8 +1,4 @@
-// .navbar {
-//     margin-bottom: 0;
-//     width:100%;
-//     position:fixed;
-// }
+// common
 
 .content {
     top: 51px;
@@ -13,167 +9,169 @@
     height: auto;
 }
 
+// search
+
 .searchpage {
     height: 100%;
-}
 
-.mapbox {
-    height: 100%;
-    min-height: 100%;
-    background-color: lightgray;
-    margin:auto;
-}
-
-#cd-zoom-in, #cd-zoom-out {
-    height: 32px;
-    width: 32px;
-    cursor: pointer;
-    position:absolute;
-    z-index: 1;
-    left: 10px;
-    background-color: @esprova-red;
-    font-size:32px;
-    color:white;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 32px;
-}
-
-#cd-zoom-in {
-    top: 15px;
-}
-#cd-zoom-out {
-    top: 48px;
-}
-
-.sidebox {
-    height: 100%;
-    overflow-y: scroll;
-    border: 1px solid;
-    border-width: 0 0 0 1px;
-    border-color: @esprova-gray;
-
-    .shadow(-2px, 0);
-}
-
-// Filters
-
-.searchbox {    
-    min-height: 20px;
-    padding: 19px;
-    margin-bottom: -20px;
-}
-
-.distance_selector {
-    width: 20%;
-    padding: 6px 6px;
-}
-
-.help-search {
-    font-size: 24px;
-    margin-top: 3px;
-}
-
-// Results
-
-.month-spacer {
-    font-size: 18px;
-    color: @esprova-red;
-    font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: 0.02em;
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
-
-
-.search-result {
-    padding: 15px 0 15px 0;
-    margin: 0 -15px 0 -15px;
-    border: 1px solid @esprova-lightergray;
-    border-width: 0 0 1px 0;
-
-    &.first {
-        border-width: 1px 0 1px 0;
+    .mapbox {
+        height: 100%;
+        min-height: 100%;
+        background-color: lightgray;
+        margin:auto;
     }
 
-    &:hover {
-        background-color: @esprova-lightergray;
-    }
-
-    .result-date-preview {
-        width: 100px;
-        height: 70px;
-        float: left;
-        font-size: 50px;
+    #cd-zoom-in, #cd-zoom-out {
+        height: 32px;
+        width: 32px;
+        cursor: pointer;
+        position:absolute;
+        z-index: 1;
+        left: 10px;
+        background-color: @esprova-red;
+        font-size:32px;
+        color:white;
         text-align: center;
-        color: @esprova-lightgray;
+        vertical-align: middle;
+        line-height: 32px;
     }
 
-    .result-content {
-        margin-left: 100px;
-
-        .result-title {
-            letter-spacing: 0.075em;
-            margin: 0;
-        }
-
-        .result-location {
-            color: @esprova-gray;
-            letter-spacing: 0.075em;
-        }
-
-        .result-detail {
-
-            .result-detail-distance {
-                margin-top: 3px;
-                display:inline;
-                &.disabled {
-                        visibility: hidden;
-                    }
-                .result-detail-date {
-                    display: none;
-                }
-
-                .distance-icon {
-                    background-color: @esprova-gray;
-                    color:white;
-                    cursor: inherit;
-                    width: 40px;
-                    border: 0;
-                }
-
-            }
-
-        }
-
+    #cd-zoom-in {
+        top: 15px;
+    }
+    #cd-zoom-out {
+        top: 48px;
     }
 
-// when result selected ("active")
-    &.active {
-        background-color: @esprova-lightgray;
-        padding-bottom: 20px;
+    .sidebox {
+        height: 100%;
+        overflow-y: scroll;
+        border: 1px solid;
+        border-width: 0 0 0 1px;
+        border-color: @esprova-gray;
+
+        .shadow(-2px, 0);
+    }
+
+    // Filters
+
+    .searchbox {    
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: -20px;
+    }
+
+    .distance_selector {
+        width: 20%;
+        padding: 6px 6px;
+    }
+
+    .help-search {
+        font-size: 24px;
+        margin-top: 3px;
+    }
+
+    // Results
+
+    .month-spacer {
+        font-size: 18px;
+        color: @esprova-red;
+        font-weight: 500;
+        line-height: 1.1;
+        letter-spacing: 0.02em;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+
+    .search-result {
+        padding: 15px 0 15px 0;
+        margin: 0 -15px 0 -15px;
+        border: 1px solid @esprova-lightergray;
+        border-width: 0 0 1px 0;
+
+        &.first {
+            border-width: 1px 0 1px 0;
+        }
+
+        &:hover {
+            background-color: @esprova-lightergray;
+        }
 
         .result-date-preview {
-            color: @esprova-red;
+            width: 100px;
+            height: 70px;
+            float: left;
+            font-size: 50px;
+            text-align: center;
+            color: @esprova-lightgray;
         }
 
         .result-content {
+            margin-left: 100px;
+
+            .result-title {
+                letter-spacing: 0.075em;
+                margin: 0;
+            }
+
+            .result-location {
+                color: @esprova-gray;
+                letter-spacing: 0.075em;
+            }
+
             .result-detail {
-                display: initial;
-                color: @esprova-red;
+
                 .result-detail-distance {
-                    display: block;
+                    margin-top: 3px;
+                    display:inline;
                     &.disabled {
+                            visibility: hidden;
+                        }
+                    .result-detail-date {
                         display: none;
                     }
-                    .result-detail-date {
-                        display: inline;
-                    }
+
                     .distance-icon {
-                        background-color: @esprova-red;
-                        color: white;
-                        margin-right: 20px;
+                        background-color: @esprova-gray;
+                        color:white;
+                        cursor: inherit;
+                        width: 40px;
+                        border: 0;
+                    }
+
+                }
+
+            }
+
+        }
+
+    // when result selected ("active")
+        &.active {
+            background-color: @esprova-lightgray;
+            padding-bottom: 20px;
+
+            .result-date-preview {
+                color: @esprova-red;
+            }
+
+            .result-content {
+                .result-detail {
+                    display: initial;
+                    color: @esprova-red;
+                    .result-detail-distance {
+                        display: block;
+                        &.disabled {
+                            display: none;
+                        }
+                        .result-detail-date {
+                            display: inline;
+                        }
+                        .distance-icon {
+                            background-color: @esprova-red;
+                            color: white;
+                            margin-right: 20px;
+                        }
                     }
                 }
             }
@@ -181,12 +179,96 @@
     }
 }
 
+.racepage {
+    .race-header {
+        margin-top: 30px;
+        margin-bottom: 60px;
+
+        .event-name{
+            font-size: 40px;
+            color: black;
+        }
+
+        .event-location{
+            font-size: 24px;
+            color: @esprova-gray;
+        }
+    }
+
+    .race-distances {
+        .center-block();
+        width: 300px;
+        text-align: center;
+        margin-bottom: 100px;
+        .distance-icon {
+            width: 50px;
+            // height: 50px;
+            font-size: 25px;
+            padding: 0;
+            color: @esprova-red;
+            border: solid 1px @esprova-red;
+            margin: 0 2px;
+        }
+        .distance-icon.active {
+                color: white;
+                border: solid 1px white;
+                background-color: @esprova-red;
+        }
+    }
+
+
+    .race-content {
+        .center-block();
+        .race-infogroup {
+            // height: 100px;
+            // border: solid 1px black;
+            margin-bottom: 70px;
+            .race-infogroup-icon {
+                // line-height: 400px;
+                // vertical-align: middle;
+                font-size: 70px;
+                margin-top: -20px;
+                color: @esprova-red;
+                text-align: center;
+            }
+            .race-infogroup-details {
+                // line-height: 400px;
+                // vertical-align: middle;
+                // display:inline-block;
+                // line-height: normal;
+                dt {
+                    color: @esprova-gray;
+                    margin-bottom: 5px;
+                    font-weight: normal;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+
+    .race-command {
+        width: 450px;
+        .center-block();
+        .btn {
+            width: 140px;
+        }
+    }
+}
 
 // Datepicker
 .datepicker-switch {
     color: @esprova-red;
 }
 
+
+
+
+
+
+// 
+// 
+// 
+// 
 // not used so far
 
 .racebanner {
