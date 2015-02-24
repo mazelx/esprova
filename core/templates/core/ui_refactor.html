@@ -32,8 +32,8 @@
 
                     {# expression search #}
                     <div class="row form-group" id="race_quicksearch_form">
-                        <label for="start_date" class="col-xs-3 control-label">Recherche :</label>
-                        <div class="col-xs-8">
+                        <label for="start_date" class="col-sm-3 control-label">Recherche :</label>
+                        <div class="col-sm-8">
                             <div class="input-group">
                                 <input type="text" id="search_expr" name="search_expr" class="form-control" placeholder="Epreuve, lieu, organisateur..." value="{{ params.search_expr }}"/>
                                 <span class="input-group-btn">
@@ -48,8 +48,8 @@
 
                     {# date search #}
                     <div class="row form-group">
-                        <label for="start_date" class="col-xs-3 control-label">Période :</label>
-                        <div class= "col-xs-8">
+                        <label for="start_date" class="col-sm-3 control-label">Période :</label>
+                        <div class= "col-sm-8">
                             <div class="input-daterange datepicker input-group" id="datepicker">
                               <input type="text" class="input-sm form-control" name="start_date" id="start_date" value="{{ params.start_date }}"/>
                             <span class="input-group-addon"> à </span>
@@ -61,8 +61,8 @@
 
                     {# distance search #}
                     <div class="row form-group">
-                        <label for="inDistances" class="col-xs-3 control-label">Distances</label>
-                        <div class="col-xs-8">
+                        <label for="inDistances" class="col-sm-3 control-label">Distances</label>
+                        <div class="col-sm-8">
                             <div class="row">
                                 <div class="btn-group col-xs-10" data-toggle="buttons">
                                     <label type="button" class="distance_selector btn btn-default {{ params.distances.XS |yesno:"active," }}" id="dist1">XS
@@ -86,7 +86,7 @@
                         </div>
                     </div>
 
-                    <a href="#" id="reset-search-form" class="col-xs-8 col-xs-offset-3 text-center">Réinitialiser les critères de recherche</a>
+                    <a href="#" id="reset-search-form" class="col-sm-8 col-sm-offset-3 text-center">Réinitialiser les critères de recherche</a>
                 </form>
             </div>
             {# end searchbox #}
