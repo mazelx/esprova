@@ -138,7 +138,8 @@ def ajx_get_races(request):
             seen[event_id] = 1
             race_data = {'id': int(event_id),
                          'score': str(sr.score),
-                         'rankClass': "primary" if (rank <= 10) else "secondary",
+                         # 'rankClass': "primary" if (rank <= 10) else "secondary",
+                         'rankClass': "secondary",
                          'lat': str(location.get_coords()[1]),
                          'lng': str(location.get_coords()[0])
                          }
