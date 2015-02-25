@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat);
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -3854,11 +3853,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: #eeeeee;
 }
 .nav > li.disabled > a {
-  color: #777777;
+  color: #e6e6e6;
 }
 .nav > li.disabled > a:hover,
 .nav > li.disabled > a:focus {
-  color: #777777;
+  color: #e6e6e6;
   text-decoration: none;
   background-color: transparent;
   cursor: not-allowed;
@@ -3897,7 +3896,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #555555;
+  color: #e35252;
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
@@ -6532,16 +6531,23 @@ button.close {
     display: none !important;
   }
 }
+html,
+body {
+  height: 100%;
+}
 .content {
-  top: 51px;
+  min-height: 100%;
+  margin-bottom: -214px;
+  margin-top: -51px;
+  padding-top: 51px;
+}
+.searchpage {
   left: 0;
   right: 0;
   bottom: 0;
+  top: 51px;
+  margin: 0;
   position: absolute;
-  height: auto;
-}
-.searchpage {
-  height: 100%;
 }
 .searchpage .mapbox {
   height: 100%;
@@ -6673,6 +6679,9 @@ button.close {
   color: white;
   margin-right: 20px;
 }
+.racepage {
+  min-height: 100%;
+}
 .racepage .race-header {
   margin-top: 30px;
   margin-bottom: 60px;
@@ -6706,6 +6715,9 @@ button.close {
   border: solid 1px white;
   background-color: #e35252;
 }
+.racepage .race-tabs {
+  margin-bottom: 100px;
+}
 .racepage .race-content {
   display: block;
   margin-left: auto;
@@ -6726,17 +6738,70 @@ button.close {
   font-weight: normal;
   padding-right: 10px;
 }
+.racepage .race-content .race-infogroup .race-infogroup-details #link-display-map {
+  float: right;
+  cursor: pointer;
+}
+.racepage .race-content .race-infogroup .race-infogroup-details #address-map {
+  height: 300px;
+  background: gray;
+  margin-bottom: 20px;
+  display: none;
+}
 .racepage .race-command {
-  width: 450px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: center;
 }
 .racepage .race-command .btn {
   width: 140px;
 }
 .datepicker-switch {
   color: #e35252;
+}
+footer {
+  margin-top: 150px;
+  margin-bottom: 0px;
+  padding: 15px 15px 0 15px;
+  background-color: #e35252;
+  color: white;
+}
+footer:before,
+footer:after {
+  content: " ";
+  display: table;
+}
+footer:after {
+  clear: both;
+}
+footer:before,
+footer:after {
+  content: " ";
+  display: table;
+}
+footer:after {
+  clear: both;
+}
+footer .footer-logo {
+  text-align: center;
+  max-width: 200px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+footer .footer-quicklinks {
+  float: right;
+  text-align: right;
+  line-height: 35px;
+}
+footer .footer-quicklinks li > a {
+  color: white;
+}
+footer .footer-quicklinks .contact-icons {
+  margin-left: 15px;
+}
+footer .footer-quicklinks .contact-icons > img {
+  height: 25px;
+  margin-left: 7px;
 }
 .racebanner {
   /*margin: 20px 0;*/

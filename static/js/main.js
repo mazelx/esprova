@@ -16,41 +16,6 @@ var default_lng = 2.6;
 var static_url = 'https://esprova-static.s3.amazonaws.com/';
 // var static_url = 'http://localhost:8000/static/'
 
-primaryIcons['default']= {
-    url: static_url + 'images/primary_marker_default.svg',
-    size: new google.maps.Size(28,42),
-};
-
-primaryIcons['selected']={
-    url: static_url + 'images/primary_marker_selected.svg',
-    size: new google.maps.Size(28,42),
-};
-
-primaryIcons['hover']= {
-    url: static_url + 'images/primary_marker_hover.svg',
-    size: new google.maps.Size(28,42),
-};
-
-secondaryIcons['default']= {
-    url: static_url + 'images/secondary_marker_default.svg',
-    size: new google.maps.Size(26,26),
-    anchor: new google.maps.Point(13,13),
-};
-
-secondaryIcons['selected']={
-    url: static_url + 'images/secondary_marker_selected.svg',
-    size: new google.maps.Size(26,26),
-    anchor: new google.maps.Point(13,13),
-};
-
-secondaryIcons['hover']= {
-    url: static_url + 'images/secondary_marker_hover.svg',
-    size: new google.maps.Size(26,26),
-    anchor: new google.maps.Point(13,13),
-};
-markerIcons["primary"]=primaryIcons;
-markerIcons["secondary"]=secondaryIcons;
-
 
 // if the map style has not been provided
 if (typeof map_styles === 'undefined'){
@@ -61,10 +26,48 @@ if (typeof map_styles === 'undefined'){
 // ----------------------
 // JS Init
 // ----------------------
+if (typeof google !== "undefined") {
+    google.maps.event.addDomListener(window, 'load', initialize);
+}
 
-google.maps.event.addDomListener(window, 'load', initialize);
 
 function initialize() {
+
+    primaryIcons['default']= {
+        url: static_url + 'images/primary_marker_default.svg',
+        size: new google.maps.Size(28,42),
+    };
+
+    primaryIcons['selected']={
+        url: static_url + 'images/primary_marker_selected.svg',
+        size: new google.maps.Size(28,42),
+    };
+
+    primaryIcons['hover']= {
+        url: static_url + 'images/primary_marker_hover.svg',
+        size: new google.maps.Size(28,42),
+    };
+
+    secondaryIcons['default']= {
+        url: static_url + 'images/secondary_marker_default.svg',
+        size: new google.maps.Size(26,26),
+        anchor: new google.maps.Point(13,13),
+    };
+
+    secondaryIcons['selected']={
+        url: static_url + 'images/secondary_marker_selected.svg',
+        size: new google.maps.Size(26,26),
+        anchor: new google.maps.Point(13,13),
+    };
+
+    secondaryIcons['hover']= {
+        url: static_url + 'images/secondary_marker_hover.svg',
+        size: new google.maps.Size(26,26),
+        anchor: new google.maps.Point(13,13),
+    };
+    markerIcons["primary"]=primaryIcons;
+    markerIcons["secondary"]=secondaryIcons;
+
 
     var mapOptions = {
         mapTypeId: google.maps.MapTypeId.TERRAIN,
@@ -110,6 +113,7 @@ function initialize() {
     addListAlertMessages();
     addListResultClick();
     addListResetForm();
+    addListRaceDisplayMap();
 
     createDatePickerComponent();
 

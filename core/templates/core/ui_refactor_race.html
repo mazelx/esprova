@@ -3,59 +3,11 @@
 
 
 {% block head_extra %}
-<script>
-// using jQuery
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
-});
+<script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
 
-function validateRace(pk) {
-    // TODO : Propose a cancel link and delay for few seconds
-    $.ajax({
-        url: '/ajx/validate/'+pk,
-        type: 'PUT',
-        success: function(response, statut) {
-            alert('validé')
-        },
-    });
-}
-function deleteRace(pk) {
-    // TODO : Propose a cancel link and delay for few seconds
-     $.ajax({
-        url: '/ajx/delete/'+pk,
-        type: 'DELETE',
-        success: function(response, statut) {
-            alert('supprimé')
-            window.location.replace("/list")
-        },
-    });
-}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
+<script type="text/javascript" src="{% static "js/race.js" %}"></script>
 
-</script>
 {% endblock %}
 
 
@@ -92,6 +44,15 @@ function deleteRace(pk) {
 
     </div>
 
+    <div class="race-tabs">
+        <ul class="nav nav-tabs nav-justified">
+                <li role="presentation" class="active"><a href="#">Résumé</a></li>
+                <li role="presentation" class="disabled" ><a href="#">Parcours</a></li>
+                <li role="presentation" class="disabled"><a href="#">Médias</a></li>
+                <li role="presentation" class="disabled"><a href="#">Résultats</a></li>
+        </ul>
+    </div>
+
     <div class="race-content row">
         <div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
             {# general information #}
@@ -105,14 +66,17 @@ function deleteRace(pk) {
                             </dd>
                             <dt>Adresse</dt>
                             <dd>
-                                <address>
-                                
+                                <address id="race-location" data-lat="44.51073" data-lng="-0.63937">
+                                <a id="link-display-map">afficher la carte</a>
                                 {% for address_line in race.location.get_address_lines %}
                                     {{ address_line }}<br>
                                 {% endfor %}
-                                
                                 </address>
+
+                                <div id="address-map">
+                                </div>
                             </dd>
+
                             <dt>Web</dt>
                             {# <dd><a href="race.website">{{race.website}}</a> #}
                             <dd><a href="http://www.triathlonstgervais.com">http://www.triathlonstgervais.com</a>
@@ -189,4 +153,6 @@ function deleteRace(pk) {
 </div>
 
 {% endblock %}
+
+
 

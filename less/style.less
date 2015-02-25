@@ -1,18 +1,24 @@
 // common
+html, body{
+    height: 100%;
+}
 
 .content {
-    top: 51px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    height: auto;
+    min-height: 100%;
+    margin-bottom: -214px;
+    margin-top:-51px;
+    padding-top:51px
 }
 
 // search
 
 .searchpage {
-    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 51px;
+    margin: 0;
+    position: absolute;
 
     .mapbox {
         height: 100%;
@@ -180,6 +186,8 @@
 }
 
 .racepage {
+    min-height: 100%;
+
     .race-header {
         margin-top: 30px;
         margin-bottom: 60px;
@@ -216,6 +224,10 @@
         }
     }
 
+    .race-tabs {
+        margin-bottom: 100px;
+    }
+
 
     .race-content {
         .center-block();
@@ -242,13 +254,23 @@
                     font-weight: normal;
                     padding-right: 10px;
                 }
+
+                #link-display-map {
+                    float: right;
+                    cursor: pointer;
+                }
+                #address-map {
+                    height: 300px;
+                    background: gray;
+                    margin-bottom: 20px;
+                    display: none;
+                }
             }
         }
     }
 
     .race-command {
-        width: 450px;
-        .center-block();
+        text-align: center;
         .btn {
             width: 140px;
         }
@@ -260,7 +282,45 @@
     color: @esprova-red;
 }
 
+footer {
+    .clearfix();
+    margin-top: 150px;
+    margin-bottom: 0px;
+    padding: 15px 15px 0 15px;
+    background-color: @esprova-red;
+    color: white;
 
+    .footer-logo {
+        text-align: center;
+        max-width: 200px;
+        margin-bottom: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    // .footer-contacts {
+    //     float: right;
+    //     text-align: right;
+        
+    // }
+
+    .footer-quicklinks {
+        float: right;
+        text-align: right;
+        line-height: 35px;
+        li > a {
+            color: white;
+        }
+        .contact-icons {
+            margin-left: 15px;
+            > img {
+                height: 25px;
+                margin-left: 7px;
+            }
+        }
+    }
+    
+}
 
 
 

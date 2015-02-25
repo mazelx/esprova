@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <script src="{% static "js/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
 
     {%block head_extra%}
     {# page specific head directives #}
     {%endblock%}
 
     <link href="{% static "css/main.css" %}" rel="stylesheet">
-    <script src="{% static "js/main.js" %}"></script>
 </head>
 
 <body>
@@ -70,6 +70,28 @@
     {% block content %}
 
     {% endblock %}
+
+    {% block footer %}
+
+    <footer>
+        <img class="footer-logo col-sm-2" alt="Espròva" src="{% static "images/typogramme_esprova_white.svg" %}"> 
+        <ul class="list-inline footer-quicklinks col-sm-10">
+            <li><a href="{% url "intro" %}">à propos</a></li> |
+            <li><a href="{% url "list_race" %}">recherche d’épreuves</a></li> |
+            <li><a href="{% url "login" %}">connexion</a></li> |
+            <li><a href="#">mentions légales</a> |
+            <li>contacts :
+                <span class="contact-icons">
+                    <img alt="mail" src="{% static "images/icon-email.svg" %}"> 
+                    <img alt="facebook" src="{% static "images/icon-facebook.svg" %}"> 
+                    <img alt="twitter" src="{% static "images/icon-twitter.svg" %}"> 
+                </span>
+            </li>
+        </ul>
+    </footer>
+
+    {% endblock %}
+
 
 </body>
 
