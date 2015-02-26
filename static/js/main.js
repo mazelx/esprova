@@ -312,6 +312,15 @@ function getRaces(recordState) {
                 last_query = param_query
             }
         }
+    } else if ($("#map-canvas").is(":hidden")) {
+        param_query = getParamQuery();
+         if (param_query !== last_query) {
+            ajaxLoad(param_query);
+            if (recordState === true) {
+                pushState(param_query);
+                last_query = param_query
+            }
+        }
     }
 }
 
@@ -461,12 +470,14 @@ function getParameterByName(name) {
 }
 
 function getParamQuery(){
+    
+    _boundsarray = (typeof boundsarray === "undefined" ) ? [40,-10,60,12] : boundsarray;
     param_query = 'z=' + map.getZoom() +
                       '&active=' + selected_event_id +
-                      '&lat_lo=' + boundsarray[0] + 
-                      '&lng_lo=' + boundsarray[1] + 
-                      '&lat_hi=' + boundsarray[2] + 
-                      '&lng_hi=' + boundsarray[3] +
+                      '&lat_lo=' + _boundsarray[0] + 
+                      '&lng_lo=' + _boundsarray[1] + 
+                      '&lat_hi=' + _boundsarray[2] + 
+                      '&lng_hi=' + _boundsarray[3] +
                       '&' + $( "#race_search_form" ).serialize()
 
     return param_query;

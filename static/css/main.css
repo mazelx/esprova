@@ -6610,7 +6610,7 @@ body {
   width: 20%;
   padding: 6px 6px;
 }
-.searchpage.active {
+.searchpage .distance_selector.active {
   background-color: #e35252;
   color: white;
 }
