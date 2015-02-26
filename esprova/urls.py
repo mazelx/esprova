@@ -45,7 +45,7 @@ urlpatterns = patterns('',
                        url(r'^$', IntroView.as_view(), name="intro"),
 
                        # Race list (main page)
-                       url(r'^list$', RaceList.as_view(), name='list_race'),
+                       url(r'^search$', RaceList.as_view(), name='list_race'),
                        # url(r'^facet$', FacetTest.as_view(), name='list_facet_race'),
 
                        url(r'^facet$', FacetedSearchView(form_class=FacetedSearchForm, 

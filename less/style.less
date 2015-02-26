@@ -48,6 +48,23 @@ html, body{
     #cd-zoom-out {
         top: 48px;
     }
+    #cd-follow_map_bounds {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        z-index: 1;
+        background: white;
+        padding: 2px;
+        color: @esprova-red;
+        font-weight: 300;
+        font-size: 12px;
+        padding-right: 5px;
+        padding-left: 5px;
+
+        span {
+            padding-left: 5px;
+        }
+    }
 
     .sidebox {
         height: 100%;
@@ -70,6 +87,11 @@ html, body{
     .distance_selector {
         width: 20%;
         padding: 6px 6px;
+    }
+
+    &.active {
+        background-color: @esprova-red;
+        color:white;  
     }
 
     .help-search {

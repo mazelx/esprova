@@ -1,0 +1,123 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+
+{% block head_extra %}
+    <link href="{% static "css/datepicker3.css" %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static "js/bootstrap-datepicker.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
+    
+    <script src="{% static "js/main.js" %}"></script>
+{% endblock %}
+
+{% block content %} 
+
+<div class='container-fluid content'>
+
+    {# search page #}
+    <div class='row searchpage'>
+
+        {# mapbox #}
+        <div id="cd-zoom-in" class="hidden-xs">+</div>
+        <div id="cd-zoom-out" class="hidden-xs">-</div>
+        <div id="cd-follow_map_bounds"> 
+            <input id="follow_map_bounds" type="checkbox" name="terms" checked="checked"/>
+            <span> Rechercher quand je déplace la carte</span>
+        </div>
+        <div class='col-md-7 col-sm-5 mapbox hidden-xs' id="map-canvas"></div>
+
+        
+        {# sidebox #}
+        <div class='col-md-5 col-sm-7 sidebox'>
+           
+           {# searchbox #}
+            <div class="row searchbox">
+
+                <form id="race_search_form" class="form-horizontal" role="form">
+
+                    {# expression search #}
+                    <div class="row form-group" id="race_quicksearch_form">
+                        <label for="start_date" class="col-sm-3 control-label">Recherche :</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input type="text" id="search_expr" name="search_expr" class="form-control" placeholder="Epreuve, lieu, organisateur..." value="{{ params.search_expr }}"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" id="search_expr_go"> 
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true">
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {# date search #}
+                    <div class="row form-group">
+                        <label for="start_date" class="col-sm-3 control-label">Période :</label>
+                        <div class= "col-sm-8">
+                            <div class="input-daterange datepicker input-group" id="datepicker">
+                              <input type="text" class="input-sm form-control" name="start_date" id="start_date" value="{{ params.start_date }}"/>
+                            <span class="input-group-addon"> à </span>
+                              <input type="text" class="input-sm form-control" name="end_date" id="end_date" value="{{ params.end_date }}"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {# distance search #}
+                    <div class="row form-group">
+                        <label for="inDistances" class="col-sm-3 control-label">Distances</label>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="btn-group col-xs-10" data-toggle="buttons">
+                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.XS |yesno:"active," }}" id="dist1">XS
+                                        <input type="checkbox" autocomplete="off" name="distances" value="XS" {{ params.distances.XS |yesno:"checked," }}>
+                                    </label>
+                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.S |yesno:"active," }}" id="dist2">S
+                                        <input type="checkbox" autocomplete="off" name="distances" value="S" {{ params.distances.S |yesno:"checked," }}>
+                                    </label>
+                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.M |yesno:"active," }}" id="dist3">M
+                                        <input type="checkbox" autocomplete="off" name="distances" value="M" {{ params.distances.M |yesno:"checked," }}>
+                                    </label>
+                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.L |yesno:"active," }}" id="dist4">L
+                                        <input type="checkbox" autocomplete="off" name="distances" value="L" {{ params.distances.L |yesno:"checked," }}>
+                                    </label>
+                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.XL |yesno:"active," }}" id="dist5">XL
+                                        <input type="checkbox" autocomplete="off" name="distances" value="XL" {{ params.distances.XL |yesno:"checked," }}>
+                                    </label>
+                                </div>
+                                <span class="help-search glyphicon glyphicon-question-sign col-xs-2"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" id="reset-search-form" class="col-sm-8 col-sm-offset-3 text-center">Réinitialiser les critères de recherche</a>
+                </form>
+            </div>
+            {# end searchbox #}
+
+            {# racelist #}
+            <div id="racelist" class="list-group" role="tablist" aria-multiselectable="true">
+        
+            </div>
+
+            {# end racelist #}
+
+        </div>
+        {# end sidebox #}
+
+
+    </div>
+    {# end search page #}
+
+</div>
+{# end content #}
+
+{% endblock %}
+
+{% block footer %} 
+
+{% endblock %}
+
+

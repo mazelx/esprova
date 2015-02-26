@@ -108,12 +108,12 @@ function initialize() {
     
     // Add custom event listeners
     addListMapMoves();
-    addListQuickSearch();
+    // addListQuickSearch();
     addListSearch();
     addListAlertMessages();
     addListResultClick();
     addListResetForm();
-    addListRaceDisplayMap();
+    // addListRaceDisplayMap();
 
     createDatePickerComponent();
 
@@ -154,7 +154,7 @@ function createDatePickerComponent() {
 
 
 function initializeFromURL(){
-    
+
     // set map to provided bounds
     lat_lo = getParameterByName('lat_lo')
     lat_hi = getParameterByName('lat_hi')
@@ -192,7 +192,10 @@ function initializeFromURL(){
         selected_event_id = ""
     }
 
-    // getRaces(false);
+    getRaces(false);
+
+    
+    
 }
 
 // ----------------------
@@ -245,6 +248,7 @@ function addListSearch(){
     $( "#race_search_form" ).change(function( event ) {
         event.preventDefault();
         getRaces();
+        selected_event_id = ""
     });
 }
 
@@ -380,8 +384,7 @@ function selectEvent(event_id){
     if ( markers[selected_event_id] !== undefined ) {
         // unselect old event
         if($("#event_" + selected_event_id).length) {
-            $("#event_" + selected_event_id).removeClass("panel-primary");
-            $("#event_" + selected_event_id + "_races").removeClass("in");
+            $("#event_" + selected_event_id).removeClass("active");
             marker = markers[selected_event_id];
             marker.setIcon(markerIcons[marker.rankClass]["default"]);
         }
@@ -392,8 +395,7 @@ function selectEvent(event_id){
 
     if ( markers[selected_event_id] !== undefined ) {
         if($("#event_" + selected_event_id).length) {
-            $("#event_" + selected_event_id).addClass("panel-primary");
-            $("#event_" + selected_event_id + "_races").addClass("in");
+            $("#event_" + selected_event_id).addClass("active");
             
             // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
             $(".sidebox").animate({
@@ -475,12 +477,12 @@ function pushState(param_query){
                 }
 
     if (param_query !== last_query && typeof last_query !== "undefined"){
-        history.pushState(stateObj, 'index', '/list?' + param_query);
+        history.pushState(stateObj, 'index', '/search?' + param_query);
         last_query = param_query
         console.log('push') 
         console.log(stateObj)   
     } else if (location.search === ""){
-        history.replaceState(stateObj, 'index', '/list?' + param_query);
+        history.replaceState(stateObj, 'index', '/search?' + param_query);
         last_query = param_query
         console.log('push initial')    
         console.log(stateObj)
@@ -489,10 +491,10 @@ function pushState(param_query){
 
 window.onpopstate = function(event){
     // window.location.href = event.state
-    console.log("history pop")
-    console.log(event.state)
+    // console.log("history pop")
+    // console.log(event.state)
 
-    if(true) {
+    if(event.state !== null) {
         ajaxLoad(event.state["param_query"])    
     }
 

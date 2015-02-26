@@ -7,9 +7,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  */
-.datepicker {
+
+ /* XMA */
+/*.datepicker {
   padding: 4px;
   border-radius: 4px;
+
   direction: ltr;
 }
 .datepicker-inline {
@@ -19,7 +22,7 @@
   direction: rtl;
 }
 .datepicker.datepicker-rtl table tr td span {
-  float: right;
+  float: right;*/
 }
 .datepicker-dropdown {
   top: 0;
@@ -738,7 +741,9 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .input-daterange input:last-child {
   border-radius: 0 3px 3px 0;
 }
-.input-daterange .input-group-addon {
+
+/* XMA */
+/*.input-daterange .input-group-addon {
   width: auto;
   min-width: 16px;
   padding: 4px 5px;
@@ -752,7 +757,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   border-width: 1px 0;
   margin-left: -5px;
   margin-right: -5px;
-}
+}*/
 .datepicker.dropdown-menu {
   position: absolute;
   top: 100%;

@@ -181,7 +181,7 @@ class FacetTest(LoginRequiredMixin, ListView):
 class RaceList(LoginRequiredMixin, TemplateView):
     # model = Race
     context_object_name = "race_list"
-    template_name = "core/race_list.html"
+    template_name = "core/racesearch.html"
 
     def get_context_data(self, **kwargs):
         context = super(RaceList, self).get_context_data(**kwargs)

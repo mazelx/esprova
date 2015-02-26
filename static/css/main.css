@@ -6576,6 +6576,22 @@ body {
 .searchpage #cd-zoom-out {
   top: 48px;
 }
+.searchpage #cd-follow_map_bounds {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1;
+  background: white;
+  padding: 2px;
+  color: #e35252;
+  font-weight: 300;
+  font-size: 12px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.searchpage #cd-follow_map_bounds span {
+  padding-left: 5px;
+}
 .searchpage .sidebox {
   height: 100%;
   overflow-y: scroll;
@@ -6592,6 +6608,10 @@ body {
 .searchpage .distance_selector {
   width: 20%;
   padding: 6px 6px;
+}
+.searchpage.active {
+  background-color: #e35252;
+  color: white;
 }
 .searchpage .help-search {
   font-size: 24px;
