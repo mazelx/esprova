@@ -39,7 +39,9 @@ urlpatterns = patterns('',
                        # Login
                        url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
                            name="login"),
-                       url(r'^logout$', 'django.contrib.auth.views.logout_then_login', name="logout"),
+                       
+                       url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': 'intro'},
+                           name="logout"),
 
                        # Introduction
                        url(r'^$', IntroView.as_view(), name="intro"),

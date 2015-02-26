@@ -287,7 +287,7 @@ class RaceWizard(SessionWizardView):
         return HttpResponseRedirect(reverse('create_race'))
 
 
-class IntroView(LoginRequiredMixin, TemplateView):
+class IntroView(TemplateView):
     template_name = 'core/introduction.html'
 
 
