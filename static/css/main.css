@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -6537,7 +6538,7 @@ body {
 }
 .content {
   min-height: 100%;
-  margin-bottom: -214px;
+  margin-bottom: -195px;
   margin-top: -51px;
   padding-top: 51px;
 }
@@ -6780,7 +6781,7 @@ body {
 footer {
   margin-top: 150px;
   margin-bottom: 0px;
-  padding: 15px 15px 0 15px;
+  padding: 5px 15px 5px 15px;
   background-color: #e35252;
   color: white;
 }
@@ -6803,7 +6804,6 @@ footer:after {
 footer .footer-logo {
   text-align: center;
   max-width: 200px;
-  margin-bottom: 20px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -6812,16 +6812,17 @@ footer .footer-quicklinks {
   float: right;
   text-align: right;
   line-height: 35px;
+  margin: 0;
 }
 footer .footer-quicklinks li > a {
   color: white;
 }
 footer .footer-quicklinks .contact-icons {
-  margin-left: 15px;
+  margin-left: 10px;
 }
-footer .footer-quicklinks .contact-icons > img {
-  height: 25px;
-  margin-left: 7px;
+footer .footer-quicklinks .contact-icons img {
+  height: 20px;
+  margin-left: 12px;
 }
 .racebanner {
   /*margin: 20px 0;*/
