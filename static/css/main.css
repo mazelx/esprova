@@ -6538,9 +6538,14 @@ body {
 }
 .content {
   min-height: 100%;
-  margin-bottom: -195px;
   margin-top: -51px;
-  padding-top: 51px;
+  padding-top: 81px;
+  padding-bottom: 100px;
+  margin-bottom: -45px;
+}
+.content:after {
+  content: "";
+  display: block;
 }
 .searchpage {
   left: 0;
@@ -6779,7 +6784,6 @@ body {
   color: #e35252;
 }
 footer {
-  margin-top: 150px;
   margin-bottom: 0px;
   padding: 5px 15px 5px 15px;
   background-color: #e35252;
