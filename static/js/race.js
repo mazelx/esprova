@@ -1,14 +1,19 @@
 
 var mapOptions;
+var lat, lng;
 
 google.maps.event.addDomListener(window, 'load', createMap);
 
 $( document ).ready(function() {
+
+    lat = $("#race-location").data("lat");
+    lng = $("#race-location").data("lng");
+
     mapOptions = {
         mapTypeId: google.maps.MapTypeId.TERRAIN,
         center: {
-            lat: $("#race-location").data("lat"),
-            lng: $("#race-location").data("lng")
+            lat: lat,
+            lng: lng
         },
         zoom: 10,
         maxZoom: 15,
@@ -29,6 +34,7 @@ function addListRaceDisplayMap() {
             $( "#address-map" ).show("fast", function () {
                map.set({styles: map_styles});
                google.maps.event.trigger(map, 'resize');
+               map.setCenter({lat:lat, lng:lng});
             });            
         } else {
             $( "#address-map" ).hide("fast");
@@ -44,6 +50,12 @@ function createMap(){
         map = new google.maps.Map(document.getElementById('address-map'),
             mapOptions);
         map.setOptions({styles: map_styles});
+
+        var marker = new google.maps.Marker({
+            position: {lat:lat, lng:lng} ,
+            map: map,
+            zIndex : 1,
+        });
 }   
 
 function getCookie(name) {

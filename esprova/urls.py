@@ -81,7 +81,7 @@ urlpatterns = patterns('',
 
                        # UI refactor
                        # url(r'^listv2/$', TemplateView.as_view(template_name='core/ui_refactor.html')),
-                       url(r'^racev2/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceViewv2.as_view(), name='view_racev2'),
+                       # url(r'^racev2/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceViewv2.as_view(), name='view_racev2'),
 
 
                        )

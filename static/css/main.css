@@ -6652,6 +6652,12 @@ body {
   text-align: center;
   color: #e6e6e6;
 }
+.searchpage .search-result .result-date-preview .result-start-date {
+  line-height: 60px;
+}
+.searchpage .search-result .result-date-preview .result-end-date {
+  font-size: 14px;
+}
 .searchpage .search-result .result-content {
   margin-left: 100px;
 }
