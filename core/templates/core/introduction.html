@@ -1,12 +1,137 @@
 {% extends "base.html" %} 
-{% block content %}
+{% load static from staticfiles %}
 
-<div class="jumbotron content">
-  <div class="container">
-    <h1>Espròva</h1>
-    <p>Ne courez plus après les épreuves... </p>
-    <p><a class="btn btn-primary btn-lg" href="{% url "list_race" %}" role="button">Trouvez !</a></p>
-  </div>
+{%block navbar %}
+    <nav class="intro-navbar">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="nav navbar-nav">
+                    <a href="http://www.facebook.com/esprova" target="_blank">
+                        <img alt="facebook" src="{% static "images/icon-facebook.svg" %}">
+                    </a>
+                    <a href="http://www.twitter.com/esprova" target="_blank">
+                        <img alt="twitter" src="{% static "images/icon-twitter.svg" %}">
+                    </a> 
+                    <a class="pull-right" href="#">Connexion</a>
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    
+                </div>        
+        <!-- /.container-fluid -->
+    </nav>
+
+    {% endblock %}
+
+{% block content %}
+<div class="content intropage">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="banner">
+                <div class="typogram">
+                    <img alt="Espròva" src="{% static "images/typogramme_esprova.svg" %}"> 
+                </div>
+                <div class="baseline">
+                    <p>Une phrase d’accroche qui marche bien, et qu’il va falloir trouver rapidement </p>
+                </div>
+            </div>
+            <!-- intro-banner -->
+        </div>
+        <!-- row -->
+        <form class="search-command form-horizontal">
+            <div class="form-group">
+                <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Selectionnez un sport :</label>
+                <div class="col-sm-5">
+                    <select class="form-control">
+                      <option>Triathlon</option>
+                      <option>Triathlon Jeunes</option>
+                      <option>Triathlon Nature</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-offset-1 col-sm-3 control-label">Selectionnez un lieu :</label>
+                <div class="col-sm-5">
+                    <div class="input-group">
+                        <input type="search" id="search_expr" name="search_expr" class="form-control" placeholder="Ville, Région, Département, ..." value="{{ params.search_expr }}"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" id="search_expr_go"> 
+                                <span class="glyphicon glyphicon-search" aria-hidden="true">
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- search-command  -->
+
+
+        <div class="informations">
+            <div class="about row">
+                <div class="col-sm-4">
+                    <div class="about-title">
+                        RECHERCHER
+                    </div>
+                    <img class="about-icon" alt="rechercher" src="{% static "images/icon-about-search.svg" %}">
+                    <div class="about-text">
+                        Recherchez les épreuves près de chez vous en quelques clics grâce à notre page interactive. Filtrez les résultats par distances, par période, recherchez par mots clés... et trouvez l’épreuve qui vous fera briller !   
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="about-title">
+                        ORGANISEZ
+                    </div>
+                    <img class="about-icon" alt="organiser" src="{% static "images/icon-about-organize.svg" %}">
+                    <div class="about-text">
+                        Sauvegardez les épreuves incontournables et préparer votre programme sportif de l’année. 
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="about-title">
+                        PARTAGEZ
+                    </div>
+                    <img class="about-icon" alt="partager" src="{% static "images/icon-about-share.svg" %}">
+                    <div class="about-text">
+                        Partagez votre programme avec vos amis et mettez-les au défi... Que le meilleur gagne   !
+                    </div>
+                </div>
+            </div>
+
+            <div class="intro-spacer row"></div>
+
+            <div class="more-info row">
+                <div class="col-sm-4 more-info-icon">
+                    <img alt="partager" src="{% static "images/icon-organizers.svg" %}">
+                </div>
+                <div class="col-sm-8 more-info-text">
+                    <div class="title">
+                        Vous êtes organisateur d'épreuves ?
+                    </div>
+                    <div class="text">
+                        <p>Espròva pense à vous et vous proposera bientôt des offres spécialement conçues pour améliorer la visibilité de vos évenements sportifs et vous aider à gérer la vie numérique de vos épreuves...</p>
+                        <p>En attendant, n’hésitez pas à nous faire part de votre intérêt par <a href="mailto:contact@esprova.com">mail</a>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="intro-spacer row"></div>
+
+            <div class="more-info row">
+                <div class="col-sm-4 col-sm-push-8 more-info-icon">
+                    <img alt="partager" src="{% static "images/icon-beta.svg" %}">
+                </div>
+                <div class="col-sm-8 col-sm-pull-4 more-info-text">
+                    <div class="title">
+                        Espròva est en construction...
+                    </div>
+                    <div class="text">
+                        <p>Espròva est encore tout nouveau, tout beau et de nombreuses fonctionnalités sont encore en développement.</p>
+                        <p>Nous travaillons sans relache pour vous offrir tout ce qui pourrait vous aider à organiser vos épreuves, néanmoins, n’hésitez pas à nous faire part de vos remarques, suggestions (et encouragements) par <a href="mailto:contact@esprova.com">mail</a>, <a href="http://www.facebook.com/esprova" target="_blank">facebook</a> ou <a href="http://www.twitter.com/esprova">twitter</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

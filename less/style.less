@@ -16,6 +16,139 @@ html, body{
   display: block;
 }
 
+// intro
+
+.intro-navbar {
+    background-color: @esprova-red;
+    color:white;
+    line-height: 51px;
+    .nav {
+        width: 100%;
+        margin: 0;
+    }
+    * > a {
+        color: white;
+    }
+
+    * > img {
+        height: 20px;
+        margin-left: 10px;
+    }
+}
+
+.intropage {
+    // background-color: @esprova-red;
+    // color:white;
+
+    .banner {
+        height: 400px;
+        text-align: center;
+        background: url(../images/intro-banner.png) no-repeat center;
+        background-size: cover; 
+        margin-top: -81px;
+        padding-top: 80px;
+        width: 100%;
+
+        .typogram {
+            width: 50%;
+            margin: auto;
+            >img {
+                width: 100%;
+            }
+        }
+
+        .baseline {
+            font-size: 1.4em;
+            color: white;
+            width: 70%;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 40px;
+
+
+            @media (min-width: @screen-sm-min) {
+                font-size: 2.3em;
+            }
+        }
+    }
+
+    .search-command {
+        background-color: @esprova-red;
+        color: white;
+        padding: 50px 30px 50px 30px;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .intro-spacer {
+        background-color: @esprova-red;
+        height: 1px;
+        margin: 60px -15px;
+    }
+
+    .informations {
+        padding: 40px 0 50px 0;
+        color: @esprova-darkgray;
+
+        @media (min-width: @screen-md-min) {
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+        
+
+        .about {
+            text-align: center;
+
+            .about-title {
+                margin-top: 30px;
+                font-size: 2em;
+            }
+
+            .about-icon {
+                margin-top: 50px;
+                margin-bottom: 50px;
+                height: 100px;
+            }
+
+            .about-text {
+                text-align: justify;
+                padding: 0 30px 0 30px;
+            }
+        }
+        .more-info {
+            // padding: 150px 0 0 0;
+
+            .more-info-icon {
+                padding: 0;
+                height: 200px;
+                line-height: 200px;
+                text-align: center;
+
+                > img {
+                    height: 150px;
+                }
+            }
+
+            .more-info-text {
+                padding: 0 30px 0 30px;
+                text-align: justify;
+
+                .title {
+                    font-size: 2em;
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
+
+            }
+        }
+    }
+
+    
+
+}
+
+
+
 // search
 
 .searchpage {
@@ -429,4 +562,3 @@ footer {
 .event-result.mouseover{
     border-color:  gray;
 }
-

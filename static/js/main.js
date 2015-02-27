@@ -34,7 +34,7 @@ if (typeof google !== "undefined") {
 function initialize() {
 
     primaryIcons['default']= {
-        url: static_url + 'images/primary_marker_default.svg',
+        url: static_url + '../images/primary_marker_default.svg',
         size: new google.maps.Size(28,42),
     };
 
