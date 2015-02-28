@@ -39,7 +39,7 @@
                 {% if r == race %}
                     <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
                 {% else %}
-                    <a href="{% url "view_race" race.slug race.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
+                    <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
                 {% endif %}
 
             {% endfor %}
