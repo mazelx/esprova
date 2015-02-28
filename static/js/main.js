@@ -326,6 +326,8 @@ function getRaces(recordState) {
 
 function ajaxLoad(params) {
     console.log("ajaxload: "+params)
+    $("#racelist").html('<div class="spinner"><i class="fa fa-spinner fa-spin"></i></div>');
+
     $.ajax({
         url: 'ajx/search/',
         type: 'GET', 
@@ -349,6 +351,7 @@ function refreshRacesOnSidebar(races_html) {
     addListResultClick();
     addListHoverSideboxResult();
     selectEvent(selected_event_id);
+
 }
         
 function refreshRacesOnMap(races) {

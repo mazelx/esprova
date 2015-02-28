@@ -6733,6 +6733,12 @@ body {
   margin-top: 50px;
   margin-bottom: 30px;
 }
+.searchpage .spinner {
+  font-size: 60px;
+  color: #e6e6e6;
+  text-align: center;
+  line-height: 300px;
+}
 .searchpage .search-result {
   padding: 15px 0 15px 0;
   margin: 0 -15px 0 -15px;
