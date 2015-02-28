@@ -12,6 +12,8 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.views.decorators.cache import never_cache
+
 import datetime
 
 import logging
@@ -56,6 +58,7 @@ def ajx_delete_race(request, pk):
     return HttpResponseBadRequest
 
 
+@never_cache
 @login_required
 def ajx_get_races(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
