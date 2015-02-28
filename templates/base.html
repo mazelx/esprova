@@ -1,4 +1,6 @@
 {% load static from staticfiles %}
+{% load templatetags %}
+
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link href="{% static "css/main.css" %}" rel="stylesheet">
+
+    <script type="text/javascript">
+        var static_url = {% settings_value "STATIC_URL" %}
+    </script>
 
     <script src="{% static "js/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
@@ -41,13 +47,12 @@
 
                 <ul class="nav navbar-nav navbar-left">
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Triathlon <span class="caret"></span></a>           
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sport <span class="caret"></span></a>           
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Duathlon</a></li>
-                            <li><a href="#">Triathlon</a></li>
-                            <li><a href="#">Triathlon Nature</a></li>
-                            <li><a href="#">Triathlon Jeunes</a></li>
-                            <li><a href="#">Triathlon des Neiges</a></li>
+                        {% get_sports %}
+                        {% for sport in sports %}
+                            <li><a href="#">{{ sport.name }}</a></li>
+                        {% endfor %}
                         </ul>
                     </li>
                 </ul>

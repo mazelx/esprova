@@ -13,7 +13,7 @@ var secondaryIcons = {};
 var default_lat = 46.9;
 var default_lng = 2.6;
 
-var static_url = 'https://esprova-static.s3.amazonaws.com/';
+// var static_url = 'https://esprova-static.s3.amazonaws.com/';
 // var static_url = 'http://localhost:8000/static/'
 
 
@@ -34,7 +34,7 @@ if (typeof google !== "undefined") {
 function initialize() {
 
     primaryIcons['default']= {
-        url: static_url + '../images/primary_marker_default.svg',
+        url: static_url + 'images/primary_marker_default.svg',
         size: new google.maps.Size(28,42),
     };
 
