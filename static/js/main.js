@@ -326,7 +326,7 @@ function getRaces(recordState) {
 
 function ajaxLoad(params) {
     console.log("ajaxload: "+params)
-    $("#racelist").html('<div class="spinner"><i class="fa fa-spinner fa-spin"></i></div>');
+    $("#racelist").html('<div class="spinner"><i class="fa fa-spinner fa-pulse"></i></div>');
 
     $.ajax({
         url: 'ajx/search/',
