@@ -11,7 +11,7 @@
     <link href="{% static "css/main.css" %}" rel="stylesheet">
 
     <script type="text/javascript">
-        var static_url = {% settings_value "STATIC_URL" %}
+        var static_url = "{% settings_value "STATIC_URL" %}"
     </script>
 
     <script src="{% static "js/jquery.js" %}"></script>
