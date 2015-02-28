@@ -6648,6 +6648,9 @@ body {
   margin-bottom: 20px;
   text-align: center;
 }
+.racebanner {
+  background: url(../images/intro-banner.png) no-repeat center;
+}
 .searchpage {
   left: 0;
   right: 0;
@@ -6863,7 +6866,7 @@ body {
   margin-right: auto;
 }
 .racepage .race-content .race-infogroup {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 .racepage .race-content .race-infogroup .race-infogroup-icon {
   font-size: 70px;
