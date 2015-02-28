@@ -82,9 +82,6 @@
                                     </div>
                                 </dd>
 
-                                <dt>Web</dt>
-                                <dd><a href="{{race.website}}">{{race.website}}</a>
-                                </dd>
                             </dl>
                         </div>
                 </section>
@@ -115,6 +112,9 @@
                     <div class="col-sm-9">
                         <div class="race-infogroup-details">
                             <dl class="dl-horizontal">
+                                <dt>Web</dt>
+                                <dd><a href="{{race.website}}">{{race.website}}</a>
+                                </dd>
                                 <dt>Organisateur</dt>
                                 <dd>
                                 {% if race.event.organizer.website %}
