@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from urllib.parse import urlparse
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -105,25 +106,17 @@ DATABASES = {
     }
 }
 
-os.environ['MEMCACHE_SERVERS'] = os.environ.get('MEMCACHIER_SERVERS', '').replace(',', ';')
-os.environ['MEMCACHE_USERNAME'] = os.environ.get('MEMCACHIER_USERNAME', '')
-os.environ['MEMCACHE_PASSWORD'] = os.environ.get('MEMCACHIER_PASSWORD', '')
-
+redis_url = urlparse(os.environ.get('REDISCLOUD_URL'))
 CACHES = {
-    'default': {
-        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
-        'BINARY': True,
-        'OPTIONS': {
-            'no_block': True,
-            'tcp_nodelay': True,
-            'tcp_keepalive': True,
-            'remove_failed': 4,
-            'retry_timeout': 2,
-            'dead_timeout': 10,
-            '_poll_timeout': 2000
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': '%s:%s' % (redis_url.hostname, redis_url.port),
+            'OPTIONS': {
+                'PASSWORD': redis_url.password,
+                'DB': 0,
+            }
         }
     }
-}
 
 
 # Internationalization
