@@ -123,7 +123,7 @@ CACHES = {
             '_poll_timeout': 2000
         }
     }
-}   
+}
 
 
 # Internationalization
