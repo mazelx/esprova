@@ -6,8 +6,8 @@ google.maps.event.addDomListener(window, 'load', createMap);
 
 $( document ).ready(function() {
 
-    lat = $("#race-location").data("lat");
-    lng = $("#race-location").data("lng");
+    lat = parseFloat( $("#race-location").data("lat"));
+    lng = parseFloat( $("#race-location").data("lng"));
 
     mapOptions = {
         mapTypeId: google.maps.MapTypeId.TERRAIN,
