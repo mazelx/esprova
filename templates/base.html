@@ -68,11 +68,11 @@
                 <ul class="nav navbar-nav navbar-left">
                     {% get_sports %}
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="sport-selected">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         {% if request.session.selected_sport %}
-                            {{ request.session.selected_sport | capfirst }}
+                            <span class="sport-selected">{{ request.session.selected_sport | capfirst }}</span>
                         {% else %}
-                            {{ sports.0.name }}
+                            <span class="sport-selected">{{ sports.0.name }}</span>
                         {% endif %}
                     </span> 
                     <span class="caret"></span></a>           
