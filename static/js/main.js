@@ -210,8 +210,13 @@ function initializeFromURL(){
         sw = new google.maps.LatLng(parseFloat(lat_hi), parseFloat(lng_lo));
         ne = new google.maps.LatLng(parseFloat(lat_lo), parseFloat(lng_hi));
         bounds = new google.maps.LatLngBounds(sw, ne);
-        map.setCenter(bounds.getCenter());
-        map.setZoom(parseInt(getParameterByName('z')))
+        if (getParameterByName('z') === "") {
+            map.fitBounds(bounds);
+        } else {
+            map.setCenter(bounds.getCenter());
+            map.setZoom(parseInt(getParameterByName('z')))
+        }
+        mapbounds = bounds.toUrlValue();
     }
 
     // set dates
