@@ -6653,6 +6653,10 @@ body {
 }
 .racebanner {
   background: url(../images/race-banner.png) no-repeat center;
+  vertical-align: text-bottom;
+  top: 51px;
+  height: 400px;
+  margin-top: -30px;
 }
 .searchpage {
   left: 0;
@@ -6677,11 +6681,11 @@ body {
   z-index: 1;
   left: 10px;
   background-color: #e35252;
-  font-size: 32px;
+  font-size: 2.28em;
   color: white;
   text-align: center;
   vertical-align: middle;
-  line-height: 32px;
+  line-height: 1em;
 }
 .searchpage #cd-zoom-in {
   top: 15px;
@@ -6698,7 +6702,7 @@ body {
   padding: 2px;
   color: #e35252;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 0.86em;
   padding-right: 5px;
   padding-left: 5px;
 }
@@ -6727,11 +6731,11 @@ body {
   color: white;
 }
 .searchpage .help-search {
-  font-size: 24px;
+  font-size: 1.71em;
   margin-top: 3px;
 }
 .searchpage .month-spacer {
-  font-size: 18px;
+  font-size: 1.29em;
   color: #e35252;
   font-weight: 500;
   line-height: 1.1;
@@ -6740,7 +6744,7 @@ body {
   margin-bottom: 30px;
 }
 .searchpage .spinner {
-  font-size: 60px;
+  font-size: 4.29em;
   color: #e6e6e6;
   text-align: center;
   line-height: 300px;
@@ -6761,7 +6765,7 @@ body {
   width: 100px;
   height: 70px;
   float: left;
-  font-size: 50px;
+  font-size: 3.57em;
   text-align: center;
   color: #e6e6e6;
 }
@@ -6769,7 +6773,7 @@ body {
   line-height: 60px;
 }
 .searchpage .search-result .result-date-preview .result-end-date {
-  font-size: 14px;
+  font-size: 1em;
 }
 .searchpage .search-result .result-content {
   margin-left: 100px;
@@ -6832,7 +6836,7 @@ body {
   margin-bottom: 60px;
 }
 .racepage .race-header .event-name {
-  font-size: 40px;
+  font-size: 2.86em;
   color: black;
 }
 .racepage .race-header .event-location {
@@ -6849,7 +6853,7 @@ body {
 }
 .racepage .race-distances .distance-icon {
   width: 50px;
-  font-size: 25px;
+  font-size: 1.79em;
   padding: 0;
   color: #e35252;
   border: solid 1px #e35252;
@@ -6872,7 +6876,7 @@ body {
   margin-bottom: 50px;
 }
 .racepage .race-content .race-infogroup .race-infogroup-icon {
-  font-size: 70px;
+  font-size: 5em;
   margin-top: -20px;
   color: #e35252;
   text-align: center;
