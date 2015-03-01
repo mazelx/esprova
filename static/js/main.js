@@ -192,13 +192,12 @@ function createDatePickerComponent() {
 
 function initializeFromURL(){
 
-    // if sport not set in query o
+    // need to test whetheir sport exists trhough ajax
     _selected_sport = getParameterByName('sport');
-    if (saveSportSession(selected_sport)) {
-        selected_sport = _selected_sport.charAt(0).toUpperCase() + _selected_sport.slice(1);
-    } else {
-        selected_sport = $(".sport-selected").text();    
+    if (_selected_sport !== "" ) {
+        saveSportSession(_selected_sport);
     }
+
 
     // set map to provided bounds
     lat_lo = getParameterByName('lat_lo');
@@ -258,20 +257,19 @@ function saveSportSession(sport){
         data: {sport: sport},
         type: 'POST',
         success: function(response, statut) {
-            $('.sport-selected').html(sport);
-            return true;
+            formatted_sport = sport.charAt(0).toUpperCase() + sport.slice(1);
+            $('.sport-selected').html(formatted_sport);
+            selected_sport = formatted_sport;
+            getRaces();
         },
-        error: function(response, statut) {
-            return false;
-        }
     });
 }
 
 function addListSportSelection(){
     // change sport
     $('.sport-selecter').click(function (event) { 
-        selected_sport = event.currentTarget.innerText;
-        getRaces();
+        event.preventDefault();
+        saveSportSession(event.currentTarget.innerText);
    });
 }
 
@@ -586,16 +584,16 @@ window.onpopstate = function(event){
 
     if(event.state !== null) {
         ajaxLoad(event.state["param_query"])    
-    }
 
-    // disable map move listener to avoid refresh upon initialization
-    google.maps.event.clearListeners(map, 'idle');
-    // initialize document from URL parameters
-    initializeFromURL();
-    // enable map move listener
-    google.maps.event.addListenerOnce(map, 'idle', function() {
+        // disable map move listener to avoid refresh upon initialization
+        google.maps.event.clearListeners(map, 'idle');
+        // initialize document from URL parameters
+        initializeFromURL();
+        // enable map move listener
+        google.maps.event.addListenerOnce(map, 'idle', function() {
             addListMapMoves();
         });
+    }
 
 }
 
