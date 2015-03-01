@@ -1,5 +1,5 @@
 from django import forms
-from core.models import EventEdition, EventReference, Race, Location, Contact
+from core.models import EventEdition, EventReference, Race, Location, Contact, Sport
 
 
 # model forms ????
@@ -7,6 +7,10 @@ from core.models import EventEdition, EventReference, Race, Location, Contact
 class ConnexionForm(forms.Form):
     username = forms.CharField(label="Nom d'utilisateur", max_length=30)
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
+
+
+class SportForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.Select)
 
 
 class EventReferenceForm(forms.ModelForm):

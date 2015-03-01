@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.views.generic import ListView, DetailView, TemplateView, DeleteView
-from core.models import Race
+from core.models import Race, Sport
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
@@ -11,7 +11,8 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
+# from core.forms import SportForm
 
 import datetime
 
@@ -24,7 +25,19 @@ class LoginRequiredMixin(object):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
 
+
 # Ajax calls
+@login_required
+def ajx_set_sport_session(request):
+    # if this is a POST request we need to process the form data
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        sport = request.POST.get("sport").lower()
+        if sport in [s.name.lower() for s in Sport.objects.all()]:
+            request.session['selected_sport'] = sport
+            return HttpResponse('')
+    return Http404
+
 
 @login_required
 def ajx_validate_all(request):
@@ -63,6 +76,12 @@ def ajx_get_races(request):
 
         sqs = SearchQuerySet()
         sqs = sqs.filter(validated="true")
+
+        # search from quick search form
+        sport = request.GET.get('sport')
+        if not sport:
+            raise Http404
+        sqs = sqs.filter(sport=sport)
 
         # search from map bounds
         lat_lo = request.GET.get('lat_lo')
@@ -302,3 +321,5 @@ class RaceValidationList(ListView):
     queryset = Race.objects.filter(validated=False)
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
+
+

@@ -5,16 +5,36 @@
 <html>
 
 <head>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static "apple-touch-icon-57x57.png" %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static "apple-touch-icon-60x60.png" %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static "apple-touch-icon-72x72.png" %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static "apple-touch-icon-76x76.png" %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static "apple-touch-icon-114x114.png" %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static "apple-touch-icon-120x120.png" %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static "apple-touch-icon-144x144.png" %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static "apple-touch-icon-152x152.png" %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon-180x180.png" %}">
+    <link rel="icon" type="image/png" href="{% static "favicon-32x32.png" sizes="32x32" %}">
+    <link rel="icon" type="image/png" href="{% static "favicon-194x194.png" sizes="194x194" %}">
+    <link rel="icon" type="image/png" href="{% static "favicon-96x96.png" sizes="96x96" %}">
+    <link rel="icon" type="image/png" href="{% static "android-chrome-192x192.png" sizes="192x192" %}">
+    <link rel="icon" type="image/png" href="{% static "favicon-16x16.png" sizes="16x16" %}">
+    <link rel="manifest" href="{% static "manifest.json" %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static "mstile-144x144.png" %}">
+    <meta name="theme-color" content="#ffffff">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link href="{% static "css/main.css" %}" rel="stylesheet">
 
+    <script src="{% static "js/jquery.js" %}"></script>
     <script type="text/javascript">
-        var static_url = "{% settings_value "STATIC_URL" %}"
+        var static_url = "{% settings_value "STATIC_URL" %}"        
     </script>
 
-    <script src="{% static "js/jquery.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
     <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
 
@@ -47,11 +67,11 @@
 
                 <ul class="nav navbar-nav navbar-left">
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sport <span class="caret"></span></a>           
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="sport-selected">{{ request.session.selected_sport | capfirst }}</span> <span class="caret"></span></a>           
                         <ul class="dropdown-menu" role="menu">
                         {% get_sports %}
                         {% for sport in sports %}
-                            <li><a href="#">{{ sport.name }}</a></li>
+                            <li><a href="#" class="sport-selecter">{{ sport.name }}</a></li>
                         {% endfor %}
                         </ul>
                     </li>

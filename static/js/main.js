@@ -3,6 +3,7 @@ var mapbounds;
 var last_query;
 var markers = {};
 var selected_event_id="";
+var selected_sport = "";
 
 var highestZIndex = 10;
 
@@ -32,7 +33,6 @@ if (typeof google !== "undefined") {
 
 
 function initialize() {
-
     primaryIcons['default']= {
         url: static_url + 'images/primary_marker_default.svg',
         size: new google.maps.Size(28,42),
@@ -105,6 +105,15 @@ function initialize() {
     } else {
         resetSearchForm();
     }
+
+    // Initiliaze CRSF token
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
     
     // Add custom event listeners
     addListMapMoves();
@@ -113,6 +122,7 @@ function initialize() {
     addListAlertMessages();
     addListResultClick();
     addListResetForm();
+    addListSportSelection();
     // addListRaceDisplayMap();
 
     createDatePickerComponent();
@@ -120,6 +130,31 @@ function initialize() {
     initializeMapZoomControl();
     initializeFromURL();
 }
+
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+
 
 // ----------------------
 // DOM Initialization 
@@ -155,11 +190,18 @@ function createDatePickerComponent() {
 
 function initializeFromURL(){
 
+    if (getParameterByName('sport') === "" || getParameterByName('sport') === 'undefined') {
+        selected_sport = $(".sport-selected").text();
+    } else {
+        selected_sport = getParameterByName('sport');
+        saveSportSession(selected_sport);
+    }
+
     // set map to provided bounds
-    lat_lo = getParameterByName('lat_lo')
-    lat_hi = getParameterByName('lat_hi')
-    lng_lo = getParameterByName('lng_lo')
-    lng_hi = getParameterByName('lng_hi')
+    lat_lo = getParameterByName('lat_lo');
+    lat_hi = getParameterByName('lat_hi');
+    lng_lo = getParameterByName('lng_lo');
+    lng_hi = getParameterByName('lng_hi');
 
     if(lat_lo !== "" && lat_hi !== "" && lng_lo !== "" && lng_hi !== "") {
         sw = new google.maps.LatLng(parseFloat(lat_hi), parseFloat(lng_lo));
@@ -201,6 +243,25 @@ function initializeFromURL(){
 // ----------------------
 // LISTENERS
 // ----------------------
+
+function saveSportSession(sport){
+       $.ajax({
+        url: '/ajx/sport-session/',
+        data: {sport: sport},
+        type: 'POST',
+        success: function(response, statut) {
+            $('.sport-selected').html(sport);
+        },
+    });
+}
+
+function addListSportSelection(){
+    // change sport
+    $('.sport-selecter').click(function (event) { 
+        selected_sport = event.currentTarget.innerText;
+        getRaces();
+   });
+}
 
 // LISTENER : retrieve races when map moves
 function addListMapMoves(){
@@ -245,7 +306,7 @@ function addListQuickSearch(){
     
 // LISTENER : retrieve races from basic search
 function addListSearch(){
-    $( "#race_search_form" ).change(function( event ) {
+    $( "#race_search_form" ).on('click submit', function( event ) {
         event.preventDefault();
         getRaces();
         selected_event_id = ""
@@ -473,15 +534,18 @@ function getParameterByName(name) {
 }
 
 function getParamQuery(){
+    // selected_sport = $('.sport-selected').text().toLowerCase();
     
     _boundsarray = (typeof boundsarray === "undefined" ) ? [40,-10,60,12] : boundsarray;
-    param_query = 'z=' + map.getZoom() +
+    param_query = $( "#race_search_form" ).serialize() +
+                      '&sport=' + selected_sport + 
                       '&active=' + selected_event_id +
+                      '&z=' + map.getZoom() +
                       '&lat_lo=' + _boundsarray[0] + 
                       '&lng_lo=' + _boundsarray[1] + 
                       '&lat_hi=' + _boundsarray[2] + 
-                      '&lng_hi=' + _boundsarray[3] +
-                      '&' + $( "#race_search_form" ).serialize()
+                      '&lng_hi=' + _boundsarray[3]
+                      
 
     return param_query;
 }

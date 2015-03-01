@@ -60,6 +60,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -118,6 +119,7 @@ CACHES = {
         }
     }
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
