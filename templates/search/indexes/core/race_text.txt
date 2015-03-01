@@ -8,4 +8,5 @@
 {{ object.location.postal_code }}
 {{ object.federation.name }}
 {{ object.label.name }}
+{{ object.location.country.name }}
 {% endautoescape %}
