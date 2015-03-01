@@ -192,12 +192,12 @@ function createDatePickerComponent() {
 
 function initializeFromURL(){
 
-    if (getParameterByName('sport') === "" || getParameterByName('sport') === 'undefined') {
-        selected_sport = $(".sport-selected").text();
-    } else {
-        _selected_sport = getParameterByName('sport');
+    // if sport not set in query o
+    _selected_sport = getParameterByName('sport');
+    if (saveSportSession(selected_sport)) {
         selected_sport = _selected_sport.charAt(0).toUpperCase() + _selected_sport.slice(1);
-        saveSportSession(selected_sport);
+    } else {
+        selected_sport = $(".sport-selected").text();    
     }
 
     // set map to provided bounds
@@ -259,7 +259,11 @@ function saveSportSession(sport){
         type: 'POST',
         success: function(response, statut) {
             $('.sport-selected').html(sport);
+            return true;
         },
+        error: function(response, statut) {
+            return false;
+        }
     });
 }
 
