@@ -82,6 +82,9 @@ urlpatterns = patterns('',
                            template_name='robots.txt',
                            content_type='text/plain')),
 
+                       url(r'^legal/$', TemplateView.as_view(
+                           template_name='legal.html'), name='legal'),
+
                        # UI refactor
                        # url(r'^listv2/$', TemplateView.as_view(template_name='core/ui_refactor.html')),
                        # url(r'^racev2/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceViewv2.as_view(), name='view_racev2'),
