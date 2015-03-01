@@ -6,16 +6,28 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         var input = document.getElementById('search_expr');
-        autocomplete = new google.maps.places.Autocomplete(input);
+        var options = {
+            types: ['(regions)'],
+            componentRestrictions: {country: 'fr'}
+            };
+        autocomplete = new google.maps.places.Autocomplete(input, options);
 
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        $( "#search-form" ).on('submit', function( event ) {
             var place = autocomplete.getPlace();
-            $("input[name=lat_lo]").val(place.geometry.viewport.getSouthWest().lat());
-            $("input[name=lng_lo]").val(place.geometry.viewport.getSouthWest().lng());
-            $("input[name=lat_hi]").val(place.geometry.viewport.getNorthEast().lat());
-            $("input[name=lng_hi]").val(place.geometry.viewport.getNorthEast().lng());
+            
+            if (typeof place !== "undefined") {
+                if (!place.geometry) {
+                    event.preventDefault();
+                    return;
+                }
+                $("input[name=lat_lo]").val(place.geometry.viewport.getSouthWest().lat());
+                $("input[name=lng_lo]").val(place.geometry.viewport.getSouthWest().lng());
+                $("input[name=lat_hi]").val(place.geometry.viewport.getNorthEast().lat());
+                $("input[name=lng_hi]").val(place.geometry.viewport.getNorthEast().lng());
+            }
         });
     });
+
 </script>
 
 {%endblock%}
@@ -56,7 +68,7 @@
             <!-- intro-banner -->
         </div>
         <!-- row -->
-        <form class="search-command form-horizontal"  action="{% url "list_race" %}" method="GET">
+        <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" method="GET">
             <div class="form-group">
                 <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Selectionnez un sport :</label>
                 <div class="col-sm-5">
@@ -72,7 +84,7 @@
                 <label for="inputPassword3" class="col-sm-offset-1 col-sm-3 control-label">Selectionnez un lieu :</label>
                 <div class="col-sm-5">
                     <div class="input-group">
-                        <input type="search" id="search_expr" class="form-control" placeholder="Pays, Région, Département, Ville ..."/>
+                        <input type="search" id="search_expr" class="form-control" placeholder="Région, Département, Ville ..."/>
                         <span class="input-group-btn">
                             <button class="btn btn-default" id="search_expr_go"> 
                                 <span class="glyphicon glyphicon-search" aria-hidden="true">
