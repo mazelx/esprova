@@ -14,6 +14,8 @@ var secondaryIcons = {};
 var default_lat = 46.9;
 var default_lng = 2.6;
 
+var default_boundsarray = [40,-10,60,12]
+
 // var static_url = 'https://esprova-static.s3.amazonaws.com/';
 // var static_url = 'http://localhost:8000/static/'
 
@@ -193,7 +195,8 @@ function initializeFromURL(){
     if (getParameterByName('sport') === "" || getParameterByName('sport') === 'undefined') {
         selected_sport = $(".sport-selected").text();
     } else {
-        selected_sport = getParameterByName('sport');
+        _selected_sport = getParameterByName('sport');
+        selected_sport = _selected_sport.charAt(0).toUpperCase() + _selected_sport.slice(1);
         saveSportSession(selected_sport);
     }
 
@@ -536,7 +539,7 @@ function getParameterByName(name) {
 function getParamQuery(){
     // selected_sport = $('.sport-selected').text().toLowerCase();
     
-    _boundsarray = (typeof boundsarray === "undefined" ) ? [40,-10,60,12] : boundsarray;
+    _boundsarray = (typeof boundsarray === "undefined" ) ? default_boundsarray : boundsarray;
     param_query = $( "#race_search_form" ).serialize() +
                       '&sport=' + selected_sport + 
                       '&active=' + selected_event_id +
