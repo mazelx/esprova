@@ -6773,7 +6773,7 @@ body {
   line-height: 60px;
 }
 .searchpage .search-result .result-date-preview .result-end-date {
-  font-size: 1em;
+  font-size: 0.3em;
 }
 .searchpage .search-result .result-content {
   margin-left: 100px;
