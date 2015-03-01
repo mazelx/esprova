@@ -66,10 +66,17 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul class="nav navbar-nav navbar-left">
+                    {% get_sports %}
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="sport-selected">{{ request.session.selected_sport | capfirst }}</span> <span class="caret"></span></a>           
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="sport-selected">
+                        {% if request.session.selected_sport %}
+                            {{ request.session.selected_sport | capfirst }}
+                        {% else %}
+                            {{ sports.0.name }}
+                        {% endif %}
+                    </span> 
+                    <span class="caret"></span></a>           
                         <ul class="dropdown-menu" role="menu">
-                        {% get_sports %}
                         {% for sport in sports %}
                             <li><a href="#" class="sport-selecter">{{ sport.name }}</a></li>
                         {% endfor %}
