@@ -1,6 +1,25 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %}
 
+{%block head_extra%}
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        var input = document.getElementById('search_expr');
+        autocomplete = new google.maps.places.Autocomplete(input);
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            $("input[name=lat_lo]").val(place.geometry.viewport.getSouthWest().lat());
+            $("input[name=lng_lo]").val(place.geometry.viewport.getSouthWest().lng());
+            $("input[name=lat_hi]").val(place.geometry.viewport.getNorthEast().lat());
+            $("input[name=lng_hi]").val(place.geometry.viewport.getNorthEast().lng());
+        });
+    });
+</script>
+
+{%endblock%}
+
 {%block navbar %}
     <nav class="intro-navbar">
         <div class="container-fluid">
@@ -37,11 +56,11 @@
             <!-- intro-banner -->
         </div>
         <!-- row -->
-        <form class="search-command form-horizontal">
+        <form class="search-command form-horizontal"  action="{% url "list_race" %}" method="GET">
             <div class="form-group">
                 <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Selectionnez un sport :</label>
                 <div class="col-sm-5">
-                    <select class="form-control">
+                    <select class="form-control" name="sport">
                       <option>Triathlon</option>
                       <option>Triathlon Jeunes</option>
                       <option>Triathlon Nature</option>
@@ -53,7 +72,7 @@
                 <label for="inputPassword3" class="col-sm-offset-1 col-sm-3 control-label">Selectionnez un lieu :</label>
                 <div class="col-sm-5">
                     <div class="input-group">
-                        <input type="search" id="search_expr" name="search_expr" class="form-control" placeholder="Ville, Région, Département, ..." value="{{ params.search_expr }}"/>
+                        <input type="search" id="search_expr" class="form-control" placeholder="Pays, Région, Département, Ville ..."/>
                         <span class="input-group-btn">
                             <button class="btn btn-default" id="search_expr_go"> 
                                 <span class="glyphicon glyphicon-search" aria-hidden="true">
@@ -62,6 +81,10 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="lat_lo" value="">
+            <input type="hidden" name="lng_lo" value="">
+            <input type="hidden" name="lat_hi" value="">
+            <input type="hidden" name="lng_hi" value="">
         </form>
         <!-- search-command  -->
 

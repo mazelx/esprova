@@ -140,7 +140,7 @@ LOGIN_REDIRECT_URL = "/"
 
  # ------ Project Specific Settings ------
 
-GOOGLE_API_KEY = "AIzaSyCA3YCeUu02CRg_QPLS8GUhIx2fgX4is24"
+GOOGLE_API_KEY = "AIzaSyAu5lWzzuB7WXLqI9UzK2yL0IVtyr97yOg"
 
 
 # Haystack -----------
