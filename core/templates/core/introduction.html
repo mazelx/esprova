@@ -1,5 +1,6 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %}
+{% load templatetags %}
 
 {%block head_extra%}
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
@@ -14,16 +15,20 @@
 
         $( "#search-form" ).on('submit', function( event ) {
             var place = autocomplete.getPlace();
+            var submit = false;
             
             if (typeof place !== "undefined") {
-                if (!place.geometry) {
-                    event.preventDefault();
-                    return;
+                if (place.geometry) {
+                    submit = true;
+                    $("input[name=lat_lo]").val(place.geometry.viewport.getSouthWest().lat());
+                    $("input[name=lng_lo]").val(place.geometry.viewport.getSouthWest().lng());
+                    $("input[name=lat_hi]").val(place.geometry.viewport.getNorthEast().lat());
+                    $("input[name=lng_hi]").val(place.geometry.viewport.getNorthEast().lng());
                 }
-                $("input[name=lat_lo]").val(place.geometry.viewport.getSouthWest().lat());
-                $("input[name=lng_lo]").val(place.geometry.viewport.getSouthWest().lng());
-                $("input[name=lat_hi]").val(place.geometry.viewport.getNorthEast().lat());
-                $("input[name=lng_hi]").val(place.geometry.viewport.getNorthEast().lng());
+            }
+            if (!submit) {
+                event.preventDefault();
+                return;
             }
         });
     });
@@ -73,9 +78,10 @@
                 <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Selectionnez un sport :</label>
                 <div class="col-sm-5">
                     <select class="form-control" name="sport">
-                      <option>Triathlon</option>
-                      <option>Triathlon Jeunes</option>
-                      <option>Triathlon Nature</option>
+                    {% get_sports %}
+                    {% for sport in sports %}
+                            <option>{{ sport.name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
