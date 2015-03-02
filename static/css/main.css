@@ -6559,6 +6559,9 @@ body {
   a[href^="#"]:after {
     content: "";
   }
+  dt {
+    font-size: 1.2em;
+  }
 }
 .content {
   min-height: 100%;
