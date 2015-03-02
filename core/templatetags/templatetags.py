@@ -21,3 +21,4 @@ get_sports = register.tag(get_sports)
 @register.simple_tag
 def settings_value(name):
     return getattr(settings, name, "")
+

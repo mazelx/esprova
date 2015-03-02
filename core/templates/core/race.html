@@ -8,6 +8,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
 <script type="text/javascript" src="{% static "js/race.js" %}"></script>
 
+
 {% endblock %}
 
 
@@ -136,17 +137,22 @@
                             </dl>
                         </div>
                 </section>
+               
             </div>
-        </div>
-
+        </div>        
+                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
         <div class="row">
-
+            <div class="addthis_sharing_toolbox"></div>
+        </div>
+    
+        <div class="row">
             <div class="race-command">
                     {%if request.user.is_superuser %}
 
-                        {% if not race.validated %}
-                            <a id="race_{{race.pk}}" onclick="validateRace({{race.pk}})" class="btn btn-success" href='#'>Valider</a>
-                        {% endif %}
+                    {% if not race.validated %}
+                        <a id="race_{{race.pk}}" onclick="validateRace({{race.pk}})" class="btn btn-success" href='#'>Valider</a>
+                    {% endif %}
                   
                     <a class="btn btn-warning" href="{% url "edit_race" race.slug race.pk %}">Modifier</a>
                     <a onclick="deleteRace({{race.pk}})" class="btn btn-danger" href="#">Supprimer</a>
@@ -156,5 +162,12 @@
 
     </div>
 </div>
+
+
+{% endblock %}
+
+{% block beforeBodyClose %}
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-54f46991241dcb03" async="async"></script>
 
 {% endblock %}

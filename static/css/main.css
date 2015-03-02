@@ -6897,6 +6897,10 @@ body {
   margin-bottom: 20px;
   display: none;
 }
+.racepage .addthis_sharing_toolbox {
+  text-align: center;
+  margin-bottom: 100px;
+}
 .racepage .race-command {
   text-align: center;
 }
