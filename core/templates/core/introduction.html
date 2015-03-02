@@ -178,3 +178,12 @@
 </div>
 
 {% endblock %}
+
+
+{% block beforeBodyClose %}
+<script type="text/javascript" id="cookiebanner"
+    src="{% static "js/cookiebanner.min.js"%}"
+    data-message="En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies permettant de vous offrir un service optimal et des contenus personnalisés."
+    data-linkmsg="Plus d'info"
+    ></script>
+{% endblock %}
