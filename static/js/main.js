@@ -14,7 +14,6 @@ var secondaryIcons = {};
 
 var default_lat = 46.9;
 var default_lng = 2.6;
-
 var default_boundsarray = [40,-10,60,12]
 var default_search_expr = "" 
 var default_start_date = "2015-01-01"
@@ -55,22 +54,27 @@ function initialize() {
     };
 
     secondaryIcons['default']= {
-        url: static_url + 'images/secondary_marker_default.svg',
-        size: new google.maps.Size(26,26),
-        anchor: new google.maps.Point(13,13),
+        // url: static_url + 'images/secondary_marker_default.svg',
+        url: static_url + 'images/marker_default.png',
+        // size: new google.maps.Size(9,9),
+        scaledSize: new google.maps.Size(10,10),
+        anchor: new google.maps.Point(4,4),
     };
 
     secondaryIcons['selected']={
-        url: static_url + 'images/secondary_marker_selected.svg',
-        size: new google.maps.Size(26,26),
-        anchor: new google.maps.Point(13,13),
+        url: static_url + 'images/marker_selected.png',
+        // size: new google.maps.Size(26,26),
+        scaledSize: new google.maps.Size(14,14),
+        anchor: new google.maps.Point(7,7),
     };
 
     secondaryIcons['hover']= {
-        url: static_url + 'images/secondary_marker_hover.svg',
-        size: new google.maps.Size(26,26),
-        anchor: new google.maps.Point(13,13),
+        url: static_url + 'images/marker_hover.png',
+        // size: new google.maps.Size(26,26),
+        scaledSize: new google.maps.Size(10,10),
+        anchor: new google.maps.Point(4,4),   
     };
+
     markerIcons["primary"]=primaryIcons;
     markerIcons["secondary"]=secondaryIcons;
 
@@ -245,10 +249,7 @@ function initializeFromURL(){
         selected_event_id = ""
     }
 
-    getRaces(false);
-
-    
-    
+    getRaces(false);    
 }
 
 // ----------------------
@@ -408,12 +409,15 @@ function ajaxLoad(params) {
         url: 'ajx/search/',
         type: 'GET', 
         data: params,
-        dataType: 'json',
-        success: function(response, statut) {
+        dataType: 'json'
+        })
+        .done(function(response, status) {
             refreshRacesOnSidebar(response.html, response.count);
             refreshRacesOnMap(response.races);
-        },
-    });
+        })
+        .fail(function(response, status){
+            alert('ajaxload error') ;
+        });
 }
 
 

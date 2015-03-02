@@ -4,5 +4,5 @@
 	 id="Calque_1" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="26px" height="26px"
 	 viewBox="-626 388 26 26" enable-background="new -626 388 26 26" xml:space="preserve">
-<circle fill="#4D4D4D" cx="-613.1" cy="400.8" r="4"/>
+<circle fill="#4D4D4D" stroke="#666666" stroke-miterlimit="10" cx="-613.1" cy="401.3" r="4"/>
 </svg>
