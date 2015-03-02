@@ -124,7 +124,7 @@ function initialize() {
     addListAlertMessages();
     addListResultClick();
     addListResetForm();
-    addListSportSelection();
+    // addListSportSelection();
     // addListRaceDisplayMap();
 
     createDatePickerComponent();
@@ -316,7 +316,15 @@ function addListQuickSearch(){
     
 // LISTENER : retrieve races from basic search
 function addListSearch(){
-    $( "#race_search_form" ).on('click submit', function( event ) {
+    // $(".distance_selector").on('change', function (event) {
+    //     $( "#race_search_form" ).submit();
+    // });
+
+    // $(".sport-selecter").on('change', function (event) {
+    //     $( "#race_search_form" ).submit();
+    // });
+
+    $("#race_search_form").on('change submit', function(event) {
         event.preventDefault();
         getRaces();
         selected_event_id = ""
@@ -548,7 +556,6 @@ function getParamQuery(){
     
     _boundsarray = (typeof boundsarray === "undefined" ) ? default_boundsarray : boundsarray;
     param_query = $( "#race_search_form" ).serialize() +
-                      '&sport=' + selected_sport + 
                       '&active=' + selected_event_id +
                       '&z=' + map.getZoom() +
                       '&lat_lo=' + _boundsarray[0] + 

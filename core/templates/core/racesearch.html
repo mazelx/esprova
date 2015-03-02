@@ -1,5 +1,7 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %} 
+{% load templatetags %}
+
 
 {% block head_extra %}
     <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -39,6 +41,21 @@
             <div class="row searchbox">
 
                 <form id="race_search_form" class="form-horizontal" role="form">
+
+
+
+                     <div class="row form-group">
+                        <label for="sport" class="col-sm-3 control-label">Sport :</label>
+                        <div class="col-sm-8">
+                            <select class="sport-selecter form-control" name="sport">
+                            {% get_sports %}
+                            {% for sport in sports %}
+                                <option>{{ sport.name }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
 
                     {# expression search #}
                     <div class="row form-group" id="race_quicksearch_form">

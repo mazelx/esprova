@@ -1,6 +1,7 @@
 {% load static from staticfiles %}
 {% load templatetags %}
 
+
 <!DOCTYPE html>
 <html>
 
@@ -64,25 +65,6 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                <ul class="nav navbar-nav navbar-left">
-                    {% get_sports %}
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {% if request.session.selected_sport %}
-                            <span class="sport-selected">{{ request.session.selected_sport | capfirst }}</span>
-                        {% else %}
-                            <span class="sport-selected">{{ sports.0.name }}</span>
-                        {% endif %}
-                    </span> 
-                    <span class="caret"></span></a>           
-                        <ul class="dropdown-menu" role="menu">
-                        {% for sport in sports %}
-                            <li><a href="#" class="sport-selecter">{{ sport.name }}</a></li>
-                        {% endfor %}
-                        </ul>
-                    </li>
-                </ul>
             
                 <ul class="nav navbar-nav navbar-right">
                     
