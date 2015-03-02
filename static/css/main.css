@@ -6536,6 +6536,30 @@ html,
 body {
   height: 100%;
 }
+@media print {
+  * {
+    text-shadow: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  body {
+    font-size: 10px;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: "";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+}
 .content {
   min-height: 100%;
   margin-top: -51px;
@@ -6657,6 +6681,11 @@ body {
   top: 51px;
   height: 400px;
   margin-top: -30px;
+}
+@media print {
+  .racebanner {
+    display: none !important;
+  }
 }
 .searchpage {
   left: 0;
@@ -6867,6 +6896,11 @@ body {
 .racepage .race-tabs {
   margin-bottom: 100px;
 }
+@media print {
+  .racepage .race-tabs {
+    display: none !important;
+  }
+}
 .racepage .race-content {
   display: block;
   margin-left: auto;
@@ -6880,6 +6914,11 @@ body {
   margin-top: -20px;
   color: #e35252;
   text-align: center;
+}
+@media print {
+  .racepage .race-content .race-infogroup .race-infogroup-icon {
+    display: none !important;
+  }
 }
 .racepage .race-content .race-infogroup .race-infogroup-details dt {
   color: #b3b3b3;
@@ -6901,8 +6940,18 @@ body {
   text-align: center;
   margin-bottom: 100px;
 }
+@media print {
+  .racepage .addthis_sharing_toolbox {
+    display: none !important;
+  }
+}
 .racepage .race-command {
   text-align: center;
+}
+@media print {
+  .racepage .race-command {
+    display: none !important;
+  }
 }
 .racepage .race-command .btn {
   width: 140px;
@@ -6915,6 +6964,11 @@ footer {
   padding: 5px 15px 5px 15px;
   background-color: #e35252;
   color: white;
+}
+@media print {
+  footer {
+    display: none !important;
+  }
 }
 footer:before,
 footer:after {

@@ -3,6 +3,24 @@ html, body{
     height: 100%;
 }
 
+@media print {
+  * { 
+    text-shadow: none !important;
+    // color: #000 !important; 
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  body {
+    font-size: 10px;
+  }
+
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: ""; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after { content: ""; }
+}
+
 .content {
     min-height: 100%;
     margin-top: -51px;
@@ -158,6 +176,7 @@ html, body{
     top: 51px;
     height: 400px;
     margin-top: -30px;
+    .hidden-print();
 
 }
 
@@ -413,6 +432,7 @@ html, body{
     }
 
     .race-tabs {
+        .hidden-print();
         margin-bottom: 100px;
     }
 
@@ -430,6 +450,7 @@ html, body{
                 margin-top: -20px;
                 color: @esprova-red;
                 text-align: center;
+                .hidden-print();
             }
             .race-infogroup-details {
                 // line-height: 400px;
@@ -458,12 +479,14 @@ html, body{
     }
     
     .addthis_sharing_toolbox {
+        .hidden-print();
         text-align: center;
         margin-bottom: 100px;
     }
 
 
     .race-command {
+        .hidden-print();
         text-align: center;
         .btn {
             width: 140px;
@@ -477,6 +500,7 @@ html, body{
 }
 
 footer {
+    .hidden-print();
     .clearfix();
     margin-bottom: 0px;
     padding: 5px 15px 5px 15px;
