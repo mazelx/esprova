@@ -9,7 +9,9 @@
         var input = document.getElementById('search_expr');
         var options = {
             types: ['(regions)'],
-            componentRestrictions: {country: 'fr'}
+            // 
+            // componentRestrictions: {country: 'fr'}
+
             };
         autocomplete = new google.maps.places.Autocomplete(input, options);
 
@@ -90,7 +92,7 @@
                 <label for="inputPassword3" class="col-sm-offset-1 col-sm-3 control-label">Selectionnez un lieu :</label>
                 <div class="col-sm-5">
                     <div class="input-group">
-                        <input type="search" id="search_expr" class="form-control" placeholder="Région, Département, Ville ..."/>
+                        <input type="search" id="search_expr" name="search_expr" class="form-control" placeholder="Région, Département, Ville ..."/>
                         <span class="input-group-btn">
                             <button class="btn btn-default" id="search_expr_go"> 
                                 <span class="glyphicon glyphicon-search" aria-hidden="true">
