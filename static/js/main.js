@@ -1,3 +1,4 @@
+// SPAGHETTI v1.0
 var map;
 var mapbounds;
 var last_query;
@@ -15,6 +16,9 @@ var default_lat = 46.9;
 var default_lng = 2.6;
 
 var default_boundsarray = [40,-10,60,12]
+var default_search_expr = "" 
+var default_start_date = "2015-01-01"
+var default_end_date = "2015-12-31"
 
 // var static_url = 'https://esprova-static.s3.amazonaws.com/';
 // var static_url = 'http://localhost:8000/static/'
@@ -316,13 +320,6 @@ function addListQuickSearch(){
     
 // LISTENER : retrieve races from basic search
 function addListSearch(){
-    // $(".distance_selector").on('change', function (event) {
-    //     $( "#race_search_form" ).submit();
-    // });
-
-    // $(".sport-selecter").on('change', function (event) {
-    //     $( "#race_search_form" ).submit();
-    // });
 
     $("#race_search_form").on('change submit', function(event) {
         event.preventDefault();
@@ -413,7 +410,7 @@ function ajaxLoad(params) {
         data: params,
         dataType: 'json',
         success: function(response, statut) {
-            refreshRacesOnSidebar(response.html);
+            refreshRacesOnSidebar(response.html, response.count);
             refreshRacesOnMap(response.races);
         },
     });
@@ -423,16 +420,68 @@ function ajaxLoad(params) {
 // ----------------------
 // Display results
 // ----------------------
-function refreshRacesOnSidebar(races_html) {
+function refreshRacesOnSidebar(raceshtml, count) {
     // replace HTML by ajax provided code
-    $("#racelist").html(races_html);
+    $("#racelist").html(raceshtml);
 
     addListResultClick();
     addListHoverSideboxResult();
     selectEvent(selected_event_id);
 
+    // if no result, try to find if the search expression is a location, and propose a link to search
+    if (count === 0) {
+        handleNoResult();
+    }   
+
 }
-        
+       
+function handleNoResult(){
+    selector = $('.try-location-search');
+    address = selector.data('expr')
+
+    // try to geocode expression
+    geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode( { 'address': address, region: 'fr' }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            selector.removeClass('hidden');
+            text = results[0].address_components[0].short_name + 
+                ' (' + results[0].address_components[1].short_name + ')';
+
+            selector.children('.location').children('a').text(text);
+
+            selector.children('.location').click(function (event) {
+                mapbounds = results[0].geometry.bounds;
+                $('#search_expr').val('');
+                map.fitBounds(mapbounds);
+            });
+        }
+    });
+
+    $('.no-result .cde-zoom-out').click(function (event) {
+        map.setZoom(map.getZoom()-1);
+    });
+
+    $('.no-result .cde-full-year').click(function (event) {
+        $("#start_date").val(default_start_date);
+        $("#end_date").val(default_end_date);
+        $('#start_date').datepicker('update');
+        $('#end_date').datepicker('update');
+        getRaces();
+    });
+
+    $('.no-result .cde-all-distances').click(function (event) {
+        $(".distance_selector").removeClass("active");
+        $(this).prop('checked', false);
+        getRaces();
+    });
+
+    $('.no-result .cde-all-distances').click(function (event) {
+        resetSearchForm();
+    });
+
+}
+
 function refreshRacesOnMap(races) {
     for(var key in markers){
         markers[key].setMap(null);
@@ -514,10 +563,15 @@ function setMapBoundsFromResults() {
 }
 
 function resetSearchForm(){
-    $("#race_search_form")[0].reset();
-    $('#start_date').datepicker('update')
-    $('#end_date').datepicker('update')
+    $("#search_expr").val(default_search_expr);
+    $("#start_date").val(default_start_date);
+    $("#end_date").val(default_end_date);
+    $('#start_date').datepicker('update');
+    $('#end_date').datepicker('update');
     $(".distance_selector").removeClass("active");
+    $('.distance_selector > input').each( function(i) {
+        $(this).prop('checked', false);
+    });
     getRaces();
 }
 
@@ -554,7 +608,7 @@ function getParameterByName(name) {
 function getParamQuery(){
     // selected_sport = $('.sport-selected').text().toLowerCase();
     
-    _boundsarray = (typeof boundsarray === "undefined" ) ? default_boundsarray : boundsarray;
+    _boundsarray = (typeof boundsarray === "undefined" || boundsarray === "") ? default_boundsarray : boundsarray;
     param_query = $( "#race_search_form" ).serialize() +
                       '&active=' + selected_event_id +
                       '&z=' + map.getZoom() +

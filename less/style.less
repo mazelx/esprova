@@ -289,6 +289,15 @@ html, body{
         line-height: 300px;
     }
 
+    .no-result {
+        margin-top: 15px;
+        padding: 30px;
+
+        .try-location-search {
+            font-style: italic;
+        }
+    }
+
     .search-result {
         padding: 15px 0 15px 0;
         margin: 0 -15px 0 -15px;
@@ -302,6 +311,7 @@ html, body{
         &:hover {
             background-color: @esprova-lightergray;
         }
+
 
         .result-date-preview {
             width: 100px;
@@ -339,7 +349,8 @@ html, body{
                     display:inline;
                     &.disabled {
                             visibility: hidden;
-                        }
+                    }
+
                     .result-detail-date {
                         display: none;
                     }

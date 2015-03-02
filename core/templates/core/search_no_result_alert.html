@@ -1,3 +1,16 @@
-<div class="sidealert alert alert-danger" role="alert">
-<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Nous n'avons pas trouvé de course correspondant à vos critères
+<div class="no-result" role="alert">
+    <p><strong>Nous n'avons pas trouvé de course correspondant à vos critères.</strong></p>
+    <p>
+        Essayez nos conseils suivants : <br>
+        <ul>
+            <li><a href="#" class="cde-zoom-out">Elargir la zone géographique</a></li>
+            <li><a href="#" class="cde-full-year">Rechercher sur les 12 prochains mois</a></li>
+            <li><a href="#" class="cde-all-distances">Rechercher pour toutes les distances</a></li>
+            <li><a href="#" class="cde-reset-form">Réinitialisez tous les critères de recherche</a></li>
+        </ul>
+    </p>
+    <br>
+    <p class="try-location-search hidden" data-expr="{{ search_expr }}">
+        Souhaitiez-vous rechercher les épreuves à <span class="location"><a href="#">Ruoms (07)</a></span> ou <a href="#" class="cde-full-map">sur toute la France</a> ?</i>  
+    </p>
  </div>

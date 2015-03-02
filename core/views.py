@@ -178,7 +178,7 @@ def ajx_get_races(request):
             rank += 1
 
         if not races:
-            result_html = render_to_string('core/search_no_result_alert.html')
+            result_html = render_to_string('core/search_no_result_alert.html', { 'search_expr' : search_expr})
 
         response = {'count': sqs.count(),
                     'races': races,
