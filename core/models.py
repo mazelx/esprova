@@ -29,6 +29,31 @@ class Sport(models.Model):
         return self.name
 
 
+    @property
+    def distances(self):
+        distances = []
+        for dc in self.distancecategory_set.all().order_by('order'):
+            distance = {}
+            distance['order'] = dc.order
+            distance['name'] = dc.name
+            distance['long_name'] = dc.long_name
+            distance['stages'] = []
+            for sd in dc.stagedistancedefault_set.all().order_by('order'):
+                stage = {}
+                stage['order'] = sd.order
+                stage['name'] = sd.stage.name
+                stage['distance'] = sd.get_formatted_distance
+                distance['stages'].append(stage)
+
+            distances.append(distance)
+
+        return distances
+
+    # @name.setter
+    # def name(self, value):
+        # self.distancecategory_set.all() = value
+
+
 class Location(models.Model):
 
     """

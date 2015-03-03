@@ -6867,6 +6867,10 @@ body {
   color: white;
   margin-right: 20px;
 }
+.distance-name {
+  color: #e35252;
+  border-bottom: solid 1px #e6e6e6;
+}
 .racepage {
   min-height: 100%;
 }

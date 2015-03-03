@@ -69,6 +69,7 @@ urlpatterns = patterns('',
                        url(r'^ajx/delete/(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
                        url(r'^ajx/validate/(?P<pk>\d+)$', ajx_validate_race, name="ajx_validate_race"),
                        url(r'^ajx/sport-session/', ajx_set_sport_session, name="ajx_set_sport_session"),
+                       url(r'^ajx/distance/(?P<name>[\w ]+)$', ajx_get_distance_helper, name="ajx_get_distance_helper"),
 
                        # API
                        url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

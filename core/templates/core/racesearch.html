@@ -40,9 +40,7 @@
            {# searchbox #}
             <div class="row searchbox">
 
-                <form id="race_search_form" class="form-horizontal" role="form">
-
-
+                <form id="race_search_form" class="form-horizontal" role="form" action="{% url "ajx_search_race" %}">
 
                      <div class="row form-group">
                         <label for="sport" class="col-sm-3 control-label">Sport :</label>
@@ -108,12 +106,13 @@
                                         <input type="checkbox" autocomplete="off" name="distances" value="XL" {{ params.distances.XL |yesno:"checked," }}>
                                     </label>
                                 </div>
-                                <span class="help-search glyphicon glyphicon-question-sign col-xs-2"></span>
+                                <span data-toggle="modal" data-target="#myModal" class="help-search glyphicon glyphicon-question-sign col-xs-2"></span>
+
                             </div>
                         </div>
                     </div>
 
-                    <a href="#" id="reset-search-form" class="col-sm-8 col-sm-offset-3 text-center">Réinitialiser les critères de recherche</a>
+                    <a id="reset-search-form" class="col-sm-8 col-sm-offset-3 text-center">Réinitialiser les critères de recherche</a>
                 </form>
             </div>
             {# end searchbox #}
@@ -134,6 +133,11 @@
 
 </div>
 {# end content #}
+
+<!-- Modal -->
+<div id="sport-distances-helper">
+</div>
+
 
 {% endblock %}
 

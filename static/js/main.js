@@ -14,7 +14,7 @@ var secondaryIcons = {};
 
 var default_lat = 46.9;
 var default_lng = 2.6;
-var default_boundsarray = [40,-10,60,12]
+var default_boundsarray = [40,-10,60,12];
 var default_search_expr = "" 
 var default_start_date = "2015-01-01"
 var default_end_date = "2015-12-31"
@@ -78,7 +78,6 @@ function initialize() {
     markerIcons["primary"]=primaryIcons;
     markerIcons["secondary"]=secondaryIcons;
 
-
     var mapOptions = {
         mapTypeId: google.maps.MapTypeId.TERRAIN,
         center: {
@@ -132,7 +131,7 @@ function initialize() {
     addListAlertMessages();
     addListResultClick();
     addListResetForm();
-    // addListSportSelection();
+    addListSportSelection();
     // addListRaceDisplayMap();
 
     createDatePickerComponent();
@@ -183,7 +182,21 @@ function initializeMapZoomControl() {
         });
     }
 }
-    
+
+
+function initializeSportDistanceHelper(sport) {
+     $.ajax({
+        url: 'ajx/distance/' + sport,
+        type: 'GET', 
+        dataType: 'text'
+        })
+        .done(function(response, status) {
+            $('#sport-distances-helper').html(response);
+        })
+        .fail(function(response, status){
+            $('#sport-distances-helper').html("");
+        });
+}
 
 // initialize bootstrap-datepicker component
 function createDatePickerComponent() {
@@ -266,15 +279,16 @@ function saveSportSession(sport){
             $('.sport-selected').html(formatted_sport);
             selected_sport = formatted_sport;
             getRaces();
+            initializeSportDistanceHelper(sport);
         },
     });
 }
 
 function addListSportSelection(){
     // change sport
-    $('.sport-selecter').click(function (event) { 
+    $('.sport-selecter').on('change', function (event) { 
         event.preventDefault();
-        saveSportSession(event.currentTarget.innerText);
+        saveSportSession(event.currentTarget.value);
    });
 }
 
@@ -402,21 +416,22 @@ function getRaces(recordState) {
 }
 
 function ajaxLoad(params) {
-    console.log("ajaxload: "+params)
+    console.log("ajaxload: " + params)
     $("#racelist").html('<div class="spinner"><i class="fa fa-spinner fa-pulse"></i></div>');
 
     $.ajax({
         url: 'ajx/search/',
         type: 'GET', 
         data: params,
-        dataType: 'json'
+        dataType: 'json',
+        timeout: 6000,
         })
         .done(function(response, status) {
             refreshRacesOnSidebar(response.html, response.count);
             refreshRacesOnMap(response.races);
         })
         .fail(function(response, status){
-            alert('ajaxload error') ;
+            displayError(message)
         });
 }
 
@@ -462,8 +477,9 @@ function handleNoResult(){
         }
     });
 
-    $('.no-result .cde-zoom-out').click(function (event) {
-        map.setZoom(map.getZoom()-1);
+    $('.no-result .cde-remove-keywords').click(function (event) {
+        $("#search_expr").val('');
+        getRaces();
     });
 
     $('.no-result .cde-full-year').click(function (event) {
@@ -482,6 +498,16 @@ function handleNoResult(){
 
     $('.no-result .cde-all-distances').click(function (event) {
         resetSearchForm();
+    });
+
+
+    $('.no-result .cde-full-map').click(function (event) {  
+        sw = new google.maps.LatLng(default_boundsarray[0],default_boundsarray[1]);
+        ne = new google.maps.LatLng(default_boundsarray[2], default_boundsarray[3]);
+        bounds = new google.maps.LatLngBounds(sw, ne);
+        map.fitBounds(bounds);
+
+        getRaces();
     });
 
 }

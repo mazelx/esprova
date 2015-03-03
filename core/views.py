@@ -11,7 +11,7 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render_to_response
 # from core.forms import SportForm
 
 import datetime
@@ -37,6 +37,12 @@ def ajx_set_sport_session(request):
             request.session['selected_sport'] = sport
             return HttpResponse('')
     return Http404
+
+
+def ajx_get_distance_helper(request, name):
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+        sport = get_object_or_404(Sport, name=name)
+        return render_to_response('core/distance_helper.html', {'sport': sport})
 
 
 @login_required
