@@ -424,14 +424,17 @@ function ajaxLoad(params) {
         type: 'GET', 
         data: params,
         dataType: 'json',
-        timeout: 6000,
+        timeout: 10000,
         })
         .done(function(response, status) {
             refreshRacesOnSidebar(response.html, response.count);
             refreshRacesOnMap(response.races);
         })
         .fail(function(response, status){
-            displayError(message)
+            $("#racelist").html(
+                "<div class='alert alert-danger' role='alert'>Une erreur est survenue, " +
+                "veuillez contacter <a href='mailto:contact@esprova.com?subject=[issue]:[ajaxLoad]'>" +
+                "le support</a></div>");
         });
 }
 
