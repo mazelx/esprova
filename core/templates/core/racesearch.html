@@ -9,12 +9,12 @@
     <link href="{% static "css/datepicker3.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="{% static "js/bootstrap-datepicker.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/min/bootstrap-datepicker-min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
     
-    <script src="{% static "js/main.js" %}"></script>
+    <script src="{% static "js/min/main-min.js" %}"></script>
 {% endblock %}
 
 {% block content %} 
@@ -60,7 +60,7 @@
                         <label for="start_date" class="col-sm-3 control-label">Mots-clés :</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="search" id="search_expr" name="search_expr" class="form-control" placeholder="Epreuve, lieu, organisateur..." value="{{ params.search_expr }}"/>
+                                <input type="search" id="search_expr" name="search_expr" class="form-control" placeholder="Nom, Région, Département, ..." value="{{ params.search_expr }}"/>
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" id="search_expr_go"> 
                                         <span class="glyphicon glyphicon-search" aria-hidden="true">
