@@ -90,10 +90,12 @@ def ajx_get_races(request):
         sqs = sqs.filter(sport=sport)
 
         # search from map bounds
-        lat_lo = request.GET.get('lat_lo')
-        lng_lo = request.GET.get('lng_lo')
-        lat_hi = request.GET.get('lat_hi')
-        lng_hi = request.GET.get('lng_hi')
+        param_viewport = request.GET.get('viewport')
+        viewport = [x.strip() for x in param_viewport.split(',')]
+        lat_lo = viewport[0]
+        lng_lo = viewport[1]
+        lat_hi = viewport[2]
+        lng_hi = viewport[3]
 
         if lat_lo and lng_lo and lat_hi and lng_hi:
             downtown_bottom_left = Point(float(lng_lo), float(lat_lo))
@@ -118,7 +120,7 @@ def ajx_get_races(request):
             sqs = sqs.filter(distance_cat__in=distances)
 
         # search from quick search form
-        search_expr = request.GET.get('search_expr')
+        search_expr = request.GET.get('q')
 
         if search_expr:
             sqs = sqs.filter(content=search_expr)

@@ -73,7 +73,12 @@
                     
                     {% if user.is_authenticated %}
                         <li>
-                        <li class="disabled bg-primary" ><a href=" {% url "create_race" %}">Ajouter une course</a></li>
+                        <li class="disabled bg-primary" >
+                        {% if not user.is_authenticated %}
+                            <a href=" {% url "create_race" %}">Ajouter une course</a></li>
+                        {% else %}
+                             <a href="#">Ajouter une course</a></li>
+                        {% endif %}
 
                         </li>
                         <li class="dropdown">

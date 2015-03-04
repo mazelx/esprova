@@ -89,7 +89,7 @@ $.ajaxSetup({
 function validateRace(pk) {
     // TODO : Propose a cancel link and delay for few seconds
     $.ajax({
-        url: '/ajx/validate/'+pk,
+        url: '/api/validate/'+pk,
         type: 'PUT',
         success: function(response, statut) {
             alert('validé')
@@ -99,7 +99,7 @@ function validateRace(pk) {
 function deleteRace(pk) {
     // TODO : Propose a cancel link and delay for few seconds
      $.ajax({
-        url: '/ajx/delete/'+pk,
+        url: '/api/delete/'+pk,
         type: 'DELETE',
         success: function(response, statut) {
             alert('supprimé')
