@@ -27,7 +27,6 @@ class LoginRequiredMixin(object):
 
 
 # Ajax calls
-@login_required
 def ajx_set_sport_session(request):
     # if this is a POST request we need to process the form data
     if (request.is_ajax() or settings.DEBUG) and request.method == 'POST':
@@ -76,7 +75,6 @@ def ajx_delete_race(request, pk):
     return HttpResponseBadRequest
 
 
-@login_required
 def ajx_get_races(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
@@ -206,7 +204,7 @@ class FacetTest(LoginRequiredMixin, ListView):
 
 
 # Should be heriting View ... or function not based on a class
-class RaceList(LoginRequiredMixin, TemplateView):
+class RaceList(TemplateView):
     # model = Race
     context_object_name = "race_list"
     template_name = "core/racesearch.html"
@@ -232,7 +230,7 @@ class RaceList(LoginRequiredMixin, TemplateView):
         return context
 
 
-class RaceView(LoginRequiredMixin, DetailView):
+class RaceView(DetailView):
     model = Race
     context_object_name = "race"
     template_name = "core/race.html"
