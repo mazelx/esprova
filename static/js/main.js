@@ -307,17 +307,18 @@ function saveSportSession(sport){
             $(".sport-selected").html(formatted_sport);
             if (selected_sport !== formatted_sport) {
                 selected_sport = formatted_sport;
-                getRaces( new RefreshOptions({"recordState": false, "refreshMap": false}) );
                 initializeSportDistanceHelper(sport);
             }
         });
 }
+
 
 function addListSportSelection(){
     // change sport
     $(".sport-selecter").on("change", function (event) { 
         event.preventDefault();
         saveSportSession(event.currentTarget.value);
+        getRaces( new RefreshOptions({"recordState": false, "refreshMap": false}) );
    });
 }
 

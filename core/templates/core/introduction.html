@@ -166,11 +166,10 @@
             if (typeof place !== "undefined") {
                 if (place.geometry) {
                     submit = true;
-                    $("input[name=viewport]").val(
-                        place.geometry.viewport.getSouthWest().lat() + ","
-                        place.geometry.viewport.getSouthWest().lng() + ","
-                        place.geometry.viewport.getNorthEast().lat() + ","
-                        place.geometry.viewport.getNorthEast().lng());
+                    $("input[name=viewport]").val(place.geometry.viewport.getSouthWest().lat() + "," +
+                                                  place.geometry.viewport.getSouthWest().lng() + "," +
+                                                  place.geometry.viewport.getNorthEast().lat() + "," +
+                                                  place.geometry.viewport.getNorthEast().lng());
                 }
             }
             if (!submit) {
