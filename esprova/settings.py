@@ -158,9 +158,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'core.signals.RaceOnlySignalProcessor'
 # Haystack -----------
 ELASTICSEARCH_INDEX_SETTINGS = {
     'settings': {
-        "number_of_shards": 8,
-        "number_of_replicas": 1,
-
+        "number_of_shards": 9,
         "analysis": {
             "analyzer": {
                 "search_analyzer": {
