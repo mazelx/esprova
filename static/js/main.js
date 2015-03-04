@@ -103,41 +103,16 @@ function initialize() {
     markerIcons.primary = primaryIcons;
     markerIcons.secondary = secondaryIcons;
 
-    var mapOptions = {
-        mapTypeId: google.maps.MapTypeId.TERRAIN,
-        center: {
-            lat: default_lat ,
-            lng: default_lng
-        },
-        zoom: 6,
-        maxZoom: 15,
-        // minZoom:5,   
-        panControl: false,
-        zoomControl: false,
-        streetViewControl: false
-    };
-
-    if( $("#map-canvas").length !== 0 ){
-
-        // initialize the map
-        map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-
-        map.setOptions({styles: map_styles});
-
-        // If map is not displayed (for mobile access)
-        // Initialize results
-        if($("#map-canvas").is(":hidden") === true) {    
-            resetSearchForm();
-        } else {
-            // On Firefox (others?), a refresh would not display markers
-                google.maps.event.addListenerOnce(map, "idle", function () {
-                viewport = initial_viewport;
-                getRaces();
-            });
-        }
-    } else {
+    if( $("#map-canvas").is(":hidden") ) {
         resetSearchForm();
+    } 
+    else {
+        // initialize the map
+        initializeMap();
+        google.maps.event.addListenerOnce(map, "idle", function () {
+            viewport = initial_viewport;
+            getRaces();
+        });    
     }
 
     // Initiliaze CRSF token
@@ -150,15 +125,12 @@ function initialize() {
     });
     
     // Add custom event listeners
+    addListWindowResize();
     addListMapMoves();
     addListSearch();
-    // addListAlertMessages();
     addListResultClick();
     addListResetForm();
     addListSportSelection();
-
-    // createDatePickerComponent();
-
     initializeMapZoomControl();
     initializeFromURL();
 }
@@ -195,9 +167,30 @@ function getCookie(name) {
 // ----------------------
 
 
+function initializeMap() {
+     var mapOptions = {
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        center: {
+            lat: default_lat ,
+            lng: default_lng
+        },
+        zoom: 6,
+        maxZoom: 15,
+        // minZoom:5,   
+        panControl: false,
+        zoomControl: false,
+        streetViewControl: false
+    };
+
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    map.setOptions({styles: map_styles});
+
+}
+
 // initialize map zoom controls
 function initializeMapZoomControl() {
-    if (map !== undefined) {
+    if (map) {
         // Setup the click event listeners and zoom-in or out according to the clicked element
         $("#cd-zoom-in").click( function() {
             map.setZoom(map.getZoom()+1);
@@ -254,7 +247,7 @@ function initializeFromURL(){
     var lat_hi = viewport[2];
     var lng_hi = viewport[3];
 
-    if(lat_lo !== "" && lat_hi !== "" && lng_lo !== "" && lng_hi !== "") {
+    if(map && lat_lo !== "" && lat_hi !== "" && lng_lo !== "" && lng_hi !== "") {
         var sw = new google.maps.LatLng(parseFloat(lat_hi), parseFloat(lng_lo));
         var ne = new google.maps.LatLng(parseFloat(lat_lo), parseFloat(lng_hi));
         var bounds = new google.maps.LatLngBounds(sw, ne);
@@ -297,6 +290,18 @@ function initializeFromURL(){
 // LISTENERS
 // ----------------------
 
+function addListWindowResize () {
+    $(window).on("resize", function() {
+        if(map && $("#map-canvas").is(":hidden")) {
+            map = null;
+        } 
+        else {
+            initializeMap();
+            getRaces(new RefreshOptions({"recordState": false}));
+        }
+    });
+}
+
 function saveSportSession(sport){
        $.ajax({
         url: "/api/sport-session/",
@@ -324,7 +329,7 @@ function addListSportSelection(){
 
 // LISTENER : retrieve races when map moves
 function addListMapMoves(){
-    if (map !== undefined) {
+    if (map) {
         google.maps.event.addListener(map, "idle", function() {
             // Do not refresh races if the map is not visible or "follow map bounds" not checked
             if ($("#follow_map_bounds").is(":checked") && $(".mapbox").is(":visible") ) {
@@ -336,7 +341,7 @@ function addListMapMoves(){
 }
 
 function addListMarkerClick(marker){
-    if (map !== undefined) {
+    if (map) {
         google.maps.event.addListener(marker, "click", function () {
             selectEvent(marker.get("id"));
             pushState(getParamQuery(), false);
@@ -395,7 +400,7 @@ function addListHoverSideboxResult(){
 }
 
 function addListHoverMapResult(marker){
-    if (map !== undefined) {
+    if (map) {
         google.maps.event.addListener(marker, "mouseover", function() {
             highlightResult(marker.get("id"));
         });
@@ -412,13 +417,14 @@ function addListHoverMapResult(marker){
 function getParamQuery(){
 
     viewport = (typeof viewport === "undefined" || viewport === "") ? default_viewport : viewport;
+    var zoom = map ? map.getZoom() : "";
     var param_query = $( "#race_search_form" ).serialize() +
                       "&viewport=" + viewport[0] +
                       "," + viewport[1] +
                       "," + viewport[2] +
                       "," + viewport[3] +
                       "&active=" + selected_event_id +
-                      "&z=" + map.getZoom();
+                      "&z=" + zoom;
 
     return param_query;
 }
