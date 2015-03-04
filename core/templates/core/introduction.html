@@ -2,43 +2,6 @@
 {% load static from staticfiles %}
 {% load templatetags %}
 
-{%block head_extra%}
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
-<script type="text/javascript">
-    $( document ).ready(function() {
-        var input = document.getElementById('search_expr');
-        var options = {
-            types: ['(regions)'],
-            // 
-            // componentRestrictions: {country: 'fr'}
-
-            };
-        autocomplete = new google.maps.places.Autocomplete(input, options);
-
-        $( "#search-form" ).on('submit', function( event ) {
-            var place = autocomplete.getPlace();
-            var submit = false;
-            
-            if (typeof place !== "undefined") {
-                if (place.geometry) {
-                    submit = true;
-                    $("input[name=lat_lo]").val(place.geometry.viewport.getSouthWest().lat());
-                    $("input[name=lng_lo]").val(place.geometry.viewport.getSouthWest().lng());
-                    $("input[name=lat_hi]").val(place.geometry.viewport.getNorthEast().lat());
-                    $("input[name=lng_hi]").val(place.geometry.viewport.getNorthEast().lng());
-                }
-            }
-            if (!submit) {
-                event.preventDefault();
-                return;
-            }
-        });
-    });
-
-</script>
-
-{%endblock%}
-
 {%block navbar %}
     <nav class="intro-navbar">
         <div class="container-fluid">
@@ -181,6 +144,47 @@
 
 
 {% block beforeBodyClose %}
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script type="text/javascript">
+    var input;
+    $( document ).ready(function() {
+        var options = {
+            types: ['(regions)'],
+            // 
+            // componentRestrictions: {country: 'fr'}
+
+            };
+        input = $('#search_expr');
+        autocomplete = new google.maps.places.Autocomplete(input[0], options);
+
+        $( "#search-form" ).on('submit', function( event ) {
+            var place = autocomplete.getPlace();
+            var submit = false;
+
+            if (input.val() === "" ) {
+                submit = true
+            }
+            
+            if (typeof place !== "undefined") {
+                if (place.geometry) {
+                    submit = true;
+                    $("input[name=lat_lo]").val(place.geometry.viewport.getSouthWest().lat());
+                    $("input[name=lng_lo]").val(place.geometry.viewport.getSouthWest().lng());
+                    $("input[name=lat_hi]").val(place.geometry.viewport.getNorthEast().lat());
+                    $("input[name=lng_hi]").val(place.geometry.viewport.getNorthEast().lng());
+                }
+            }
+            if (!submit) {
+                event.preventDefault();
+                return;
+            }
+        });
+    });
+
+</script>
+
+
 <script type="text/javascript" id="cookiebanner"
     src="{% static "js/cookiebanner.min.js"%}"
     data-message="En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies permettant de vous offrir un service optimal et des contenus personnalisés."
