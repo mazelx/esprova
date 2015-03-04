@@ -20,7 +20,7 @@
             <div class="result-detail-distance" >
                 <button type="button" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</button>
                 <span class="result-detail-date">
-                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | datefr }}</a>
+                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | date:"l d/m/Y à H:i" | capfirst }}</a>
                 </span>
             </div>
             {% endfor %}
