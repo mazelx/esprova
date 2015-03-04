@@ -5,7 +5,7 @@
 /*global static_url:false */
 /*global jQuery:false */
 
-var map;
+var map = null;
 var viewport; // store the current map bounds
 var last_query;
 var markers = {};

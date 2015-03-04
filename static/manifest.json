@@ -1,5 +1,12 @@
 {
-	"name": "My app",
+	"manifest_version": 1,
+	"name": "Esprova",
+  	"version": "versionString",
+	"description": "Espròva vous permet de rechercher les épreuves de sport près de chez vous. Agenda des courses de triathlon, de trail, de de course à pied, de courses fun... Espròva vous permet également d'effectuer un programme d'épreuves que vous pourrez partager avec vos amis.",
+
+  	"default_locale": "fr",
+  	"launch_path": "/",
+
 	"icons": [
 		{
 			"src": "\/android-chrome-36x36.png",
