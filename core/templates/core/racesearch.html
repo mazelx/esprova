@@ -75,9 +75,9 @@
                         <label for="start_date" class="col-sm-3 control-label">Période :</label>
                         <div class= "col-sm-8">
                             <div class="input-daterange datepicker input-group" id="datepicker">
-                              <input type="text" class="input-sm form-control" name="start_date" id="start_date" value="{{ params.start_date }}"/>
+                              <input type="date" class="input-sm form-control" name="start_date" id="start_date" value="{{ params.start_date }}"/>
                             <span class="input-group-addon"> à </span>
-                              <input type="text" class="input-sm form-control" name="end_date" id="end_date" value="{{ params.end_date }}"/>
+                              <input type="date" class="input-sm form-control" name="end_date" id="end_date" value="{{ params.end_date }}"/>
                             </div>
                         </div>
                     </div>
@@ -105,13 +105,13 @@
                                         <input type="checkbox" autocomplete="off" name="distances" value="XL" {{ params.distances.XL |yesno:"checked," }}>
                                     </label>
                                 </div>
-                                <span data-toggle="modal" data-target="#myModal" class="help-search glyphicon glyphicon-question-sign col-xs-2"></span>
+                                <span data-toggle="modal" data-target="#myModal" class="help-search col-xs-2"> <i class="fa fa-question"></i></span>
 
                             </div>
                         </div>
                     </div>
 
-                    <a id="reset-search-form" class="col-sm-8 col-sm-offset-3 col-xs-12 text-center">Réinitialiser les critères de recherche</a>
+                    <a id="reset-search-form" href="#" class="col-sm-8 col-sm-offset-3 col-xs-12 text-center">Réinitialiser les critères de recherche</a>
                 </form>
             </div>
             {# end searchbox #}
@@ -146,5 +146,12 @@
 
 {% block beforeBodyClose %}
     <script src="{% static "js/main.js" %}"></script>
+    <script>
+  var i = document.createElement("input");
+  i.setAttribute("type", "date");
+  if (i.type == "text") {
+    createDatePickerComponent()
+  }
+</script>
 {% endblock%}
 

@@ -157,7 +157,7 @@ function initialize() {
     addListResetForm();
     addListSportSelection();
 
-    createDatePickerComponent();
+    // createDatePickerComponent();
 
     initializeMapZoomControl();
     initializeFromURL();
@@ -517,8 +517,6 @@ function handleNoResult(){
     $("#no-result #cde-full-year").click(function () {
         $("#start_date").val(default_start_date);
         $("#end_date").val(default_end_date);
-        $("#start_date").datepicker("update");
-        $("#end_date").datepicker("update");
         getRaces();
     });
 
@@ -616,8 +614,8 @@ function resetSearchForm(){
     $("#search_expr").val(default_search_expr);
     $("#start_date").val(default_start_date);
     $("#end_date").val(default_end_date);
-    $("#start_date").datepicker("update");
-    $("#end_date").datepicker("update");
+    // $("#start_date").datepicker("update");
+    // $("#end_date").datepicker("update");
     $(".distance_selector").removeClass("active");
     $(".distance_selector > input").each( function() {
         $(this).prop("checked", false);
