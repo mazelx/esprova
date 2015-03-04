@@ -39,7 +39,7 @@
         </div>
         <!-- row -->
         <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" method="GET">
-            <div class="form-group">
+            <div class="form-group form-group-lg">
                 <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Selectionnez un sport :</label>
                 <div class="col-sm-5">
                     <select class="form-control" name="sport">
@@ -51,13 +51,13 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-group-lg">
                 <label for="inputPassword3" class="col-sm-offset-1 col-sm-3 control-label">Rechercher à proximité de :</label>
                 <div class="col-sm-5">
                     <div class="input-group">
                         <input type="search" id="search_expr" class="form-control" placeholder="Région, Département, Ville ..."/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" id="search_expr_go"> 
+                            <button class="btn btn-default btn-lg" id="search_expr_go"> 
                                 <span class="glyphicon glyphicon-search" aria-hidden="true">
                             </button>
                         </span>

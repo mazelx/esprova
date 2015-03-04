@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="100px" height="100px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#E35252;}
-</style>
-<g id="Page-1">
-	<g id="icon-111-search">
-		<path id="search" class="st0" d="M62.7,72c-6.5,4.6-14.4,7.3-23,7.3C17.8,79.4,0,61.6,0,39.7S17.8,0,39.7,0s39.7,17.8,39.7,39.7
-			c0,8.6-2.7,16.5-7.3,23l26.1,26.1c2.6,2.6,2.5,6.7,0,9.2L98,98.1c-2.5,2.5-6.7,2.5-9.2,0L62.7,72L62.7,72z M39.7,70
-			C56.4,70,70,56.4,70,39.7S56.4,9.3,39.7,9.3S9.3,22.9,9.3,39.7S22.9,70,39.7,70L39.7,70z"/>
-	</g>
-</g>
+	 width="112.6px" height="100.5px" viewBox="-586.9 335.9 112.6 100.5" enable-background="new -586.9 335.9 112.6 100.5"
+	 xml:space="preserve">
+<circle fill="none" stroke="#E35252" stroke-width="11" stroke-miterlimit="10" cx="-544.3" cy="378.5" r="37"/>
+<line fill="none" stroke="#E35252" stroke-width="14" stroke-linecap="round" stroke-miterlimit="10" x1="-513.3" y1="402.9" x2="-481.3" y2="429.4"/>
 </svg>
