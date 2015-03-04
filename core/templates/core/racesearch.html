@@ -9,12 +9,8 @@
     <link href="{% static "css/datepicker3.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="{% static "js/min/bootstrap-datepicker-min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
-
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
     
-    <script src="{% static "js/min/main-min.js" %}"></script>
 {% endblock %}
 
 {% block content %} 
@@ -145,4 +141,9 @@
 
 {% endblock %}
 
+{% block beforeBodyClose %}
+    <script type="text/javascript" src="{% static "js/min/bootstrap-datepicker-min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
+    <script src="{% static "js/min/main-min.js" %}"></script>
+{% endblock%}
 

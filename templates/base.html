@@ -35,8 +35,6 @@
     <script type="text/javascript">
         var static_url = "{% settings_value "STATIC_URL" %}";
     </script>
-    <script type="text/javascript" src="{% static "js/min/bootstrap-min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/min/map_styles-min.js" %}"></script>
 
     {%block head_extra%}
     {# page specific head directives #}
@@ -64,14 +62,19 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav">
+                    <li><a href=" {% url "intro" %} ">Accueil</a></li>
+                    <li><a href=" {% url "list_race" %}">Recherche</a></li>
+                    <li class="disabled" ><a href=" {% url "list_race" %}">Programme</a></li>
+                </ul>
             
                 <ul class="nav navbar-nav navbar-right">
                     
                     {% if user.is_authenticated %}
                         <li>
-                            <form action="{% url "create_race" %}">
-                                <button type="submit" class="btn btn-primary navbar-btn ">Ajouter une épreuve</button>
-                            </form>
+                        <li class="disabled bg-primary" ><a href=" {% url "create_race" %}">Ajouter une course</a></li>
+
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ request.user.username }} <span class="caret"></span></a>
@@ -132,6 +135,11 @@
     </footer>
 
     {% endblock %}
+
+
+
+<script type="text/javascript" src="{% static "js/min/bootstrap-min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/min/map_styles-min.js" %}"></script>
 
 {% block beforeBodyClose %}
 
