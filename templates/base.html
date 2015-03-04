@@ -117,12 +117,12 @@
     <footer>
         <img class="footer-logo col-sm-2" alt="Espròva" src="{% static "images/typogramme_esprova_white.svg" %}"> 
         <ul class="list-inline footer-quicklinks col-sm-10">
-            <li><a href="{% url "intro" %}">à propos</a></li> |
-            <li><a href="{% url "list_race" %}">recherche d’épreuves</a></li> |
+            <li><a href="{% url "intro" %}">à propos</a> | </li>
+            <li><a href="{% url "list_race" %}">recherche d’épreuves</a> | </li>
             {% if not user.is_authenticated %}
-                <li><a href="{% url "login" %}">connexion</a></li> |
+                <li><a href="{% url "login" %}">connexion</a> | </li>
             {% endif %}
-            <li><a href="{% url "legal" %}">mentions légales</a> |
+            <li><a href="{% url "legal" %}">mentions légales</a> | </li>
             <li>contact :
                 <span class="contact-icons">
                     <a href="mailto:contact@esprova.com">

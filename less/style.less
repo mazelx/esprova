@@ -1,6 +1,10 @@
 // common
 html, body{
     height: 100%;
+    font-size: @font-size-xs;
+     @media (min-width: @screen-sm-min) {
+                font-size: @font-size-base;
+            }
 }
 
 @media print {
@@ -9,9 +13,6 @@ html, body{
     // color: #000 !important; 
     background: transparent !important;
     box-shadow: none !important;
-  }
-  body {
-    font-size: 10px;
   }
 
   a, a:visited { text-decoration: underline; }
@@ -123,7 +124,7 @@ html, body{
             text-align: center;
 
             .about-title {
-                margin-top: 30px;
+                margin-top: 80px;
                 font-size: 2em;
             }
 
@@ -136,6 +137,7 @@ html, body{
             .about-text {
                 text-align: justify;
                 padding: 0 30px 0 30px;
+                margin-bottom: 100px;
             }
         }
         .more-info {
@@ -312,14 +314,23 @@ html, body{
             background-color: @esprova-lightergray;
         }
 
-
+        @date-preview-width-sm: 100px;
+        @date-preview-width-xs: 60px;
         .result-date-preview {
-            width: 100px;
-            height: 70px;
+            @media (min-width: @screen-sm-min) {
+                width: @date-preview-width-sm;
+                height: 70px;
+                float: left;
+                font-size: 3.57em;
+                text-align: center;
+            }
+            width: @date-preview-width-xs;
+            height: 40px;
             float: left;
-            font-size: 3.57em;
+            font-size: 2.2em;
             text-align: center;
             color: @esprova-lightgray;
+
 
             .result-start-date {
                 line-height: 60px;
@@ -330,7 +341,11 @@ html, body{
         }
 
         .result-content {
-            margin-left: 100px;
+            margin-left: @date-preview-width-xs;
+            @media (min-width: @screen-sm-min) {
+                margin-left: @date-preview-width-sm;
+
+            }
 
             .result-title {
                 letter-spacing: 0.075em;
@@ -539,11 +554,17 @@ footer {
 
     .footer-quicklinks {
         float: right;
-        text-align: right;
         line-height: 35px;
         margin: 0;
-        li > a {
+        text-align: right;
+        li {
+            @media (max-width: @screen-xs-max) {
+                width: 100%;
+                text-align: right;
+            }
+            > a {
             color: white;
+            }
         }
         .contact-icons {
             margin-left: 10px;
