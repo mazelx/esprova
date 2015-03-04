@@ -31,16 +31,12 @@
     
     <link href="{% static "css/main.css" %}" rel="stylesheet">
 
-    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/min/jquery-2.1.3.min.js" %}"></script>
     <script type="text/javascript">
         var static_url = "{% settings_value "STATIC_URL" %}";
-        var addthis_config = {
-            pubid: "ra-54f46991241dcb03"
-        };
     </script>
-
-    <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/min/bootstrap-min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/min/map_styles-min.js" %}"></script>
 
     {%block head_extra%}
     {# page specific head directives #}
@@ -141,6 +137,7 @@
 
 {% endblock%}
 
+{# google analytics #}
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
