@@ -137,7 +137,7 @@ function initialize() {
     // Add custom event listeners
     addListMapMoves();
     addListSearch();
-    addListAlertMessages();
+    // addListAlertMessages();
     addListResultClick();
     addListResetForm();
     addListSportSelection();
@@ -355,14 +355,14 @@ function addListResetForm(){
 }
 
 
-// En CSS ??
-function addListAlertMessages(){
-    window.setTimeout(function() {
-            $(".alert").fadeTo(500, 0).slideUp(500, function(){
-            $(this).remove(); 
-      });
-    }, 3000);
-}
+// // En CSS ??
+// function addListAlertMessages(){
+//     window.setTimeout(function() {
+//             $(".alert").fadeTo(500, 0).slideUp(500, function(){
+//             $(this).remove(); 
+//       });
+//     }, 3000);
+// }
 
 function addListHoverSideboxResult(){
     $(".search-result").hover(function() {
@@ -473,7 +473,7 @@ function refreshRacesOnSidebar(raceshtml, count) {
 }
        
 function handleNoResult(){
-    var selector = $(".try-location-search");
+    var selector = $("#try-location-search");
     var address = selector.data("expr");
 
     // try to geocode expression
@@ -488,11 +488,11 @@ function handleNoResult(){
                     if (results[0].address_components.length > 1){
                         text += " (" + results[0].address_components[1].short_name + ")";
                     }
-                    selector.children(".location").children("a").text(text);
+                    selector.children("#location").children("a").text(text);
                 }
             }
 
-            selector.children(".location").click(function () {
+            selector.children("#location").click(function () {
                 mapbounds = results[0].geometry.bounds;
                 $("#search_expr").val("");
                 map.fitBounds(mapbounds);
@@ -500,12 +500,12 @@ function handleNoResult(){
         }
     });
 
-    $(".no-result .cde-remove-keywords").click(function () {
+    $("#no-result #cde-remove-keywords").click(function () {
         $("#search_expr").val("");
         getRaces();
     });
 
-    $(".no-result .cde-full-year").click(function () {
+    $("#no-result #cde-full-year").click(function () {
         $("#start_date").val(default_start_date);
         $("#end_date").val(default_end_date);
         $("#start_date").datepicker("update");
@@ -513,18 +513,18 @@ function handleNoResult(){
         getRaces();
     });
 
-    $(".no-result .cde-all-distances").click(function () {
+    $("#no-result #cde-all-distances").click(function () {
         $(".distance_selector").removeClass("active");
         $(this).prop("checked", false);
         getRaces();
     });
 
-    $(".no-result .cde-all-distances").click(function () {
+    $("#no-result #cde-all-distances").click(function () {
         resetSearchForm();
     });
 
 
-    $(".no-result .cde-full-map").click(function () {  
+    $("#no-result #cde-full-map").click(function () {  
         var sw = new google.maps.LatLng(default_boundsarray[0],default_boundsarray[1]);
         var ne = new google.maps.LatLng(default_boundsarray[2], default_boundsarray[3]);
         var bounds = new google.maps.LatLngBounds(sw, ne);
@@ -591,8 +591,8 @@ function selectEvent(event_id){
             $("#event_" + selected_event_id).addClass("active");
             
             // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
-            $(".sidebox").animate({
-                scrollTop: $(".sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
+            $("#sidebox").animate({
+                scrollTop: $("#sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
             }, 500);
             var marker = markers[selected_event_id];
             marker.setIcon(markerIcons[marker.rankClass].selected);
