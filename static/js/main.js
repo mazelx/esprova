@@ -406,9 +406,8 @@ function addListSearch(){
         $("#race_search_form").serialize();
         search_distances = "";
         $.each($(".distance_input").serialize().split("&"), function(i, d) {
-                              search_distances += d.split("=")[1] + ",";
+                              if(d) { search_distances += d.split("=")[1] + ",";}
                         }); 
-        search_distances = search_distances;
         search_sport = $("#sport-selecter").val();
         search_expr = $("#search_expr").val();
         search_start_date = $("#start_date").val();
