@@ -43,7 +43,6 @@ def ajx_sport_session(request):
     return Http404
 
 
-
 def ajx_get_distance_helper(request, name):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
         # first cap to match name case

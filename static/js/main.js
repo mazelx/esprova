@@ -38,9 +38,11 @@ function RefreshOptions(options) {
     if (typeof options === "undefined") {
         this.refreshMap = true;
         this.refreshSidebar = true;
+        this.fullRefresh = false;
     } else {
         this.refreshMap = (typeof options.refreshMap === "undefined") ? true : options.refreshMap;
         this.refreshSidebar = (typeof options.refreshSidebar === "undefined") ? true : options.refreshSidebar;    
+        this.fullRefresh = (typeof options.fullRefresh === "undefined") ? false : options.fullRefresh;    
     }
     
 }
@@ -113,6 +115,7 @@ function initialize() {
         initializeMap();
         google.maps.event.addListenerOnce(map, "idle", function () {
             viewport = default_cache_bounds;
+
             // getRaces();
         });    
     }
@@ -413,7 +416,7 @@ function addListSearch(){
         search_start_date = $("#start_date").val();
         search_end_date = $("#end_date").val();
 
-        getRaces();
+        getRaces(new RefreshOptions({"fullRefresh": true}));
         selected_event_id = "";
         pushState(getParamQuery());
     });
@@ -485,18 +488,11 @@ function getParamQuery(){
 }
 
 function getRaces(options) {
-    if (typeof options === "undefined") { options = new RefreshOptions();}
-
     // returns a HTML of races results
     var param_query;
     param_query = getParamQuery();
     if (param_query !== last_query) {
         ajaxLoad(param_query, options);
-        // if ( options.recordState === true) {
-        //     manualStateChange = false;
-        //     // pushState(param_query);
-        //     last_query = param_query;
-        // }
     }
 }
 
@@ -506,7 +502,22 @@ function ajaxLoad(data, options) {
 
     $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
 
-    $.ajax({
+    if (options.fullRefresh) {
+        // remove the viewport part of the url
+        // var arr_data = data.split(",");
+        // for (var j=0; j<arr.length; j++) { 
+        //     if (arr_data[j].match("viewport")) { 
+        //         arr_data.splice(j,1); 
+        //     }
+        // }
+        // getRaces(arr_data.join("&"));
+        var tmp_viewport = viewport;
+        viewport = default_cache_bounds;
+        ajaxLoad(getParamQuery(), new RefreshOptions({"refreshRacesOnSidebar": false}));
+
+    } 
+    else {
+        $.ajax({
         url: "api/search/",
         type: "GET", 
         data: data,
@@ -523,6 +534,7 @@ function ajaxLoad(data, options) {
                 "veuillez contacter <a href='mailto:contact@esprova.com?subject=[issue]:[ajaxLoad]'>" +
                 "le support</a></div>");
         });
+    }
 }
 
 
