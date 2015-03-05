@@ -536,7 +536,7 @@ function refreshRacesOnSidebar(raceshtml, count) {
 
     addListResultClick();
     addListHoverSideboxResult();
-    selectEvent(selected_event_id);
+    selectEvent(selected_event_id, false);
 
     // if no result, try to find if the search expression is a location, and propose a link to search
     if (count === 0) {
@@ -637,14 +637,16 @@ function refreshRacesOnMap(races) {
     //     selected_event_id = null;
     // }
 
-    selectEvent(selected_event_id);
+    selectEvent(selected_event_id, false);
 }
 
 
 // ----------------------
 // Dynamic display
 // ----------------------
-function selectEvent(event_id){
+function selectEvent(event_id, animate){
+    animate = (typeof animate === "undefined") ? true : animate;
+
     if ( markers[selected_event_id] !== undefined ) {
         // unselect old event
         $("#event_" + selected_event_id).removeClass("active");
@@ -659,10 +661,17 @@ function selectEvent(event_id){
         if($("#event_" + selected_event_id).length) {
             $("#event_" + selected_event_id).addClass("active");
             
+
             // scroll sidebox to selected race with a 150px reserve (navbar + extra space)
-            $("#sidebox").animate({
-                scrollTop: $("#sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
-            }, 500);
+            if(animate) {
+                $("#sidebox").animate({
+                    scrollTop: $("#sidebox").scrollTop() + $("#event_" + selected_event_id).offset().top - 150
+                }, 500);
+            }
+            else {
+                $("#sidebox").scrollTop($("#event_" + selected_event_id).offset().top - 150);
+            }
+
             var marker = markers[selected_event_id];
             marker.setIcon(markerIcons[marker.rankClass].selected);
             marker.setZIndex(highest_Z_index+1);
