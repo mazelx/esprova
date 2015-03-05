@@ -4,31 +4,33 @@
 /*global $:false */
 /*global static_url:false */
 /*global jQuery:false */
+/*global default_lat */
+/*global default_lng */
+/*global default_search_bounds */
+/*global default_search_expr */
+/*global default_start_date */
+/*global default_end_date */
+/*global default_cache_bounds */
+/*global default_distances */
+/*global History */
+/*global google */
+/*global default_sport */
 
 var map = null;
 var viewport; // store the current map bounds
 var last_query;
 var markers = {};
 var selected_event_id="";
-var selected_sport = "";
-
+var search_sport = "";
+var search_distances = "";
+var search_start_date = "";
+var search_end_date = "";
+var search_expr = "";
 var highest_Z_index = 10;
-
 var markerIcons = {};
 var primaryIcons = {};
 var secondaryIcons = {};
 
-var default_lat = 46.9;
-var default_lng = 2.6;
-// var default_boundsarray = [40,-10,60,12];
-var default_viewport = [36.997739,-14.974121,54.708447,17.853027];
-var default_search_expr = "";
-var default_start_date = "2015-01-01";
-var default_end_date = "2015-12-31";
-
-var initial_viewport = [-90, -90, 90, 90]; // used for fetching map icons at startup
-
-var google;
 
 function RefreshOptions(options) {
     if (typeof options === "undefined") {
@@ -110,8 +112,8 @@ function initialize() {
         // initialize the map
         initializeMap();
         google.maps.event.addListenerOnce(map, "idle", function () {
-            viewport = initial_viewport;
-            getRaces();
+            viewport = default_cache_bounds;
+            // getRaces();
         });    
     }
 
@@ -123,7 +125,9 @@ function initialize() {
             }
         }
     });
-    
+
+    search_sport = default_sport;
+
     // Add custom event listeners
     addListWindowResize();
     addListMapMoves();
@@ -132,7 +136,10 @@ function initialize() {
     addListResetForm();
     addListSportSelection();
     initializeMapZoomControl();
-    initializeFromURL();
+
+    initializeDOMComponents();
+
+    getRaces();
 }
 
 
@@ -216,7 +223,7 @@ function initializeSportDistanceHelper(sport) {
         });
 }
 
-// initialize bootstrap-datepicker component
+// called directly from html file for legacy browser datepicker (inpu="date") fallback
 function createDatePickerComponent() {
     $(".datepicker").datepicker({
         format: "yyyy-mm-dd",
@@ -228,19 +235,19 @@ function createDatePickerComponent() {
     });
 }
 
-
-function initializeFromURL(){
+function initializeDOMComponents(){
 
     // need to test whetheir sport exists trhough ajax
-    var _selected_sport = getParameterByName("sport");
-    if (_selected_sport !== "" ) {
-        saveSportSession(_selected_sport);
+    search_sport = getParameterByName("sport");
+    if (search_sport !== "" ) {
+        saveSportSession(search_sport);
+    } 
+    else {
+        search_sport = default_sport;
     }
-
-
     // set map to provided bounds
     var str_viewport = getParameterByName("viewport");
-    viewport = (str_viewport === "") ? default_viewport : str_viewport.split(","); 
+    viewport = (str_viewport === "") ? default_search_bounds : str_viewport.split(","); 
 
     var lat_lo = viewport[0];
     var lng_lo = viewport[1];
@@ -282,8 +289,31 @@ function initializeFromURL(){
         selected_event_id = "";
     }
 
+    search_distances = getParameterByName("distances");
+    if (search_distances !== "") {
+        var arr_distances = search_distances.split(",");
+        setCheckDistanceInput("XS", arr_distances.indexOf("XS") !== -1);
+        setCheckDistanceInput("S", arr_distances.indexOf("S") !== -1);
+        setCheckDistanceInput("M", arr_distances.indexOf("M") !== -1);
+        setCheckDistanceInput("L", arr_distances.indexOf("L") !== -1);
+        setCheckDistanceInput("XL", arr_distances.indexOf("XL") !== -1);
+    }
+}
+
+function refreshDOMComponents(){    
+
     // var options = new RefreshOptions({"recordState": true});
     // getRaces(options);    
+}
+
+
+function setCheckDistanceInput(distance, val) {
+    $("#distance_input_"+distance).prop("checked", false);
+    $("#distance_selector_"+distance).removeClass("active");
+    if (val){
+        $("#distance_input_"+distance).prop("checked", true);
+        $("#distance_selector_"+distance).addClass("active");
+    }
 }
 
 // ----------------------
@@ -302,25 +332,40 @@ function addListWindowResize () {
     });
 }
 
+function setSearchSport(){
+    $.ajax({
+    url: "/api/sport-session/",
+    dataType: "json",
+    type: "GET",
+    }).done(function(response) {
+        search_sport = response;
+    });
+
+}
 function saveSportSession(sport){
-       $.ajax({
+    // setter
+    if (sport) {
+         $.ajax({
         url: "/api/sport-session/",
         data: {sport: sport},
         type: "POST",
         }).done(function() {
             var formatted_sport = sport.charAt(0).toUpperCase() + sport.slice(1);
             $(".sport-selected").html(formatted_sport);
-            if (selected_sport !== formatted_sport) {
-                selected_sport = formatted_sport;
+            if (search_sport !== formatted_sport) {
+                search_sport = formatted_sport;
                 initializeSportDistanceHelper(sport);
             }
         });
+    } 
+
+      
 }
 
 
 function addListSportSelection(){
     // change sport
-    $(".sport-selecter").on("change", function (event) { 
+    $("#sport-selecter").on("change", function (event) { 
         event.preventDefault();
         saveSportSession(event.currentTarget.value);
         getRaces( new RefreshOptions({"recordState": false, "refreshMap": false}) );
@@ -364,6 +409,17 @@ function addListSearch(){
 
     $("#race_search_form").on("change submit", function(event) {
         event.preventDefault();
+        $("#race_search_form").serialize();
+        search_distances = "";
+        $.each($(".distance_input").serialize().split("&"), function(i, d) {
+                              search_distances += d.split("=")[1] + ",";
+                        }); 
+        search_distances = search_distances;
+        search_sport = $("#sport-selecter").val();
+        search_expr = $("#search_expr").val();
+        search_start_date = $("#start_date").val();
+        search_end_date = $("#end_date").val();
+
         getRaces();
         selected_event_id = "";
     });
@@ -416,15 +472,20 @@ function addListHoverMapResult(marker){
 
 function getParamQuery(){
 
-    viewport = (typeof viewport === "undefined" || viewport === "") ? default_viewport : viewport;
+    viewport = (typeof viewport === "undefined" || viewport === "") ? default_search_bounds : viewport;
     var zoom = map ? map.getZoom() : "";
-    var param_query = $( "#race_search_form" ).serialize() +
-                      "&viewport=" + viewport[0] +
-                      "," + viewport[1] +
-                      "," + viewport[2] +
-                      "," + viewport[3] +
-                      "&active=" + selected_event_id +
-                      "&z=" + zoom;
+    var param_query = "sport=" + search_sport;
+    param_query += (search_expr) ? ("&q=") + search_expr : "" ;
+    param_query += (search_start_date) ? ("&start_date=" + search_start_date) : "";
+    param_query += (search_end_date) ? ("&end_date=" + search_end_date) : "";
+    param_query += (search_distances) ? ("&distances=" + search_distances) : "";
+    param_query += "&viewport=" + viewport[0];
+    param_query += "," + viewport[1];
+    param_query += "," + viewport[2];
+    param_query += "," + viewport[3];
+    param_query += "&z=" + zoom;
+    param_query += (selected_event_id) ? ("&active="  + selected_event_id) : "";
+
 
     return param_query;
 }
@@ -617,7 +678,7 @@ function selectEvent(event_id){
 
 
 function resetSearchForm(){
-    viewport = initial_viewport;
+    viewport = default_cache_bounds;
     $("#search_expr").val(default_search_expr);
     $("#start_date").val(default_start_date);
     $("#end_date").val(default_end_date);
@@ -666,28 +727,48 @@ function pushState(param_query){
                 };
 
     if (param_query !== last_query && typeof last_query !== "undefined"){
-        history.pushState(stateObj, "index", "/search?" + param_query);
+        History.pushState(stateObj, "index", "/search?" + param_query);
         last_query = param_query;
     } else if (location.search === ""){
-        history.replaceState(stateObj, "index", "/search?" + param_query);
+        History.replaceState(stateObj, "index", "/search?" + param_query);
         last_query = param_query;
     }
 }
 
-window.onpopstate = function(event){
-    if(event.state !== null) {
-        ajaxLoad(event.state.param_query); 
+// Bind to StateChange Event
+History.Adapter.bind(window, "statechange", function() {
+    var state = History.getState();
+    if(state !== null) {
+        var a;
+            // initializeDOMComponents();
 
-        // disable map move listener to avoid refresh upon initialization
-        google.maps.event.clearListeners(map, "idle");
-        // initialize document from URL parameters
-        initializeFromURL();
-        // enable map move listener
-        google.maps.event.addListenerOnce(map, "idle", function() {
-            addListMapMoves();
-        });
-    }
+            // ajaxLoad(state.param_query); 
 
-};
+            // disable map move listener to avoid refresh upon initialization
+            // google.maps.event.clearListeners(map, "idle");
+            // initialize document from URL parameters
+            // refreshDOMComponents();
+            // // enable map move listener
+            // google.maps.event.addListenerOnce(map, "idle", function() {
+            //     addListMapMoves();
+            // });
+        }
+    });
+
+// window.onpopstate = function(event){
+//     if(event.state !== null) {
+//         ajaxLoad(event.state.param_query); 
+
+//         // disable map move listener to avoid refresh upon initialization
+//         google.maps.event.clearListeners(map, "idle");
+//         // initialize document from URL parameters
+//         refreshDOMComponents();
+//         // enable map move listener
+//         google.maps.event.addListenerOnce(map, "idle", function() {
+//             addListMapMoves();
+//         });
+//     }
+
+// };
 
 

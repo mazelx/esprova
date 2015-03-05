@@ -153,17 +153,18 @@
 
             };
         input = $('#search_expr');
-        autocomplete = new google.maps.places.Autocomplete(input[0], options);
+        searchBox = new google.maps.places.SearchBox(input[0]);
 
-        $( "#search-form" ).on('submit', function( event ) {
-            var place = autocomplete.getPlace();
+        google.maps.event.addListener(searchBox, 'places_changed', function() {
+            var places = searchBox.getPlaces();
             var submit = false;
 
             if (input.val() === "" ) {
                 submit = true
             }
             
-            if (typeof place !== "undefined") {
+            if (typeof places !== "undefined") {
+                place = places[0];
                 if (place.geometry) {
                     submit = true;
                     $("input[name=viewport]").val(place.geometry.viewport.getSouthWest().lat() + "," +

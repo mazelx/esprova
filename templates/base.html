@@ -29,12 +29,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="{% static "css/main.css" %}" rel="stylesheet">
-
+    <link href="{% static "css/datepicker3.css" %}" rel="stylesheet">
+    
     <script src="{% static "js/min/jquery-2.1.3.min.js" %}"></script>
+    <script src="{% static "js/min/jquery.history.min.js" %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
+    <script src="{% static "js/bootstrap-datepicker.js" %}"></script>
+    <script src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+
+
     <script type="text/javascript">
         var static_url = "{% settings_value "STATIC_URL" %}";
+        var default_lat = 46.9; // depecrated ?
+        var default_lng = 2.6; // depecrated ?
+        var default_search_bounds = [36.997739,-14.974121,54.708447,17.853027]; // for results fetching
+        var default_cache_bounds = [-90, -90, 90, 90]; // for map marker intialization
+        var default_search_expr = "";
+        var default_start_date = "2015-01-01";
+        var default_end_date = "2015-12-31";
+        var default_sport = "{{ request.session.selected_sport }}"
     </script>
 
     {%block head_extra%}

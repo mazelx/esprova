@@ -5,15 +5,6 @@
 
 {% block head_extra %}
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-
-    <link href="{% static "css/datepicker3.css" %}" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}"></script>
-
-    <script type="text/javascript" src="{% static "js/bootstrap-datepicker.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/locales/bootstrap-datepicker.fr.js" %}"></script>
-    
 {% endblock %}
 
 {% block content %} 
@@ -44,7 +35,7 @@
                      <div class="row form-group">
                         <label for="sport" class="col-sm-3 control-label">Sport :</label>
                         <div class="col-sm-8">
-                            <select class="sport-selecter form-control" name="sport">
+                            <select id="sport-selecter" class="form-control" name="sport">
                             {% get_sports %}
                             {% for sport in sports %}
                                 <option>{{ sport.name }}</option>
@@ -89,20 +80,20 @@
                         <div class="col-sm-8">
                             <div class="row">
                                 <div class="btn-group col-xs-10" data-toggle="buttons">
-                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.XS |yesno:"active," }}" id="dist1">XS
-                                        <input type="checkbox" autocomplete="off" name="distances" value="XS" {{ params.distances.XS |yesno:"checked," }}>
+                                    <label type="button" id="distance_selector_XS" class="btn btn-default distance_selector {{ params.distances.XS |yesno:"active," }}" id="dist1">XS
+                                        <input type="checkbox" autocomplete="off" value="XS" name="distances" id="distance_input_XS" class="distance_input" {{ params.distances.XS |yesno:"checked," }}>
                                     </label>
-                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.S |yesno:"active," }}" id="dist2">S
-                                        <input type="checkbox" autocomplete="off" name="distances" value="S" {{ params.distances.S |yesno:"checked," }}>
+                                    <label type="button" id="distance_selector_S" class="btn btn-default distance_selector {{ params.distances.S |yesno:"active," }}" id="dist2">S
+                                        <input type="checkbox" autocomplete="off" value="S" name="distances" id="distance_input_S" class="distance_input" {{ params.distances.S |yesno:"checked," }}>
                                     </label>
-                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.M |yesno:"active," }}" id="dist3">M
-                                        <input type="checkbox" autocomplete="off" name="distances" value="M" {{ params.distances.M |yesno:"checked," }}>
+                                    <label type="button" id="distance_selector_M" class="btn btn-default distance_selector {{ params.distances.M |yesno:"active," }}" id="dist3">M
+                                        <input type="checkbox" autocomplete="off" value="M" name="distances" id="distance_input_M" class="distance_input" {{ params.distances.M |yesno:"checked," }}>
                                     </label>
-                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.L |yesno:"active," }}" id="dist4">L
-                                        <input type="checkbox" autocomplete="off" name="distances" value="L" {{ params.distances.L |yesno:"checked," }}>
+                                    <label type="button" id="distance_selector_L" class="btn btn-default distance_selector {{ params.distances.L |yesno:"active," }}" id="dist4">L
+                                        <input type="checkbox" autocomplete="off" value="L" name="distances" id="distance_input_L" class="distance_input" {{ params.distances.L |yesno:"checked," }}>
                                     </label>
-                                    <label type="button" class="btn btn-default distance_selector {{ params.distances.XL |yesno:"active," }}" id="dist5">XL
-                                        <input type="checkbox" autocomplete="off" name="distances" value="XL" {{ params.distances.XL |yesno:"checked," }}>
+                                    <label type="button" id="distance_selector_XL" class="btn btn-default distance_selector {{ params.distances.XL |yesno:"active," }}" id="dist5">XL
+                                        <input type="checkbox" autocomplete="off" value="XL" name="distances" id="distance_input_XL" class="distance_input" {{ params.distances.XL |yesno:"checked," }}>
                                     </label>
                                 </div>
                                 <span data-toggle="modal" data-target="#myModal" class="help-search col-xs-2"> <i class="fa fa-question"></i></span>
@@ -145,7 +136,6 @@
 {% endblock %}
 
 {% block beforeBodyClose %}
-    <script src="{% static "js/main.js" %}"></script>
     <script>
   var i = document.createElement("input");
   i.setAttribute("type", "date");

@@ -27,19 +27,27 @@ class LoginRequiredMixin(object):
 
 
 # Ajax calls
-def ajx_set_sport_session(request):
+def ajx_sport_session(request):
     # if this is a POST request we need to process the form data
-    if (request.is_ajax() or settings.DEBUG) and request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        sport = request.POST.get("sport").lower()
-        if sport in [s.name.lower() for s in Sport.objects.all()]:
-            request.session['selected_sport'] = sport
-            return HttpResponse('')
+    if (request.is_ajax() or settings.DEBUG):
+        if request.method == 'POST':
+            # create a form instance and populate it with data from the request:
+            sport = request.POST.get("sport").lower()
+            if sport in [s.name.lower() for s in Sport.objects.all()]:
+                request.session['selected_sport'] = sport
+                return HttpResponse('')
+        elif request.method == 'GET':
+            sport = request.session['selected_sport']
+            return HttpResponse(dumps(sport), content_type="application/json")
+
     return Http404
+
 
 
 def ajx_get_distance_helper(request, name):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+        # first cap to match name case
+        name = name.title()
         sport = get_object_or_404(Sport, name=name)
         return render_to_response('core/distance_helper.html', {'sport': sport})
 
@@ -84,27 +92,27 @@ def ajx_get_races(request):
         # search from quick search form
         sport = request.GET.get('sport')
         if not sport:
-            raise Http404
+            return HttpResponseBadRequest
         sqs = sqs.filter(sport=sport)
 
         # search from map bounds
         param_viewport = request.GET.get('viewport')
-        viewport = [x.strip() for x in param_viewport.split(',')]
-        lat_lo = viewport[0]
-        lng_lo = viewport[1]
-        lat_hi = viewport[2]
-        lng_hi = viewport[3]
+        if param_viewport:
+            viewport = [x.strip() for x in param_viewport.split(',')]
+            lat_lo = viewport[0]
+            lng_lo = viewport[1]
+            lat_hi = viewport[2]
+            lng_hi = viewport[3]
 
-        if lat_lo and lng_lo and lat_hi and lng_hi:
-            downtown_bottom_left = Point(float(lng_lo), float(lat_lo))
-            downtown_top_right = Point(float(lng_hi), float(lat_hi))
+            if lat_lo and lng_lo and lat_hi and lng_hi:
+                downtown_bottom_left = Point(float(lng_lo), float(lat_lo))
+                downtown_top_right = Point(float(lng_hi), float(lat_hi))
 
-            sqs = sqs.within('location', downtown_bottom_left, downtown_top_right)
+                sqs = sqs.within('location', downtown_bottom_left, downtown_top_right)
 
         # search from search form
         start_date = request.GET.get('start_date')
         end_date = request.GET.get('end_date')
-        distances = request.GET.getlist('distances')
 
         if not start_date:
             start_date = "2015-01-07"
@@ -114,7 +122,9 @@ def ajx_get_races(request):
             end_date = "2016-01-06"
         sqs = sqs.filter(date__lte=end_date)
 
-        if distances:
+        param_distances = request.GET.get('distances')
+        if param_distances:
+            distances = [x.strip() for x in param_distances.split(',')]
             sqs = sqs.filter(distance_cat__in=distances)
 
         # search from quick search form
