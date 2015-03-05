@@ -31,14 +31,14 @@ var markerIcons = {};
 var primaryIcons = {};
 var secondaryIcons = {};
 
+var manualStateChange = false;
+
 
 function RefreshOptions(options) {
     if (typeof options === "undefined") {
-        this.recordState = true;
         this.refreshMap = true;
         this.refreshSidebar = true;
     } else {
-        this.recordState = (typeof options.recordState === "undefined") ? true : options.recordState;
         this.refreshMap = (typeof options.refreshMap === "undefined") ? true : options.refreshMap;
         this.refreshSidebar = (typeof options.refreshSidebar === "undefined") ? true : options.refreshSidebar;    
     }
@@ -300,12 +300,6 @@ function initializeDOMComponents(){
     }
 }
 
-function refreshDOMComponents(){    
-
-    // var options = new RefreshOptions({"recordState": true});
-    // getRaces(options);    
-}
-
 
 function setCheckDistanceInput(distance, val) {
     $("#distance_input_"+distance).prop("checked", false);
@@ -325,7 +319,7 @@ function addListWindowResize () {
         if(map && $("#map-canvas").is(":hidden")) {
             map = null;
         } 
-        else {
+        else if (!map) {
             initializeMap();
             getRaces(new RefreshOptions({"recordState": false}));
         }
@@ -380,6 +374,7 @@ function addListMapMoves(){
             if ($("#follow_map_bounds").is(":checked") && $(".mapbox").is(":visible") ) {
                 viewport = map.getBounds().toUrlValue().split(",");
                 getRaces(new RefreshOptions({"refreshMap": false}));
+                pushState(getParamQuery());
             }
         });
     }
@@ -389,7 +384,7 @@ function addListMarkerClick(marker){
     if (map) {
         google.maps.event.addListener(marker, "click", function () {
             selectEvent(marker.get("id"));
-            pushState(getParamQuery(), false);
+            pushState(getParamQuery());
         });
     }
 }
@@ -399,14 +394,13 @@ function addListResultClick(){
         selectEvent(event.currentTarget.id.replace("event_",""));
         $(".search-result").removeClass("active");
         $(event.currentTarget).addClass("active");
-        pushState(getParamQuery(), false);
+        pushState(getParamQuery());
     });
 }
 
     
 // LISTENER : retrieve races from basic search
 function addListSearch(){
-
     $("#race_search_form").on("change submit", function(event) {
         event.preventDefault();
         $("#race_search_form").serialize();
@@ -422,6 +416,7 @@ function addListSearch(){
 
         getRaces();
         selected_event_id = "";
+        pushState(getParamQuery());
     });
 }
 
@@ -498,10 +493,11 @@ function getRaces(options) {
     param_query = getParamQuery();
     if (param_query !== last_query) {
         ajaxLoad(param_query, options);
-        if ( options.recordState === true) {
-            pushState(param_query);
-            last_query = param_query;
-        }
+        // if ( options.recordState === true) {
+        //     manualStateChange = false;
+        //     // pushState(param_query);
+        //     last_query = param_query;
+        // }
     }
 }
 
@@ -682,12 +678,11 @@ function resetSearchForm(){
     $("#search_expr").val(default_search_expr);
     $("#start_date").val(default_start_date);
     $("#end_date").val(default_end_date);
-    // $("#start_date").datepicker("update");
-    // $("#end_date").datepicker("update");
     $(".distance_selector").removeClass("active");
     $(".distance_selector > input").each( function() {
         $(this).prop("checked", false);
     });
+    pushState(getParamQuery());
     getRaces();
 }
 
@@ -725,33 +720,43 @@ function getParameterByName(name) {
 function pushState(param_query){
     var stateObj = { param_query: param_query
                 };
+    manualStateChange = false;
 
-    if (param_query !== last_query && typeof last_query !== "undefined"){
-        History.pushState(stateObj, "index", "/search?" + param_query);
-        last_query = param_query;
-    } else if (location.search === ""){
-        History.replaceState(stateObj, "index", "/search?" + param_query);
-        last_query = param_query;
-    }
+    History.pushState(stateObj, "index", "/search?" + param_query);
+    last_query = param_query;
+
+    // if (param_query !== last_query && typeof last_query !== "undefined"){
+    //     History.pushState(stateObj, "index", "/search?" + param_query);
+    //     last_query = param_query;
+    // } else if (location.search === ""){
+    //     History.replaceState(stateObj, "index", "/search?" + param_query);
+    //     last_query = param_query;
+    // }
 }
 
 // Bind to StateChange Event
 History.Adapter.bind(window, "statechange", function() {
     var state = History.getState();
     if(state !== null) {
-        var a;
+        if(manualStateChange === true){
+            ajaxLoad(state.data.param_query);
+            // disable map move listener to avoid refresh upon initialization
+            google.maps.event.clearListeners(map, "idle");
+            // initialize document from URL parameters
+            initializeDOMComponents();
+            // enable map move listener
+            google.maps.event.addListenerOnce(map, "idle", function() {
+                addListMapMoves();
+            });
+
+        }
+
+        manualStateChange = true;
             // initializeDOMComponents();
 
             // ajaxLoad(state.param_query); 
 
-            // disable map move listener to avoid refresh upon initialization
-            // google.maps.event.clearListeners(map, "idle");
-            // initialize document from URL parameters
-            // refreshDOMComponents();
-            // // enable map move listener
-            // google.maps.event.addListenerOnce(map, "idle", function() {
-            //     addListMapMoves();
-            // });
+    
         }
     });
 
