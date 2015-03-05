@@ -11,15 +11,15 @@
 /*global default_start_date */
 /*global default_end_date */
 /*global default_cache_bounds */
-/*global default_distances */
 /*global History */
 /*global google */
 /*global default_sport */
+/*global Modernizr */
 
 var map = null;
 var viewport; // store the current map bounds
 var last_query;
-var markers = {};
+var markers = {};       
 var selected_event_id="";
 var search_sport = "";
 var search_distances = "";
@@ -67,6 +67,7 @@ if (typeof google !== "undefined") {
 
 
 function initialize() {
+
     primaryIcons.default = {
         url: static_url + "images/primary_marker_default.svg",
         size: new google.maps.Size(28,42),
@@ -104,8 +105,15 @@ function initialize() {
         anchor: new google.maps.Point(4,4),   
     };
 
+
     markerIcons.primary = primaryIcons;
     markerIcons.secondary = secondaryIcons;
+
+
+    if (!Modernizr.touch) {
+            $("input[type=date]").attr("type", "text");
+            createDatePickerComponent();
+    }
 
     if( $("#map-canvas").is(":hidden") ) {
         resetSearchForm();
@@ -698,6 +706,8 @@ function resetSearchForm(){
     $("#search_expr").val(default_search_expr);
     $("#start_date").val(default_start_date);
     $("#end_date").val(default_end_date);
+    $("#start_date").datepicker("update");
+    $("#end_date").datepicker("update");
     $(".distance_selector").removeClass("active");
     $(".distance_selector > input").each( function() {
         $(this).prop("checked", false);
