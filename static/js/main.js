@@ -162,7 +162,7 @@ function initialize() {
 
     initializeDOMComponents();
 
-    getRaces();
+    getRaces({"fullRefresh": true});
 }
 
 
