@@ -54,7 +54,8 @@
         var default_search_expr = "";
         var default_start_date = "2015-01-01";
         var default_end_date = "2015-12-31";
-        var default_sport = "{{ request.session.selected_sport }}";
+         {% get_sports %}
+        var default_sport = "{{ request.session.selected_sport | default:sports.0 }}";
         var default_distances = "" ;
     </script>
 

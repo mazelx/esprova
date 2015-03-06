@@ -74,6 +74,7 @@ if (typeof google !== "undefined") {
 
 function initialize() {
 
+    search_sport = default_sport;
     viewport = default_search_bounds; 
     search_distances = default_distances;
     search_start_date = default_start_date;
@@ -131,12 +132,13 @@ function initialize() {
     // if the map will not be displayed due to the viewport resolution (mobile)
     if( $("#map-canvas").is(":hidden") ) {
         map_hidden = true;
-        resetSearchForm();
+        getRaces();
     } 
     // else initialize map
     else {
         // initialize the map
         initializeMap();
+        // no need to call getRaces() as the "idle" event from map will be triggered and call getRaces()
     }
 
     // Initiliaze CRSF token
@@ -147,8 +149,6 @@ function initialize() {
             }
         }
     });
-
-    search_sport = default_sport;
 
     // Add custom event listeners
     addListWindowResize();
@@ -556,14 +556,6 @@ function ajaxLoad(data, options) {
     $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
 
     if (options.fullRefresh) {
-        // remove the viewport part of the url
-        // var arr_data = data.split(",");
-        // for (var j=0; j<arr.length; j++) { 
-        //     if (arr_data[j].match("viewport")) { 
-        //         arr_data.splice(j,1); 
-        //     }
-        // }
-        // getRaces(arr_data.join("&"));
         var tmp_viewport = viewport;
         viewport = default_cache_bounds;
         ajaxLoad(getParamQuery(), new RefreshOptions({"refreshSidebar": false}));
