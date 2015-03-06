@@ -1,6 +1,7 @@
 from django.template import Library, Node
 from core.models import Sport
 from django.conf import settings
+from datetime import datetime, date
 
 register = Library()
 
@@ -15,6 +16,19 @@ class GetSportList(Node):
 def get_sports(parser, token):
     return GetSportList()
 get_sports = register.tag(get_sports)
+
+
+# nextyear
+@register.simple_tag
+def nextyear(date_format):
+    d = datetime.now()
+    years = 1
+    date_format = '-'.join(['%' + x for x in date_format.split('-')])
+    try:
+        d = d.replace(year=d.year + years)
+    except ValueError:
+        d = d + (date(d.year + years, 1, 1) - date(d.year, 1, 1))
+    return d.strftime(date_format)
 
 
 # get settings value

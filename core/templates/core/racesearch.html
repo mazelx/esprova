@@ -76,9 +76,9 @@
                             <label for="start_date" class="col-sm-3 control-label">Période :</label>
                             <div class= "col-sm-8">
                                 <div class="input-daterange datepicker input-group" id="datepicker">
-                                  <input type="date" class="input-sm form-control" name="start_date" id="start_date" value="{{ params.start_date }}"/>
+                                  <input type="date" class="input-sm form-control" name="start_date" id="start_date" value="{% now 'Y-m-d' %}"/>
                                 <span class="input-group-addon"> à </span>
-                                  <input type="date" class="input-sm form-control" name="end_date" id="end_date" value="{{ params.end_date }}"/>
+                                  <input type="date" class="input-sm form-control" name="end_date" id="end_date" value="{% nextyear 'Y-m-d' %}"/>
                                 </div>
                             </div>
                         </div>
