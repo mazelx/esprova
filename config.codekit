@@ -4365,6 +4365,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/static\/js\/min\/jquery.history.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/static\/js\/min\/jquery.history.min.js",
+		"outputAbbreviatedPath": "\/static\/js\/min\/min\/jquery.history.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/static\/js\/min\/main-min.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -4382,6 +4393,28 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/static\/js\/min\/map_styles-min.js",
 		"outputAbbreviatedPath": "\/static\/js\/min\/min\/map_styles-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/static\/js\/min\/min\/modernizr.min-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/static\/js\/min\/min\/modernizr.min-min.js",
+		"outputAbbreviatedPath": "\/static\/js\/min\/min\/min\/modernizr.min-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/static\/js\/min\/modernizr.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/static\/js\/min\/modernizr.min.js",
+		"outputAbbreviatedPath": "\/static\/js\/min\/min\/modernizr.min-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

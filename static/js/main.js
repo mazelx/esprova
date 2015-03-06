@@ -150,6 +150,7 @@ function initialize() {
     addListResultClick();
     addListResetForm();
     addListSportSelection();
+    addListSideboxScroll();
     initializeMapZoomControl();
 
     initializeDOMComponents();
@@ -198,7 +199,7 @@ function initializeMap() {
         },
         zoom: 6,
         maxZoom: 15,
-        // minZoom:5,   
+        minZoom:4 ,   
         panControl: false,
         zoomControl: false,
         streetViewControl: false
@@ -328,6 +329,33 @@ function setCheckDistanceInput(distance, val) {
 // ----------------------
 // LISTENERS
 // ----------------------
+
+function addListSideboxScroll() {
+    var filter_cde = $("#filter-cde");
+    var origOffsetY = $("#filter-cde").offset().top;
+
+    function scroll() {
+        if ($(window).scrollTop() >= origOffsetY) {
+            filter_cde.addClass("sticky-xs");
+        } 
+        else {
+            filter_cde.removeClass("sticky sticky-xs");
+        }
+    }
+
+    document.onscroll = scroll;
+
+    $("#filter-cde-top").on("click", function (e){
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        $("#sidebox").scrollTop(0);
+    });
+
+    $("#filter-cde-reset").on("click", function (e){
+         e.preventDefault();
+         resetSearchForm();
+    });
+}
 
 // when the window is resized ()
 function addListWindowResize () {
@@ -563,6 +591,7 @@ function ajaxLoad(data, options) {
 function refreshRacesOnSidebar(raceshtml, count) {
     // replace HTML by ajax provided code
     $("#racelist").html(raceshtml);
+    $("#filter-cde-results").html(count + (count>1 ? " courses" : " course"));
 
     addListResultClick();
     addListHoverSideboxResult();
