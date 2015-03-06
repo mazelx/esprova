@@ -554,6 +554,7 @@ function ajaxLoad(data, options) {
 
 
     $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+    $("#filter-cde-results").html("<i class='fa fa-spinner fa-pulse'></i>");
 
     if (options.fullRefresh) {
         var tmp_viewport = viewport;
@@ -610,7 +611,7 @@ function handleNoResult(){
 
     // try to geocode expression
     var geocoder = new google.maps.Geocoder();
-    if (address !== "None") {
+    if (address !== "None" && map_hidden === false) {
         geocoder.geocode( { "address": address, region: "fr" }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 selector.removeClass("hidden");

@@ -93,9 +93,6 @@
                 </ul>
             
                 <ul class="nav navbar-nav navbar-right">
-                    
-                    {% if user.is_authenticated %}
-                        <li>
                         <li class="disabled" >
                         {% if not user.is_authenticated %}
                             <a href=" {% url "create_race" %}">Ajouter une course</a></li>
@@ -104,13 +101,12 @@
                         {% endif %}
 
                         </li>
+                    {% if user.is_authenticated %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ request.user.username }} <span class="caret"></span></a>
                    
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{% url "list_race" %}">Recherche</a>
-                                </li>
-                                <li><a href="{% url "intro" %}">A propos</a>
+                                <li><a href="{% url "list_race" %}">Paramètres</a>
                                 </li>
                                 {% if user.is_authenticated %}
                                     <li class="divider"></li>
