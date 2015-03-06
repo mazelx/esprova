@@ -55,7 +55,7 @@
         var default_start_date = "{% now 'Y-m-d' %}";
         var default_end_date = "{% nextyear 'Y-m-d' %}";
          {% get_sports %}
-        var default_sport = "{{ request.session.selected_sport }}";
+        var default_sport = "{{ request.session.selected_sport | default:sports.0 }}";
         var default_distances = "" ;
     </script>
 
