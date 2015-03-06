@@ -245,6 +245,10 @@ html, body{
         border: 1px solid;
         border-width: 0 0 0 1px;
         border-color: @esprova-gray;
+        @media (max-width: @screen-sm-max) {
+                overflow-y: visible;
+            }
+
 
         .shadow(-2px, 0);
     }

@@ -31,6 +31,8 @@ var markerIcons = {};
 var primaryIcons = {};
 var secondaryIcons = {};
 
+var map_hidden = false;
+
 var manualStateChange = false;
 
 
@@ -109,21 +111,23 @@ function initialize() {
     markerIcons.primary = primaryIcons;
     markerIcons.secondary = secondaryIcons;
 
-
+    // set datepicker on non-touch devices, and native HTML5 for touch devices
     if (!Modernizr.touch) {
             $("input[type=date]").attr("type", "text");
             createDatePickerComponent();
     }
 
+    // if the map will not be displayed due to the viewport resolution (mobile)
     if( $("#map-canvas").is(":hidden") ) {
+        map_hidden = true;
         resetSearchForm();
     } 
+    // else initialize map
     else {
         // initialize the map
         initializeMap();
         google.maps.event.addListenerOnce(map, "idle", function () {
             viewport = default_cache_bounds;
-
             // getRaces();
         });    
     }
@@ -325,14 +329,21 @@ function setCheckDistanceInput(distance, val) {
 // LISTENERS
 // ----------------------
 
+// when the window is resized ()
 function addListWindowResize () {
     $(window).on("resize", function() {
-        if(map && $("#map-canvas").is(":hidden")) {
+        // if the map is being hid
+        if(!map_hidden && $("#map-canvas").is(":hidden")){
+            // do erase map
             map = null;
-        } 
-        else if (!map) {
+            map_hidden = true;
+        }
+        // if the map is being shown
+        else if (map_hidden && !($("#map-canvas").is(":hidden"))) {
+            // initialize map    
             initializeMap();
-            getRaces(new RefreshOptions({"recordState": false}));
+            getRaces(new RefreshOptions());
+            map_hidden = false;
         }
     });
 }
