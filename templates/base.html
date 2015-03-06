@@ -47,14 +47,15 @@
 
     <script type="text/javascript">
         var static_url = "{% settings_value "STATIC_URL" %}";
-        var default_lat = 46.9; // depecrated ?
-        var default_lng = 2.6; // depecrated ?
-        var default_search_bounds = [36.997739,-14.974121,54.708447,17.853027]; // for results fetching
+        var default_lat = 46.9; // depecrated
+        var default_lng = 2.6; // depecrated
+        var default_search_bounds = [36.82205,-14.336914,54.581304,18.490234]; // for results fetching
         var default_cache_bounds = [-90, -90, 90, 90]; // for map marker intialization
         var default_search_expr = "";
         var default_start_date = "2015-01-01";
         var default_end_date = "2015-12-31";
-        var default_sport = "{{ request.session.selected_sport }}"
+        var default_sport = "{{ request.session.selected_sport }}";
+        var default_distances = "" ;
     </script>
 
     {%block head_extra%}

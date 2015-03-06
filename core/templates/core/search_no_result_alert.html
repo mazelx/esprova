@@ -1,15 +1,17 @@
 <div id="no-result" role="alert">
     <p><strong>Nous n'avons pas trouvé de course correspondant à vos critères.</strong></p>
+    <br>
     <p>
         Essayez nos conseils suivants : <br>
         <ul>
-            <li><a href="#" id="cde-remove-keywords">Supprimer les mots-clés saisis</a></li>
-            <li><a href="#" id="cde-full-map">Rechercher sur toute la France</a></li>
-            <li><a href="#" id="cde-full-year">Rechercher sur les 12 prochains mois</a></li>
-            <li><a href="#" id="cde-all-distances">Rechercher pour toutes les distances</a></li>
-            <li><a href="#" id="cde-reset-form"><strong>Réinitialisez tous les critères de recherche</strong></a></li>
+            <li id="cde-remove-keywords" class="hidden"><a href="#">Supprimer les mots-clés saisis</a></li>
+            <li id="cde-full-map" class="hidden"><a href="#">Rechercher sur toute la France (hors outre-mer)</a></li>
+            <li id="cde-full-year" class="hidden"><a href="#" >Rechercher sur les 12 prochains mois</a></li>
+            <li id="cde-all-distances" class="hidden"><a href="#" >Rechercher pour toutes les distances</a></li>
         </ul>
     </p>
+    <br>
+    <p id="cde-reset-form"><a href="#"><strong>... ou réinitialisez tous les critères de recherche</strong></a></li>
     <br>
     <p id="try-location-search" class="hidden" data-expr="{{ search_expr }}">
         Souhaitiez-vous rechercher les épreuves à <span id="location"><a href="#"></a></span> ?</i>  

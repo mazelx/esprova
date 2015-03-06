@@ -15,21 +15,25 @@
 /*global google */
 /*global default_sport */
 /*global Modernizr */
+/*global default_distances */
 
 var map = null;
-var viewport; // store the current map bounds
 var last_query;
 var markers = {};       
+
+var highest_Z_index = 10;
+var markerIcons = {};
+var primaryIcons = {};
+var secondaryIcons = {};
+
+
+var viewport = ""; // store the current map bounds
 var selected_event_id="";
 var search_sport = "";
 var search_distances = "";
 var search_start_date = "";
 var search_end_date = "";
 var search_expr = "";
-var highest_Z_index = 10;
-var markerIcons = {};
-var primaryIcons = {};
-var secondaryIcons = {};
 
 var map_hidden = false;
 
@@ -69,6 +73,13 @@ if (typeof google !== "undefined") {
 
 
 function initialize() {
+
+    viewport = default_search_bounds; 
+    search_distances = default_distances;
+    search_start_date = default_start_date;
+    search_end_date = default_end_date;
+    search_expr = default_search_expr;
+
 
     primaryIcons.default = {
         url: static_url + "images/primary_marker_default.svg",
@@ -126,10 +137,6 @@ function initialize() {
     else {
         // initialize the map
         initializeMap();
-        google.maps.event.addListenerOnce(map, "idle", function () {
-            viewport = default_cache_bounds;
-            // getRaces();
-        });    
     }
 
     // Initiliaze CRSF token
@@ -197,9 +204,9 @@ function initializeMap() {
             lat: default_lat ,
             lng: default_lng
         },
-        zoom: 6,
+        // zoom: 6,
         maxZoom: 15,
-        minZoom:4 ,   
+        minZoom:5 ,   
         panControl: false,
         zoomControl: false,
         streetViewControl: false
@@ -454,7 +461,7 @@ function addListSearch(){
     $("#race_search_form").on("change submit", function(event) {
         event.preventDefault();
         $("#race_search_form").serialize();
-        search_distances = "";
+        search_distances = default_distances;
         $.each($(".distance_input").serialize().split("&"), function(i, d) {
                               if(d) { search_distances += d.split("=")[1] + ",";}
                         }); 
@@ -611,59 +618,76 @@ function handleNoResult(){
 
     // try to geocode expression
     var geocoder = new google.maps.Geocoder();
-
-    geocoder.geocode( { "address": address, region: "fr" }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            selector.removeClass("hidden");
-            if (results.length > 0){
-                if (results[0].address_components.length > 0){
-                    var text = results[0].address_components[0].short_name;
-                    if (results[0].address_components.length > 1){
-                        text += " (" + results[0].address_components[1].short_name + ")";
+    if (address !== "None") {
+        geocoder.geocode( { "address": address, region: "fr" }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                selector.removeClass("hidden");
+                if (results.length > 0){
+                    if (results[0].address_components.length > 0){
+                        var text = results[0].address_components[0].short_name;
+                        if (results[0].address_components.length > 1){
+                            text += " (" + results[0].address_components[1].short_name + ")";
+                        }
+                        selector.children("#location").children("a").text(text);
                     }
-                    selector.children("#location").children("a").text(text);
                 }
+
+                selector.children("#location").click(function () {
+                    viewport = results[0].geometry.bounds;
+                    $("#search_expr").val("");
+                    map.fitBounds(viewport);
+                });
             }
+        });
+    }
+    
+    if(search_expr !== default_search_expr) {
+        $("#no-result #cde-remove-keywords").removeClass("hidden");
+        $("#no-result #cde-remove-keywords").click(function () {
+            $("#search_expr").val("");
+            search_expr = default_search_expr;
+            getRaces();
+        });
+    }
+   
+    if(search_start_date !== default_start_date || search_end_date !== default_end_date) {
+        $("#no-result #cde-full-year").removeClass("hidden");
+        $("#no-result #cde-full-year").click(function () {
+            $("#start_date").val(default_start_date);
+            search_start_date = default_start_date;
+            $("#end_date").val(default_end_date);
+            search_end_date = default_end_date;
+            getRaces();
+        });
+    }
 
-            selector.children("#location").click(function () {
-                viewport = results[0].geometry.bounds;
-                $("#search_expr").val("");
-                map.fitBounds(viewport);
-            });
-        }
-    });
-
-    $("#no-result #cde-remove-keywords").click(function () {
-        $("#search_expr").val("");
-        getRaces();
-    });
-
-    $("#no-result #cde-full-year").click(function () {
-        $("#start_date").val(default_start_date);
-        $("#end_date").val(default_end_date);
-        getRaces();
-    });
-
-    $("#no-result #cde-all-distances").click(function () {
-        $(".distance_selector").removeClass("active");
-        $(this).prop("checked", false);
-        getRaces();
-    });
+    if(search_distances !== default_distances) {
+        $("#no-result #cde-all-distances").removeClass("hidden");
+        $("#no-result #cde-all-distances").click(function () {
+            $(".distance_selector").removeClass("active");
+            $(this).prop("checked", false);
+            search_distances = default_distances;
+            getRaces();
+        });
+    }
 
     $("#no-result #cde-reset-form").click(function () {
         resetSearchForm();
     });
 
 
-    $("#no-result #cde-full-map").click(function () {  
-        var sw = new google.maps.LatLng(default_boundsarray[0],default_boundsarray[1]);
-        var ne = new google.maps.LatLng(default_boundsarray[2], default_boundsarray[3]);
-        var bounds = new google.maps.LatLngBounds(sw, ne);
-        map.fitBounds(bounds);
+    if(viewport !== default_search_bounds) {
+        $("#no-result #cde-full-map").removeClass("hidden");
+        $("#no-result #cde-full-map").click(function () {  
+            var sw = new google.maps.LatLng(default_search_bounds[0],default_search_bounds[1]);
+            var ne = new google.maps.LatLng(default_search_bounds[2], default_search_bounds[3]);
+            var bounds = new google.maps.LatLngBounds(sw, ne);
+            map.fitBounds(bounds);
+            viewport = default_search_bounds;
 
-        getRaces();
-    });
-
+            getRaces();
+        });
+    }
 }
 
 function refreshRacesOnMap(races) {
