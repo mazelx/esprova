@@ -66,7 +66,7 @@ urlpatterns = patterns('',
                        url(r'^validate/$', RaceValidationList.as_view(), name="validate_racelist"),
 
                        # Ajax views
-                       url(r'^api/search/$', ajx_get_races, name='ajx_search_race'),
+                       url(r'^api/races/$', ajx_get_races, name='ajx_search_race'),
                        url(r'^api/delete/(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
                        url(r'^api/validate/(?P<pk>\d+)$', ajx_validate_race, name="ajx_validate_race"),
                        url(r'^api/sport-session/', ajx_sport_session, name="ajx_sport_session"),

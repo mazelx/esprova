@@ -589,7 +589,7 @@ function ajaxLoad(data, options, fallback) {
             console.log("load:" + data + JSON.stringify( options ));
 
             $.ajax({
-            url: "api/search/",
+            url: "api/races/",
             type: "GET", 
             data: data,
             dataType: "json",
@@ -828,7 +828,7 @@ function pushState(param_query){
 
     if (last_query_pushed !== param_query) {
         console.log("push:" + param_query);
-        History.pushState(stateObj, "index", "/search?" + param_query);        
+        History.pushState(stateObj, "index", "/races?" + param_query);        
         last_query_pushed = param_query;
     }
 
