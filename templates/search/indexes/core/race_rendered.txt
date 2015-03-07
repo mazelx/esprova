@@ -13,8 +13,8 @@
         {% endif %}
     </div>
     <div class="result-content">
-        <p class="result-title">{{ object.event.name }}</p>
-        <p class="result-location">{{ object.location.locality }}  ({{ object.location.administrative_area_level_2_short_name}})</p>
+        <div class="result-title">{{ object.event.name }}</div>
+        <div class="result-location">{{ object.location.locality }}  ({{ object.location.administrative_area_level_2_short_name}})</div>
         <div class="result-detail" id="event_{{ object.event.pk }}_races">
             {% for r in object.event.get_races %}
             <div class="result-detail-distance" >
