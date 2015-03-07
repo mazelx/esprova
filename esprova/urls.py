@@ -47,7 +47,8 @@ urlpatterns = patterns('',
                        url(r'^$', IntroView.as_view(), name="intro"),
 
                        # Race list (main page)
-                       url(r'^search$', RaceList.as_view(), name='list_race'),
+                       # url(r'^search\/?$', RaceList.as_view(), name='list_race'),
+                       url(r'^races\/?$', RaceList.as_view(), name='list_race'),
                        # url(r'^facet$', FacetTest.as_view(), name='list_facet_race'),
 
                        url(r'^facet$', FacetedSearchView(form_class=FacetedSearchForm, 
@@ -58,7 +59,7 @@ urlpatterns = patterns('',
 
                        # CRUD
                        url(r'^create/$', racewizard, name="create_race"),
-                       url(r'^race/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
+                       url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
                        url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
                        url(r'^delete/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
 

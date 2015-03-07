@@ -26,6 +26,8 @@ var markerIcons = {};
 var primaryIcons = {};
 var secondaryIcons = {};
 
+var last_query_pushed;
+var last_query_options_loaded;
 
 var viewport = ""; // store the current map bounds
 var selected_event_id="";
@@ -307,8 +309,10 @@ function initializeDOMComponents(){
     
     // updates the datepicker in order to save changed value in datepicker window
     if (!native_datepicker) {
+        delListSearch();
         $("#start_date").datepicker("update");
         $("#end_date").datepicker("update");
+        addListSearch();
     }
 
 
@@ -407,8 +411,6 @@ function saveSportSession(sport){
                 // will be set by the 
                 search_sport = formatted_sport;
                 initializeSportDistanceHelper(sport);
-                getRaces(new RefreshOptions({"fullRefresh":true}));
-                pushState(getParamQuery());
             });
     } 
 
@@ -422,19 +424,24 @@ function addListSportSelection(){
         event.preventDefault();
         saveSportSession(event.currentTarget.value);
         getRaces( new RefreshOptions({"recordState": false, "refreshMap": false}) );
+        pushState(getParamQuery());
    });
 }
 
 // LISTENER : retrieve races when map moves
 function addListMapMoves(){
     if (map) {
-        google.maps.event.addListener(map, "idle", function() {
-            // Do not refresh races if the map is not visible or "follow map bounds" not checked
-            if ($("#follow_map_bounds").is(":checked") && $(".mapbox").is(":visible") ) {
-                viewport = map.getBounds().toUrlValue().split(",");
-                getRaces(new RefreshOptions({"refreshMap": false}));
-                pushState(getParamQuery());
-            }
+        // attach proper event listener after first idle
+        // as the races have already been fetched in initialize()
+        google.maps.event.addListenerOnce(map, "idle", function() {
+            google.maps.event.addListener(map, "idle", function() {
+                // Do not refresh races if the map is not visible or "follow map bounds" not checked
+                if ($("#follow_map_bounds").is(":checked") && $(".mapbox").is(":visible") ) {
+                    viewport = map.getBounds().toUrlValue().split(",");
+                    getRaces(new RefreshOptions({"refreshMap": false}));
+                    pushState(getParamQuery());
+                }
+            });
         });
     }
 }
@@ -478,6 +485,11 @@ function addListSearch(){
         pushState(getParamQuery());
     });
 }
+
+// LISTENER : retrieve races from basic search
+function delListSearch(){
+    $("#race_search_form").off("change submit");
+    }
 
 
 // function addListSearch() {
@@ -569,26 +581,34 @@ function ajaxLoad(data, options, fallback) {
                     ajaxLoad(getParamQuery(), new RefreshOptions({"refreshMap": false}));
                  }         
             );
+        viewport = tmp_viewport;
     } 
     else {
-        $.ajax({
-        url: "api/search/",
-        type: "GET", 
-        data: data,
-        dataType: "json",
-        timeout: 40000,
-        })
-        .done(function(response) {
-            if (options.refreshSidebar) { refreshRacesOnSidebar(response.html, response.count); }
-            if (options.refreshMap && !map_hidden) { refreshRacesOnMap(response.races); }
-            if(typeof fallback === "function") {fallback();}
-        })
-        .fail(function(){
-            $("#racelist").html(
-                "<div class='alert alert-danger' role='alert'>Une erreur est survenue, " +
-                "veuillez contacter <a href='mailto:contact@esprova.com?subject=[issue]:[ajaxLoad]'>" +
-                "le support</a></div>");
-        });
+        if(last_query_options_loaded !==  data + JSON.stringify( options ) ) {
+
+            console.log("load:" + data + JSON.stringify( options ));
+
+            $.ajax({
+            url: "api/search/",
+            type: "GET", 
+            data: data,
+            dataType: "json",
+            timeout: 40000,
+            })
+            .done(function(response) {
+                if (options.refreshSidebar) { refreshRacesOnSidebar(response.html, response.count); }
+                if (options.refreshMap && !map_hidden) { refreshRacesOnMap(response.races); }
+                last_query_options_loaded =  data + JSON.stringify( options );
+
+                if(typeof fallback === "function") {fallback();}
+            })
+            .fail(function(){
+                $("#racelist").html(
+                    "<div class='alert alert-danger' role='alert'>Une erreur est survenue, " +
+                    "veuillez contacter <a href='mailto:contact@esprova.com?subject=[issue]:[ajaxLoad]'>" +
+                    "le support</a></div>");
+            });
+        }
     }
 }
 
@@ -806,8 +826,11 @@ function pushState(param_query){
                 };
     manualStateChange = false;
 
-    History.pushState(stateObj, "index", "/search?" + param_query);
-    last_query = param_query;
+    if (last_query_pushed !== param_query) {
+        console.log("push:" + param_query);
+        History.pushState(stateObj, "index", "/search?" + param_query);        
+        last_query_pushed = param_query;
+    }
 
     // if (param_query !== last_query && typeof last_query !== "undefined"){
     //     History.pushState(stateObj, "index", "/search?" + param_query);
@@ -836,28 +859,9 @@ History.Adapter.bind(window, "statechange", function() {
         }
 
         manualStateChange = true;
-            // initializeDOMComponents();
-
-            // ajaxLoad(state.param_query); 
 
     
         }
     });
-
-// window.onpopstate = function(event){
-//     if(event.state !== null) {
-//         ajaxLoad(event.state.param_query); 
-
-//         // disable map move listener to avoid refresh upon initialization
-//         google.maps.event.clearListeners(map, "idle");
-//         // initialize document from URL parameters
-//         refreshDOMComponents();
-//         // enable map move listener
-//         google.maps.event.addListenerOnce(map, "idle", function() {
-//             addListMapMoves();
-//         });
-//     }
-
-// };
 
 

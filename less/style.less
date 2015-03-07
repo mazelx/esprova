@@ -7,6 +7,10 @@ html, body{
             }
 }
 
+// p {
+//     font-family: Arimo
+// }
+
 @media print {
   * { 
     text-shadow: none !important;
@@ -114,7 +118,11 @@ html, body{
         padding: 40px 0 50px 0;
         color: @esprova-darkgray;
 
-        @media (min-width: @screen-md-min) {
+        @media (min-width: @screen-lg-min) {
+            margin-left: 200px;
+            margin-right: 200px;
+        }
+        @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
             margin-left: 100px;
             margin-right: 100px;
         }
@@ -126,6 +134,7 @@ html, body{
             .about-title {
                 margin-top: 80px;
                 font-size: 2em;
+                letter-spacing: 0.15em;
             }
 
             .about-icon {
