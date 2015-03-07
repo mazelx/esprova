@@ -36,6 +36,7 @@ var search_end_date = "";
 var search_expr = "";
 
 var map_hidden = false;
+var native_datepicker = Modernizr.touch;
 
 var manualStateChange = false;
 
@@ -123,9 +124,9 @@ function initialize() {
     markerIcons.secondary = secondaryIcons;
 
     // set datepicker on non-touch devices, and native HTML5 for touch devices
-    if (!Modernizr.touch) {
-            $("input[type=date]").attr("type", "text");
-            createDatePickerComponent();
+    if (!native_datepicker) {
+        $("input[type=date]").attr("type", "text");
+        createDatePickerComponent();
     }
 
     // if the map will not be displayed due to the viewport resolution (mobile)
@@ -253,7 +254,7 @@ function initializeSportDistanceHelper(sport) {
 
 // called directly from html file for legacy browser datepicker (inpu="date") fallback
 function createDatePickerComponent() {
-    $(".datepicker").datepicker({
+    $("#datepicker").datepicker({
         format: "yyyy-mm-dd",
         language: "fr",
         autoclose: true,
@@ -305,8 +306,10 @@ function initializeDOMComponents(){
     $("#search_expr").val(search_expr);
     
     // updates the datepicker in order to save changed value in datepicker window
-    $("#start_date").datepicker("update");
-    $("#end_date").datepicker("update");
+    if (!native_datepicker) {
+        $("#start_date").datepicker("update");
+        $("#end_date").datepicker("update");
+    }
 
 
 
