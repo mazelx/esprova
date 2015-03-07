@@ -378,16 +378,19 @@ function addListSideboxScroll() {
 }
 
 // when the window is resized ()
+
+// TODO : KO, should test if the map CAN be displayed, if true, initialize the map and never delete
 function addListWindowResize () {
     $(window).on("resize", function() {
         // if the map is being hid
-        if(!map_hidden && $("#map-canvas").is(":hidden")){
+        var willbe_hidden = $("#map-canvas").is(":hidden");
+        if(!map_hidden && willbe_hidden){
             // do erase map
-            map = null;
+            // map = null;
             map_hidden = true;
         }
         // if the map is being shown
-        else if (map_hidden && !($("#map-canvas").is(":hidden"))) {
+        else if (map_hidden && !willbe_hidden) {
             // initialize map    
             initializeMap();
             getRaces(new RefreshOptions());
