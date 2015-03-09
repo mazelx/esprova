@@ -226,7 +226,7 @@ class FFTri:
             finally:
                 if has_error:
                     nb_failed += 1
-                    # NO ! Cannot just delete event if a race is not ok...
+                    # NO ! Cannot just delete event if a race is not ok... That may delete an existing 
                     if event:
                         if event.pk:
                             event.delete()
