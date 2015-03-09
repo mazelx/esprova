@@ -71,7 +71,7 @@ class FFTri:
 
         return sorted_list
 
-    def save_events(self, geocode=True, limit=0):
+    def import_events_in_app(self, geocode=True, limit=0, file):
         nb_created, nb_failed = 0, 0
         event_re = re.compile('.+(?=\s-\s)')
         address_re = re.compile('(.+)(?=\s-\s\D)')

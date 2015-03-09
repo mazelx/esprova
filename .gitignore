@@ -1,5 +1,4 @@
 .Python/
-extras/
 .coverage
 esprova/local_settings.py
 __pycache__/

@@ -1,0 +1,169 @@
+[{
+    "sport": ["", ""],
+    "count": 59
+}, {
+    "sport": ["Animathlon", ""],
+    "count": 53
+}, {
+    "sport": ["Aquathlon", "Jeunes 10-13"],
+    "count": 60
+}, {
+    "sport": ["Aquathlon", "Jeunes 12-19"],
+    "count": 31
+}, {
+    "sport": ["Aquathlon", "Jeunes 6-9"],
+    "count": 62
+}, {
+    "sport": ["Aquathlon", "Jeunes 8-11"],
+    "count": 54
+}, {
+    "sport": ["Aquathlon", "L"],
+    "count": 2
+}, {
+    "sport": ["Aquathlon", "M"],
+    "count": 10
+}, {
+    "sport": ["Aquathlon", "S"],
+    "count": 44
+}, {
+    "sport": ["Aquathlon", "XS"],
+    "count": 64
+}, {
+    "sport": ["Bike & Run", "Jeunes 10-13"],
+    "count": 65
+}, {
+    "sport": ["Bike & Run", "Jeunes 12-19"],
+    "count": 32
+}, {
+    "sport": ["Bike & Run", "Jeunes 6-9"],
+    "count": 62
+}, {
+    "sport": ["Bike & Run", "Jeunes 8-11"],
+    "count": 46
+}, {
+    "sport": ["Bike & Run", "M"],
+    "count": 7
+}, {
+    "sport": ["Bike & Run", "S"],
+    "count": 81
+}, {
+    "sport": ["Bike & Run", "XS"],
+    "count": 88
+}, {
+    "sport": ["Cross Duathlon", "Jeunes 10-13"],
+    "count": 24
+}, {
+    "sport": ["Cross Duathlon", "Jeunes 12-19"],
+    "count": 15
+}, {
+    "sport": ["Cross Duathlon", "Jeunes 6-9"],
+    "count": 32
+}, {
+    "sport": ["Cross Duathlon", "Jeunes 8-11"],
+    "count": 28
+}, {
+    "sport": ["Cross Duathlon", "M"],
+    "count": 18
+}, {
+    "sport": ["Cross Duathlon", "S"],
+    "count": 20
+}, {
+    "sport": ["Cross Duathlon", "XS"],
+    "count": 18
+}, {
+    "sport": ["Cross Triathlon", "Jeunes 10-13"],
+    "count": 20
+}, {
+    "sport": ["Cross Triathlon", "Jeunes 12-19"],
+    "count": 5
+}, {
+    "sport": ["Cross Triathlon", "Jeunes 6-9"],
+    "count": 19
+}, {
+    "sport": ["Cross Triathlon", "Jeunes 8-11"],
+    "count": 17
+}, {
+    "sport": ["Cross Triathlon", "M"],
+    "count": 20
+}, {
+    "sport": ["Cross Triathlon", "S"],
+    "count": 28
+}, {
+    "sport": ["Cross Triathlon", "XS"],
+    "count": 27
+}, {
+    "sport": ["Duathlon", "Jeunes 10-13"],
+    "count": 71
+}, {
+    "sport": ["Duathlon", "Jeunes 12-19"],
+    "count": 22
+}, {
+    "sport": ["Duathlon", "Jeunes 6-9"],
+    "count": 61
+}, {
+    "sport": ["Duathlon", "Jeunes 8-11"],
+    "count": 51
+}, {
+    "sport": ["Duathlon", "L"],
+    "count": 4
+}, {
+    "sport": ["Duathlon", "M"],
+    "count": 22
+}, {
+    "sport": ["Duathlon", "S"],
+    "count": 100
+}, {
+    "sport": ["Duathlon", "XS"],
+    "count": 55
+}, {
+    "sport": ["Duathlon des neiges", "S"],
+    "count": 1
+}, {
+    "sport": ["Raid", ""],
+    "count": 7
+}, {
+    "sport": ["Rando Bike & Run", ""],
+    "count": 1
+}, {
+    "sport": ["Rando Duathlon", ""],
+    "count": 1
+}, {
+    "sport": ["Rando Triathlon", ""],
+    "count": 10
+}, {
+    "sport": ["Triathlon", "Jeunes 10-13"],
+    "count": 122
+}, {
+    "sport": ["Triathlon", "Jeunes 12-19"],
+    "count": 65
+}, {
+    "sport": ["Triathlon", "Jeunes 6-9"],
+    "count": 99
+}, {
+    "sport": ["Triathlon", "Jeunes 8-11"],
+    "count": 120
+}, {
+    "sport": ["Triathlon", "L"],
+    "count": 65
+}, {
+    "sport": ["Triathlon", "M"],
+    "count": 159
+}, {
+    "sport": ["Triathlon", "S"],
+    "count": 286
+}, {
+    "sport": ["Triathlon", "XL"],
+    "count": 3
+}, {
+    "sport": ["Triathlon", "XS"],
+    "count": 180
+}, {
+    "sport": ["Triathlon", "XXL"],
+    "count": 7
+}, {
+    "sport": ["Triathlon des neiges", "M"],
+    "count": 4
+}, {
+    "sport": ["Triathlon des neiges", "S"],
+    "count": 1
+}]
