@@ -9,7 +9,7 @@ html, body{
 
 .alt_font {
     font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 
@@ -143,14 +143,14 @@ html, body{
             .about-icon {
                 margin-top: 50px;
                 margin-bottom: 50px;
-                height: 150px;
+                height: 100px;
             }
 
             .about-text {
                 .alt_font ();
-                text-align: justify;
+                text-align: left;
                 padding: 0 20px 0 20px;
-                margin-bottom: 100px;
+                margin-bottom: 50px;
             }
         }
         .more-info {
@@ -165,7 +165,7 @@ html, body{
                 margin-bottom: 30px;
 
                 > img {
-                    height: 180px;
+                    height: 150px;
 
                 }
 
@@ -181,7 +181,7 @@ html, body{
 
             .more-info-text {
                 padding: 0 30px 0 30px;
-                text-align: justify;
+                text-align: left;
 
                 .title {
                     font-size: 2em;
@@ -191,6 +191,7 @@ html, body{
 
                 .text {
                     .alt_font ();
+                    margin-bottom: 30px;
                 }
 
 
@@ -434,6 +435,7 @@ html, body{
             .result-location {
                 color: @esprova-gray;
                 letter-spacing: 0.075em;
+                margin-bottom: 5px;
             }
 
             .result-detail {
@@ -593,6 +595,9 @@ html, body{
         .hidden-print();
         text-align: center;
         margin-bottom: 100px;
+        filter: grayscale(100%);
+        -webkit-filter:grayscale(100%);
+        filter: gray; filter: grayscale(100%);
     }
 
 
