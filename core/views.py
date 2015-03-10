@@ -32,23 +32,32 @@ def ajx_sport_session(request):
     if (request.is_ajax() or settings.DEBUG):
         if request.method == 'POST':
             # create a form instance and populate it with data from the request:
-            sport = request.POST.get("sport").lower()
-            if sport in [s.name.lower() for s in Sport.objects.all()]:
+            sport = request.POST.get("sport")
+            if Sport.objects.filter(name__iexact=sport).count():
                 request.session['selected_sport'] = sport
                 return HttpResponse('')
         elif request.method == 'GET':
             sport = request.session['selected_sport']
             return HttpResponse(dumps(sport), content_type="application/json")
 
-    return Http404
+    return HttpResponseBadRequest
 
 
-def ajx_get_distance_helper(request, name):
+def ajx_get_distances(request, name):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+
         # first cap to match name case
-        name = name.title()
-        sport = get_object_or_404(Sport, name=name)
-        return render_to_response('core/distance_helper.html', {'sport': sport})
+        sport = get_object_or_404(Sport, name__iexact=name)
+
+        if sport:
+            distances = [d.get('name') for d in sport.distances]
+
+        helper_html = render_to_string('core/distance_helper.html', {'sport': sport})
+        response = {'helper_html': helper_html,
+                    'distances': distances,
+                    }
+
+        return HttpResponse(dumps(response), content_type="application/json")
 
 
 @login_required
@@ -58,7 +67,7 @@ def ajx_validate_all(request):
             r.validated = True
             r.save()
         return HttpResponse('')
-    return Http404
+    return HttpResponseBadRequest
 
 
 @login_required
@@ -69,7 +78,7 @@ def ajx_validate_race(request, pk):
         race.validated = True
         race.save()
         return HttpResponse('')
-    return Http404
+    return HttpResponseBadRequest
 
 
 @login_required
@@ -235,6 +244,7 @@ class RaceList(TemplateView):
         for dist in self.request.GET.getlist('distances'):
             # directly assign into params.distances.XS for example
             context['params']['distances'][dist] = True
+
 
         return context
 
