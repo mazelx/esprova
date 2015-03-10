@@ -348,7 +348,7 @@ class DistanceCategory(models.Model):
         verbose_name_plural = "Distance Categories"
 
     def __str__(self):
-        return "{0}".format(self.name)
+        return "{0}:{1}".format(self.sport, self.name)
 
     def natural_key(self):
         return (self.sport, self.name)
