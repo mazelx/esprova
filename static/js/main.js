@@ -412,16 +412,8 @@ function saveSportSession(sport){
         url: "/api/sport-session/",
         data: {sport: sport},
         type: "POST",
-        }).done(function() {
-            // var formatted_sport = sport.charAt(0).toUpperCase() + sport.slice(1);
-            // $(".sport-selected").html(formatted_sport);
-            // will be set by the 
-            // if (search_sport !== formatted_sport) {
-            // will be set by the 
+        }).done(function() { 
             search_sport = sport;
-            getDistanceInfo(sport);
-            // pushState(getParamQuery());
-            // getRaces( new RefreshOptions({ "refreshMap": false}) );
             resetSearchForm();
         });
     } 
