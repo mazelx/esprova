@@ -42,6 +42,8 @@ var native_datepicker = Modernizr.touch;
 
 var manualStateChange = false;
 
+var page_title;
+
 
 function RefreshOptions(options) {
     if (typeof options === "undefined") {
@@ -76,6 +78,8 @@ if (typeof google !== "undefined") {
 
 
 function initialize() {
+
+    page_title = document.title;
     search_sport = default_sport;
     viewport = default_search_bounds; 
     search_distances = default_distances;
@@ -240,14 +244,15 @@ function initializeMapZoomControl() {
 }
 
 
-function initializeSportDistanceHelper(sport) {
+function getDistanceInfo(sport) {
      $.ajax({
         url: "api/distance/" + sport,
         type: "GET", 
-        dataType: "text"
+        dataType: "json"
         })
         .done(function(response) {
-            $("#sport-distances-helper").html(response);
+            $("#sport-distances-helper").html(response.helper_html);
+            refreshDistances(response.distances);
         })
         .fail(function(){
             $("#sport-distances-helper").html("");
@@ -276,6 +281,9 @@ function initializeDOMComponents(){
     else {
         search_sport = default_sport;
     }
+    $("#sport-selecter").val(search_sport);
+    getDistanceInfo(search_sport);
+
     // set map to provided bounds
     var str_viewport = getParameterByName("viewport");
     viewport = (str_viewport === "") ? default_search_bounds : str_viewport.split(","); 
@@ -314,8 +322,6 @@ function initializeDOMComponents(){
         $("#end_date").datepicker("update");
         addListSearch();
     }
-
-
 
     // set active
     var active = getParameterByName("active");
@@ -407,14 +413,17 @@ function saveSportSession(sport){
         data: {sport: sport},
         type: "POST",
         }).done(function() {
-            var formatted_sport = sport.charAt(0).toUpperCase() + sport.slice(1);
-            $(".sport-selected").html(formatted_sport);
+            // var formatted_sport = sport.charAt(0).toUpperCase() + sport.slice(1);
+            // $(".sport-selected").html(formatted_sport);
             // will be set by the 
             // if (search_sport !== formatted_sport) {
-                // will be set by the 
-                search_sport = formatted_sport;
-                initializeSportDistanceHelper(sport);
-            });
+            // will be set by the 
+            search_sport = sport;
+            getDistanceInfo(sport);
+            // pushState(getParamQuery());
+            // getRaces( new RefreshOptions({ "refreshMap": false}) );
+            resetSearchForm();
+        });
     } 
 
       
@@ -426,8 +435,6 @@ function addListSportSelection(){
     $("#sport-selecter").on("change", function (event) { 
         event.preventDefault();
         saveSportSession(event.currentTarget.value);
-        getRaces( new RefreshOptions({"recordState": false, "refreshMap": false}) );
-        pushState(getParamQuery());
    });
 }
 
@@ -747,6 +754,14 @@ function refreshRacesOnMap(races) {
     selectEvent(selected_event_id, false);
 }
 
+function refreshDistances(distances) {
+    $(".distance_selector").removeClass("hidden");
+    if (distances.indexOf("XS") < 0 ) { $("#distance_selector_XS").addClass("hidden"); }
+    if (distances.indexOf("S") < 0 ) { $("#distance_selector_S").addClass("hidden"); }
+    if (distances.indexOf("M") < 0 ) { $("#distance_selector_M").addClass("hidden"); }
+    if (distances.indexOf("L") < 0 ) { $("#distance_selector_L").addClass("hidden"); }
+    if (distances.indexOf("XL") < 0 )  { $("#distance_selector_XL").addClass("hidden"); }
+}
 
 // ----------------------
 // Dynamic display
@@ -831,7 +846,7 @@ function pushState(param_query){
 
     if (last_query_pushed !== param_query) {
         // console.log("push:" + param_query);
-        History.pushState(stateObj, "index", "/races?" + param_query);        
+        History.pushState(stateObj, page_title + " - " + search_sport, "/races?" + param_query);        
         last_query_pushed = param_query;
     }
 
