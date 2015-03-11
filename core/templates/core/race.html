@@ -54,7 +54,9 @@
 
 
         <div class="race-distances row">
-
+            <span class="race-sport">
+             {{race.sport.name}}
+            </span>
             {% for r in race.event.get_races %}
                 {% if r == race %}
                     <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>

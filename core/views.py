@@ -222,7 +222,7 @@ class FacetTest(LoginRequiredMixin, ListView):
 
 
 # Should be heriting View ... or function not based on a class
-class RaceList(TemplateView):
+class RaceList(LoginRequiredMixin, TemplateView):
     # model = Race
     context_object_name = "race_list"
     template_name = "core/racesearch.html"
@@ -249,7 +249,7 @@ class RaceList(TemplateView):
         return context
 
 
-class RaceView(DetailView):
+class RaceView(LoginRequiredMixin, DetailView):
     model = Race
     context_object_name = "race"
     template_name = "core/race.html"
@@ -326,7 +326,7 @@ class RaceWizard(SessionWizardView):
         return HttpResponseRedirect(reverse('create_race'))
 
 
-class IntroView(TemplateView):
+class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
 
 
