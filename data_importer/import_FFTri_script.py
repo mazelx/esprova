@@ -9,9 +9,10 @@ import traceback
 
 from data_importer.FFTri import FFTri
 
+test.utils.setup_test_environment()
+db = connection.creation.create_test_db()
+
 try:
-    test.utils.setup_test_environment()
-    db = connection.creation.create_test_db()
     call_command('loaddata', 'core/fixtures/sports.yaml', format='yaml', verbosity=1)
 
 

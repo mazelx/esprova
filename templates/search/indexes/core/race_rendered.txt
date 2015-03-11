@@ -1,6 +1,7 @@
  {% load static from staticfiles %} 
  {% load templatefilters %}
 
+
 <div class="search-result" id="event_{{ object.event.pk }}">
     <div class="result-date-preview">
         <div class="result-start-date">
@@ -20,7 +21,8 @@
             <div class="result-detail-distance" >
                 <button type="button" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</button>
                 <span class="result-detail-date">
-                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | date:"l d/m/Y à H:i" | capfirst }}</a>
+                {% comment %} I still don't fucking understand why I can't use genuine date here... check custom searchbackend to activate that bloody locale{% endcomment %}
+                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | datefr | capfirst }} à {{ r.time | time:"H:i" | default:"<em>NC</em>" }}</a>
                 </span>
             </div>
             {% endfor %}

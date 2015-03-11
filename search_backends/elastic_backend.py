@@ -3,7 +3,8 @@ from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend
 from haystack.backends.elasticsearch_backend import ElasticsearchSearchEngine
 from haystack.fields import EdgeNgramField as BaseEdgeNgramField
 from django.utils import translation
-
+import locale
+from datetime import datetime 
 
 # Custom Backend
 class CustomElasticBackend(ElasticsearchSearchBackend):

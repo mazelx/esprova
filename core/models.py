@@ -356,7 +356,7 @@ class DistanceCategory(models.Model):
     def get_formatted_name(self):
         var = self.name
         if self.long_name:
-            var += "({0})".format(self.long_name)
+            var += " ({0}) ".format(self.long_name)
         return var
 
 
@@ -378,7 +378,8 @@ class Race(models.Model):
     sport = models.ForeignKey(Sport)
     event = models.ForeignKey(EventEdition, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateTimeField()
+    date = models.DateField()
+    time = models.TimeField(blank=True, null=True)
     distance_cat = models.ForeignKey(DistanceCategory)
     price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')

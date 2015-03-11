@@ -2,7 +2,7 @@ import requests
 import json
 import re
 from operator import itemgetter
-import pytz
+from pytz import timezone
 from datetime import datetime
 import warnings
 import sys
@@ -106,6 +106,7 @@ class FFTri:
 
             d = race_src.get('date') 
             r['date'] = datetime.strptime(d, '%d/%m/%Y')
+            r['date'] = r['date'].replace(tzinfo=timezone('Europe/Paris'))
 
             r['price'] = None
             o['name'] = race_src.get('nom_orga', None)

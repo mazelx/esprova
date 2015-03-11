@@ -117,32 +117,32 @@
 - fields: {long_name: Longue Distance, name: XL, order: 5, sport: 3}
   model: core.distancecategory
   pk: 17
-- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 11:29:43.932212+00:00',
-    date: !!timestamp '2015-03-28 23:00:00+00:00', description: null, distance_cat: 14,
-    event: 1, federation: 1, label: null, location: 1, modified_date: !!timestamp '2015-03-11
-      11:29:43.992113+00:00', price: null, slug: 10e-duathlon-international-de-sarreguemines-s,
-    sport: 3, title: 10e Duathlon International de Sarreguemines - S, validated: false}
+- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 11:59:32.388167+00:00',
+    date: 2015-03-29, description: null, distance_cat: 14, event: 1, federation: 1,
+    label: null, location: 1, modified_date: !!timestamp '2015-03-11 11:59:32.438676+00:00',
+    price: null, slug: 10e-duathlon-international-de-sarreguemines-s, sport: 3, time: null,
+    title: 10e Duathlon International de Sarreguemines - S, validated: false}
   model: core.race
   pk: 1
-- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 11:29:44.044402+00:00',
-    date: !!timestamp '2015-03-28 23:00:00+00:00', description: null, distance_cat: 13,
-    event: 1, federation: 1, label: null, location: 2, modified_date: !!timestamp '2015-03-11
-      11:29:44.088256+00:00', price: null, slug: 10e-duathlon-international-de-sarreguemines-xs,
-    sport: 3, title: 10e Duathlon International de Sarreguemines - XS, validated: false}
+- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 11:59:32.479416+00:00',
+    date: 2015-03-29, description: null, distance_cat: 13, event: 1, federation: 1,
+    label: null, location: 2, modified_date: !!timestamp '2015-03-11 11:59:32.520392+00:00',
+    price: null, slug: 10e-duathlon-international-de-sarreguemines-xs, sport: 3, time: null,
+    title: 10e Duathlon International de Sarreguemines - XS, validated: false}
   model: core.race
   pk: 2
-- fields: {contact: 2, created_by: '', created_date: !!timestamp '2015-03-11 11:29:44.145596+00:00',
-    date: !!timestamp '2015-05-16 22:00:00+00:00', description: null, distance_cat: 15,
-    event: 2, federation: 1, label: null, location: 3, modified_date: !!timestamp '2015-03-11
-      11:29:44.179373+00:00', price: null, slug: 14eme-combine-de-st-benoit-m, sport: 3,
-    title: "14\xE8me COMBINE  DE ST BENOIT - M", validated: false}
+- fields: {contact: 2, created_by: '', created_date: !!timestamp '2015-03-11 11:59:32.572636+00:00',
+    date: 2015-05-17, description: null, distance_cat: 15, event: 2, federation: 1,
+    label: null, location: 3, modified_date: !!timestamp '2015-03-11 11:59:32.613633+00:00',
+    price: null, slug: 14eme-combine-de-st-benoit-m, sport: 3, time: null, title: "14\xE8\
+      me COMBINE  DE ST BENOIT - M", validated: false}
   model: core.race
   pk: 3
-- fields: {contact: 2, created_by: '', created_date: !!timestamp '2015-03-11 11:29:44.229071+00:00',
-    date: !!timestamp '2015-11-14 23:00:00+00:00', description: null, distance_cat: 14,
-    event: 3, federation: 1, label: null, location: 4, modified_date: !!timestamp '2015-03-11
-      11:29:44.259172+00:00', price: null, slug: 15eme-combine-de-la-plaine-des-palmistes-s,
-    sport: 3, title: "15\xE8me COMBINE DE LA PLAINE DES PALMISTES - S", validated: false}
+- fields: {contact: 2, created_by: '', created_date: !!timestamp '2015-03-11 11:59:32.663600+00:00',
+    date: 2015-11-15, description: null, distance_cat: 14, event: 3, federation: 1,
+    label: null, location: 4, modified_date: !!timestamp '2015-03-11 11:59:32.708887+00:00',
+    price: null, slug: 15eme-combine-de-la-plaine-des-palmistes-s, sport: 3, time: null,
+    title: "15\xE8me COMBINE DE LA PLAINE DES PALMISTES - S", validated: false}
   model: core.race
   pk: 4
 - fields: {distance: 5000, order: 1, race: 1, stage: 6}

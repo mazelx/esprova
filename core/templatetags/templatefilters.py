@@ -12,4 +12,4 @@ def datefr(value):
     except Exception:
         locale.setlocale(locale.LC_ALL, 'fr_FR.UTF-8')
 
-    return value.strftime("%A %d/%m/%Y à %H:%M")
+    return value.strftime("%A %d/%m/%Y")
