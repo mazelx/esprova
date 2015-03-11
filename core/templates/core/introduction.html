@@ -21,7 +21,9 @@
                     <a href="http://www.twitter.com/esprova" target="_blank">
                         <img alt="twitter" src="{% static "images/icon-twitter.svg" %}">
                     </a> 
-                    <a class="pull-right" href="#">Connexion</a>
+                    {% if not user.is_authenticated %}
+                        <a class="pull-right" href="{% url "login" %}">Connexion</a>
+                    {% endif %}
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     
