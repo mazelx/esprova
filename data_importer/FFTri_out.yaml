@@ -1,0 +1,309 @@
+- fields: {combinedSport: true, name: Triathlon}
+  model: core.sport
+  pk: 2
+- fields: {combinedSport: true, name: Duathlon}
+  model: core.sport
+  pk: 3
+- fields: {combinedSport: true, name: Triathlon Jeunes}
+  model: core.sport
+  pk: 4
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '', country: '',
+    lat: '49.10603', lng: '7.07086', locality: Sarreguemines, postal_code: '57200',
+    route: Esplanade du Casino des Faienceries, street_number: null}
+  model: core.location
+  pk: 1
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '', country: '',
+    lat: '49.10603', lng: '7.07086', locality: Sarreguemines, postal_code: '57200',
+    route: Esplanade du Casino des Faienceries, street_number: null}
+  model: core.location
+  pk: 2
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '', country: '',
+    lat: '-21.03403', lng: '55.71257', locality: ST BENOIT, postal_code: '97470',
+    route: ST BENOIT, street_number: null}
+  model: core.location
+  pk: 3
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '', country: '',
+    lat: '-20.98339', lng: '55.29536', locality: LA PLAINE DES PALMISTES, postal_code: '97470',
+    route: ST BENOIT, street_number: null}
+  model: core.location
+  pk: 4
+- fields: {default_order: 1, name: Natation, sport: 2}
+  model: core.sportstage
+  pk: 4
+- fields: {default_order: 1, name: Cyclisme, sport: 2}
+  model: core.sportstage
+  pk: 5
+- fields: {default_order: 1, name: "Course \xE0 Pied", sport: 2}
+  model: core.sportstage
+  pk: 6
+- fields: {name: SARREGUEMINES TRIATHLON CLUB, website: null}
+  model: core.organizer
+  pk: 1
+- fields: {name: TRIATHLON CLUB DES MARSOUINS, website: null}
+  model: core.organizer
+  pk: 2
+- fields: {name: 10e Duathlon International de Sarreguemines, organizer: 1, website: 'http://sarregueminestri.free.fr'}
+  model: core.eventreference
+  pk: 1
+- fields: {name: "14\xE8me COMBINE  DE ST BENOIT", organizer: 2, website: ''}
+  model: core.eventreference
+  pk: 2
+- fields: {name: "15\xE8me COMBINE DE LA PLAINE DES PALMISTES", organizer: 2, website: ''}
+  model: core.eventreference
+  pk: 3
+- fields: {edition: 1, event_ref: 1}
+  model: core.eventedition
+  pk: 1
+- fields: {edition: 1, event_ref: 2}
+  model: core.eventedition
+  pk: 2
+- fields: {edition: 1, event_ref: 3}
+  model: core.eventedition
+  pk: 3
+- fields:
+    name: FFTri
+    sport: []
+  model: core.federation
+  pk: 1
+- fields: {email: romain.cabanski@gmail.com, name: SARREGUEMINES TRIATHLON CLUB, phone: ''}
+  model: core.contact
+  pk: 1
+- fields: {email: tcm974@yahoo.fr, name: TRIATHLON CLUB DES MARSOUINS, phone: ''}
+  model: core.contact
+  pk: 2
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 2}
+  model: core.distancecategory
+  pk: 4
+- fields: {long_name: Sprint, name: S, order: 2, sport: 2}
+  model: core.distancecategory
+  pk: 5
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 2}
+  model: core.distancecategory
+  pk: 6
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 2}
+  model: core.distancecategory
+  pk: 7
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 2}
+  model: core.distancecategory
+  pk: 8
+- fields: {long_name: Jeunes 6-9 ans, name: XS, order: 1, sport: 4}
+  model: core.distancecategory
+  pk: 9
+- fields: {long_name: Jeunes 8-11 ans, name: S, order: 2, sport: 4}
+  model: core.distancecategory
+  pk: 10
+- fields: {long_name: Jeunes 10-13 ans, name: M, order: 3, sport: 4}
+  model: core.distancecategory
+  pk: 11
+- fields: {long_name: Jeunes 12-19ans, name: L, order: 4, sport: 4}
+  model: core.distancecategory
+  pk: 12
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 3}
+  model: core.distancecategory
+  pk: 13
+- fields: {long_name: Sprint, name: S, order: 2, sport: 3}
+  model: core.distancecategory
+  pk: 14
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 3}
+  model: core.distancecategory
+  pk: 15
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 3}
+  model: core.distancecategory
+  pk: 16
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 3}
+  model: core.distancecategory
+  pk: 17
+- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 11:29:43.932212+00:00',
+    date: !!timestamp '2015-03-28 23:00:00+00:00', description: null, distance_cat: 14,
+    event: 1, federation: 1, label: null, location: 1, modified_date: !!timestamp '2015-03-11
+      11:29:43.992113+00:00', price: null, slug: 10e-duathlon-international-de-sarreguemines-s,
+    sport: 3, title: 10e Duathlon International de Sarreguemines - S, validated: false}
+  model: core.race
+  pk: 1
+- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 11:29:44.044402+00:00',
+    date: !!timestamp '2015-03-28 23:00:00+00:00', description: null, distance_cat: 13,
+    event: 1, federation: 1, label: null, location: 2, modified_date: !!timestamp '2015-03-11
+      11:29:44.088256+00:00', price: null, slug: 10e-duathlon-international-de-sarreguemines-xs,
+    sport: 3, title: 10e Duathlon International de Sarreguemines - XS, validated: false}
+  model: core.race
+  pk: 2
+- fields: {contact: 2, created_by: '', created_date: !!timestamp '2015-03-11 11:29:44.145596+00:00',
+    date: !!timestamp '2015-05-16 22:00:00+00:00', description: null, distance_cat: 15,
+    event: 2, federation: 1, label: null, location: 3, modified_date: !!timestamp '2015-03-11
+      11:29:44.179373+00:00', price: null, slug: 14eme-combine-de-st-benoit-m, sport: 3,
+    title: "14\xE8me COMBINE  DE ST BENOIT - M", validated: false}
+  model: core.race
+  pk: 3
+- fields: {contact: 2, created_by: '', created_date: !!timestamp '2015-03-11 11:29:44.229071+00:00',
+    date: !!timestamp '2015-11-14 23:00:00+00:00', description: null, distance_cat: 14,
+    event: 3, federation: 1, label: null, location: 4, modified_date: !!timestamp '2015-03-11
+      11:29:44.259172+00:00', price: null, slug: 15eme-combine-de-la-plaine-des-palmistes-s,
+    sport: 3, title: "15\xE8me COMBINE DE LA PLAINE DES PALMISTES - S", validated: false}
+  model: core.race
+  pk: 4
+- fields: {distance: 5000, order: 1, race: 1, stage: 6}
+  model: core.stagedistancespecific
+  pk: 1
+- fields: {distance: 20000, order: 2, race: 1, stage: 5}
+  model: core.stagedistancespecific
+  pk: 2
+- fields: {distance: 2500, order: 3, race: 1, stage: 6}
+  model: core.stagedistancespecific
+  pk: 3
+- fields: {distance: 2500, order: 1, race: 2, stage: 6}
+  model: core.stagedistancespecific
+  pk: 4
+- fields: {distance: 10000, order: 2, race: 2, stage: 5}
+  model: core.stagedistancespecific
+  pk: 5
+- fields: {distance: 1250, order: 3, race: 2, stage: 6}
+  model: core.stagedistancespecific
+  pk: 6
+- fields: {distance: 10000, order: 1, race: 3, stage: 6}
+  model: core.stagedistancespecific
+  pk: 7
+- fields: {distance: 40000, order: 2, race: 3, stage: 5}
+  model: core.stagedistancespecific
+  pk: 8
+- fields: {distance: 5000, order: 3, race: 3, stage: 6}
+  model: core.stagedistancespecific
+  pk: 9
+- fields: {distance: 5000, order: 1, race: 4, stage: 6}
+  model: core.stagedistancespecific
+  pk: 10
+- fields: {distance: 20000, order: 2, race: 4, stage: 5}
+  model: core.stagedistancespecific
+  pk: 11
+- fields: {distance: 2500, order: 3, race: 4, stage: 6}
+  model: core.stagedistancespecific
+  pk: 12
+- fields: {distance: 400, distance_cat: 4, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 7
+- fields: {distance: 10000, distance_cat: 4, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 8
+- fields: {distance: 2500, distance_cat: 4, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 9
+- fields: {distance: 750, distance_cat: 5, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 10
+- fields: {distance: 20000, distance_cat: 5, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 11
+- fields: {distance: 5000, distance_cat: 5, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 12
+- fields: {distance: 1500, distance_cat: 6, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 13
+- fields: {distance: 40000, distance_cat: 6, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 14
+- fields: {distance: 10000, distance_cat: 6, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 15
+- fields: {distance: 3000, distance_cat: 7, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 16
+- fields: {distance: 80000, distance_cat: 7, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 17
+- fields: {distance: 20000, distance_cat: 7, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 18
+- fields: {distance: 4000, distance_cat: 8, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 19
+- fields: {distance: 120000, distance_cat: 8, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 20
+- fields: {distance: 30000, distance_cat: 8, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 21
+- fields: {distance: 50, distance_cat: 9, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 22
+- fields: {distance: 1000, distance_cat: 9, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 23
+- fields: {distance: 500, distance_cat: 9, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 24
+- fields: {distance: 100, distance_cat: 10, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 25
+- fields: {distance: 2000, distance_cat: 10, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 26
+- fields: {distance: 1000, distance_cat: 10, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 27
+- fields: {distance: 200, distance_cat: 11, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 28
+- fields: {distance: 4000, distance_cat: 11, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 29
+- fields: {distance: 1500, distance_cat: 11, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 30
+- fields: {distance: 300, distance_cat: 12, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 31
+- fields: {distance: 6000, distance_cat: 12, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 32
+- fields: {distance: 2000, distance_cat: 12, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 33
+- fields: {distance: 2500, distance_cat: 13, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 34
+- fields: {distance: 10000, distance_cat: 13, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 35
+- fields: {distance: 1250, distance_cat: 13, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 36
+- fields: {distance: 5000, distance_cat: 14, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 37
+- fields: {distance: 20000, distance_cat: 14, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 38
+- fields: {distance: 2500, distance_cat: 14, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 39
+- fields: {distance: 10000, distance_cat: 15, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 40
+- fields: {distance: 40000, distance_cat: 15, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 41
+- fields: {distance: 5000, distance_cat: 15, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 42
+- fields: {distance: 10000, distance_cat: 16, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 43
+- fields: {distance: 80000, distance_cat: 16, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 44
+- fields: {distance: 10000, distance_cat: 16, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 45
+- fields: {distance: 20000, distance_cat: 17, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 46
+- fields: {distance: 120000, distance_cat: 17, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 47
+- fields: {distance: 10000, distance_cat: 17, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 48

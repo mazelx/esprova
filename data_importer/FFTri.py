@@ -71,7 +71,7 @@ class FFTri:
 
         return sorted_list
 
-    def import_events_in_app(self, geocode=True, limit=0, file):
+    def import_events_in_app(self, sport_restrict, geocode=True, limit=0):
         nb_created, nb_failed = 0, 0
         event_re = re.compile('.+(?=\s-\s)')
         address_re = re.compile('(.+)(?=\s-\s\D)')
@@ -79,7 +79,11 @@ class FFTri:
         federation_name = "FFTri"
         edition_no = 1
 
-        for race_src in self.race_list:
+        restricted_race_list = self.race_list
+        if sport_restrict:
+            restricted_race_list = [x for x in restricted_race_list if x['discipline'].lower() == sport_restrict.lower()]
+
+        for race_src in restricted_race_list:
             e, eref, s, c, l, dc, r, o, f = ({} for i in range(9))
             distance_cat, sport, event, event_ref, contact, location, race, organizer, federation = (None for i in range(9))
 
@@ -101,7 +105,7 @@ class FFTri:
             r['title'] = race_src.get('nom', None)
 
             d = race_src.get('date') 
-            r['date'] = pytz.utc.localize(datetime.strptime(d, '%d/%m/%Y'))
+            r['date'] = datetime.strptime(d, '%d/%m/%Y')
 
             r['price'] = None
             o['name'] = race_src.get('nom_orga', None)
@@ -116,8 +120,8 @@ class FFTri:
 
             try:
                 has_error = False
-                distance_cat = DistanceCategory.objects.get(**dc)
                 sport = Sport.objects.get(**s)
+                distance_cat = DistanceCategory.objects.get(sport=sport,**dc)
                 organizer, organizer_created = Organizer.objects.get_or_create(**o)
                 event_ref, event_created = EventReference.objects.get_or_create(organizer=organizer, **eref)
                 event, event_created = EventEdition.objects.get_or_create(event_ref=event_ref, **e)
@@ -241,9 +245,10 @@ class FFTri:
                             race.delete()
                 else:
                     print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
-                    if limit == 1:
-                        break
-                    limit -= 1
+
+                if limit == 1:
+                    break
+                limit -= 1
 
 
 
