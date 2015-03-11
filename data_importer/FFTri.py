@@ -52,6 +52,7 @@ class FFTri:
 
     def __init__(self, *args, **kwargs):
         self.race_list = self.__get_race_list_from_provider()
+        self.__clean_race_list()
 
 
     def __get_race_list_from_provider(self):
@@ -70,6 +71,22 @@ class FFTri:
         sorted_list = sorted(race_list, key=itemgetter('nom'))
 
         return sorted_list
+
+    def __clean_race_list(self):
+        for x in self.race_list:
+            if('Jeunes' in x['format']):
+                x['discipline'] += ' Jeunes'
+                sport = Sport.objects.filter(name=x['discipline'])
+                dc = DistanceCategory.objects.filter(sport=sport, long_name__contains=x['format'])
+                if dc.count():
+                    x['format'] = dc[0].name
+                else:
+                    x['format'] = ''
+            if('XXL' in x['format']):
+                x['format'] = 'XL'
+            if('XXS' in x['format']):
+                x['format'] = 'XS'
+
 
     def import_events_in_app(self, sport_restrict, geocode=True, limit=0):
         nb_created, nb_failed = 0, 0
@@ -120,6 +137,10 @@ class FFTri:
             l['lng'] = race_src.get('longitude', None)
 
             try:
+
+                # check if the race is already in the db to avoid useless treatment
+                
+
                 has_error = False
                 sport = Sport.objects.get(**s)
                 distance_cat = DistanceCategory.objects.get(sport=sport,**dc)
@@ -130,6 +151,9 @@ class FFTri:
                 federation, federation_created = Federation.objects.get_or_create(**f)
 
                 location = Location()
+
+                geocoded = False
+
                 if geocode:
                     country = 'FR'
                     adm2_short = l['postal_code'][:2]
@@ -175,13 +199,16 @@ class FFTri:
                         country = 'NC'
                         adm2_short = l['postal_code'][:3]
 
-                    location.geocode_raw_address(raw_address=l['raw'], postal_code=l['postal_code'], country=country)
+                    geocoded = location.geocode_raw_address(raw_address=l['raw'], postal_code=l['postal_code'], country=country)
 
                     # fix for google geocoder bug for some french departments
                     # replace postal code and departement with API value
                     location.postal_code = l['postal_code']
                     location.administrative_area_level_2_short_name = adm2_short
-                else:
+
+                    # in case the geocode did not find location, switch back to given infos
+                
+                if not geocoded:
                     location.lat = l['lat']
                     location.lng = l['lng']
                     location.postal_code = l['postal_code']

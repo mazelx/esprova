@@ -1,4 +1,4 @@
-# ./manage.py dumpdata --format json core.Sport core.DistanceCategory core.SportStage core.StageDistancedefault
+# ./manage.py dumpdata --format yaml core.Sport core.DistanceCategory core.SportStage core.StageDistancedefault
 
 - fields: {combinedSport: true, name: Triathlon}
   model: core.sport
@@ -9,6 +9,36 @@
 - fields: {combinedSport: true, name: Triathlon Jeunes}
   model: core.sport
   pk: 4
+- fields: {combinedSport: true, name: Aquathlon}
+  model: core.sport
+  pk: 5
+- fields: {combinedSport: true, name: Bike & Run}
+  model: core.sport
+  pk: 6
+- fields: {combinedSport: true, name: Cross Duathlon}
+  model: core.sport
+  pk: 7
+- fields: {combinedSport: true, name: Cross Triathlon}
+  model: core.sport
+  pk: 8
+- fields: {combinedSport: true, name: Duathlon des Neiges}
+  model: core.sport
+  pk: 9
+- fields: {combinedSport: true, name: Triathlon des Neiges}
+  model: core.sport
+  pk: 10
+- fields: {combinedSport: true, name: Aquathlon Jeunes}
+  model: core.sport
+  pk: 11
+- fields: {combinedSport: true, name: Duathlon Jeunes}
+  model: core.sport
+  pk: 12
+- fields: {combinedSport: true, name: Cross Triathlon Jeunes}
+  model: core.sport
+  pk: 13
+- fields: {combinedSport: true, name: Cross Duathlon Jeunes}
+  model: core.sport
+  pk: 14
 - fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 2}
   model: core.distancecategory
   pk: 4
@@ -51,6 +81,99 @@
 - fields: {long_name: Longue Distance, name: XL, order: 5, sport: 3}
   model: core.distancecategory
   pk: 17
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 5}
+  model: core.distancecategory
+  pk: 18
+- fields: {long_name: Sprint, name: S, order: 2, sport: 5}
+  model: core.distancecategory
+  pk: 19
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 5}
+  model: core.distancecategory
+  pk: 20
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 5}
+  model: core.distancecategory
+  pk: 21
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 5}
+  model: core.distancecategory
+  pk: 22
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 7}
+  model: core.distancecategory
+  pk: 23
+- fields: {long_name: Sprint, name: S, order: 2, sport: 7}
+  model: core.distancecategory
+  pk: 24
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 7}
+  model: core.distancecategory
+  pk: 25
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 7}
+  model: core.distancecategory
+  pk: 26
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 7}
+  model: core.distancecategory
+  pk: 27
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 8}
+  model: core.distancecategory
+  pk: 28
+- fields: {long_name: Sprint, name: S, order: 2, sport: 8}
+  model: core.distancecategory
+  pk: 29
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 8}
+  model: core.distancecategory
+  pk: 30
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 8}
+  model: core.distancecategory
+  pk: 31
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 8}
+  model: core.distancecategory
+  pk: 32
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 10}
+  model: core.distancecategory
+  pk: 33
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 9}
+  model: core.distancecategory
+  pk: 34
+- fields: {long_name: '', name: S, order: 2, sport: 10}
+  model: core.distancecategory
+  pk: 35
+- fields: {long_name: '', name: M, order: 3, sport: 10}
+  model: core.distancecategory
+  pk: 36
+- fields: {long_name: '', name: S, order: 2, sport: 9}
+  model: core.distancecategory
+  pk: 37
+- fields: {long_name: '', name: M, order: 3, sport: 9}
+  model: core.distancecategory
+  pk: 38
+- fields: {long_name: '', name: XS, order: 1, sport: 13}
+  model: core.distancecategory
+  pk: 39
+- fields: {long_name: '', name: S, order: 2, sport: 13}
+  model: core.distancecategory
+  pk: 40
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 13}
+  model: core.distancecategory
+  pk: 41
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 13}
+  model: core.distancecategory
+  pk: 42
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 13}
+  model: core.distancecategory
+  pk: 43
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 14}
+  model: core.distancecategory
+  pk: 44
+- fields: {long_name: Sprint, name: S, order: 2, sport: 14}
+  model: core.distancecategory
+  pk: 45
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 14}
+  model: core.distancecategory
+  pk: 46
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 14}
+  model: core.distancecategory
+  pk: 47
+- fields: {long_name: '', name: XL, order: 5, sport: 14}
+  model: core.distancecategory
+  pk: 48
 - fields: {default_order: 1, name: Natation, sport: 2}
   model: core.sportstage
   pk: 4
@@ -60,6 +183,9 @@
 - fields: {default_order: 1, name: "Course \xE0 Pied", sport: 2}
   model: core.sportstage
   pk: 6
+- fields: {default_order: 3, name: Ski de Fond, sport: 10}
+  model: core.sportstage
+  pk: 7
 - fields: {distance: 400, distance_cat: 4, order: 1, stage: 4}
   model: core.stagedistancedefault
   pk: 7
@@ -186,3 +312,267 @@
 - fields: {distance: 10000, distance_cat: 17, order: 3, stage: 6}
   model: core.stagedistancedefault
   pk: 48
+- fields: {distance: 500, distance_cat: 18, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 49
+- fields: {distance: 2500, distance_cat: 18, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 50
+- fields: {distance: 1000, distance_cat: 19, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 51
+- fields: {distance: 2500, distance_cat: 19, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 52
+- fields: {distance: 2000, distance_cat: 20, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 53
+- fields: {distance: 10000, distance_cat: 20, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 54
+- fields: {distance: 3000, distance_cat: 21, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 55
+- fields: {distance: 15000, distance_cat: 21, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 56
+- fields: {distance: 4000, distance_cat: 22, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 57
+- fields: {distance: 20000, distance_cat: 22, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 58
+- fields: {distance: 2000, distance_cat: 23, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 59
+- fields: {distance: 5500, distance_cat: 23, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 60
+- fields: {distance: 1000, distance_cat: 23, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 61
+- fields: {distance: 4000, distance_cat: 24, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 62
+- fields: {distance: 5500, distance_cat: 24, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 63
+- fields: {distance: 2000, distance_cat: 24, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 64
+- fields: {distance: 8000, distance_cat: 25, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 65
+- fields: {distance: 22000, distance_cat: 25, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 66
+- fields: {distance: 4000, distance_cat: 25, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 67
+- fields: {distance: 16000, distance_cat: 26, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 68
+- fields: {distance: 44000, distance_cat: 26, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 69
+- fields: {distance: 8000, distance_cat: 26, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 70
+- fields: {distance: 24000, distance_cat: 27, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 71
+- fields: {distance: 66000, distance_cat: 27, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 72
+- fields: {distance: 12000, distance_cat: 27, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 73
+- fields: {distance: 250, distance_cat: 28, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 74
+- fields: {distance: 5500, distance_cat: 28, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 75
+- fields: {distance: 2000, distance_cat: 28, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 76
+- fields: {distance: 500, distance_cat: 29, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 77
+- fields: {distance: 11000, distance_cat: 29, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 78
+- fields: {distance: 4000, distance_cat: 29, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 79
+- fields: {distance: 1000, distance_cat: 30, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 80
+- fields: {distance: 22000, distance_cat: 30, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 81
+- fields: {distance: 8000, distance_cat: 30, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 82
+- fields: {distance: 2000, distance_cat: 31, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 83
+- fields: {distance: 44000, distance_cat: 31, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 84
+- fields: {distance: 16000, distance_cat: 31, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 85
+- fields: {distance: 3000, distance_cat: 32, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 86
+- fields: {distance: 66000, distance_cat: 32, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 87
+- fields: {distance: 24000, distance_cat: 32, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 88
+- fields: {distance: 2000, distance_cat: 33, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 89
+- fields: {distance: 3500, distance_cat: 33, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 90
+- fields: {distance: 3000, distance_cat: 33, order: 3, stage: 7}
+  model: core.stagedistancedefault
+  pk: 91
+- fields: {distance: 2000, distance_cat: 34, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 92
+- fields: {distance: 3000, distance_cat: 34, order: 2, stage: 7}
+  model: core.stagedistancedefault
+  pk: 93
+- fields: {distance: 2000, distance_cat: 34, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 94
+- fields: {distance: 4000, distance_cat: 35, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 95
+- fields: {distance: 7000, distance_cat: 35, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 96
+- fields: {distance: 6000, distance_cat: 35, order: 3, stage: 7}
+  model: core.stagedistancedefault
+  pk: 97
+- fields: {distance: 8000, distance_cat: 36, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 98
+- fields: {distance: 14000, distance_cat: 36, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 99
+- fields: {distance: 12000, distance_cat: 36, order: 3, stage: 7}
+  model: core.stagedistancedefault
+  pk: 100
+- fields: {distance: 4000, distance_cat: 37, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 101
+- fields: {distance: 6000, distance_cat: 37, order: 2, stage: 7}
+  model: core.stagedistancedefault
+  pk: 102
+- fields: {distance: 4000, distance_cat: 37, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 103
+- fields: {distance: 8000, distance_cat: 38, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 104
+- fields: {distance: 12000, distance_cat: 38, order: 2, stage: 7}
+  model: core.stagedistancedefault
+  pk: 105
+- fields: {distance: 8000, distance_cat: 38, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 106
+- fields: {distance: 0, distance_cat: 39, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 107
+- fields: {distance: 0, distance_cat: 39, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 108
+- fields: {distance: 0, distance_cat: 39, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 109
+- fields: {distance: 0, distance_cat: 40, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 110
+- fields: {distance: 0, distance_cat: 40, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 111
+- fields: {distance: 0, distance_cat: 40, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 112
+- fields: {distance: 0, distance_cat: 41, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 113
+- fields: {distance: 0, distance_cat: 41, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 114
+- fields: {distance: 0, distance_cat: 41, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 115
+- fields: {distance: 0, distance_cat: 42, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 116
+- fields: {distance: 0, distance_cat: 42, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 117
+- fields: {distance: 0, distance_cat: 42, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 118
+- fields: {distance: 0, distance_cat: 43, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 119
+- fields: {distance: 0, distance_cat: 43, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 120
+- fields: {distance: 0, distance_cat: 43, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 121
+- fields: {distance: 0, distance_cat: 44, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 122
+- fields: {distance: 0, distance_cat: 44, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 123
+- fields: {distance: 0, distance_cat: 44, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 124
+- fields: {distance: 0, distance_cat: 45, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 125
+- fields: {distance: 0, distance_cat: 45, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 126
+- fields: {distance: 0, distance_cat: 45, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 127
+- fields: {distance: 0, distance_cat: 46, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 128
+- fields: {distance: 0, distance_cat: 46, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 129
+- fields: {distance: 0, distance_cat: 46, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 130
+- fields: {distance: 0, distance_cat: 47, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 131
+- fields: {distance: 0, distance_cat: 47, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 132
+- fields: {distance: 0, distance_cat: 47, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 133
+- fields: {distance: 0, distance_cat: 48, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 134
+- fields: {distance: 0, distance_cat: 48, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 135
+- fields: {distance: 0, distance_cat: 48, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 136

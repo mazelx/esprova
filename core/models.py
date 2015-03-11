@@ -21,6 +21,7 @@ class Sport(models.Model):
     """
     name = models.CharField(max_length=100)
     combinedSport = models.BooleanField(default=False)
+    hidden = models.BooleanField(default=True)
 
     def natural_key(self):
         return (self.name)
@@ -115,6 +116,11 @@ class Location(models.Model):
     def __str__(self):
         return "{0}, {1}, {2} ({3}, {4})".format(self.postal_code, self.locality, self.country, self.lat, self.lng)
 
+
+    def natural_key(self):
+        return (self.lat, self.lng)
+
+
     def geocode_raw_address(self, raw_address, postal_code, country='FR'):
         """
             Geocode using the Google maps V3 geocoder
@@ -133,6 +139,9 @@ class Location(models.Model):
 
             self.lat = loc.latitude
             self.lng = loc.longitude
+            return True
+        else:
+            return False
 
     def get_point(self):
         return Point(float(self.lng), float(self.lat))
@@ -213,6 +222,9 @@ class Season(models.Model):
     def __str__(self):
         return self.name
 
+    def natural_key(self):
+        return (self.name)
+
 
 class EventReference(models.Model):
     """
@@ -225,6 +237,9 @@ class EventReference(models.Model):
     def __str__(self):
         return self.name
 
+    def natural_key(self):
+        return (self.name)
+
 
 class EventEdition(models.Model):
     """
@@ -235,6 +250,14 @@ class EventEdition(models.Model):
 
     event_ref = models.ForeignKey(EventReference)
     edition = models.PositiveSmallIntegerField()
+
+    def natural_key(self):
+        return (self.edition,) + self.event_ref.natural_key()
+    natural_key.dependencies = ['core.EventReference']
+
+
+    def __str__(self):
+        return self.name
 
     @property
     def name(self):
@@ -259,12 +282,6 @@ class EventEdition(models.Model):
     @organizer.setter
     def organizer(self, value):
         self.event_ref.organizer = value
-
-    def natural_key(self):
-        return (self.name)
-
-    def __str__(self):
-        return self.name
 
     def get_start_date(self):
         return self.races.filter(validated=True).aggregate(Min('date'))['date__min']
@@ -297,7 +314,7 @@ class Federation(models.Model):
     sport = models.ManyToManyField(Sport)
 
     def natural_key(self):
-        return (self.name)
+        return (self.name, self.sport)
 
     def __str__(self):
         return self.name
@@ -398,6 +415,11 @@ class Race(models.Model):
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
+    def natural_key(self):
+        return (self.date, self.time, self.distance_cat) + self.event
+    natural_key.dependencies = ['core.Eventedition']
+
+
     def pre_delete(self, *args, **kwargs):
         """
             Do a cascade delete on contact, location and event instance if this is their last race
@@ -426,9 +448,6 @@ class Race(models.Model):
             if kwargs.get('force_insert', None):
                 kwargs.pop('force_insert')
         super(Race, self).save(force_update=True, *args, **kwargs)
-
-    def natural_key(self):
-        return (self.event, self.sport, self.distance_cat)
 
     def init_distances_from_default(self):
         """
@@ -477,6 +496,9 @@ class StageDistance(models.Model):
     class Meta:
         abstract = True
 
+    def natural_key(self):
+        return (self.stage,)
+
     def get_formatted_distance(self):
         """
             Return a distance string formatted in meters if distance < 1km, and in km if above
@@ -499,7 +521,8 @@ class StageDistanceSpecific(StageDistance):
         ordering = ['pk']
 
     def natural_key(self):
-        return (self.race, self.order)
+        return (self.order,) + self.race.natural_key()
+    natural_key.dependencies = ['core.Race']
 
     def clean(self):
         if (not self.race.sport.combinedSport) & (self.race.distances.all().count() > 1):
@@ -525,7 +548,8 @@ class StageDistanceDefault(StageDistance):
             raise ValidationError('Only combined sport should be able to have multiple stages')
 
     def natural_key(self):
-        return (self.race, self.order)
+        return (self.order,) + self.race.natural_key()
+    natural_key.dependencies = ['core.Race']
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)

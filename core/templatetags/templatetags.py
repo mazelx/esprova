@@ -9,7 +9,7 @@ register = Library()
 # get sports
 class GetSportList(Node):
     def render(self, context):
-        context['sports'] = Sport.objects.all()
+        context['sports'] = Sport.objects.filter(hidden=False).order_by('name')
         return ''
 
 

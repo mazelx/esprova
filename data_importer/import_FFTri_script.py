@@ -10,14 +10,15 @@ import traceback
 from data_importer.FFTri import FFTri
 
 test.utils.setup_test_environment()
-db = connection.creation.create_test_db()
+db = connection.creation.create_test_db(autoclobber=True)
+
 
 try:
     call_command('loaddata', 'core/fixtures/sports.yaml', format='yaml', verbosity=1)
 
 
     data = FFTri()
-    data.import_events_in_app('Duathlon', geocode=False, limit=10)
+    data.import_events_in_app('Triathlon Jeunes', geocode=True)
 
 
     # Export to fixture

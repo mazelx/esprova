@@ -1,0 +1,2853 @@
+- fields: {combinedSport: true, name: Triathlon}
+  model: core.sport
+  pk: 2
+- fields: {combinedSport: true, name: Duathlon}
+  model: core.sport
+  pk: 3
+- fields: {combinedSport: true, name: Triathlon Jeunes}
+  model: core.sport
+  pk: 4
+- fields: {combinedSport: true, name: Aquathlon}
+  model: core.sport
+  pk: 5
+- fields: {combinedSport: true, name: Bike & Run}
+  model: core.sport
+  pk: 6
+- fields: {combinedSport: true, name: Cross Duathlon}
+  model: core.sport
+  pk: 7
+- fields: {combinedSport: true, name: Cross Triathlon}
+  model: core.sport
+  pk: 8
+- fields: {combinedSport: true, name: Duathlon des Neiges}
+  model: core.sport
+  pk: 9
+- fields: {combinedSport: true, name: Triathlon des Neiges}
+  model: core.sport
+  pk: 10
+- fields: {combinedSport: true, name: Aquathlon Jeunes}
+  model: core.sport
+  pk: 11
+- fields: {combinedSport: true, name: Duathlon Jeunes}
+  model: core.sport
+  pk: 12
+- fields: {combinedSport: true, name: Cross Triathlon Jeunes}
+  model: core.sport
+  pk: 13
+- fields: {combinedSport: true, name: Cross Duathlon Jeunes}
+  model: core.sport
+  pk: 14
+- fields: {administrative_area_level_1: Burgandy, administrative_area_level_1_short_name: Burgandy,
+    administrative_area_level_2: "Sa\xF4ne-et-Loire", administrative_area_level_2_short_name: '71',
+    country: FR, lat: '46.61887', lng: '4.03504', locality: Gueugnon, postal_code: '71130',
+    route: null, street_number: null}
+  model: core.location
+  pk: 1
+- fields: {administrative_area_level_1: Burgandy, administrative_area_level_1_short_name: Burgandy,
+    administrative_area_level_2: "Sa\xF4ne-et-Loire", administrative_area_level_2_short_name: '71',
+    country: FR, lat: '46.61887', lng: '4.03504', locality: Gueugnon, postal_code: '71130',
+    route: null, street_number: null}
+  model: core.location
+  pk: 2
+- fields: {administrative_area_level_1: Burgandy, administrative_area_level_1_short_name: Burgandy,
+    administrative_area_level_2: "Sa\xF4ne-et-Loire", administrative_area_level_2_short_name: '71',
+    country: FR, lat: '46.95817', lng: '4.30310', locality: Autun, postal_code: '71400',
+    route: null, street_number: null}
+  model: core.location
+  pk: 3
+- fields: {administrative_area_level_1: Centre, administrative_area_level_1_short_name: Centre,
+    administrative_area_level_2: Cher, administrative_area_level_2_short_name: '18',
+    country: FR, lat: '47.08183', lng: '2.40393', locality: Bourges, postal_code: '18000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 4
+- fields: {administrative_area_level_1: Centre, administrative_area_level_1_short_name: Centre,
+    administrative_area_level_2: Cher, administrative_area_level_2_short_name: '18',
+    country: FR, lat: '47.08183', lng: '2.40393', locality: Bourges, postal_code: '18000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 5
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Ardennes, administrative_area_level_2_short_name: 08,
+    country: FR, lat: '49.87291', lng: '4.60539', locality: Les Mazures, postal_code: 08500,
+    route: null, street_number: null}
+  model: core.location
+  pk: 6
+- fields: {administrative_area_level_1: Limousin, administrative_area_level_1_short_name: Limousin,
+    administrative_area_level_2: Correze, administrative_area_level_2_short_name: '19',
+    country: FR, lat: '45.08395', lng: '1.46758', locality: "Saint-Pantal\xE9on-de-Larche",
+    postal_code: '19600', route: null, street_number: null}
+  model: core.location
+  pk: 7
+- fields: {administrative_area_level_1: "Provence-Alpes-C\xF4te d'Azur", administrative_area_level_1_short_name: PACA,
+    administrative_area_level_2: Var, administrative_area_level_2_short_name: '83',
+    country: FR, lat: '43.49482', lng: '6.77081', locality: "Fr\xE9jus", postal_code: '83600',
+    route: null, street_number: null}
+  model: core.location
+  pk: 8
+- fields: {administrative_area_level_1: Centre, administrative_area_level_1_short_name: Centre,
+    administrative_area_level_2: Loir-et-Cher, administrative_area_level_2_short_name: '41',
+    country: FR, lat: '47.79773', lng: '1.12536', locality: "Vend\xF4me", postal_code: '41100',
+    route: null, street_number: null}
+  model: core.location
+  pk: 9
+- fields: {administrative_area_level_1: Nord-Pas-de-Calais, administrative_area_level_1_short_name: Nord-Pas-de-Calais,
+    administrative_area_level_2: Pas-de-Calais, administrative_area_level_2_short_name: '62',
+    country: FR, lat: '50.40450', lng: '1.58810', locality: Berck, postal_code: '62600',
+    route: null, street_number: null}
+  model: core.location
+  pk: 10
+- fields: {administrative_area_level_1: "Provence-Alpes-C\xF4te d'Azur", administrative_area_level_1_short_name: PACA,
+    administrative_area_level_2: Hautes-Alpes, administrative_area_level_2_short_name: '05',
+    country: FR, lat: '44.58387', lng: '5.94097', locality: Veynes, postal_code: '05400',
+    route: null, street_number: null}
+  model: core.location
+  pk: 11
+- fields: {administrative_area_level_1: "Provence-Alpes-C\xF4te d'Azur", administrative_area_level_1_short_name: PACA,
+    administrative_area_level_2: Hautes-Alpes, administrative_area_level_2_short_name: '05',
+    country: FR, lat: '44.58387', lng: '5.94097', locality: Veynes, postal_code: '05400',
+    route: null, street_number: null}
+  model: core.location
+  pk: 12
+- fields: {administrative_area_level_1: "Provence-Alpes-C\xF4te d'Azur", administrative_area_level_1_short_name: PACA,
+    administrative_area_level_2: Hautes-Alpes, administrative_area_level_2_short_name: '05',
+    country: FR, lat: '44.58387', lng: '5.94097', locality: Veynes, postal_code: '05400',
+    route: null, street_number: null}
+  model: core.location
+  pk: 13
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '972',
+    country: '', lat: '47.42604', lng: '-1.60075', locality: SAINTE ANNE, postal_code: '97227',
+    route: POINTE MARIN, street_number: null}
+  model: core.location
+  pk: 14
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: "Loz\xE8re", administrative_area_level_2_short_name: '48',
+    country: FR, lat: '44.69370', lng: '3.80448', locality: Naussac, postal_code: '48300',
+    route: null, street_number: null}
+  model: core.location
+  pk: 15
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: "Loz\xE8re", administrative_area_level_2_short_name: '48',
+    country: FR, lat: '44.69370', lng: '3.80448', locality: Naussac, postal_code: '48300',
+    route: null, street_number: null}
+  model: core.location
+  pk: 16
+- fields: {administrative_area_level_1: Burgandy, administrative_area_level_1_short_name: Burgandy,
+    administrative_area_level_2: "C\xF4te-d'Or", administrative_area_level_2_short_name: '21',
+    country: FR, lat: '47.32138', lng: '5.20259', locality: Arc-sur-Tille, postal_code: '21560',
+    route: null, street_number: null}
+  model: core.location
+  pk: 17
+- fields: {administrative_area_level_1: Poitou-Charentes, administrative_area_level_1_short_name: PCh,
+    administrative_area_level_2: Charente, administrative_area_level_2_short_name: '16',
+    country: FR, lat: '45.67052', lng: '0.11746', locality: Saint-Yrieix-sur-Charente,
+    postal_code: '16710', route: "All\xE9e de la Goutte d'Eau", street_number: null}
+  model: core.location
+  pk: 18
+- fields: {administrative_area_level_1: Poitou-Charentes, administrative_area_level_1_short_name: PCh,
+    administrative_area_level_2: Charente, administrative_area_level_2_short_name: '16',
+    country: FR, lat: '45.67052', lng: '0.11746', locality: Saint-Yrieix-sur-Charente,
+    postal_code: '16710', route: "All\xE9e de la Goutte d'Eau", street_number: null}
+  model: core.location
+  pk: 19
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '972',
+    country: '', lat: '47.42604', lng: '-1.60075', locality: Sainte Anne, postal_code: '97227',
+    route: Pointe Marin, street_number: null}
+  model: core.location
+  pk: 20
+- fields: {administrative_area_level_1: Lorraine, administrative_area_level_1_short_name: Lorraine,
+    administrative_area_level_2: Meurthe-et-Moselle, administrative_area_level_2_short_name: '54',
+    country: FR, lat: '48.90335', lng: '6.04417', locality: "Pont-\xE0-Mousson", postal_code: '54700',
+    route: null, street_number: null}
+  model: core.location
+  pk: 21
+- fields: {administrative_area_level_1: Lorraine, administrative_area_level_1_short_name: Lorraine,
+    administrative_area_level_2: Meurthe-et-Moselle, administrative_area_level_2_short_name: '54',
+    country: FR, lat: '48.90335', lng: '6.04417', locality: "Pont-\xE0-Mousson", postal_code: '54700',
+    route: null, street_number: null}
+  model: core.location
+  pk: 22
+- fields: {administrative_area_level_1: Corsica, administrative_area_level_1_short_name: Corsica,
+    administrative_area_level_2: Haute-Corse, administrative_area_level_2_short_name: '20',
+    country: FR, lat: '42.53684', lng: '8.78116', locality: Calvi, postal_code: '20260',
+    route: null, street_number: null}
+  model: core.location
+  pk: 23
+- fields: {administrative_area_level_1: Corsica, administrative_area_level_1_short_name: Corsica,
+    administrative_area_level_2: Haute-Corse, administrative_area_level_2_short_name: '20',
+    country: FR, lat: '42.53684', lng: '8.78116', locality: Calvi, postal_code: '20260',
+    route: null, street_number: null}
+  model: core.location
+  pk: 24
+- fields: {administrative_area_level_1: Lower Normandy, administrative_area_level_1_short_name: Lower
+      Normandy, administrative_area_level_2: Orne, administrative_area_level_2_short_name: '61',
+    country: FR, lat: '48.73913', lng: '0.14907', locality: Silly-en-Gouffern, postal_code: '61310',
+    route: null, street_number: null}
+  model: core.location
+  pk: 25
+- fields: {administrative_area_level_1: Nord-Pas-de-Calais, administrative_area_level_1_short_name: Nord-Pas-de-Calais,
+    administrative_area_level_2: Pas-de-Calais, administrative_area_level_2_short_name: '62',
+    country: FR, lat: '50.42377', lng: '2.77020', locality: "Li\xE9vin", postal_code: '62800',
+    route: null, street_number: null}
+  model: core.location
+  pk: 26
+- fields: {administrative_area_level_1: Lorraine, administrative_area_level_1_short_name: Lorraine,
+    administrative_area_level_2: Vosges, administrative_area_level_2_short_name: '88',
+    country: FR, lat: '48.22277', lng: '5.99557', locality: Vittel, postal_code: '88800',
+    route: null, street_number: null}
+  model: core.location
+  pk: 27
+- fields: {administrative_area_level_1: Lorraine, administrative_area_level_1_short_name: Lorraine,
+    administrative_area_level_2: Vosges, administrative_area_level_2_short_name: '88',
+    country: FR, lat: '48.22277', lng: '5.99557', locality: Vittel, postal_code: '88800',
+    route: null, street_number: null}
+  model: core.location
+  pk: 28
+- fields: {administrative_area_level_1: Pays de la Loire, administrative_area_level_1_short_name: Pays
+      de la Loire, administrative_area_level_2: Sarthe, administrative_area_level_2_short_name: '72',
+    country: FR, lat: '47.70456', lng: '-0.10263', locality: "La Fl\xE8che", postal_code: '72200',
+    route: null, street_number: null}
+  model: core.location
+  pk: 29
+- fields: {administrative_area_level_1: Pays de la Loire, administrative_area_level_1_short_name: Pays
+      de la Loire, administrative_area_level_2: Sarthe, administrative_area_level_2_short_name: '72',
+    country: FR, lat: '47.70456', lng: '-0.10263', locality: "La Fl\xE8che", postal_code: '72200',
+    route: null, street_number: null}
+  model: core.location
+  pk: 30
+- fields: {administrative_area_level_1: "Franche-Comt\xE9", administrative_area_level_1_short_name: "Franche-Comt\xE9",
+    administrative_area_level_2: "Haute-Sa\xF4ne", administrative_area_level_2_short_name: '70',
+    country: FR, lat: '47.70200', lng: '6.07347', locality: "Port-sur-Sa\xF4ne", postal_code: '70170',
+    route: null, street_number: null}
+  model: core.location
+  pk: 31
+- fields: {administrative_area_level_1: "Franche-Comt\xE9", administrative_area_level_1_short_name: "Franche-Comt\xE9",
+    administrative_area_level_2: "Haute-Sa\xF4ne", administrative_area_level_2_short_name: '70',
+    country: FR, lat: '47.70200', lng: '6.07347', locality: "Port-sur-Sa\xF4ne", postal_code: '70170',
+    route: null, street_number: null}
+  model: core.location
+  pk: 32
+- fields: {administrative_area_level_1: Auvergne, administrative_area_level_1_short_name: Auvergne,
+    administrative_area_level_2: Allier, administrative_area_level_2_short_name: '03',
+    country: FR, lat: '46.65872', lng: '2.67278', locality: "Ainay-le-Ch\xE2teau",
+    postal_code: '03360', route: null, street_number: null}
+  model: core.location
+  pk: 33
+- fields: {administrative_area_level_1: Auvergne, administrative_area_level_1_short_name: Auvergne,
+    administrative_area_level_2: Allier, administrative_area_level_2_short_name: '03',
+    country: FR, lat: '46.65872', lng: '2.67278', locality: "Ainay-le-Ch\xE2teau",
+    postal_code: '03360', route: null, street_number: null}
+  model: core.location
+  pk: 34
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Seine-et-Marne, administrative_area_level_2_short_name: '77',
+    country: FR, lat: '48.94891', lng: '2.71440', locality: Claye-Souilly, postal_code: '77410',
+    route: null, street_number: null}
+  model: core.location
+  pk: 35
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Seine-et-Marne, administrative_area_level_2_short_name: '77',
+    country: FR, lat: '48.94891', lng: '2.71440', locality: Claye-Souilly, postal_code: '77410',
+    route: null, street_number: null}
+  model: core.location
+  pk: 36
+- fields: {administrative_area_level_1: Corsica, administrative_area_level_1_short_name: Corsica,
+    administrative_area_level_2: Corse-du-Sud, administrative_area_level_2_short_name: '20',
+    country: FR, lat: '41.60602', lng: '9.25639', locality: Porto-Vecchio, postal_code: '20137',
+    route: null, street_number: null}
+  model: core.location
+  pk: 37
+- fields: {administrative_area_level_1: Aquitaine, administrative_area_level_1_short_name: Aquitaine,
+    administrative_area_level_2: "Pyr\xE9n\xE9es-Atlantiques", administrative_area_level_2_short_name: '64',
+    country: FR, lat: '43.30012', lng: '-0.29018', locality: Bizanos, postal_code: '64320',
+    route: null, street_number: null}
+  model: core.location
+  pk: 38
+- fields: {administrative_area_level_1: Aquitaine, administrative_area_level_1_short_name: Aquitaine,
+    administrative_area_level_2: "Pyr\xE9n\xE9es-Atlantiques", administrative_area_level_2_short_name: '64',
+    country: FR, lat: '43.30012', lng: '-0.29018', locality: Bizanos, postal_code: '64320',
+    route: null, street_number: null}
+  model: core.location
+  pk: 39
+- fields: {administrative_area_level_1: Aquitaine, administrative_area_level_1_short_name: Aquitaine,
+    administrative_area_level_2: "Pyr\xE9n\xE9es-Atlantiques", administrative_area_level_2_short_name: '64',
+    country: FR, lat: '43.30012', lng: '-0.29018', locality: Bizanos, postal_code: '64320',
+    route: null, street_number: null}
+  model: core.location
+  pk: 40
+- fields: {administrative_area_level_1: Aquitaine, administrative_area_level_1_short_name: Aquitaine,
+    administrative_area_level_2: "Pyr\xE9n\xE9es-Atlantiques", administrative_area_level_2_short_name: '64',
+    country: FR, lat: '43.30012', lng: '-0.29018', locality: Bizanos, postal_code: '64320',
+    route: null, street_number: null}
+  model: core.location
+  pk: 41
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '971',
+    country: '', lat: '48.76706', lng: '0.86063', locality: MORNE-A-L'EAU, postal_code: '97111',
+    route: Vieux-Bourg, street_number: null}
+  model: core.location
+  pk: 42
+- fields: {administrative_area_level_1: Limousin, administrative_area_level_1_short_name: Limousin,
+    administrative_area_level_2: Creuse, administrative_area_level_2_short_name: '23',
+    country: FR, lat: '46.15569', lng: '1.86760', locality: "Gu\xE9ret", postal_code: '23000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 43
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '988',
+    country: '', lat: '-21.56812', lng: '165.49762', locality: BOURAIL, postal_code: '98870',
+    route: POE, street_number: null}
+  model: core.location
+  pk: 44
+- fields: {administrative_area_level_1: Pays de la Loire, administrative_area_level_1_short_name: Pays
+      de la Loire, administrative_area_level_2: Maine-et-Loire, administrative_area_level_2_short_name: '49',
+    country: FR, lat: '47.62357', lng: '-0.72161', locality: Le Lion-d'Angers, postal_code: '49220',
+    route: null, street_number: null}
+  model: core.location
+  pk: 45
+- fields: {administrative_area_level_1: "Provence-Alpes-C\xF4te d'Azur", administrative_area_level_1_short_name: PACA,
+    administrative_area_level_2: Var, administrative_area_level_2_short_name: '83',
+    country: FR, lat: '43.66147', lng: '6.19513', locality: Aups, postal_code: '83630',
+    route: null, street_number: null}
+  model: core.location
+  pk: 46
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '988',
+    country: '', lat: '46.48018', lng: '-1.18776', locality: Mont Dore, postal_code: '98817',
+    route: Netcha, street_number: null}
+  model: core.location
+  pk: 47
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Yvelines, administrative_area_level_2_short_name: '78',
+    country: FR, lat: '48.77074', lng: '2.08036', locality: Guyancourt, postal_code: '78280',
+    route: null, street_number: null}
+  model: core.location
+  pk: 48
+- fields: {administrative_area_level_1: Nord-Pas-de-Calais, administrative_area_level_1_short_name: Nord-Pas-de-Calais,
+    administrative_area_level_2: Pas-de-Calais, administrative_area_level_2_short_name: '62',
+    country: FR, lat: '50.29005', lng: '2.74517', locality: Arras, postal_code: '62000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 49
+- fields: {administrative_area_level_1: Nord-Pas-de-Calais, administrative_area_level_1_short_name: Nord-Pas-de-Calais,
+    administrative_area_level_2: Pas-de-Calais, administrative_area_level_2_short_name: '62',
+    country: FR, lat: '50.29005', lng: '2.74517', locality: Arras, postal_code: '62000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 50
+- fields: {administrative_area_level_1: Nord-Pas-de-Calais, administrative_area_level_1_short_name: Nord-Pas-de-Calais,
+    administrative_area_level_2: Pas-de-Calais, administrative_area_level_2_short_name: '62',
+    country: FR, lat: '50.40170', lng: '2.82778', locality: Avion, postal_code: '62210',
+    route: null, street_number: null}
+  model: core.location
+  pk: 51
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: "H\xE9rault", administrative_area_level_2_short_name: '34',
+    country: FR, lat: '43.65603', lng: '3.36867', locality: "Clermont-l'H\xE9rault",
+    postal_code: '34800', route: Lac du Salagou, street_number: null}
+  model: core.location
+  pk: 52
+- fields: {administrative_area_level_1: Auvergne, administrative_area_level_1_short_name: Auvergne,
+    administrative_area_level_2: Allier, administrative_area_level_2_short_name: '03',
+    country: FR, lat: '46.56521', lng: '3.29800', locality: Moulins, postal_code: '03000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 53
+- fields: {administrative_area_level_1: Auvergne, administrative_area_level_1_short_name: Auvergne,
+    administrative_area_level_2: Allier, administrative_area_level_2_short_name: '03',
+    country: FR, lat: '46.56521', lng: '3.29800', locality: Moulins, postal_code: '03000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 54
+- fields: {administrative_area_level_1: "Provence-Alpes-C\xF4te d'Azur", administrative_area_level_1_short_name: PACA,
+    administrative_area_level_2: Var, administrative_area_level_2_short_name: '83',
+    country: FR, lat: '43.63259', lng: '6.70659', locality: Fayence, postal_code: '83440',
+    route: null, street_number: null}
+  model: core.location
+  pk: 55
+- fields: {administrative_area_level_1: "Provence-Alpes-C\xF4te d'Azur", administrative_area_level_1_short_name: PACA,
+    administrative_area_level_2: Var, administrative_area_level_2_short_name: '83',
+    country: FR, lat: '43.63259', lng: '6.70659', locality: Fayence, postal_code: '83440',
+    route: null, street_number: null}
+  model: core.location
+  pk: 56
+- fields: {administrative_area_level_1: Poitou-Charentes, administrative_area_level_1_short_name: PCh,
+    administrative_area_level_2: Charente-Maritime, administrative_area_level_2_short_name: '17',
+    country: FR, lat: '45.74446', lng: '-0.62800', locality: Saintes, postal_code: '17100',
+    route: Rue du Jardin public, street_number: null}
+  model: core.location
+  pk: 57
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: "H\xE9rault", administrative_area_level_2_short_name: '34',
+    country: FR, lat: '43.43713', lng: '3.59139', locality: "M\xE8ze", postal_code: '34140',
+    route: null, street_number: null}
+  model: core.location
+  pk: 58
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: "H\xE9rault", administrative_area_level_2_short_name: '34',
+    country: FR, lat: '43.43713', lng: '3.59139', locality: "M\xE8ze", postal_code: '34140',
+    route: null, street_number: null}
+  model: core.location
+  pk: 59
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: "H\xE9rault", administrative_area_level_2_short_name: '34',
+    country: FR, lat: '43.43713', lng: '3.59139', locality: "M\xE8ze", postal_code: '34140',
+    route: null, street_number: null}
+  model: core.location
+  pk: 60
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Is\xE8re", administrative_area_level_2_short_name: '38',
+    country: FR, lat: '44.89245', lng: '5.90322', locality: Valbonnais, postal_code: '38740',
+    route: null, street_number: null}
+  model: core.location
+  pk: 61
+- fields: {administrative_area_level_1: "Rh\xF4ne-Alpes", administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Is\xE8re", administrative_area_level_2_short_name: '38',
+    country: FR, lat: '44.89245', lng: '5.90322', locality: Valbonnais, postal_code: '38740',
+    route: null, street_number: null}
+  model: core.location
+  pk: 62
+- fields: {administrative_area_level_1: Centre, administrative_area_level_1_short_name: Centre,
+    administrative_area_level_2: Eure-et-Loir, administrative_area_level_2_short_name: '28',
+    country: FR, lat: '48.44395', lng: '1.50355', locality: Chartres, postal_code: '28000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 63
+- fields: {administrative_area_level_1: Rhone-Alpes, administrative_area_level_1_short_name: RA,
+    administrative_area_level_2: "Rh\xF4ne", administrative_area_level_2_short_name: '69',
+    country: FR, lat: '45.52752', lng: '4.82166', locality: Sainte-Colombe, postal_code: '69560',
+    route: null, street_number: null}
+  model: core.location
+  pk: 64
+- fields: {administrative_area_level_1: Centre, administrative_area_level_1_short_name: Centre,
+    administrative_area_level_2: Loiret, administrative_area_level_2_short_name: '45',
+    country: FR, lat: '48.03813', lng: '2.72792', locality: "Ch\xE2lette-sur-Loing",
+    postal_code: '45120', route: null, street_number: null}
+  model: core.location
+  pk: 65
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Yvelines, administrative_area_level_2_short_name: '78',
+    country: FR, lat: '48.99914', lng: '1.95752', locality: Verneuil-sur-Seine, postal_code: '78480',
+    route: Chemin du Rouillard, street_number: null}
+  model: core.location
+  pk: 66
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Yvelines, administrative_area_level_2_short_name: '78',
+    country: FR, lat: '48.79290', lng: '2.11512', locality: Versailles, postal_code: '78000',
+    route: "Tunnel v\xE9los/pi\xE9tons pi\xE8ce d'eau des Suisses", street_number: null}
+  model: core.location
+  pk: 67
+- fields: {administrative_area_level_1: Limousin, administrative_area_level_1_short_name: Limousin,
+    administrative_area_level_2: Haute-Vienne, administrative_area_level_2_short_name: '87',
+    country: FR, lat: '46.03100', lng: '1.19706', locality: Nantiat, postal_code: '87140',
+    route: null, street_number: null}
+  model: core.location
+  pk: 68
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Haute-Marne, administrative_area_level_2_short_name: '52',
+    country: FR, lat: '48.08455', lng: '5.14613', locality: Chaumont, postal_code: '52000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 69
+- fields: {administrative_area_level_1: Champagne-Ardenne, administrative_area_level_1_short_name: Champagne-Ardenne,
+    administrative_area_level_2: Haute-Marne, administrative_area_level_2_short_name: '52',
+    country: FR, lat: '48.08455', lng: '5.14613', locality: Chaumont, postal_code: '52000',
+    route: null, street_number: null}
+  model: core.location
+  pk: 70
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '974',
+    country: '', lat: '46.72927', lng: '4.50120', locality: Saint-Leu, postal_code: '97436',
+    route: Saint-Leu et La Pointe au Sel, street_number: null}
+  model: core.location
+  pk: 71
+- fields: {administrative_area_level_1: '', administrative_area_level_1_short_name: '',
+    administrative_area_level_2: '', administrative_area_level_2_short_name: '974',
+    country: '', lat: '47.81777', lng: '6.37508', locality: saline les bains, postal_code: '97434',
+    route: plage de trou d'eau, street_number: null}
+  model: core.location
+  pk: 72
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: Gard, administrative_area_level_2_short_name: '30',
+    country: FR, lat: '44.23611', lng: '3.98799', locality: "Sainte-C\xE9cile-d'Andorge",
+    postal_code: '30110', route: Les Camboux, street_number: null}
+  model: core.location
+  pk: 73
+- fields: {administrative_area_level_1: Languedoc-Roussillon, administrative_area_level_1_short_name: Languedoc-Roussillon,
+    administrative_area_level_2: Gard, administrative_area_level_2_short_name: '30',
+    country: FR, lat: '44.23611', lng: '3.98799', locality: "Sainte-C\xE9cile-d'Andorge",
+    postal_code: '30110', route: Les Camboux, street_number: null}
+  model: core.location
+  pk: 74
+- fields: {administrative_area_level_1: "\xCEle-de-France", administrative_area_level_1_short_name: IDF,
+    administrative_area_level_2: Yvelines, administrative_area_level_2_short_name: '78',
+    country: FR, lat: '49.06038', lng: '1.68029', locality: Moisson, postal_code: '78840',
+    route: null, street_number: null}
+  model: core.location
+  pk: 75
+- fields: {default_order: 1, name: Natation, sport: 2}
+  model: core.sportstage
+  pk: 4
+- fields: {default_order: 1, name: Cyclisme, sport: 2}
+  model: core.sportstage
+  pk: 5
+- fields: {default_order: 1, name: "Course \xE0 Pied", sport: 2}
+  model: core.sportstage
+  pk: 6
+- fields: {default_order: 3, name: Ski de Fond, sport: 10}
+  model: core.sportstage
+  pk: 7
+- fields: {name: "Office Municipal des F\xEAtes et des sports", website: null}
+  model: core.organizer
+  pk: 1
+- fields: {name: AUTUN TRIATHLON, website: null}
+  model: core.organizer
+  pk: 2
+- fields: {name: Bourges triathlon, website: null}
+  model: core.organizer
+  pk: 3
+- fields: {name: Charleville Triathlon Ardennes, website: null}
+  model: core.organizer
+  pk: 4
+- fields: {name: Brive Limousin Triathlon, website: null}
+  model: core.organizer
+  pk: 5
+- fields: {name: Oxygen Sport Association, website: null}
+  model: core.organizer
+  pk: 6
+- fields: {name: TRI ATTITUDE 41, website: null}
+  model: core.organizer
+  pk: 7
+- fields: {name: SERVICE DES SPORTS, website: null}
+  model: core.organizer
+  pk: 8
+- fields: {name: office municipal des sports de Veynes, website: null}
+  model: core.organizer
+  pk: 9
+- fields: {name: MADININA BIKERS, website: null}
+  model: core.organizer
+  pk: 10
+- fields: {name: LANGOGNE TRIATHLON, website: null}
+  model: core.organizer
+  pk: 11
+- fields: {name: Ligue de Bourgogne, website: null}
+  model: core.organizer
+  pk: 12
+- fields: {name: "J S Angoul\xEAme Triathlon", website: null}
+  model: core.organizer
+  pk: 13
+- fields: {name: Triathlon Club Mussipontain, website: null}
+  model: core.organizer
+  pk: 14
+- fields: {name: calvixtri, website: null}
+  model: core.organizer
+  pk: 15
+- fields: {name: UCP Argentan, website: null}
+  model: core.organizer
+  pk: 16
+- fields: {name: Triathlon CLub LIEVIN, website: null}
+  model: core.organizer
+  pk: 17
+- fields: {name: Vittel Triathlon, website: null}
+  model: core.organizer
+  pk: 18
+- fields: {name: ENDURANCE 72 TRIATHLON, website: null}
+  model: core.organizer
+  pk: 19
+- fields: {name: "Groupe Triathlon Vesoul Haute Sa\xF4ne", website: null}
+  model: core.organizer
+  pk: 20
+- fields: {name: TRONCAIS CLUB TRIATHLON, website: null}
+  model: core.organizer
+  pk: 21
+- fields: {name: Villepinte Triathlon 93, website: null}
+  model: core.organizer
+  pk: 22
+- fields: {name: SUD CORSE TRIATHLON, website: null}
+  model: core.organizer
+  pk: 23
+- fields: {name: Arch-event, website: null}
+  model: core.organizer
+  pk: 24
+- fields: {name: LIGUE REGIONALE DE TRIATHLON de GPE, website: null}
+  model: core.organizer
+  pk: 25
+- fields: {name: SAM TRIATHLON, website: null}
+  model: core.organizer
+  pk: 26
+- fields: {name: CERCLE DES TRIATHLETES DE NOUVELLE  CALEDONIE, website: null}
+  model: core.organizer
+  pk: 27
+- fields: {name: Tobesport, website: null}
+  model: core.organizer
+  pk: 28
+- fields: {name: verdon Oxygene, website: null}
+  model: core.organizer
+  pk: 29
+- fields: {name: AS TRI MONT DORE, website: null}
+  model: core.organizer
+  pk: 30
+- fields: {name: ASM Bouygues, website: null}
+  model: core.organizer
+  pk: 31
+- fields: {name: Racing Club d'Arras Triathlon, website: null}
+  model: core.organizer
+  pk: 32
+- fields: {name: TRIATHLON CLUB AVION, website: null}
+  model: core.organizer
+  pk: 33
+- fields: {name: MONTPELLIER AGGLO TRIATHLON, website: null}
+  model: core.organizer
+  pk: 34
+- fields: {name: TRIMAY, website: null}
+  model: core.organizer
+  pk: 35
+- fields: {name: AU PLAISIR DU SPORT, website: null}
+  model: core.organizer
+  pk: 36
+- fields: {name: SAINTES TRIATHLON, website: null}
+  model: core.organizer
+  pk: 37
+- fields: {name: Loupian Tri Nature, website: null}
+  model: core.organizer
+  pk: 38
+- fields: {name: Triathlon Nature du Valbonnais, website: null}
+  model: core.organizer
+  pk: 39
+- fields: {name: "Chartres M\xE9tropole Triathlon", website: null}
+  model: core.organizer
+  pk: 40
+- fields: {name: Mach3 Triathlon, website: null}
+  model: core.organizer
+  pk: 41
+- fields: {name: J3 SPORTS AMILLY SECTION TRIATHLON, website: null}
+  model: core.organizer
+  pk: 42
+- fields: {name: Trinosaure, website: null}
+  model: core.organizer
+  pk: 43
+- fields: {name: Versailles Triathlon, website: null}
+  model: core.organizer
+  pk: 44
+- fields: {name: LIMOGES TRIATHLON, website: null}
+  model: core.organizer
+  pk: 45
+- fields: {name: ECA CHAUMONT TRIATHLON-DUATHLON, website: null}
+  model: core.organizer
+  pk: 46
+- fields: {name: Le Club Triathlon, website: null}
+  model: core.organizer
+  pk: 47
+- fields: {name: ouest run triathlon, website: null}
+  model: core.organizer
+  pk: 48
+- fields: {name: "comite des f\xEAtes de branoux", website: null}
+  model: core.organizer
+  pk: 49
+- fields: {name: Ligue Ile de France, website: null}
+  model: core.organizer
+  pk: 50
+- fields: {name: "12\xE8me triathlon cross Chazey Gueugnon", organizer: 1, website: service.sports@ville-gueugnon.fr}
+  model: core.eventreference
+  pk: 1
+- fields: {name: "19\xE8me TRIATHLON DE LA VILLE D'AUTUN", organizer: 2, website: www.autun-triathlon.com}
+  model: core.eventreference
+  pk: 2
+- fields: {name: "26\xB0 TRIATHLON DE BOURGES", organizer: 3, website: 'http://bourges-triathlon.com'}
+  model: core.eventreference
+  pk: 3
+- fields: {name: '28e TRIATHLON ARDENNES - 3E LEZARDEN ', organizer: 4, website: charleville-triathlon-ardennes.com}
+  model: core.eventreference
+  pk: 4
+- fields: {name: "28\xE8me Triathlon du Pays de Brive", organizer: 5, website: www.brive-triathlon.com}
+  model: core.eventreference
+  pk: 5
+- fields: {name: "4\xE8me Tri Roc", organizer: 6, website: www.rocazur.com}
+  model: core.eventreference
+  pk: 6
+- fields: {name: "5\xE8me Cross Triathlon des Grands Pr\xE9s", organizer: 7, website: 'http://club.quomodo.com/triattitude41'}
+  model: core.eventreference
+  pk: 7
+- fields: {name: "7\xE8me CROSS TRIATHLON", organizer: 8, website: www.berck.fr}
+  model: core.eventreference
+  pk: 8
+- fields: {name: "CROSS TRIATHLON \"D\xE9fis des argouses\"", organizer: 9, website: www.defis-des-argouses.com}
+  model: core.eventreference
+  pk: 9
+- fields: {name: CROSS TRIATHLON, organizer: 10, website: madininabikers.com}
+  model: core.eventreference
+  pk: 10
+- fields: {name: CROSS TRIATHLON DE LANGOGNE NAUSSAC, organizer: 11, website: ''}
+  model: core.eventreference
+  pk: 11
+- fields: {name: CROSS TRIATHLON DUATHLON DE LA PLAINE DES TILLES, organizer: 12,
+    website: 'http://www.triathlon-bourgogne.com'}
+  model: core.eventreference
+  pk: 12
+- fields: {name: CROSS TRIATHLON GRAND ANGOULEME, organizer: 13, website: www.angoulemetriathlon.fr}
+  model: core.eventreference
+  pk: 13
+- fields: {name: CROSS TRIATHLON Ste Anne, organizer: 10, website: www.madininabikers.com}
+  model: core.eventreference
+  pk: 14
+- fields: {name: Championnat de Meurthe et Moselle - Cross Triathlon, organizer: 14,
+    website: 'http://www.triathlon54.fr'}
+  model: core.eventreference
+  pk: 15
+- fields: {name: Corsicaxtri, organizer: 15, website: www.corsicaxtri.fr}
+  model: core.eventreference
+  pk: 16
+- fields: {name: Cross Duathlon du Pays d'Argentan, organizer: 16, website: 'http://www.ucpargentan.com'}
+  model: core.eventreference
+  pk: 17
+- fields: {name: "Cross Triathlon Li\xE9vin", organizer: 17, website: 'http://triathlon.lievin.free.fr/'}
+  model: core.eventreference
+  pk: 18
+- fields: {name: "Cross Triathlon de Contrex\xE9ville", organizer: 18, website: www.vitteltriathlon.com}
+  model: core.eventreference
+  pk: 19
+- fields: {name: "Cross Triathlon de La Fl\xE8che", organizer: 19, website: 'http://www.endurance72tri.com'}
+  model: core.eventreference
+  pk: 20
+- fields: {name: "Cross Triathlon de Port Sur Sa\xF4ne", organizer: 20, website: www.triathlondevesoul.com}
+  model: core.eventreference
+  pk: 21
+- fields: {name: "Cross Triathlon du Pays de Tron\xE7ais", organizer: 21, website: www.tri-series-troncais.com}
+  model: core.eventreference
+  pk: 22
+- fields: {name: Cross triathlon de Jablines-Annet, organizer: 22, website: base de
+      loisirs de Jablines-Annet}
+  model: core.eventreference
+  pk: 23
+- fields: {name: EXTREME-SUD CROSS TRIATHLON DE LECCI, organizer: 23, website: www.sudcorsetriathlon.com}
+  model: core.eventreference
+  pk: 24
+- fields: {name: Eaux Vives Cross Triathlon, organizer: 24, website: www.archevent.fr}
+  model: core.eventreference
+  pk: 25
+- fields: {name: 'GWAD''AHLON ', organizer: 25, website: ''}
+  model: core.eventreference
+  pk: 26
+- fields: {name: HALFTRIMAN DES MONTS DE GUERET, organizer: 26, website: www.triathlon-desmontsdegueret/fr}
+  model: core.eventreference
+  pk: 27
+- fields: {name: JEEP CROSS TRIATHLON, organizer: 27, website: ctnctriathlon.wordpress.com}
+  model: core.eventreference
+  pk: 28
+- fields: {name: La Tobesport, organizer: 28, website: www.tobesport-event.com}
+  model: core.eventreference
+  pk: 29
+- fields: {name: Natureman Verdon, organizer: 29, website: www.natureman-verdon.com}
+  model: core.eventreference
+  pk: 30
+- fields: {name: RAID MULTISPORTS DE NETCHA, organizer: 30, website: 'http://www.astrimontdore.org/topic/index.html '}
+  model: core.eventreference
+  pk: 31
+- fields: {name: SWIM BIKE AND RUN DE GUYANCOURT, organizer: 31, website: 'http://swim-bike-and-run-de-guyancourt.blogspot.fr/'}
+  model: core.eventreference
+  pk: 32
+- fields: {name: TRIATHLON D'ARRAS, organizer: 32, website: www.triathlon-arras.com}
+  model: core.eventreference
+  pk: 33
+- fields: {name: TRIATHLON DU NOUVEL AN, organizer: 33, website: ''}
+  model: core.eventreference
+  pk: 34
+- fields: {name: TRIATHLON DU SALAGOU, organizer: 34, website: www.triathlondusalagou.com}
+  model: core.eventreference
+  pk: 35
+- fields: {name: TRIVERT EN OVIVE 2015, organizer: 35, website: www.trimay.fr}
+  model: core.eventreference
+  pk: 36
+- fields: {name: TRIVERT SAINT CASSIEN, organizer: 36, website: www.L7street.com}
+  model: core.eventreference
+  pk: 37
+- fields: {name: "TROPH\xC9E JEAN MOINS ", organizer: 37, website: 'http://saintestri.wix.com/trophee-jeanmoins'}
+  model: core.eventreference
+  pk: 38
+- fields: {name: Triathlon Nature de Bouzigues, organizer: 38, website: www.LTN34.wordpress.com}
+  model: core.eventreference
+  pk: 39
+- fields: {name: Triathlon Nature du Valbonnais, organizer: 39, website: 'http://triathlon-valbonnais.onlinetri.com/'}
+  model: core.eventreference
+  pk: 40
+- fields: {name: Triathlon de Chartres, organizer: 40, website: www.triathlon-chartres.fr}
+  model: core.eventreference
+  pk: 41
+- fields: {name: Triathlon de l ile Barlet, organizer: 41, website: www.triathlondebarlet.fr}
+  model: core.eventreference
+  pk: 42
+- fields: {name: Triathlon de l'AME, organizer: 42, website: www.j3triathlon.tripassion.fr}
+  model: core.eventreference
+  pk: 43
+- fields: {name: Triathlon des Mureaux, organizer: 43, website: www.trinosaurelesmureaux.fr}
+  model: core.eventreference
+  pk: 44
+- fields: {name: Triathlon du Roi, organizer: 44, website: www.triathlonduroi.com}
+  model: core.eventreference
+  pk: 45
+- fields: {name: Triathlons du lac de Saint Pardoux, organizer: 45, website: 'http://http://www.limogestriathlon.fr/pages/triathlons-de-saint-pardoux/'}
+  model: core.eventreference
+  pk: 46
+- fields: {name: X-TRIATHLON DE CHAUMONT, organizer: 46, website: En cours}
+  model: core.eventreference
+  pk: 47
+- fields: {name: "X-Triathlon de la Pointe au Sel, championnat de la R\xE9union",
+    organizer: 47, website: www.leclubtriathlon.clubeo.com}
+  model: core.eventreference
+  pk: 48
+- fields: {name: XTERRA REUNION, organizer: 48, website: xterrareunion.com}
+  model: core.eventreference
+  pk: 49
+- fields: {name: 'triathlon des Camboux 30110 branoux les taillades ', organizer: 49,
+    website: triathlondescamboux@gmail.com}
+  model: core.eventreference
+  pk: 50
+- fields: {name: triathlon des boucles de la seine, organizer: 50, website: ''}
+  model: core.eventreference
+  pk: 51
+- fields: {edition: 1, event_ref: 1}
+  model: core.eventedition
+  pk: 1
+- fields: {edition: 1, event_ref: 2}
+  model: core.eventedition
+  pk: 2
+- fields: {edition: 1, event_ref: 3}
+  model: core.eventedition
+  pk: 3
+- fields: {edition: 1, event_ref: 4}
+  model: core.eventedition
+  pk: 4
+- fields: {edition: 1, event_ref: 5}
+  model: core.eventedition
+  pk: 5
+- fields: {edition: 1, event_ref: 6}
+  model: core.eventedition
+  pk: 6
+- fields: {edition: 1, event_ref: 7}
+  model: core.eventedition
+  pk: 7
+- fields: {edition: 1, event_ref: 8}
+  model: core.eventedition
+  pk: 8
+- fields: {edition: 1, event_ref: 9}
+  model: core.eventedition
+  pk: 9
+- fields: {edition: 1, event_ref: 10}
+  model: core.eventedition
+  pk: 10
+- fields: {edition: 1, event_ref: 11}
+  model: core.eventedition
+  pk: 11
+- fields: {edition: 1, event_ref: 12}
+  model: core.eventedition
+  pk: 12
+- fields: {edition: 1, event_ref: 13}
+  model: core.eventedition
+  pk: 13
+- fields: {edition: 1, event_ref: 14}
+  model: core.eventedition
+  pk: 14
+- fields: {edition: 1, event_ref: 15}
+  model: core.eventedition
+  pk: 15
+- fields: {edition: 1, event_ref: 16}
+  model: core.eventedition
+  pk: 16
+- fields: {edition: 1, event_ref: 17}
+  model: core.eventedition
+  pk: 17
+- fields: {edition: 1, event_ref: 18}
+  model: core.eventedition
+  pk: 18
+- fields: {edition: 1, event_ref: 19}
+  model: core.eventedition
+  pk: 19
+- fields: {edition: 1, event_ref: 20}
+  model: core.eventedition
+  pk: 20
+- fields: {edition: 1, event_ref: 21}
+  model: core.eventedition
+  pk: 21
+- fields: {edition: 1, event_ref: 22}
+  model: core.eventedition
+  pk: 22
+- fields: {edition: 1, event_ref: 23}
+  model: core.eventedition
+  pk: 23
+- fields: {edition: 1, event_ref: 24}
+  model: core.eventedition
+  pk: 24
+- fields: {edition: 1, event_ref: 25}
+  model: core.eventedition
+  pk: 25
+- fields: {edition: 1, event_ref: 26}
+  model: core.eventedition
+  pk: 26
+- fields: {edition: 1, event_ref: 27}
+  model: core.eventedition
+  pk: 27
+- fields: {edition: 1, event_ref: 28}
+  model: core.eventedition
+  pk: 28
+- fields: {edition: 1, event_ref: 29}
+  model: core.eventedition
+  pk: 29
+- fields: {edition: 1, event_ref: 30}
+  model: core.eventedition
+  pk: 30
+- fields: {edition: 1, event_ref: 31}
+  model: core.eventedition
+  pk: 31
+- fields: {edition: 1, event_ref: 32}
+  model: core.eventedition
+  pk: 32
+- fields: {edition: 1, event_ref: 33}
+  model: core.eventedition
+  pk: 33
+- fields: {edition: 1, event_ref: 34}
+  model: core.eventedition
+  pk: 34
+- fields: {edition: 1, event_ref: 35}
+  model: core.eventedition
+  pk: 35
+- fields: {edition: 1, event_ref: 36}
+  model: core.eventedition
+  pk: 36
+- fields: {edition: 1, event_ref: 37}
+  model: core.eventedition
+  pk: 37
+- fields: {edition: 1, event_ref: 38}
+  model: core.eventedition
+  pk: 38
+- fields: {edition: 1, event_ref: 39}
+  model: core.eventedition
+  pk: 39
+- fields: {edition: 1, event_ref: 40}
+  model: core.eventedition
+  pk: 40
+- fields: {edition: 1, event_ref: 41}
+  model: core.eventedition
+  pk: 41
+- fields: {edition: 1, event_ref: 42}
+  model: core.eventedition
+  pk: 42
+- fields: {edition: 1, event_ref: 43}
+  model: core.eventedition
+  pk: 43
+- fields: {edition: 1, event_ref: 44}
+  model: core.eventedition
+  pk: 44
+- fields: {edition: 1, event_ref: 45}
+  model: core.eventedition
+  pk: 45
+- fields: {edition: 1, event_ref: 46}
+  model: core.eventedition
+  pk: 46
+- fields: {edition: 1, event_ref: 47}
+  model: core.eventedition
+  pk: 47
+- fields: {edition: 1, event_ref: 48}
+  model: core.eventedition
+  pk: 48
+- fields: {edition: 1, event_ref: 49}
+  model: core.eventedition
+  pk: 49
+- fields: {edition: 1, event_ref: 50}
+  model: core.eventedition
+  pk: 50
+- fields: {edition: 1, event_ref: 51}
+  model: core.eventedition
+  pk: 51
+- fields:
+    name: FFTri
+    sport: []
+  model: core.federation
+  pk: 1
+- fields: {email: service.sports@ville-gueugnon.fr, name: "Office Municipal des F\xEA\
+      tes et des sports", phone: ''}
+  model: core.contact
+  pk: 1
+- fields: {email: bernadette.cortet@sfr.fr, name: AUTUN TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 2
+- fields: {email: pfabcam@aol.com, name: Bourges triathlon, phone: ''}
+  model: core.contact
+  pk: 3
+- fields: {email: ctriardennes@free.fr, name: Charleville Triathlon Ardennes, phone: ''}
+  model: core.contact
+  pk: 4
+- fields: {email: denisrondeau2013@gmail.com, name: Brive Limousin Triathlon, phone: ''}
+  model: core.contact
+  pk: 5
+- fields: {email: vhocquet@aso.fr, name: Oxygen Sport Association, phone: ''}
+  model: core.contact
+  pk: 6
+- fields: {email: tri.attitude.41@hotmail.fr, name: TRI ATTITUDE 41, phone: ''}
+  model: core.contact
+  pk: 7
+- fields: {email: service-des-sports@berck-sur-mer.com, name: SERVICE DES SPORTS,
+    phone: ''}
+  model: core.contact
+  pk: 8
+- fields: {email: oms.veynes@free.fr, name: office municipal des sports de Veynes,
+    phone: ''}
+  model: core.contact
+  pk: 9
+- fields: {email: boris.odry@gmail.com, name: MADININA BIKERS, phone: ''}
+  model: core.contact
+  pk: 10
+- fields: {email: berhele@orange.fr, name: LANGOGNE TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 11
+- fields: {email: emmanuellebergerot@msn.com, name: Ligue de Bourgogne, phone: ''}
+  model: core.contact
+  pk: 12
+- fields: {email: pandry@laposte.net, name: "J S Angoul\xEAme Triathlon", phone: ''}
+  model: core.contact
+  pk: 13
+- fields: {email: batail.mireille@orange.fr, name: Triathlon Club Mussipontain, phone: ''}
+  model: core.contact
+  pk: 14
+- fields: {email: calvixtri@me.com, name: calvixtri, phone: ''}
+  model: core.contact
+  pk: 15
+- fields: {email: contact@ucpargentan.com, name: UCP Argentan, phone: ''}
+  model: core.contact
+  pk: 16
+- fields: {email: egriselain@wanadoo.fr, name: Triathlon CLub LIEVIN, phone: ''}
+  model: core.contact
+  pk: 17
+- fields: {email: vitteltriathlon@yahoo.fr, name: Vittel Triathlon, phone: ''}
+  model: core.contact
+  pk: 18
+- fields: {email: gaugainnicolas@hotmail.fr, name: ENDURANCE 72 TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 19
+- fields: {email: gtvhs70@gmail.com, name: "Groupe Triathlon Vesoul Haute Sa\xF4ne",
+    phone: ''}
+  model: core.contact
+  pk: 20
+- fields: {email: becker-seb@orange.fr, name: TRONCAIS CLUB TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 21
+- fields: {email: helene.sabin@orange.fr, name: Villepinte Triathlon 93, phone: ''}
+  model: core.contact
+  pk: 22
+- fields: {email: contact@sudcorsetriathlon.com, name: SUD CORSE TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 23
+- fields: {email: loicmetais@gmail.com, name: Arch-event, phone: ''}
+  model: core.contact
+  pk: 24
+- fields: {email: ligue-de-triathlon@wanadoo.fr, name: LIGUE REGIONALE DE TRIATHLON
+      de GPE, phone: ''}
+  model: core.contact
+  pk: 25
+- fields: {email: fabre.fam@wanadoo.fr, name: SAM TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 26
+- fields: {email: jeff.bernut@icap.nc, name: CERCLE DES TRIATHLETES DE NOUVELLE  CALEDONIE,
+    phone: ''}
+  model: core.contact
+  pk: 27
+- fields: {email: contact@tobesport.com, name: Tobesport, phone: ''}
+  model: core.contact
+  pk: 28
+- fields: {email: eric.am@tteis.com, name: verdon Oxygene, phone: ''}
+  model: core.contact
+  pk: 29
+- fields: {email: baraquet.philippe@hotmail.fr, name: AS TRI MONT DORE, phone: ''}
+  model: core.contact
+  pk: 30
+- fields: {email: fapicella@free.fr, name: ASM Bouygues, phone: ''}
+  model: core.contact
+  pk: 31
+- fields: {email: olivier.duchateau.rcatri@gmail.com, name: Racing Club d'Arras Triathlon,
+    phone: ''}
+  model: core.contact
+  pk: 32
+- fields: {email: eric-grossemy@wanadoo.fr, name: TRIATHLON CLUB AVION, phone: ''}
+  model: core.contact
+  pk: 33
+- fields: {email: contact@montpelliertriathlon.com, name: MONTPELLIER AGGLO TRIATHLON,
+    phone: ''}
+  model: core.contact
+  pk: 34
+- fields: {email: pier.info@yahoo.fr, name: TRIMAY, phone: ''}
+  model: core.contact
+  pk: 35
+- fields: {email: aps.events@free.fr, name: AU PLAISIR DU SPORT, phone: ''}
+  model: core.contact
+  pk: 36
+- fields: {email: saintestri17@gmail.com, name: SAINTES TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 37
+- fields: {email: jcnath.jack@laposte.net, name: Loupian Tri Nature, phone: ''}
+  model: core.contact
+  pk: 38
+- fields: {email: lp.eric@free.fr, name: Triathlon Nature du Valbonnais, phone: ''}
+  model: core.contact
+  pk: 39
+- fields: {email: triathlon@cmtri.org, name: "Chartres M\xE9tropole Triathlon", phone: ''}
+  model: core.contact
+  pk: 40
+- fields: {email: o.berger@cegetel.net, name: Mach3 Triathlon, phone: ''}
+  model: core.contact
+  pk: 41
+- fields: {email: j3triathlon@hotmail.fr, name: J3 SPORTS AMILLY SECTION TRIATHLON,
+    phone: ''}
+  model: core.contact
+  pk: 42
+- fields: {email: freulon.guillaume@gmail.com, name: Trinosaure, phone: ''}
+  model: core.contact
+  pk: 43
+- fields: {email: germainhaz@yahoo.fr, name: Versailles Triathlon, phone: ''}
+  model: core.contact
+  pk: 44
+- fields: {email: limoges.triathlon@gmail.com, name: LIMOGES TRIATHLON, phone: ''}
+  model: core.contact
+  pk: 45
+- fields: {email: ecactriathlon@free.fr, name: ECA CHAUMONT TRIATHLON-DUATHLON, phone: ''}
+  model: core.contact
+  pk: 46
+- fields: {email: pierref@univ-reunion.fr, name: Le Club Triathlon, phone: ''}
+  model: core.contact
+  pk: 47
+- fields: {email: ouestruntriathlon@live.fr, name: ouest run triathlon, phone: ''}
+  model: core.contact
+  pk: 48
+- fields: {email: floreal.martinez@sfr.fr, name: "comite des f\xEAtes de branoux",
+    phone: ''}
+  model: core.contact
+  pk: 49
+- fields: {email: elo.idftriathlon@bbox.fr, name: Ligue Ile de France, phone: ''}
+  model: core.contact
+  pk: 50
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 2}
+  model: core.distancecategory
+  pk: 4
+- fields: {long_name: Sprint, name: S, order: 2, sport: 2}
+  model: core.distancecategory
+  pk: 5
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 2}
+  model: core.distancecategory
+  pk: 6
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 2}
+  model: core.distancecategory
+  pk: 7
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 2}
+  model: core.distancecategory
+  pk: 8
+- fields: {long_name: Jeunes 6-9 ans, name: XS, order: 1, sport: 4}
+  model: core.distancecategory
+  pk: 9
+- fields: {long_name: Jeunes 8-11 ans, name: S, order: 2, sport: 4}
+  model: core.distancecategory
+  pk: 10
+- fields: {long_name: Jeunes 10-13 ans, name: M, order: 3, sport: 4}
+  model: core.distancecategory
+  pk: 11
+- fields: {long_name: Jeunes 12-19ans, name: L, order: 4, sport: 4}
+  model: core.distancecategory
+  pk: 12
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 3}
+  model: core.distancecategory
+  pk: 13
+- fields: {long_name: Sprint, name: S, order: 2, sport: 3}
+  model: core.distancecategory
+  pk: 14
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 3}
+  model: core.distancecategory
+  pk: 15
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 3}
+  model: core.distancecategory
+  pk: 16
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 3}
+  model: core.distancecategory
+  pk: 17
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 5}
+  model: core.distancecategory
+  pk: 18
+- fields: {long_name: Sprint, name: S, order: 2, sport: 5}
+  model: core.distancecategory
+  pk: 19
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 5}
+  model: core.distancecategory
+  pk: 20
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 5}
+  model: core.distancecategory
+  pk: 21
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 5}
+  model: core.distancecategory
+  pk: 22
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 7}
+  model: core.distancecategory
+  pk: 23
+- fields: {long_name: Sprint, name: S, order: 2, sport: 7}
+  model: core.distancecategory
+  pk: 24
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 7}
+  model: core.distancecategory
+  pk: 25
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 7}
+  model: core.distancecategory
+  pk: 26
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 7}
+  model: core.distancecategory
+  pk: 27
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 8}
+  model: core.distancecategory
+  pk: 28
+- fields: {long_name: Sprint, name: S, order: 2, sport: 8}
+  model: core.distancecategory
+  pk: 29
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 8}
+  model: core.distancecategory
+  pk: 30
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 8}
+  model: core.distancecategory
+  pk: 31
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 8}
+  model: core.distancecategory
+  pk: 32
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 10}
+  model: core.distancecategory
+  pk: 33
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 9}
+  model: core.distancecategory
+  pk: 34
+- fields: {long_name: '', name: S, order: 2, sport: 10}
+  model: core.distancecategory
+  pk: 35
+- fields: {long_name: '', name: M, order: 3, sport: 10}
+  model: core.distancecategory
+  pk: 36
+- fields: {long_name: '', name: S, order: 2, sport: 9}
+  model: core.distancecategory
+  pk: 37
+- fields: {long_name: '', name: M, order: 3, sport: 9}
+  model: core.distancecategory
+  pk: 38
+- fields: {long_name: '', name: XS, order: 1, sport: 13}
+  model: core.distancecategory
+  pk: 39
+- fields: {long_name: '', name: S, order: 2, sport: 13}
+  model: core.distancecategory
+  pk: 40
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 13}
+  model: core.distancecategory
+  pk: 41
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 13}
+  model: core.distancecategory
+  pk: 42
+- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 13}
+  model: core.distancecategory
+  pk: 43
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 14}
+  model: core.distancecategory
+  pk: 44
+- fields: {long_name: Sprint, name: S, order: 2, sport: 14}
+  model: core.distancecategory
+  pk: 45
+- fields: {long_name: Courte Distance, name: M, order: 3, sport: 14}
+  model: core.distancecategory
+  pk: 46
+- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 14}
+  model: core.distancecategory
+  pk: 47
+- fields: {long_name: '', name: XL, order: 5, sport: 14}
+  model: core.distancecategory
+  pk: 48
+- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 15:22:58.131710+00:00',
+    date: 2015-06-27, description: null, distance_cat: 29, event: 1, federation: 1,
+    label: null, location: 1, modified_date: !!timestamp '2015-03-11 15:22:58.179729+00:00',
+    price: null, slug: 12eme-triathlon-cross-chazey-gueugnon-s, sport: 8, time: null,
+    title: "12\xE8me triathlon cross Chazey Gueugnon - S", validated: false}
+  model: core.race
+  pk: 1
+- fields: {contact: 1, created_by: '', created_date: !!timestamp '2015-03-11 15:22:58.682364+00:00',
+    date: 2015-06-27, description: null, distance_cat: 28, event: 1, federation: 1,
+    label: null, location: 2, modified_date: !!timestamp '2015-03-11 15:22:58.710200+00:00',
+    price: null, slug: 12eme-triathlon-cross-chazey-gueugnon-xs, sport: 8, time: null,
+    title: "12\xE8me triathlon cross Chazey Gueugnon - XS", validated: false}
+  model: core.race
+  pk: 2
+- fields: {contact: 2, created_by: '', created_date: !!timestamp '2015-03-11 15:22:59.285989+00:00',
+    date: 2015-06-21, description: null, distance_cat: 29, event: 2, federation: 1,
+    label: null, location: 3, modified_date: !!timestamp '2015-03-11 15:22:59.313598+00:00',
+    price: null, slug: 19eme-triathlon-de-la-ville-dautun-s, sport: 8, time: null,
+    title: "19\xE8me TRIATHLON DE LA VILLE D'AUTUN - S", validated: false}
+  model: core.race
+  pk: 3
+- fields: {contact: 3, created_by: '', created_date: !!timestamp '2015-03-11 15:23:00.303570+00:00',
+    date: 2015-06-14, description: null, distance_cat: 28, event: 3, federation: 1,
+    label: null, location: 4, modified_date: !!timestamp '2015-03-11 15:23:00.337927+00:00',
+    price: null, slug: 26-triathlon-de-bourges-xs, sport: 8, time: null, title: "26\xB0\
+      \ TRIATHLON DE BOURGES - XS", validated: false}
+  model: core.race
+  pk: 4
+- fields: {contact: 3, created_by: '', created_date: !!timestamp '2015-03-11 15:23:00.851861+00:00',
+    date: 2015-06-14, description: null, distance_cat: 28, event: 3, federation: 1,
+    label: null, location: 5, modified_date: !!timestamp '2015-03-11 15:23:00.885321+00:00',
+    price: null, slug: 26-triathlon-de-bourges-xs, sport: 8, time: null, title: "26\xB0\
+      \ TRIATHLON DE BOURGES - XS", validated: false}
+  model: core.race
+  pk: 5
+- fields: {contact: 4, created_by: '', created_date: !!timestamp '2015-03-11 15:23:01.452765+00:00',
+    date: 2015-06-21, description: null, distance_cat: 30, event: 4, federation: 1,
+    label: null, location: 6, modified_date: !!timestamp '2015-03-11 15:23:01.484270+00:00',
+    price: null, slug: 28e-triathlon-ardennes-3e-lezarden-m, sport: 8, time: null,
+    title: 28e TRIATHLON ARDENNES - 3E LEZARDEN  - M, validated: false}
+  model: core.race
+  pk: 6
+- fields: {contact: 5, created_by: '', created_date: !!timestamp '2015-03-11 15:23:02.166565+00:00',
+    date: 2015-06-20, description: null, distance_cat: 29, event: 5, federation: 1,
+    label: null, location: 7, modified_date: !!timestamp '2015-03-11 15:23:02.199638+00:00',
+    price: null, slug: 28eme-triathlon-du-pays-de-brive-s, sport: 8, time: null, title: "28\xE8\
+      me Triathlon du Pays de Brive - S", validated: false}
+  model: core.race
+  pk: 7
+- fields: {contact: 6, created_by: '', created_date: !!timestamp '2015-03-11 15:23:02.866400+00:00',
+    date: 2015-10-08, description: null, distance_cat: 30, event: 6, federation: 1,
+    label: null, location: 8, modified_date: !!timestamp '2015-03-11 15:23:02.897976+00:00',
+    price: null, slug: 4eme-tri-roc-m, sport: 8, time: null, title: "4\xE8me Tri Roc\
+      \ - M", validated: false}
+  model: core.race
+  pk: 8
+- fields: {contact: 7, created_by: '', created_date: !!timestamp '2015-03-11 15:23:03.549455+00:00',
+    date: 2015-09-12, description: null, distance_cat: 28, event: 7, federation: 1,
+    label: null, location: 9, modified_date: !!timestamp '2015-03-11 15:23:03.581921+00:00',
+    price: null, slug: 5eme-cross-triathlon-des-grands-pres-xs, sport: 8, time: null,
+    title: "5\xE8me Cross Triathlon des Grands Pr\xE9s - XS", validated: false}
+  model: core.race
+  pk: 9
+- fields: {contact: 8, created_by: '', created_date: !!timestamp '2015-03-11 15:23:04.231172+00:00',
+    date: 2015-09-19, description: null, distance_cat: 30, event: 8, federation: 1,
+    label: null, location: 10, modified_date: !!timestamp '2015-03-11 15:23:04.257242+00:00',
+    price: null, slug: 7eme-cross-triathlon-m, sport: 8, time: null, title: "7\xE8\
+      me CROSS TRIATHLON - M", validated: false}
+  model: core.race
+  pk: 10
+- fields: {contact: 9, created_by: '', created_date: !!timestamp '2015-03-11 15:23:04.820279+00:00',
+    date: 2015-06-21, description: null, distance_cat: 30, event: 9, federation: 1,
+    label: null, location: 11, modified_date: !!timestamp '2015-03-11 15:23:04.852939+00:00',
+    price: null, slug: cross-triathlon-defis-des-argouses-m, sport: 8, time: null,
+    title: "CROSS TRIATHLON \"D\xE9fis des argouses\" - M", validated: false}
+  model: core.race
+  pk: 11
+- fields: {contact: 9, created_by: '', created_date: !!timestamp '2015-03-11 15:23:05.480165+00:00',
+    date: 2015-06-21, description: null, distance_cat: 29, event: 9, federation: 1,
+    label: null, location: 12, modified_date: !!timestamp '2015-03-11 15:23:05.508406+00:00',
+    price: null, slug: cross-triathlon-defis-des-argouses-s, sport: 8, time: null,
+    title: "CROSS TRIATHLON \"D\xE9fis des argouses\" - S", validated: false}
+  model: core.race
+  pk: 12
+- fields: {contact: 9, created_by: '', created_date: !!timestamp '2015-03-11 15:23:06.098692+00:00',
+    date: 2015-06-21, description: null, distance_cat: 28, event: 9, federation: 1,
+    label: null, location: 13, modified_date: !!timestamp '2015-03-11 15:23:06.124315+00:00',
+    price: null, slug: cross-triathlon-defis-des-argouses-xs, sport: 8, time: null,
+    title: "CROSS TRIATHLON \"D\xE9fis des argouses\" - XS", validated: false}
+  model: core.race
+  pk: 13
+- fields: {contact: 10, created_by: '', created_date: !!timestamp '2015-03-11 15:23:06.772196+00:00',
+    date: 2015-01-25, description: null, distance_cat: 29, event: 10, federation: 1,
+    label: null, location: 14, modified_date: !!timestamp '2015-03-11 15:23:06.800945+00:00',
+    price: null, slug: cross-triathlon-s, sport: 8, time: null, title: CROSS TRIATHLON
+      - S, validated: false}
+  model: core.race
+  pk: 14
+- fields: {contact: 11, created_by: '', created_date: !!timestamp '2015-03-11 15:23:07.446721+00:00',
+    date: 2015-07-26, description: null, distance_cat: 30, event: 11, federation: 1,
+    label: null, location: 15, modified_date: !!timestamp '2015-03-11 15:23:07.477731+00:00',
+    price: null, slug: cross-triathlon-de-langogne-naussac-m, sport: 8, time: null,
+    title: CROSS TRIATHLON DE LANGOGNE NAUSSAC - M, validated: false}
+  model: core.race
+  pk: 15
+- fields: {contact: 11, created_by: '', created_date: !!timestamp '2015-03-11 15:23:08.741105+00:00',
+    date: 2015-07-26, description: null, distance_cat: 29, event: 11, federation: 1,
+    label: null, location: 16, modified_date: !!timestamp '2015-03-11 15:23:08.769197+00:00',
+    price: null, slug: cross-triathlon-de-langogne-naussac-s, sport: 8, time: null,
+    title: CROSS TRIATHLON DE LANGOGNE NAUSSAC - S, validated: false}
+  model: core.race
+  pk: 16
+- fields: {contact: 12, created_by: '', created_date: !!timestamp '2015-03-11 15:23:09.384266+00:00',
+    date: 2015-05-10, description: null, distance_cat: 28, event: 12, federation: 1,
+    label: null, location: 17, modified_date: !!timestamp '2015-03-11 15:23:09.415983+00:00',
+    price: null, slug: cross-triathlon-duathlon-de-la-plaine-des-tilles-xs, sport: 8,
+    time: null, title: CROSS TRIATHLON DUATHLON DE LA PLAINE DES TILLES - XS, validated: false}
+  model: core.race
+  pk: 17
+- fields: {contact: 13, created_by: '', created_date: !!timestamp '2015-03-11 15:23:10.932292+00:00',
+    date: 2015-10-18, description: null, distance_cat: 29, event: 13, federation: 1,
+    label: null, location: 18, modified_date: !!timestamp '2015-03-11 15:23:10.962129+00:00',
+    price: null, slug: cross-triathlon-grand-angouleme-s, sport: 8, time: null, title: CROSS
+      TRIATHLON GRAND ANGOULEME - S, validated: false}
+  model: core.race
+  pk: 18
+- fields: {contact: 13, created_by: '', created_date: !!timestamp '2015-03-11 15:23:11.927554+00:00',
+    date: 2015-10-18, description: null, distance_cat: 28, event: 13, federation: 1,
+    label: null, location: 19, modified_date: !!timestamp '2015-03-11 15:23:11.956615+00:00',
+    price: null, slug: cross-triathlon-grand-angouleme-xs, sport: 8, time: null, title: CROSS
+      TRIATHLON GRAND ANGOULEME - XS, validated: false}
+  model: core.race
+  pk: 19
+- fields: {contact: 10, created_by: '', created_date: !!timestamp '2015-03-11 15:23:12.546626+00:00',
+    date: 2015-01-25, description: null, distance_cat: 29, event: 14, federation: 1,
+    label: null, location: 20, modified_date: !!timestamp '2015-03-11 15:23:12.582672+00:00',
+    price: null, slug: cross-triathlon-ste-anne-s, sport: 8, time: null, title: CROSS
+      TRIATHLON Ste Anne - S, validated: false}
+  model: core.race
+  pk: 20
+- fields: {contact: 14, created_by: '', created_date: !!timestamp '2015-03-11 15:23:13.219894+00:00',
+    date: 2015-06-21, description: null, distance_cat: 30, event: 15, federation: 1,
+    label: null, location: 21, modified_date: !!timestamp '2015-03-11 15:23:13.252365+00:00',
+    price: null, slug: championnat-de-meurthe-et-moselle-cross-triathlon-m, sport: 8,
+    time: null, title: Championnat de Meurthe et Moselle - Cross Triathlon - M, validated: false}
+  model: core.race
+  pk: 21
+- fields: {contact: 14, created_by: '', created_date: !!timestamp '2015-03-11 15:23:14.448453+00:00',
+    date: 2015-06-21, description: null, distance_cat: 28, event: 15, federation: 1,
+    label: null, location: 22, modified_date: !!timestamp '2015-03-11 15:23:14.481327+00:00',
+    price: null, slug: championnat-de-meurthe-et-moselle-cross-triathlon-xs, sport: 8,
+    time: null, title: Championnat de Meurthe et Moselle - Cross Triathlon - XS, validated: false}
+  model: core.race
+  pk: 22
+- fields: {contact: 15, created_by: '', created_date: !!timestamp '2015-03-11 15:23:15.085823+00:00',
+    date: 2015-05-10, description: null, distance_cat: 30, event: 16, federation: 1,
+    label: null, location: 23, modified_date: !!timestamp '2015-03-11 15:23:15.118549+00:00',
+    price: null, slug: corsicaxtri-m, sport: 8, time: null, title: Corsicaxtri - M,
+    validated: false}
+  model: core.race
+  pk: 23
+- fields: {contact: 15, created_by: '', created_date: !!timestamp '2015-03-11 15:23:15.630279+00:00',
+    date: 2015-05-10, description: null, distance_cat: 29, event: 16, federation: 1,
+    label: null, location: 24, modified_date: !!timestamp '2015-03-11 15:23:15.661587+00:00',
+    price: null, slug: corsicaxtri-s, sport: 8, time: null, title: Corsicaxtri - S,
+    validated: false}
+  model: core.race
+  pk: 24
+- fields: {contact: 16, created_by: '', created_date: !!timestamp '2015-03-11 15:23:16.230839+00:00',
+    date: 2015-03-01, description: null, distance_cat: 30, event: 17, federation: 1,
+    label: null, location: 25, modified_date: !!timestamp '2015-03-11 15:23:16.257364+00:00',
+    price: null, slug: cross-duathlon-du-pays-dargentan-m, sport: 8, time: null, title: Cross
+      Duathlon du Pays d'Argentan - M, validated: false}
+  model: core.race
+  pk: 25
+- fields: {contact: 17, created_by: '', created_date: !!timestamp '2015-03-11 15:23:16.947507+00:00',
+    date: 2015-02-15, description: null, distance_cat: 29, event: 18, federation: 1,
+    label: null, location: 26, modified_date: !!timestamp '2015-03-11 15:23:16.978573+00:00',
+    price: null, slug: cross-triathlon-lievin-s, sport: 8, time: null, title: "Cross\
+      \ Triathlon Li\xE9vin - S", validated: false}
+  model: core.race
+  pk: 26
+- fields: {contact: 18, created_by: '', created_date: !!timestamp '2015-03-11 15:23:17.608375+00:00',
+    date: 2015-08-30, description: null, distance_cat: 30, event: 19, federation: 1,
+    label: null, location: 27, modified_date: !!timestamp '2015-03-11 15:23:17.643400+00:00',
+    price: null, slug: cross-triathlon-de-contrexeville-m, sport: 8, time: null, title: "Cross\
+      \ Triathlon de Contrex\xE9ville - M", validated: false}
+  model: core.race
+  pk: 27
+- fields: {contact: 18, created_by: '', created_date: !!timestamp '2015-03-11 15:23:18.694153+00:00',
+    date: 2015-08-30, description: null, distance_cat: 28, event: 19, federation: 1,
+    label: null, location: 28, modified_date: !!timestamp '2015-03-11 15:23:18.726559+00:00',
+    price: null, slug: cross-triathlon-de-contrexeville-xs, sport: 8, time: null,
+    title: "Cross Triathlon de Contrex\xE9ville - XS", validated: false}
+  model: core.race
+  pk: 28
+- fields: {contact: 19, created_by: '', created_date: !!timestamp '2015-03-11 15:23:20.117589+00:00',
+    date: 2015-09-27, description: null, distance_cat: 30, event: 20, federation: 1,
+    label: null, location: 29, modified_date: !!timestamp '2015-03-11 15:23:20.143885+00:00',
+    price: null, slug: cross-triathlon-de-la-fleche-m, sport: 8, time: null, title: "Cross\
+      \ Triathlon de La Fl\xE8che - M", validated: false}
+  model: core.race
+  pk: 29
+- fields: {contact: 19, created_by: '', created_date: !!timestamp '2015-03-11 15:23:20.648541+00:00',
+    date: 2015-09-27, description: null, distance_cat: 28, event: 20, federation: 1,
+    label: null, location: 30, modified_date: !!timestamp '2015-03-11 15:23:20.680366+00:00',
+    price: null, slug: cross-triathlon-de-la-fleche-xs, sport: 8, time: null, title: "Cross\
+      \ Triathlon de La Fl\xE8che - XS", validated: false}
+  model: core.race
+  pk: 30
+- fields: {contact: 20, created_by: '', created_date: !!timestamp '2015-03-11 15:23:21.332582+00:00',
+    date: 2015-05-14, description: null, distance_cat: 29, event: 21, federation: 1,
+    label: null, location: 31, modified_date: !!timestamp '2015-03-11 15:23:21.360897+00:00',
+    price: null, slug: cross-triathlon-de-port-sur-saone-s, sport: 8, time: null,
+    title: "Cross Triathlon de Port Sur Sa\xF4ne - S", validated: false}
+  model: core.race
+  pk: 31
+- fields: {contact: 20, created_by: '', created_date: !!timestamp '2015-03-11 15:23:22.046962+00:00',
+    date: 2015-05-14, description: null, distance_cat: 29, event: 21, federation: 1,
+    label: null, location: 32, modified_date: !!timestamp '2015-03-11 15:23:22.076429+00:00',
+    price: null, slug: cross-triathlon-de-port-sur-saone-s, sport: 8, time: null,
+    title: "Cross Triathlon de Port Sur Sa\xF4ne - S", validated: false}
+  model: core.race
+  pk: 32
+- fields: {contact: 21, created_by: '', created_date: !!timestamp '2015-03-11 15:23:22.664197+00:00',
+    date: 2015-05-09, description: null, distance_cat: 30, event: 22, federation: 1,
+    label: null, location: 33, modified_date: !!timestamp '2015-03-11 15:23:22.691154+00:00',
+    price: null, slug: cross-triathlon-du-pays-de-troncais-m, sport: 8, time: null,
+    title: "Cross Triathlon du Pays de Tron\xE7ais - M", validated: false}
+  model: core.race
+  pk: 33
+- fields: {contact: 21, created_by: '', created_date: !!timestamp '2015-03-11 15:23:23.415630+00:00',
+    date: 2015-05-10, description: null, distance_cat: 28, event: 22, federation: 1,
+    label: null, location: 34, modified_date: !!timestamp '2015-03-11 15:23:23.444014+00:00',
+    price: null, slug: cross-triathlon-du-pays-de-troncais-xs, sport: 8, time: null,
+    title: "Cross Triathlon du Pays de Tron\xE7ais - XS", validated: false}
+  model: core.race
+  pk: 34
+- fields: {contact: 22, created_by: '', created_date: !!timestamp '2015-03-11 15:23:24.038644+00:00',
+    date: 2015-09-27, description: null, distance_cat: 30, event: 23, federation: 1,
+    label: null, location: 35, modified_date: !!timestamp '2015-03-11 15:23:24.067752+00:00',
+    price: null, slug: cross-triathlon-de-jablines-annet-m, sport: 8, time: null,
+    title: Cross triathlon de Jablines-Annet - M, validated: false}
+  model: core.race
+  pk: 35
+- fields: {contact: 22, created_by: '', created_date: !!timestamp '2015-03-11 15:23:24.734012+00:00',
+    date: 2015-09-27, description: null, distance_cat: 29, event: 23, federation: 1,
+    label: null, location: 36, modified_date: !!timestamp '2015-03-11 15:23:24.764559+00:00',
+    price: null, slug: cross-triathlon-de-jablines-annet-s, sport: 8, time: null,
+    title: Cross triathlon de Jablines-Annet - S, validated: false}
+  model: core.race
+  pk: 36
+- fields: {contact: 23, created_by: '', created_date: !!timestamp '2015-03-11 15:23:26.108214+00:00',
+    date: 2015-09-27, description: null, distance_cat: 29, event: 24, federation: 1,
+    label: null, location: 37, modified_date: !!timestamp '2015-03-11 15:23:26.134441+00:00',
+    price: null, slug: extreme-sud-cross-triathlon-de-lecci-s, sport: 8, time: null,
+    title: EXTREME-SUD CROSS TRIATHLON DE LECCI - S, validated: false}
+  model: core.race
+  pk: 37
+- fields: {contact: 24, created_by: '', created_date: !!timestamp '2015-03-11 15:23:26.798908+00:00',
+    date: 2015-07-25, description: null, distance_cat: 30, event: 25, federation: 1,
+    label: null, location: 38, modified_date: !!timestamp '2015-03-11 15:23:26.832752+00:00',
+    price: null, slug: eaux-vives-cross-triathlon-m, sport: 8, time: null, title: Eaux
+      Vives Cross Triathlon - M, validated: false}
+  model: core.race
+  pk: 38
+- fields: {contact: 24, created_by: '', created_date: !!timestamp '2015-03-11 15:23:27.345687+00:00',
+    date: 2015-07-25, description: null, distance_cat: 30, event: 25, federation: 1,
+    label: null, location: 39, modified_date: !!timestamp '2015-03-11 15:23:27.377942+00:00',
+    price: null, slug: eaux-vives-cross-triathlon-m, sport: 8, time: null, title: Eaux
+      Vives Cross Triathlon - M, validated: false}
+  model: core.race
+  pk: 39
+- fields: {contact: 24, created_by: '', created_date: !!timestamp '2015-03-11 15:23:28.326954+00:00',
+    date: 2015-07-25, description: null, distance_cat: 28, event: 25, federation: 1,
+    label: null, location: 40, modified_date: !!timestamp '2015-03-11 15:23:28.356276+00:00',
+    price: null, slug: eaux-vives-cross-triathlon-xs, sport: 8, time: null, title: Eaux
+      Vives Cross Triathlon - XS, validated: false}
+  model: core.race
+  pk: 40
+- fields: {contact: 24, created_by: '', created_date: !!timestamp '2015-03-11 15:23:29.043787+00:00',
+    date: 2015-07-25, description: null, distance_cat: 28, event: 25, federation: 1,
+    label: null, location: 41, modified_date: !!timestamp '2015-03-11 15:23:29.075689+00:00',
+    price: null, slug: eaux-vives-cross-triathlon-xs, sport: 8, time: null, title: Eaux
+      Vives Cross Triathlon - XS, validated: false}
+  model: core.race
+  pk: 41
+- fields: {contact: 25, created_by: '', created_date: !!timestamp '2015-03-11 15:23:29.616845+00:00',
+    date: 2015-11-08, description: null, distance_cat: 29, event: 26, federation: 1,
+    label: null, location: 42, modified_date: !!timestamp '2015-03-11 15:23:29.645266+00:00',
+    price: null, slug: gwadahlon-s, sport: 8, time: null, title: GWAD'AHLON  - S,
+    validated: false}
+  model: core.race
+  pk: 42
+- fields: {contact: 26, created_by: '', created_date: !!timestamp '2015-03-11 15:23:30.272336+00:00',
+    date: 2015-07-04, description: null, distance_cat: 28, event: 27, federation: 1,
+    label: null, location: 43, modified_date: !!timestamp '2015-03-11 15:23:30.298623+00:00',
+    price: null, slug: halftriman-des-monts-de-gueret-xs, sport: 8, time: null, title: HALFTRIMAN
+      DES MONTS DE GUERET - XS, validated: false}
+  model: core.race
+  pk: 43
+- fields: {contact: 27, created_by: '', created_date: !!timestamp '2015-03-11 15:23:30.778956+00:00',
+    date: 2015-10-31, description: null, distance_cat: 29, event: 28, federation: 1,
+    label: null, location: 44, modified_date: !!timestamp '2015-03-11 15:23:30.809371+00:00',
+    price: null, slug: jeep-cross-triathlon-s, sport: 8, time: null, title: JEEP CROSS
+      TRIATHLON - S, validated: false}
+  model: core.race
+  pk: 44
+- fields: {contact: 28, created_by: '', created_date: !!timestamp '2015-03-11 15:23:31.443120+00:00',
+    date: 2015-08-29, description: null, distance_cat: 29, event: 29, federation: 1,
+    label: null, location: 45, modified_date: !!timestamp '2015-03-11 15:23:31.475131+00:00',
+    price: null, slug: la-tobesport-s, sport: 8, time: null, title: La Tobesport -
+      S, validated: false}
+  model: core.race
+  pk: 45
+- fields: {contact: 29, created_by: '', created_date: !!timestamp '2015-03-11 15:23:32.098506+00:00',
+    date: 2015-10-02, description: null, distance_cat: 29, event: 30, federation: 1,
+    label: null, location: 46, modified_date: !!timestamp '2015-03-11 15:23:32.125514+00:00',
+    price: null, slug: natureman-verdon-s, sport: 8, time: null, title: Natureman
+      Verdon - S, validated: false}
+  model: core.race
+  pk: 46
+- fields: {contact: 30, created_by: '', created_date: !!timestamp '2015-03-11 15:23:32.746740+00:00',
+    date: 2015-04-12, description: null, distance_cat: 29, event: 31, federation: 1,
+    label: null, location: 47, modified_date: !!timestamp '2015-03-11 15:23:32.774303+00:00',
+    price: null, slug: raid-multisports-de-netcha-s, sport: 8, time: null, title: RAID
+      MULTISPORTS DE NETCHA - S, validated: false}
+  model: core.race
+  pk: 47
+- fields: {contact: 31, created_by: '', created_date: !!timestamp '2015-03-11 15:23:33.379219+00:00',
+    date: 2015-03-29, description: null, distance_cat: 29, event: 32, federation: 1,
+    label: null, location: 48, modified_date: !!timestamp '2015-03-11 15:23:33.406826+00:00',
+    price: null, slug: swim-bike-and-run-de-guyancourt-s, sport: 8, time: null, title: SWIM
+      BIKE AND RUN DE GUYANCOURT - S, validated: false}
+  model: core.race
+  pk: 48
+- fields: {contact: 32, created_by: '', created_date: !!timestamp '2015-03-11 15:23:33.957284+00:00',
+    date: 2015-03-29, description: null, distance_cat: 29, event: 33, federation: 1,
+    label: null, location: 49, modified_date: !!timestamp '2015-03-11 15:23:33.987893+00:00',
+    price: null, slug: triathlon-darras-s, sport: 8, time: null, title: TRIATHLON
+      D'ARRAS - S, validated: false}
+  model: core.race
+  pk: 49
+- fields: {contact: 32, created_by: '', created_date: !!timestamp '2015-03-11 15:23:34.457820+00:00',
+    date: 2015-03-29, description: null, distance_cat: 28, event: 33, federation: 1,
+    label: null, location: 50, modified_date: !!timestamp '2015-03-11 15:23:34.493820+00:00',
+    price: null, slug: triathlon-darras-xs, sport: 8, time: null, title: TRIATHLON
+      D'ARRAS - XS, validated: false}
+  model: core.race
+  pk: 50
+- fields: {contact: 33, created_by: '', created_date: !!timestamp '2015-03-11 15:23:35.096557+00:00',
+    date: 2015-01-18, description: null, distance_cat: 29, event: 34, federation: 1,
+    label: null, location: 51, modified_date: !!timestamp '2015-03-11 15:23:35.123255+00:00',
+    price: null, slug: triathlon-du-nouvel-an-s, sport: 8, time: null, title: TRIATHLON
+      DU NOUVEL AN - S, validated: false}
+  model: core.race
+  pk: 51
+- fields: {contact: 34, created_by: '', created_date: !!timestamp '2015-03-11 15:23:35.702255+00:00',
+    date: 2015-06-07, description: null, distance_cat: 29, event: 35, federation: 1,
+    label: null, location: 52, modified_date: !!timestamp '2015-03-11 15:23:35.731080+00:00',
+    price: null, slug: triathlon-du-salagou-s, sport: 8, time: null, title: TRIATHLON
+      DU SALAGOU - S, validated: false}
+  model: core.race
+  pk: 52
+- fields: {contact: 35, created_by: '', created_date: !!timestamp '2015-03-11 15:23:36.766632+00:00',
+    date: 2015-04-06, description: null, distance_cat: 29, event: 36, federation: 1,
+    label: null, location: 53, modified_date: !!timestamp '2015-03-11 15:23:36.795783+00:00',
+    price: null, slug: trivert-en-ovive-2015-s, sport: 8, time: null, title: TRIVERT
+      EN OVIVE 2015 - S, validated: false}
+  model: core.race
+  pk: 53
+- fields: {contact: 35, created_by: '', created_date: !!timestamp '2015-03-11 15:23:37.278978+00:00',
+    date: 2015-04-06, description: null, distance_cat: 29, event: 36, federation: 1,
+    label: null, location: 54, modified_date: !!timestamp '2015-03-11 15:23:37.306588+00:00',
+    price: null, slug: trivert-en-ovive-2015-s, sport: 8, time: null, title: TRIVERT
+      EN OVIVE 2015 - S, validated: false}
+  model: core.race
+  pk: 54
+- fields: {contact: 36, created_by: '', created_date: !!timestamp '2015-03-11 15:23:37.872323+00:00',
+    date: 2015-05-08, description: null, distance_cat: 30, event: 37, federation: 1,
+    label: null, location: 55, modified_date: !!timestamp '2015-03-11 15:23:37.901734+00:00',
+    price: null, slug: trivert-saint-cassien-m, sport: 8, time: null, title: TRIVERT
+      SAINT CASSIEN - M, validated: false}
+  model: core.race
+  pk: 55
+- fields: {contact: 36, created_by: '', created_date: !!timestamp '2015-03-11 15:23:38.405719+00:00',
+    date: 2015-05-08, description: null, distance_cat: 29, event: 37, federation: 1,
+    label: null, location: 56, modified_date: !!timestamp '2015-03-11 15:23:38.440452+00:00',
+    price: null, slug: trivert-saint-cassien-s, sport: 8, time: null, title: TRIVERT
+      SAINT CASSIEN - S, validated: false}
+  model: core.race
+  pk: 56
+- fields: {contact: 37, created_by: '', created_date: !!timestamp '2015-03-11 15:23:38.984834+00:00',
+    date: 2015-09-20, description: null, distance_cat: 28, event: 38, federation: 1,
+    label: null, location: 57, modified_date: !!timestamp '2015-03-11 15:23:39.017524+00:00',
+    price: null, slug: trophee-jean-moins-xs, sport: 8, time: null, title: "TROPH\xC9\
+      E JEAN MOINS  - XS", validated: false}
+  model: core.race
+  pk: 57
+- fields: {contact: 38, created_by: '', created_date: !!timestamp '2015-03-11 15:23:39.605548+00:00',
+    date: 2015-06-14, description: null, distance_cat: 30, event: 39, federation: 1,
+    label: null, location: 58, modified_date: !!timestamp '2015-03-11 15:23:39.639835+00:00',
+    price: null, slug: triathlon-nature-de-bouzigues-m, sport: 8, time: null, title: Triathlon
+      Nature de Bouzigues - M, validated: false}
+  model: core.race
+  pk: 58
+- fields: {contact: 38, created_by: '', created_date: !!timestamp '2015-03-11 15:23:40.087431+00:00',
+    date: 2015-06-14, description: null, distance_cat: 29, event: 39, federation: 1,
+    label: null, location: 59, modified_date: !!timestamp '2015-03-11 15:23:40.114544+00:00',
+    price: null, slug: triathlon-nature-de-bouzigues-s, sport: 8, time: null, title: Triathlon
+      Nature de Bouzigues - S, validated: false}
+  model: core.race
+  pk: 59
+- fields: {contact: 38, created_by: '', created_date: !!timestamp '2015-03-11 15:23:40.617074+00:00',
+    date: 2015-06-14, description: null, distance_cat: 28, event: 39, federation: 1,
+    label: null, location: 60, modified_date: !!timestamp '2015-03-11 15:23:40.656211+00:00',
+    price: null, slug: triathlon-nature-de-bouzigues-xs, sport: 8, time: null, title: Triathlon
+      Nature de Bouzigues - XS, validated: false}
+  model: core.race
+  pk: 60
+- fields: {contact: 39, created_by: '', created_date: !!timestamp '2015-03-11 15:23:41.240357+00:00',
+    date: 2015-07-05, description: null, distance_cat: 30, event: 40, federation: 1,
+    label: null, location: 61, modified_date: !!timestamp '2015-03-11 15:23:41.267800+00:00',
+    price: null, slug: triathlon-nature-du-valbonnais-m, sport: 8, time: null, title: Triathlon
+      Nature du Valbonnais - M, validated: false}
+  model: core.race
+  pk: 61
+- fields: {contact: 39, created_by: '', created_date: !!timestamp '2015-03-11 15:23:41.763988+00:00',
+    date: 2015-07-05, description: null, distance_cat: 28, event: 40, federation: 1,
+    label: null, location: 62, modified_date: !!timestamp '2015-03-11 15:23:41.792515+00:00',
+    price: null, slug: triathlon-nature-du-valbonnais-xs, sport: 8, time: null, title: Triathlon
+      Nature du Valbonnais - XS, validated: false}
+  model: core.race
+  pk: 62
+- fields: {contact: 40, created_by: '', created_date: !!timestamp '2015-03-11 15:23:42.339763+00:00',
+    date: 2015-09-26, description: null, distance_cat: 28, event: 41, federation: 1,
+    label: null, location: 63, modified_date: !!timestamp '2015-03-11 15:23:42.368088+00:00',
+    price: null, slug: triathlon-de-chartres-xs, sport: 8, time: null, title: Triathlon
+      de Chartres - XS, validated: false}
+  model: core.race
+  pk: 63
+- fields: {contact: 41, created_by: '', created_date: !!timestamp '2015-03-11 15:23:42.969037+00:00',
+    date: 2015-06-14, description: null, distance_cat: 28, event: 42, federation: 1,
+    label: null, location: 64, modified_date: !!timestamp '2015-03-11 15:23:43.001322+00:00',
+    price: null, slug: triathlon-de-l-ile-barlet-xs, sport: 8, time: null, title: Triathlon
+      de l ile Barlet - XS, validated: false}
+  model: core.race
+  pk: 64
+- fields: {contact: 42, created_by: '', created_date: !!timestamp '2015-03-11 15:23:43.694096+00:00',
+    date: 2015-05-02, description: null, distance_cat: 28, event: 43, federation: 1,
+    label: null, location: 65, modified_date: !!timestamp '2015-03-11 15:23:43.726685+00:00',
+    price: null, slug: triathlon-de-lame-xs, sport: 8, time: null, title: Triathlon
+      de l'AME - XS, validated: false}
+  model: core.race
+  pk: 65
+- fields: {contact: 43, created_by: '', created_date: !!timestamp '2015-03-11 15:23:44.356316+00:00',
+    date: 2015-05-16, description: null, distance_cat: 28, event: 44, federation: 1,
+    label: null, location: 66, modified_date: !!timestamp '2015-03-11 15:23:44.384684+00:00',
+    price: null, slug: triathlon-des-mureaux-xs, sport: 8, time: null, title: Triathlon
+      des Mureaux - XS, validated: false}
+  model: core.race
+  pk: 66
+- fields: {contact: 44, created_by: '', created_date: !!timestamp '2015-03-11 15:23:44.965512+00:00',
+    date: 2015-05-30, description: null, distance_cat: 28, event: 45, federation: 1,
+    label: null, location: 67, modified_date: !!timestamp '2015-03-11 15:23:44.994029+00:00',
+    price: null, slug: triathlon-du-roi-xs, sport: 8, time: null, title: Triathlon
+      du Roi - XS, validated: false}
+  model: core.race
+  pk: 67
+- fields: {contact: 45, created_by: '', created_date: !!timestamp '2015-03-11 15:23:45.552766+00:00',
+    date: 2015-09-13, description: null, distance_cat: 28, event: 46, federation: 1,
+    label: null, location: 68, modified_date: !!timestamp '2015-03-11 15:23:45.579878+00:00',
+    price: null, slug: triathlons-du-lac-de-saint-pardoux-xs, sport: 8, time: null,
+    title: Triathlons du lac de Saint Pardoux - XS, validated: false}
+  model: core.race
+  pk: 68
+- fields: {contact: 46, created_by: '', created_date: !!timestamp '2015-03-11 15:23:46.247641+00:00',
+    date: 2015-05-24, description: null, distance_cat: 30, event: 47, federation: 1,
+    label: null, location: 69, modified_date: !!timestamp '2015-03-11 15:23:46.284690+00:00',
+    price: null, slug: x-triathlon-de-chaumont-m, sport: 8, time: null, title: X-TRIATHLON
+      DE CHAUMONT - M, validated: false}
+  model: core.race
+  pk: 69
+- fields: {contact: 46, created_by: '', created_date: !!timestamp '2015-03-11 15:23:46.753152+00:00',
+    date: 2015-05-24, description: null, distance_cat: 28, event: 47, federation: 1,
+    label: null, location: 70, modified_date: !!timestamp '2015-03-11 15:23:46.782194+00:00',
+    price: null, slug: x-triathlon-de-chaumont-xs, sport: 8, time: null, title: X-TRIATHLON
+      DE CHAUMONT - XS, validated: false}
+  model: core.race
+  pk: 70
+- fields: {contact: 47, created_by: '', created_date: !!timestamp '2015-03-11 15:23:47.291800+00:00',
+    date: 2015-06-21, description: null, distance_cat: 30, event: 48, federation: 1,
+    label: null, location: 71, modified_date: !!timestamp '2015-03-11 15:23:47.319180+00:00',
+    price: null, slug: x-triathlon-de-la-pointe-au-sel-championnat-de-la-reunion-m,
+    sport: 8, time: null, title: "X-Triathlon de la Pointe au Sel, championnat de\
+      \ la R\xE9union - M", validated: false}
+  model: core.race
+  pk: 71
+- fields: {contact: 48, created_by: '', created_date: !!timestamp '2015-03-11 15:23:47.927928+00:00',
+    date: 2015-04-26, description: null, distance_cat: 30, event: 49, federation: 1,
+    label: null, location: 72, modified_date: !!timestamp '2015-03-11 15:23:47.955281+00:00',
+    price: null, slug: xterra-reunion-m, sport: 8, time: null, title: XTERRA REUNION
+      - M, validated: false}
+  model: core.race
+  pk: 72
+- fields: {contact: 49, created_by: '', created_date: !!timestamp '2015-03-11 15:23:48.531019+00:00',
+    date: 2015-06-28, description: null, distance_cat: 29, event: 50, federation: 1,
+    label: null, location: 73, modified_date: !!timestamp '2015-03-11 15:23:48.557954+00:00',
+    price: null, slug: triathlon-des-camboux-30110-branoux-les-taillades-s, sport: 8,
+    time: null, title: triathlon des Camboux 30110 branoux les taillades  - S, validated: false}
+  model: core.race
+  pk: 73
+- fields: {contact: 49, created_by: '', created_date: !!timestamp '2015-03-11 15:23:49.099643+00:00',
+    date: 2015-06-28, description: null, distance_cat: 28, event: 50, federation: 1,
+    label: null, location: 74, modified_date: !!timestamp '2015-03-11 15:23:49.131575+00:00',
+    price: null, slug: triathlon-des-camboux-30110-branoux-les-taillades-xs, sport: 8,
+    time: null, title: triathlon des Camboux 30110 branoux les taillades  - XS, validated: false}
+  model: core.race
+  pk: 74
+- fields: {contact: 50, created_by: '', created_date: !!timestamp '2015-03-11 15:23:49.695426+00:00',
+    date: 2015-06-21, description: null, distance_cat: 28, event: 51, federation: 1,
+    label: null, location: 75, modified_date: !!timestamp '2015-03-11 15:23:49.723336+00:00',
+    price: null, slug: triathlon-des-boucles-de-la-seine-xs, sport: 8, time: null,
+    title: triathlon des boucles de la seine - XS, validated: false}
+  model: core.race
+  pk: 75
+- fields: {distance: 500, order: 1, race: 1, stage: 4}
+  model: core.stagedistancespecific
+  pk: 1
+- fields: {distance: 11000, order: 2, race: 1, stage: 5}
+  model: core.stagedistancespecific
+  pk: 2
+- fields: {distance: 4000, order: 3, race: 1, stage: 6}
+  model: core.stagedistancespecific
+  pk: 3
+- fields: {distance: 250, order: 1, race: 2, stage: 4}
+  model: core.stagedistancespecific
+  pk: 4
+- fields: {distance: 5500, order: 2, race: 2, stage: 5}
+  model: core.stagedistancespecific
+  pk: 5
+- fields: {distance: 2000, order: 3, race: 2, stage: 6}
+  model: core.stagedistancespecific
+  pk: 6
+- fields: {distance: 500, order: 1, race: 3, stage: 4}
+  model: core.stagedistancespecific
+  pk: 7
+- fields: {distance: 11000, order: 2, race: 3, stage: 5}
+  model: core.stagedistancespecific
+  pk: 8
+- fields: {distance: 4000, order: 3, race: 3, stage: 6}
+  model: core.stagedistancespecific
+  pk: 9
+- fields: {distance: 250, order: 1, race: 4, stage: 4}
+  model: core.stagedistancespecific
+  pk: 10
+- fields: {distance: 5500, order: 2, race: 4, stage: 5}
+  model: core.stagedistancespecific
+  pk: 11
+- fields: {distance: 2000, order: 3, race: 4, stage: 6}
+  model: core.stagedistancespecific
+  pk: 12
+- fields: {distance: 250, order: 1, race: 5, stage: 4}
+  model: core.stagedistancespecific
+  pk: 13
+- fields: {distance: 5500, order: 2, race: 5, stage: 5}
+  model: core.stagedistancespecific
+  pk: 14
+- fields: {distance: 2000, order: 3, race: 5, stage: 6}
+  model: core.stagedistancespecific
+  pk: 15
+- fields: {distance: 1000, order: 1, race: 6, stage: 4}
+  model: core.stagedistancespecific
+  pk: 16
+- fields: {distance: 22000, order: 2, race: 6, stage: 5}
+  model: core.stagedistancespecific
+  pk: 17
+- fields: {distance: 8000, order: 3, race: 6, stage: 6}
+  model: core.stagedistancespecific
+  pk: 18
+- fields: {distance: 500, order: 1, race: 7, stage: 4}
+  model: core.stagedistancespecific
+  pk: 19
+- fields: {distance: 11000, order: 2, race: 7, stage: 5}
+  model: core.stagedistancespecific
+  pk: 20
+- fields: {distance: 4000, order: 3, race: 7, stage: 6}
+  model: core.stagedistancespecific
+  pk: 21
+- fields: {distance: 1000, order: 1, race: 8, stage: 4}
+  model: core.stagedistancespecific
+  pk: 22
+- fields: {distance: 22000, order: 2, race: 8, stage: 5}
+  model: core.stagedistancespecific
+  pk: 23
+- fields: {distance: 8000, order: 3, race: 8, stage: 6}
+  model: core.stagedistancespecific
+  pk: 24
+- fields: {distance: 250, order: 1, race: 9, stage: 4}
+  model: core.stagedistancespecific
+  pk: 25
+- fields: {distance: 5500, order: 2, race: 9, stage: 5}
+  model: core.stagedistancespecific
+  pk: 26
+- fields: {distance: 2000, order: 3, race: 9, stage: 6}
+  model: core.stagedistancespecific
+  pk: 27
+- fields: {distance: 1000, order: 1, race: 10, stage: 4}
+  model: core.stagedistancespecific
+  pk: 28
+- fields: {distance: 22000, order: 2, race: 10, stage: 5}
+  model: core.stagedistancespecific
+  pk: 29
+- fields: {distance: 8000, order: 3, race: 10, stage: 6}
+  model: core.stagedistancespecific
+  pk: 30
+- fields: {distance: 1000, order: 1, race: 11, stage: 4}
+  model: core.stagedistancespecific
+  pk: 31
+- fields: {distance: 22000, order: 2, race: 11, stage: 5}
+  model: core.stagedistancespecific
+  pk: 32
+- fields: {distance: 8000, order: 3, race: 11, stage: 6}
+  model: core.stagedistancespecific
+  pk: 33
+- fields: {distance: 500, order: 1, race: 12, stage: 4}
+  model: core.stagedistancespecific
+  pk: 34
+- fields: {distance: 11000, order: 2, race: 12, stage: 5}
+  model: core.stagedistancespecific
+  pk: 35
+- fields: {distance: 4000, order: 3, race: 12, stage: 6}
+  model: core.stagedistancespecific
+  pk: 36
+- fields: {distance: 250, order: 1, race: 13, stage: 4}
+  model: core.stagedistancespecific
+  pk: 37
+- fields: {distance: 5500, order: 2, race: 13, stage: 5}
+  model: core.stagedistancespecific
+  pk: 38
+- fields: {distance: 2000, order: 3, race: 13, stage: 6}
+  model: core.stagedistancespecific
+  pk: 39
+- fields: {distance: 500, order: 1, race: 14, stage: 4}
+  model: core.stagedistancespecific
+  pk: 40
+- fields: {distance: 11000, order: 2, race: 14, stage: 5}
+  model: core.stagedistancespecific
+  pk: 41
+- fields: {distance: 4000, order: 3, race: 14, stage: 6}
+  model: core.stagedistancespecific
+  pk: 42
+- fields: {distance: 1000, order: 1, race: 15, stage: 4}
+  model: core.stagedistancespecific
+  pk: 43
+- fields: {distance: 22000, order: 2, race: 15, stage: 5}
+  model: core.stagedistancespecific
+  pk: 44
+- fields: {distance: 8000, order: 3, race: 15, stage: 6}
+  model: core.stagedistancespecific
+  pk: 45
+- fields: {distance: 500, order: 1, race: 16, stage: 4}
+  model: core.stagedistancespecific
+  pk: 46
+- fields: {distance: 11000, order: 2, race: 16, stage: 5}
+  model: core.stagedistancespecific
+  pk: 47
+- fields: {distance: 4000, order: 3, race: 16, stage: 6}
+  model: core.stagedistancespecific
+  pk: 48
+- fields: {distance: 250, order: 1, race: 17, stage: 4}
+  model: core.stagedistancespecific
+  pk: 49
+- fields: {distance: 5500, order: 2, race: 17, stage: 5}
+  model: core.stagedistancespecific
+  pk: 50
+- fields: {distance: 2000, order: 3, race: 17, stage: 6}
+  model: core.stagedistancespecific
+  pk: 51
+- fields: {distance: 500, order: 1, race: 18, stage: 4}
+  model: core.stagedistancespecific
+  pk: 52
+- fields: {distance: 11000, order: 2, race: 18, stage: 5}
+  model: core.stagedistancespecific
+  pk: 53
+- fields: {distance: 4000, order: 3, race: 18, stage: 6}
+  model: core.stagedistancespecific
+  pk: 54
+- fields: {distance: 250, order: 1, race: 19, stage: 4}
+  model: core.stagedistancespecific
+  pk: 55
+- fields: {distance: 5500, order: 2, race: 19, stage: 5}
+  model: core.stagedistancespecific
+  pk: 56
+- fields: {distance: 2000, order: 3, race: 19, stage: 6}
+  model: core.stagedistancespecific
+  pk: 57
+- fields: {distance: 500, order: 1, race: 20, stage: 4}
+  model: core.stagedistancespecific
+  pk: 58
+- fields: {distance: 11000, order: 2, race: 20, stage: 5}
+  model: core.stagedistancespecific
+  pk: 59
+- fields: {distance: 4000, order: 3, race: 20, stage: 6}
+  model: core.stagedistancespecific
+  pk: 60
+- fields: {distance: 1000, order: 1, race: 21, stage: 4}
+  model: core.stagedistancespecific
+  pk: 61
+- fields: {distance: 22000, order: 2, race: 21, stage: 5}
+  model: core.stagedistancespecific
+  pk: 62
+- fields: {distance: 8000, order: 3, race: 21, stage: 6}
+  model: core.stagedistancespecific
+  pk: 63
+- fields: {distance: 250, order: 1, race: 22, stage: 4}
+  model: core.stagedistancespecific
+  pk: 64
+- fields: {distance: 5500, order: 2, race: 22, stage: 5}
+  model: core.stagedistancespecific
+  pk: 65
+- fields: {distance: 2000, order: 3, race: 22, stage: 6}
+  model: core.stagedistancespecific
+  pk: 66
+- fields: {distance: 1000, order: 1, race: 23, stage: 4}
+  model: core.stagedistancespecific
+  pk: 67
+- fields: {distance: 22000, order: 2, race: 23, stage: 5}
+  model: core.stagedistancespecific
+  pk: 68
+- fields: {distance: 8000, order: 3, race: 23, stage: 6}
+  model: core.stagedistancespecific
+  pk: 69
+- fields: {distance: 500, order: 1, race: 24, stage: 4}
+  model: core.stagedistancespecific
+  pk: 70
+- fields: {distance: 11000, order: 2, race: 24, stage: 5}
+  model: core.stagedistancespecific
+  pk: 71
+- fields: {distance: 4000, order: 3, race: 24, stage: 6}
+  model: core.stagedistancespecific
+  pk: 72
+- fields: {distance: 1000, order: 1, race: 25, stage: 4}
+  model: core.stagedistancespecific
+  pk: 73
+- fields: {distance: 22000, order: 2, race: 25, stage: 5}
+  model: core.stagedistancespecific
+  pk: 74
+- fields: {distance: 8000, order: 3, race: 25, stage: 6}
+  model: core.stagedistancespecific
+  pk: 75
+- fields: {distance: 500, order: 1, race: 26, stage: 4}
+  model: core.stagedistancespecific
+  pk: 76
+- fields: {distance: 11000, order: 2, race: 26, stage: 5}
+  model: core.stagedistancespecific
+  pk: 77
+- fields: {distance: 4000, order: 3, race: 26, stage: 6}
+  model: core.stagedistancespecific
+  pk: 78
+- fields: {distance: 1000, order: 1, race: 27, stage: 4}
+  model: core.stagedistancespecific
+  pk: 79
+- fields: {distance: 22000, order: 2, race: 27, stage: 5}
+  model: core.stagedistancespecific
+  pk: 80
+- fields: {distance: 8000, order: 3, race: 27, stage: 6}
+  model: core.stagedistancespecific
+  pk: 81
+- fields: {distance: 250, order: 1, race: 28, stage: 4}
+  model: core.stagedistancespecific
+  pk: 82
+- fields: {distance: 5500, order: 2, race: 28, stage: 5}
+  model: core.stagedistancespecific
+  pk: 83
+- fields: {distance: 2000, order: 3, race: 28, stage: 6}
+  model: core.stagedistancespecific
+  pk: 84
+- fields: {distance: 1000, order: 1, race: 29, stage: 4}
+  model: core.stagedistancespecific
+  pk: 85
+- fields: {distance: 22000, order: 2, race: 29, stage: 5}
+  model: core.stagedistancespecific
+  pk: 86
+- fields: {distance: 8000, order: 3, race: 29, stage: 6}
+  model: core.stagedistancespecific
+  pk: 87
+- fields: {distance: 250, order: 1, race: 30, stage: 4}
+  model: core.stagedistancespecific
+  pk: 88
+- fields: {distance: 5500, order: 2, race: 30, stage: 5}
+  model: core.stagedistancespecific
+  pk: 89
+- fields: {distance: 2000, order: 3, race: 30, stage: 6}
+  model: core.stagedistancespecific
+  pk: 90
+- fields: {distance: 500, order: 1, race: 31, stage: 4}
+  model: core.stagedistancespecific
+  pk: 91
+- fields: {distance: 11000, order: 2, race: 31, stage: 5}
+  model: core.stagedistancespecific
+  pk: 92
+- fields: {distance: 4000, order: 3, race: 31, stage: 6}
+  model: core.stagedistancespecific
+  pk: 93
+- fields: {distance: 500, order: 1, race: 32, stage: 4}
+  model: core.stagedistancespecific
+  pk: 94
+- fields: {distance: 11000, order: 2, race: 32, stage: 5}
+  model: core.stagedistancespecific
+  pk: 95
+- fields: {distance: 4000, order: 3, race: 32, stage: 6}
+  model: core.stagedistancespecific
+  pk: 96
+- fields: {distance: 1000, order: 1, race: 33, stage: 4}
+  model: core.stagedistancespecific
+  pk: 97
+- fields: {distance: 22000, order: 2, race: 33, stage: 5}
+  model: core.stagedistancespecific
+  pk: 98
+- fields: {distance: 8000, order: 3, race: 33, stage: 6}
+  model: core.stagedistancespecific
+  pk: 99
+- fields: {distance: 250, order: 1, race: 34, stage: 4}
+  model: core.stagedistancespecific
+  pk: 100
+- fields: {distance: 5500, order: 2, race: 34, stage: 5}
+  model: core.stagedistancespecific
+  pk: 101
+- fields: {distance: 2000, order: 3, race: 34, stage: 6}
+  model: core.stagedistancespecific
+  pk: 102
+- fields: {distance: 1000, order: 1, race: 35, stage: 4}
+  model: core.stagedistancespecific
+  pk: 103
+- fields: {distance: 22000, order: 2, race: 35, stage: 5}
+  model: core.stagedistancespecific
+  pk: 104
+- fields: {distance: 8000, order: 3, race: 35, stage: 6}
+  model: core.stagedistancespecific
+  pk: 105
+- fields: {distance: 500, order: 1, race: 36, stage: 4}
+  model: core.stagedistancespecific
+  pk: 106
+- fields: {distance: 11000, order: 2, race: 36, stage: 5}
+  model: core.stagedistancespecific
+  pk: 107
+- fields: {distance: 4000, order: 3, race: 36, stage: 6}
+  model: core.stagedistancespecific
+  pk: 108
+- fields: {distance: 500, order: 1, race: 37, stage: 4}
+  model: core.stagedistancespecific
+  pk: 109
+- fields: {distance: 11000, order: 2, race: 37, stage: 5}
+  model: core.stagedistancespecific
+  pk: 110
+- fields: {distance: 4000, order: 3, race: 37, stage: 6}
+  model: core.stagedistancespecific
+  pk: 111
+- fields: {distance: 1000, order: 1, race: 38, stage: 4}
+  model: core.stagedistancespecific
+  pk: 112
+- fields: {distance: 22000, order: 2, race: 38, stage: 5}
+  model: core.stagedistancespecific
+  pk: 113
+- fields: {distance: 8000, order: 3, race: 38, stage: 6}
+  model: core.stagedistancespecific
+  pk: 114
+- fields: {distance: 1000, order: 1, race: 39, stage: 4}
+  model: core.stagedistancespecific
+  pk: 115
+- fields: {distance: 22000, order: 2, race: 39, stage: 5}
+  model: core.stagedistancespecific
+  pk: 116
+- fields: {distance: 8000, order: 3, race: 39, stage: 6}
+  model: core.stagedistancespecific
+  pk: 117
+- fields: {distance: 250, order: 1, race: 40, stage: 4}
+  model: core.stagedistancespecific
+  pk: 118
+- fields: {distance: 5500, order: 2, race: 40, stage: 5}
+  model: core.stagedistancespecific
+  pk: 119
+- fields: {distance: 2000, order: 3, race: 40, stage: 6}
+  model: core.stagedistancespecific
+  pk: 120
+- fields: {distance: 250, order: 1, race: 41, stage: 4}
+  model: core.stagedistancespecific
+  pk: 121
+- fields: {distance: 5500, order: 2, race: 41, stage: 5}
+  model: core.stagedistancespecific
+  pk: 122
+- fields: {distance: 2000, order: 3, race: 41, stage: 6}
+  model: core.stagedistancespecific
+  pk: 123
+- fields: {distance: 500, order: 1, race: 42, stage: 4}
+  model: core.stagedistancespecific
+  pk: 124
+- fields: {distance: 11000, order: 2, race: 42, stage: 5}
+  model: core.stagedistancespecific
+  pk: 125
+- fields: {distance: 4000, order: 3, race: 42, stage: 6}
+  model: core.stagedistancespecific
+  pk: 126
+- fields: {distance: 250, order: 1, race: 43, stage: 4}
+  model: core.stagedistancespecific
+  pk: 127
+- fields: {distance: 5500, order: 2, race: 43, stage: 5}
+  model: core.stagedistancespecific
+  pk: 128
+- fields: {distance: 2000, order: 3, race: 43, stage: 6}
+  model: core.stagedistancespecific
+  pk: 129
+- fields: {distance: 500, order: 1, race: 44, stage: 4}
+  model: core.stagedistancespecific
+  pk: 130
+- fields: {distance: 11000, order: 2, race: 44, stage: 5}
+  model: core.stagedistancespecific
+  pk: 131
+- fields: {distance: 4000, order: 3, race: 44, stage: 6}
+  model: core.stagedistancespecific
+  pk: 132
+- fields: {distance: 500, order: 1, race: 45, stage: 4}
+  model: core.stagedistancespecific
+  pk: 133
+- fields: {distance: 11000, order: 2, race: 45, stage: 5}
+  model: core.stagedistancespecific
+  pk: 134
+- fields: {distance: 4000, order: 3, race: 45, stage: 6}
+  model: core.stagedistancespecific
+  pk: 135
+- fields: {distance: 500, order: 1, race: 46, stage: 4}
+  model: core.stagedistancespecific
+  pk: 136
+- fields: {distance: 11000, order: 2, race: 46, stage: 5}
+  model: core.stagedistancespecific
+  pk: 137
+- fields: {distance: 4000, order: 3, race: 46, stage: 6}
+  model: core.stagedistancespecific
+  pk: 138
+- fields: {distance: 500, order: 1, race: 47, stage: 4}
+  model: core.stagedistancespecific
+  pk: 139
+- fields: {distance: 11000, order: 2, race: 47, stage: 5}
+  model: core.stagedistancespecific
+  pk: 140
+- fields: {distance: 4000, order: 3, race: 47, stage: 6}
+  model: core.stagedistancespecific
+  pk: 141
+- fields: {distance: 500, order: 1, race: 48, stage: 4}
+  model: core.stagedistancespecific
+  pk: 142
+- fields: {distance: 11000, order: 2, race: 48, stage: 5}
+  model: core.stagedistancespecific
+  pk: 143
+- fields: {distance: 4000, order: 3, race: 48, stage: 6}
+  model: core.stagedistancespecific
+  pk: 144
+- fields: {distance: 500, order: 1, race: 49, stage: 4}
+  model: core.stagedistancespecific
+  pk: 145
+- fields: {distance: 11000, order: 2, race: 49, stage: 5}
+  model: core.stagedistancespecific
+  pk: 146
+- fields: {distance: 4000, order: 3, race: 49, stage: 6}
+  model: core.stagedistancespecific
+  pk: 147
+- fields: {distance: 250, order: 1, race: 50, stage: 4}
+  model: core.stagedistancespecific
+  pk: 148
+- fields: {distance: 5500, order: 2, race: 50, stage: 5}
+  model: core.stagedistancespecific
+  pk: 149
+- fields: {distance: 2000, order: 3, race: 50, stage: 6}
+  model: core.stagedistancespecific
+  pk: 150
+- fields: {distance: 500, order: 1, race: 51, stage: 4}
+  model: core.stagedistancespecific
+  pk: 151
+- fields: {distance: 11000, order: 2, race: 51, stage: 5}
+  model: core.stagedistancespecific
+  pk: 152
+- fields: {distance: 4000, order: 3, race: 51, stage: 6}
+  model: core.stagedistancespecific
+  pk: 153
+- fields: {distance: 500, order: 1, race: 52, stage: 4}
+  model: core.stagedistancespecific
+  pk: 154
+- fields: {distance: 11000, order: 2, race: 52, stage: 5}
+  model: core.stagedistancespecific
+  pk: 155
+- fields: {distance: 4000, order: 3, race: 52, stage: 6}
+  model: core.stagedistancespecific
+  pk: 156
+- fields: {distance: 500, order: 1, race: 53, stage: 4}
+  model: core.stagedistancespecific
+  pk: 157
+- fields: {distance: 11000, order: 2, race: 53, stage: 5}
+  model: core.stagedistancespecific
+  pk: 158
+- fields: {distance: 4000, order: 3, race: 53, stage: 6}
+  model: core.stagedistancespecific
+  pk: 159
+- fields: {distance: 500, order: 1, race: 54, stage: 4}
+  model: core.stagedistancespecific
+  pk: 160
+- fields: {distance: 11000, order: 2, race: 54, stage: 5}
+  model: core.stagedistancespecific
+  pk: 161
+- fields: {distance: 4000, order: 3, race: 54, stage: 6}
+  model: core.stagedistancespecific
+  pk: 162
+- fields: {distance: 1000, order: 1, race: 55, stage: 4}
+  model: core.stagedistancespecific
+  pk: 163
+- fields: {distance: 22000, order: 2, race: 55, stage: 5}
+  model: core.stagedistancespecific
+  pk: 164
+- fields: {distance: 8000, order: 3, race: 55, stage: 6}
+  model: core.stagedistancespecific
+  pk: 165
+- fields: {distance: 500, order: 1, race: 56, stage: 4}
+  model: core.stagedistancespecific
+  pk: 166
+- fields: {distance: 11000, order: 2, race: 56, stage: 5}
+  model: core.stagedistancespecific
+  pk: 167
+- fields: {distance: 4000, order: 3, race: 56, stage: 6}
+  model: core.stagedistancespecific
+  pk: 168
+- fields: {distance: 250, order: 1, race: 57, stage: 4}
+  model: core.stagedistancespecific
+  pk: 169
+- fields: {distance: 5500, order: 2, race: 57, stage: 5}
+  model: core.stagedistancespecific
+  pk: 170
+- fields: {distance: 2000, order: 3, race: 57, stage: 6}
+  model: core.stagedistancespecific
+  pk: 171
+- fields: {distance: 1000, order: 1, race: 58, stage: 4}
+  model: core.stagedistancespecific
+  pk: 172
+- fields: {distance: 22000, order: 2, race: 58, stage: 5}
+  model: core.stagedistancespecific
+  pk: 173
+- fields: {distance: 8000, order: 3, race: 58, stage: 6}
+  model: core.stagedistancespecific
+  pk: 174
+- fields: {distance: 500, order: 1, race: 59, stage: 4}
+  model: core.stagedistancespecific
+  pk: 175
+- fields: {distance: 11000, order: 2, race: 59, stage: 5}
+  model: core.stagedistancespecific
+  pk: 176
+- fields: {distance: 4000, order: 3, race: 59, stage: 6}
+  model: core.stagedistancespecific
+  pk: 177
+- fields: {distance: 250, order: 1, race: 60, stage: 4}
+  model: core.stagedistancespecific
+  pk: 178
+- fields: {distance: 5500, order: 2, race: 60, stage: 5}
+  model: core.stagedistancespecific
+  pk: 179
+- fields: {distance: 2000, order: 3, race: 60, stage: 6}
+  model: core.stagedistancespecific
+  pk: 180
+- fields: {distance: 1000, order: 1, race: 61, stage: 4}
+  model: core.stagedistancespecific
+  pk: 181
+- fields: {distance: 22000, order: 2, race: 61, stage: 5}
+  model: core.stagedistancespecific
+  pk: 182
+- fields: {distance: 8000, order: 3, race: 61, stage: 6}
+  model: core.stagedistancespecific
+  pk: 183
+- fields: {distance: 250, order: 1, race: 62, stage: 4}
+  model: core.stagedistancespecific
+  pk: 184
+- fields: {distance: 5500, order: 2, race: 62, stage: 5}
+  model: core.stagedistancespecific
+  pk: 185
+- fields: {distance: 2000, order: 3, race: 62, stage: 6}
+  model: core.stagedistancespecific
+  pk: 186
+- fields: {distance: 250, order: 1, race: 63, stage: 4}
+  model: core.stagedistancespecific
+  pk: 187
+- fields: {distance: 5500, order: 2, race: 63, stage: 5}
+  model: core.stagedistancespecific
+  pk: 188
+- fields: {distance: 2000, order: 3, race: 63, stage: 6}
+  model: core.stagedistancespecific
+  pk: 189
+- fields: {distance: 250, order: 1, race: 64, stage: 4}
+  model: core.stagedistancespecific
+  pk: 190
+- fields: {distance: 5500, order: 2, race: 64, stage: 5}
+  model: core.stagedistancespecific
+  pk: 191
+- fields: {distance: 2000, order: 3, race: 64, stage: 6}
+  model: core.stagedistancespecific
+  pk: 192
+- fields: {distance: 250, order: 1, race: 65, stage: 4}
+  model: core.stagedistancespecific
+  pk: 193
+- fields: {distance: 5500, order: 2, race: 65, stage: 5}
+  model: core.stagedistancespecific
+  pk: 194
+- fields: {distance: 2000, order: 3, race: 65, stage: 6}
+  model: core.stagedistancespecific
+  pk: 195
+- fields: {distance: 250, order: 1, race: 66, stage: 4}
+  model: core.stagedistancespecific
+  pk: 196
+- fields: {distance: 5500, order: 2, race: 66, stage: 5}
+  model: core.stagedistancespecific
+  pk: 197
+- fields: {distance: 2000, order: 3, race: 66, stage: 6}
+  model: core.stagedistancespecific
+  pk: 198
+- fields: {distance: 250, order: 1, race: 67, stage: 4}
+  model: core.stagedistancespecific
+  pk: 199
+- fields: {distance: 5500, order: 2, race: 67, stage: 5}
+  model: core.stagedistancespecific
+  pk: 200
+- fields: {distance: 2000, order: 3, race: 67, stage: 6}
+  model: core.stagedistancespecific
+  pk: 201
+- fields: {distance: 250, order: 1, race: 68, stage: 4}
+  model: core.stagedistancespecific
+  pk: 202
+- fields: {distance: 5500, order: 2, race: 68, stage: 5}
+  model: core.stagedistancespecific
+  pk: 203
+- fields: {distance: 2000, order: 3, race: 68, stage: 6}
+  model: core.stagedistancespecific
+  pk: 204
+- fields: {distance: 1000, order: 1, race: 69, stage: 4}
+  model: core.stagedistancespecific
+  pk: 205
+- fields: {distance: 22000, order: 2, race: 69, stage: 5}
+  model: core.stagedistancespecific
+  pk: 206
+- fields: {distance: 8000, order: 3, race: 69, stage: 6}
+  model: core.stagedistancespecific
+  pk: 207
+- fields: {distance: 250, order: 1, race: 70, stage: 4}
+  model: core.stagedistancespecific
+  pk: 208
+- fields: {distance: 5500, order: 2, race: 70, stage: 5}
+  model: core.stagedistancespecific
+  pk: 209
+- fields: {distance: 2000, order: 3, race: 70, stage: 6}
+  model: core.stagedistancespecific
+  pk: 210
+- fields: {distance: 1000, order: 1, race: 71, stage: 4}
+  model: core.stagedistancespecific
+  pk: 211
+- fields: {distance: 22000, order: 2, race: 71, stage: 5}
+  model: core.stagedistancespecific
+  pk: 212
+- fields: {distance: 8000, order: 3, race: 71, stage: 6}
+  model: core.stagedistancespecific
+  pk: 213
+- fields: {distance: 1000, order: 1, race: 72, stage: 4}
+  model: core.stagedistancespecific
+  pk: 214
+- fields: {distance: 22000, order: 2, race: 72, stage: 5}
+  model: core.stagedistancespecific
+  pk: 215
+- fields: {distance: 8000, order: 3, race: 72, stage: 6}
+  model: core.stagedistancespecific
+  pk: 216
+- fields: {distance: 500, order: 1, race: 73, stage: 4}
+  model: core.stagedistancespecific
+  pk: 217
+- fields: {distance: 11000, order: 2, race: 73, stage: 5}
+  model: core.stagedistancespecific
+  pk: 218
+- fields: {distance: 4000, order: 3, race: 73, stage: 6}
+  model: core.stagedistancespecific
+  pk: 219
+- fields: {distance: 250, order: 1, race: 74, stage: 4}
+  model: core.stagedistancespecific
+  pk: 220
+- fields: {distance: 5500, order: 2, race: 74, stage: 5}
+  model: core.stagedistancespecific
+  pk: 221
+- fields: {distance: 2000, order: 3, race: 74, stage: 6}
+  model: core.stagedistancespecific
+  pk: 222
+- fields: {distance: 250, order: 1, race: 75, stage: 4}
+  model: core.stagedistancespecific
+  pk: 223
+- fields: {distance: 5500, order: 2, race: 75, stage: 5}
+  model: core.stagedistancespecific
+  pk: 224
+- fields: {distance: 2000, order: 3, race: 75, stage: 6}
+  model: core.stagedistancespecific
+  pk: 225
+- fields: {distance: 400, distance_cat: 4, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 7
+- fields: {distance: 10000, distance_cat: 4, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 8
+- fields: {distance: 2500, distance_cat: 4, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 9
+- fields: {distance: 750, distance_cat: 5, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 10
+- fields: {distance: 20000, distance_cat: 5, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 11
+- fields: {distance: 5000, distance_cat: 5, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 12
+- fields: {distance: 1500, distance_cat: 6, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 13
+- fields: {distance: 40000, distance_cat: 6, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 14
+- fields: {distance: 10000, distance_cat: 6, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 15
+- fields: {distance: 3000, distance_cat: 7, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 16
+- fields: {distance: 80000, distance_cat: 7, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 17
+- fields: {distance: 20000, distance_cat: 7, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 18
+- fields: {distance: 4000, distance_cat: 8, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 19
+- fields: {distance: 120000, distance_cat: 8, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 20
+- fields: {distance: 30000, distance_cat: 8, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 21
+- fields: {distance: 50, distance_cat: 9, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 22
+- fields: {distance: 1000, distance_cat: 9, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 23
+- fields: {distance: 500, distance_cat: 9, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 24
+- fields: {distance: 100, distance_cat: 10, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 25
+- fields: {distance: 2000, distance_cat: 10, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 26
+- fields: {distance: 1000, distance_cat: 10, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 27
+- fields: {distance: 200, distance_cat: 11, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 28
+- fields: {distance: 4000, distance_cat: 11, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 29
+- fields: {distance: 1500, distance_cat: 11, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 30
+- fields: {distance: 300, distance_cat: 12, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 31
+- fields: {distance: 6000, distance_cat: 12, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 32
+- fields: {distance: 2000, distance_cat: 12, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 33
+- fields: {distance: 2500, distance_cat: 13, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 34
+- fields: {distance: 10000, distance_cat: 13, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 35
+- fields: {distance: 1250, distance_cat: 13, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 36
+- fields: {distance: 5000, distance_cat: 14, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 37
+- fields: {distance: 20000, distance_cat: 14, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 38
+- fields: {distance: 2500, distance_cat: 14, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 39
+- fields: {distance: 10000, distance_cat: 15, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 40
+- fields: {distance: 40000, distance_cat: 15, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 41
+- fields: {distance: 5000, distance_cat: 15, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 42
+- fields: {distance: 10000, distance_cat: 16, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 43
+- fields: {distance: 80000, distance_cat: 16, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 44
+- fields: {distance: 10000, distance_cat: 16, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 45
+- fields: {distance: 20000, distance_cat: 17, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 46
+- fields: {distance: 120000, distance_cat: 17, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 47
+- fields: {distance: 10000, distance_cat: 17, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 48
+- fields: {distance: 500, distance_cat: 18, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 49
+- fields: {distance: 2500, distance_cat: 18, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 50
+- fields: {distance: 1000, distance_cat: 19, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 51
+- fields: {distance: 2500, distance_cat: 19, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 52
+- fields: {distance: 2000, distance_cat: 20, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 53
+- fields: {distance: 10000, distance_cat: 20, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 54
+- fields: {distance: 3000, distance_cat: 21, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 55
+- fields: {distance: 15000, distance_cat: 21, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 56
+- fields: {distance: 4000, distance_cat: 22, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 57
+- fields: {distance: 20000, distance_cat: 22, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 58
+- fields: {distance: 2000, distance_cat: 23, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 59
+- fields: {distance: 5500, distance_cat: 23, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 60
+- fields: {distance: 1000, distance_cat: 23, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 61
+- fields: {distance: 4000, distance_cat: 24, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 62
+- fields: {distance: 5500, distance_cat: 24, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 63
+- fields: {distance: 2000, distance_cat: 24, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 64
+- fields: {distance: 8000, distance_cat: 25, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 65
+- fields: {distance: 22000, distance_cat: 25, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 66
+- fields: {distance: 4000, distance_cat: 25, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 67
+- fields: {distance: 16000, distance_cat: 26, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 68
+- fields: {distance: 44000, distance_cat: 26, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 69
+- fields: {distance: 8000, distance_cat: 26, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 70
+- fields: {distance: 24000, distance_cat: 27, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 71
+- fields: {distance: 66000, distance_cat: 27, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 72
+- fields: {distance: 12000, distance_cat: 27, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 73
+- fields: {distance: 250, distance_cat: 28, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 74
+- fields: {distance: 5500, distance_cat: 28, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 75
+- fields: {distance: 2000, distance_cat: 28, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 76
+- fields: {distance: 500, distance_cat: 29, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 77
+- fields: {distance: 11000, distance_cat: 29, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 78
+- fields: {distance: 4000, distance_cat: 29, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 79
+- fields: {distance: 1000, distance_cat: 30, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 80
+- fields: {distance: 22000, distance_cat: 30, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 81
+- fields: {distance: 8000, distance_cat: 30, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 82
+- fields: {distance: 2000, distance_cat: 31, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 83
+- fields: {distance: 44000, distance_cat: 31, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 84
+- fields: {distance: 16000, distance_cat: 31, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 85
+- fields: {distance: 3000, distance_cat: 32, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 86
+- fields: {distance: 66000, distance_cat: 32, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 87
+- fields: {distance: 24000, distance_cat: 32, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 88
+- fields: {distance: 2000, distance_cat: 33, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 89
+- fields: {distance: 3500, distance_cat: 33, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 90
+- fields: {distance: 3000, distance_cat: 33, order: 3, stage: 7}
+  model: core.stagedistancedefault
+  pk: 91
+- fields: {distance: 2000, distance_cat: 34, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 92
+- fields: {distance: 3000, distance_cat: 34, order: 2, stage: 7}
+  model: core.stagedistancedefault
+  pk: 93
+- fields: {distance: 2000, distance_cat: 34, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 94
+- fields: {distance: 4000, distance_cat: 35, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 95
+- fields: {distance: 7000, distance_cat: 35, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 96
+- fields: {distance: 6000, distance_cat: 35, order: 3, stage: 7}
+  model: core.stagedistancedefault
+  pk: 97
+- fields: {distance: 8000, distance_cat: 36, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 98
+- fields: {distance: 14000, distance_cat: 36, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 99
+- fields: {distance: 12000, distance_cat: 36, order: 3, stage: 7}
+  model: core.stagedistancedefault
+  pk: 100
+- fields: {distance: 4000, distance_cat: 37, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 101
+- fields: {distance: 6000, distance_cat: 37, order: 2, stage: 7}
+  model: core.stagedistancedefault
+  pk: 102
+- fields: {distance: 4000, distance_cat: 37, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 103
+- fields: {distance: 8000, distance_cat: 38, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 104
+- fields: {distance: 12000, distance_cat: 38, order: 2, stage: 7}
+  model: core.stagedistancedefault
+  pk: 105
+- fields: {distance: 8000, distance_cat: 38, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 106
+- fields: {distance: 0, distance_cat: 39, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 107
+- fields: {distance: 0, distance_cat: 39, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 108
+- fields: {distance: 0, distance_cat: 39, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 109
+- fields: {distance: 0, distance_cat: 40, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 110
+- fields: {distance: 0, distance_cat: 40, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 111
+- fields: {distance: 0, distance_cat: 40, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 112
+- fields: {distance: 0, distance_cat: 41, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 113
+- fields: {distance: 0, distance_cat: 41, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 114
+- fields: {distance: 0, distance_cat: 41, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 115
+- fields: {distance: 0, distance_cat: 42, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 116
+- fields: {distance: 0, distance_cat: 42, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 117
+- fields: {distance: 0, distance_cat: 42, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 118
+- fields: {distance: 0, distance_cat: 43, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 119
+- fields: {distance: 0, distance_cat: 43, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 120
+- fields: {distance: 0, distance_cat: 43, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 121
+- fields: {distance: 0, distance_cat: 44, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 122
+- fields: {distance: 0, distance_cat: 44, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 123
+- fields: {distance: 0, distance_cat: 44, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 124
+- fields: {distance: 0, distance_cat: 45, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 125
+- fields: {distance: 0, distance_cat: 45, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 126
+- fields: {distance: 0, distance_cat: 45, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 127
+- fields: {distance: 0, distance_cat: 46, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 128
+- fields: {distance: 0, distance_cat: 46, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 129
+- fields: {distance: 0, distance_cat: 46, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 130
+- fields: {distance: 0, distance_cat: 47, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 131
+- fields: {distance: 0, distance_cat: 47, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 132
+- fields: {distance: 0, distance_cat: 47, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 133
+- fields: {distance: 0, distance_cat: 48, order: 1, stage: 6}
+  model: core.stagedistancedefault
+  pk: 134
+- fields: {distance: 0, distance_cat: 48, order: 2, stage: 5}
+  model: core.stagedistancedefault
+  pk: 135
+- fields: {distance: 0, distance_cat: 48, order: 3, stage: 6}
+  model: core.stagedistancedefault
+  pk: 136

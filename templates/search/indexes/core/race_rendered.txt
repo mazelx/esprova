@@ -22,7 +22,7 @@
                 <button type="button" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</button>
                 <span class="result-detail-date">
                 {% comment %} I still don't fucking understand why I can't use genuine date here... check custom searchbackend to activate that bloody locale{% endcomment %}
-                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | datefr | capfirst }} à {{ r.time | time:"H:i" | default:"<em>NC</em>" }}</a>
+                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | datefr | capfirst }}</a>
                 </span>
             </div>
             {% endfor %}
