@@ -140,7 +140,7 @@ GOOGLE_API_KEY = "AIzaSyAu5lWzzuB7WXLqI9UzK2yL0IVtyr97yOg"
 
 
 
-bonsai_url = urlparse(os.environ.get('BONSAI_URL'))
+bonsai_url = os.environ.get('BONSAI_URL')
 
 # Haystack -----------
 HAYSTACK_CONNECTIONS = {
