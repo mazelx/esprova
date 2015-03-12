@@ -24,14 +24,14 @@ TEMPLATE_DIRS = (
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'oq3@gp%)8=x((h3%#d-v39dj#53foldi#akg_)m)(jicpohoyf'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['esprova.herokuapp.com', '.esprova.com']
+ALLOWED_HOSTS = ['esprova.herokuapp.com', '.esprova.com', 'esprova-staging.herokuapp.com']
 
 
 # Application definition
@@ -96,16 +96,10 @@ WSGI_APPLICATION = 'esprova.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 # Django settings.py
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd7bils84pgrji8',
-        'USER': 'smymkxetydqacu',
-        'PASSWORD': 'MsuTJ6e_EYO_-nMhFzPgV2f6_W',
-        'HOST': 'ec2-54-217-238-179.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
 
 redis_url = urlparse(os.environ.get('REDISCLOUD_URL'))
 CACHES = {
@@ -143,11 +137,14 @@ LOGIN_REDIRECT_URL = "/"
 GOOGLE_API_KEY = "AIzaSyAu5lWzzuB7WXLqI9UzK2yL0IVtyr97yOg"
 
 
+
+bonsai_url = urlparse(os.environ.get('BONSAI_URL'))
+
 # Haystack -----------
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'search_backends.elastic_backend.CustomElasticSearchEngine',
-        'URL': 'https://8vq0uifr:to2z8sa47tplzs1x@myrtle-3593425.eu-west-1.bonsai.io:443/',
+        'URL': bonsai_url,
         'INDEX_NAME': 'haystack',
     },
 }
