@@ -303,7 +303,9 @@ function initializeDOMComponents(){
             map.setCenter(bounds.getCenter());
             map.setZoom(parseInt(getParameterByName("z")));
         }
+        // viewport = map.getBounds().toUrlValue().split(",");
     }
+
 
     // set dates
     search_start_date = getParameterByName("start_date") || default_start_date;
@@ -414,7 +416,6 @@ function saveSportSession(sport){
         type: "POST",
         }).done(function() { 
             search_sport = sport;
-            resetSearchForm();
         });
     } 
 
@@ -427,6 +428,7 @@ function addListSportSelection(){
     $("#sport-selecter").on("change", function (event) { 
         event.preventDefault();
         saveSportSession(event.currentTarget.value);
+        resetSearchForm();
    });
 }
 

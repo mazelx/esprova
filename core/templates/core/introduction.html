@@ -48,7 +48,7 @@
             <!-- intro-banner -->
         </div>
         <!-- row -->
-        <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" method="GET">
+        <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" onsubmit="return submitForm(event)" method="GET">
             <div class="form-group form-group-lg">
                 <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Selectionnez un sport :</label>
                 <div class="col-sm-5">
@@ -161,6 +161,8 @@
 {% block beforeBodyClose %}
 <script type="text/javascript">
     var input;
+    var searchBox;
+    var submit = false;
     $( document ).ready(function() {
         var options = {
             types: ['(regions)'],
@@ -171,30 +173,29 @@
         input = $('#search_expr');
         searchBox = new google.maps.places.SearchBox(input[0]);
 
-        google.maps.event.addListener(searchBox, 'places_changed', function() {
-            var places = searchBox.getPlaces();
-            var submit = false;
+    });
+
+    function submitForm(evt) {
+        
+
+        var places = searchBox.getPlaces();
 
             if (input.val() === "" ) {
-                submit = true
+                return true;
             }
             
             if (typeof places !== "undefined") {
                 place = places[0];
                 if (place.geometry) {
-                    submit = true;
                     $("input[name=viewport]").val(place.geometry.viewport.getSouthWest().lat() + "," +
                                                   place.geometry.viewport.getSouthWest().lng() + "," +
                                                   place.geometry.viewport.getNorthEast().lat() + "," +
                                                   place.geometry.viewport.getNorthEast().lng());
+                    return true;
                 }
             }
-            if (!submit) {
-                event.preventDefault();
-                return;
-            }
-        });
-    });
+            evt.preventDefault();
+    }
 
 </script>
 
