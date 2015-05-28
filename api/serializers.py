@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Sport, Race, Location, EventReference, Contact, DistanceCategory, StageDistanceSpecific, SportStage
+from core.models import Sport, Race, Location, Event, Contact, DistanceCategory, StageDistanceSpecific, SportStage
 from rest_framework.exceptions import ParseError
 
 import logging
@@ -73,7 +73,7 @@ class DistanceSerializer(serializers.ModelSerializer):
 
 
 class RaceSerializer(serializers.ModelSerializer):
-    event = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=EventReference.objects.all(), default="")
+    event = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=Event.objects.all(), default="")
     sport = SportSerializer()
     distance_cat = DistanceCategorySerializer()
 
@@ -133,9 +133,9 @@ class EventSerializer(serializers.ModelSerializer):
     races = RaceSerializer(many=True)
 
     class Meta:
-        model = EventReference
+        model = Event
         fields = ('name',
-                  # 'edition',
+                  'edition',
                   'website',
                   'races'
                   )

@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from core.views import *
-from core.forms import ContactForm, RaceForm, LocationForm, EventReferenceForm, EventEditionForm
+from core.forms import ContactForm, RaceForm, LocationForm, EventForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from rest_framework import routers
@@ -15,7 +15,7 @@ from haystack.views import FacetedSearchView
 router = routers.DefaultRouter()
 router.register(r'/race', views.RaceViewSet)
 router.register(r'/sport', views.SportViewSet)
-router.register(r'/event', views.EventReferenceViewSet)
+router.register(r'/event', views.EventViewSet)
 router.register(r'/distancecat', views.DistanceCategoryViewSet)
 router.register(r'/contact', views.ContactViewSet)
 router.register(r'/location', views.LocationViewSet)
@@ -23,14 +23,14 @@ router.register(r'/location', views.LocationViewSet)
 
 
 race_named_forms = (
-    ("eventReference", EventReferenceForm),
-    ("eventEdition", EventEditionForm),
+    # ("eventReference", EventReferenceForm),
+    # ("event", EventForm),
     ("race", RaceForm),
     ("location", LocationForm),
     ("contact", ContactForm)
 )
 
-racewizard = RaceWizard.as_view(race_named_forms)
+race_edit = RaceEdit.as_view(race_named_forms)
 
 sqs = SearchQuerySet().facet('distance_cat')
 
@@ -58,18 +58,19 @@ urlpatterns = patterns('',
 
 
                        # CRUD
-                       url(r'^create/$', racewizard, name="create_race"),
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
                        # url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
-                       url(r'^update/(?P<pk>\d+)$', update_event, name="edit_event_edition"),
-                       url(r'^delete/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
+                       
+                       url(r'^update/(?P<pk>\d+)$', update_event, name='update_event'),
 
-                       url(r'^validate/$', RaceValidationList.as_view(), name="validate_racelist"),
+                       url(r'^update/(?P<event>\d+)/(?P<pk>\d+)$', race_edit, name="update_race"),
+                       url(r'^update/(?P<event>\d+)/add_race$', race_edit, name="add_race"),
+                       url(r'^update/(?P<event>\d+)/delete_race/(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
+
 
                        # Ajax views
                        url(r'^api/races/$', ajx_get_races, name='ajx_search_race'),
                        url(r'^api/delete/(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
-                       url(r'^api/validate/(?P<pk>\d+)$', ajx_validate_race, name="ajx_validate_race"),
                        url(r'^api/sport-session/', ajx_sport_session, name="ajx_sport_session"),
                        url(r'^api/distance/(?P<name>[\w ]+)$', ajx_get_distances, name="ajx_get_distances"),
 

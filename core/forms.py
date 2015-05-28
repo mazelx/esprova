@@ -1,5 +1,5 @@
 from django import forms
-from core.models import EventEdition, EventReference, Race, Location, Contact, Sport
+from core.models import Event, Race, Location, Contact, Sport
 
 
 # model forms ????
@@ -13,19 +13,12 @@ class SportForm(forms.ModelForm):
     name = forms.CharField(widget=forms.Select)
 
 
-class EventReferenceForm(forms.ModelForm):
+class EventForm(forms.ModelForm):
     class Meta:
-        model = EventReference
+        model = Event
         fields = [
             'name',
             'website',
-        ]
-
-
-class EventEditionForm(forms.ModelForm):
-    class Meta:
-        model = EventEdition
-        fields = [
             'edition',
         ]
 
@@ -35,11 +28,14 @@ class RaceForm(forms.ModelForm):
         model = Race
         fields = [
             'date',
+            'time',
             'sport',
             'distance_cat'
         ]
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'input-group datepicker'}),
+            'date': forms.DateInput(attrs={'class': 'input-group datepicker'},
+                                    format='%Y-%m-%d'),
+            'time': forms.TimeInput(format='%I:%M %p')
         }
     # # TODO : cascading select box to choose distances corresponding to a sport
 

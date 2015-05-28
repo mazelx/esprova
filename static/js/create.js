@@ -1,4 +1,8 @@
- var componentForm = {
+ 
+var native_datepicker = Modernizr.touch;
+
+
+var componentForm = {
   street_number : [{id: "id_location-street_number", selector: "short_name"}],
   route : [{id: "id_location-route", selector: "short_name"}],
   locality : [{id: "id_location-locality", selector: "short_name"}],
@@ -31,8 +35,10 @@ function initialize() {
     });
   }
 
-  createDatePickerComponent();
-
+  if (!native_datepicker) {
+        $("input[type=date]").attr("type", "text");
+        createDatePickerComponent();
+    }
 }
 
 // initialize bootstrap-datepicker component
@@ -46,7 +52,6 @@ function createDatePickerComponent() {
         todayBtn: "linked"
     });
 }
-
 
 // [START region_fillform]
 function fillInAddress() {

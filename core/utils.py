@@ -99,11 +99,11 @@ def direct_block_to_template(request, template, block, extra_context=None, mimet
 
 # clean db
 
-from core.models import Race, EventReference, EventEdition, Contact, Location, Organizer
+from core.models import Race, Event, Contact, Location, Organizer
 
 def delete_all_races_and_cascade():
     Race.objects.all().delete()
-    EventEdition.objects.all().delete()
+    Event.objects.all().delete()
     EventReference.objects.all().delete()
     Contact.objects.all().delete()
     Location.objects.all().delete()

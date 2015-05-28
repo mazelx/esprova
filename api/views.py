@@ -1,4 +1,4 @@
-from core.models import Sport, Race, Location, EventReference, Contact, DistanceCategory
+from core.models import Sport, Race, Location, Event, Contact, DistanceCategory
 from rest_framework import viewsets
 from api.serializers import *
 from api.serializers import RaceSerializer
@@ -21,11 +21,11 @@ class SportViewSet(viewsets.ModelViewSet):
     serializer_class = SportSerializer
 
 
-class EventReferenceViewSet(viewsets.ModelViewSet):
+class EventViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = EventReference.objects.all()
+    queryset = Event.objects.all()
     serializer_class = EventSerializer
 
 

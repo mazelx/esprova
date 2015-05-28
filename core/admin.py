@@ -25,8 +25,7 @@ class RaceAdmin(admin.ModelAdmin):
 
 admin.site.register(DistanceCategory, DistanceCategoryAdmin)
 admin.site.register(Race, RaceAdmin)
-admin.site.register(EventEdition)
-admin.site.register(EventReference)
+admin.site.register(Event)
 admin.site.register(Season)
 admin.site.register(Sport)
 admin.site.register(Contact)

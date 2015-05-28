@@ -135,7 +135,7 @@
                         <div class="race-infogroup-details">
                             <dl class="dl-horizontal">
                                 <dt>Web</dt>
-                                <dd><a href="{{race.website}}">{{race.website}}</a>
+                                <dd><a href="{{race.event.website}}">{{race.event.website}}</a>
                                 </dd>
                                 <dt>Organisateur</dt>
                                 <dd>
@@ -175,7 +175,7 @@
                         <a id="race_{{race.pk}}" onclick="validateRace({{race.pk}})" class="btn btn-success" href='#'>Valider</a>
                     {% endif %}
                   
-                    <a class="btn btn-warning" href="{% url "edit_event_edition" race.event.pk %}">Modifier</a>
+                    <a class="btn btn-warning" href="{% url "update_event" race.event.pk %}">Modifier</a>
                     <a onclick="deleteRace({{race.pk}})" class="btn btn-danger" href="#">Supprimer</a>
                     {% endif %}
             </div>

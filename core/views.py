@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.views.generic import ListView, DetailView, TemplateView
-from core.models import Race, Sport, EventReference, EventEdition
+from core.models import Race, Sport, Event
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render_to_response, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from core.forms import EventReferenceForm, EventEditionForm
+from core.forms import EventForm
 
 import datetime
 
@@ -61,25 +61,25 @@ def ajx_get_distances(request, name):
         return HttpResponse(dumps(response), content_type="application/json")
 
 
-@login_required
-def ajx_validate_all(request):
-    if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
-        for r in Race.validated_objects.all():
-            r.validated = True
-            r.save()
-        return HttpResponse('')
-    return HttpResponseBadRequest
+# @login_required
+# def ajx_validate_all(request):
+#     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
+#         for r in Race.validated_objects.all():
+#             r.validated = True
+#             r.save()
+#         return HttpResponse('')
+#     return HttpResponseBadRequest
 
 
-@login_required
-def ajx_validate_race(request, pk):
-    if (request.is_ajax() or settings.DEBUG) and request.method == 'PUT':
-        race = get_object_or_404(Race, pk=pk)
-        logging.debug('validate ' + str(race))  
-        race.validated = True
-        race.save()
-        return HttpResponse('')
-    return HttpResponseBadRequest
+# @login_required
+# def ajx_validate_race(request, pk):
+#     if (request.is_ajax() or settings.DEBUG) and request.method == 'PUT':
+#         race = get_object_or_404(Race, pk=pk)
+#         logging.debug('validate ' + str(race))  
+#         race.validated = True
+#         race.save()
+#         return HttpResponse('')
+#     return HttpResponseBadRequest
 
 
 @login_required
@@ -96,7 +96,7 @@ def ajx_get_races(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
         sqs = SearchQuerySet()
-        sqs = sqs.filter(validated="true")
+        # sqs = sqs.filter(validated="true")
 
         # search from quick search form
         sport = request.GET.get('sport')
@@ -251,33 +251,47 @@ class RaceList(LoginRequiredMixin, TemplateView):
 
 
 def update_event(request, pk):
-    eventEdition = EventEdition.objects.get(pk=pk)
-    eventEditionForm = EventEditionForm(request.POST or None, instance=eventEdition)
+    event = Event.objects.get(pk=pk)
+    eventForm = EventForm(request.POST or None, instance=event)
 
-    eventRef = eventEdition.event_ref
-    eventRefForm = EventReferenceForm(request.POST or None, instance=eventRef)
+    # eventRef = eventEdition.event_ref
+    # eventRefForm = EventReferenceForm(request.POST or None, instance=eventRef)
 
-    race_list = eventEdition.get_races()
+    race_list = event.get_races()
     
 
     if request.method == 'POST':
-        if eventEditionForm.is_valid() and eventRefForm.is_valid():
-            eventEditionForm.save()
-            eventRefForm.save()
+        if eventForm.is_valid():
+            eventForm.save()
             messages.success(request, (
                 "L'évènement {0} a bien été modifié et sera publié "
-                "après validation par nos services".format(eventRef.name))
+                "après validation par nos services".format(event.name))
             )
 
             return HttpResponseRedirect(reverse('list_race'))
 
 
-    return render(request, 'core/update_event.html', {'eventRefForm': eventRefForm, 
-                                                      'eventEditionForm':eventEditionForm,
+    return render(request, 'core/update_event.html', {'eventForm': eventForm,
+                                                      'pk': pk, 
                                                       'race_list': race_list})
     
 
+# def update_race(request, slug, pk):
+#     race = Race.objects.get(pk=pk)
+#     raceForm = RaceForm(request.POST or None, instance=race)
+#     location = race.location
+#     locationForm = LocationForm(request.POST or None, instance=location)
+#     contact = race.contact
+#     contactForm = ContactForm(request.POST or None, instance=contact)
 
+
+#     if request.method == 'POST':
+#         if raceForm.is_valid():
+#             raceForm.save()
+#         return HttpResponseRedirect(reverse('update_event'))
+#     return render(request, 'core/update_race.html', {'raceForm': raceForm, 
+#                                                      'locationForm': locationForm,
+#                                                      'contactForm': contactForm })
 
 
 class RaceView(LoginRequiredMixin, DetailView):
@@ -286,7 +300,7 @@ class RaceView(LoginRequiredMixin, DetailView):
     template_name = "core/race.html"
 
 
-class RaceWizard(SessionWizardView):
+class RaceEdit(SessionWizardView):
 
     TEMPLATES = {"race": "core/create_race.html",
                  "location": "core/create_race_location.html",
@@ -299,15 +313,17 @@ class RaceWizard(SessionWizardView):
         return [self.TEMPLATES[self.steps.current]]
 
     def get_form_initial(self, step):
-        if 'slug' in self.kwargs:
+        if 'pk' in self.kwargs:
             return {}
         else:
             return self.initial_dict.get(step, {})
 
     def get_form_instance(self, step):
-        if 'slug' in self.kwargs:
-            slug = self.kwargs['slug']
-            race = Race.objects.get(slug=slug)
+        event_pk = self.kwargs['event']
+        self.event = Event.objects.get(pk=event_pk)
+        if 'pk' in self.kwargs:
+            pk = self.kwargs['pk']
+            race = Race.objects.get(pk=pk)
 
             if (step == "race"):
                 instance = race
@@ -324,37 +340,17 @@ class RaceWizard(SessionWizardView):
 
     # This method is called when every forms has been submitted and validated
     def done(self, form_list, form_dict, **kwargs):
-        # a modifier
-        eventReference = form_dict['eventReference'].save()
-        logging.debug("event reference {0} saved , pk:{1}".format(eventReference, eventReference.pk))
-        eventEdition = form_dict['eventEdition'].save(commit=False)
-        eventEdition.event_ref = eventReference
-        eventEdition.save()
-        logging.debug("event {0}".format(eventReference))
-        # a modifier
-
-
         location = form_dict['location'].save()
         logging.debug("location {0}".format(location))
         contact = form_dict['contact'].save()
         logging.debug("contact {0}".format(contact))
         race = form_dict['race'].save(commit=False)
-
-        # if race.pk:
-        #     logging.debug("modification de l'id".format(race.pk))
-        #     race.modified_source_id = race
-        #     race.validated = False
-        #     race.pk = None
-        # else:
-        #     logging.debug("création")
-
-        # copy location
-        location.pk = None
-        location.save()
         race.location = location
-        race.event = eventEdition
         race.contact = contact
-        logging.debug("race {0}".format(race))
+
+        if not hasattr(race, 'event'):
+            race.event = self.event
+
         race.save()
 
         if race.pk:
@@ -363,22 +359,12 @@ class RaceWizard(SessionWizardView):
                 "après validation par nos services".format(race.event.name))
             )
 
-            # return HttpResponseRedirect(reverse('list_race'))
             changed_fields = []
             for form in form_list:
                 if form.has_changed():
                     changed_fields.append(form.changed_data)
 
-            # if form_dict['eventEdition'].has_changed():
-            #     return HttpResponse("event edition changed")
-            # if form_dict['location'].has_changed():
-            #     return HttpResponse("location changed")
-            # if form_dict['contact'].has_changed():
-            #     return HttpResponse("contact changed")
-            # if form_dict['race'].has_changed():
-            #     return HttpResponse("race changed")
-
-            return HttpResponse("Changed : {0}".format(changed_fields))
+            return HttpResponseRedirect(reverse('update_event', kwargs={'pk': race.event.pk}))
 
         messages.error(self.request, ("Il y a eu un problème lors de la création de la course"))
         return HttpResponseRedirect(reverse('create_race'))
@@ -391,17 +377,22 @@ class IntroView(LoginRequiredMixin, TemplateView):
 class RaceDelete(DeleteView):
     model = Race
     template_name = 'core/confirm_delete.html'
-    success_url = reverse_lazy('validate_racelist')
+    # success_url = reverse_lazy('list_race')
     context_object_name = "race"
 
     def get_object(self, queryset=None):
-        slug = self.kwargs.get('slug', None)
-        return get_object_or_404(Race, slug=slug)
+        pk = self.kwargs.get('pk', None)
+        self.instance = get_object_or_404(Race, pk=pk)
+        return self.instance
+
+    def get_success_url(self):
+        return reverse('update_event', kwargs={'pk': self.instance.event.pk})
 
 
 class RaceValidationList(ListView):
     model = Race
-    queryset = Race.objects.filter(validated=False)
+    # queryset = Race.objects.filter(validated=False)
+    queryset = Race.objects.all()
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
 

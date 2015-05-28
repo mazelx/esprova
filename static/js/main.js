@@ -79,6 +79,8 @@ if (typeof google !== "undefined") {
 
 function initialize() {
 
+
+
     page_title = document.title;
     search_sport = default_sport;
     viewport = default_search_bounds; 
@@ -323,7 +325,7 @@ function initializeDOMComponents(){
         $("#start_date").datepicker("update");
         $("#end_date").datepicker("update");
         addListSearch();
-    }
+    }e
 
     // set active
     var active = getParameterByName("active");

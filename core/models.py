@@ -226,73 +226,49 @@ class Season(models.Model):
         return (self.name)
 
 
-class EventReference(models.Model):
+# class EventReference(models.Model):
+#     """
+#         Represent an event (accross all seasons)
+#     """
+#     name = models.CharField(max_length=150)
+#     website = models.URLField(blank=True, null=True)
+#     organizer = models.ForeignKey(Organizer, blank=True, null=True)
+
+#     def __str__(self):
+#         return self.name
+
+#     def natural_key(self):
+#         return (self.name)
+
+
+class Event(models.Model):
     """
-        Represent an event (accross all seasons)
+        Represent an edition of an event
+        Races instances are direcly tied to an event distance. 
     """
     name = models.CharField(max_length=150)
     website = models.URLField(blank=True, null=True)
     organizer = models.ForeignKey(Organizer, blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-    def natural_key(self):
-        return (self.name)
-
-
-class EventEdition(models.Model):
-    """
-        Represent an edition of an event
-        Races instances are direcly tied to an event distance. 
-        For simplicity purpose, the eventmaster data can be directly accessed with properties
-    """
-
-    event_ref = models.ForeignKey(EventReference)
+    # event_ref = models.ForeignKey(EventReference)
     edition = models.PositiveSmallIntegerField()
+    previous_edition = models.ForeignKey("Event", blank=True, null=True)
 
     def natural_key(self):
-        return (self.edition,) + self.event_ref.natural_key()
-    natural_key.dependencies = ['core.EventReference']
-
+        return self.name + self.edition
 
     def __str__(self):
         return self.name
-
-    @property
-    def name(self):
-        return self.event_ref.name
-
-    @name.setter
-    def name(self, value):
-        self.event_ref.name = value
-
-    @property
-    def website(self):
-        return self.event_ref.website
-
-    @website.setter
-    def website(self, value):
-        self.event_ref.website = value
-
-    @property
-    def organizer(self):
-        return self.event_ref.organizer
-
-    @organizer.setter
-    def organizer(self, value):
-        self.event_ref.organizer = value
 
     def get_start_date(self):
-        return self.races.filter(validated=True).aggregate(Min('date'))['date__min']
+        return self.races.all().aggregate(Min('date'))['date__min']
 
     def get_end_date(self):
-        return self.races.filter(validated=True).aggregate(Max('date'))['date__max']
+        return self.races.all().aggregate(Max('date'))['date__max']
 
     def get_distance_cat_set(self, unique=False):
         distance_cat_set = []
         already_added = {}
-        for r in self.races.filter(validated=True).order_by('distance_cat__order'):
+        for r in self.races.all().order_by('distance_cat__order'):
             if r.distance_cat in already_added and unique == True: continue
             already_added[r.distance_cat] = 1
             distance_cat_set.append(r.distance_cat)
@@ -300,7 +276,7 @@ class EventEdition(models.Model):
 
     def get_races(self):
         races = []
-        for r in self.races.filter(validated=True).order_by('distance_cat__order'):
+        for r in self.races.all().order_by('distance_cat__order'):
             races.append(r)
         return races
 
@@ -377,23 +353,14 @@ class DistanceCategory(models.Model):
         return var
 
 
-class RaceValidatedManager(models.Manager):
-    """
-        Model manager for retrieving valided races only
-    """
-    def get_queryset(self):
-        return super(RaceValidatedManager, self).get_queryset().filter(validated=True)
-
-
 class Race(models.Model):
     """
         Represent a race, main model of the application
-        If the validated flag is set to False, the race will not be displayed in search result
 
     """
     slug = models.SlugField(max_length=100, blank=True, null=True)
     sport = models.ForeignKey(Sport)
-    event = models.ForeignKey(EventEdition, related_name='races')
+    event = models.ForeignKey(Event, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField()
     time = models.TimeField(blank=True, null=True)
@@ -404,20 +371,16 @@ class Race(models.Model):
     contact = models.ForeignKey(Contact)
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
-    validated = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.CharField(max_length=100)
     modified_date = models.DateTimeField(auto_now=True)
-
-    objects = models.Manager()  # The default manager.
-    validated_objects = RaceValidatedManager()  # Validated race manager
 
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
 
     def natural_key(self):
         return (self.date, self.time, self.distance_cat) + self.event
-    natural_key.dependencies = ['core.Eventedition']
+    natural_key.dependencies = ['core.Event']
 
 
     def pre_delete(self, *args, **kwargs):
