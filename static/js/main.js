@@ -325,7 +325,7 @@ function initializeDOMComponents(){
         $("#start_date").datepicker("update");
         $("#end_date").datepicker("update");
         addListSearch();
-    }e
+    }
 
     // set active
     var active = getParameterByName("active");
