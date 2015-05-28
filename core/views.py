@@ -297,18 +297,35 @@ class RaceWizard(SessionWizardView):
         else:
             return self.instance_dict.get(step, None)
 
+    # This method is called when every forms has been submitted and validated
     def done(self, form_list, form_dict, **kwargs):
         eventReference = form_dict['eventReference'].save()
+
+        if form_dict['eventEdition'].has_changed():
+            logging.debug("event edition changed")
+
         logging.debug("event reference {0} saved , pk:{1}".format(eventReference, eventReference.pk))
         eventEdition = form_dict['eventEdition'].save(commit=False)
         eventEdition.event_ref = eventReference
         eventEdition.save()
         logging.debug("event {0}".format(eventReference))
         location = form_dict['location'].save()
-        logging.debug("event {0}".format(location))
+        logging.debug("location {0}".format(location))
         contact = form_dict['contact'].save()
-        logging.debug("event {0}".format(contact))
+        logging.debug("contact {0}".format(contact))
         race = form_dict['race'].save(commit=False)
+
+        if race.pk:
+            logging.debug("modification de l'id".format(race.pk))
+            race.modified_source_id = race
+            race.validated = False
+            race.pk = None
+        else:
+            logging.debug("création")
+
+        # copy location
+        location.pk = None
+        location.save()
         race.location = location
         race.event = eventEdition
         race.contact = contact
@@ -320,7 +337,23 @@ class RaceWizard(SessionWizardView):
                 "La course {0} a bien été créée et sera publiée "
                 "après validation par nos services".format(race.event.name))
             )
-            return HttpResponseRedirect(reverse('list_race'))
+
+            # return HttpResponseRedirect(reverse('list_race'))
+            changed_fields = []
+            for form in form_list:
+                if form.has_changed():
+                    changed_fields.append(form.changed_data)
+
+            # if form_dict['eventEdition'].has_changed():
+            #     return HttpResponse("event edition changed")
+            # if form_dict['location'].has_changed():
+            #     return HttpResponse("location changed")
+            # if form_dict['contact'].has_changed():
+            #     return HttpResponse("contact changed")
+            # if form_dict['race'].has_changed():
+            #     return HttpResponse("race changed")
+
+            return HttpResponse("Changed : {0}".format(changed_fields))
 
         messages.error(self.request, ("Il y a eu un problème lors de la création de la course"))
         return HttpResponseRedirect(reverse('create_race'))
