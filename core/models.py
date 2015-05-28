@@ -240,6 +240,8 @@ class EventReference(models.Model):
     def natural_key(self):
         return (self.name)
 
+    def get_absolute_url(self):
+        return reverse('author-detail', kwargs={'pk': self.pk})
 
 class EventEdition(models.Model):
     """

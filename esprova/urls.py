@@ -60,7 +60,8 @@ urlpatterns = patterns('',
                        # CRUD
                        url(r'^create/$', racewizard, name="create_race"),
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
-                       url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
+                       # url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
+                       url(r'^update/(?P<pk>\d+)$', update_event, name="edit_event_edition"),
                        url(r'^delete/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
 
                        url(r'^validate/$', RaceValidationList.as_view(), name="validate_racelist"),

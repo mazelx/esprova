@@ -1,6 +1,6 @@
 from django.http import Http404
-from django.views.generic import ListView, DetailView, TemplateView, DeleteView
-from core.models import Race, Sport
+from django.views.generic import ListView, DetailView, TemplateView
+from core.models import Race, Sport, EventReference, EventEdition
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
@@ -11,8 +11,9 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render_to_response
-# from core.forms import SportForm
+from django.shortcuts import get_object_or_404, render_to_response, render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from core.forms import EventReferenceForm, EventEditionForm
 
 import datetime
 
@@ -74,7 +75,7 @@ def ajx_validate_all(request):
 def ajx_validate_race(request, pk):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'PUT':
         race = get_object_or_404(Race, pk=pk)
-        logging.debug('validate ' + str(race))
+        logging.debug('validate ' + str(race))  
         race.validated = True
         race.save()
         return HttpResponse('')
@@ -249,6 +250,36 @@ class RaceList(LoginRequiredMixin, TemplateView):
         return context
 
 
+def update_event(request, pk):
+    eventEdition = EventEdition.objects.get(pk=pk)
+    eventEditionForm = EventEditionForm(request.POST or None, instance=eventEdition)
+
+    eventRef = eventEdition.event_ref
+    eventRefForm = EventReferenceForm(request.POST or None, instance=eventRef)
+
+    race_list = eventEdition.get_races()
+    
+
+    if request.method == 'POST':
+        if eventEditionForm.is_valid() and eventRefForm.is_valid():
+            eventEditionForm.save()
+            eventRefForm.save()
+            messages.success(request, (
+                "L'évènement {0} a bien été modifié et sera publié "
+                "après validation par nos services".format(eventRef.name))
+            )
+
+            return HttpResponseRedirect(reverse('list_race'))
+
+
+    return render(request, 'core/update_event.html', {'eventRefForm': eventRefForm, 
+                                                      'eventEditionForm':eventEditionForm,
+                                                      'race_list': race_list})
+    
+
+
+
+
 class RaceView(LoginRequiredMixin, DetailView):
     model = Race
     context_object_name = "race"
@@ -257,9 +288,7 @@ class RaceView(LoginRequiredMixin, DetailView):
 
 class RaceWizard(SessionWizardView):
 
-    TEMPLATES = {"eventReference": "core/create_race.html",
-                 "eventEdition": "core/create_race.html",
-                 "race": "core/create_race.html",
+    TEMPLATES = {"race": "core/create_race.html",
                  "location": "core/create_race_location.html",
                  "contact": "core/create_race.html"}
 
@@ -280,11 +309,7 @@ class RaceWizard(SessionWizardView):
             slug = self.kwargs['slug']
             race = Race.objects.get(slug=slug)
 
-            if (step == "eventReference"):
-                instance = race.event.event_ref
-            elif (step == "eventEdition"):
-                instance = race.event
-            elif (step == "race"):
+            if (step == "race"):
                 instance = race
             elif (step == "location"):
                 instance = race.location
@@ -299,29 +324,29 @@ class RaceWizard(SessionWizardView):
 
     # This method is called when every forms has been submitted and validated
     def done(self, form_list, form_dict, **kwargs):
+        # a modifier
         eventReference = form_dict['eventReference'].save()
-
-        if form_dict['eventEdition'].has_changed():
-            logging.debug("event edition changed")
-
         logging.debug("event reference {0} saved , pk:{1}".format(eventReference, eventReference.pk))
         eventEdition = form_dict['eventEdition'].save(commit=False)
         eventEdition.event_ref = eventReference
         eventEdition.save()
         logging.debug("event {0}".format(eventReference))
+        # a modifier
+
+
         location = form_dict['location'].save()
         logging.debug("location {0}".format(location))
         contact = form_dict['contact'].save()
         logging.debug("contact {0}".format(contact))
         race = form_dict['race'].save(commit=False)
 
-        if race.pk:
-            logging.debug("modification de l'id".format(race.pk))
-            race.modified_source_id = race
-            race.validated = False
-            race.pk = None
-        else:
-            logging.debug("création")
+        # if race.pk:
+        #     logging.debug("modification de l'id".format(race.pk))
+        #     race.modified_source_id = race
+        #     race.validated = False
+        #     race.pk = None
+        # else:
+        #     logging.debug("création")
 
         # copy location
         location.pk = None

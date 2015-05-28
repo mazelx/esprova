@@ -18,7 +18,6 @@ class EventReferenceForm(forms.ModelForm):
         model = EventReference
         fields = [
             'name',
-            # 'edition',
             'website',
         ]
 
@@ -27,9 +26,7 @@ class EventEditionForm(forms.ModelForm):
     class Meta:
         model = EventEdition
         fields = [
-            # 'name',
             'edition',
-            # 'website',
         ]
 
 
