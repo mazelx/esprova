@@ -300,12 +300,17 @@ class Event(models.Model):
                 race_list.append(r)
 
             e = self
+
+            # clone event into new event (no pk yet)
             e.pk = None
-            e.event_mod_source = self
             e.save()
+
             for r in race_list:
                 r.event = e
                 r.save()
+
+            e.event_mod_source = self
+            e.validated = False
             e.save()
 
             return e
