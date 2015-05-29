@@ -251,7 +251,9 @@ class Event(models.Model):
     organizer = models.ForeignKey(Organizer, blank=True, null=True)
     # event_ref = models.ForeignKey(EventReference)
     edition = models.PositiveSmallIntegerField()
-    previous_edition = models.ForeignKey("Event", blank=True, null=True)
+    event_prev_edition = models.OneToOneField("Event", related_name='event_next_edition', blank=True, null=True)
+    validated = models.BooleanField(default=False)
+    event_mod_source = models.ForeignKey("Event", related_name='event_modified_set', blank=True, null=True)
 
     def natural_key(self):
         return self.name + self.edition
@@ -279,6 +281,42 @@ class Event(models.Model):
         for r in self.races.all().order_by('distance_cat__order'):
             races.append(r)
         return races
+
+    def clone(self):
+        try:
+            race_list = []
+            for r in self.get_races():
+                # copy location
+                l = r.location
+                l.pk = None
+                l.save()
+                r.location = l
+
+                # copy race
+                r.pk = None
+                r.save()
+
+                # save race in list
+                race_list.append(r)
+
+            e = self
+            e.pk = None
+            e.event_mod_source = self
+            e.save()
+            for r in race_list:
+                r.event = e
+                r.save()
+            e.save()
+
+            return e
+
+        except Exception as exception:
+            print(exception)
+            for r in race_list:
+                r.location.delete()
+                r.delete()
+            if e.pk:
+                e.delete()
 
 
 class Federation(models.Model):
