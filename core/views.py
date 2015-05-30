@@ -250,6 +250,7 @@ class RaceList(LoginRequiredMixin, TemplateView):
         return context
 
 
+
 def update_event(request, pk):
     event = Event.objects.get(pk=pk)
     eventForm = EventForm(request.POST or None, instance=event)
