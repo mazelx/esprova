@@ -66,21 +66,21 @@ class Location(models.Model):
 
     """
 
-    street_number = models.CharField(max_length=10, blank=True, null=True)
-    route = models.CharField(max_length=200, blank=True, null=True)
+    street_number = models.CharField(max_length=10, blank=True, null=True, verbose_name='Numero')
+    route = models.CharField(max_length=200, blank=True, null=True, verbose_name='Voie')
 
     # city/town
-    locality = models.CharField(max_length=100)
+    locality = models.CharField(max_length=100, verbose_name='Ville')
 
     # region / state
-    administrative_area_level_1 = models.CharField(max_length=100)
+    administrative_area_level_1 = models.CharField(max_length=100, verbose_name='Région')
     administrative_area_level_1_short_name = models.CharField(max_length=100)
     # departement
-    administrative_area_level_2 = models.CharField(max_length=100)
+    administrative_area_level_2 = models.CharField(max_length=100, verbose_name='Département')
     administrative_area_level_2_short_name = models.CharField(max_length=100)
 
-    postal_code = models.CharField(max_length=16)
-    country = CountryField()
+    postal_code = models.CharField(max_length=16, verbose_name='Code Postal')
+    country = CountryField(verbose_name='Pays')
 
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lng = models.DecimalField(max_digits=8, decimal_places=5)
@@ -329,7 +329,7 @@ class Federation(models.Model):
         Represent a sport Federation
     
     """
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150,)
     sport = models.ManyToManyField(Sport)
 
     def natural_key(self):
@@ -344,9 +344,9 @@ class Contact(models.Model):
         Represent a race contact
 
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Contact')
     email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=10, blank=True, null=True)
+    phone = models.CharField(max_length=10, blank=True, null=True, verbose_name='Téléphone')
 
     def natural_key(self):
         return (self.name)
@@ -406,8 +406,8 @@ class Race(models.Model):
     event = models.ForeignKey(Event, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField()
-    time = models.TimeField(blank=True, null=True)
-    distance_cat = models.ForeignKey(DistanceCategory)
+    time = models.TimeField(blank=True, null=True, verbose_name='Heure')
+    distance_cat = models.ForeignKey(DistanceCategory, verbose_name="Distance")
     price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
     label = models.ForeignKey(Label, blank=True, null=True, related_name='races')

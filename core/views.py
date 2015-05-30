@@ -303,7 +303,7 @@ class RaceView(LoginRequiredMixin, DetailView):
 class RaceEdit(SessionWizardView):
 
     TEMPLATES = {"race": "core/create_race.html",
-                 "location": "core/create_race_location.html",
+                 "location": "core/create_race.html",
                  "contact": "core/create_race.html"}
 
     # template_name = 'core/create_race.html'

@@ -27,15 +27,15 @@ class RaceForm(forms.ModelForm):
     class Meta:
         model = Race
         fields = [
+            'sport',
+            'distance_cat',
             'date',
             'time',
-            'sport',
-            'distance_cat'
         ]
         widgets = {
             'date': forms.DateInput(attrs={'class': 'input-group datepicker'},
                                     format='%Y-%m-%d'),
-            'time': forms.TimeInput(format='%I:%M %p')
+            'time': forms.TimeInput(format='%H:%M')
         }
     # # TODO : cascading select box to choose distances corresponding to a sport
 
@@ -48,13 +48,9 @@ class LocationForm(forms.ModelForm):
             'route',
             'locality',
             'administrative_area_level_1',
-            'administrative_area_level_1_short_name',
             'administrative_area_level_2',
-            'administrative_area_level_2_short_name',
             'postal_code',
             'country',
-            'lat',
-            'lng',
         ]
 
 
