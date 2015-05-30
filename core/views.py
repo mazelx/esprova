@@ -262,6 +262,8 @@ def update_event(request, pk):
 
     if request.method == 'POST':
         if eventForm.is_valid():
+            event = event.clone()
+            eventForm = EventForm(request.POST or None, instance=event)
             eventForm.save()
             messages.success(request, (
                 "L'évènement {0} a bien été modifié et sera publié "
