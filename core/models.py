@@ -247,10 +247,10 @@ class Event(models.Model):
         Races instances are direcly tied to an event distance. 
     """
     name = models.CharField(max_length=150)
-    website = models.URLField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True, verbose_name='Site internet')
     organizer = models.ForeignKey(Organizer, blank=True, null=True)
     # event_ref = models.ForeignKey(EventReference)
-    edition = models.PositiveSmallIntegerField()
+    edition = models.PositiveSmallIntegerField(verbose_name="Numéro d'édition")
     event_prev_edition = models.OneToOneField("Event", related_name='event_next_edition', blank=True, null=True)
     validated = models.BooleanField(default=False)
     event_mod_source = models.ForeignKey("Event", related_name='event_modified_set', blank=True, null=True)
