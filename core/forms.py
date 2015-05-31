@@ -37,7 +37,7 @@ class RaceForm(forms.ModelForm):
                                     format='%Y-%m-%d'),
             'time': forms.TimeInput(format='%H:%M')
         }
-    # # TODO : cascading select box to choose distances corresponding to a sport
+    # # TODO : cascading select box to choo se distances corresponding to a sport
 
 
 class LocationForm(forms.ModelForm):
@@ -51,6 +51,12 @@ class LocationForm(forms.ModelForm):
             'administrative_area_level_2',
             'postal_code',
             'country',
+
+            # hidden
+            'administrative_area_level_1_short_name', 
+            'administrative_area_level_2_short_name',
+            'lat',
+            'lng',
         ]
 
 
