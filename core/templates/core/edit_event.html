@@ -52,7 +52,7 @@
                     {% if pk %}
                         <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary"><a href="{% url "add_race" pk %}"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Ajouter une course"></span> Ajouter un course ...</a></li>
                     {% else %}
-                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary text-muted">Veuillez créer l'évenement avant d'ajouter une course</li>
+                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary text-muted">Veuillez enregistrer l'évenement avant d'ajouter une course</li>
                     {% endif %}
                 </ul>
             </div>
@@ -63,7 +63,7 @@
                     {% if pk %}
                         <button type="submit" class="btn btn-primary">Modifier</button>
                     {% else %}
-                        <button type="submit" class="btn btn-primary">Créer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     {% endif %}
                 </div>
             </div>
