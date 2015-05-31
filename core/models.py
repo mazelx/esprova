@@ -66,7 +66,7 @@ class Location(models.Model):
 
     """
 
-    street_number = models.CharField(max_length=10, blank=True, null=True, verbose_name='Numero')
+    street_number = models.CharField(max_length=10, blank=True, null=True, verbose_name='Numéro')
     route = models.CharField(max_length=200, blank=True, null=True, verbose_name='Voie')
 
     # city/town
