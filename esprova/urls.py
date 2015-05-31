@@ -61,7 +61,7 @@ urlpatterns = patterns('',
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
                        # url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
                        
-                       url(r'^create/$', update_event, name='create_event'),
+                       url(r'^create/$', create_event, name='create_event'),
                        url(r'^update/(?P<pk>\d+)$', update_event, name='update_event'),
 
                        url(r'^update/(?P<event>\d+)/(?P<pk>\d+)$', race_edit, name="update_race"),

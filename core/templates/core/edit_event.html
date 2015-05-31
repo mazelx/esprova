@@ -15,7 +15,11 @@
 <div class="content ">
     <div class="container update">
 
+    {% if pk %}
     <h1>Modification d'évènement</h1>
+    {% else %}
+    <h1>Création d'évènement</h1>
+    {% endif %}
 
         <form action="" method="post">
             {% csrf_token %}
@@ -45,14 +49,22 @@
                          </span>
                          </li>
                     {% endfor %}
-                    <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary"><a href="{% url "add_race" pk %}"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Ajouter une course"></span> Ajouter un course ...</a></li>
+                    {% if pk %}
+                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary"><a href="{% url "add_race" pk %}"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Ajouter une course"></span> Ajouter un course ...</a></li>
+                    {% else %}
+                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary text-muted">Veuillez créer l'évenement avant d'ajouter une course</li>
+                    {% endif %}
                 </ul>
             </div>
 
             <div class="row">
                 <div class="form-submit">
                     <button type="cancel" class="btn btn-default">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Modifier</button>
+                    {% if pk %}
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary">Créer</button>
+                    {% endif %}
                 </div>
             </div>
 

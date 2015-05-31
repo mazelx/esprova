@@ -246,24 +246,36 @@ class RaceList(LoginRequiredMixin, TemplateView):
             # directly assign into params.distances.XS for example
             context['params']['distances'][dist] = True
 
-
         return context
 
+
+def create_event(request):
+    eventForm = EventForm(request.POST or None)
+
+    if request.method == 'POST':
+        if eventForm.is_valid():
+            event = eventForm.save()
+            messages.success(request, (
+                "L'évènement {0} a bien été modifié et sera publié "
+                "après validation par nos services".format(event.name))
+            )
+
+            return HttpResponseRedirect(reverse('update_event', kwargs={'pk': event.pk}))
+
+    return render(request, 'core/edit_event.html', {'eventForm': eventForm,
+                                                      'pk': None,
+                                                      'race_list': None})
 
 
 def update_event(request, pk):
     event = Event.objects.get(pk=pk)
     eventForm = EventForm(request.POST or None, instance=event)
-
-    # eventRef = eventEdition.event_ref
-    # eventRefForm = EventReferenceForm(request.POST or None, instance=eventRef)
-
     race_list = event.get_races()
-    
 
     if request.method == 'POST':
         if eventForm.is_valid():
-            event = event.clone()
+            if(event.validated):
+                event = event.clone()
             eventForm = EventForm(request.POST or None, instance=event)
             eventForm.save()
             messages.success(request, (
@@ -274,7 +286,7 @@ def update_event(request, pk):
             return HttpResponseRedirect(reverse('list_race'))
 
 
-    return render(request, 'core/update_event.html', {'eventForm': eventForm,
+    return render(request, 'core/edit_event.html', {'eventForm': eventForm,
                                                       'pk': pk, 
                                                       'race_list': race_list})
     
@@ -305,11 +317,11 @@ class RaceView(LoginRequiredMixin, DetailView):
 
 class RaceEdit(SessionWizardView):
 
-    TEMPLATES = {"race": "core/create_race.html",
-                 "location": "core/create_race.html",
-                 "contact": "core/create_race.html"}
+    TEMPLATES = {"race": "core/edit_race.html",
+                 "location": "core/edit_race.html",
+                 "contact": "core/edit_race.html"}
 
-    # template_name = 'core/create_race.html'
+    # template_name = 'core/edit_race.html'
 
     # Define template files trough TEMPLATES dict
     def get_template_names(self):

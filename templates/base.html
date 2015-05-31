@@ -94,13 +94,13 @@
                 </ul>
             
                 <ul class="nav navbar-nav navbar-right">
-                        <li class="disabled" >
+                        
                         {% if not user.is_authenticated %}
-                            <a href=" {% url "create_race" %}">Ajouter une course</a></li>
+                            <li class="disabled">
                         {% else %}
-                             <a href="#"><i class="fa fa-plus"></i>  Ajouter une course</a></li>
+                            <li>
                         {% endif %}
-
+                            <a href=" {% url "create_event" %}"> Ajouter une course</a></li>
                         </li>
                     {% if user.is_authenticated %}
                         <li class="dropdown">

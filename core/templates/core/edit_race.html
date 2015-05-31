@@ -5,18 +5,17 @@
 {% block head_extra %}
 <script type="text/javascript" src="{% static "js/create.js" %}"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key={{ GOOGLE_API_KEY }}"></script>
-{# <script type="text/javascript" src="{% static "js/race.js" %}"></script> #}
 {% endblock %}
 
 {% block content %}
 <div class="content">
     <div class="container update">
-        <h1>Modification de course</h1>
+        <h1>f:Modification de course</h1>
         <h2>f:Informations Générales ( {{wizard.steps.step1 }} / {{ wizard.steps.count }} )</h2>
         <form action="" method="post" class="form-horizontal">
             {% csrf_token %}
 
-            {# display location search box only for locaiton form #}
+            {# display location search box only for location form #}
             {% if wizard.steps.step1 == 2 %}
             <div class='row'>
                 <div class="col-sm-8 col-sm-offset-2">
