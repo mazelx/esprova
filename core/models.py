@@ -5,6 +5,8 @@ from haystack.utils.geo import Point
 from django.db.models import Min, Max
 from django.template.defaultfilters import slugify
 from geopy.geocoders import GoogleV3
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import D
@@ -412,7 +414,7 @@ class Race(models.Model):
     price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
     label = models.ForeignKey(Label, blank=True, null=True, related_name='races')
-    contact = models.ForeignKey(Contact)
+    contact = models.OneToOneField(Contact)
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -426,18 +428,17 @@ class Race(models.Model):
         return (self.date, self.time, self.distance_cat) + self.event
     natural_key.dependencies = ['core.Event']
 
-
-    def pre_delete(self, *args, **kwargs):
-        """
-            Do a cascade delete on contact, location and event instance if this is their last race
-        """
-        logging.debug("entering pre_delete")
-        if len(self.contact.races.all()) < 2:
-            self.contact.delete()
-        if len(self.location.races.all()) < 2:
-            self.location.delete()
-        if len(self.event.races.all()) < 2:
-            self.event.delete()
+    # def pre_delete(self, *args, **kwargs):
+    #     """
+    #         Do a cascade delete on contact, location and event instance if this is their last race
+    #     """
+    #     logging.debug("entering pre_delete")
+    #     if len(self.contact.races.all()) < 2:
+    #         self.contact.delete()
+    #     if len(self.location.races.all()) < 2:
+    #         self.location.delete()
+    #     if len(self.event.races.all()) < 2:
+    #         self.event.delete()
 
     def save(self, *args, **kwargs):
         """
@@ -487,6 +488,14 @@ class Race(models.Model):
 
         # return race objects instead of haystack searchresul
         return [sr.object for sr in sqs]
+
+
+@receiver(post_delete, sender=Race)
+def post_delete_race(sender, instance, *args, **kwargs):
+    if instance.contact:
+        instance.contact.delete()
+    if instance.location:
+        instance.location.delete()
 
 
 class StageDistance(models.Model):
