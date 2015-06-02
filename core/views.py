@@ -324,6 +324,34 @@ class RaceEdit(SessionWizardView):
 
     # template_name = 'core/edit_race.html'
 
+
+    def get(self, request, *args, **kwargs):
+        """
+        This method handles GET requests.
+
+        If a GET request reaches this point, the wizard assumes that the user
+        just starts at the first step or wants to restart the process.
+        The data of the wizard will be resetted before rendering the first step.
+        """
+        event_pk = self.kwargs['event']
+        event = Event.objects.get(pk=event_pk)
+
+        if event.validated:
+            cloned_event = event.clone()
+            return HttpResponseRedirect(reverse('add_race', kwargs={'event': cloned_event.pk}))
+
+        self.storage.reset()
+
+        # reset the current step to the first step.
+        self.storage.current_step = self.steps.first
+        return self.render(self.get_form())
+
+    def get_context_data(self, form, **kwargs):
+        event_pk = self.kwargs['event']
+        context = super(RaceEdit, self).get_context_data(form=form, **kwargs)
+        context.update({'event_pk': event_pk})
+        return context
+
     # Define template files trough TEMPLATES dict
     def get_template_names(self):
         return [self.TEMPLATES[self.steps.current]]
