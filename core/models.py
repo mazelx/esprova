@@ -75,6 +75,7 @@ class Location(models.Model):
     # region / state
     administrative_area_level_1 = models.CharField(max_length=100, verbose_name='Région')
     administrative_area_level_1_short_name = models.CharField(max_length=100)
+    
     # departement
     administrative_area_level_2 = models.CharField(max_length=100, verbose_name='Département')
     administrative_area_level_2_short_name = models.CharField(max_length=100)
