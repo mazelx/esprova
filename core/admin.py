@@ -22,10 +22,11 @@ class RaceAdmin(admin.ModelAdmin):
     ordering = ('date', )
     search_fields = ('event', 'distance_cat')
 
+
 class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'website', 'edition', 'validated', 'event_mod_source', 'event_prev_edition')
     list_filter = ('name', 'website', 'edition', 'validated', 'event_mod_source', 'event_prev_edition')
-    ordering = ('name', )
+    ordering = ('name', ) 
     search_fields = ('name', 'validated')
 
 
