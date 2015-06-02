@@ -102,6 +102,7 @@ def ajx_get_races(request):
         sport = request.GET.get('sport')
         if not sport:
             return HttpResponseBadRequest
+
         sqs = sqs.filter(sport=sport)
 
         # search from map bounds

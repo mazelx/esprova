@@ -306,6 +306,7 @@ class Event(models.Model):
 
             # clone event into new event (no pk yet)
             e.pk = None
+            e.validated = False
             e.save()
 
             for r in race_list:
@@ -313,7 +314,6 @@ class Event(models.Model):
                 r.save()
 
             e.event_mod_source = self
-            e.validated = False
             e.save()
 
             return e
@@ -387,7 +387,7 @@ class DistanceCategory(models.Model):
         verbose_name_plural = "Distance Categories"
 
     def __str__(self):
-        return "{0}:{1}".format(self.sport, self.name)
+        return "{0} ({1})".format(self.name, self.sport)
 
     def natural_key(self):
         return (self.sport, self.name)
@@ -399,18 +399,24 @@ class DistanceCategory(models.Model):
         return var
 
 
+def get_limit_for_distancecat():
+    return {'sport': Sport.objects.get(name='Triathlon').id}
+
+
 class Race(models.Model):
     """
         Represent a race, main model of the application
 
     """
     slug = models.SlugField(max_length=100, blank=True, null=True)
-    sport = models.ForeignKey(Sport)
+    sport = models.ForeignKey(Sport, limit_choices_to={'hidden': False})
     event = models.ForeignKey(Event, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField()
     time = models.TimeField(blank=True, null=True, verbose_name='Heure')
-    distance_cat = models.ForeignKey(DistanceCategory, verbose_name="Distance")
+    distance_cat = models.ForeignKey(DistanceCategory,
+                                     verbose_name="Distance",
+                                     limit_choices_to=get_limit_for_distancecat)
     price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
     label = models.ForeignKey(Label, blank=True, null=True, related_name='races')
