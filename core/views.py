@@ -96,7 +96,7 @@ def ajx_get_races(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
         sqs = SearchQuerySet()
-        # sqs = sqs.filter(validated="true")
+        sqs = sqs.filter(validated="true")
 
         # search from quick search form
         sport = request.GET.get('sport')
