@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django_countries.fields import CountryField
 from haystack.utils.geo import Point
 from django.db.models import Min, Max
@@ -498,10 +498,15 @@ class Race(models.Model):
 
 @receiver(post_delete, sender=Race)
 def post_delete_race(sender, instance, *args, **kwargs):
-    if instance.contact:
+    try:
         instance.contact.delete()
-    if instance.location:
+    except ObjectDoesNotExist as exp:
+        pass
+
+    try:
         instance.location.delete()
+    except ObjectDoesNotExist as exp:
+        pass
 
 
 class StageDistance(models.Model):
