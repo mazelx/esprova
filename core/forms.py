@@ -1,6 +1,7 @@
 from django import forms
 from core.models import Event, Race, Location, Contact, Sport
-
+import pycountry
+import pdb
 
 # model forms ????
 
@@ -47,17 +48,38 @@ class LocationForm(forms.ModelForm):
             'street_number',
             'route',
             'locality',
-            'administrative_area_level_1',
-            'administrative_area_level_2',
             'postal_code',
             'country',
 
             # hidden
-            'administrative_area_level_1_short_name', 
-            'administrative_area_level_2_short_name',
+            # 'administrative_area_level_1_short_name',
+            # 'administrative_area_level_2_short_name',
+            # 'administrative_area_level_1',
+            # 'administrative_area_level_2',
             'lat',
             'lng',
         ]
+        widgets = {
+            'lat': forms.HiddenInput(),
+            'lng': forms.HiddenInput(),
+        }
+
+    def save(self, force_insert=False, force_update=False, commit=True):
+        l = super(LocationForm, self).save(commit=False)
+        # pdb.set_trace()
+
+        # get admin level 1 and 2 data from postal code (at least for France)
+        dpt = self.cleaned_data['postal_code'][:2]
+        sub = pycountry.subdivisions.get(code=('FR-' + dpt))
+        l.administrative_area_level_2_short_name = dpt
+        l.administrative_area_level_2 = sub.name
+        l.administrative_area_level_1_short_name = sub.parent.code
+        l.administrative_area_level_1 = sub.parent.name
+        # l.save(commit=False)  
+
+        if commit:
+            l.save()
+        return l
 
 
 class ContactForm(forms.ModelForm):
