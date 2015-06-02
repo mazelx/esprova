@@ -4,7 +4,7 @@
 
 {% block head_extra %}
 <script type="text/javascript" src="{% static "js/create.js" %}"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key={{ GOOGLE_API_KEY }}"></script>
+{# <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key={{ GOOGLE_API_KEY }}"></script> #}
 {% endblock %}
 
 {% block content %}
@@ -12,15 +12,30 @@
     <div class="container update">
         <h1>f:Modification de course</h1>
         <h2>f:Informations Générales ( {{wizard.steps.step1 }} / {{ wizard.steps.count }} )</h2>
-        <form action="" method="post" class="form-horizontal">
+        <form autocomplete="off"  action="" method="post" class="form-horizontal" id="edit-form">
+            
             {% csrf_token %}
+
+            <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+            <input autocomplete="false" name="hidden" type="text" style="display:none;">
 
             {# display location search box only for location form #}
             {% if wizard.steps.step1 == 2 %}
-            <div class='row'>
-                <div class="col-sm-8 col-sm-offset-2">
-                    <input id="autocompleteInput" class="form-control location-searchbox" placeholder="Rechercher une adresse" onFocus="geolocate()" type="text"></input>
+            <div class='location-searchbox'>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="autocompleteInput" class="location-searchbox-label">Rechercher une adresse :</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input id="autocompleteInput" class="form-control" placeholder="Entrer une adresse pour remplir automatiquement le formulaire" onFocus="geolocate()" type="text" name="location-searchbox"></input>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 map-container" >
+                        <div id="address-map"></div>
+                    </div>
+                </div>
+
             </div>
             {% endif %}
 
@@ -32,6 +47,12 @@
                 {{ wizard.form.management_form }}
         
                 {% for form in wizard.form.forms %}
+
+                    {# Include the hidden fields #}
+                    {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+
                     {% for field in form.visible_fields %}
                         <div class="form-group">
                             {{ field.errors }}
@@ -42,6 +63,12 @@
                 {% endfor %}
 
             {% else %}
+
+                {# Include the hidden fields #}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+
                 {% for field in wizard.form.visible_fields %}
                     <div class="form-group">
                         {{ field.errors }}
