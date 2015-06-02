@@ -500,12 +500,12 @@ class Race(models.Model):
 def post_delete_race(sender, instance, *args, **kwargs):
     try:
         instance.contact.delete()
-    except ObjectDoesNotExist as exp:
+    except ObjectDoesNotExist:
         pass
 
     try:
         instance.location.delete()
-    except ObjectDoesNotExist as exp:
+    except ObjectDoesNotExist:
         pass
 
 
