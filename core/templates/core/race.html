@@ -169,12 +169,6 @@
     
         <div class="row">
             <div class="race-command">
-                    {%if request.user.is_superuser %}
-
-                    {% if not race.validated %}
-                        <a id="race_{{race.pk}}" onclick="validateRace({{race.pk}})" class="btn btn-success" href='#'>Valider</a>
-                    {% endif %}
-                  
                     <a class="btn btn-warning" href="{% url "update_event" race.event.pk %}">Modifier</a>
                     <a onclick="deleteRace({{race.pk}})" class="btn btn-danger" href="#">Supprimer</a>
                     {% endif %}
