@@ -113,31 +113,30 @@ function clearForm() {
     field_type = frm_elements[i].type.toLowerCase();
     
     // do not clear the crsf token
-    if(frm_elements[i].name === 'csrfmiddlewaretoken'){
-      break;
-    }
+    if(frm_elements[i].name !== 'csrfmiddlewaretoken' && frm_elements[i].name !== 'race_edit-current_step'){
 
-    switch (field_type)
-    {
-    case "text":
-    case "password":
-    case "textarea":
-    case "hidden":
-        frm_elements[i].value = "";
-        break;
-    case "radio":
-    case "checkbox":
-        if (frm_elements[i].checked)
-        {
-            frm_elements[i].checked = false;
-        }
-        break;
-    case "select-one":
-    case "select-multi":
-        frm_elements[i].selectedIndex = -1;
-        break;
-    default:
-        break;
+      switch (field_type)
+      {
+      case "text":
+      case "password":
+      case "textarea":
+      case "hidden":
+          frm_elements[i].value = "";
+          break;
+      case "radio":
+      case "checkbox":
+          if (frm_elements[i].checked)
+          {
+              frm_elements[i].checked = false;
+          }
+          break;
+      case "select-one":
+      case "select-multi":
+          frm_elements[i].selectedIndex = -1;
+          break;
+      default:
+          break;
+      }
     }
   }
 }
