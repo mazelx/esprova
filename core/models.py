@@ -7,6 +7,7 @@ from django.template.defaultfilters import slugify
 from geopy.geocoders import GoogleV3
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+import copy
 
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import D
@@ -262,7 +263,7 @@ class Event(models.Model):
         return self.name + self.edition
 
     def __str__(self):
-        return self.name
+        return "{0} - {1}".format(self.pk, self.name)
 
     def get_start_date(self):
         return self.races.all().aggregate(Min('date'))['date__min']
@@ -302,7 +303,7 @@ class Event(models.Model):
                 # save race in list
                 race_list.append(r)
 
-            e = self
+            e = copy.copy(self)
 
             # clone event into new event (no pk yet)
             e.pk = None
