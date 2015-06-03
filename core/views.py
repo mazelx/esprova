@@ -282,19 +282,15 @@ def create_event(request):
 
 def update_event(request, pk):
     event = Event.objects.get(pk=pk)
+    eventForm = EventForm(request.POST or None, instance=event)
     cloned = False
 
-    if event.validated:
-        event = event.clone()
-        pk = event.pk
-        cloned = True
-
-    eventForm = EventForm(request.POST or None, instance=event)
+    # eventForm = EventForm(request.POST or None, instance=event)
     race_list = event.get_races()
 
+    # if form sent
     if request.method == 'POST':
         if eventForm.is_valid():
-            eventForm = EventForm(request.POST or None, instance=event)
             eventForm.save()
             messages.success(request, (
                 "L'évènement {0} a bien été modifié et sera publié "
@@ -302,6 +298,13 @@ def update_event(request, pk):
             )
 
             return HttpResponseRedirect(reverse('list_race'))
+    # if form init
+    else:
+        if event.validated:
+            event = event.clone()
+            pk = event.pk
+            cloned = True
+            eventForm = EventForm(instance=event)
 
     return render(request, 'core/edit_event.html', {'eventForm': eventForm,
                                                     'pk': pk,
