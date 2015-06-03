@@ -24,7 +24,7 @@ class RaceAdmin(admin.ModelAdmin):
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'website', 'edition', 'validated', 'event_mod_source', 'event_prev_edition')
+    list_display = ('pk', 'name', 'website', 'edition', 'validated', 'event_mod_source', 'event_prev_edition')
     list_filter = ('name', 'website', 'edition', 'validated', 'event_mod_source', 'event_prev_edition')
     ordering = ('name', ) 
     search_fields = ('name', 'validated')
