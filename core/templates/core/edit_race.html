@@ -12,7 +12,13 @@
 {% block content %}
 <div class="content">
     <div class="container update">
-        <h1>f:Modification de course</h1>
+        <h1>
+        {% if update_flg %}
+            Modification de course
+        {% else %}
+            Création de course
+        {% endif %}
+        </h1>
         <h2> 
         {% if wizard.steps.current == 'race' %}
         Général

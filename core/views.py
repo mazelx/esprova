@@ -374,7 +374,7 @@ class RaceEdit(SessionWizardView):
     def get_context_data(self, form, **kwargs):
         event_pk = self.kwargs['event']
         context = super(RaceEdit, self).get_context_data(form=form, **kwargs)
-        context.update({'event_pk': event_pk})
+        context.update({'event_pk': event_pk, 'update_flg': self.update_flg})
         return context
 
     # Define template files trough TEMPLATES dict
