@@ -70,7 +70,7 @@ urlpatterns = patterns('',
                        url(r'^update/(?P<event>\d+)/add_race$', race_edit, name="add_race"),
                        url(r'^update/(?P<event>\d+)/delete_race/(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
 
-
+                       url(r'^events/$', EventList.as_view(), name='list_event'),
 
                        # Ajax views
                        url(r'^api/races/$', ajx_get_races, name='ajx_search_race'),

@@ -288,7 +288,7 @@ def update_event(request, pk):
 
     # if form sent
     if request.method == 'POST':
-       
+
         if eventForm.is_valid():
             eventForm.save()
             messages.success(request, (
@@ -307,7 +307,7 @@ def update_event(request, pk):
                                                     'pk': pk,
                                                     'race_list': race_list,
                                                     })
-    
+
 
 # def update_race(request, slug, pk):
 #     race = Race.objects.get(pk=pk)
@@ -441,6 +441,13 @@ class RaceEdit(SessionWizardView):
 
 class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
+
+
+class EventList(ListView):
+    model = Event
+    queryset = Event.objects.all()
+    template_name = "core/list_event.html"
+    context_object_name = "event_list"
 
 
 class EventDelete(DeleteView):
