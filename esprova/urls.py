@@ -63,15 +63,19 @@ urlpatterns = patterns('',
                        
                        url(r'^create/$', create_event, name='create_event'),
                        url(r'^update/(?P<pk>\d+)$', update_event, name='update_event'),
+                       url(r'^delete/(?P<pk>\d+)$', EventDelete.as_view(), name='delete_event'),
+
 
                        url(r'^update/(?P<event>\d+)/(?P<pk>\d+)$', race_edit, name="update_race"),
                        url(r'^update/(?P<event>\d+)/add_race$', race_edit, name="add_race"),
                        url(r'^update/(?P<event>\d+)/delete_race/(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
 
 
+
                        # Ajax views
                        url(r'^api/races/$', ajx_get_races, name='ajx_search_race'),
-                       url(r'^api/delete/(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
+                       url(r'^api/delete/race/(?P<pk>\d+)$', ajx_delete_race, name="ajx_delete_race"),
+                       # url(r'^api/delete/(?P<pk>\d+)$', ajx_delete_event, name="ajx_delete_event"),
                        url(r'^api/sport-session/', ajx_sport_session, name="ajx_sport_session"),
                        url(r'^api/distance/(?P<name>[\w ]+)$', ajx_get_distances, name="ajx_get_distances"),
 

@@ -59,7 +59,12 @@
 
             <div class="row">
                 <div class="form-submit">
-                    <button type="cancel" class="btn btn-default">Annuler</button>
+                    {% if cloned %}
+                        <a href="{% url "delete_event" pk %}" class="btn btn-info" role="button">Annuler</a>
+                    {% else %}
+                        <a href="{% url "list_race" %}" class="btn btn-info" role="button">Annuler</a>
+                    {% endif %}
+
                     {% if pk %}
                         <button type="submit" class="btn btn-primary">Modifier</button>
                     {% else %}

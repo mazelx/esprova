@@ -82,6 +82,8 @@ def ajx_get_distances(request, name):
 #     return HttpResponseBadRequest
 
 
+# All ajx SHOULD include crsf ... i guess ?
+
 @login_required
 def ajx_delete_race(request, pk):
     logging.debug(str(request.is_ajax()) + '-' + str(settings.DEBUG) + '-' + str(request.method))
@@ -90,6 +92,16 @@ def ajx_delete_race(request, pk):
         race.delete()
         return HttpResponse('')
     return HttpResponseBadRequest
+
+
+# @login_required
+# def ajx_delete_event(request, pk):
+#     logging.debug(str(request.is_ajax()) + '-' + str(settings.DEBUG) + '-' + str(request.method))
+#     if (request.is_ajax() or settings.DEBUG) and request.method == 'DELETE':
+#         event = get_object_or_404(Event, pk=pk)
+#         event.delete()
+#         return HttpResponse('')
+#     return HttpResponseBadRequest
 
 
 def ajx_get_races(request):
@@ -264,19 +276,24 @@ def create_event(request):
             return HttpResponseRedirect(reverse('update_event', kwargs={'pk': event.pk}))
 
     return render(request, 'core/edit_event.html', {'eventForm': eventForm,
-                                                      'pk': None,
-                                                      'race_list': None})
+                                                    'pk': None,
+                                                    'race_list': None})
 
 
 def update_event(request, pk):
     event = Event.objects.get(pk=pk)
+    cloned = False
+
+    if event.validated:
+        event = event.clone()
+        pk = event.pk
+        cloned = True
+
     eventForm = EventForm(request.POST or None, instance=event)
     race_list = event.get_races()
 
     if request.method == 'POST':
         if eventForm.is_valid():
-            if(event.validated):
-                event = event.clone()
             eventForm = EventForm(request.POST or None, instance=event)
             eventForm.save()
             messages.success(request, (
@@ -286,10 +303,10 @@ def update_event(request, pk):
 
             return HttpResponseRedirect(reverse('list_race'))
 
-
     return render(request, 'core/edit_event.html', {'eventForm': eventForm,
-                                                      'pk': pk, 
-                                                      'race_list': race_list})
+                                                    'pk': pk,
+                                                    'race_list': race_list,
+                                                    'cloned': cloned})
     
 
 # def update_race(request, slug, pk):
@@ -322,8 +339,8 @@ class RaceEdit(SessionWizardView):
                  "location": "core/edit_race.html",
                  "contact": "core/edit_race.html"}
 
+    update_flg = False
     # template_name = 'core/edit_race.html'
-
 
     def get(self, request, *args, **kwargs):
         """
@@ -333,11 +350,19 @@ class RaceEdit(SessionWizardView):
         just starts at the first step or wants to restart the process.
         The data of the wizard will be resetted before rendering the first step.
         """
+
+        # if update
+        if 'pk' in self.kwargs:
+            self.update_flg = True
+
         event_pk = self.kwargs['event']
         event = Event.objects.get(pk=event_pk)
 
         if event.validated:
             cloned_event = event.clone()
+            if self.update_flg:
+                # TODO : ne pas transmettre l'ancien race pk ! mais quoi ?
+                return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}))
             return HttpResponseRedirect(reverse('add_race', kwargs={'event': cloned_event.pk}))
 
         self.storage.reset()
@@ -418,9 +443,23 @@ class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
 
 
+class EventDelete(DeleteView):
+    mode = Event
+    template_name = 'core/delete_event.html'
+    context_object_name = "event"
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk', None)
+        self.instance = get_object_or_404(Event, pk=pk)
+        return self.instance
+
+    def get_success_url(self):
+        return reverse('list_race')
+
+
 class RaceDelete(DeleteView):
     model = Race
-    template_name = 'core/confirm_delete.html'
+    template_name = 'core/delete_race.html'
     # success_url = reverse_lazy('list_race')
     context_object_name = "race"
 
