@@ -115,6 +115,8 @@ class Location(ComparableModelMixin, models.Model):
         Note that a location may be used by multiple races
 
     """
+    compare_excluded_keys = 'pk', 'id', '_state', 'lat', 'lng'
+
 
     street_number = models.CharField(max_length=10, blank=True, null=True, verbose_name='Numéro')
     route = models.CharField(max_length=200, blank=True, null=True, verbose_name='Voie')
@@ -470,7 +472,7 @@ class Race(ComparableModelMixin, models.Model):
         Represent a race, main model of the application
 
     """
-    compare_excluded_keys = 'pk', 'id', '_state', 'slug', 'created_date', 'created_by', 'modified_date'
+    compare_excluded_keys = 'pk', 'id', '_state', 'event_id', 'slug', 'created_date', 'created_by', 'modified_date'
 
     slug = models.SlugField(max_length=100, blank=True, null=True)
     sport = models.ForeignKey(Sport, limit_choices_to={'hidden': False})
