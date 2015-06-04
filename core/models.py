@@ -7,6 +7,8 @@ from django.template.defaultfilters import slugify
 from geopy.geocoders import GoogleV3
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.db.models import ForeignKey
+
 import copy
 
 from haystack.query import SearchQuerySet
@@ -14,6 +16,51 @@ from haystack.utils.geo import D
 
 import datetime
 import logging
+
+
+class ComparableModelMixin(object):
+    compare_excluded_keys = 'pk', 'id', '_state'
+
+    def compare(self, obj1):
+        d1, d2 = self.__dict__, obj1.__dict__
+        old, new = {}, {}
+
+        # remove _cache fields
+        fields = {field: value for (field, value) in d1.items() if not field[-6:] == '_cache'}
+
+        for k, v in fields.items():
+            # pass if excluded
+            if k in self.compare_excluded_keys:
+                continue
+
+            # if field is a relationship, try to call the compare() method
+            # the field name is followed by 'id' thus need concat (ex. contact_id -> contact)
+            instance_field = ''
+            rel_field_name = k[:-3]
+            try:
+                instance_field = self._meta.get_field_by_name(rel_field_name)[0]
+            except:
+                pass
+
+            if isinstance(instance_field, ForeignKey):
+                try:
+                    instance_rel = getattr(self, rel_field_name)
+                    old_rel = getattr(obj1, rel_field_name)
+                    field_old, field_new = instance_rel.compare(old_rel)
+                    old.update({rel_field_name: field_old})
+                    new.update({rel_field_name: field_new})
+                    pass
+                except:
+                    pass
+            else:
+                try:
+                    if v != d2[k]:
+                        old.update({k: v})
+                        new.update({k: d2[k]})
+                except KeyError:
+                    old.update({k: v})
+
+        return old, new
 
 
 class Sport(models.Model):
@@ -58,7 +105,7 @@ class Sport(models.Model):
         # self.distancecategory_set.all() = value
 
 
-class Location(models.Model):
+class Location(ComparableModelMixin, models.Model):
 
     """
         Represent a race location, built upon the Google maps V3 data structure as
@@ -78,7 +125,7 @@ class Location(models.Model):
     # region / state
     administrative_area_level_1 = models.CharField(max_length=100, verbose_name='Région')
     administrative_area_level_1_short_name = models.CharField(max_length=100)
-    
+
     # departement
     administrative_area_level_2 = models.CharField(max_length=100, verbose_name='Département')
     administrative_area_level_2_short_name = models.CharField(max_length=100)
@@ -199,7 +246,7 @@ class SportStage(models.Model):
         return "{0}".format(self.name)
 
 
-class Organizer(models.Model):
+class Organizer(ComparableModelMixin, models.Model):
     """
         Represent the event organizer
     """
@@ -245,11 +292,15 @@ class Season(models.Model):
 #         return (self.name)
 
 
-class Event(models.Model):
+class Event(ComparableModelMixin, models.Model):
     """
         Represent an edition of an event
-        Races instances are direcly tied to an event distance. 
+        Races instances are direcly tied to an event distance.
     """
+
+    # for compare() method of ComparableModelMixin
+    compare_excluded_keys = 'pk', 'id', '_state', 'event_mod_source', 'validated', 'event_mod_source'
+
     name = models.CharField(max_length=150)
     website = models.URLField(blank=True, null=True, verbose_name='Site internet')
     organizer = models.ForeignKey(Organizer, blank=True, null=True)
@@ -275,7 +326,7 @@ class Event(models.Model):
         distance_cat_set = []
         already_added = {}
         for r in self.races.all().order_by('distance_cat__order'):
-            if r.distance_cat in already_added and unique == True: continue
+            if r.distance_cat in already_added and unique is True: continue
             already_added[r.distance_cat] = 1
             distance_cat_set.append(r.distance_cat)
         return distance_cat_set
@@ -290,11 +341,19 @@ class Event(models.Model):
         try:
             race_list = []
             for r in self.get_races():
+
                 # copy location
                 l = r.location
                 l.pk = None
                 l.save()
                 r.location = l
+
+                 # copy contact
+                c = r.contact
+                c.pk = None
+                c.save()
+                r.contact = c
+
 
                 # copy race
                 r.pk = None
@@ -328,6 +387,7 @@ class Event(models.Model):
                 e.delete()
 
 
+
 class Federation(models.Model):
     """
         Represent a sport Federation
@@ -343,7 +403,7 @@ class Federation(models.Model):
         return self.name
 
 
-class Contact(models.Model):
+class Contact(ComparableModelMixin, models.Model):
     """
         Represent a race contact
 
@@ -357,6 +417,7 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 class Label(models.Model):
@@ -404,11 +465,13 @@ def get_limit_for_distancecat():
     return {'sport': Sport.objects.get(name='Triathlon').id}
 
 
-class Race(models.Model):
+class Race(ComparableModelMixin, models.Model):
     """
         Represent a race, main model of the application
 
     """
+    compare_excluded_keys = 'pk', 'id', '_state', 'slug', 'created_date', 'created_by', 'modified_date'
+
     slug = models.SlugField(max_length=100, blank=True, null=True)
     sport = models.ForeignKey(Sport, limit_choices_to={'hidden': False})
     event = models.ForeignKey(Event, related_name='races')
