@@ -299,7 +299,6 @@ class Event(ComparableModelMixin, models.Model):
         Represent an edition of an event
         Races instances are direcly tied to an event distance.
     """
-
     # for compare() method of ComparableModelMixin
     compare_excluded_keys = 'pk', 'id', '_state', 'event_mod_source', 'validated', 'event_mod_source'
 

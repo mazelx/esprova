@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     # project applications
     'search_backends',
     'core',
+    'planning',
 )
 
 MIDDLEWARE_CLASSES = (
