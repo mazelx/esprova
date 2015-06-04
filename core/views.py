@@ -485,5 +485,3 @@ class RaceValidationList(ListView):
     queryset = Race.objects.all()
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
-
-

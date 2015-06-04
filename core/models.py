@@ -356,6 +356,7 @@ class Event(ComparableModelMixin, models.Model):
                 c.save()
                 r.contact = c
 
+                r.race_mod_source = r
 
                 # copy race
                 r.pk = None
@@ -489,6 +490,7 @@ class Race(ComparableModelMixin, models.Model):
     contact = models.OneToOneField(Contact)
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
+    race_mod_source = models.ForeignKey("Race", related_name='race_modified_set', blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.CharField(max_length=100)
     modified_date = models.DateTimeField(auto_now=True)
