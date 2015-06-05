@@ -310,6 +310,7 @@ class Event(ComparableModelMixin, models.Model):
     event_prev_edition = models.OneToOneField("Event", related_name='event_next_edition', blank=True, null=True)
     validated = models.BooleanField(default=False)
     event_mod_source = models.ForeignKey("Event", related_name='event_modified_set', blank=True, null=True)
+    to_be_deleted = models.BooleanField(default=False)
 
     def natural_key(self):
         return self.name + self.edition
