@@ -86,24 +86,15 @@ $.ajaxSetup({
     }
 });
 
-function validateRace(pk) {
-    // TODO : Propose a cancel link and delay for few seconds
-    $.ajax({
-        url: '/api/validate/'+pk,
-        type: 'PUT',
+
+function addToPlanning(pk) {
+      $.ajax({
+        url: '/api/planning/add',
+        type: 'POST',
+        data: { race: pk },
         success: function(response, statut) {
-            alert('validé')
-        },
-    });
-}
-function deleteRace(pk) {
-    // TODO : Propose a cancel link and delay for few seconds
-     $.ajax({
-        url: '/api/delete/'+pk,
-        type: 'DELETE',
-        success: function(response, statut) {
-            alert('supprimé')
-            window.location.replace("/list")
+            window.location.replace("/planning/")
+
         },
     });
 }

@@ -2,6 +2,51 @@
 {% load static from staticfiles %} 
 
 
+{% block head_extra %}
+<script type="text/javascript">
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
+    function removeFromPlanning(pk) {
+          $.ajax({
+            url: '/api/planning/remove',
+            type: 'POST',
+            data: { race: pk },
+            success: function(response, statut) {
+                alert('retiré')
+            },
+        });
+          location.reload();
+    }
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="container content planning">
 
@@ -9,18 +54,22 @@
     <div class="list-group">
         {% for planned_race in planned_race_list %}
             <div id="race_{{planned_race.race.pk}}">
-                <a href="{% url 'view_race' planned_race.race.slug planned_race.race.pk %}" class="list-group-item row">
+                <div class="list-group-item row">
                     <div class="list-group-item-text">
                             <div class="col-xs-3 date">
                                 <div class="visible-xs-block">{{ planned_race.race.date | date:"d/m/Y" }}</div>
                                 <div class="hidden-xs">{{ planned_race.race.date }}</div>
                             </div>
-                            <div class="col-xs-9">
-                                <div class="event">{{ planned_race.race.event.name }}</div>
+                            <div class="col-xs-8">
+                                <div class="event"><a href="{% url "view_race" planned_race.race.slug planned_race.race.pk %}" title="Plus d'informations">{{ planned_race.race.event.name }}</a></div>
                                 <div class="infos">{{planned_race.race.sport.name}} - {{planned_race.race.distance_cat.name}}</div>
                             </div>
+                            <div>
+                                <a class="glyphicon glyphicon-remove text-danger close_button" aria-hidden="true" href="#" title="Retirer du planning" onclick="removeFromPlanning({{planned_race.race.pk}})"></a>
+                            </div>
                     </div>
-                </a>
+                </div>
+
             </div>
         {% endfor %}
     </div>
