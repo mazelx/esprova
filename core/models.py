@@ -21,7 +21,7 @@ import logging
 class ComparableModelMixin(object):
     compare_excluded_keys = 'pk', 'id', '_state'
 
-    def compare(self, obj1):
+    def compare(self, obj1, no_follow=False):
         d1, d2 = self.__dict__, obj1.__dict__
         old, new = {}, {}
 
@@ -37,18 +37,20 @@ class ComparableModelMixin(object):
             # the field name is followed by 'id' thus need concat (ex. contact_id -> contact)
             instance_field = ''
             rel_field_name = k[:-3]
-            try:
-                instance_field = self._meta.get_field_by_name(rel_field_name)[0]
-            except:
-                pass
+            if not no_follow:
+                try:
+                    instance_field = self._meta.get_field_by_name(rel_field_name)[0]
+                except:
+                    pass
 
             if isinstance(instance_field, ForeignKey):
                 try:
                     instance_rel = getattr(self, rel_field_name)
                     old_rel = getattr(obj1, rel_field_name)
                     field_old, field_new = instance_rel.compare(old_rel)
-                    old.update({rel_field_name: field_old})
-                    new.update({rel_field_name: field_new})
+                    if field_old or field_new:
+                        old.update({rel_field_name: field_old})
+                        new.update({rel_field_name: field_new})
                     pass
                 except:
                     pass
@@ -63,7 +65,7 @@ class ComparableModelMixin(object):
         return old, new
 
 
-class Sport(models.Model):
+class Sport(ComparableModelMixin, models.Model):
     """
         Represent a sport : "Triathlon" / "Duathlon" / "Trail" ...
         Sports that contains multiple stages are defined with combinedSport = true
@@ -390,7 +392,6 @@ class Event(ComparableModelMixin, models.Model):
                 e.delete()
 
 
-
 class Federation(models.Model):
     """
         Represent a sport Federation
@@ -422,7 +423,6 @@ class Contact(ComparableModelMixin, models.Model):
         return self.name
 
 
-
 class Label(models.Model):
     """
         Represent a race label
@@ -437,7 +437,7 @@ class Label(models.Model):
         return self.name
 
 
-class DistanceCategory(models.Model):
+class DistanceCategory(ComparableModelMixin, models.Model):
     """
         Represent a distance category (ie: XS, S, M, L, XL)
 
