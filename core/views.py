@@ -496,3 +496,20 @@ class RaceValidationList(ListView):
     queryset = Race.objects.all()
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
+
+
+def show_changes(pk):
+    changes = {}
+    e = Event.objects.get(pk=pk)
+    changes.update({'event': e.compare(e.event_mod_source)})
+    races_changes = {}
+    for r in e.get_races():
+        if r.race_mod_source:
+            races_changes.update({r.pk: r.compare(r.race_mod_source)})
+        else:
+            races_changes.update({r.pk: ({}, None)})
+
+    changes.update({'race': races_changes})
+    return changes
+
+
