@@ -46,9 +46,10 @@
                     <p class="event-name">{{ race.event.name }}</p>
                     <p class="event-location">{{ race.location.locality }}
                         {% if race.location.administrative_area_level_2_short_name %}
-                        ({{ race.location.administrative_area_level_2_short_name }})
+                            ({{ race.location.administrative_area_level_2_short_name }})
                         {%endif%}
                     </p>
+                    <a onclick="addToPlanning({{race.pk}})" class="btn btn-danger" href="#">Ajouter au planning</a>
             </header>
         </div>
 
