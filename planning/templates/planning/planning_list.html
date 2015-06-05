@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static from staticfiles %} 
+
+
+{% block content %}
+<div class="container content planning">
+
+    <h1>Programme</h1>
+    <div class="list-group">
+        {% for planned_race in planned_race_list %}
+            <div id="race_{{planned_race.race.pk}}">
+                <a href="{% url 'view_race' planned_race.race.slug planned_race.race.pk %}" class="list-group-item row">
+                    <div class="list-group-item-text">
+                            <div class="col-xs-3 date">
+                                <div class="visible-xs-block">{{ planned_race.race.date | date:"d/m/Y" }}</div>
+                                <div class="hidden-xs">{{ planned_race.race.date }}</div>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="event">{{ planned_race.race.event.name }}</div>
+                                <div class="infos">{{planned_race.race.sport.name}} - {{planned_race.race.distance_cat.name}}</div>
+                            </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{%endblock%}

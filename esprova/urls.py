@@ -6,6 +6,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from rest_framework import routers
 from api import views
+from planning.views import PlanningList
 
 from haystack.forms import FacetedSearchForm
 from haystack.query import SearchQuerySet
@@ -98,6 +99,7 @@ urlpatterns = patterns('',
                        # url(r'^listv2/$', TemplateView.as_view(template_name='core/ui_refactor.html')),
                        # url(r'^racev2/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceViewv2.as_view(), name='view_racev2'),
 
+                      url(r'^planning/$', PlanningList.as_view()),
 
                        )
 

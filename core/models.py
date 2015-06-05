@@ -647,5 +647,3 @@ class StageDistanceDefault(StageDistance):
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)
-
-
