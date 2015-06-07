@@ -61,6 +61,7 @@ urlpatterns = patterns('',
 
                        # CRUD
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
+                       url(r'^events/(?P<pk>\d+)$', EventView.as_view(), name='view_event'),
                        # url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
                        
                        url(r'^create/$', create_event, name='create_event'),
@@ -71,8 +72,6 @@ urlpatterns = patterns('',
                        url(r'^update/(?P<event>\d+)/(?P<pk>\d+)$', race_edit, name="update_race"),
                        url(r'^update/(?P<event>\d+)/add_race$', race_edit, name="add_race"),
                        url(r'^update/(?P<event>\d+)/delete_race/(?P<pk>\d+)$', RaceDelete.as_view(), name="delete_race"),
-
-                       url(r'^events/$', EventList.as_view(), name='list_event'),
 
                        # Ajax views
                        url(r'^api/races/$', ajx_get_races, name='ajx_search_race'),
@@ -103,6 +102,8 @@ urlpatterns = patterns('',
                        url(r'^planning/$', PlanningList.as_view(), name='planning'),
                        url(r'^api/planning/add$', add_race_to_planning, name='planning_add_race'),
                        url(r'^api/planning/remove$', remove_race_from_planning, name='planning_remove_race'),
+
+                       url(r'^validation$', EventValidationList.as_view(), name='list_event_validation'),
 
                        )
 

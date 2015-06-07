@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+
+
+{% block head_extra %}
+<script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
+<script type="text/javascript" src="{% static "js/race.js" %}"></script>
+
+<title>{{ event.name }}</title>
+<meta name="description" content="{{ race.event.name }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+{% endblock %}
+
+{% block content %}
+
+<div class="content ">
+    <div class="container update">
+
+    <h1>{{ event.name }}</h1>
+
+        <div class="row">
+            <div class="row">
+                <span class="col-xs-3">Site internet : </span>
+                <span class="col-xs-9">{{ event.website }}</span>
+            </div>
+            <div class="row">
+                <span class="col-xs-3">Editon : </span>
+                <span class="col-xs-9">{{ event.edition }}</span>
+            </div>
+
+            <br class="row">
+            <div class="row"> <span class="col-xs-3"><label>Races : </label> </span></div>
+            <ul class="list-group row">
+                {% for race in event.get_races %}
+                     <li class="col-xs-9 col-xs-offset-3 list-group-item">
+                         <span>
+                            <a href="{% url "view_race" race.slug race.pk %}" >{{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} </a>
+                         </span>
+                     </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

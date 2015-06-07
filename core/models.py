@@ -21,7 +21,7 @@ import logging
 class ComparableModelMixin(object):
     compare_excluded_keys = 'pk', 'id', '_state'
 
-    def compare(self, obj1, no_follow=False):
+    def _compare(self, obj1, no_follow=False):
         d1, d2 = self.__dict__, obj1.__dict__
         old, new = {}, {}
 
@@ -33,7 +33,7 @@ class ComparableModelMixin(object):
             if k in self.compare_excluded_keys:
                 continue
 
-            # if field is a relationship, try to call the compare() method
+            # if field is a relationship, try to call the _compare() method
             # the field name is followed by 'id' thus need concat (ex. contact_id -> contact)
             instance_field = ''
             rel_field_name = k[:-3]
@@ -47,7 +47,7 @@ class ComparableModelMixin(object):
                 try:
                     instance_rel = getattr(self, rel_field_name)
                     old_rel = getattr(obj1, rel_field_name)
-                    field_old, field_new = instance_rel.compare(old_rel)
+                    field_old, field_new = instance_rel._compare(old_rel)
                     if field_old or field_new:
                         old.update({rel_field_name: field_old})
                         new.update({rel_field_name: field_new})
@@ -301,7 +301,7 @@ class Event(ComparableModelMixin, models.Model):
         Represent an edition of an event
         Races instances are direcly tied to an event distance.
     """
-    # for compare() method of ComparableModelMixin
+    # for _compare() method of ComparableModelMixin
     compare_excluded_keys = 'pk', 'id', '_state', 'event_mod_source', 'validated', 'event_mod_source'
 
     name = models.CharField(max_length=150)
@@ -390,6 +390,40 @@ class Event(ComparableModelMixin, models.Model):
                 r.delete()
             if e.pk:
                 e.delete()
+
+    def get_nb_changes(self):
+        if self.pk:
+            return Event.objects.filter(event_mod_source=self.pk).count()
+
+    def get_changed_event(self):
+        if self.pk:
+            return Event.objects.filter(event_mod_source=self.pk)
+
+
+    def get_changes(self):
+        if self.pk and self.event_mod_source:
+            # Compare only event fields (not race fields)
+            event_changes = self._compare(self.event_mod_source)
+            races_changes = {}
+            ref_races = [r.pk for r in self.event_mod_source.get_races()]
+
+            for r in self.get_races():
+                # race updated
+                if r.race_mod_source:
+                    changes = r._compare(r.race_mod_source)
+                    if any(changes):
+                        races_changes.update({'race_updated_{0}'.format(r.pk): changes})
+                    ref_races.remove(r.race_mod_source.pk)
+                # race added
+                else:
+                    races_changes.update({'race_added_{0}'.format(r.pk): ({}, None)})
+
+            # race deleted
+            for race_deleted_pk in ref_races:
+                    races_changes.update({'race_deleted_{0}'.format(race_deleted_pk): (None, {})})
+
+            return {'attributes': event_changes, 'races': races_changes}
+
 
 
 class Federation(models.Model):

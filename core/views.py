@@ -280,6 +280,12 @@ def create_event(request):
                                                     'race_list': None})
 
 
+class EventView(LoginRequiredMixin, DetailView):
+    model = Event
+    context_object_name = "event"
+    template_name = "core/view_event.html"
+
+
 def update_event(request, pk):
     event = Event.objects.get(pk=pk)
 
@@ -443,10 +449,10 @@ class IntroView(LoginRequiredMixin, TemplateView):
     template_name = 'core/introduction.html'
 
 
-class EventList(ListView):
+class EventValidationList(ListView):
     model = Event
-    queryset = Event.objects.all()
-    template_name = "core/list_event.html"
+    queryset = Event.objects.filter(event_mod_source=None)
+    template_name = "core/list_event_validation.html"
     context_object_name = "event_list"
 
 
@@ -496,20 +502,4 @@ class RaceValidationList(ListView):
     queryset = Race.objects.all()
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
-
-
-def show_changes(pk):
-    changes = {}
-    e = Event.objects.get(pk=pk)
-    changes.update({'event': e.compare(e.event_mod_source)})
-    races_changes = {}
-    for r in e.get_races():
-        if r.race_mod_source:
-            races_changes.update({r.pk: r.compare(r.race_mod_source)})
-        else:
-            races_changes.update({r.pk: ({}, None)})
-
-    changes.update({'race': races_changes})
-    return changes
-
 
