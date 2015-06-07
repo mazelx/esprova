@@ -424,6 +424,31 @@ class Event(ComparableModelMixin, models.Model):
 
             return {'attributes': event_changes, 'races': races_changes}
 
+    def validate(self):
+        if self.pk and not self.validated:
+            # create
+            if not self.event_mod_source:
+                print("create")
+                self.validated = True
+                return self.save()
+            else:
+                # update
+                if not self.to_be_deleted:
+                    old_event = self.event_mod_source
+                    print("update")
+                    self.event_mod_source = None
+                    self.validated = True
+                    for r in self.get_races():
+                        r.race_mod_source = None
+                        r.save()
+
+                    self.save()
+                    old_event.delete()
+                # delete
+                else:
+                    print("delete")
+                    self.event_mod_source.delete()
+
 
 
 class Federation(models.Model):

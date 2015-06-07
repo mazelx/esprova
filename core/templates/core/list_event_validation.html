@@ -1,24 +1,72 @@
 {% extends "base.html" %}
 {% load static from staticfiles %} 
 
+{% block head_extra %}
+<script type="text/javascript">
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
+    function validateRace(pk) {
+          $.ajax({
+            url: '/api/validate/'+pk,
+            type: 'PUT',
+            data: { race: pk },
+            success: function(response, statut) {
+                alert('validé')
+            },
+        });
+          location.replace('/races');
+    }
+</script>
+
+{% endblock %}
 {% block content %}
 <div class="container content validation">
 
     <h1>Validation</h1>
-    <div class="list-group">
+    <div class="list-group row">
         {% for event in event_list %}
             <div id="event_{{event.pk}}">
                 <div class="list-group-item">
                     <div class="list-group-item-heading row">
-                        <div class="col-xs-8">
+                        <div class="col-xs-5">
                             <div class="event"><a href="{% url "view_event" event.pk %}" title="Plus d'informations">{{ event.name }}</a> </div>
                         </div>
                         <div class="col-xs-4 changes">
                             {% if event.validated %}
-                                {{ event.get_nb_changes }} changements (<a data-toggle="collapse" href="#event_{{event.pk}}_changes" aria-expanded="false" aria-controls="event_{{event.pk}}_changes">voir</a>)
+                                {{ event.get_nb_changes }} changements (<a data-toggle="collapse" href="#event_{{event.pk}}_changes" aria-expanded="false" aria-controls="event_{{event.pk}}_changes">voir ...</a>)
                             {% else %}
                                 Création
                             {% endif %}
+                        </div>
+                        <div class="col-xs-3 validation-action">
+                            {# <button class="btn btn-default" onclick="validateRace({{event.pk}})">Valider</button> #}
                         </div>
                     </div>
                     <div class="list-group-item-text collapse" id="event_{{event.pk}}_changes">
@@ -36,7 +84,6 @@
             </div>
         {% endfor %}
     </div>
-
 </div>
 
 {% endblock %}

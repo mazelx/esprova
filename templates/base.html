@@ -95,11 +95,12 @@
             
                 <ul class="nav navbar-nav navbar-right">
                         
-                        {% if not user.is_authenticated %}
-                            <li class="disabled">
-                        {% else %}
+                        {% if not request.is_superuser %}
                             <li>
+                                <a href=" {% url "list_event_validation" %}" class="text-warning"> Validation</a></li>
+                            </li>
                         {% endif %}
+                        <li>
                             <a href=" {% url "create_event" %}"> Ajouter une course</a></li>
                         </li>
                     {% if user.is_authenticated %}

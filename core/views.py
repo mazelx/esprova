@@ -81,6 +81,14 @@ def ajx_get_distances(request, name):
 #         return HttpResponse('')
 #     return HttpResponseBadRequest
 
+@login_required
+def ajx_validate_event(request, pk):
+    if (request.is_ajax() or settings.DEBUG) and request.method == 'PUT':
+        event = get_object_or_404(Event, pk=pk)
+        event.validate()
+        return HttpResponse('')
+    return HttpResponseBadRequest
+
 
 # All ajx SHOULD include crsf ... i guess ?
 
