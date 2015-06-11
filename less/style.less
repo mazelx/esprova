@@ -204,16 +204,6 @@ html, body{
 }
 
 
-.racebanner {
-    background: url(../images/race-banner.png) no-repeat center;
-    vertical-align: text-bottom;
-    top: 51px;
-    height: 400px;
-    margin-top: -30px;
-    .hidden-print();
-
-}
-
 // search
 
 .searchpage {
@@ -503,119 +493,146 @@ html, body{
         border-bottom: solid 1px @esprova-lightgray;
     }
 
+
+@race-padding: 200px;
+.race-auto-padding {
+    padding-left: @race-padding;
+    padding-right: @race-padding;
+}
+
 .racepage {
     min-height: 100%;
-
-    .race-header {
-        margin-top: 30px;
-        margin-bottom: 60px;
-
-        .event-name{
-            font-size: 2.86em;
-            color: black;
+       
+        .racebanner {
+            background: url(../images/race-banner.png) no-repeat center;
+            vertical-align: text-bottom;
+            top: 51px;
+            height: 300px;
+            margin-top: -30px;
+            .hidden-print();
         }
 
-        .event-location{
-            font-size: 24px;
-            color: @esprova-gray;
+        .event-header {
+            background-color: @esprova-red;
+            color: white;
+            padding-top: 40px;
+            padding-bottom: 40px; 
+            
+            .race-event-info{
+                .race-auto-padding();
+                .event-name {
+                    text-transform: uppercase;
+                    font-size: 2.5em;
+                }
+            }
+            .race-distances{
+                .race-auto-padding();
+                margin-top: 40px;
+            }
+
         }
-    }
+        .race-menu {
+            background-color: @esprova-darkgray;
+            color: white;
+            @race-menu-height: 60px;
+            height: @race-menu-height;
+            .race-auto-padding();
 
-    .race-distances {
-        .center-block();
-        text-align: center;
-        margin-bottom: 100px;
+            .race-menu-title {
+                .make-sm-column(4);
+                padding: 0;
+                font-size: 1.5em;
+                line-height: @race-menu-height;
 
-        // quick fix, TODO: clean that mess
-        .race-sport{
-            font-size: 24px;
-            color: @esprova-gray;
-            margin-right: 20px;
+            }
 
+            .race-menu-pills {
+                .make-sm-column(8);
+                line-height: @race-menu-height;
+                li > a {
+                   padding:0; 
+                }
+                .active>a {
+                    background-color: @esprova-gray !important;
+                    border-left: solid 1px white;
+                    border-right: solid 1px white;
+                }
+            }
         }
 
-        .distance-icon {
-            width: 50px;
-            // height: 50px;
-            font-size: 1.79em;
-            padding: 0;
-            color: @esprova-red;
-            border: solid 1px @esprova-red;
-            margin: 0 2px;
-            margin-bottom: 10px;
-        }
-
-        .distance-icon.active {
-                color: white;
-                border: solid 1px white;
-                background-color: @esprova-red;
-        }
-    }
-
-    .race-tabs {
-        .hidden-print();
-        margin-bottom: 100px;
-    }
+        .race-content {
+            .race-auto-padding();
+            .race-infogroup {
+                padding-top: 70px;
+                padding-bottom: 70px;
+                border-bottom: solid 1px @esprova-lightergray;
 
 
-    .race-content {
-        .center-block();
-        .race-infogroup {
-            // height: 100px;
-            // border: solid 1px black;
-            margin-bottom: 50px;
-            .race-infogroup-icon {
-                // line-height: 400px;
-                // vertical-align: middle;
-                font-size: 5em;
-                margin-top: -20px;
-                color: @esprova-red;
-                text-align: center;
+                .race-infogroup-icon {
+                    .make-sm-column(4);
+                    text-align: center;
+
+                    img {
+                        height: 100px;
+                    }
+                }
+                .race-infogroup-details {
+                    .make-sm-column(8);
+
+                    margin-top: 10px;
+
+                    .dl-horizontal-perso {
+                        // .make-row();
+                        dt {
+                            .make-sm-column(3);
+                            color: @esprova-gray;
+                            text-align: right;
+                        }
+                        dd {
+                            .make-sm-column(9);
+                        }
+                        
+                    }
+                }
+            }
+
+            .race-add-planning {
                 .hidden-print();
-            }
-            .race-infogroup-details {
-                // line-height: 400px;
-                // vertical-align: middle;
-                // display:inline-block;
-                // line-height: normal;
-                dt {
-                    color: @esprova-gray;
-                    margin-bottom: 5px;
-                    font-weight: normal;
-                    padding-right: 10px;
-                }
+                text-align: center;
+                padding: 120px 0;
+                font-size: 1.5em;
+                color: @esprova-gray;
+                border-bottom: solid 1px @esprova-lightergray;
 
-                #link-display-map {
-                    cursor: pointer;
-                }
-                #address-map {
-                    height: 300px;
-                    background: gray;
-                    margin-bottom: 20px;
-                    display: none;
+
+                img {
+                    margin-left: 50px;
+                    height: 100px;
                 }
             }
         }
-    }
-    
-    .social-buttons {
-        .hidden-print();
-        text-align: center;
-        margin-bottom: 100px;
-        filter: grayscale(100%);
-        -webkit-filter:grayscale(100%);
-        filter: gray; filter: grayscale(100%);
-    }
 
 
-    .race-command {
-        .hidden-print();
-        text-align: center;
-        .btn {
-            width: 140px;
+
+        .social-buttons {
+            .hidden-print();
+            text-align: center;
+            color: @esprova-gray;
+            margin-top: 70px;
+            margin-bottom: 100px;
+            filter: grayscale(100%);
+            -webkit-filter:grayscale(100%);
+            filter: gray; filter: grayscale(100%);
         }
-    }
+
+        .race-edit {
+            color: @esprova-gray;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: -50px;
+        }
 }
+
 
 // Datepicker
 .datepicker-switch {

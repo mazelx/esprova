@@ -1,6 +1,6 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %} 
-
+{% load humanize %}
 
 {% block head_extra %}
 <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
@@ -35,62 +35,60 @@
 
 <div class="content">
 
-    <div class="container-fluid">
-        <div class="racebanner row">
-        </div> 
-    </div>
-    <div class="container racepage">
+    <div class="racepage container-fluid">
+        <div class="row racebanner"></div>
         
-        <div class="row">
-            <header class="race-header col-lg-10 col-lg-offset-1">
-                    <p class="event-name">{{ race.event.name }}</p>
-                    <p class="event-location">{{ race.location.locality }}
-                        {% if race.location.administrative_area_level_2_short_name %}
-                            ({{ race.location.administrative_area_level_2_short_name }})
-                        {%endif%}
-                    </p>
-                    <a onclick="addToPlanning({{race.pk}})" class="btn btn-danger" href="#">Ajouter au planning</a>
+            <header class="event-header row">
+                <div class="race-event-info">
+                        <p class="event-name">{{ race.event.name }}</p>
+                        <p class="event-detail"> {{ race.event.edition | ordinal }} édition : du {{ race.event.get_start_date }} au {{ race.event.get_end_date }}, à {{ race.location.locality }}
+                            {% if race.location.administrative_area_level_2_short_name %}
+                                ({{ race.location.administrative_area_level_2_short_name }})
+                            {%endif%}
+                        </p>
+                </div>
+                <div class="race-distances">
+                    <span class="race-sport">
+                     {{race.sport.name}}
+                    </span>
+                    {% for r in race.event.get_races %}
+                        {% if r == race %}
+                            <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
+                        {% else %}
+                            <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
             </header>
-        </div>
+            
+
+            <div class="race-menu row">
+                <span class="race-menu-title">Course {{ race.distance_cat.name }}</span>
+                <ul class="race-menu-pills nav nav-pills nav-justified">
+                        <li role="presentation" class="active"><a href="#">Résumé</a></li>
+                        <li role="presentation" class="disabled" ><a href="#">Parcours</a></li>
+                        <li role="presentation" class="disabled"><a href="#">Médias</a></li>
+                        <li role="presentation" class="disabled"><a href="#">Résultats</a></li>
+                </ul>
+            </div>
 
 
-        <div class="race-distances row">
-            <span class="race-sport">
-             {{race.sport.name}}
-            </span>
-            {% for r in race.event.get_races %}
-                {% if r == race %}
-                    <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
-                {% else %}
-                    <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
-                {% endif %}
+            <div class="race-content">
 
-            {% endfor %}
-
-        </div>
-
-        <div class="race-tabs">
-            <ul class="nav nav-tabs nav-justified">
-                    <li role="presentation" class="active"><a href="#">Résumé</a></li>
-                    <li role="presentation" class="disabled" ><a href="#">Parcours</a></li>
-                    <li role="presentation" class="disabled"><a href="#">Médias</a></li>
-                    <li role="presentation" class="disabled"><a href="#">Résultats</a></li>
-            </ul>
-        </div>
-
-        <div class="race-content row">
-            <div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
                 {# general information #}
                  <section class="race-infogroup row">
-                    <div class="race-infogroup-icon col-sm-3">&lt;i&gt;</div>
-                    <div class="race-infogroup-details col-sm-9">
-                            <dl class="dl-horizontal">
+                    <div class="race-infogroup-icon">
+                        <img class="icon-race-info" alt="informations générales" src="/static/images/icon-race-info.svg">
+                    </div>
+                    <div class="race-infogroup-details">
+                            <dl class="dl-horizontal-perso">
                                 <dt>Départ</dt>
                                 <dd>
                                     <time datetime="{{race.date}} {{race.time| time:"H:i"}}">{{race.date | date:"l d/m/Y" | capfirst }} {{race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}}</time>
                                 </dd>
                                 <dt>Adresse</dt>
-                                <dd>
+                                <dd>    
                                     {# <address id="race-location" data-lat="-0.63937" data-lng="-0.63937"> #}
                                     <address id="race-location" 
                                         data-lat="{{ race.location.lat | stringformat:'.5f' }}" 
@@ -113,68 +111,72 @@
 
                 {# distance #}
                 <section class="race-infogroup row">
-                    <div class="race-infogroup-icon col-sm-3"><span>[...]</span></div>
-                        <div class="col-sm-9">
-                            <div class="race-infogroup-details">
-                            <dl class="dl-horizontal">
-                                <dt>Distance</dt>
-                                <dd>{{ race.distance_cat.get_formatted_name }}</dd>
-                                <br>
-                                {% for distance in race.distances.all %}
-                                    <dt>{{ distance.stage.name }}</dt>
-                                    <dd>{{ distance.get_formatted_distance }}</dd>
-                                {% endfor %}
-                            </dl>
-                        </div>
+                    <div class="race-infogroup-icon">
+                        <img class="icon-race-distances" alt="distances" src="/static/images/icon-race-distances.svg">
+                    </div>
+                    <div class="race-infogroup-details">
+                        <dl class="dl-horizontal-perso">
+                            <dt>Distance</dt>
+                            <dd>{{ race.distance_cat.get_formatted_name }}</dd>
+                            <br>
+                            {% for distance in race.distances.all %}
+                                <dt>{{ distance.stage.name }}</dt>
+                                <dd>{{ distance.get_formatted_distance }}</dd>
+                            {% endfor %}
+                        </dl>
                     </div>
                 </section>
 
                 {# organizer #}
                 <section class="race-infogroup row">
-                    <div class="race-infogroup-icon col-sm-3">@</div>
-                    <div class="col-sm-9">
-                        <div class="race-infogroup-details">
-                            <dl class="dl-horizontal">
-                                <dt>Web</dt>
-                                <dd><a href="{{race.event.website}}">{{race.event.website}}</a>
-                                </dd>
-                                <dt>Organisateur</dt>
-                                <dd>
-                                {% if race.event.organizer.website %}
-                                    <a href="{{ race.event.organizer.website }}">
-                                        {{ race.event.organizer.name }}
-                                    </a>
-                                {% else %}
+                    <div class="race-infogroup-icon">
+                        <img class="icon-race-contact" alt="contact" src="/static/images/icon-race-contact.svg">
+                    </div>
+
+                    <div class="race-infogroup-details">
+                        <dl class="dl-horizontal-perso">
+                            <dt>Web</dt>
+                            <dd><a href="{{race.event.website}}">{{race.event.website}}</a>
+                            </dd>
+                            <dt>Organisateur</dt>
+                            <dd>
+                            {% if race.event.organizer.website %}
+                                <a href="{{ race.event.organizer.website }}">
                                     {{ race.event.organizer.name }}
-                                {%endif%}
-                                </dd>
-                                <dt>Contact</dt>
-                                <dd>
-                                    <address>
-                                        <strong>{{ race.contact.name }}</strong>
-                                        <br> {{ race.contact.phone }}
-                                        <br> <a href="mailto:{{ race.contact.email }}">{{ race.contact.email }}</a>
-                                    </address>
-                                </dd>
-                            </dl>
-                        </div>
+                                </a>
+                            {% else %}
+                                {{ race.event.organizer.name | default:"<br>"}}
+                            {%endif%}
+                            </dd>
+                            <dt>Contact</dt>
+                            <dd>
+                                <address>
+                                    <strong>{{ race.contact.name }}</strong>
+                                    <br> {{ race.contact.phone }}
+                                    <br> <a href="mailto:{{ race.contact.email }}">{{ race.contact.email }}</a>
+                                </address>
+                            </dd>
+                        </dl>
+                    </div>
                 </section>
                
+                <div class="row race-add-planning">
+                    <p>Ajouter cette course au programme : <a onclick="addToPlanning({{race.pk}})" href="#"><img class="icon-race-add-planning" alt="ajouter au planning" src="/static/images/icon-race-add-planning.svg"></a></p>
+                </div>
+
+
+            </div>        
+
+
+            <div class="row social-buttons">
+                <p>Partager sur les réseaux sociaux : <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='15968501'></div></p>
             </div>
-        </div>        
+        
 
-
-        <div class="row  social-buttons">
-            <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='15968501'></div>
-        </div>
-    
-        <div class="row">
-            <div class="race-command">
-                    <a class="btn btn-warning" href="{% url "update_event" race.event.pk %}">Modifier</a>
-                    <a onclick="deleteRace({{race.pk}})" class="btn btn-danger" href="#">Supprimer</a>
+            <div class="row race-edit">
+                <p>Une erreur ? Vous pouvez proposer une <a href="{% url "update_event" race.event.pk %}">modification</a> de l'épreuve</p>
             </div>
         </div>
-
     </div>
 </div>
 
