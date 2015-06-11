@@ -550,8 +550,8 @@ class Race(ComparableModelMixin, models.Model):
     date = models.DateField()
     time = models.TimeField(blank=True, null=True, verbose_name='Heure')
     distance_cat = models.ForeignKey(DistanceCategory,
-                                     verbose_name="Distance",
-                                     limit_choices_to=get_limit_for_distancecat)
+                                     verbose_name="Distance")
+                                     # limit_choices_to=get_limit_for_distancecat)
     price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
     label = models.ForeignKey(Label, blank=True, null=True, related_name='races')
@@ -581,6 +581,14 @@ class Race(ComparableModelMixin, models.Model):
     #         self.location.delete()
     #     if len(self.event.races.all()) < 2:
     #         self.event.delete()
+
+    def get_event_races_same_sport(self):
+        # races = []
+        # for r in self.event.races.filter(sport=self.sport).order_by('distance_cat__order'):
+        #     races.append(r)
+        # return races
+        return self.event.races.filter(sport=self.sport).order_by('distance_cat__order')
+
 
     def save(self, *args, **kwargs):
         """
