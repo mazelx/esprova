@@ -41,7 +41,8 @@
             <header class="event-header row">
                 <div class="race-event-info">
                         <p class="event-name">{{ race.event.name }}</p>
-                        <p class="event-detail"> {{ race.event.edition | ordinal }} édition : du {{ race.event.get_start_date }} au {{ race.event.get_end_date }}, à {{ race.location.locality }}
+                        <p class="event-detail"> 
+                        <p>{{ race.event.edition | ordinal }} édition du {{ race.event.get_start_date }} au {{ race.event.get_end_date }} à {{ race.location.locality }}
                             {% if race.location.administrative_area_level_2_short_name %}
                                 ({{ race.location.administrative_area_level_2_short_name }})
                             {%endif%}
