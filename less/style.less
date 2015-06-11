@@ -516,7 +516,7 @@ html, body{
             background-color: @esprova-red;
             color: white;
             padding-top: 40px;
-            padding-bottom: 40px; 
+            padding-bottom: 60px; 
             
             .race-event-info{
                 .race-auto-padding();
@@ -536,6 +536,8 @@ html, body{
                 .distance-icon {
                     color: @esprova-red;
                     border: solid 1px @esprova-red;
+                    width: 40px;
+
                 }
                 .distance-icon.active{
                     color: white;
@@ -583,24 +585,23 @@ html, body{
 
         .race-content {
             .race-auto-padding();
+            .alt_font();
             .race-infogroup {
-                padding-top: 70px;
-                padding-bottom: 70px;
+                padding-top: 50px;
+                padding-bottom: 50px;
                 border-bottom: solid 1px @esprova-lightergray;
 
 
                 .race-infogroup-icon {
                     .make-sm-column(4);
-                    text-align: center;
+                    text-align: right;
 
                     img {
-                        height: 100px;
+                        height: 80px;
                     }
                 }
                 .race-infogroup-details {
                     .make-sm-column(8);
-
-                    margin-top: 10px;
 
                     .dl-horizontal-perso {
                         // .make-row();
@@ -608,6 +609,7 @@ html, body{
                             .make-sm-column(3);
                             color: @esprova-gray;
                             text-align: right;
+                            font-weight: 100;
                         }
                         dd {
                             .make-sm-column(9);
