@@ -29,8 +29,11 @@ $( document ).ready(function() {
 
 
 function addListRaceDisplayMap() {
-    $("#link-display-map").click(function (event) {
+    $("#link-display-map").click(function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
         if( $( "#address-map" ).is(":hidden")) {
+            $('#link-display-map').html("masquer la carte")
             $( "#address-map" ).show("fast", function () {
                map.set({styles: map_styles});
                google.maps.event.trigger(map, 'resize');
@@ -38,6 +41,7 @@ function addListRaceDisplayMap() {
             });            
         } else {
             $( "#address-map" ).hide("fast");
+            $('#link-display-map').html("afficher la carte")
         }
 
     });
