@@ -8,6 +8,7 @@ from geopy.geocoders import GoogleV3
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.db.models import ForeignKey
+from collections import OrderedDict
 
 import copy
 
@@ -340,6 +341,14 @@ class Event(ComparableModelMixin, models.Model):
         for r in self.races.all().order_by('distance_cat__order'):
             races.append(r)
         return races
+
+    def get_races_by_sports(self):
+        races_list = {}
+        for r in self.races.all().order_by('distance_cat__order'):
+            races_for_sport = races_list.get(r.sport.name) or []
+            races_for_sport.append(r)
+            races_list.update({r.sport.name: races_for_sport})
+        return OrderedDict(sorted(races_list.items(), key=lambda x: len(x[1]), reverse=True))
 
     def clone(self):
         try:

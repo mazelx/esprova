@@ -528,11 +528,32 @@ html, body{
             .race-distances{
                 .race-auto-padding();
                 margin-top: 40px;
+
+                .race-sport {
+                    margin-right: 15px;
+                }
+
+                .distance-icon {
+                    color: @esprova-red;
+                    border: solid 1px @esprova-red;
+                }
+                .distance-icon.active{
+                    color: white;
+                    // border: solid 1px white;
+                    background-color: @esprova-red;
+                }
+
+                .sport-spacer {
+                    margin-left: 50px;
+                }
+
+
             }
 
         }
         .race-menu {
-            background-color: @esprova-darkgray;
+            // background-color: @esprova-darkgray;
+            background: @esprova-darkgray url(../images/icon-race-notch.svg) no-repeat right;
             color: white;
             @race-menu-height: 60px;
             height: @race-menu-height;

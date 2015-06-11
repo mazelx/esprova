@@ -344,7 +344,7 @@ def update_event(request, pk):
 class RaceView(LoginRequiredMixin, DetailView):
     model = Race
     context_object_name = "race"
-    template_name = "core/race.html"
+    template_name = "core/race.html"    
 
 
 class RaceEdit(SessionWizardView):
