@@ -1,0 +1,42 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+
+
+{% block head_extra %}
+<script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
+<script type="text/javascript" src="{% static "js/race.js" %}"></script>
+
+<title>Inscription</title>
+<meta name="description" content="{{ race.event.name }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+{% endblock %}
+
+{% block content %}
+
+<div class="content ">
+    <div class="container update">
+
+        <form action="" method="post" class="edit-form">
+            {% csrf_token %}
+
+            <div class="row">
+
+                {% for field in form %}
+                    <div class="fieldWrapper row">
+                        {{ field.errors }}
+                        <span class="col-xs-3">{{ field.label_tag }}</span>
+                        <span class="col-xs-9">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="form-submit">
+                    <a href="{% url "list_race" %}" class="btn btn-default" role="button">Annuler</a>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

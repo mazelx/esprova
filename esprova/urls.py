@@ -7,6 +7,9 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from api import views
 
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
+
 from planning.views import *
 
 from haystack.forms import FacetedSearchForm
@@ -41,9 +44,12 @@ urlpatterns = patterns('',
                        # Login
                        url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
                            name="login"),
-                       
+
                        url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': 'intro'},
                            name="logout"),
+
+                       (r'^accounts/', include('registration.backends.default.urls')),
+
 
                        # Introduction
                        url(r'^$', IntroView.as_view(), name="intro"),

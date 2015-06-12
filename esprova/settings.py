@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.formtools',
     'django.contrib.humanize',
+    # optional but advised for registration app
+    # 'django.contrib.sites',
     # External modules
     'rest_framework',
     'django_countries',
@@ -56,6 +58,8 @@ INSTALLED_APPS = (
     'search_backends',
     'core',
     'planning',
+    'registration',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -272,6 +276,7 @@ REST_FRAMEWORK = {
 
 }
 
+ACCOUNT_ACTIVATION_DAYS = 7
 
 
 # Development settings :
