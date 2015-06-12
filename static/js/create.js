@@ -27,32 +27,8 @@ $(document).ready(function() {
 });
 
 function initialize() {
-  var distList = $('#id_race-distance_cat');
-  var sportList = $('#id_race-sport')
-  var options  = [];
-
-  // store all options in data
-  $(distList).find('option').each(function() {
-      options.push({value: $(this).val(), text: $(this).text()});
-    });
-  $(distList).data('options', options);
-
-  $('#id_race-sport').on('change', function(){
-
-      var options = $(distList).empty().scrollTop(0).data('options');
-      var search = "\\(" + $.trim($(sportList).children(":selected").text()) + "\\)";
-      var regex = new RegExp(search,'gi');
-
-    $.each(options, function(i) {
-        var option = options[i];
-        if(option.text.match(regex) !== null) {
-          $(distList).append(
-             $('<option>').text(option.text).val(option.value)
-          );
-        }
-      });
-
-  });
+  
+  addSportSelectCascade();
 
   if (typeof google === 'object' && typeof google.maps === 'object'){
 
@@ -105,6 +81,35 @@ function initialize() {
         $("input[type=date]").attr("type", "text");
         createDatePickerComponent();
     }
+}
+
+function addSportSelectCascade(){
+  var distList = $('#id_race-distance_cat');
+  var sportList = $('#id_race-sport')
+  var options  = [];
+
+  // store all options in data
+  $(distList).find('option').each(function() {
+    options.push({value: $(this).val(), text: $(this).text()});
+  });
+  $(distList).data('options', options);
+
+  $('#id_race-sport').on('change', function(){
+
+    var options = $(distList).empty().scrollTop(0).data('options');
+    var search = "\\(" + $.trim($(sportList).children(":selected").text()) + "\\)";
+    var regex = new RegExp(search,'gi');
+
+  $.each(options, function(i) {
+      var option = options[i];
+      if(option.text.match(regex) !== null) {
+        $(distList).append(
+           $('<option>').text(option.text).val(option.value)
+        );
+      }
+    });
+
+  });
 }
 
 // initialize bootstrap-datepicker component
