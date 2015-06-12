@@ -1,6 +1,7 @@
 from planning.models import ShortlistedRace
 from core.models import Race
 from django.views.generic import ListView
+from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 
@@ -28,8 +29,10 @@ def add_race_to_planning(request):
                 planned.save()
             except race.DoesNotExist:
                 pass
+            messages.success(request, 'La course a bien été ajoutée du programme')
             return HttpResponse('')
-
+    
+    messages.error(request, "Il y a eu un problème lors de l'ajout de la course au programme")
     return HttpResponseBadRequest
 
 
@@ -47,7 +50,9 @@ def remove_race_from_planning(request):
                 planned.delete()
             except race.DoesNotExist:
                 pass
+            messages.success(request, 'La course a bien été supprimée du programme')
             return HttpResponse('')
 
+    messages.error(request, "Il y a eu un problème lors de la retrait de la course du programme")
     return HttpResponseBadRequest
 

@@ -97,8 +97,7 @@ function addToPlanning(pk) {
         type: 'POST',
         data: { race: pk },
         success: function(response, statut) {
-            window.location.replace("/planning/")
-
+            window.location.reload();
         },
     });
 }

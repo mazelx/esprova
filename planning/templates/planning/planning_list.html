@@ -38,11 +38,10 @@
             url: '/api/planning/remove',
             type: 'POST',
             data: { race: pk },
-            success: function(response, statut) {
-                alert('retiré')
-            },
+            complete: function() {
+                location.reload();
+            }
         });
-          location.reload();
     }
 </script>
 {% endblock %}

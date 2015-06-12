@@ -30,17 +30,20 @@ html, body{
 }
 
 .messages {
-    margin-top: 30px;
-    margin-left: 40px;
     position: absolute;
+    bottom: 50px;
+    right: 50px;
     min-width: 30%;
+    max-width: 40%;
     color: white;
-    background: white url(../images/alert-notch.svg) no-repeat top left;
+    background: transparent url(../images/alert-notch.svg) no-repeat bottom right;
     opacity: 0.9;
+    z-index: 1000;
+    .alt_font();
 
     .alert{
         margin-top: 22px;
-        background-color: @esprova-red;
+        background-color: @esprova-gray;
     }
 }
     

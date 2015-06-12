@@ -15,6 +15,8 @@ from django.shortcuts import get_object_or_404, render_to_response, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from core.forms import EventForm
 
+from planning.models import ShortlistedRace
+
 import datetime
 
 import logging
@@ -86,6 +88,7 @@ def ajx_validate_event(request, pk):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'PUT':
         event = get_object_or_404(Event, pk=pk)
         event.validate()
+        messages.success(request, ("Evenement {0} validé").format(event.name))
         return HttpResponse('')
     return HttpResponseBadRequest
 
@@ -98,6 +101,7 @@ def ajx_delete_race(request, pk):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'DELETE':
         race = get_object_or_404(Race, pk=pk)
         race.delete()
+        messages.success(request, ("Evenement {0} supprimé").format(event.name))
         return HttpResponse('')
     return HttpResponseBadRequest
 
@@ -250,6 +254,7 @@ class RaceList(LoginRequiredMixin, TemplateView):
     template_name = "core/racesearch.html"
 
     def get_context_data(self, **kwargs):
+
         context = super(RaceList, self).get_context_data(**kwargs)
 
         # GET parameters and convert directly to dict for better handling in the templates
@@ -264,7 +269,7 @@ class RaceList(LoginRequiredMixin, TemplateView):
         # Loop through distances parameters as it is a list of values
         context['params']['distances'] = {}
         for dist in self.request.GET.getlist('distances'):
-            # directly assign into params.distances.XS for example
+            # directly assign into params.distances.XS for examplew
             context['params']['distances'][dist] = True
 
         return context
@@ -300,9 +305,6 @@ def update_event(request, pk):
     eventForm = EventForm(request.POST or None, instance=event)
     race_list = event.get_races()
 
-    messages.success(request, ("Bonjour !"))
-
-
     # if form sent
     if request.method == 'POST':
 
@@ -310,7 +312,8 @@ def update_event(request, pk):
             eventForm.save()
             messages.success(request, (
                 "L'évènement {0} a bien été modifié et sera publié "
-                "après validation par nos services".format(event.name))
+                "après validation par nos services".format(event.name)
+                )
             )
 
             return HttpResponseRedirect(reverse('list_race'))
@@ -347,7 +350,14 @@ def update_event(request, pk):
 class RaceView(LoginRequiredMixin, DetailView):
     model = Race
     context_object_name = "race"
-    template_name = "core/race.html"    
+    template_name = "core/race.html"
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        planned_race = [sr.race for sr in ShortlistedRace.objects.filter(user=user)]
+        context = super(RaceView, self).get_context_data(**kwargs)
+        context.update({'planned_race': planned_race})
+        return context
 
 
 class RaceEdit(SessionWizardView):
@@ -440,11 +450,6 @@ class RaceEdit(SessionWizardView):
         race.save()
 
         if race.pk:
-            messages.success(self.request, (
-                "La course {0} a bien été créée et sera publiée "
-                "après validation par nos services".format(race.event.name))
-            )
-
             changed_fields = []
             for form in form_list:
                 if form.has_changed():

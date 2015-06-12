@@ -160,10 +160,16 @@
                         </dl>
                     </div>
                 </section>
-               
+
+                   
                 <div class="row race-add-planning">
-                    <span class="race-add-planning-text">Ajouter cette course au programme : </span>
-                    <a onclick="addToPlanning({{race.pk}})" href="#"><img class="race-add-planning-icon" alt="ajouter au planning" src="/static/images/icon-race-add-planning.svg"></a>
+                    {% if race not in planned_race %}
+                        <span class="race-add-planning-text">Ajouter cette course au programme : </span>
+                        <a onclick="addToPlanning({{race.pk}})" href="#"><img class="race-add-planning-icon" alt="ajouter au planning" src="/static/images/icon-race-add-planning.svg"></a>
+                    {% else %}
+                        <span class="race-add-planning-text">Cette course figure dans votre <a href="{%url "planning" %}">programme</a></span>
+                    {% endif %}
+
                 </div>
 
 
