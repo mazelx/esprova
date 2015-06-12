@@ -21,7 +21,7 @@
     <h1>Création d'évènement</h1>
     {% endif %}
 
-        <form action="" method="post" class="event">
+        <form action="" method="post" class="edit-form">
             {% csrf_token %}
 
             <div class="row">
@@ -60,9 +60,9 @@
             <div class="row">
                 <div class="form-submit">
                     {% if cloned %}
-                        <a href="{% url "delete_event" pk %}" class="btn btn-info" role="button">Annuler</a>
+                        <a href="{% url "delete_event" pk %}" class="btn btn-default" role="button">Annuler</a>
                     {% else %}
-                        <a href="{% url "list_race" %}" class="btn btn-info" role="button">Annuler</a>
+                        <a href="{% url "list_race" %}" class="btn btn-default" role="button">Annuler</a>
                     {% endif %}
 
                     {% if pk %}
