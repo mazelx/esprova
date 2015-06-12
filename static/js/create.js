@@ -83,6 +83,9 @@ function initialize() {
     }
 }
 
+function addLocationSelectConstraint(){
+}
+
 function addSportSelectCascade(){
   var distList = $('#id_race-distance_cat');
   var sportList = $('#id_race-sport')

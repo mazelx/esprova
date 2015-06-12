@@ -300,6 +300,9 @@ def update_event(request, pk):
     eventForm = EventForm(request.POST or None, instance=event)
     race_list = event.get_races()
 
+    messages.success(request, ("Bonjour !"))
+
+
     # if form sent
     if request.method == 'POST':
 

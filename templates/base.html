@@ -129,6 +129,21 @@
 
     {% endblock %}
 
+    {% block messages %}
+        {% if messages %}
+        <div class="messages">
+            <div class="alert-notch"></div>
+            {% for message in messages %}
+            <div class="alert alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+        {% endif %}
+    {% endblock %}
+
     {% block content %}
 
     {% endblock %}
