@@ -50,15 +50,16 @@
                 </div>
                 <div class="race-distances">
                     {% for sport, races in race.event.get_races_by_sports.items %}
-                    <span class="race-sport">{{ sport }}</span>  
-                        {% for r in races %}
-                            {% if r == race %}
-                                <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
-                            {% else %}
-                                <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
-                            {% endif %}
-                        {% endfor %}
-                        <span class="sport-spacer"></span>
+                        <div class="race-sport-distances">
+                            <span class="race-sport">{{ sport }}</span>  
+                            {% for r in races %}
+                                {% if r == race %}
+                                    <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
+                                {% else %}
+                                    <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     {% endfor %}
                 </div>
             </header>
