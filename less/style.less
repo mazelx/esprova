@@ -782,11 +782,19 @@ footer {
             margin-top: 10px;
             margin-bottom: 10px; 
         }
-        label {
-            width: 100%;
+
+        .label {
             text-align: right;
             color: @esprova-red;
+            font-size: 1em;
+            label {
+                font-weight: 400;                
+            }
         }
+        .required:before {
+            content: '* ';
+        }
+
         input {
             width: 100%;
         }
