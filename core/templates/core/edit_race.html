@@ -73,9 +73,9 @@
 
                     {% for field in form.visible_fields %}
                         <div class="form-group">
-                            {{ field.errors }}
                             {{ field.label_tag }}
                             {{ field }}
+                            {{ field.errors }}
                         </div>
                     {% endfor %}
                 {% endfor %}
@@ -89,7 +89,9 @@
 
                 {% for field in wizard.form.visible_fields %}
                     <div class="form-group">
-                        {{ field.errors }}
+                    {% if field.errors %}
+                        <div class="col-sm-10 col-sm-offset-2">{{ field.errors.as_text }}</div>
+                    {% endif %}
                         <div class="col-sm-2">{{ field.label_tag }}</div>
                         <div class="col-sm-8">{{ field }}</div>
                     </div>

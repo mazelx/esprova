@@ -29,7 +29,9 @@
 
                 {% for field in eventForm %}
                     <div class="fieldWrapper row">
-                        {{ field.errors }}
+                        {% if field.errors %}
+                            <span class="col-xs-10 col-xs-offset-3">{{ field.errors.as_text }}</span>
+                        {% endif %}
                         <span class="col-xs-3">{{ field.label_tag }}</span>
                         <span class="col-xs-9">{{ field }}</span>
                     </div>
