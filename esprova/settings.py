@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.formtools',
     'django.contrib.humanize',
     # optional but advised for registration app
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     # External modules
     'rest_framework',
     'django_countries',
@@ -275,6 +275,8 @@ REST_FRAMEWORK = {
     )
 
 }
+
+SITE_ID = 1
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
