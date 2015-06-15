@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load templatetags %}
+
+{% block content %}
+<div class="content">
+    <div class="container content simple-page"> 
+    {% block content-simple %}
+    {% endblock %}
+    </div>
+</div>
+{% endblock %}   

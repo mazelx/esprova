@@ -37,6 +37,23 @@ ALLOWED_HOSTS = ['esprova.herokuapp.com', '.esprova.com', 'esprova-staging.herok
 # Application definition
 
 INSTALLED_APPS = (
+    # project applications
+    'core',
+    'search_backends',
+    'planning',
+    'accounts',
+    'registration',
+
+    # External modules
+    # 'debug_toolbar',
+
+    'django_countries',
+    'haystack',
+    'rest_framework',
+    'django_nose',
+    'django_extensions',
+    'storages',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,18 +64,6 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     # optional but advised for registration app
     'django.contrib.sites',
-    # External modules
-    'rest_framework',
-    'django_countries',
-    'haystack',
-    'django_nose',
-    'django_extensions',
-    'storages',
-    # project applications
-    'search_backends',
-    'core',
-    'planning',
-    'registration',
 
 )
 
@@ -278,7 +283,18 @@ REST_FRAMEWORK = {
 
 SITE_ID = 1
 
+
+# REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 7
+
+
+# EMAIL SETTING
+EMAIL_HOST = 'mail.privateemail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'contact@esprova.com'
+EMAIL_HOST_PASSWORD = '.GNS25eiu.'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'contact@esprova.com'
 
 
 # Development settings :

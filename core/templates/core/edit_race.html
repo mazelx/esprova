@@ -11,26 +11,28 @@
 
 {% block content %}
 <div class="content">
-    <div class="container update">
-        <h1>
-        {% if update_flg %}
-            Modification de course
-        {% else %}
-            Création de course
-        {% endif %}
-        </h1>
-        <h2> 
-        {% if wizard.steps.current == 'race' %}
-        Général
-        {% elif wizard.steps.current == 'location' %}
-        Lieu
-        {% else %}
-        Contact
-        {% endif %} 
+    <div class="container simple-page">
+        <header>
+            <h1>
+            {% if update_flg %}
+                Modification de course
+            {% else %}
+                Création de course
+            {% endif %}
+            </h1>
+            <h2> 
+            {% if wizard.steps.current == 'race' %}
+            Général
+            {% elif wizard.steps.current == 'location' %}
+            Lieu
+            {% else %}
+            Contact
+            {% endif %} 
 
-        ( {{wizard.steps.step1 }} / {{ wizard.steps.count }} )</h2>
-
-        <form autocomplete="off"  action="" method="post" class="form-horizontal edit-form" id="edit-form">
+            ( {{wizard.steps.step1 }} / {{ wizard.steps.count }} )</h2>
+        </header>
+        
+        <form autocomplete="off"  action="" method="post" class="form-horizontal simple-form" id="edit-form">
             
             {% csrf_token %}
 

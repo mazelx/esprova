@@ -13,15 +13,16 @@
 {% block content %}
 
 <div class="content ">
-    <div class="container update">
+    <div class="container simple-page">
+    <header>
+        {% if pk %}
+        <h1>Modification d'évènement</h1>
+        {% else %}
+        <h1>Création d'évènement</h1>
+        {% endif %}
+    </header>
 
-    {% if pk %}
-    <h1>Modification d'évènement</h1>
-    {% else %}
-    <h1>Création d'évènement</h1>
-    {% endif %}
-
-        <form action="" method="post" class="edit-form">
+        <form action="" method="post" class="simple-form">
             {% csrf_token %}
 
             <div class="row">

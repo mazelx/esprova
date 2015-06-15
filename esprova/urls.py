@@ -1,16 +1,15 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from core.views import *
-from core.forms import ContactForm, RaceForm, LocationForm, EventForm
+from core.forms import ContactForm, RaceForm, LocationForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 from rest_framework import routers
 from api import views
 
-from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
-
 from planning.views import *
+
+from accounts.views import CustomRegistrationView
 
 from haystack.forms import FacetedSearchForm
 from haystack.query import SearchQuerySet
@@ -49,7 +48,7 @@ urlpatterns = patterns('',
                            # name="logout"),
 
                        (r'^accounts/', include('registration.backends.default.urls')),
-
+                       url(r'^accounts/register', CustomRegistrationView.as_view(), name="registration_register"),
 
                        # Introduction
                        url(r'^$', IntroView.as_view(), name="intro"),
@@ -69,7 +68,7 @@ urlpatterns = patterns('',
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
                        url(r'^events/(?P<pk>\d+)$', EventView.as_view(), name='view_event'),
                        # url(r'^update/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', racewizard, name="edit_race"),
-                       
+
                        url(r'^create/$', create_event, name='create_event'),
                        url(r'^update/(?P<pk>\d+)$', update_event, name='update_event'),
                        url(r'^delete/(?P<pk>\d+)$', EventDelete.as_view(), name='delete_event'),

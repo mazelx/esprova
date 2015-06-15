@@ -1,12 +1,15 @@
 from planning.models import ShortlistedRace
 from core.models import Race
+from core.views import LoginRequiredMixin
 from django.views.generic import ListView
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 
 
-class PlanningList(ListView):
+
+
+class PlanningList(LoginRequiredMixin, ListView):
     model = ShortlistedRace
     template_name = 'planning/planning_list.html'
     context_object_name = "planned_race_list"

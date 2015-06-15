@@ -3,21 +3,33 @@
 
 {% block title %}{% trans "Log in" %}{% endblock %}
 
-{% block content %}
-<div class="content">
-    <div class="container">
+{% block content-simple %}
+<h1>Connexion</h1>
 
-    <form method="post" action="">
+<div class="col-sm-6 col-sm-offset-3">
+    <form method="post" action="" class="simple-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="{% trans 'Log in' %}" />
-        <input type="hidden" name="next" value="{% url "list_race" %}" />
+        {% for field in form %}
+            <div class="fieldWrapper row">
+                {% if field.errors %}
+                    <span class="col-xs-10 col-xs-offset-3">{{ field.errors.as_text }}</span>
+                {% endif %}
+
+                <span class="col-xs-3 label">{{ field.label_tag }}</span>
+                <span class="col-xs-9">{{ field }}</span>
+            </div>
+        {% endfor %}
+
+         <div class="form-submit">
+            <input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary"/>
+            <input type="hidden" name="next" value="{% url "list_race" %}" />
+        </div>
     </form>
 
     <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
     <p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p>
-    </div>
 </div>
+
 {% endblock %}
 
     
