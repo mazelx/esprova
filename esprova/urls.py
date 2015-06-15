@@ -42,11 +42,11 @@ sqs = SearchQuerySet().facet('distance_cat')
 
 urlpatterns = patterns('',
                        # Login
-                       url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
-                           name="login"),
+                       # url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
+                           # name="login"),
 
-                       url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': 'intro'},
-                           name="logout"),
+                       # url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': 'intro'},
+                           # name="logout"),
 
                        (r'^accounts/', include('registration.backends.default.urls')),
 

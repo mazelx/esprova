@@ -19,7 +19,7 @@
             <div class="account-wall">
                 <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
-                <form method="post" action="{% url "login" %}" class="form-signin">
+                <form method="post" action="{% url "auth_login" %}" class="form-signin">
                 {% csrf_token %}
                         <input id="id_username"  name="username" type="text" class="form-control" placeholder="Login" required autofocus>
                         <input id="id_password" name="password" type="password" class="form-control" placeholder="Password" required>
