@@ -164,11 +164,15 @@
 
                    
                 <div class="row race-add-planning">
-                    {% if race not in planned_race %}
-                        <span class="race-add-planning-text">Ajouter cette course au programme : </span>
-                        <a onclick="addToPlanning({{race.pk}})" href="#"><img class="race-add-planning-icon" alt="ajouter au planning" src="/static/images/icon-race-add-planning.svg"></a>
-                    {% else %}
+                    {% if race in planned_race %}
                         <span class="race-add-planning-text">Cette course figure dans votre <a href="{%url "planning" %}">programme</a></span>
+                    {% else %}
+                        <span class="race-add-planning-text">Ajouter cette course au programme : </span>
+                        {% if not user.is_authenticated %}
+                            <a href="{% url "auth_login" %}?next={% firstof request.path '/' %}"><img class="race-add-planning-icon" alt="ajouter au planning" src="/static/images/icon-race-add-planning.svg"></a>
+                        {% else %}
+                            <a onclick="addToPlanning({{race.pk}})" href="#"><img class="race-add-planning-icon" alt="ajouter au planning" src="/static/images/icon-race-add-planning.svg"></a>
+                        {% endif %}
                     {% endif %}
 
                 </div>
