@@ -125,7 +125,7 @@
             
                 <ul class="nav navbar-nav navbar-right">
                         
-                        {% if not request.is_superuser %}
+                        {% if user.is_superuser %}
                             <li>
                                 <a href=" {% url "list_event_validation" %}" class="text-warning"> Validation</a></li>
                             </li>
