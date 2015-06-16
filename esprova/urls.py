@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
+from django.contrib import admin, messages
 from core.views import *
 from core.forms import ContactForm, RaceForm, LocationForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -9,7 +9,7 @@ from api import views
 
 from planning.views import *
 
-from accounts.views import CustomRegistrationView
+from accounts.views import CustomRegistrationView, custom_password_reset_done
 
 from haystack.forms import FacetedSearchForm
 from haystack.query import SearchQuerySet
@@ -49,6 +49,8 @@ urlpatterns = patterns('',
 
                        (r'^accounts/', include('registration.backends.default.urls')),
                        url(r'^accounts/register', CustomRegistrationView.as_view(), name="registration_register"),
+                       url(r'^accounts/reset/done', custom_password_reset_done, name="auth_password_reset_done"),
+
 
                        # Introduction
                        url(r'^$', IntroView.as_view(), name="intro"),

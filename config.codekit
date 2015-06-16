@@ -209,15 +209,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/accounts\/templates\/registration\/password_reset_done.html": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/accounts\/templates\/registration\/password_reset_done.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/accounts\/templates\/registration\/password_reset_email.html": {
 		"fileType": 8192,
 		"ignore": 0,
