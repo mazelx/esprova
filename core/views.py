@@ -248,7 +248,7 @@ class FacetTest(LoginRequiredMixin, ListView):
 
 
 # Should be heriting View ... or function not based on a class
-class RaceList(LoginRequiredMixin, TemplateView):
+class RaceList(TemplateView):
     # model = Race
     context_object_name = "race_list"
     template_name = "core/racesearch.html"
@@ -272,8 +272,6 @@ class RaceList(LoginRequiredMixin, TemplateView):
             # directly assign into params.distances.XS for examplew
             context['params']['distances'][dist] = True
 
-        return context
-
 
 def create_event(request):
     eventForm = EventForm(request.POST or None)
@@ -293,7 +291,7 @@ def create_event(request):
                                                     'race_list': None})
 
 
-class EventView(LoginRequiredMixin, DetailView):
+class EventView(DetailView):
     model = Event
     context_object_name = "event"
     template_name = "core/view_event.html"
@@ -347,7 +345,7 @@ def update_event(request, pk):
 #                                                      'contactForm': contactForm })
 
 
-class RaceView(LoginRequiredMixin, DetailView):
+class RaceView(DetailView):
     model = Race
     context_object_name = "race"
     template_name = "core/race.html"
@@ -461,18 +459,18 @@ class RaceEdit(SessionWizardView):
         return HttpResponseRedirect(reverse('create_race'))
 
 
-class IntroView(LoginRequiredMixin, TemplateView):
+class IntroView(TemplateView):
     template_name = 'core/introduction.html'
 
 
-class EventValidationList(ListView):
+class EventValidationList(LoginRequiredMixin, ListView):
     model = Event
     queryset = Event.objects.filter(event_mod_source=None)
     template_name = "core/list_event_validation.html"
     context_object_name = "event_list"
 
 
-class EventDelete(DeleteView):
+class EventDelete(LoginRequiredMixin, DeleteView):
     mode = Event
     template_name = 'core/delete_event.html'
     context_object_name = "event"
@@ -497,7 +495,7 @@ class EventDelete(DeleteView):
         return HttpResponseRedirect(success_url)
 
 
-class RaceDelete(DeleteView):
+class RaceDelete(LoginRequiredMixin, DeleteView):
     model = Race
     template_name = 'core/delete_race.html'
     # success_url = reverse_lazy('list_race')
@@ -512,10 +510,9 @@ class RaceDelete(DeleteView):
         return reverse('update_event', kwargs={'pk': self.instance.event.pk})
 
 
-class RaceValidationList(ListView):
+class RaceValidationList(LoginRequiredMixin, ListView):
     model = Race
     # queryset = Race.objects.filter(validated=False)
     queryset = Race.objects.all()
     template_name = 'core/tovalidate.html'
     context_object_name = "race_list"
-
