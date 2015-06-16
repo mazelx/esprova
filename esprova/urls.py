@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin, messages
+from django.contrib import admin
 from core.views import *
 from core.forms import ContactForm, RaceForm, LocationForm
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -42,10 +42,10 @@ sqs = SearchQuerySet().facet('distance_cat')
 urlpatterns = patterns('',
                        # Login
                        # url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'core/login.html'},
-                           # name="login"),
+                       #     name="login"),
 
                        # url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': 'intro'},
-                           # name="logout"),
+                       #     name="logout"),
 
                        (r'^accounts/', include('registration.backends.default.urls')),
                        url(r'^accounts/register', CustomRegistrationView.as_view(), name="registration_register"),
