@@ -5,6 +5,7 @@ from django.views.generic import ListView
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -18,6 +19,7 @@ class PlanningList(LoginRequiredMixin, ListView):
         return ShortlistedRace.objects.filter(user=self.request.user).order_by("race__date")
 
 
+@login_required
 def add_race_to_planning(request):
     # Ajax calls
     # if this is a POST request we need to process the form data

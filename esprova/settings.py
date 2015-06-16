@@ -290,6 +290,8 @@ SITE_ID = 1
 # REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 7
 
+LOGIN_REDIRECT_URL = 'list_race'
+
 
 # EMAIL SETTING
 EMAIL_HOST = 'mail.privateemail.com'

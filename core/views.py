@@ -24,8 +24,8 @@ import logging
 
 class LoginRequiredMixin(object):
     @classmethod
-    def as_view(cls, **initkwargs):
-        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+    def as_view(cls, *initargs, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(*initargs, **initkwargs)
         return login_required(view)
 
 
@@ -273,6 +273,7 @@ class RaceList(TemplateView):
             context['params']['distances'][dist] = True
 
 
+@login_required
 def create_event(request):
     eventForm = EventForm(request.POST or None)
 
@@ -297,6 +298,7 @@ class EventView(DetailView):
     template_name = "core/view_event.html"
 
 
+@login_required
 def update_event(request, pk):
     event = Event.objects.get(pk=pk)
 
@@ -351,14 +353,16 @@ class RaceView(DetailView):
     template_name = "core/race.html"
 
     def get_context_data(self, **kwargs):
-        user = self.request.user
-        planned_race = [sr.race for sr in ShortlistedRace.objects.filter(user=user)]
+        planned_race = ''
+        if self.request.user.is_authenticated():
+            user = self.request.user
+            planned_race = [sr.race for sr in ShortlistedRace.objects.filter(user=user)]
         context = super(RaceView, self).get_context_data(**kwargs)
         context.update({'planned_race': planned_race})
         return context
 
 
-class RaceEdit(SessionWizardView):
+class RaceEdit(LoginRequiredMixin, SessionWizardView):
 
     TEMPLATES = {"race": "core/edit_race.html",
                  "location": "core/edit_race.html",
