@@ -1,22 +1,20 @@
-from django.db import models
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django_countries.fields import CountryField
-from haystack.utils.geo import Point
-from django.db.models import Min, Max
-from django.template.defaultfilters import slugify
-from geopy.geocoders import GoogleV3
-from django.db.models.signals import post_delete
 from django.dispatch import receiver
-from django.db.models import ForeignKey
+from django.db import models
+from django.db.models import Min, Max, ForeignKey
+from django.db.models.signals import post_delete
 from collections import OrderedDict
-
 import copy
+import datetime
+
+from django_countries.fields import CountryField
+
+from django.template.defaultfilters import slugify
+
+from geopy.geocoders import GoogleV3
 
 from haystack.query import SearchQuerySet
-from haystack.utils.geo import D
-
-import datetime
-import logging
+from haystack.utils.geo import D, Point
 
 
 class ComparableModelMixin(object):
@@ -82,7 +80,6 @@ class Sport(ComparableModelMixin, models.Model):
     def __str__(self):
         return self.name
 
-
     @property
     def distances(self):
         distances = []
@@ -103,10 +100,6 @@ class Sport(ComparableModelMixin, models.Model):
 
         return distances
 
-    # @name.setter
-    # def name(self, value):
-        # self.distancecategory_set.all() = value
-
 
 class Location(ComparableModelMixin, models.Model):
 
@@ -119,7 +112,6 @@ class Location(ComparableModelMixin, models.Model):
 
     """
     compare_excluded_keys = 'pk', 'id', '_state', 'lat', 'lng'
-
 
     street_number = models.CharField(max_length=10, blank=True, null=True, verbose_name='Numéro')
     route = models.CharField(max_length=200, blank=True, null=True, verbose_name='Voie')
@@ -172,10 +164,8 @@ class Location(ComparableModelMixin, models.Model):
     def __str__(self):
         return "{0}, {1}, {2} ({3}, {4})".format(self.postal_code, self.locality, self.country, self.lat, self.lng)
 
-
     def natural_key(self):
         return (self.lat, self.lng)
-
 
     def geocode_raw_address(self, raw_address, postal_code, country='FR'):
         """
@@ -282,21 +272,6 @@ class Season(models.Model):
         return (self.name)
 
 
-# class EventReference(models.Model):
-#     """
-#         Represent an event (accross all seasons)
-#     """
-#     name = models.CharField(max_length=150)
-#     website = models.URLField(blank=True, null=True)
-#     organizer = models.ForeignKey(Organizer, blank=True, null=True)
-
-#     def __str__(self):
-#         return self.name
-
-#     def natural_key(self):
-#         return (self.name)
-
-
 class Event(ComparableModelMixin, models.Model):
     """
         Represent an edition of an event
@@ -331,7 +306,8 @@ class Event(ComparableModelMixin, models.Model):
         distance_cat_set = []
         already_added = {}
         for r in self.races.all().order_by('distance_cat__order'):
-            if r.distance_cat in already_added and unique is True: continue
+            if r.distance_cat in already_added and unique is True:
+                continue
             already_added[r.distance_cat] = 1
             distance_cat_set.append(r.distance_cat)
         return distance_cat_set
@@ -361,7 +337,7 @@ class Event(ComparableModelMixin, models.Model):
                 l.save()
                 r.location = l
 
-                 # copy contact
+                # copy contact
                 c = r.contact
                 c.pk = None
                 c.save()
@@ -551,7 +527,6 @@ class Race(ComparableModelMixin, models.Model):
     time = models.TimeField(blank=True, null=True, verbose_name='Heure')
     distance_cat = models.ForeignKey(DistanceCategory,
                                      verbose_name="Distance")
-                                     # limit_choices_to=get_limit_for_distancecat)
     price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
     label = models.ForeignKey(Label, blank=True, null=True, related_name='races')
@@ -570,25 +545,12 @@ class Race(ComparableModelMixin, models.Model):
         return (self.date, self.time, self.distance_cat) + self.event
     natural_key.dependencies = ['core.Event']
 
-    # def pre_delete(self, *args, **kwargs):
-    #     """
-    #         Do a cascade delete on contact, location and event instance if this is their last race
-    #     """
-    #     logging.debug("entering pre_delete")
-    #     if len(self.contact.races.all()) < 2:
-    #         self.contact.delete()
-    #     if len(self.location.races.all()) < 2:
-    #         self.location.delete()
-    #     if len(self.event.races.all()) < 2:
-    #         self.event.delete()
-
     def get_event_races_same_sport(self):
         # races = []
         # for r in self.event.races.filter(sport=self.sport).order_by('distance_cat__order'):
         #     races.append(r)
         # return races
         return self.event.races.filter(sport=self.sport).order_by('distance_cat__order')
-
 
     def save(self, *args, **kwargs):
         """

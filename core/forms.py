@@ -1,9 +1,7 @@
 from django import forms
-from core.models import Event, Race, Location, Contact, Sport
+from core.models import Event, Race, Location, Contact
 import pycountry
-import pdb
 
-# model forms ????
 
 class ConnexionForm(forms.Form):
     username = forms.CharField(label="Nom d'utilisateur", max_length=30)
@@ -38,7 +36,6 @@ class RaceForm(forms.ModelForm):
                                     format='%Y-%m-%d'),
             'time': forms.TimeInput(format='%H:%M')
         }
-    # # TODO : cascading select box to choo se distances corresponding to a sport
 
 
 class LocationForm(forms.ModelForm):
@@ -66,7 +63,6 @@ class LocationForm(forms.ModelForm):
 
     def save(self, force_insert=False, force_update=False, commit=True):
         l = super(LocationForm, self).save(commit=False)
-        # pdb.set_trace()
 
         # get admin level 1 and 2 data from postal code (at least for France)
         dpt = self.cleaned_data['postal_code'][:2]
@@ -75,7 +71,6 @@ class LocationForm(forms.ModelForm):
         l.administrative_area_level_2 = sub.name
         l.administrative_area_level_1_short_name = sub.parent.code
         l.administrative_area_level_1 = sub.parent.name
-        # l.save(commit=False)  
 
         if commit:
             l.save()
