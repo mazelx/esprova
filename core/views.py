@@ -177,6 +177,7 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
                  "contact": "core/edit_race.html"}
 
     update_flg = False
+    event = None
     # template_name = 'core/edit_race.html'
 
     def get(self, request, *args, **kwargs):
@@ -187,16 +188,16 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
         just starts at the first step or wants to restart the process.
         The data of the wizard will be resetted before rendering the first step.
         """
+        if 'event' in self.kwargs:
+            event_pk = self.kwargs['event']
+            self.event = Event.objects.get(pk=event_pk)
 
         # if update
         if 'pk' in self.kwargs:
             self.update_flg = True
 
-        event_pk = self.kwargs['event']
-        event = Event.objects.get(pk=event_pk)
-
-        if event.validated:
-            cloned_event = event.clone()
+        if self.event.validated:
+            cloned_event = self.event.clone()
             if self.update_flg:
                 # TODO : ne pas transmettre l'ancien race pk ! mais quoi ?
                 return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}))
@@ -219,14 +220,22 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
         return [self.TEMPLATES[self.steps.current]]
 
     def get_form_initial(self, step):
+        # initial = self.initial_dict.get(step, {})
+        if 'event' in self.kwargs:
+            event_pk = self.kwargs['event']
+            self.event = Event.objects.get(pk=event_pk)
+
         if 'pk' in self.kwargs:
             return {}
         else:
-            return self.initial_dict.get(step, {})
+            data = {}
+            if step == 'location':
+                data = self.event.races.last().location.__dict__.copy()
+            elif step == 'contact':
+                data = self.event.races.last().contact.__dict__.copy()
+            return self.initial_dict.get(step, data)
 
     def get_form_instance(self, step):
-        event_pk = self.kwargs['event']
-        self.event = Event.objects.get(pk=event_pk)
         if 'pk' in self.kwargs:
             pk = self.kwargs['pk']
             race = Race.objects.get(pk=pk)
@@ -238,7 +247,6 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
             elif (step == "contact"):
                 instance = race.contact
 
-            logging.debug("instance {0}".format(instance))
             return instance
 
         else:
