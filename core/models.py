@@ -411,27 +411,39 @@ class Event(ComparableModelMixin, models.Model):
 
     def validate(self):
         if self.pk and not self.validated:
+
             # create
             if not self.event_mod_source:
-                print("create")
                 self.validated = True
                 return self.save()
             else:
                 # update
                 if not self.to_be_deleted:
-                    old_event = self.event_mod_source
-                    print("update")
-                    self.event_mod_source = None
-                    self.validated = True
-                    for r in self.get_races():
-                        r.race_mod_source = None
-                        r.save()
+                    data = self.__dict__.copy()
 
-                    self.save()
-                    old_event.delete()
+                    del data['id']
+                    event_mod_source_id = data.pop('event_mod_source_id')
+                    # remove _ keys
+                    data = {k: v for k, v in data.items() if not k[:1] == '_'}
+                    data['validated'] = True
+                    try:
+                        for r in self.get_races():
+                            r.validate()
+                        self.delete()
+                        # update event
+                        Event.objects.filter(id=event_mod_source_id).update(**data)
+                        # remove all other modifications
+                        Event.objects.filter(event_mod_source_id=event_mod_source_id).delete()
+
+                    except Exception as e:
+                        # if update fails, recreate the deleted object
+                        data['validated'] = False
+                        data['event_mod_source_id'] = event_mod_source_id
+                        Event(**data).save()
+                        print('update failed, object has been recreated:' + str(e))
+
                 # delete
                 else:
-                    print("delete")
                     self.event_mod_source.delete()
 
 
@@ -534,6 +546,7 @@ class Race(ComparableModelMixin, models.Model):
     description = models.TextField(blank=True, null=True)
     location = models.OneToOneField(Location)
     race_mod_source = models.ForeignKey("Race", related_name='race_modified_set', blank=True, null=True)
+    to_be_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.CharField(max_length=100)
     modified_date = models.DateTimeField(auto_now=True)
@@ -601,18 +614,45 @@ class Race(ComparableModelMixin, models.Model):
         # return race objects instead of haystack searchresul
         return [sr.object for sr in sqs]
 
+    def validate(self):
+        if self.pk:
+            # create
+            if not self.race_mod_source:
+                self.event = self.event.event_mod_source
+                self.save()
 
-@receiver(post_delete, sender=Race)
-def post_delete_race(sender, instance, *args, **kwargs):
-    try:
-        instance.contact.delete()
-    except ObjectDoesNotExist:
-        pass
+            else:
+                if not self.to_be_deleted:
+                    # update
+                    data = self.__dict__.copy()
+                    # remove _ keys
+                    data = {k: v for k, v in data.items() if not k[:1] == '_'}
+                    del data['id']
+                    race_mod_source_id = data.pop('race_mod_source_id')
+                    data['event_id'] = self.event.event_mod_source.pk
+                    self.delete()
+                    try:
+                        Race.objects.filter(id=race_mod_source_id).update(**data)
+                    except Exception as e:
+                        # if update fails, recreate the deleted object
+                        Race(**data)
+                        raise e
+                else:
+                    self.race_mod_source.delete()
+                    self.delete()
 
-    try:
-        instance.location.delete()
-    except ObjectDoesNotExist:
-        pass
+
+# @receiver(post_delete, sender=Race)
+# def post_delete_race(sender, instance, *args, **kwargs):
+#     try:
+#         instance.contact.delete()
+#     except ObjectDoesNotExist:
+#         pass
+
+#     try:
+#         instance.location.delete()
+#     except ObjectDoesNotExist:
+#         pass
 
 
 class StageDistance(models.Model):

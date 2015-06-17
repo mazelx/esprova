@@ -2,19 +2,6 @@
 {% load static from staticfiles %} 
 
 {% block head_extra %}
-<script type="text/javascript">
-    function validateRace(pk) {
-          $.ajax({
-            url: '/api/validate/'+pk,
-            type: 'PUT',
-            data: { race: pk },
-            success: function(response, statut) {
-                alert('validé')
-            },
-        });
-          location.replace('/races');
-    }
-</script>
 
 {% endblock %}
 {% block content %}

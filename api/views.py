@@ -1,7 +1,9 @@
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
@@ -11,6 +13,7 @@ from api.serializers import RaceSerializer
 
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
+from haystack.management.commands import update_index
 
 from core.models import Sport, Race, Location, Event, Contact, DistanceCategory
 
@@ -105,7 +108,12 @@ def ajx_validate_event(request, pk):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'PUT':
         event = get_object_or_404(Event, pk=pk)
         event.validate()
+
+        # update haystack index to display changes
+        update_index.Command().handle(interactive=False)
+
         messages.success(request, ("Evenement {0} validé").format(event.name))
+
         return HttpResponse('')
     return HttpResponseBadRequest
 

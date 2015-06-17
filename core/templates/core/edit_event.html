@@ -49,12 +49,16 @@
                 <ul class="list-group row">
                     {% for race in race_list %}
                          <li class="col-xs-9 col-xs-offset-3 list-group-item">
-                         <span class="col-xs-10">
+                         <span class="col-xs-10 {{race.to_be_deleted|yesno:"deleted,"}}">
                             {{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} 
                          </span>
                          <span class="col-xs-2">
-                             <a class="glyphicon glyphicon-edit text-info" aria-hidden="true" href="{% url "update_race" race.event.pk race.pk %}" title="Modifier la course"></a>
-                             <a class="glyphicon glyphicon-remove text-danger" aria-hidden="true" href="{% url "delete_race" race.event.pk race.pk %}" title="Supprimer la course"></a>
+                            {% if not race.to_be_deleted %}
+                                 <a class="glyphicon glyphicon-edit text-info" aria-hidden="true" href="{% url "update_race" race.event.pk race.pk %}" title="Modifier la course"></a>
+                                 <a class="glyphicon glyphicon-remove text-danger" aria-hidden="true" href="{% url "delete_race" race.event.pk race.pk %}" title="Supprimer la course"></a>
+                            {% else %}
+                                <span>supprimé</span>
+                            {% endif %}
                          </span>
                          </li>
                     {% endfor %}
@@ -83,6 +87,11 @@
             </div>
 
         </form>
+        <div class="row footer-info">
+            {% if pk %}
+                <p>Cet evenement ne devrait pas apparaitre sur le site ? Demander la <a href="{% url "delete_event" pk %}">suppression</a> de l'évenement.</p>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}

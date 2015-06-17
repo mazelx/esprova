@@ -10,10 +10,9 @@
             type: 'PUT',
             data: { race: pk },
             success: function(response, statut) {
-                alert('validé')
+                location.replace('/races');
             },
         });
-          location.replace('/races');
     }
 </script>
 
@@ -24,9 +23,9 @@
 <div class="content ">
     <div class="container simple-page">
 
-        <h1>{{ event.name }}</h1>
+        <header><h1>{{ event.name }}</h1></header>
 
-        <div class="event">
+        <div class="simple-form">
 
             <div class="row">
                 <div class="row">
@@ -43,7 +42,7 @@
                 <ul class="list-group row">
                     {% for race in event.get_races %}
                          <li class="col-xs-9 col-xs-offset-3 list-group-item">
-                             <span>
+                             <span class="{{race.to_be_deleted|yesno:"deleted,"}}">
                                 <a href="{% url "view_race" race.slug race.pk %}" >{{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} </a>
                              </span>
                          </li>

@@ -289,6 +289,8 @@ SITE_ID = 1
 
 # REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 7
+# REGISTRATION_FORM = 'accounts.forms.customRegistrationForm'
+REGISTRATION_FORM = 'registration.forms.RegistrationFormUniqueEmail'
 
 LOGIN_REDIRECT_URL = 'list_race'
 

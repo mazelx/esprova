@@ -138,7 +138,12 @@
                     <div class="race-infogroup-details">
                         <dl class="dl-horizontal-perso">
                             <dt>Web</dt>
-                            <dd><a href="{{race.event.website}}">{{race.event.website}}</a>
+                            <dd>
+                            {% if race.event.website %}
+                                <a href="{{race.event.website}}">{{race.event.website}}</a>
+                            {% else %}
+                                <br>
+                            {% endif %}
                             </dd>
                             <dt>Organisateur</dt>
                             <dd>

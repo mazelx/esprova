@@ -114,11 +114,19 @@ def update_event(request, pk):
 
         if eventForm.is_valid():
             eventForm.save()
-            messages.success(request, (
-                "L'évènement {0} a bien été modifié et sera publié "
-                "après validation par nos services".format(event.name)
-                )
-            )
+
+            if not event.event_mod_source:
+                # creation
+                messages.success(request, (
+                    "L'évènement {0} a bien été créé et sera publié "
+                    "après validation par nos services".format(event.name)
+                    ))
+            else:
+                # update
+                messages.success(request, (
+                    "L'évènement {0} a bien été modifié et sera publié "
+                    "après validation par nos services".format(event.event_mod_source.name)
+                    ))
 
             return HttpResponseRedirect(reverse('list_race'))
     # if form init
@@ -134,7 +142,7 @@ def update_event(request, pk):
 
 
 class EventDelete(LoginRequiredMixin, DeleteView):
-    mode = Event
+    model = Event
     template_name = 'core/delete_event.html'
     context_object_name = "event"
 
@@ -155,6 +163,10 @@ class EventDelete(LoginRequiredMixin, DeleteView):
         success_url = self.get_success_url()
         self.object.to_be_deleted = True
         self.object.save()
+        messages.success(request, (
+                    "La demande de suppression de l'évènement {0} a bien été prise en compte "
+                    " et sera traitée par notre équipe de validation".format(self.instance.name)
+                    ))
         return HttpResponseRedirect(success_url)
 
 
@@ -272,3 +284,14 @@ class RaceDelete(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('update_event', kwargs={'pk': self.instance.event.pk})
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Calls the delete() method on the fetched object and then
+        redirects to the success URL.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.to_be_deleted = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
