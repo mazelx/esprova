@@ -775,6 +775,37 @@ footer {
         }
     }
 
+    .location-searchbox {
+        margin-bottom: 50px;
+        margin-top: 50px;
+        // border-color: @esprova-red;
+    }
+
+    .location-searchbox-label {
+        color: @esprova-darkgray;
+    }
+
+    .map-container {
+        height: 400px;
+        margin-top: 15px;
+        padding: 15px;
+    }
+    #address-map {
+        height: 100%;
+    }
+
+    #selected-address {
+
+        #selected-address-title {
+            color: @esprova-gray;
+        }
+
+        a {
+              .pull-right();
+        }
+
+    }
+
     .simple-form {
         margin-bottom: 50px;
         .row {
@@ -794,27 +825,9 @@ footer {
             content: '* ';
         }
 
-        input {
+        input,
+        textarea {
             width: 100%;
-        }
-
-        .location-searchbox {
-            margin-bottom: 50px;
-            margin-top: 50px;
-            // border-color: @esprova-red;
-        }
-
-        .location-searchbox-label {
-            color: @esprova-darkgray;
-        }
-
-        .map-container {
-            height: 400px;
-            margin-top: 15px;
-            padding: 15px;
-        }
-        #address-map {
-            height: 100%;
         }
 
         .list-group {

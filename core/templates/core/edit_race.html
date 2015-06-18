@@ -31,6 +31,30 @@
 
             ( {{wizard.steps.step1 }} / {{ wizard.steps.count }} )</h2>
         </header>
+
+        <form id="location-form">
+            {# display location search box only for location form #}
+            {% if wizard.steps.current == 'location' %}
+                <div class='location-searchbox'>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="autocompleteInput" class="location-searchbox-label">Rechercher une adresse :</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input id="autocompleteInput" class="form-control" placeholder="Entrer une adresse pour remplir automatiquement le formulaire" onFocus="geolocate()" type="text" name="location-searchbox" onkeypress="return event.keyCode != 13;"></input>
+                            <p id="selected-address"><span id="selected-address-title"></span><a class="pull-right" href="#" onclick="enableLocationSearchBox();">changer</a><p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 map-container" >
+                            <div id="address-map"></div>
+                        </div>
+                    </div>
+
+                </div>
+            {% endif %}
+
+        </form>
         
         <form autocomplete="off"  action="" method="post" class="form-horizontal simple-form" id="edit-form">
             
@@ -38,26 +62,6 @@
 
             <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
             <input autocomplete="false" name="hidden" type="text" style="display:none;">
-
-            {# display location search box only for location form #}
-            {% if wizard.steps.current == 'location' %}
-            <div class='location-searchbox'>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <label for="autocompleteInput" class="location-searchbox-label">Rechercher une adresse :</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <input id="autocompleteInput" class="form-control" placeholder="Entrer une adresse pour remplir automatiquement le formulaire" onFocus="geolocate()" type="text" name="location-searchbox" onkeypress="return event.keyCode != 13;"></input>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2 map-container" >
-                        <div id="address-map"></div>
-                    </div>
-                </div>
-
-            </div>
-            {% endif %}
 
 
             {{ wizard.management_form }}
@@ -92,7 +96,7 @@
                 {% for field in wizard.form.visible_fields %}
                     <div class="form-group">
                         {% if field.errors %}
-                            <div class="col-sm-10 col-sm-offset-2">{{ field.errors.as_text }}</div>
+                            <div class="col-sm-10 col-sm-offset-2 field-error">{{ field.errors.as_text }}</div>
                         {% endif %}
 
                         {% if field.field.required %}

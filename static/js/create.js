@@ -1,6 +1,7 @@
  
 var native_datepicker = Modernizr.touch;
 
+var formatted_address;
 var mapOptions;
 var marker;
 
@@ -58,7 +59,13 @@ function initialize() {
                   lng: 2.6
           }
           mapOptions.zoom = 5
-      } 
+      }  
+      else {
+        formatted_address = $("#id_location-street_number").val() + ' ' + $("#id_location-route").val() + ', ' +  
+                            $("#id_location-postal_code").val() + ' ' + $("#id_location-locality").val() + ', ' + 
+                            $("#id_location-country").val()
+      }
+
       createMap();
 
 
@@ -73,6 +80,9 @@ function initialize() {
         clearForm();
         changeAddress();
       });
+
+      initLocationLayout();
+
     }
 
   }
@@ -99,9 +109,9 @@ function addSportSelectCascade(){
 
   $('#id_race-sport').on('change', function(){
 
-    var options = $(distList).empty().scrollTop(0).data('options');
-    var search = "\\(" + $.trim($(sportList).children(":selected").text()) + "\\)";
-    var regex = new RegExp(search,'gi');
+  var options = $(distList).empty().scrollTop(0).data('options');
+  var search = "\\(" + $.trim($(sportList).children(":selected").text()) + "\\)";
+  var regex = new RegExp(search,'gi');
 
   $.each(options, function(i) {
       var option = options[i];
@@ -114,6 +124,48 @@ function addSportSelectCascade(){
 
   });
 }
+function displayFieldRequiredError() {
+  $.each($(".required").parent(), function( index, element ) {
+    if ($(this).find("input").val() === ""){
+      $("#edit-form").before( "<p>Merci de préciser : </p>" );
+      $(this).show();
+      $(this).find("input").css({'border':'solid 1px red'});
+      $('html, body').animate( { scrollTop: $(this).offset().top }, 600 ); 
+    }
+  });
+
+}
+function enableLocationSearchBox() {
+    $("#selected-address").hide() 
+    $("#autocompleteInput").show() 
+}
+
+function initLocationLayout(){
+  $("#edit-form .form-group").hide()
+      // form field error handling
+      displayFieldRequiredError()
+      
+      // display searchbox if address is not provided
+      if ($("#autocompleteInput").is(':hidden')) {
+        enableLocationSearchBox();
+      }
+      else {
+        $("#selected-address-title").html(formatted_address)
+        $("#selected-address").show()
+        $("#autocompleteInput").hide()
+      }
+      
+
+      // prevent form submit if address is being changed
+      $( "#edit-form" ).submit(function( event ) {
+          if(!$("#autocompleteInput").is(':hidden')) {
+              event.preventDefault();
+              $("#autocompleteInput").css({"border":"solid 1px red"}) 
+              $('html, body').animate({ scrollTop: 0 }, 'slow');
+        }
+      });
+}
+
 
 // initialize bootstrap-datepicker component
 function createDatePickerComponent() {
@@ -199,34 +251,35 @@ function changeAddress() {
         document.getElementById(componentArray[j].id).value = val;
       }
     }
+    formatted_address = place.formatted_address
 
   }
 
-  if(wizard_step === 'location') {
-    // remove the marker from the map
-    marker.setMap(null);
+  // remove the marker from the map
+  marker.setMap(null);
 
-    lat = place.geometry.location.lat();
-    lng = place.geometry.location.lng();
+  lat = place.geometry.location.lat();
+  lng = place.geometry.location.lng();
 
-    marker = new google.maps.Marker({
-            position: {lat:lat, lng:lng} ,
-            map: map,
-            zIndex : 1,
-        });
+  marker = new google.maps.Marker({
+          position: {lat:lat, lng:lng} ,
+          map: map,
+          zIndex : 1,
+      });
 
-    // center map on new marker
-    map.setCenter(marker.getPosition());
-    google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
-          if (this.getZoom()){
-              this.setZoom(12);
-          }
-    });
+  // center map on new marker
+  map.setCenter(marker.getPosition());
+  google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+        if (this.getZoom()){
+            this.setZoom(12);
+        }
+  });
 
-    // save the lat /lng in the form
-    document.getElementById('id_location-lat').value = lat.toFixed(5);
-    document.getElementById('id_location-lng').value = lng.toFixed(5);
-  }
+  // save the lat /lng in the form
+  document.getElementById('id_location-lat').value = lat.toFixed(5);
+  document.getElementById('id_location-lng').value = lng.toFixed(5);
+
+  initLocationLayout();
 }
 // [END region_fillform]
 

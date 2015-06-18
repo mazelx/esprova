@@ -133,6 +133,8 @@ class Location(ComparableModelMixin, models.Model):
     lat = models.DecimalField(max_digits=8, decimal_places=5)
     lng = models.DecimalField(max_digits=8, decimal_places=5)
 
+    extra_info = models.TextField(null=True, blank=True, verbose_name='Infos complémentaires')
+
     geocode_mapping = [{'field': 'street_number',
                         'geo_field': {'name': 'street_number', 'type': 'short_name'}
                         },

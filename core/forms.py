@@ -55,10 +55,17 @@ class LocationForm(forms.ModelForm):
             # 'administrative_area_level_2',
             'lat',
             'lng',
+            'extra_info',
         ]
         widgets = {
             'lat': forms.HiddenInput(),
             'lng': forms.HiddenInput(),
+            # 'street_number': forms.HiddenInput(),
+            # 'locality': forms.HiddenInput(),
+            # 'route': forms.HiddenInput(),
+            # 'localsity': forms.HiddenInput(),
+            # 'postal_code': forms.HiddenInput(),
+            # 'country': forms.HiddenInput(),
         }
 
     def save(self, force_insert=False, force_update=False, commit=True):
