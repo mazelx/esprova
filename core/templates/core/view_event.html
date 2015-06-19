@@ -23,11 +23,18 @@
 <div class="content ">
     <div class="container simple-page">
 
-        <header><h1>{{ event.name }}</h1></header>
+        <header>
+        <h1>{{ event.name }}</h1>
+
+        {% if event.to_be_deleted %}
+            <h2 class="text-danger">**** A supprimer ! ****</h2>
+        {% endif %}
+        </header>
 
         <div class="simple-form">
 
             <div class="row">
+
                 <div class="row">
                     <span class="col-xs-3"><label>Site internet : </label></span>
                     <span class="col-xs-9">{{ event.website }}</span>
