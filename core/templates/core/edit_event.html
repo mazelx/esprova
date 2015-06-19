@@ -10,7 +10,15 @@
     function cancelEdition() {
         if(confirm("Etes-vous sur de vouloir annuler cette modification ?")){
             {% if pk %}
-                location.replace("{% url "delete_event" pk %}")
+                 $.ajax({
+                    url: "{% url 'delete_event' pk %}",
+                    type: 'POST',
+                    success: function() {
+                        location.replace("{% url "list_race" %}");
+                    }
+                });
+            {% else %}
+                location.replace("{% url "list_race" %}");
             {% endif %}
         }
     }
@@ -84,7 +92,7 @@
                     {% if cloned %}
                         <a href="{% url "delete_event" pk %}" class="btn btn-default" role="button">Annuler</a>
                     {% else %}
-                        <a href="{% url "list_race" %}" onclick="cancelEdition();" class="btn btn-default" role="button">Annuler</a>
+                        <a href="#" onclick="cancelEdition();" class="btn btn-default" role="button">Annuler</a>
                     {% endif %}
 
                     {% if pk %}
