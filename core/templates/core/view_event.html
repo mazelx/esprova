@@ -59,11 +59,11 @@
             <div class="row">
                 <div class="form-submit">
                     {% if not event.validated %}
-                        <form action="{% url "delete_event" event.pk %}" method="POST">
+                        <form action="{% url "delete_event" event.pk %}" method="POST" style="display: inline;">
                          {% csrf_token %}
                             <button type="submit" class="btn btn-warning" value="DELETE">Ignorer</button>
-                            <button class="btn btn-primary" onclick="validateRace({{event.pk}})">Accepter</button>
                         </form>
+                        <button class="btn btn-primary" onclick="validateRace({{event.pk}})">Accepter</button>
                     {% endif %}
                 </div>
             </div>
