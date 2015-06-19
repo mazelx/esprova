@@ -83,6 +83,17 @@ function initialize() {
 
       initLocationLayout();
 
+      // prevent location form submit if address is being changed
+      $( "#edit-form" ).submit(function( event ) {
+        // only if the "next button has been clicked" (not previous or start)
+        if($("#TheForm").context.activeElement.value === "contact")
+          if(!$("#autocompleteInput").is(':hidden')) {
+              event.preventDefault();
+              $("#autocompleteInput").css({"border":"solid 1px red"}) 
+              $('html, body').animate({ scrollTop: 0 }, 'slow');
+        }
+      });
+
     }
 
   }
@@ -142,28 +153,20 @@ function enableLocationSearchBox() {
 
 function initLocationLayout(){
   $("#edit-form .form-group").hide()
-      // form field error handling
-      displayFieldRequiredError()
-      
-      // display searchbox if address is not provided
-      if ($("#autocompleteInput").is(':hidden')) {
-        enableLocationSearchBox();
-      }
-      else {
-        $("#selected-address-title").html(formatted_address)
-        $("#selected-address").show()
-        $("#autocompleteInput").hide()
-      }
-      
-
-      // prevent form submit if address is being changed
-      $( "#edit-form" ).submit(function( event ) {
-          if(!$("#autocompleteInput").is(':hidden')) {
-              event.preventDefault();
-              $("#autocompleteInput").css({"border":"solid 1px red"}) 
-              $('html, body').animate({ scrollTop: 0 }, 'slow');
-        }
-      });
+  if($("#id_location-lat").val() != "") {
+    // display field missing
+    displayFieldRequiredError()
+    
+    // display searchbox if address is not provided
+    if ($("#autocompleteInput").is(':hidden')) {
+      enableLocationSearchBox();
+    }
+    else {
+      $("#selected-address-title").html(formatted_address)
+      $("#selected-address").show()
+      $("#autocompleteInput").hide()
+    }
+  }
 }
 
 
