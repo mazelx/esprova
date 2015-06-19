@@ -33,6 +33,7 @@ urlpatterns = patterns('',
                        url(r'^create/$', create_event, name='create_event'),
                        url(r'^update/(?P<pk>\d+)$', update_event, name='update_event'),
                        url(r'^delete/(?P<pk>\d+)$', EventDelete.as_view(), name='delete_event'),
+                       url(r'^soft_delete/(?P<pk>\d+)$', EventSoftDelete.as_view(), name='soft_delete_event'),
 
                        url(r'^update/(?P<event>\d+)/(?P<pk>\d+)$', race_edit, name="update_race"),
                        url(r'^update/(?P<event>\d+)/add_race$', race_edit, name="add_race"),

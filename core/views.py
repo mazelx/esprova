@@ -152,6 +152,7 @@ class EventDelete(LoginRequiredMixin, DeleteView):
     model = Event
     template_name = 'core/delete_event.html'
     context_object_name = "event"
+    hard_delete = True
 
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk', None)
@@ -168,7 +169,7 @@ class EventDelete(LoginRequiredMixin, DeleteView):
         """
         self.object = self.get_object()
         success_url = self.get_success_url()
-        if self.object.validated:
+        if not self.hard_delete:
             # Soft delete
             self.object.to_be_deleted = True
             self.object.save()
@@ -177,9 +178,14 @@ class EventDelete(LoginRequiredMixin, DeleteView):
                         " et sera traitée par notre équipe de validation".format(self.instance.name)
                         ))
         else:
+            # hard delete
             self.object.delete()
 
         return HttpResponseRedirect(success_url)
+
+
+class EventSoftDelete(EventDelete):
+    hard_delete = False
 
 
 class RaceEdit(LoginRequiredMixin, SessionWizardView):
@@ -210,7 +216,7 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
             event_pk = self.kwargs['event']
             self.event = Event.objects.get(pk=event_pk)
 
-        if self.event.validated:
+        if not self.event.validated:
             cloned_event = self.event.clone()
             if self.update_flg:
                 return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}))

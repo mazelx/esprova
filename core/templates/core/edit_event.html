@@ -106,7 +106,7 @@
         </form>
         <div class="row footer-info">
             {% if pk %}
-                <p>Cet evenement ne devrait pas apparaitre sur le site ? Vous pouvez également demander sa <a href="{% url "delete_event" pk %}">suppression</a>.</p>
+                <p>Cet evenement ne devrait pas apparaitre sur le site ? Vous pouvez également demander sa <a href="{% url "soft_delete_event" pk %}">suppression</a>.</p>
             {% endif %}
         </div>
     </div>
