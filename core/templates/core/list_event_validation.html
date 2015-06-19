@@ -7,9 +7,11 @@
 {% block content %}
 <div class="container content simple-page">
 
-    <h1>Validation</h1>
+    <header><h1>Validation</h1></header>
+
+
     <div class="list-group validation row">
-        {% for event in event_list %}
+        {% for event, changes in event_list %}
             <div id="event_{{event.pk}}">
                 <div class="list-group-item">
                     <div class="list-group-item-heading row">
@@ -18,7 +20,7 @@
                         </div>
                         <div class="col-xs-4 changes">
                             {% if event.validated %}
-                                {{ event.get_nb_changes }} changements (<a data-toggle="collapse" href="#event_{{event.pk}}_changes" aria-expanded="false" aria-controls="event_{{event.pk}}_changes">voir ...</a>)
+                                {{ changes }} changements (<a data-toggle="collapse" href="#event_{{event.pk}}_changes" aria-expanded="false" aria-controls="event_{{event.pk}}_changes">voir ...</a>)
                             {% else %}
                                 Création
                             {% endif %}

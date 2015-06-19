@@ -36,6 +36,18 @@ class EventValidationList(LoginRequiredMixin, ListView):
     template_name = "core/list_event_validation.html"
     context_object_name = "event_list"
 
+    def get_queryset(self):
+        changed_event_list = []
+        qs = super(EventValidationList, self).get_queryset()
+        for event in qs:
+            nb_changes = event.get_nb_changes()
+            # add event to the list :
+            # * if event has one or more awaiting validation change OR
+            # * if event has just been created (no source_mod and not validated)
+            if nb_changes or not event.validated:
+                changed_event_list.append((event, nb_changes))
+        return changed_event_list
+
 
 class RaceList(TemplateView):
     context_object_name = "race_list"
