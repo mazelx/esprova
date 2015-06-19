@@ -90,11 +90,6 @@ def create_event(request):
     if request.method == 'POST':
         if eventForm.is_valid():
             event = eventForm.save()
-            messages.success(request, (
-                "L'évènement {0} a bien été modifié et sera publié "
-                "après validation par nos services".format(event.name))
-            )
-
             return HttpResponseRedirect(reverse('update_event', kwargs={'pk': event.pk}))
 
     return render(request, 'core/edit_event.html', {'eventForm': eventForm,
@@ -180,6 +175,12 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
     event = None
     # template_name = 'core/edit_race.html'
 
+    def get_form_kwargs(self, step):
+        # if update
+        if 'pk' in self.kwargs:
+            self.update_flg = True
+        return super(RaceEdit, self).get_form_kwargs(step)
+
     def get(self, request, *args, **kwargs):
         """
         This method handles GET requests.
@@ -192,14 +193,9 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
             event_pk = self.kwargs['event']
             self.event = Event.objects.get(pk=event_pk)
 
-        # if update
-        if 'pk' in self.kwargs:
-            self.update_flg = True
-
         if self.event.validated:
             cloned_event = self.event.clone()
             if self.update_flg:
-                # TODO : ne pas transmettre l'ancien race pk ! mais quoi ?
                 return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}))
             return HttpResponseRedirect(reverse('add_race', kwargs={'event': cloned_event.pk}))
 
@@ -229,10 +225,11 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
             return {}
         else:
             data = {}
-            if step == 'location':
-                data = self.event.races.last().location.__dict__.copy()
-            elif step == 'contact':
-                data = self.event.races.last().contact.__dict__.copy()
+            if self.event.races.count():
+                if step == 'location':
+                    data = self.event.races.last().location.__dict__.copy()
+                elif step == 'contact':
+                    data = self.event.races.last().contact.__dict__.copy()
             return self.initial_dict.get(step, data)
 
     def get_form_instance(self, step):
@@ -261,6 +258,11 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
         race = form_dict['race'].save(commit=False)
         race.location = location
         race.contact = contact
+        if self.request.user.is_authenticated():
+            if self.update_flg:
+                race.modified_by = self.request.user.username
+            else:
+                race.created_by = self.request.user.username
 
         if not hasattr(race, 'event'):
             race.event = self.event

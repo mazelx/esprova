@@ -4,7 +4,17 @@
 
 {% block head_extra %}
 <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
-<script type="text/javascript" src="{% static "js/race.js" %}"></script>
+{# <script type="text/javascript" src="{% static "js/race.js" %}"></script> #}
+
+<script type="text/javascript">
+    function cancelEdition() {
+        if(confirm("Etes-vous sur de vouloir annuler cette modification ?")){
+            {% if pk %}
+                location.replace("{% url "delete_event" pk %}")
+            {% endif %}
+        }
+    }
+</script>
 
 <title>Modification d'évenement</title>
 <meta name="description" content="{{ race.event.name }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
@@ -76,7 +86,7 @@
                     {% if cloned %}
                         <a href="{% url "delete_event" pk %}" class="btn btn-default" role="button">Annuler</a>
                     {% else %}
-                        <a href="{% url "list_race" %}" class="btn btn-default" role="button">Annuler</a>
+                        <a href="{% url "list_race" %}" onclick="cancelEdition();" class="btn btn-default" role="button">Annuler</a>
                     {% endif %}
 
                     {% if pk %}
@@ -90,7 +100,7 @@
         </form>
         <div class="row footer-info">
             {% if pk %}
-                <p>Cet evenement ne devrait pas apparaitre sur le site ? Demander la <a href="{% url "delete_event" pk %}">suppression</a> de l'évenement.</p>
+                <p>Cet evenement ne devrait pas apparaitre sur le site ? Vous pouvez également demander sa <a href="{% url "delete_event" pk %}">suppression</a>.</p>
             {% endif %}
         </div>
     </div>

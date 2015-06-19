@@ -552,6 +552,7 @@ class Race(ComparableModelMixin, models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.CharField(max_length=100)
     modified_date = models.DateTimeField(auto_now=True)
+    modified_by = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)

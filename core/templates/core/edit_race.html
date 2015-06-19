@@ -113,11 +113,11 @@
             <div class="form-submit">
                 <a href="{% url "update_event" event_pk %}" class="btn btn-default" role="button">Annuler</a>
                 {% if wizard.steps.prev %}
-                    <button name="wizard_goto_step" type="submit" class="btn btn-default" value="{{ wizard.steps.first }}"><< Début</button>
-                    <button name="wizard_goto_step" type="submit" class="btn btn-default" value="{{ wizard.steps.prev }}">< Précédent</button>
+                    <button name="wizard_goto_step" type="submit" class="btn btn-default" value="{{ wizard.steps.first }}" id="btn-form-start"><< Début</button>
+                    <button name="wizard_goto_step" type="submit" class="btn btn-default" value="{{ wizard.steps.prev }}" id="btn-form-prev">< Précédent</button>
                 {% endif %}
                 {% if wizard.steps.next %}
-                    <button type="submit" class="btn btn-default"/>Suivant ></button>
+                    <button type="submit" class="btn btn-default" id="btn-form-next" value="{{ wizard.steps.next }}"/>Suivant ></button>
                 {% else %}
                     <button type="submit" class="btn btn-primary"/>Envoyer</button>
                 {% endif %}
