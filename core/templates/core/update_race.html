@@ -5,9 +5,6 @@
 {% block head_extra %}
 <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
 <script type="text/javascript" src="{% static "js/race.js" %}"></script>
-
-<title>Modification d'évenement</title>
-<meta name="description" content="{{ race.event.name }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
 {% endblock %}
 
 {% block content %}
