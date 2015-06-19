@@ -59,7 +59,7 @@ urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
 
                        # Accounts
-                       url(r'accounts/', include('accounts.urls')),
+                       url(r'user/', include('accounts.urls')),
 
                        # API
                        url(r'api/', include('api.urls')),

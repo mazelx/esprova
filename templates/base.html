@@ -138,7 +138,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ request.user.username }} <span class="caret"></span></a>
                    
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{% url "list_race" %}">Paramètres</a>
+                                <li><a href="{% url "user_settings" %}">Paramètres</a>
                                 </li>
                                 {% if user.is_authenticated %}
                                     <li class="divider"></li>
