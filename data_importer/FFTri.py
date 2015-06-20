@@ -4,12 +4,11 @@ import re
 from operator import itemgetter
 from pytz import timezone
 from datetime import datetime
-import warnings
 import sys
 import traceback
 
 
-from core.models import Race, EventReference, EventEdition, Location, Contact, DistanceCategory, Sport, Organizer, Federation
+from core.models import Race, Event, Location, Contact, DistanceCategory, Sport, Organizer, Federation
 
 
 class RaceDoubleException(Exception):
@@ -68,6 +67,8 @@ class FFTri:
         json_data = json.loads(resp_formatted)
 
         race_list = json_data['data']['photos']
+        race_list = [race for key, race in race_list.items()]
+
         sorted_list = sorted(race_list, key=itemgetter('nom'))
 
         return sorted_list
@@ -98,18 +99,19 @@ class FFTri:
 
         restricted_race_list = self.race_list
         if sport_restrict:
-            restricted_race_list = [x for x in restricted_race_list if x['discipline'].lower() == sport_restrict.lower()]
+            restricted_race_list = [x for x in restricted_race_list
+                                    if x['discipline'].lower() == sport_restrict.lower()]
 
         for race_src in restricted_race_list:
-            e, eref, s, c, l, dc, r, o, f = ({} for i in range(9))
-            distance_cat, sport, event, event_ref, contact, location, race, organizer, federation = (None for i in range(9))
+            e, s, c, l, dc, r, o, f = ({} for i in range(8))
+            distance_cat, sport, event, contact, location, race, organizer, federation = (None for i in range(8))
 
             race_src_id = race_src.get('id', None)
 
             f['name'] = federation_name
 
-            eref['name'] = event_re.search(race_src.get('nom', None)).group(0)
-            eref['website'] = race_src.get('site')
+            e['name'] = event_re.search(race_src.get('nom', None)).group(0)
+            e['website'] = race_src.get('site')
             e['edition'] = edition_no
             # event = Event(**e)
 
@@ -121,11 +123,17 @@ class FFTri:
 
             r['title'] = race_src.get('nom', None)
 
-            d = race_src.get('date') 
+            d = race_src.get('date')
             r['date'] = datetime.strptime(d, '%d/%m/%Y')
             r['date'] = r['date'].replace(tzinfo=timezone('Europe/Paris'))
 
             r['price'] = None
+
+            # edition info
+            r['created_by'] = "FFTri"
+            r['import_source'] = "FFTri"
+            r['import_source_id'] = race_src_id
+
             o['name'] = race_src.get('nom_orga', None)
             c['name'] = race_src.get('nom_orga', None)
             c['email'] = race_src.get('email', None)
@@ -139,15 +147,13 @@ class FFTri:
             try:
 
                 # check if the race is already in the db to avoid useless treatment
-                
-
                 has_error = False
                 sport = Sport.objects.get(**s)
-                distance_cat = DistanceCategory.objects.get(sport=sport,**dc)
+                distance_cat = DistanceCategory.objects.get(sport=sport, **dc)
                 organizer, organizer_created = Organizer.objects.get_or_create(**o)
-                event_ref, event_created = EventReference.objects.get_or_create(organizer=organizer, **eref)
-                event, event_created = EventEdition.objects.get_or_create(event_ref=event_ref, **e)
-                contact, contact_created = Contact.objects.get_or_create(**c)
+                # event_ref, event_created = EventReference.objects.get_or_create(organizer=organizer, **eref)
+                event, event_created = Event.objects.get_or_create(organizer=organizer, **e)
+                contact = Contact.objects.create(**c)
                 federation, federation_created = Federation.objects.get_or_create(**f)
 
                 location = Location()
@@ -231,6 +237,7 @@ class FFTri:
                 race.sport = sport
                 race.contact = contact
                 race.location = location
+
 
                 if race.get_potential_doubles():
                     raise RaceDoubleException("Double detected")
