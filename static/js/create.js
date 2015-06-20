@@ -5,6 +5,8 @@ var formatted_address;
 var mapOptions;
 var marker;
 
+var countriesArray = ['FR', 'GP', 'MQ', 'GF', 'RE', 'PM', 'YT', 'TF', 'WF', 'PF', 'NC']
+
 
 
 var componentForm = {
@@ -138,7 +140,7 @@ function addSportSelectCascade(){
 function displayFieldRequiredError() {
   $.each($(".required").parent(), function( index, element ) {
     if ($(this).find("input").val() === ""){
-      $("#edit-form").before( "<p>Merci de préciser : </p>" );
+      $("#location-error-message").html( "Merci de préciser :" );
       $(this).show();
       $(this).find("input").css({'border':'solid 1px red'});
       $('html, body').animate( { scrollTop: $(this).offset().top }, 600 ); 
@@ -236,9 +238,21 @@ function changeAddress() {
   // Get the place details from the autocomplete object.
   var place = autocomplete.getPlace();
 
+  // restrict to FR only for the moment
 
   $("#location-form :input:not(:hidden)").val('');
 
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0]
+      if(place.address_components[i].types[0] === 'country'){
+        if (countriesArray.indexOf(place.address_components[i].short_name) === -1 ) {
+          alert("Espròva proposera bientôt la création de courses dans de nombreux pays. " +
+                "Pour l'instant, seules les adresses en France et les territoires d'outre-mer sont acceptées. " +
+                "Merci pour votre compréhension.");
+          return;
+        }
+      }
+  }
   // Get each component of the address from the place details
   // and fill the corresponding field on the form.
   for (var i = 0; i < place.address_components.length; i++) {
