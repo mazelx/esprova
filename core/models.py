@@ -553,6 +553,8 @@ class Race(ComparableModelMixin, models.Model):
     created_by = models.CharField(max_length=100)
     modified_date = models.DateTimeField(auto_now=True)
     modified_by = models.CharField(max_length=100, blank=True, null=True)
+    import_source = models.CharField(max_length=100, blank=True, null=True)
+    import_source_id = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return "{0} - {1}".format(self.event.name, self.distance_cat.name)
