@@ -73,11 +73,17 @@ class LocationForm(forms.ModelForm):
 
         # get admin level 1 and 2 data from postal code (at least for France)
         dpt = self.cleaned_data['postal_code'][:2]
-        sub = pycountry.subdivisions.get(code=('FR-' + dpt))
-        l.administrative_area_level_2_short_name = dpt
-        l.administrative_area_level_2 = sub.name
-        l.administrative_area_level_1_short_name = sub.parent.code
-        l.administrative_area_level_1 = sub.parent.name
+        try:
+            sub = pycountry.subdivisions.get(code=('FR-' + dpt))
+            l.administrative_area_level_2_short_name = dpt
+            l.administrative_area_level_2 = sub.name
+            l.administrative_area_level_1_short_name = sub.parent.code
+            l.administrative_area_level_1 = sub.parent.name
+        except KeyError:
+            l.administrative_area_level_2_short_name = l.country.code
+            l.administrative_area_level_2 = l.country.name.title()
+            l.administrative_area_level_1_short_name = l.country.code
+            l.administrative_area_level_1 = l.country.name.title()
 
         if commit:
             l.save()
