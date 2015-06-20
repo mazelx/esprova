@@ -73,7 +73,7 @@ class RaceList(TemplateView):
             context['params']['distances'][dist] = True
 
 
-class EventView(DetailView):
+class EventView(LoginRequiredMixin, DetailView):
     model = Event
     context_object_name = "event"
     template_name = "core/view_event.html"
@@ -203,30 +203,6 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
         if 'pk' in self.kwargs:
             self.update_flg = True
         return super(RaceEdit, self).get_form_kwargs(step)
-
-    def get(self, request, *args, **kwargs):
-        """
-        This method handles GET requests.
-
-        If a GET request reaches this point, the wizard assumes that the user
-        just starts at the first step or wants to restart the process.
-        The data of the wizard will be resetted before rendering the first step.
-        """
-        if 'event' in self.kwargs:
-            event_pk = self.kwargs['event']
-            self.event = Event.objects.get(pk=event_pk)
-
-        if not self.event.validated:
-            cloned_event = self.event.clone()
-            if self.update_flg:
-                return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}))
-            return HttpResponseRedirect(reverse('add_race', kwargs={'event': cloned_event.pk}))
-
-        self.storage.reset()
-
-        # reset the current step to the first step.
-        self.storage.current_step = self.steps.first
-        return self.render(self.get_form())
 
     def get_context_data(self, form, **kwargs):
         event_pk = self.kwargs['event']
