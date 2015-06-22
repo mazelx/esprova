@@ -474,7 +474,8 @@ class Race(ComparableModelMixin, models.Model):
                         Race(**data)
                         raise e
                 else:
-                    self.race_mod_source.delete()
+                    if self.race_mod_source:
+                        self.race_mod_source.delete()
                     self.delete()
 
 
