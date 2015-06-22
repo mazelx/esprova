@@ -195,7 +195,7 @@ function initializeMap() {
         },
         // zoom: 6,
         maxZoom: 15,
-        minZoom:5 ,   
+        minZoom: 2 ,   
         panControl: false,
         zoomControl: false,
         streetViewControl: false
