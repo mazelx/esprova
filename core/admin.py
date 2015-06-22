@@ -16,11 +16,11 @@ class DistanceCategoryAdmin(admin.ModelAdmin):
 
 
 class RaceAdmin(admin.ModelAdmin):
-    list_display = ('sport', 'event', 'date', 'distance_cat', 'location')
+    list_display = ('sport', 'event', 'date', 'distance_cat', 'location', 'created_date')
     list_filter = ('sport', 'event', 'date', 'distance_cat', 'location')
     date_hierarchy = 'date'
     ordering = ('date', )
-    search_fields = ('event', 'distance_cat')
+    search_fields = ('event__name', 'distance_cat__name')
 
 
 class EventAdmin(admin.ModelAdmin):
