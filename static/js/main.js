@@ -586,7 +586,7 @@ function ajaxLoad(data, options, fallback) {
             .fail(function(){
                 $("#racelist").html(
                     "<div class='alert alert-danger' role='alert'>Une erreur est survenue, " +
-                    "veuillez contacter <a href='mailto:contact@esprova.com?subject=[issue]:[ajaxLoad]'>" +
+                    "veuillez contacter <a href='https://esprova.zendesk.com/hc/fr/requests/new'>" +
                     "le support</a></div>");
             });
         }

@@ -8,20 +8,25 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0048_auto_20150604_2139'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('events', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Planning',
+            name='ShortlistedRace',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
-                ('planned_race', models.ForeignKey(to='core.Race')),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('registered', models.BooleanField(default=False)),
+                ('race', models.ForeignKey(to='events.Race')),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
             bases=(models.Model,),
+        ),
+        migrations.AlterUniqueTogether(
+            name='shortlistedrace',
+            unique_together=set([('user', 'race')]),
         ),
     ]

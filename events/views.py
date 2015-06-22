@@ -21,7 +21,7 @@ import logging
 class EventValidationList(LoginRequiredMixin, ListView):
     model = Event
     queryset = Event.objects.filter(event_mod_source=None)
-    template_name = "core/list_event_validation.html"
+    template_name = "events/event_validation_list.html"
     context_object_name = "event_list"
 
     def get_queryset(self):
@@ -39,7 +39,7 @@ class EventValidationList(LoginRequiredMixin, ListView):
 
 class RaceList(TemplateView):
     context_object_name = "race_list"
-    template_name = "core/racesearch.html"
+    template_name = "events/race_search.html"
 
     def get_context_data(self, **kwargs):
 
@@ -64,13 +64,13 @@ class RaceList(TemplateView):
 class EventView(LoginRequiredMixin, DetailView):
     model = Event
     context_object_name = "event"
-    template_name = "core/view_event.html"
+    template_name = "events/event_view.html"
 
 
 class RaceView(DetailView):
     model = Race
     context_object_name = "race"
-    template_name = "core/race.html"
+    template_name = "events/race_view.html"
 
     def get_context_data(self, **kwargs):
         planned_race = ''
@@ -92,9 +92,9 @@ def create_event(request):
             event = eventForm.save()
             return HttpResponseRedirect(reverse('update_event', kwargs={'pk': event.pk}))
 
-    return render(request, 'core/edit_event.html', {'eventForm': eventForm,
-                                                    'pk': None,
-                                                    'race_list': None})
+    return render(request, 'events/event_edit.html', {'eventForm': eventForm,
+                                                      'pk': None,
+                                                      'race_list': None})
 
 
 @login_required
@@ -130,15 +130,15 @@ def update_event(request, pk):
             cloned_event = event.clone()
             return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}))
 
-    return render(request, 'core/edit_event.html', {'eventForm': eventForm,
-                                                    'pk': pk,
-                                                    'race_list': race_list,
-                                                    })
+    return render(request, 'events/event_edit.html', {'eventForm': eventForm,
+                                                      'pk': pk,
+                                                      'race_list': race_list,
+                                                      })
 
 
 class EventDelete(LoginRequiredMixin, DeleteView):
     model = Event
-    template_name = 'core/delete_event.html'
+    template_name = 'events/event_delete.html'
     context_object_name = "event"
     hard_delete = True
 
@@ -178,13 +178,13 @@ class EventSoftDelete(EventDelete):
 
 class RaceEdit(LoginRequiredMixin, SessionWizardView):
 
-    TEMPLATES = {"race": "core/edit_race.html",
-                 "location": "core/edit_race.html",
-                 "contact": "core/edit_race.html"}
+    TEMPLATES = {"race": "events/race_edit.html",
+                 "location": "events/race_edit.html",
+                 "contact": "events/race_edit.html"}
 
     update_flg = False
     event = None
-    # template_name = 'core/edit_race.html'
+    # template_name = 'events/race_edit.html'
 
     def get_form_kwargs(self, step):
         # if update
@@ -270,7 +270,7 @@ class RaceEdit(LoginRequiredMixin, SessionWizardView):
 
 class RaceDelete(LoginRequiredMixin, DeleteView):
     model = Race
-    template_name = 'core/delete_race.html'
+    template_name = 'events/race_delete.html'
     # success_url = reverse_lazy('list_race')
     context_object_name = "race"
 

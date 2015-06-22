@@ -36,20 +36,20 @@ ALLOWED_HOSTS = ['esprova.herokuapp.com', '.esprova.com', 'esprova-staging.herok
 
 # Application definition
 
-INSTALLED_APPS = (
-    # admin should be first (need to list applications)
-    'django.contrib.admin',
 
+INSTALLED_APPS = (
+    'accounts',
+    'registration',
+    'django.contrib.admin',
 
     # project applications
     'core',
+    'events',
     'search_backends',
     'planning',
-    'accounts',
-    'registration',
 
     # External modules
-    # 'debug_toolbar',
+    'debug_toolbar',
 
     'django_countries',
     'haystack',
@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'django_nose',
     'django_extensions',
     'storages',
+    # 'passwords',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,8 +68,8 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     # optional but advised for registration app
     'django.contrib.sites',
-
 )
+
 
 MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.UpdateCacheMiddleware',

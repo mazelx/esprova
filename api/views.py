@@ -96,7 +96,7 @@ def ajx_get_distances(request, name):
         if sport:
             distances = [d.get('name') for d in sport.distances]
 
-        helper_html = render_to_string('core/distance_helper.html', {'sport': sport})
+        helper_html = render_to_string('html_utils/distance_helper.html', {'sport': sport})
         response = {'helper_html': helper_html,
                     'distances': distances,
                     }
@@ -231,7 +231,7 @@ def ajx_get_races(request):
             races.append(race_data)
 
             if prev_month != cur_month:
-                result_html.append(render_to_string('core/result_month_spacer.html',
+                result_html.append(render_to_string('html_utils/result_month_spacer.html',
                                                     {'last_date': sr.date,
                                                      'count': facet['dates']['date'][month_iterator][1]}))
                 month_iterator += 1
@@ -242,7 +242,7 @@ def ajx_get_races(request):
             rank += 1
 
         if not races:
-            result_html = render_to_string('core/search_no_result_alert.html', {'search_expr': search_expr})
+            result_html = render_to_string('html_utils/search_no_result_alert.html', {'search_expr': search_expr})
 
         response = {'count': sqs.count(),
                     'races': races,

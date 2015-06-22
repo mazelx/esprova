@@ -1,4 +1,4 @@
-from core.models import Race
+from events.models import Race
 from haystack import indexes
 from search_backends.elastic_backend import CustomEdgeNgramField
 # from elasticstack.fields import CharField
