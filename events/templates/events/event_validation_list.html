@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static from staticfiles %} 
+
+{% block head_extra %}
+
+{% endblock %}
+{% block content %}
+<div class="container content simple-page">
+
+    <header><h1>Validation</h1></header>
+
+
+    <div class="list-group validation row">
+        {% for event, changes in event_list %}
+            <div id="event_{{event.pk}}">
+                <div class="list-group-item">
+                    <div class="list-group-item-heading row">
+                        <div class="col-xs-5">
+                            <div class="event"><a href="{% url "view_event" event.pk %}" title="Plus d'informations">{{ event.name }}</a> </div>
+                        </div>
+                        <div class="col-xs-4 changes">
+                            {% if event.validated %}
+                                {{ changes }} changements (<a data-toggle="collapse" href="#event_{{event.pk}}_changes" aria-expanded="false" aria-controls="event_{{event.pk}}_changes">voir ...</a>)
+                            {% else %}
+                                Création
+                            {% endif %}
+                        </div>
+                        <div class="col-xs-3 validation-action">
+                            {# <button class="btn btn-default" onclick="validateRace({{event.pk}})">Valider</button> #}
+                        </div>
+                    </div>
+                    <div class="list-group-item-text collapse" id="event_{{event.pk}}_changes">
+                        <div class="list-group">
+                            {% for event_changed in event.get_changed_event %}
+                                <div class="list-group-item">
+                                    <p class="list-group-item-heading"><a href="{% url "view_event" event_changed.pk %}" title="Plus d'informations">{{ event_changed.pk }}</a></p>
+                                    <p class="list-group-item-text"> {{ event_changed.get_changes }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

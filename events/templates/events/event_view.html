@@ -1,0 +1,73 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+
+
+{% block head_extra %}
+<script type="text/javascript">
+    function validateRace(pk) {
+          $.ajax({
+            url: '/api/validate/'+pk,
+            type: 'PUT',
+            data: { race: pk },
+            success: function(response, statut) {
+                location.replace('/races');
+            },
+        });
+    }
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="content ">
+    <div class="container simple-page">
+
+        <header>
+        <h1>{{ event.name }}</h1>
+
+        {% if event.to_be_deleted %}
+            <h2 class="text-danger">**** A supprimer ! ****</h2>
+        {% endif %}
+        </header>
+
+        <div class="simple-form">
+
+            <div class="row">
+
+                <div class="row">
+                    <span class="col-xs-3"><label>Site internet : </label></span>
+                    <span class="col-xs-9">{{ event.website }}</span>
+                </div>
+                <div class="row">
+                    <span class="col-xs-3"><label>Editon : </label></span>
+                    <span class="col-xs-9">{{ event.edition }}</span>
+                </div>
+
+                <br class="row">
+                <div class="row"> <span class="col-xs-3"><label>Races : </label> </span></div>
+                <ul class="list-group row">
+                    {% for race in event.get_races %}
+                         <li class="col-xs-9 col-xs-offset-3 list-group-item">
+                             <span class="{{race.to_be_deleted|yesno:"deleted,"}}">
+                                <a href="{% url "view_race" race.slug race.pk %}" >{{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} </a>
+                             </span>
+                         </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="row">
+                <div class="form-submit">
+                    {% if not event.validated %}
+                        <form action="{% url "delete_event" event.pk %}" method="POST" style="display: inline;">
+                         {% csrf_token %}
+                            <button type="submit" class="btn btn-warning" value="DELETE">Ignorer</button>
+                        </form>
+                        <button class="btn btn-primary" onclick="validateRace({{event.pk}})">Accepter</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

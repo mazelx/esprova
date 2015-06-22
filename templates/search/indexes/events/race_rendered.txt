@@ -1,0 +1,31 @@
+ {% load static from staticfiles %} 
+ {% load templatefilters %}
+
+
+<div class="search-result" id="event_{{ object.event.pk }}">
+    <div class="result-date-preview">
+        <div class="result-start-date">
+            {{ object.event.get_start_date|date:"d"  }}
+        </div>
+        {% if object.event.get_start_date|date:"d" != object.event.get_end_date|date:"d" %}
+            <div class="result-end-date">
+                - {{ object.event.get_end_date|date:"d"  }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="result-content">
+        <div class="result-title">{{ object.event.name }}</div>
+        <div class="result-location">{{ object.location.locality }}  ({{ object.location.administrative_area_level_2_short_name}})</div>
+        <div class="result-detail" id="event_{{ object.event.pk }}_races">
+            {% for r in object.get_event_races_same_sport %}
+            <div class="result-detail-distance" >
+                <button type="button" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</button>
+                <span class="result-detail-date">
+                {% comment %} I still don't fucking understand why I can't use genuine date here... check custom searchbackend to activate that bloody locale{% endcomment %}
+                    <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | datefr | capfirst }}</a>
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+
+
+{% block head_extra %}
+<script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
+{# <script type="text/javascript" src="{% static "js/race.js" %}"></script> #}
+
+<script type="text/javascript">
+    function cancelEdition() {
+        if(confirm("Etes-vous sur de vouloir annuler cette modification ?")){
+            {% if pk %}
+                 $.ajax({
+                    url: "{% url 'delete_event' pk %}",
+                    type: 'POST',
+                    success: function() {
+                        location.replace("{% url "list_race" %}");
+                    }
+                });
+            {% else %}
+                location.replace("{% url "list_race" %}");
+            {% endif %}
+        }
+    }
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="content ">
+    <div class="container simple-page">
+    <header>
+        {% if pk %}
+        <h1>Modification d'évènement</h1>
+        {% else %}
+        <h1>Création d'évènement</h1>
+        {% endif %}
+        <p><i>Toute demande de création ou modification d'un évenement est soumise à validation par nos équipes</i></p>
+    </header>
+
+        <form action="" method="post" class="simple-form">
+            {% csrf_token %}
+
+            <div class="row">
+
+
+                {% for field in eventForm %}
+                    <div class="fieldWrapper row">
+                        {% if field.errors %}
+                            <span class="col-xs-10 col-xs-offset-3">{{ field.errors.as_text }}</span>
+                        {% endif %}
+
+                        {% if field.field.required %}
+                            <span class="col-xs-3 label required">{{ field.label_tag }}</span>
+                        {% else %}
+                            <span class="col-xs-3 label">{{ field.label_tag }}</span>
+                        {% endif %}
+
+                        <span class="col-xs-9">{{ field }}</span>
+                    </div>
+                {% endfor %}
+
+                <br class="row">
+                <div class="row"> <span class="col-xs-3 label"><label>Races : </label> </span></div>
+                <ul class="list-group row">
+                    {% for race in race_list %}
+                         <li class="col-xs-9 col-xs-offset-3 list-group-item">
+                         <span class="col-xs-10 {{race.to_be_deleted|yesno:"deleted,"}}">
+                            {{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} 
+                         </span>
+                         <span class="col-xs-2">
+                            {% if not race.to_be_deleted %}
+                                 <a class="glyphicon glyphicon-edit text-info" aria-hidden="true" href="{% url "update_race" race.event.pk race.pk %}" title="Modifier la course"></a>
+                                 <a class="glyphicon glyphicon-remove text-danger" aria-hidden="true" href="{% url "delete_race" race.event.pk race.pk %}" title="Supprimer la course"></a>
+                            {% else %}
+                                <span>supprimé</span>
+                            {% endif %}
+                         </span>
+                         </li>
+                    {% endfor %}
+                    {% if pk %}
+                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary"><a href="{% url "add_race" pk %}"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Ajouter une course"></span> Ajouter un course ...</a></li>
+                    {% else %}
+                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary text-muted">Veuillez enregistrer l'évenement avant d'ajouter une course</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="form-submit">
+                    {% if cloned %}
+                        <a href="{% url "delete_event" pk %}" class="btn btn-default" role="button">Annuler</a>
+                    {% else %}
+                        <a href="#" onclick="cancelEdition();" class="btn btn-default" role="button">Annuler</a>
+                    {% endif %}
+
+                    {% if pk %}
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </form>
+        <div class="row footer-info">
+            {% if pk %}
+                <p>Cet evenement ne devrait pas apparaitre sur le site ? Vous pouvez également demander sa <a href="{% url "soft_delete_event" pk %}">suppression</a>.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

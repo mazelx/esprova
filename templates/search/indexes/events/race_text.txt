@@ -1,0 +1,12 @@
+{% autoescape off %}
+{{ object.event.name }}
+{{ object.location.administrative_area_level_1 }}
+{{ object.location.administrative_area_level_1_short_name }}
+{{ object.location.administrative_area_level_2 }}
+{{ object.location.administrative_area_level_2_short_name }}
+{{ object.location.locality }}
+{{ object.location.postal_code }}
+{{ object.federation.name }}
+{{ object.label.name }}
+{{ object.location.country.name }}
+{% endautoescape %}

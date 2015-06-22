@@ -1,0 +1,148 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+{% load templatetags %}
+
+
+{% block head_extra %}
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <script src="{% static "js/main.js" %}"></script>
+{% endblock %}
+
+{% block content %} 
+
+<div class='container-fluid content'>
+
+    {# search page #}
+    <div class='row searchpage'>
+
+        {# mapbox #}
+        <div id="cd-zoom-in" class="hidden-xs">+</div>
+        <div id="cd-zoom-out" class="hidden-xs">-</div>
+        <div id="cd-follow_map_bounds"  class="hidden-xs"> 
+            <input id="follow_map_bounds" type="checkbox" name="terms" checked="checked"/>
+            <span>Rechercher quand je déplace la carte</span>
+        </div>
+        <div class='col-md-7 col-sm-5 mapbox hidden-xs' id="map-canvas"></div>
+
+        
+        {# sidebox #}
+        <div class='col-md-5 col-sm-7' id="sidebox">
+           
+
+            <div id="filter-cde">
+                <a href="#" id="filter-cde-top"><i class="fa fa-angle-double-up"></i>  Filtres de recherche</a>
+                <span class="pull-right">
+                    <span id="filter-result-spinner"></span>
+                    <span id="filter-cde-results"></span>
+                    <span style="color:white"> | </span><a id="filter-cde-reset" href='#'>réinitialiser <i class="fa fa-refresh"></i></a>
+                </span>
+            </div>
+            <div id="sidebox-content">
+
+           {# searchbox #}
+            <div class="row searchbox">
+                    <form id="race_search_form" class="form-horizontal" role="form" action="{% url "ajx_search_race" %}">
+
+                        <div class="row form-group">
+                            <label for="sport" class="col-sm-3 control-label">Sport :</label>
+                            <div class="col-sm-8">
+                                <select id="sport-selecter" class="form-control" name="sport">
+                                {% get_sports %}
+                                {% for sport in sports %}
+                                    <option>{{ sport.name }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+
+                        {# expression search #}
+                        <div class="row form-group" id="race_quicksearch_form">
+                            <label for="q" class="col-sm-3 control-label">Mots-clés :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="search" id="search_expr" name="q" class="form-control" placeholder="Nom, Région, Département, ..." value="{{ params.search_expr }}"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" id="search_expr_go"> 
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true">
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {# date search #}
+                        <div class="row form-group">
+                            <label for="start_date" class="col-sm-3 control-label">Période :</label>
+                            <div class= "col-sm-8">
+                                <div class="input-daterange datepicker input-group" id="datepicker">
+                                  <input type="date" class="input-sm form-control" name="start_date" id="start_date" value="{% now 'Y-m-d' %}"/>
+                                <span class="input-group-addon"> à </span>
+                                  <input type="date" class="input-sm form-control" name="end_date" id="end_date" value="{% nextyear 'Y-m-d' %}"/>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {# distance search #}
+                        <div class="row form-group">
+                            <label for="inDistances" class="col-sm-3 control-label">Distances</label>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="btn-group col-xs-10" data-toggle="buttons">
+                                        <label type="button" id="distance_selector_XS" class="btn btn-default distance_selector {{ params.distances.XS |yesno:"active," }}" id="dist1">XS
+                                            <input type="checkbox" autocomplete="off" value="XS" name="distances" id="distance_input_XS" class="distance_input" {{ params.distances.XS |yesno:"checked," }}>
+                                        </label>
+                                        <label type="button" id="distance_selector_S" class="btn btn-default distance_selector {{ params.distances.S |yesno:"active," }}" id="dist2">S
+                                            <input type="checkbox" autocomplete="off" value="S" name="distances" id="distance_input_S" class="distance_input" {{ params.distances.S |yesno:"checked," }}>
+                                        </label>
+                                        <label type="button" id="distance_selector_M" class="btn btn-default distance_selector {{ params.distances.M |yesno:"active," }}" id="dist3">M
+                                            <input type="checkbox" autocomplete="off" value="M" name="distances" id="distance_input_M" class="distance_input" {{ params.distances.M |yesno:"checked," }}>
+                                        </label>
+                                        <label type="button" id="distance_selector_L" class="btn btn-default distance_selector {{ params.distances.L |yesno:"active," }}" id="dist4">L
+                                            <input type="checkbox" autocomplete="off" value="L" name="distances" id="distance_input_L" class="distance_input" {{ params.distances.L |yesno:"checked," }}>
+                                        </label>
+                                        <label type="button" id="distance_selector_XL" class="btn btn-default distance_selector {{ params.distances.XL |yesno:"active," }}" id="dist5">XL
+                                            <input type="checkbox" autocomplete="off" value="XL" name="distances" id="distance_input_XL" class="distance_input" {{ params.distances.XL |yesno:"checked," }}>
+                                        </label>
+                                    </div>
+                                    <span data-toggle="modal" data-target="#myModal" class="help-search col-xs-2"> <i class="fa fa-info-circle"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {# end searchbox #}
+   
+            {# racelist #}
+            <div id="racelist" class="list-group" role="tablist" aria-multiselectable="true">
+
+            </div>
+
+            {# end racelist #}
+
+        </div>
+        {# end sidebox #}
+
+
+    </div>
+    {# end search page #}
+
+</div>
+{# end content #}
+
+<!-- Modal -->
+<div id="sport-distances-helper">
+</div>
+
+
+{% endblock %}
+{% block footer %} 
+
+{% endblock %}
+{% block beforeBodyClose %}
+
+{% endblock%}
+
