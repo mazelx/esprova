@@ -15,7 +15,8 @@ from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 from haystack.management.commands import update_index
 
-from core.models import Sport, Race, Location, Event, Contact, DistanceCategory
+from core.models import Sport, DistanceCategory
+from events.models import Race, Location, Event, Contact
 
 import datetime
 from json import dumps

@@ -1,13 +1,11 @@
 from planning.models import ShortlistedRace
-from core.models import Race
+from events.models import Race
 from core.views import LoginRequiredMixin
 from django.views.generic import ListView
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
-
-
 
 
 class PlanningList(LoginRequiredMixin, ListView):

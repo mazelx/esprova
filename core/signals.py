@@ -1,4 +1,4 @@
-from core.models import Race
+from events.models import Race
 from django.db import models
 from haystack import signals
 

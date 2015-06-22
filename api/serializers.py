@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from core.models import Sport, Race, Location, Event, Contact, DistanceCategory, StageDistanceSpecific, SportStage
+from events.models import Sport, Race, Location, Event, Contact, StageDistanceSpecific
+from core.models import DistanceCategory, SportStage
+
 from rest_framework.exceptions import ParseError
 
 import logging

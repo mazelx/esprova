@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import Race
+from events.models import Race
 from django.contrib.auth.models import User
 
 

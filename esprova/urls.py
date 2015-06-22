@@ -4,7 +4,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
 
 from core.views import *
-from core.forms import ContactForm, RaceForm, LocationForm
+from events.views import *
+from events.forms import ContactForm, RaceForm, LocationForm
 
 from planning.views import *
 
