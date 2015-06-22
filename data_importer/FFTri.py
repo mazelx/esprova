@@ -265,10 +265,10 @@ class FFTri:
             finally:
                 if has_error:
                     nb_failed += 1
-                    # NO ! Cannot just delete event if a race is not ok... That may delete an existing 
                     if event:
                         if event.pk:
-                            event.delete()
+                            if len(event.get_races()) == 0:
+                                event.delete()
                     if contact:
                         if contact.pk:
                             contact.delete()
@@ -278,8 +278,8 @@ class FFTri:
                     if race:
                         if race.pk:
                             race.delete()
-                else:
-                    print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
+                # else:
+                    # print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
 
                 if limit == 1:
                     break
@@ -312,6 +312,9 @@ class FFTri:
 
         # return event_list
 
-    def get_event_dict_by_name(self, event_list, event_name):
-        return [race for race in event_list if race['name'] == event_name][0]
-        # .+(?=\s-\s)
+    def get_race_from_id(self, id):
+        return [r for r in self.race_list if r['id'] == id]
+
+    def get_race_from_name(self, name):
+        return [r for r in self.race_list if name.lower() in r['nom'].lower()]
+
