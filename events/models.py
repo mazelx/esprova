@@ -5,6 +5,8 @@ from collections import OrderedDict
 import copy
 import datetime
 
+from random import randint
+
 from core.models import ComparableModelMixin
 from core.models import Sport, DistanceCategory, Federation, StageDistance, StageDistanceDefault
 
@@ -355,11 +357,27 @@ class Label(models.Model):
         return self.name
 
 
+class RaceManager(models.Manager):
+    def random(self):
+        sqs = SearchQuerySet()
+        sqs = sqs.filter(validated=True,
+                         date__gte=datetime.datetime.now(),
+                         date__lte=datetime.datetime.now() + datetime.timedelta(days=90),
+                         )
+        last = sqs.count() - 1
+        if last > 0:
+            index = randint(0, last)
+            return sqs[index].object
+
+
 class Race(ComparableModelMixin, models.Model):
     """
         Represent a race, main model of the application
 
     """
+    # manager
+    objects = RaceManager()
+
     compare_excluded_keys = 'pk', 'id', '_state', 'event_id', 'slug', 'created_date', 'created_by', 'modified_date'
 
     slug = models.SlugField(max_length=100, blank=True, null=True)

@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %}
+
+{% block content %}
+<div class="content fourOfour">
+
+    <div class="container">
+        <div class="logo">
+            <img alt="mail" src="{% static "images/icon-404.svg" %}">
+        </div>
+        <div class="info">
+            <div class="title">
+                La page demandée est introuvable...
+            </div>
+            <div class="text">
+                Vous pouvez retourner sur la <a href="{% url "list_race" %}">page de recherche</a>... Vous êtes d’humeur aventurière ? On vous emmène sur <a href="{% url "view_race" random_race.slug random_race.id %}">une course aléatoire</a>.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

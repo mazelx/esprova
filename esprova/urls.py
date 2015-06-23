@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url, handler404
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
@@ -9,6 +9,7 @@ from events.forms import ContactForm, RaceForm, LocationForm
 
 from planning.views import *
 
+handler404 = "core.views.handler404"
 
 # Prepare for Race edition
 race_named_forms = (
@@ -18,8 +19,10 @@ race_named_forms = (
 )
 race_edit = RaceEdit.as_view(race_named_forms)
 
-
 urlpatterns = patterns('',
+                       # 404 test
+                       url(r'^404$', TemplateView.as_view(template_name='404.html')),
+
                        # Introduction
                        url(r'^$', IntroView.as_view(), name="intro"),
 
