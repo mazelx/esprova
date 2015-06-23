@@ -92,7 +92,7 @@ class Location(ComparableModelMixin, models.Model):
             Geocode using the Google maps V3 geocoder
 
         """
-        g = GoogleV3()
+        g = GoogleV3(timeout=3)
         loc = g.geocode(query=raw_address, components={'postal_code': postal_code, 'country': country})
         if loc:
             # list comprehension to retrieve data
