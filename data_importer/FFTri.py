@@ -8,7 +8,9 @@ import sys
 import traceback
 
 
-from core.models import Race, Event, Location, Contact, DistanceCategory, Sport, Organizer, Federation
+from core.models import DistanceCategory, Sport, Federation
+from events.models import Race, Event, Location, Contact, Organizer
+
 
 
 class RaceDoubleException(Exception):
