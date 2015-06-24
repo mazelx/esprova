@@ -2,5 +2,5 @@
 .coverage
 esprova/local_settings.py
 __pycache__/
-static/
+static/css/main.css
 config.codekit
