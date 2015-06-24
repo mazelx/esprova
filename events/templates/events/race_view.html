@@ -2,10 +2,6 @@
 {% load static from staticfiles %} 
 {% load humanize %}
 
-{% block head_extra %}
-<script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
-<script type="text/javascript" src="{% static "js/race.js" %}"></script>
-
 {%block title%}
 <title>{{ race.event.name | capfirst  }} - {{ race.distance_cat.name }}</title>
 {%endblock%}
@@ -19,6 +15,9 @@
 <meta property="og:type" content="article" />
 {% endblock %}
 
+{% block head_extra %}
+<script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
+<script type="text/javascript" src="{% static "js/race.js" %}"></script>
 {# share buttons 'shareaholic' #}
 {% include "shareaholic/shareaholic_header.html" %}
 
