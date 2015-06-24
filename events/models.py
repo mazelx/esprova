@@ -408,7 +408,7 @@ class Race(ComparableModelMixin, models.Model):
 
     def natural_key(self):
         return (self.date, self.time, self.distance_cat) + self.event
-    natural_key.dependencies = ['core.Event']
+    natural_key.dependencies = ['events.Event']
 
     def get_event_races_same_sport(self):
         # races = []
@@ -523,7 +523,7 @@ class StageDistanceSpecific(StageDistance):
 
     def natural_key(self):
         return (self.order,) + self.race.natural_key()
-    natural_key.dependencies = ['core.Race']
+    natural_key.dependencies = ['events.Race']
 
     def clean(self):
         if (not self.race.sport.combinedSport) & (self.race.distances.all().count() > 1):
