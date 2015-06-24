@@ -20,7 +20,8 @@
     {% endblock %}
 
     <meta property="og:image" content="{% static "images/race-banner.jpg" %}"/>
-    <meta property="og:description" content="{{ race.event.name  | capfirst  }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
+    <meta property="og:description" content="{{ race.event.name  | capfirst  }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). \r\n
+    Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
 
     <link rel="apple-touch-icon" sizes="57x57" href="{% static "apple-touch-icon-57x57.png" %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static "apple-touch-icon-60x60.png" %}">
