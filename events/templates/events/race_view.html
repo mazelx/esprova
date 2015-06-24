@@ -7,11 +7,18 @@
 <script type="text/javascript" src="{% static "js/race.js" %}"></script>
 
 {%block title%}
-<title>{{ race.event.name }} - {{ race.distance_cat.name }}</title>
+<title>{{ race.event.name | capfirst  }} - {{ race.distance_cat.name }}</title>
 {%endblock%}
 
 {% block meta %}
-<meta name="description" content="{{ race.event.name }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+<meta name="description" content="{{ race.event.name  | capfirst  }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+{% endblock %}
+
+{% block opengraph %}
+<meta property="og:title" content="{{ race.event.name | capfirst }}  - {{ race.distance_cat.name }}" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{% static "favicon-32x32.png" "/>
+<meta property="og:description" content="{{ race.event.name  | capfirst  }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
 {% endblock %}
 
 {# share buttons 'shareaholic' #}
