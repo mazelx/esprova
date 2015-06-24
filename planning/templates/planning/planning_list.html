@@ -15,6 +15,9 @@
         });
     }
 </script>
+
+{% include "shareaholic/shareaholic_header.html" %}
+
 {% endblock %}
 
 {% block content %}
@@ -44,6 +47,7 @@
                 </div>
             {% endfor %}
         </div>
+        {% include "shareaholic/shareaholic_buttons.html" %}
     </div>
 </div>
 
