@@ -1,25 +1,17 @@
 {% load i18n %}
 {% load url from future %}
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <title>{{ site.name }} {% trans "registration" %}</title>
+    <title>Activitation de votre compte site_name</title>
 </head>
 
 <body>
-<p>
-    {% blocktrans with site_name=site.name %}
-    You (or someone pretending to be you) have asked to register an account at
-    {{ site_name }}.  If this wasn't you, please ignore this email
-    and your address will be removed from our records.
-    {% endblocktrans %}
+<p>Vous avez demandez à rejoindre la commauté Espròva ({{site.domain}}), et nous vous en remercions !
 </p>
 <p>
-    {% blocktrans %}
-    To activate this account, please click the following link within the next
-    {{ expiration_days }} days:
-    {% endblocktrans %}
+    Afin d'activer votre compte, cliquez sur ce lien avant {{ expiration_days }} days:
 </p>
 
 <p>
@@ -28,10 +20,8 @@
     </a>
 </p>
 <p>
-    {% blocktrans with site_name=site.name %}
-    Sincerely,
-    {{ site_name }} Management
-    {% endblocktrans %}
+    Sportivement,
+    le support {{ site_name }}
 </p>
 </body>
 
