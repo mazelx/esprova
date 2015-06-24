@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'events',
     'search_backends',
     'planning',
+    'utils',
 
     # External modules
     'debug_toolbar',
