@@ -10,15 +10,20 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 
-class PlanningList(LoginRequiredMixin, ListView):
+class PlanningList(ListView):
     model = ShortlistedRace
     template_name = 'planning/planning_list.html'
     context_object_name = "planned_race_list"
 
     def get_queryset(self):
-        username = self.kwargs.get('user', None)
+        username = self.kwargs.get('username', None)
         user = User.objects.filter(username=username) or self.request.user
         return ShortlistedRace.objects.filter(user=user).order_by("race__date")
+
+    def get_context_data(self, **kwargs):
+        context = super(PlanningList, self).get_context_data(**kwargs)
+        context['username'] = self.kwargs.get('username', None)
+        return context
 
 
 def redirect_to_planning(request):

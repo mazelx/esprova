@@ -3,9 +3,9 @@
 
 
 {% block opengraph %}
-<meta property="og:title" content="{{ user.username | capfirst }} Mon programme de courses" />
+<meta property="og:title" content="{{ username | capfirst }} Mon programme de courses" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="{% url "planning" user.username %}" />
+<meta property="og:url" content="{% url "planning" username %}" />
 <meta property="og:description" content="Consultez mon planning de courses sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
 {% endblock %}
 
@@ -31,7 +31,7 @@
 <div class="content">
     <div class="container simple-page">
 
-        <header><h1>Programme</h1></header>
+        <header><h1>Programme de {{ username  | capfirst }}</h1></header>
         <div class="planning">
             <div class="list-group">
                 {% for planned_race in planned_race_list %}
