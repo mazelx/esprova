@@ -22,9 +22,6 @@ class CustomRegistrationView(RegistrationView):
         messages.success(request, msg)
         return super(RegistrationView, self).get_success_url(request, user)
 
-    def registration_allowed(self, request):
-        return settings.REGISTRATION_ALLOWED
-
 
 def custom_password_reset_done(request, **kwargs):
     messages.success(request, render_to_string('registration/password_reset_done.txt'))
