@@ -5,11 +5,13 @@ html, body{
      @media (min-width: @screen-sm-min) {
                 font-size: @font-size-base;
             }
+    font-weight: 600;
 }
 
 .alt_font {
-    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    // font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.1em;
+    font-weight: 400;
 }
 
 
@@ -344,6 +346,7 @@ html, body{
     .distance_selector {
         width: 20%;
         padding: 6px 6px;
+        font-weight: 600;
     }
 
     .distance_selector.active {
@@ -444,6 +447,7 @@ html, body{
                 color: @esprova-gray;
                 letter-spacing: 0.075em;
                 margin-bottom: 5px;
+                font-weight: 400;
             }
 
             .result-detail {
@@ -465,6 +469,7 @@ html, body{
                         cursor: inherit;
                         width: 40px;
                         border: 0;
+                        font-weight: 600;
                     }
 
                 }
@@ -522,7 +527,7 @@ html, body{
     min-height: 100%;
        
         .racebanner {
-            background: url(../e) no-repeat center;
+            background: url(../images/race-banner.jpg) no-repeat center;
             vertical-align: text-bottom;
             top: 51px;
             height: 300px;
@@ -699,6 +704,7 @@ html, body{
 }
 
 .social-buttons {
+    .make-row();
     .hidden-print();
     .alt_font();
     text-align: center;
@@ -859,8 +865,11 @@ footer {
 
     .planning {
         margin-bottom: 50px;
+        .make-row();
 
         .list-group-item {
+            .make-sm-column-offset(2);
+            .make-sm-column(8);
             padding-top: 15px;
             padding-bottom: 15px;
             margin-top: 5px;
@@ -871,7 +880,7 @@ footer {
         }
 
         .event{
-            font-size: 1.5em;
+            font-size: 1.3em;
             color: @esprova-red;
 
         }
