@@ -17,6 +17,7 @@ class PlanningList(LoginRequiredMixin, ListView):
     context_object_name = "planned_race_list"
 
     def get_queryset(self):
+        # test
         username = self.kwargs.get('user', None)
         user = User.objects.filter(username=username) or self.request.user
         return ShortlistedRace.objects.filter(user=user).order_by("race__date")
