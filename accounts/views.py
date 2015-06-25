@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 
@@ -20,6 +21,9 @@ class CustomRegistrationView(RegistrationView):
         msg = render_to_string('registration/registration_complete.txt')
         messages.success(request, msg)
         return super(RegistrationView, self).get_success_url(request, user)
+
+    def registration_allowed(request):
+        return settings.REGISTRATION_ALLOWED
 
 
 def custom_password_reset_done(request, **kwargs):
