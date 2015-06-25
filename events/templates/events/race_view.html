@@ -13,6 +13,8 @@
 {% block opengraph %}
 <meta property="og:title" content="{{ race.event.name | capfirst }}  - {{ race.distance_cat.name }}" />
 <meta property="og:type" content="article" />
+<meta property="og:description" content="{{ race.event.name  | capfirst  }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). \r\n
+    Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
 {% endblock %}
 
 {% block head_extra %}
