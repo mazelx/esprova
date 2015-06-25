@@ -2,6 +2,13 @@
 {% load static from staticfiles %} 
 
 
+{% block opengraph %}
+<meta property="og:title" content="{{ user.username | capfirst }} Mon programme de courses" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="{% url "planning" user.username %}" />
+
+{% endblock %}
+
 {% block head_extra %}
 <script type="text/javascript">
     function removeFromPlanning(pk) {

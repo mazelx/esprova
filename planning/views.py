@@ -4,8 +4,11 @@ from core.views import LoginRequiredMixin
 from django.views.generic import ListView
 from django.contrib import messages
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.views.generic.base import RedirectView
+from django.core.urlresolvers import reverse
 
 
 class PlanningList(LoginRequiredMixin, ListView):
@@ -14,7 +17,15 @@ class PlanningList(LoginRequiredMixin, ListView):
     context_object_name = "planned_race_list"
 
     def get_queryset(self):
-        return ShortlistedRace.objects.filter(user=self.request.user).order_by("race__date")
+        username = self.kwargs.get('user', None)
+        user = User.objects.filter(username=username) or self.request.user
+        return ShortlistedRace.objects.filter(user=user).order_by("race__date")
+
+
+def redirect_to_planning(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('planning', kwargs={'user': request.user}))
+    return HttpResponseRedirect(reverse('auth_login') + '?next=' + reverse('planning'))
 
 
 @login_required
