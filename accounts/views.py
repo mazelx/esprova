@@ -22,7 +22,7 @@ class CustomRegistrationView(RegistrationView):
         messages.success(request, msg)
         return super(RegistrationView, self).get_success_url(request, user)
 
-    def registration_allowed(request):
+    def registration_allowed(self, request):
         return settings.REGISTRATION_ALLOWED
 
 
