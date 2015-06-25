@@ -28,7 +28,7 @@ class PlanningList(ListView):
 
 def redirect_to_planning(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('planning', kwargs={'user': request.user}))
+        return HttpResponseRedirect(reverse('planning', kwargs={'username': request.user.username}))
     return HttpResponseRedirect(reverse('auth_login') + '?next=' + reverse('planning'))
 
 
