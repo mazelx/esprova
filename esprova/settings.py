@@ -31,7 +31,7 @@ DEBUG = os.environ.get('DEBUG', False)
 
 TEMPLATE_DEBUG = False
 
-REGISTRATION_OPEN = os.environ.get('REGISTRATION_OPEN', True)
+REGISTRATION_OPEN = os.environ.get('REGISTRATION_OPEN') != 'False'
 
 
 ALLOWED_HOSTS = ['esprova.herokuapp.com', '.esprova.com', 'esprova-staging.herokuapp.com']
