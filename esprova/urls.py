@@ -22,6 +22,11 @@ race_named_forms = (
 )
 race_edit = RaceEdit.as_view(race_named_forms)
 
+if settings.ALLOW_SEARCHBOTS:
+    robot_path = 'robots.txt'
+else:
+    robot_path = 'robots_deny_all.txt'
+
 urlpatterns = patterns('',
                        # 404 test
                        url(r'^404$', TemplateView.as_view(template_name='404.html')),
@@ -57,7 +62,7 @@ urlpatterns = patterns('',
 
                        # Robots
                        url(r'^robots\.txt$', TemplateView.as_view(
-                           template_name='robots.txt',
+                           template_name=robot_path,
                            content_type='text/plain')),
 
                        # legal
