@@ -1,11 +1,14 @@
 from django.conf.urls import patterns, include, url, handler404
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.sitemaps.views import sitemap
+
 from django.views.generic import TemplateView
 
 from core.views import *
 from events.views import *
 from events.forms import ContactForm, RaceForm, LocationForm
+
 
 from planning.views import *
 
@@ -61,14 +64,17 @@ urlpatterns = patterns('',
                        url(r'^legal/$', TemplateView.as_view(
                            template_name='legal.html'), name='legal'),
 
+                       # sitemap
+                       url(r'', include('core.urls')),
+
                        # Admin
                        url(r'^admin/', include(admin.site.urls)),
 
                        # Accounts
-                       url(r'user/', include('accounts.urls')),
+                       url(r'^user/', include('accounts.urls')),
 
                        # API
-                       url(r'api/', include('api.urls')),
+                       url(r'^api/', include('api.urls')),
 
                        )
 

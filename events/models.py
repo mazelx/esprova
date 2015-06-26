@@ -410,6 +410,10 @@ class Race(ComparableModelMixin, models.Model):
         return (self.date, self.time, self.distance_cat) + self.event
     natural_key.dependencies = ['events.Event']
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('view_race', args=[self.slug, str(self.id)])
+
     def get_event_races_same_sport(self):
         # races = []
         # for r in self.event.races.filter(sport=self.sport).order_by('distance_cat__order'):
