@@ -157,6 +157,7 @@ LOGIN_URL = "auth_login"
 GOOGLE_API_KEY = "AIzaSyAu5lWzzuB7WXLqI9UzK2yL0IVtyr97yOg"
 
 
+GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID') or 'UA-60175871-1'
 
 bonsai_url = os.environ.get('BONSAI_URL')
 
