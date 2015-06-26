@@ -29,6 +29,13 @@ def handler404(request):
     return response
 
 
+def handler500(request):
+    response = render_to_response('500.html', {'random_race': Race.objects.random()},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
 class PlanningSiteMap(Sitemap):
     changefreq = "weekly"
     priority = 0.5
