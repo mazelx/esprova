@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     # optional but advised for registration app
     'django.contrib.sites',
+    'django.contrib.sitemaps'
 )
 
 
