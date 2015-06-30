@@ -62,8 +62,12 @@
                     <select class="form-control" name="sport">
                     {% get_sports %}
                     {% for sport in sports %}
+                        {% if sport.name = request.session.selected_sport %}
+                            <option selected>{{ sport.name }}</option>
+                        {% else %}
                             <option>{{ sport.name }}</option>
-                        {% endfor %}
+                        {% endif %}
+                    {% endfor %}
                     </select>
                 </div>
             </div>
