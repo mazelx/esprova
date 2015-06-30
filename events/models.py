@@ -384,8 +384,8 @@ class Race(ComparableModelMixin, models.Model):
     sport = models.ForeignKey(Sport, limit_choices_to={'hidden': False})
     event = models.ForeignKey(Event, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateField()
-    time = models.TimeField(blank=True, null=True, verbose_name='Heure')
+    date = models.DateField(verbose_name='Date (ex. 2015-06-25)')
+    time = models.TimeField(blank=True, null=True, verbose_name='Heure (ex. 23:10)')
     distance_cat = models.ForeignKey(DistanceCategory,
                                      verbose_name="Distance")
     price = models.PositiveIntegerField(blank=True, null=True)
