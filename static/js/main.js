@@ -342,13 +342,26 @@ function addListSideboxScroll() {
     function scroll() {
         if ($(window).scrollTop() >= origOffsetY) {
             filter_cde.addClass("sticky-xs");
+            $("#filter-cde-top").show();
         } 
         else {
             filter_cde.removeClass("sticky sticky-xs");
+            $("#filter-cde-top").hide();
+
         }
     }
-
     document.onscroll = scroll;
+
+    var displayCdeTreshold = $("#sidebox-content").offset().top - 100 ;
+    $("#sidebox").scroll(function sideboxScroll(){
+        if($("#sidebox-content").offset().top > displayCdeTreshold) {
+            $("#filter-cde-top").hide();
+        }
+        else {
+            $("#filter-cde-top").show();
+
+        }
+    })
 
     $("#filter-cde-top").on("click", function (e){
         e.preventDefault();
