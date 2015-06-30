@@ -19,7 +19,7 @@
         <div class="result-detail" id="event_{{ object.event.pk }}_races">
             {% for r in object.get_event_races_same_sport %}
             <div class="result-detail-distance" >
-                <button type="button" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</button>
+                <a href="{% url "view_race" r.slug r.pk %}" type="button" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
                 <span class="result-detail-date">
                 {% comment %} I still don't fucking understand why I can't use genuine date here... check custom searchbackend to activate that bloody locale{% endcomment %}
                     <a href="{% url "view_race" r.slug r.pk %}">{{ r.date | datefr | capfirst }}</a>
