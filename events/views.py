@@ -113,13 +113,13 @@ def update_event(request, pk):
             if not event.event_mod_source:
                 # creation
                 messages.success(request, (
-                    "L'évènement {0} a bien été créé et sera publié "
+                    "L'événement {0} a bien été créé et sera publié "
                     "après validation par nos services".format(event.name)
                     ))
             else:
                 # update
                 messages.success(request, (
-                    "L'évènement {0} a bien été modifié et sera publié "
+                    "L'événement {0} a bien été modifié et sera publié "
                     "après validation par nos services".format(event.event_mod_source.name)
                     ))
 
@@ -162,7 +162,7 @@ class EventDelete(LoginRequiredMixin, DeleteView):
             self.object.to_be_deleted = True
             self.object.save()
             messages.success(request, (
-                        "La demande de suppression de l'évènement {0} a bien été prise en compte "
+                        "La demande de suppression de l'événement {0} a bien été prise en compte "
                         " et sera traitée par notre équipe de validation".format(self.instance.name)
                         ))
         else:

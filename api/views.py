@@ -113,7 +113,7 @@ def ajx_validate_event(request, pk):
         # update haystack index to display changes
         update_index.Command().handle(interactive=False)
 
-        messages.success(request, ("Evenement {0} validé").format(event.name))
+        messages.success(request, ("Evénement {0} validé").format(event.name))
 
         return HttpResponse('')
     return HttpResponseBadRequest
@@ -125,7 +125,7 @@ def ajx_delete_race(request, pk):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'DELETE':
         race = get_object_or_404(Race, pk=pk)
         race.delete()
-        messages.success(request, ("Evenement {0} supprimé").format(event.name))
+        messages.success(request, ("Evénement {0} supprimé").format(event.name))
         return HttpResponse('')
     return HttpResponseBadRequest
 

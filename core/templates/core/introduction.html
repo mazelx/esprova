@@ -25,7 +25,7 @@
                                 </li>
                                 {% if user.is_authenticated %}
                                     <li class="divider"></li>
-                                    <li><a href="{% url "auth_logout" %}?next={% url "list_race"%}">Se deconnecter</a></li>
+                                    <li><a href="{% url "auth_logout" %}?next={% url "list_race"%}">Se déconnecter</a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -57,7 +57,7 @@
         <!-- row -->
         <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" onsubmit="return submitForm(event)" method="GET">
             <div class="form-group form-group-lg">
-                <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Selectionnez un sport :</label>
+                <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Sélectionnez un sport :</label>
                 <div class="col-sm-5">
                     <select class="form-control" name="sport">
                     {% get_sports %}
@@ -94,8 +94,8 @@
                         RECHERCHEZ
                     </div>
                     <div class="about-text alt_font">
-                       <p>Grâce à notre <strong>moteur de recherche d'épreuves sportives</strong> simple et flexible, vous allez pouvoir facilement parcourir le calendrier de courses de triathlon.</p>
-                       <p>Recherchez par <strong>disciplines</strong>, par <strong>périodes</strong>, par <strong>distances</strong> ou par <strong>mots-clés</strong> : Nom de l'évenement, département, région, organisateur, etc...</p>
+                       <p>Grâce à notre <strong>moteur de recherche d'épreuves sportives</strong> simple et flexible, vous allez pouvoir facilement parcourir le calendrier de courses de triathlon, aquathlon, duathlon, ...</p>
+                       <p>Recherchez par <strong>disciplines</strong>, par <strong>périodes</strong>, par <strong>distances</strong> ou par <strong>mots-clés</strong> : Nom de l'événement, département, région, organisateur, etc...</p>
                        <p>En quelques clics, trouvez la course qui vous fera briller !</p>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         ORGANISEZ
                     </div>
                     <div class="about-text">
-                        <p>La performance, ça se prépare : Selectionnez les courses auxquelles vous souhaitez participer cette saison et sauvegardez-les dans votre <strong>programme d'épreuves</strong>.</p>
+                        <p>La performance, ça se prépare : Sélectionnez les courses auxquelles vous souhaitez participer cette saison et sauvegardez-les dans votre <strong>programme d'épreuves</strong>.</p>
                         <p>Avec votre <strong>agenda</strong>, vous ne raterez plus aucune course !</p>
                     </div>
                 </div>
@@ -133,8 +133,8 @@
                         Vous êtes organisateur d'épreuves ?
                     </div>
                     <div class="text">
-                        <p>L'organisation d'évenements sportifs requièrent un investissement important de la part de tous les acteurs impliqués, bénévoles ou professionnels. Nous savons à quel point il est laborieux d'effectuer un annoncement efficace de vos évenements sur internet et de les faire vivre sur les réseaux sociaux.</p>
-                        <p>Il est temps que cela change : <span class="text-primary">Espròva</span> pense à vous et vous proposera bientôt des offres spécialement conçues pour améliorer la visibilité de vos évenements afin de toucher un nombre encore plus important de sportifs amateurs et professionnels. </p>
+                        <p>L'organisation d'événements sportifs requièrent un investissement important de la part de tous les acteurs impliqués, bénévoles ou professionnels. Nous savons à quel point il est laborieux d'effectuer un annoncement efficace de vos événements sur internet et de les faire vivre sur les réseaux sociaux.</p>
+                        <p>Il est temps que cela change : <span class="text-primary">Espròva</span> pense à vous et vous proposera bientôt des offres spécialement conçues pour améliorer la visibilité de vos événements afin de toucher un nombre encore plus important de sportifs amateurs et professionnels. </p>
                         <p>En attendant, n’hésitez pas à nous faire part de votre intérêt par <a href="mailto:contact@esprova.com&subject=Demande%20d'%20informations%20organisateur">email</a> en laissant vos coordonnées.</p>
                         <p>Nous ne manquerons pas de vous contacter lorsque ces fonctionnalités seront misent à disposition.</p>
                     </div>

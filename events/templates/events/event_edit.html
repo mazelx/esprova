@@ -32,11 +32,11 @@
     <div class="container simple-page">
     <header>
         {% if pk %}
-        <h1>Modification d'évènement</h1>
+        <h1>Modification d'événement</h1>
         {% else %}
-        <h1>Création d'évènement</h1>
+        <h1>Création d'événement</h1>
         {% endif %}
-        <p><i>Toute demande de création ou modification d'un évenement est soumise à validation par nos équipes</i></p>
+        <p><i>Toute demande de création ou modification d'un événement est soumise à validation par nos équipes</i></p>
     </header>
 
         <form action="" method="post" class="simple-form">
@@ -82,7 +82,7 @@
                     {% if pk %}
                         <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary"><a href="{% url "add_race" pk %}"><span class="glyphicon glyphicon-plus" aria-hidden="true" title="Ajouter une course"></span> Ajouter un course ...</a></li>
                     {% else %}
-                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary text-muted">Veuillez enregistrer l'évenement avant d'ajouter une course</li>
+                        <li class="col-xs-9 col-xs-offset-3 list-group-item list-group-item-primary text-muted">Veuillez enregistrer l'événement avant d'ajouter une course</li>
                     {% endif %}
                 </ul>
             </div>
@@ -106,7 +106,7 @@
         </form>
         <div class="row footer-info">
             {% if pk %}
-                <p>Cet evenement ne devrait pas apparaitre sur le site ? Vous pouvez également demander sa <a href="{% url "soft_delete_event" pk %}">suppression</a>.</p>
+                <p>Cet événement ne devrait pas apparaitre sur le site ? Vous pouvez également demander sa <a href="{% url "soft_delete_event" pk %}">suppression</a>.</p>
             {% endif %}
         </div>
     </div>
