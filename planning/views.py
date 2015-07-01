@@ -8,6 +8,8 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedire
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
 
 
 class PlanningList(ListView):
@@ -17,8 +19,13 @@ class PlanningList(ListView):
 
     def get_queryset(self):
         username = self.kwargs.get('username', None)
+        secret = self.request.GET.get('secret')
         user = User.objects.filter(username=username).first() or self.request.user
-        up = UserPlanning.objects.get(user=user)
+        up = get_object_or_404(UserPlanning, user=user)
+
+        if not (user == self.request.user or secret == up.secret_key):
+            raise PermissionDenied()
+
         return up.races.order_by("race__date")
 
     def get_context_data(self, **kwargs):
