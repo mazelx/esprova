@@ -13,7 +13,7 @@ from core.views import LoginRequiredMixin
 from events.forms import EventForm
 from events.models import Race, Event
 
-from planning.models import ShortlistedRace
+from planning.models import ShortlistedRace, UserPlanning
 
 import logging
 
@@ -76,7 +76,8 @@ class RaceView(DetailView):
         planned_race = ''
         if self.request.user.is_authenticated():
             user = self.request.user
-            planned_race = [sr.race for sr in ShortlistedRace.objects.filter(user=user)]
+            up = UserPlanning.objects.get(user=user)
+            planned_race = [sr.race for sr in ShortlistedRace.objects.filter(user_planning=up)]
         context = super(RaceView, self).get_context_data(**kwargs)
         context.update({'planned_race': planned_race})
         return context

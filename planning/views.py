@@ -1,4 +1,4 @@
-from planning.models import ShortlistedRace
+from planning.models import ShortlistedRace, UserPlanning
 from events.models import Race
 from core.views import LoginRequiredMixin
 from django.views.generic import ListView
@@ -17,8 +17,9 @@ class PlanningList(ListView):
 
     def get_queryset(self):
         username = self.kwargs.get('username', None)
-        user = User.objects.filter(username=username) or self.request.user
-        return ShortlistedRace.objects.filter(user=user).order_by("race__date")
+        user = User.objects.filter(username=username).first() or self.request.user
+        up = UserPlanning.objects.get(user=user)
+        return up.races.order_by("race__date")
 
     def get_context_data(self, **kwargs):
         context = super(PlanningList, self).get_context_data(**kwargs)
@@ -43,13 +44,14 @@ def add_race_to_planning(request):
             try:
                 race = Race.objects.get(pk=race_pk)
                 user = request.user
-                planned = ShortlistedRace(user=user, race=race)
+                up = UserPlanning.objects.get(user=user)
+                planned = ShortlistedRace(user_planning=up, race=race)
                 planned.save()
             except race.DoesNotExist:
                 pass
             messages.success(request, 'La course a bien été ajoutée du programme')
             return HttpResponse('')
-    
+
     messages.error(request, "Il y a eu un problème lors de l'ajout de la course au programme")
     return HttpResponseBadRequest
 
@@ -64,7 +66,8 @@ def remove_race_from_planning(request):
             try:
                 race = Race.objects.get(pk=race_pk)
                 user = request.user
-                planned = ShortlistedRace.objects.get(user=user, race=race)
+                up = UserPlanning.objects.get(user=user)
+                planned = ShortlistedRace.objects.get(user_planning=up, race=race)
                 planned.delete()
             except race.DoesNotExist:
                 pass

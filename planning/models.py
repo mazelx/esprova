@@ -6,7 +6,7 @@ import hashlib
 
 
 class UserPlanning(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, unique=True)
     secret_key = models.CharField(max_length=40)
 
     def natural_key(self):
@@ -26,7 +26,7 @@ class ShortlistedRace(models.Model):
         Represent a shortlisted race
 
     """
-    user_planning = models.ForeignKey(UserPlanning, related_name='races', null=True)
+    user_planning = models.ForeignKey(UserPlanning, related_name='races')
     race = models.ForeignKey(Race)
     registered = models.BooleanField(default=False)
 
