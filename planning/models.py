@@ -8,8 +8,6 @@ class ShortlistedRace(models.Model):
         Represent a shortlisted race
 
     """
-    class Meta:
-        unique_together = (("user", "race"),)
 
     user = models.ForeignKey(User)
     race = models.ForeignKey(Race)
