@@ -44,7 +44,7 @@
                     <form id="race_search_form" class="form-horizontal" role="form" action="{% url "ajx_search_race" %}">
 
                         <div class="row form-group">
-                            <label for="sport" class="col-sm-3 control-label">Sport :</label>
+                            <label for="sport-selecter" class="col-sm-3 control-label">Sport :</label>
                             <div class="col-sm-8">
                                 <select id="sport-selecter" class="form-control" name="sport">
                                 {% get_sports %}
@@ -58,13 +58,13 @@
 
                         {# expression search #}
                         <div class="row form-group" id="race_quicksearch_form">
-                            <label for="q" class="col-sm-3 control-label">Mots-clés :</label>
+                            <label for="search_expr" class="col-sm-3 control-label">Mots-clés :</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input type="search" id="search_expr" name="q" class="form-control" placeholder="Nom, Région, Département, ..." value="{{ params.search_expr }}"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" id="search_expr_go"> 
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                         </button>
                                     </span>
                                 </div>
@@ -87,7 +87,7 @@
 
                         {# distance search #}
                         <div class="row form-group">
-                            <label for="inDistances" class="col-sm-3 control-label">Distances</label>
+                            <label class="col-sm-3 control-label">Distances</label>
                             <div class="col-sm-8">
                                 <div class="row">
                                     <div class="btn-group col-xs-10" data-toggle="buttons">

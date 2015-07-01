@@ -7,14 +7,14 @@
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <!-- Brand and toggle get grouped for better mobile display -->
-                <ul class="nav navbar-nav">
+                <div class="nav navbar-nav">
                     <a href="http://www.facebook.com/esprova" target="_blank">
                         <img alt="facebook" src="{% static "images/icon-facebook.svg" %}">
                     </a>
                     <a href="http://www.twitter.com/esprova" target="_blank">
                         <img alt="twitter" src="{% static "images/icon-twitter.svg" %}">
                     </a> 
-                </ul>
+                </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href=" {% url "list_race" %}">Recherche</a></li>
                     <li><a href=" {% url "planning" %}">Programme</a></li>
@@ -38,6 +38,7 @@
                 </ul>        
             </div>
         <!-- /.container-fluid -->
+        </div>
     </nav>
 
     {% endblock %}
@@ -59,9 +60,9 @@
         <!-- row -->
         <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" onsubmit="return submitForm(event)" method="GET">
             <div class="form-group form-group-lg">
-                <label for="inputEmail3" class=" col-sm-offset-1 col-sm-3 control-label">Sélectionnez un sport :</label>
+                <label for="sport" class=" col-sm-offset-1 col-sm-3 control-label">Sélectionnez un sport :</label>
                 <div class="col-sm-5">
-                    <select class="form-control" name="sport">
+                    <select class="form-control" name="sport" id="sport">
                     {% get_sports %}
                     {% for sport in sports %}
                         {% if sport.name = request.session.selected_sport %}
@@ -75,13 +76,13 @@
             </div>
 
             <div class="form-group form-group-lg">
-                <label for="inputPassword3" class="col-sm-offset-1 col-sm-3 control-label">Recherchez à proximité de :</label>
+                <label for="search_expr" class="col-sm-offset-1 col-sm-3 control-label">Recherchez à proximité de :</label>
                 <div class="col-sm-5">
                     <div class="input-group">
-                        <input type="search" id="search_expr" class="form-control" placeholder="Région, Département, Ville ..."/>
+                        <input type="search" id="search_expr" class="form-control" placeholder="Région, Département, Ville ..." name="search_expr"/>
                         <span class="input-group-btn">
                             <button class="btn btn-default btn-lg" id="search_expr_go"> 
-                                <span class="glyphicon glyphicon-search" aria-hidden="true">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </button>
                         </span>
                     </div>
@@ -141,7 +142,7 @@
                     <div class="text">
                         <p>L'organisation d'événements sportifs requièrent un investissement important de la part de tous les acteurs impliqués, bénévoles ou professionnels. Nous savons à quel point il est laborieux d'effectuer un annoncement efficace de vos événements sur internet et de les faire vivre sur les réseaux sociaux.</p>
                         <p>Il est temps que cela change : <span class="text-primary">Espròva</span> pense à vous et vous proposera bientôt des offres spécialement conçues pour améliorer la visibilité de vos événements afin de toucher un nombre encore plus important de sportifs amateurs et professionnels. </p>
-                        <p>En attendant, n’hésitez pas à nous faire part de votre intérêt par <a href="mailto:contact@esprova.com&subject=Demande%20d'%20informations%20organisateur">email</a> en laissant vos coordonnées.</p>
+                        <p>En attendant, n’hésitez pas à nous faire part de votre intérêt par <a href="mailto:contact@esprova.com&amp;subject=Demande%20d'%20informations%20organisateur">email</a> en laissant vos coordonnées.</p>
                         <p>Nous ne manquerons pas de vous contacter lorsque ces fonctionnalités seront misent à disposition.</p>
                     </div>
                 </div>

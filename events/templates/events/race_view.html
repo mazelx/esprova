@@ -88,7 +88,7 @@
                             <dl class="dl-horizontal-perso">
                                 <dt>Départ</dt>
                                 <dd>
-                                    <time datetime="{{race.date}} {{race.time| time:"H:i"}}">{{race.date | date:"l d/m/Y" | capfirst }} {{race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}}</time>
+                                    <time datetime="{{race.date| date:"c"}}T{{race.time| time:"H:i"}}">{{race.date | date:"l d/m/Y" | capfirst }} {{race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}}</time>
                                 </dd>
                                 <dt>Adresse</dt>
                                 <dd>    
