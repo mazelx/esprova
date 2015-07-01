@@ -145,10 +145,10 @@ html, body{
         padding: 40px 0 50px 0;
         color: @esprova-darkgray;
 
-        @media (min-width: @screen-md-min) {
-            margin-left: 50px;
-            margin-right: 50px;
-        }
+        // @media (min-width: @screen-md-min) {
+            // margin-left: 50px;
+            // margin-right: 50px;
+        // }
         
 
         .about {
@@ -534,6 +534,8 @@ html, body{
 
 .racepage {
     min-height: 100%;
+    padding-left: 0;
+    padding-right: 0;
        
         .racebanner {
             background: url(../images/race-banner.jpg) no-repeat center;
@@ -541,6 +543,8 @@ html, body{
             top: 51px;
             height: 300px;
             margin-top: -30px;
+            background-size: cover;
+            background-position-y: 20%;
             .hidden-print();
         }
 

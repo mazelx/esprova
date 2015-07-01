@@ -32,51 +32,57 @@
 
     <div class="racepage container-fluid">
         <div class="row racebanner"></div>
-        <header class="event-header row">
-            <div class="race-event-info">
-                    <p class="event-name">{{ race.event.name }}</p>
-                    <p class="event-detail"> 
-                    <p>{{ race.event.edition | ordinal }} édition 
-                    {% if race.event.get_start_date = race.event.get_end_date %} 
-                        le {{ race.event.get_start_date }} 
-                    {% else %} 
-                        du {{ race.event.get_start_date }} au {{ race.event.get_end_date }} 
-                    {% endif %}
-                    à {{ race.location.locality }}
-                        {% if race.location.administrative_area_level_2_short_name %}
-                            ({{ race.location.administrative_area_level_2_short_name }})
-                        {%endif%}
-                    </p>
-            </div>
-            <div class="race-distances">
-                {% for sport, races in race.event.get_races_by_sports.items %}
-                    <div class="race-sport-distances">
-                        <span class="race-sport">{{ sport }}</span>  
-                        {% for r in races %}
-                            {% if r == race %}
-                                <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
-                            {% else %}
-                                <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                {% endfor %}
+        <header class="event-header">
+            <div class="container">
+                <div class="race-event-info row">
+                        <p class="event-name">{{ race.event.name }}</p>
+                        <p class="event-detail"> 
+                        <p>{{ race.event.edition | ordinal }} édition 
+                        {% if race.event.get_start_date = race.event.get_end_date %} 
+                            le {{ race.event.get_start_date }} 
+                        {% else %} 
+                            du {{ race.event.get_start_date }} au {{ race.event.get_end_date }} 
+                        {% endif %}
+                        à {{ race.location.locality }}
+                            {% if race.location.administrative_area_level_2_short_name %}
+                                ({{ race.location.administrative_area_level_2_short_name }})
+                            {%endif%}
+                        </p>
+                </div>
+                <div class="race-distances">
+                    {% for sport, races in race.event.get_races_by_sports.items %}
+                        <div class="race-sport-distances">
+                            <span class="race-sport">{{ sport }}</span>  
+                            {% for r in races %}
+                                {% if r == race %}
+                                    <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
+                                {% else %}
+                                    <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </header>
         
 
-        <div class="race-menu row">
-            <span class="race-menu-title">Course {{ race.distance_cat.name }}</span>
-            <ul class="race-menu-pills nav nav-pills nav-justified">
-                    <li role="presentation" class="active"><a href="#">Résumé</a></li>
-                    <li role="presentation" class="disabled" ><a href="#">Parcours</a></li>
-                    <li role="presentation" class="disabled"><a href="#">Médias</a></li>
-                    <li role="presentation" class="disabled"><a href="#">Résultats</a></li>
-            </ul>
+        <div class="race-menu">
+            <div class="container">
+                <div class="row">
+                    <span class="race-menu-title">Course {{ race.distance_cat.name }}</span>
+                    <ul class="race-menu-pills nav nav-pills nav-justified">
+                            <li role="presentation" class="active"><a href="#">Résumé</a></li>
+                            <li role="presentation" class="disabled" ><a href="#">Parcours</a></li>
+                            <li role="presentation" class="disabled"><a href="#">Médias</a></li>
+                            <li role="presentation" class="disabled"><a href="#">Résultats</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
 
-        <div class="race-content">
+        <div class="race-content container">
 
             {# general information #}
              <section class="race-infogroup row">
