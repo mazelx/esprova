@@ -20,7 +20,7 @@ class PlanningList(ListView):
     username = ''
 
     def get_queryset(self):
-        self.username = self.kwargs.get('username', None)
+        self.username = self.kwargs.get('username', None).lower()
         secret_key = self.request.GET.get('secret_key')
         user = User.objects.filter(username=self.username).first() or self.request.user
         up = get_object_or_404(UserPlanning, user=user)
