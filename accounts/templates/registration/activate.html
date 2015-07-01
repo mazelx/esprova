@@ -1,8 +1,12 @@
-{% extends "base.html" %}
+{% extends "registration/registration_base.html" %}
 {% load i18n %}
 
-{% block content%}
-<p>{% trans "Account activation failed." %}</p>
+{% block content-simple %}
+<header><h1>Erreur</h1></header>
+
+
+
+<p style='text-align:center'>L'activation de votre compte a échoué. Merci de contacter <a href="https://esprova.zendesk.com/hc/fr/requests/new">le support</a> si problème persiste.</p>
 {% endblock %}
 
 
