@@ -18,7 +18,7 @@ class UserPlanning(models.Model):
     def save(self, *args, **kwargs):
         if not self.secret_key:
             self.secret_key = hashlib.sha1().hexdigest()
-        super(UserPlanning, self).save(self, *args, **kwargs)
+        super(UserPlanning, self).save(*args, **kwargs)
 
 
 class ShortlistedRace(models.Model):
