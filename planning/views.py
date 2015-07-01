@@ -16,21 +16,27 @@ class PlanningList(ListView):
     model = ShortlistedRace
     template_name = 'planning/planning_list.html'
     context_object_name = "planned_race_list"
+    secret_key = ''
+    username = ''
 
     def get_queryset(self):
-        username = self.kwargs.get('username', None)
-        secret = self.request.GET.get('secret')
-        user = User.objects.filter(username=username).first() or self.request.user
+        self.username = self.kwargs.get('username', None)
+        secret_key = self.request.GET.get('secret_key')
+        user = User.objects.filter(username=self.username).first() or self.request.user
         up = get_object_or_404(UserPlanning, user=user)
 
-        if not (user == self.request.user or secret == up.secret_key):
+
+        if not (user == self.request.user or secret_key == up.secret_key):
             raise PermissionDenied()
+
+        self.secret_key = up.secret_key
 
         return up.races.order_by("race__date")
 
     def get_context_data(self, **kwargs):
         context = super(PlanningList, self).get_context_data(**kwargs)
-        context['username'] = self.kwargs.get('username', None)
+        context['username'] = self.username
+        context['secret_key'] = self.secret_key
         return context
 
 
