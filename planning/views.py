@@ -25,7 +25,6 @@ class PlanningList(ListView):
         user = User.objects.filter(username=self.username).first() or self.request.user
         up = get_object_or_404(UserPlanning, user=user)
 
-
         if not (user == self.request.user or secret_key == up.secret_key):
             raise PermissionDenied()
 
