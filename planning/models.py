@@ -2,12 +2,13 @@ from django.db import models
 from events.models import Race
 from django.contrib.auth.models import User
 
-import hashlib
+import os
+from binascii import hexlify
 
 
 class UserPlanning(models.Model):
     user = models.ForeignKey(User, unique=True)
-    secret_key = models.CharField(max_length=40)
+    secret_key = models.CharField(max_length=10)
 
     def natural_key(self):
         return (self.user)
@@ -17,7 +18,7 @@ class UserPlanning(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.secret_key:
-            self.secret_key = hashlib.sha1().hexdigest()
+            self.secret_key = hexlify(os.urandom(5))
         super(UserPlanning, self).save(*args, **kwargs)
 
 
