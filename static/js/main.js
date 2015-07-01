@@ -291,7 +291,7 @@ function initializeDOMComponents(){
     search_end_date = getParameterByName("end_date") || default_end_date;
     $("#end_date").val(search_end_date);
 
-    search_expr = getParameterByName("search_expr") || default_search_expr;
+    search_expr = getParameterByName("q") || default_search_expr;
     $("#search_expr").val(search_expr);
     
     // updates the datepicker in order to save changed value in datepicker window
@@ -417,8 +417,10 @@ function addListSportSelection(){
     // change sport
     $("#sport-selecter").on("change", function (event) { 
         event.preventDefault();
-        saveSportSession(event.currentTarget.value);
-        resetSearchForm();
+        search_sport = event.currentTarget.value
+        saveSportSession(search_sport);
+        // resetSearchForm();
+        getRaces();
    });
 }
 
