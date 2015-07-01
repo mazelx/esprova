@@ -145,12 +145,6 @@ html, body{
         padding: 40px 0 50px 0;
         color: @esprova-darkgray;
 
-        // @media (min-width: @screen-md-min) {
-            // margin-left: 50px;
-            // margin-right: 50px;
-        // }
-        
-
         .about {
             text-align: center;
 
@@ -199,6 +193,8 @@ html, body{
                     position:absolute;
                     top: 50%;
                     transform: translateY(-50%);
+                    -ms-transform: translateY(-50%); /* IE 9 */
+                    -webkit-transform: translateY(-50%); /* Safari */
                     margin-bottom: 0px;
                 }
         
@@ -724,9 +720,8 @@ html, body{
     color: @esprova-gray;
     margin-top: 70px;
     margin-bottom: 100px;
-    filter: grayscale(100%);
-    -webkit-filter:grayscale(100%);
-    filter: gray; filter: grayscale(100%);
+    -webkit-filter: grayscale(100%); 
+            filter: grayscale(100%);
 }
 
 // Datepicker

@@ -31,7 +31,7 @@
 <div class="content">
 
     <div class="racepage container-fluid">
-        <div class="row racebanner"></div>
+        <div class="racebanner"></div>
         <header class="event-header">
             <div class="container">
                 <div class="race-event-info row">
@@ -188,14 +188,13 @@
 
             </div>
 
+            {% include "shareaholic/shareaholic_buttons.html" %}
+
+            <div class="row race-edit">
+                <p>Une erreur ? Vous pouvez proposer une <a href="{% url "update_event" race.event.pk %}">modification</a> de l'épreuve</p>
+            </div>
 
         </div>        
-
-        {% include "shareaholic/shareaholic_buttons.html" %}
-
-        <div class="row race-edit">
-            <p>Une erreur ? Vous pouvez proposer une <a href="{% url "update_event" race.event.pk %}">modification</a> de l'épreuve</p>
-        </div>
     </div>
 </div>
 
