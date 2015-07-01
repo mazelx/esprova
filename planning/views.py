@@ -71,7 +71,7 @@ def remove_race_from_planning(request):
                 planned.delete()
             except race.DoesNotExist:
                 pass
-            messages.success(request, 'La course a bien été supprimée du programme')
+            messages.success(request, 'La course a bien été retirée du programme')
             return HttpResponse('')
 
     messages.error(request, "Il y a eu un problème lors de la retrait de la course du programme")
