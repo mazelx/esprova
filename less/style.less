@@ -391,123 +391,132 @@ html, body{
             font-style: italic;
         }
     }
+    #racelist {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-bottom: 5px solid @esprova-red;
+        margin-bottom: 0;
+        min-height: 400px;
+        
+        .search-result {
+            padding: 15px 0 15px 0;
+            margin: 0 -15px 0 -15px;
+            border: 1px solid @esprova-lightergray;
+            border-width: 0 0 1px 0;
 
-    .search-result {
-        padding: 15px 0 15px 0;
-        margin: 0 -15px 0 -15px;
-        border: 1px solid @esprova-lightergray;
-        border-width: 0 0 1px 0;
-
-        &.first {
-            border-width: 1px 0 1px 0;
-        }
-
-        &:hover {
-            background-color: @esprova-lightergray;
-        }
-
-        @date-preview-width-sm: 100px;
-        @date-preview-width-xs: 60px;
-        .result-date-preview {
-            @media (min-width: @screen-sm-min) {
-                width: @date-preview-width-sm;
-                height: 70px;
-                float: left;
-                font-size: 3.57em;
-                text-align: center;
-            }
-            width: @date-preview-width-xs;
-            height: 40px;
-            float: left;
-            font-size: 2.2em;
-            text-align: center;
-            color: @esprova-lightgray;
-
-
-            .result-start-date {
-                line-height: 1.2em;
-            }
-            .result-end-date {
-                font-size: 0.4em;
-                @media (min-width: @screen-sm-min) {
-                    margin-top: -0.4em;
-                }
-                
-            }
-        }
-
-        .result-content {
-            margin-left: @date-preview-width-xs;
-            @media (min-width: @screen-sm-min) {
-                margin-left: @date-preview-width-sm;
-
+            &.first {
+                border-width: 1px 0 1px 0;
             }
 
-            .result-title {
-                letter-spacing: 0.075em;
-                margin: 0;
+            &:hover {
+                background-color: @esprova-lightergray;
             }
 
-            .result-location {
-                color: @esprova-gray;
-                letter-spacing: 0.075em;
-                margin-bottom: 5px;
-                font-weight: 400;
-            }
-
-            .result-detail {
-
-                .result-detail-distance {
-                    margin-top: 3px;
-                    display:inline;
-                    &.disabled {
-                            visibility: hidden;
-                    }
-
-                    .result-detail-date {
-                        display: none;
-                    }
-
-                    .distance-icon {
-                        background-color: @esprova-gray;
-                        color:white;
-                        cursor: inherit;
-                        width: 40px;
-                        border: 0;
-                        font-weight: 600;
-                    }
-
-                }
-
-            }
-
-        }
-
-    // when result selected ("active")
-        &.active {
-            background-color: @esprova-lightgray;
-            padding-bottom: 20px;
-
+            @date-preview-width-sm: 100px;
+            @date-preview-width-xs: 60px;
             .result-date-preview {
-                color: @esprova-red;
+                @media (min-width: @screen-sm-min) {
+                    width: @date-preview-width-sm;
+                    height: 70px;
+                    float: left;
+                    font-size: 3.57em;
+                    text-align: center;
+                }
+                width: @date-preview-width-xs;
+                height: 40px;
+                float: left;
+                font-size: 2.2em;
+                text-align: center;
+                color: @esprova-lightgray;
+
+
+                .result-start-date {
+                    line-height: 1.2em;
+                }
+                .result-end-date {
+                    font-size: 0.4em;
+                    @media (min-width: @screen-sm-min) {
+                        margin-top: -0.4em;
+                    }
+                    
+                }
             }
 
             .result-content {
+                margin-left: @date-preview-width-xs;
+                @media (min-width: @screen-sm-min) {
+                    margin-left: @date-preview-width-sm;
+
+                }
+
+                .result-title {
+                    letter-spacing: 0.075em;
+                    margin: 0;
+                }
+
+                .result-location {
+                    color: @esprova-gray;
+                    letter-spacing: 0.075em;
+                    margin-bottom: 5px;
+                    font-weight: 400;
+                }
+
                 .result-detail {
-                    display: initial;
-                    color: @esprova-red;
+
                     .result-detail-distance {
-                        display: block;
+                        margin-top: 3px;
+                        display:inline;
                         &.disabled {
+                                visibility: hidden;
+                        }
+
+                        .result-detail-date {
                             display: none;
                         }
-                        .result-detail-date {
-                            display: inline;
-                        }
+
                         .distance-icon {
-                            background-color: @esprova-red;
-                            color: white;
-                            margin-right: 10px;
+                            background-color: @esprova-gray;
+                            color:white;
+                            cursor: inherit;
+                            width: 40px;
+                            border: 0;
+                            font-weight: 600;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        // when result selected ("active")
+            &.active {
+                background-color: @esprova-lightgray;
+                padding-bottom: 20px;
+
+                .result-date-preview {
+                    color: @esprova-red;
+                }
+
+                .result-content {
+                    .result-detail {
+                        display: initial;
+                        color: @esprova-red;
+                        .result-detail-distance {
+                            display: block;
+                            &.disabled {
+                                display: none;
+                            }
+                            .result-detail-date {
+                                display: inline;
+                            }
+                            .distance-icon {
+                                background-color: @esprova-red;
+                                color: white;
+                                margin-right: 10px;
+                            }
                         }
                     }
                 }
