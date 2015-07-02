@@ -648,10 +648,15 @@ function handleNoResult(){
                     }
                 }
 
-                selector.children("#location").click(function () {
-                    viewport = results[0].geometry.bounds;
+                // handle click event on location proposal
+                selector.children("#location").click(function (e) {
+                    e.preventDefault();
+                    var viewport_bounds = results[0].geometry.bounds;
+                    viewport = viewport_bounds.toUrlValue().split(",")
                     $("#search_expr").val("");
-                    map.fitBounds(viewport);
+                    search_expr = "";
+                    getRaces();
+                    map.fitBounds(viewport_bounds);
                 });
             }
         });
@@ -849,7 +854,7 @@ function pushState(param_query){
 History.Adapter.bind(window, "statechange", function() {
     var state = History.getState();
     if(state !== null) {
-        if(manualStateChange === true){
+        if(manualStateChange === true && typeof(state.data.param_query) != "undefined") {
             ajaxLoad(state.data.param_query);
             // disable map move listener to avoid refresh upon initialization
             google.maps.event.clearListeners(map, "idle");
