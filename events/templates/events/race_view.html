@@ -146,7 +146,7 @@
                         <dt>Web</dt>
                         <dd>
                         {% if race.event.website %}
-                            <a href="{{race.event.website}}">{{race.event.website}}</a>
+                            <a href="{{race.event.website}}" target="_blank">{{race.event.website}}</a>
                         {% else %}
                             <br>
                         {% endif %}
@@ -154,7 +154,7 @@
                         <dt>Organisateur</dt>
                         <dd>
                         {% if race.event.organizer.website %}
-                            <a href="{{ race.event.organizer.website }}">
+                            <a href="{{ race.event.organizer.website }}" target="_blank">
                                 {{ race.event.organizer.name }}
                             </a>
                         {% else %}
