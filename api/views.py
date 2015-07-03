@@ -133,123 +133,148 @@ def ajx_delete_race(request, pk):
 def ajx_get_races(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
-        sqs = SearchQuerySet()
-        sqs = sqs.filter(validated="true")
-
-        # search from quick search form
         sport = request.GET.get('sport')
         if not sport:
-            return HttpResponseBadRequest
+            return HttpResponseBadRequest('Error : no sport has been specified')
 
-        sqs = sqs.filter(sport=sport)
-
-        # search from map bounds
         param_viewport = request.GET.get('viewport')
+
+        viewport = []
         if param_viewport:
             viewport = [x.strip() for x in param_viewport.split(',')]
-            lat_lo = viewport[0]
-            lng_lo = viewport[1]
-            lat_hi = viewport[2]
-            lng_hi = viewport[3]
 
-            if lat_lo and lng_lo and lat_hi and lng_hi:
-                downtown_bottom_left = Point(float(lng_lo), float(lat_lo))
-                downtown_top_right = Point(float(lng_hi), float(lat_hi))
-
-                sqs = sqs.within('location', downtown_bottom_left, downtown_top_right)
-
-        # search from search form
         start_date = request.GET.get('start_date')
-        end_date = request.GET.get('end_date')
-
         if not start_date:
             start_date = "2015-01-07"
-        sqs = sqs.filter(date__gte=start_date)
-
+        end_date = request.GET.get('end_date')
         if not end_date:
             end_date = "2016-01-06"
-        sqs = sqs.filter(date__lte=end_date)
-
         param_distances = request.GET.get('distances')
+        distances = []
         if param_distances:
             distances = [x.strip() for x in param_distances.split(',')]
-            sqs = sqs.filter(distance_cat__in=distances)
-
-        # search from quick search form
         search_expr = request.GET.get('q')
 
-        if search_expr:
-            sqs = sqs.filter(content=search_expr)
+        json = races_formatted_search(format='JSON',
+                                      sport=sport,
+                                      viewport=viewport,
+                                      start_date=start_date,
+                                      end_date=end_date,
+                                      distances=distances,
+                                      search_expr=search_expr)
 
-        # sqs.order_by('score')
-        sqs = sqs.order_by('date')
-
-        sqs = sqs.facet('distance_cat').facet('administrative_area_level_1').facet('administrative_area_level_2')
-
-        # facet for dates if defined
-        sqs = sqs.date_facet(field='date',
-                             start_date=datetime.datetime.strptime(start_date, '%Y-%m-%d'),
-                             end_date=datetime.datetime.strptime(end_date, '%Y-%m-%d'),
-                             gap_by='month')
-
-        facet = sqs.facet_counts()
-
-        # convert datetime into serializable isoformat
-        facet_dates = []
-        for f in facet['dates']['date']:
-            facet_dates.append((f[0].isoformat(), f[1]))
-        facet['dates']['date'] = facet_dates
-
-        # build the JSON response
-        races = []
-        result_html = []
-
-        # Uniqfy the event list (multiple races from an event)
-        seen = {}
-        rank = 1
-        prev_month = cur_month = 0
-        month_iterator = 0
-
-        for sr in sqs:
-            cur_month = sr.date.strftime('%m%Y')
-            event_id = sr.get_stored_fields()['event_id']
-            location = sr.get_stored_fields()['location']
-            rendered = sr.get_stored_fields()['rendered']
-
-            if event_id in seen:
-                continue
-
-            seen[event_id] = 1
-            race_data = {'id': int(event_id),
-                         'score': str(sr.score),
-                         # 'rankClass': "primary" if (rank <= 10) else "secondary",
-                         'rankClass': "secondary",
-                         'lat': str(location.get_coords()[1]),
-                         'lng': str(location.get_coords()[0])
-                         }
-
-            races.append(race_data)
-
-            if prev_month != cur_month:
-                result_html.append(render_to_string('html_utils/result_month_spacer.html',
-                                                    {'last_date': sr.date,
-                                                     'count': facet['dates']['date'][month_iterator][1]}))
-                month_iterator += 1
-
-            result_html.append(rendered)
-
-            prev_month = cur_month
-            rank += 1
-
-        if not races:
-            result_html = render_to_string('html_utils/search_no_result_alert.html', {'search_expr': search_expr})
-
-        response = {'count': sqs.count(),
-                    'races': races,
-                    'html': result_html,
-                    'facet': facet,
-                    }
-
-        return HttpResponse(dumps(response), content_type="application/json")
+        return HttpResponse(json, content_type="application/json")
 
     raise Http404
+
+
+def races_formatted_search(sport='',
+                           viewport=[],
+                           start_date='',
+                           end_date='',
+                           distances=[],
+                           search_expr='',
+                           format='JSON'):
+
+    sqs = SearchQuerySet()
+
+    sqs = sqs.filter(validated="true")
+    if sport:
+        sqs = sqs.filter(sport=sport)
+    if start_date:
+        sqs = sqs.filter(date__gte=start_date)
+    else:
+        start_date = '2010-01-01'
+
+    if end_date:
+        sqs = sqs.filter(date__lte=end_date)
+    else:
+        end_date = '2030-01-01'
+    if distances:
+        sqs = sqs.filter(distance_cat__in=distances)
+    if search_expr:
+        sqs = sqs.filter(content=search_expr)
+
+    # search from map bounds
+    if viewport:
+        lat_lo = viewport[0]
+        lng_lo = viewport[1]
+        lat_hi = viewport[2]
+        lng_hi = viewport[3]
+
+        if lat_lo and lng_lo and lat_hi and lng_hi:
+            downtown_bottom_left = Point(float(lng_lo), float(lat_lo))
+            downtown_top_right = Point(float(lng_hi), float(lat_hi))
+
+            sqs = sqs.within('location', downtown_bottom_left, downtown_top_right)
+
+    sqs = sqs.order_by('date')
+    sqs = sqs.facet('distance_cat').facet('administrative_area_level_1').facet('administrative_area_level_2')
+
+    # facet for dates if defined
+    sqs = sqs.date_facet(field='date',
+                         start_date=datetime.datetime.strptime(start_date, '%Y-%m-%d'),
+                         end_date=datetime.datetime.strptime(end_date, '%Y-%m-%d'),
+                         gap_by='month')
+
+    facet = sqs.facet_counts()
+
+    # convert datetime into serializable isoformat
+    facet_dates = []
+    for f in facet['dates']['date']:
+        facet_dates.append((f[0].isoformat(), f[1]))
+    facet['dates']['date'] = facet_dates
+
+    # build the JSON response
+    races = []
+    result_html = []
+
+    # Uniqfy the event list (multiple races from an event)
+    seen = {}
+    rank = 1
+    prev_month = cur_month = 0
+    month_iterator = 0
+
+    for sr in sqs:
+        cur_month = sr.date.strftime('%m%Y')
+        event_id = sr.get_stored_fields()['event_id']
+        location = sr.get_stored_fields()['location']
+        rendered = sr.get_stored_fields()['rendered']
+
+        if event_id in seen:
+            continue
+
+        seen[event_id] = 1
+        race_data = {'id': int(event_id),
+                     'score': str(sr.score),
+                     # 'rankClass': "primary" if (rank <= 10) else "secondary",
+                     'rankClass': "secondary",
+                     'lat': str(location.get_coords()[1]),
+                     'lng': str(location.get_coords()[0])
+                     }
+
+        races.append(race_data)
+
+        if prev_month != cur_month:
+            result_html.append(render_to_string('html_utils/result_month_spacer.html',
+                                                {'last_date': sr.date,
+                                                 'count':  facet['dates']['date'][month_iterator][1]
+                                                 }))
+            month_iterator += 1
+
+        result_html.append(rendered)
+
+        prev_month = cur_month
+        rank += 1
+
+    if not races:
+        result_html = render_to_string('html_utils/search_no_result_alert.html', {'search_expr': search_expr})
+
+    data = {'count': sqs.count(),
+            'races': races,
+            'html': result_html,
+            'facet': facet,
+            }
+    if format.lower() == 'dict':
+        return data
+    return dumps(data)
