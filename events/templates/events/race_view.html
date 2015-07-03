@@ -3,18 +3,17 @@
 {% load humanize %}
 
 {%block title%}
-<title>{{ race.event.name | capfirst  }} - {{ race.distance_cat.name }}</title>
+<title>{{ race.event.name | capfirst  }} {{ race.date | date:'Y' }} - Distance {{ race.distance_cat.name }}</title>
 {%endblock%}
 
 {% block meta %}
-<meta name="description" content="{{ race.event.name  | capfirst  }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
 {% endblock %}
 
 {% block opengraph %}
 <meta property="og:title" content="{{ race.event.name | capfirst }}  - {{ race.distance_cat.name }}" />
 <meta property="og:type" content="article" />
-<meta property="og:description" content="{{ race.event.name  | capfirst  }} ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). \r\n
-    Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
+<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
 {% endblock %}
 
 {% block head_extra %}
@@ -35,7 +34,7 @@
         <header class="event-header">
             <div class="container">
                 <div class="race-event-info row">
-                        <p class="event-name">{{ race.event.name }}</p>
+                        <p class="event-name">{{ race.event.name }} {{ race.date | date:'Y' }}</p>
                         <p class="event-detail"> 
                         <p>{{ race.event.edition | ordinal }} édition 
                         {% if race.event.get_start_date = race.event.get_end_date %} 
