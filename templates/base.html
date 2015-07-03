@@ -152,7 +152,7 @@
                             </li>
                         {% endif %}
                         <li>
-                            <a href=" {% url "create_event" %}"> Ajouter une course</a>
+                            <a href="{% url "create_event" %}"> Ajouter une course</a>
                         </li>
                     {% if user.is_authenticated %}
                         <li class="dropdown">

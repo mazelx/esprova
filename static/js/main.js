@@ -158,6 +158,9 @@ function initialize() {
         }
     });
 
+    $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+
+
     // Add custom event listeners
     addListWindowResize();
     addListMapMoves();

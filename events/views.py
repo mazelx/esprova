@@ -13,6 +13,8 @@ from core.views import LoginRequiredMixin
 from events.forms import EventForm
 from events.models import Race, Event
 
+from api.views import races_formatted_search
+
 from planning.models import ShortlistedRace, UserPlanning
 
 import logging
@@ -60,6 +62,10 @@ class RaceList(TemplateView):
             # directly assign into params.distances.XS for examplew
             context['params']['distances'][dist] = True
 
+        data = races_formatted_search(format='dict')
+        context.update({'racelist': ''.join(data['html'])})
+        return context
+
 
 class EventView(LoginRequiredMixin, DetailView):
     model = Event
@@ -78,8 +84,10 @@ class RaceView(DetailView):
             user = self.request.user
             up = UserPlanning.objects.get(user=user)
             planned_race = [sr.race for sr in ShortlistedRace.objects.filter(user_planning=up)]
+
         context = super(RaceView, self).get_context_data(**kwargs)
         context.update({'planned_race': planned_race})
+
         return context
 
 
