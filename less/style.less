@@ -565,7 +565,8 @@ html, body{
             color: white;
             padding-top: 15px;
             padding-bottom: 30px; 
-            
+            font-weight: 400;
+
             .race-event-info{
                 .make-sm-column-offset(2);
                 .make-sm-column(8);
@@ -574,6 +575,10 @@ html, body{
                 .event-name {
                     text-transform: uppercase;
                     font-size: 2.5em;
+                }
+                .event-detail {
+                    font-size: 1.2em;
+                    font-weight: inherit;
                 }
             }
 
@@ -584,6 +589,9 @@ html, body{
                 margin-top: 30px;
 
                 .race-sport-distances {
+
+                    font-size: inherit;
+
 
                     @media (min-width: @screen-md-min) {
                         display: inline;
