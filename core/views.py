@@ -49,7 +49,7 @@ class PlanningSiteMap(Sitemap):
 
 class StaticViewSitemap(Sitemap):
     changefreq = 'daily'
-    prioritized_items = {'legal': 0.1, 'list_race': 0.9, 'intro': 1.0}
+    prioritized_items = {'list_race': 0.9, 'intro': 1.0}
 
     def items(self):
         return [item for item, priority in self.prioritized_items.items()]
