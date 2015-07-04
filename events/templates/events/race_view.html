@@ -95,7 +95,7 @@
                                 <time datetime="{{race.date| date:"c"}}T{{race.time| time:"H:i"}}">{{race.date | date:"l d/m/Y" | capfirst }} {{race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}}</time>
                             </dd>
                             <dt>Adresse</dt>
-                            <dd>    
+                            <dd id="info-address">    
                                 {# <address id="race-location" data-lat="-0.63937" data-lng="-0.63937"> #}
                                 <address id="race-location" 
                                     data-lat="{{ race.location.lat | stringformat:'.5f' }}" 
@@ -124,7 +124,7 @@
                 <div class="race-infogroup-details">
                     <dl class="dl-horizontal-perso">
                         <dt>Distance</dt>
-                        <dd>{{ race.distance_cat.get_formatted_name }}</dd>
+                        <dd id="info-distance">{{ race.distance_cat.get_formatted_name }}</dd>
                         <br>
                         {% for distance in race.distances.all %}
                             <dt>{{ distance.stage.name }}</dt>
@@ -143,7 +143,7 @@
                 <div class="race-infogroup-details">
                     <dl class="dl-horizontal-perso">
                         <dt>Web</dt>
-                        <dd>
+                        <dd id="info-website">
                         {% if race.event.website %}
                             <a href="{{race.event.website}}" target="_blank">{{race.event.website}}</a>
                         {% else %}
@@ -151,7 +151,7 @@
                         {% endif %}
                         </dd>
                         <dt>Organisateur</dt>
-                        <dd>
+                        <dd id="info-organizer">
                         {% if race.event.organizer.website %}
                             <a href="{{ race.event.organizer.website }}" target="_blank">
                                 {{ race.event.organizer.name }}
@@ -161,7 +161,7 @@
                         {%endif%}
                         </dd>
                         <dt>Contact</dt>
-                        <dd>
+                        <dd id="info-contact">
                             <address>
                                 <strong>{{ race.contact.name }}</strong>
                                 <br> {{ race.contact.phone }}
