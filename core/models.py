@@ -162,7 +162,7 @@ class DistanceCategory(ComparableModelMixin, models.Model):
         return (self.sport, self.name)
 
     def get_formatted_name(self):
-        var = self.name
+        var = "{0} {1}".format(self.sport.name, self.name)
         if self.long_name:
             var += " ({0}) ".format(self.long_name)
         return var
