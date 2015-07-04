@@ -1,17 +1,21 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.formtools.wizard.views import SessionWizardView
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import DeleteView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.core.urlresolvers import reverse
+
+from django.conf import settings
+
+from json import dumps
 
 from core.views import LoginRequiredMixin
 
 from events.forms import EventForm
-from events.models import Race, Event
+from events.models import Race, Event, Sport
 
 from api.views import races_formatted_search
 
@@ -39,22 +43,27 @@ class EventValidationList(LoginRequiredMixin, ListView):
         return changed_event_list
 
 
-class RaceList(TemplateView):
+class RaceSearch(TemplateView):
     context_object_name = "race_list"
     template_name = "events/race_search.html"
 
-    def get_context_data(self, **kwargs):
+    def dispatch(self, *args, **kwargs):
+        if 'sport' not in self.kwargs:
+            default_sport_name = self.request.session['selected_sport'] or settings.DEFAULT_SPORT
+            return HttpResponseRedirect(reverse('list_race_sport', kwargs={'sport': default_sport_name}))
+        return super(RaceSearch, self).dispatch(*args, **kwargs)
 
-        context = super(RaceList, self).get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(RaceSearch, self).get_context_data(**kwargs)
 
         # GET parameters and convert directly to dict for better handling in the templates
         context['params'] = self.request.GET.dict()
 
-        # TODO : get from season model
-        if not self.request.GET.get('start_date'):
-            context['params']['start_date'] = "2015-01-01"
-        if not self.request.GET.get('end_date'):
-            context['params']['end_date'] = "2015-12-31"
+        # min date for retreiving data (has an impact on degrated browsing INCLUDING search bots)
+        # if not self.request.GET.get('start_date'):
+            # context['params']['start_date'] = "2014-01-01"
+        # if not self.request.GET.get('end_date'):
+            # context['params']['end_date'] = "2016-12-31"
 
         # Loop through distances parameters as it is a list of values
         context['params']['distances'] = {}
@@ -62,8 +71,27 @@ class RaceList(TemplateView):
             # directly assign into params.distances.XS for examplew
             context['params']['distances'][dist] = True
 
-        data = races_formatted_search(format='dict')
+        # sport_name = self.request.session['selected_sport'] or Sport.objects.first().name
+
+        sport_name = self.kwargs.get('sport', None)
+        sport = get_object_or_404(Sport, name__iexact=sport_name)
+
+        viewport = ''
+        if 'viewport' in self.request.GET:
+            viewport = self.request.GET.get('viewport').split(',')
+
+        # get prefilled racelist html
+        data = races_formatted_search(format='dict',
+                                      sport=sport,
+                                      viewport=viewport,
+                                      start_date=self.request.GET.get('start_date'),
+                                      end_date=self.request.GET.get('end_date'),
+                                      distances=self.request.GET.getlist('distances'),
+                                      search_expr=self.request.GET.get('q'))
         context.update({'racelist': ''.join(data['html'])})
+        context.update({'json_races': dumps(data['races'])})
+        context['params']['sport'] = sport_name
+
         return context
 
 

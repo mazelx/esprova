@@ -17,6 +17,14 @@
 /*global Modernizr */
 /*global default_distances */
 
+/*global viewport */
+/*global selected_event_id */
+/*global search_sport */
+/*global search_distances */
+/*global search_start_date */
+/*global search_end_date */
+/*global search_expr */
+
 var map = null;
 var last_query;
 var markers = {};       
@@ -29,13 +37,13 @@ var secondaryIcons = {};
 var last_query_pushed;
 var last_query_options_loaded;
 
-var viewport = ""; // store the current map bounds
-var selected_event_id="";
-var search_sport = "";
-var search_distances = "";
-var search_start_date = "";
-var search_end_date = "";
-var search_expr = "";
+// var viewport = ""; // store the current map bounds
+// var selected_event_id="";
+// var search_sport = "";
+// var search_distances = "";
+// var search_start_date = "";
+// var search_end_date = "";
+// var search_expr = "";
 
 var map_hidden = false;
 var native_datepicker = Modernizr.touch;
@@ -79,15 +87,13 @@ if (typeof google !== "undefined") {
 
 function initialize() {
 
-
-
     page_title = document.title;
-    search_sport = default_sport;
-    viewport = default_search_bounds; 
-    search_distances = default_distances;
-    search_start_date = default_start_date;
-    search_end_date = default_end_date;
-    search_expr = default_search_expr;
+    // search_sport = default_sport.toLowerCase();
+    // viewport = default_search_bounds; 
+    // search_distances = default_distances;
+    // search_start_date = default_start_date;
+    // search_end_date = default_end_date;
+    // search_expr = default_search_expr;
 
 
     primaryIcons.default = {
@@ -158,8 +164,6 @@ function initialize() {
         }
     });
 
-    $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
-
 
     // Add custom event listeners
     addListWindowResize();
@@ -170,13 +174,6 @@ function initialize() {
     addListSportSelection();
     addListSideboxScroll();
     initializeMapZoomControl();
-
-
-    // $('body').bind('touchmove', function (ev) { 
-    //     if(ev.currentTarget === ev.target) {
-    //         ev.preventDefault();
-    //     }
-    // });
 
     initializeDOMComponents();
 
@@ -226,7 +223,7 @@ function initializeMapZoomControl() {
 
 function getDistanceInfo(sport) {
      $.ajax({
-        url: "api/distance/" + sport,
+        url: "/api/distance/" + sport,
         type: "GET", 
         dataType: "json"
         })
@@ -251,22 +248,34 @@ function createDatePickerComponent() {
     });
 }
 
+
 function initializeDOMComponents(){
 
     // need to test whetheir sport exists trhough ajax
-    search_sport = getParameterByName("sport");
-    if (search_sport !== "" ) {
+    // search_sport = getParameterByName("sport");
+
+    // need to be done in django view 
+    // if (search_sport !== "" ) {
+    //     saveSportSession(search_sport);
+    // } 
+    // else {
+    //     search_sport = default_sport;
+    // }
+    
+    // if sport has been changed (pushstate)
+    if ($("#sport-selecter").val().toLowerCase() !== search_sport.toLowerCase()){
         saveSportSession(search_sport);
-    } 
-    else {
-        search_sport = default_sport;
+        $("#sport-selecter").val(search_sport.charAt(0).toUpperCase() + search_sport.slice(1));
     }
-    $("#sport-selecter").val(search_sport);
+
+    // $("#sport-selecter").val(search_sport.charAt(0).toUpperCase() + search_sport.slice(1));
+
+    // should be done in django view
     getDistanceInfo(search_sport);
 
     // set map to provided bounds
-    var str_viewport = getParameterByName("viewport");
-    viewport = (str_viewport === "") ? default_search_bounds : str_viewport.split(","); 
+    // var str_viewport = getParameterByName("viewport");
+    // viewport = (str_viewport === "") ? default_search_bounds : str_viewport.split(","); 
 
     var lat_lo = viewport[0];
     var lng_lo = viewport[1];
@@ -288,13 +297,13 @@ function initializeDOMComponents(){
 
 
     // set dates
-    search_start_date = getParameterByName("start_date") || default_start_date;
+    // search_start_date = getParameterByName("start_date") || default_start_date;
     $("#start_date").val(search_start_date);
 
-    search_end_date = getParameterByName("end_date") || default_end_date;
+    // search_end_date = getParameterByName("end_date") || default_end_date;
     $("#end_date").val(search_end_date);
 
-    search_expr = getParameterByName("q") || default_search_expr;
+    // search_expr = getParameterByName("q") || default_search_expr;
     $("#search_expr").val(search_expr);
     
     // updates the datepicker in order to save changed value in datepicker window
@@ -306,22 +315,23 @@ function initializeDOMComponents(){
     }
 
     // set active
-    var active = getParameterByName("active");
-    if (active !== "") {
-        selected_event_id = parseInt(active);    
-    } else {
-        selected_event_id = "";
-    }
+    // var active = getParameterByName("active");
+    // if (active !== "") {
+    //     selected_event_id = parseInt(active);    
+    // } else {
+    //     selected_event_id = "";
+    // }
 
-    search_distances = getParameterByName("distances");
-    if (search_distances !== "") {
+    // search_distances = getParameterByName("distances");
+    // if (search_distances !== "") {
         var arr_distances = search_distances.split(",");
+        // arr_distances.indexOf("XS") !== -1 => true if distance selected
         setCheckDistanceInput("XS", arr_distances.indexOf("XS") !== -1);
         setCheckDistanceInput("S", arr_distances.indexOf("S") !== -1);
         setCheckDistanceInput("M", arr_distances.indexOf("M") !== -1);
         setCheckDistanceInput("L", arr_distances.indexOf("L") !== -1);
         setCheckDistanceInput("XL", arr_distances.indexOf("XL") !== -1);
-    }
+    // } 
 }
 
 
@@ -422,7 +432,6 @@ function addListSportSelection(){
         event.preventDefault();
         search_sport = event.currentTarget.value
         saveSportSession(search_sport);
-        // resetSearchForm();
         getRaces();
    });
 }
@@ -474,7 +483,6 @@ function addListSearch(){
                               if(d) { search_distances += d.split("=")[1] + ",";}
                         }); 
         // only set when sport changed (api call)
-        // search_sport = $("#sport-selecter").val();
         search_expr = $("#search_expr").val();
         search_start_date = $("#start_date").val();
         search_end_date = $("#end_date").val();
@@ -490,26 +498,11 @@ function delListSearch(){
     $("#race_search_form").off("change submit");
     }
 
-
-// function addListSearch() {
-//     // $("#start_date").datepicker().on("hide", getRaces);
-// }
-
 function addListResetForm(){
      $( "#reset-search-form" ).click(function() {
         resetSearchForm();
     });
 }
-
-
-// // En CSS ??
-// function addListAlertMessages(){
-//     window.setTimeout(function() {
-//             $(".alert").fadeTo(500, 0).slideUp(500, function(){
-//             $(this).remove(); 
-//       });
-//     }, 3000);
-// }
 
 function addListHoverSideboxResult(){
     $(".search-result").hover(function() {
@@ -537,9 +530,7 @@ function addListHoverMapResult(marker){
 
 function getParamQuery(){
     var zoom = map ? map.getZoom() : "";
-    var param_query = "sport=" + search_sport;
-    viewport = (typeof viewport === "undefined" || viewport === "") ? default_search_bounds : viewport;
-    param_query += (search_expr) ? ("&q=") + search_expr : "" ;
+    var param_query = (search_expr) ? ("&q=") + search_expr : "" ;
     param_query += (search_start_date) ? ("&start_date=" + search_start_date) : "";
     param_query += (search_end_date) ? ("&end_date=" + search_end_date) : "";
     param_query += (search_distances) ? ("&distances=" + search_distances) : "";
@@ -567,7 +558,9 @@ function ajaxLoad(data, options, fallback) {
     if (typeof options === "undefined") { options = new RefreshOptions();}
 
 
-    $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+    if (options.refreshSidebar) {
+        $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+    }
     $("#filter-cde-results").html("<i class='fa fa-spinner fa-pulse'></i>");
 
     if (options.fullRefresh) {
@@ -583,21 +576,21 @@ function ajaxLoad(data, options, fallback) {
         viewport = tmp_viewport;
     } 
     else {
-        if(last_query_options_loaded !==  data + JSON.stringify( options ) ) {
+        if(last_query_options_loaded !==  "&search_sport=" + search_sport + data + JSON.stringify( options ) ) {
 
             // console.log("load:" + data + JSON.stringify( options ));
 
             $.ajax({
-            url: "api/races/",
+            url: "/api/races/",
             type: "GET", 
-            data: data,
+            data: 'sport=' + search_sport + data,
             dataType: "json",
             timeout: 40000,
             })
             .done(function(response) {
                 if (options.refreshSidebar) { refreshRacesOnSidebar(response.html, response.count); }
                 if (options.refreshMap && !map_hidden) { refreshRacesOnMap(response.races); }
-                last_query_options_loaded =  data + JSON.stringify( options );
+                last_query_options_loaded =  "&search_sport=" + search_sport + data + JSON.stringify( options );
 
                 if(typeof fallback === "function") {fallback();}
             })
@@ -741,10 +734,6 @@ function refreshRacesOnMap(races) {
         addListHoverMapResult(marker);
     });
 
-    // if (!(selected_event_id in markers)) {
-    //     selected_event_id = null;
-    // }
-
     selectEvent(selected_event_id, false);
 }
 
@@ -834,40 +823,55 @@ function getParameterByName(name) {
 }
 
 function pushState(param_query){
-    var stateObj = { param_query: param_query
+    var stateObj = { param_query: param_query,
+                     viewport: viewport,
+                     selected_event_id: selected_event_id,
+                     search_sport: search_sport,
+                     search_distances: search_distances,
+                     search_start_date: search_start_date,
+                     search_end_date: search_end_date,
+                     search_expr: search_expr,
                 };
     manualStateChange = false;
 
     if (last_query_pushed !== param_query) {
         // console.log("push:" + param_query);
-        History.pushState(stateObj, page_title + " - " + search_sport, "/races?" + param_query);        
-        last_query_pushed = param_query;
+        History.pushState(stateObj, page_title + " - " + search_sport, "/search/" + search_sport + "?" + param_query);        
+        last_query_pushed = param_query + "&search_sport=" + search_sport;
     }
 
-    // if (param_query !== last_query && typeof last_query !== "undefined"){
-    //     History.pushState(stateObj, "index", "/search?" + param_query);
-    //     last_query = param_query;
-    // } else if (location.search === ""){
-    //     History.replaceState(stateObj, "index", "/search?" + param_query);
-    //     last_query = param_query;
-    // }
 }
 
 // Bind to StateChange Event
 History.Adapter.bind(window, "statechange", function() {
     var state = History.getState();
     if(state !== null) {
-        if(manualStateChange === true && typeof(state.data.param_query) != "undefined") {
-            ajaxLoad(state.data.param_query);
-            // disable map move listener to avoid refresh upon initialization
-            google.maps.event.clearListeners(map, "idle");
-            // initialize document from URL parameters
-            initializeDOMComponents();
-            // enable map move listener
-            google.maps.event.addListenerOnce(map, "idle", function() {
-                addListMapMoves();
-            });
+        if(manualStateChange === true) {
+            if (typeof(state.data.param_query) != "undefined") {
+                // reinit variables from history
+                var param_query = state.data.param_query;
+                viewport = state.data.viewport;
+                selected_event_id = state.data.selected_event_id;
+                search_sport = state.data.search_sport;
+                search_distances = state.data.search_distances;
+                search_start_date = state.data.search_start_date;
+                search_end_date = state.data.search_end_date;
+                search_expr = state.data.search_exp;
 
+                ajaxLoad(param_query);
+                // disable map move listener to avoid refresh upon initialization
+                google.maps.event.clearListeners(map, "idle");
+                // initialize document from URL parameters
+
+                initializeDOMComponents();
+                // enable map move listener
+                google.maps.event.addListenerOnce(map, "idle", function() {
+                    addListMapMoves();
+                });
+            }
+            else {
+                window.location.replace(state.url)
+            }
         }
 
         manualStateChange = true;

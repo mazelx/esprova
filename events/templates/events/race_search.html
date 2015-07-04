@@ -21,6 +21,21 @@
 
 {% block head_extra %}
     <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+    {#  variables initialiazation #}
+    <script>    
+    var viewport = [{{ params.viewport }}]
+    viewport = viewport.length > 0 ? viewport : default_search_bounds ; // store the current map bounds
+    var selected_event_id= "{{ params.active }}";
+    var search_sport = "{{ sport }}";
+    var search_distances = "{% for d in params.distances %}{{ d }}{% endfor %}";
+    var search_start_date = "{{ params.start_date }}" || default_start_date;
+    var search_end_date = "{{ params.end_date }}" || default_end_date;
+    var search_expr = "{{ params.q }}";
+
+    var init_races = {{ json_races|safe }}
+    </script>
+
     <script src="{% static "js/main.js" %}"></script>
 {% endblock %}
 
@@ -66,7 +81,11 @@
                                 <select id="sport-selecter" class="form-control" name="sport">
                                 {% get_sports %}
                                 {% for sport in sports %}
-                                    <option>{{ sport.name }}</option>
+                                    {% if sport.name|lower = params.sport|lower %}
+                                        <option selected>{{ sport.name }}</option>
+                                    {% else %}
+                                        <option>{{ sport.name }}</option>
+                                    {% endif %}
                                 {% endfor %}
                                 </select>
                             </div>

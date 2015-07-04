@@ -68,9 +68,10 @@
         var default_search_bounds = [36.82205,-14.336914,54.581304,18.490234]; // for results fetching
         var default_cache_bounds = [-90, -90, 90, 90]; // for map marker intialization
         var default_search_expr = "";
-        var default_start_date = "{% now 'Y-m-d' %}";
+        year = parseInt(new Date().toJSON().slice(0,4));
+        var default_start_date = year + "{% now '-m-d' %}";  
         // var default_end_date = "{% nextyear 'Y-m-d' %}";
-        var default_end_date = "2016-03-01";
+        var default_end_date = year + 1 + "{% now '-m-d' %}";  
          {% get_sports %}
         var default_sport = "{{ request.session.selected_sport | default:sports.0 }}";
         var default_distances = "" ;

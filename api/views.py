@@ -18,7 +18,7 @@ from haystack.management.commands import update_index
 from core.models import Sport, DistanceCategory
 from events.models import Race, Location, Event, Contact
 
-import datetime
+from datetime import datetime 
 from json import dumps
 
 
@@ -181,6 +181,9 @@ def races_formatted_search(sport='',
     sqs = sqs.filter(validated="true")
     if sport:
         sqs = sqs.filter(sport=sport)
+
+    # dates required for facet generation
+    # TODO : fix 
     if start_date:
         sqs = sqs.filter(date__gte=start_date)
     else:
@@ -189,7 +192,8 @@ def races_formatted_search(sport='',
     if end_date:
         sqs = sqs.filter(date__lte=end_date)
     else:
-        end_date = '2030-01-01'
+        end_date = '2020-01-01'
+
     if distances:
         sqs = sqs.filter(distance_cat__in=distances)
     if search_expr:
@@ -213,8 +217,8 @@ def races_formatted_search(sport='',
 
     # facet for dates if defined
     sqs = sqs.date_facet(field='date',
-                         start_date=datetime.datetime.strptime(start_date, '%Y-%m-%d'),
-                         end_date=datetime.datetime.strptime(end_date, '%Y-%m-%d'),
+                         start_date=datetime.strptime(start_date, '%Y-%m-%d'),
+                         end_date=datetime.strptime(end_date, '%Y-%m-%d'),
                          gap_by='month')
 
     facet = sqs.facet_counts()

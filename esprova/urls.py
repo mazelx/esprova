@@ -1,9 +1,10 @@
 from django.conf.urls import patterns, include, url, handler404
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.contrib.sitemaps.views import sitemap
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
+
+from django.core.urlresolvers import reverse_lazy
 
 from core.views import *
 from events.views import *
@@ -37,7 +38,10 @@ urlpatterns = patterns('',
                        url(r'^$', IntroView.as_view(), name="intro"),
 
                        # Search
-                       url(r'^races\/?$', RaceList.as_view(), name='list_race'),
+                       url(r'^search/?$', RaceSearch.as_view(), name='list_race'),
+                       url(r'^races/$', RaceSearch.as_view()),
+
+                       url(r'^search/(?P<sport>[-\w\d]+)$', RaceSearch.as_view(), name='list_race_sport'),
 
                        # View
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),

@@ -311,6 +311,9 @@ EMAIL_HOST_PASSWORD = '.GNS25eiu.'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'contact@esprova.com'
 
+# Esprova data constant
+DEFAULT_SPORT = 'Triathlon'
+
 
 # Development settings :
 # local_settings.py only exists on dev hosts and contains dev specific settings
