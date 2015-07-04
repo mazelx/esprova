@@ -22,6 +22,32 @@
 {# share buttons 'shareaholic' #}
 {% include "shareaholic/shareaholic_header.html" %}
 
+{# rich snippet #}
+<script type="application/ld+json">
+{ "@context" : "http://schema.org",
+  "@type" : "Event",
+  "name" : "{{ race.event.name }} - {{ race.distance_cat.get_formatted_name }} ",
+  "startDate" : "{{race.date | date:'c'}}",
+  "organizer" : {
+   "@type" : "Organization",
+   "name" : "{{race.event.organizer.name}}",
+   "url" : "{{ request.META.HTTP_HOST }}{% url "view_race" race.slug race.pk %}"
+  },
+  "location" : {
+    "@type" : "Place",
+    "name" : "{{ race.location.getFormattedLocality }}",
+    "address" : {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ race.location.getFormattedStreet }}",
+      "addressLocality": "{{ race.location.getFormattedLocality }}",
+      "addressRegion": "{{ race.location.getFormattedRegion }}",
+      "addressCountry": "{{ race.location.getFormattedCountry }}"
+      }
+     }
+}
+</script>
+
+
 {% endblock %}
 
 
@@ -29,12 +55,12 @@
 
 <div class="content">
 
-    <div class="racepage container-fluid" itemscope itemtype="http://schema.org/SportsEvent">
+    <div class="racepage container-fluid">
         <div class="racebanner"></div>
         <header class="event-header">
             <div class="container">
                 <div class="race-event-info row">
-                        <h1 class="event-name" itemprop="name">{{ race.event.name }} {{ race.date | date:'Y' }}</h1>
+                        <h1 class="event-name">{{ race.event.name }} {{ race.date | date:'Y' }}</h1>
                         <h2 class="event-detail"> 
                             {{ race.event.edition | ordinal }} édition 
                             {% if race.event.get_start_date = race.event.get_end_date %} 
@@ -92,18 +118,18 @@
                         <dl class="dl-horizontal-perso">
                             <dt>Départ</dt>
                             <dd>
-                                <time itemprop="startDate" datetime="{{race.date| date:"c"}}T{{race.time| time:"H:i"}}"><span>{{race.date | date:"l d/m/Y" | capfirst }}</span> <span >{{race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}}</span></time>
+                                <time datetime="{{race.date| date:"c"}}T{{race.time| time:"H:i"}}"><span>{{race.date | date:"l d/m/Y" | capfirst }}</span> <span >{{race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}}</span></time>
                             </dd>
                             <dt>Adresse</dt>
                             <dd id="info-address">    
                                 {# <address id="race-location" data-lat="-0.63937" data-lng="-0.63937"> #}
-                                <address id="race-location" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress"
+                                <address id="race-location"
                                     data-lat="{{ race.location.lat | stringformat:'.5f' }}" 
                                     data-lng="{{ race.location.lng | stringformat:'.5f' }}">
-                                    <div itemprop="streetAddress">{{ race.location.getFormattedStreet }}</div>
-                                    <div itemprop="addressLocality">{{ race.location.getFormattedLocality }}</div>
-                                    <div itemprop="addressRegion">{{ race.location.getFormattedRegion }}</div>
-                                    <div itemprop="addressCountry">{{ race.location.getFormattedCountry }}</div>
+                                    <div>{{ race.location.getFormattedStreet }}</div>
+                                    <div>{{ race.location.getFormattedLocality }}</div>
+                                    <div>{{ race.location.getFormattedRegion }}</div>
+                                    <div>{{ race.location.getFormattedCountry }}</div>
                                 </address>
                                  <a id="link-display-map" href="#">afficher la carte</a>
 
@@ -144,7 +170,7 @@
                 <div class="race-infogroup-details">
                     <dl class="dl-horizontal-perso">
                         <dt>Web</dt>
-                        <dd id="info-website" itemprop="url">
+                        <dd id="info-website">
                         {% if race.event.website %}
                             <a href="{{race.event.website}}" target="_blank">{{race.event.website}}</a>
                         {% else %}
@@ -152,7 +178,7 @@
                         {% endif %}
                         </dd>
                         <dt>Organisateur</dt>
-                        <dd id="info-organizer" itemprop="organizer">
+                        <dd id="info-organizer">
                         {% if race.event.organizer.website %}
                             <a href="{{ race.event.organizer.website }}" target="_blank">
                                 {{ race.event.organizer.name }}
