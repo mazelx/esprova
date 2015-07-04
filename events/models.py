@@ -116,27 +116,44 @@ class Location(ComparableModelMixin, models.Model):
         result = []
         tmp_addr = ""
         # First line : [Street number,] Route
-        if self.street_number:
-            tmp_addr = self.street_number + ", "
-        if self.route:
-            tmp_addr += self.route
+        tmp_addr = self.getFormattedStreet()
+        if tmp_addr:
             result.append(tmp_addr)
 
         # Second line : Locality [(area2)]
-        tmp_addr = self.locality
-        if self.administrative_area_level_2_short_name:
-            tmp_addr += " ({0})".format(self.administrative_area_level_2_short_name)
-        result.append(tmp_addr)
+        result.append(self.getFormattedLocality)
 
         # Third line : [Area 1]
-        if self.administrative_area_level_1:
-            tmp_addr = self.administrative_area_level_1
-            result.append(tmp_addr)
+        result.append(self.getFormattedRegion)
 
         # Fourth line : Country
-        result.append(str(self.country.name))
+        result.append(self.getFormattedCountry)
 
         return result
+
+    def getFormattedStreet(self):
+        addr = ""
+        # First line : [Street number,] Route
+        if self.street_number:
+            addr = self.street_number + ", "
+        if self.route:
+            addr += self.route
+        return addr
+
+    def getFormattedLocality(self):
+        loc = self.locality
+        if self.administrative_area_level_2_short_name:
+            loc += " ({0})".format(self.administrative_area_level_2_short_name)
+        return loc
+
+    def getFormattedRegion(self):
+        if self.administrative_area_level_1:
+            return self.administrative_area_level_1
+
+    def getFormattedCountry(self):
+        return str(self.country.name)
+
+
 
 
 class Organizer(ComparableModelMixin, models.Model):
