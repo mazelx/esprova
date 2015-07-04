@@ -49,7 +49,10 @@ class RaceSearch(TemplateView):
 
     def dispatch(self, *args, **kwargs):
         if 'sport' not in self.kwargs:
-            default_sport_name = self.request.session['selected_sport'] or settings.DEFAULT_SPORT
+            default_sport_name = settings.DEFAULT_SPORT
+            if 'selected_sport' in self.request.session:
+                default_sport_name = self.request.session['selected_sport']
+
             return HttpResponseRedirect(reverse('list_race_sport', kwargs={'sport': default_sport_name}))
         return super(RaceSearch, self).dispatch(*args, **kwargs)
 
