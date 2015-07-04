@@ -154,8 +154,6 @@ class Location(ComparableModelMixin, models.Model):
         return str(self.country.name)
 
 
-
-
 class Organizer(ComparableModelMixin, models.Model):
     """
         Represent the event organizer
