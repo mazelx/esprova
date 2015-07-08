@@ -3,17 +3,17 @@
 {% load humanize %}
 
 {%block title%}
-<title>{{ race.event.name | capfirst  }} {{ race.date | date:'Y' }} - Distance {{ race.distance_cat.name }}</title>
+<title>{{ race.event.name | capfirst  }} {{ race.date | date:'Y' }} - Distance {{ race.distance_cat.race.distance_cat.get_formatted_name}}</title>
 {%endblock%}
 
 {% block meta %}
-<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.get_formatted_name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
 {% endblock %}
 
 {% block opengraph %}
-<meta property="og:title" content="{{ race.event.name | capfirst }}  - {{ race.distance_cat.name }}" />
+<meta property="og:title" content="{{ race.event.name | capfirst }} {{ race.date | date:'Y' }} - Distance {{ race.distance_cat.race.distance_cat.get_formatted_name }}" />
 <meta property="og:type" content="article" />
-<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
+<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.get_formatted_name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
 {% endblock %}
 
 {% block head_extra %}
@@ -98,9 +98,9 @@
                     <span class="race-menu-title">Course {{ race.distance_cat.name }}</span>
                     <ul class="race-menu-pills nav nav-pills nav-justified">
                             <li role="presentation" class="active"><a href="#">Résumé</a></li>
-                            <li role="presentation" class="disabled" ><a href="#">Parcours</a></li>
-                            <li role="presentation" class="disabled"><a href="#">Médias</a></li>
-                            <li role="presentation" class="disabled"><a href="#">Résultats</a></li>
+                            <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible" ><a href="#">Parcours</a></li>
+                            <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible"><a href="#">Médias</a></li>
+                            <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible"><a href="#">Résultats</a></li>
                     </ul>
                 </div>
             </div>
