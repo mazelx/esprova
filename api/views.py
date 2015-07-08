@@ -179,11 +179,13 @@ def races_formatted_search(sport='',
     sqs = SearchQuerySet()
 
     sqs = sqs.filter(validated="true")
+    print(sport)
     if sport:
-        sqs = sqs.filter(sport=sport)
+        sqs = sqs.filter(sport__exact=sport)
+        print("sport filtered")
 
     # dates required for facet generation
-    # TODO : fix 
+    # TODO : fix
     if start_date:
         sqs = sqs.filter(date__gte=start_date)
     else:
