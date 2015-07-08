@@ -11,7 +11,7 @@ class RaceIndex(indexes.SearchIndex, indexes.Indexable):
                                 search_analyzer="search_analyzer")
     event_id = indexes.CharField(indexed=False, model_attr='event__id')
     event_title = indexes.CharField(model_attr='event__name', boost=1.5)
-    sport = indexes.CharField(model_attr='sport__name')
+    sport = indexes.CharField(indexed=False, model_attr='sport__name')
     date = indexes.DateField(model_attr='date', faceted=True)
     administrative_area_level_1 = indexes.CharField(model_attr='location__administrative_area_level_1', faceted=True)
     administrative_area_level_2 = indexes.CharField(model_attr='location__administrative_area_level_2', faceted=True)
