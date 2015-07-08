@@ -41,7 +41,7 @@ urlpatterns = patterns('',
                        url(r'^search/?$', RaceSearch.as_view(), name='list_race'),
                        url(r'^races/$', RaceSearch.as_view()),
 
-                       url(r'^search/(?P<sport>[-\w\d]+)$', RaceSearch.as_view(), name='list_race_sport'),
+                       url(r'^search/(?P<sport>[-\w\d\s]+)$', RaceSearch.as_view(), name='list_race_sport'),
 
                        # View
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
