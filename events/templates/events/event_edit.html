@@ -6,6 +6,8 @@
 <script type="text/javascript" src="{% static "js/map_styles.js" %}"></script>
 {# <script type="text/javascript" src="{% static "js/race.js" %}"></script> #}
 
+{% include 'autocomplete_light/static.html' %}
+
 <script type="text/javascript">
     function cancelEdition() {
         if(confirm("Etes-vous sur de vouloir annuler cette modification ?")){

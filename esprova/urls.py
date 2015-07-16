@@ -2,13 +2,16 @@ from django.conf.urls import patterns, include, url, handler404
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import TemplateView, RedirectView, UpdateView
 
 from django.core.urlresolvers import reverse_lazy
 
+import autocomplete_light
+
 from core.views import *
 from events.views import *
-from events.forms import ContactForm, RaceForm, LocationForm
+from events.models import Organizer
+from events.forms import ContactForm, RaceForm, LocationForm, OrganizerForm
 
 
 from planning.views import *
@@ -32,7 +35,6 @@ urlpatterns = patterns('',
                        # 404 test
                        url(r'^404$', handler404),
                        url(r'^500$', handler500),
-
 
                        # Introduction
                        url(r'^$', IntroView.as_view(), name="intro"),
@@ -58,6 +60,8 @@ urlpatterns = patterns('',
                        url(r'^update/(?P<event>\d+)/delete_race/(?P<pk>\d+)$',
                            RaceDelete.as_view(),
                            name="delete_race"),
+
+                       url(r'^testorganizer/$', create_organizer, name='create_organizer'),
 
                        # Planning
                        url(r'^planning/$', redirect_to_planning, name='planning'),
@@ -86,6 +90,16 @@ urlpatterns = patterns('',
 
                        # API
                        url(r'^api/', include('api.urls')),
+
+                       url(r'^autocomplete/', include('autocomplete_light.urls')),
+
+                       url(r'^test/$', autocomplete_light.CreateView.as_view(
+                        model=Organizer, form_class=OrganizerForm),
+                        name='add_another_organizer_create'),
+
+                       url(r'^test/$', UpdateView.as_view(
+                        model=Organizer, form_class=OrganizerForm),
+                        name='add_another_organizer_update'),
 
                        )
 

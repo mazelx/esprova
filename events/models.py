@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Min, Max
@@ -167,6 +168,10 @@ class Organizer(ComparableModelMixin, models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('add_another_organizer_update', args=(self.pk,))
+
+
 
 class Event(ComparableModelMixin, models.Model):
     """
@@ -178,7 +183,7 @@ class Event(ComparableModelMixin, models.Model):
 
     name = models.CharField(max_length=150)
     website = models.URLField(blank=True, null=True, verbose_name='Site internet')
-    organizer = models.ForeignKey(Organizer, blank=True, null=True)
+    organizer = models.ForeignKey(Organizer, blank=True, null=True, verbose_name='Organisateur')
     # event_ref = models.ForeignKey(EventReference)
     edition = models.PositiveSmallIntegerField(verbose_name="Numéro d'édition")
     event_prev_edition = models.OneToOneField("Event", related_name='event_next_edition', blank=True, null=True)

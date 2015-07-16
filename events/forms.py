@@ -1,9 +1,12 @@
 from django import forms
-from events.models import Event, Race, Location, Contact
+from events.models import Event, Race, Location, Contact, Organizer
 import pycountry
+import autocomplete_light
+
+autocomplete_light.autodiscover()
 
 
-class EventForm(forms.ModelForm):
+class EventForm(autocomplete_light.ModelForm):
     class Meta:
         model = Event
         fields = [
@@ -12,6 +15,15 @@ class EventForm(forms.ModelForm):
             'edition',
             'organizer',
         ]
+        # organizer = autocomplete_light.GenericModelChoiceField('OrganizerAutocomplete')
+
+        # autocomplete_names = {'organizer': 'OrganizerAutocomplete'}
+        # autocomplete_fields = ('organizer')
+
+
+class OrganizerForm(forms.ModelForm):
+    class Meta:
+        model = Organizer
 
 
 class RaceForm(forms.ModelForm):

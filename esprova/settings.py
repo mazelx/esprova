@@ -62,6 +62,8 @@ INSTALLED_APPS = (
     'django_nose',
     'django_extensions',
     'storages',
+    'autocomplete_light',
+
     # 'passwords',
 
     'django.contrib.auth',

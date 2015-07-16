@@ -14,7 +14,7 @@ from json import dumps
 
 from core.views import LoginRequiredMixin
 
-from events.forms import EventForm
+from events.forms import EventForm, OrganizerForm
 from events.models import Race, Event, Sport
 
 from api.views import races_formatted_search
@@ -133,6 +133,19 @@ def create_event(request):
             return HttpResponseRedirect(reverse('update_event', kwargs={'pk': event.pk}))
 
     return render(request, 'events/event_edit.html', {'eventForm': eventForm,
+                                                      'pk': None,
+                                                      'race_list': None})
+
+@login_required
+def create_organizer(request):
+    organizerForm = OrganizerForm(request.POST or None)
+
+    if request.method == 'POST':
+        if organizerForm.is_valid():
+            event = organizerForm.save()
+            return HttpResponseRedirect(reverse('update_event', kwargs={'pk': event.pk}))
+
+    return render(request, 'events/event_edit.html', {'eventForm': organizerForm,
                                                       'pk': None,
                                                       'race_list': None})
 
