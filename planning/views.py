@@ -61,7 +61,7 @@ def add_race_to_planning(request):
                 planned.save()
             except race.DoesNotExist:
                 pass
-            messages.success(request, 'La course a bien été ajoutée du programme')
+            messages.success(request, 'La course a bien été ajoutée au programme')
             return HttpResponse('')
 
     messages.error(request, "Il y a eu un problème lors de l'ajout de la course au programme")
