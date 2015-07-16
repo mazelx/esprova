@@ -181,7 +181,7 @@ class Event(ComparableModelMixin, models.Model):
     # for _compare() method of ComparableModelMixin
     compare_excluded_keys = 'pk', 'id', '_state', 'event_mod_source', 'validated', 'event_mod_source'
 
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=150, verbose_name="Nom de l'événement")
     website = models.URLField(blank=True, null=True, verbose_name='Site internet')
     organizer = models.ForeignKey(Organizer, blank=True, null=True, verbose_name='Organisateur')
     # event_ref = models.ForeignKey(EventReference)
