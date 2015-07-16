@@ -10,6 +10,7 @@ class EventForm(forms.ModelForm):
             'name',
             'website',
             'edition',
+            'organizer',
         ]
 
 
