@@ -216,7 +216,6 @@ class StageDistanceDefault(StageDistance):
 
     def natural_key(self):
         return (self.order,) + self.race.natural_key()
-    natural_key.dependencies = ['core.Race']
 
     def __str__(self):
         return "{0}/{1} - {2} : {3}m".format(self.distance_cat, self.order, self.stage.name, self.distance)
