@@ -368,7 +368,8 @@ class Label(models.Model):
         Represent a race label
 
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Nom')
+    website = models.URLField(blank=True, null=True)
 
     def natural_key(self):
         return (self.name)

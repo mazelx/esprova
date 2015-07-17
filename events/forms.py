@@ -1,5 +1,5 @@
 from django import forms
-from events.models import Event, Race, Location, Contact, Organizer
+from events.models import Event, Race, Location, Contact, Organizer, Label
 import pycountry
 import autocomplete_light
 
@@ -15,28 +15,21 @@ class EventForm(autocomplete_light.ModelForm):
             'edition',
             'organizer',
         ]
-        # organizer = autocomplete_light.GenericModelChoiceField('OrganizerAutocomplete')
-
-        # autocomplete_names = {'organizer': 'OrganizerAutocomplete'}
-        # autocomplete_fields = ('organizer')
 
 
-class OrganizerForm(forms.ModelForm):
-    class Meta:
-        model = Organizer
-
-
-class RaceForm(forms.ModelForm):
+class RaceForm(autocomplete_light.ModelForm):
     class Meta:
         model = Race
         fields = [
             'sport',
             'distance_cat',
+            'label',
             'date',
             'time',
             'description',
             'relay',
-            'timetrial'
+            'timetrial',
+
         ]
         widgets = {
             'date': forms.DateInput(attrs={'class': 'input-group datepicker', 'placeholder': 'aaaa-mm-jj'},
@@ -44,6 +37,16 @@ class RaceForm(forms.ModelForm):
             'time': forms.TimeInput(format='%H:%M', attrs={'placeholder': 'hh:mm'}),
             'description': forms.Textarea(attrs={'placeholder': 'Décrivez la course en quelques mots'})
         }
+
+
+class OrganizerForm(forms.ModelForm):
+    class Meta:
+        model = Organizer
+
+
+class LabelForm(forms.ModelForm):
+    class Meta:
+        model = Label
 
 
 class LocationForm(forms.ModelForm):
