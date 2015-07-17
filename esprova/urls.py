@@ -50,7 +50,12 @@ urlpatterns = patterns('',
                        url(r'^events/(?P<pk>\d+)$', EventView.as_view(), name='view_event'),
 
                        # CRUD
+                       url(r'^create/intro$',
+                           TemplateView.as_view(template_name='events/event_create_intro.html'),
+                           name='create_event_intro'),
+
                        url(r'^create/$', create_event, name='create_event'),
+                       url(r'^create/$', create_event, name='create_event_from'),
                        url(r'^update/(?P<pk>\d+)$', update_event, name='update_event'),
                        url(r'^delete/(?P<pk>\d+)$', EventDelete.as_view(), name='delete_event'),
                        url(r'^soft_delete/(?P<pk>\d+)$', EventSoftDelete.as_view(), name='soft_delete_event'),
