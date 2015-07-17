@@ -109,8 +109,18 @@
 
         <div class="race-content container">
 
+            {% if race.description %}
+                {# description #}
+                <section class="race-infogroup row">
+                    <div class="race-description">
+                        <blockquote>{{ race.description }}</blockquote>
+                    </div>
+                </section>
+            {% endif %}
+
+
             {# general information #}
-             <section class="race-infogroup row">
+            <section class="race-infogroup row">
                 <div class="race-infogroup-icon">
                     <img class="icon-race-info" alt="informations générales" src="{% static "images/icon-race-info.svg" %}">
                 </div>

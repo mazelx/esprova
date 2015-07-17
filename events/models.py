@@ -412,7 +412,7 @@ class Race(ComparableModelMixin, models.Model):
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
     label = models.ForeignKey(Label, blank=True, null=True, related_name='races')
     contact = models.OneToOneField(Contact)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True, verbose_name='Description de la course')
     location = models.OneToOneField(Location)
     race_mod_source = models.ForeignKey("Race", related_name='race_modified_set', blank=True, null=True)
     to_be_deleted = models.BooleanField(default=False)

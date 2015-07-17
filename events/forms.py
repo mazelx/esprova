@@ -34,11 +34,13 @@ class RaceForm(forms.ModelForm):
             'distance_cat',
             'date',
             'time',
+            'description',
         ]
         widgets = {
             'date': forms.DateInput(attrs={'class': 'input-group datepicker'},
                                     format='%Y-%m-%d'),
-            'time': forms.TimeInput(format='%H:%M')
+            'time': forms.TimeInput(format='%H:%M'),
+            'description': forms.Textarea(attrs={'placeholder': 'Décrivez la course en quelques mots'})
         }
 
 

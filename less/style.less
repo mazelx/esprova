@@ -15,6 +15,30 @@ html, body{
 }
 
 
+blockquote {
+    border:none;
+    padding-top: 100px;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+blockquote:before {
+    content: "\201C";
+    font-size: 70px;
+    display: block;
+    float: left;
+    margin-top: -70px;
+    color: @esprova-red;
+}
+blockquote:after {
+    content: "\201D";
+    font-size: 70px;
+    display: block;
+    float: right;
+    color: @esprova-red;
+
+}
+
 @media print {
   * { 
     text-shadow: none !important;
@@ -669,6 +693,11 @@ html, body{
                 padding-bottom: 50px;
                 border-bottom: solid 1px @esprova-lightergray;
 
+                .race-description {
+                    text-align: center;
+                    font-style: italic;
+                    color: @esprova-gray;
+                }
 
                 .race-infogroup-icon {
                     .make-sm-column-offset(2);
@@ -876,6 +905,7 @@ footer {
         input,
         textarea {
             width: 100%;
+            border: 1px solid @esprova-lightgray;
         }
 
         .list-group {
