@@ -23,13 +23,13 @@ class RaceForm(autocomplete_light.ModelForm):
         fields = [
             'sport',
             'distance_cat',
-            'label',
-            'challenge',
             'date',
             'time',
             'description',
             'relay',
             'timetrial',
+            'label',
+            'challenge',
 
         ]
         widgets = {
