@@ -14,9 +14,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DistanceCategory',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=2)),
-                ('long_name', models.CharField(max_length=20, blank=True, null=True)),
+                ('long_name', models.CharField(null=True, max_length=20, blank=True)),
                 ('order', models.PositiveSmallIntegerField()),
             ],
             options={
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Federation',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=150)),
             ],
             options={
@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Season',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=100)),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sport',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=100)),
                 ('combinedSport', models.BooleanField(default=False)),
                 ('hidden', models.BooleanField(default=True)),
@@ -62,22 +62,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SportStage',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=20)),
                 ('default_order', models.PositiveSmallIntegerField()),
                 ('sport', models.ForeignKey(to='core.Sport')),
             ],
             options={
                 'verbose_name_plural': 'Sport Stages',
-                'ordering': ['sport', 'default_order'],
                 'verbose_name': 'Sport Stage',
+                'ordering': ['sport', 'default_order'],
             },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='StageDistanceDefault',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('order', models.PositiveSmallIntegerField()),
                 ('distance', models.PositiveIntegerField()),
                 ('distance_cat', models.ForeignKey(to='core.DistanceCategory')),
@@ -85,8 +85,8 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name_plural': 'Stages distance (default)',
-                'ordering': ['pk'],
                 'verbose_name': 'Stage distance (default)',
+                'ordering': ['pk'],
             },
             bases=(models.Model,),
         ),

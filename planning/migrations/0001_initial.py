@@ -8,25 +8,37 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        # migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        # ('events', '0001_initial'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('events', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='ShortlistedRace',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('registered', models.BooleanField(default=False)),
                 ('race', models.ForeignKey(to='events.Race')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
             bases=(models.Model,),
         ),
-        migrations.AlterUniqueTogether(
-            name='shortlistedrace',
-            unique_together=set([('user', 'race')]),
+        migrations.CreateModel(
+            name='UserPlanning',
+            fields=[
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('secret_key', models.CharField(max_length=10)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, unique=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='shortlistedrace',
+            name='user_planning',
+            field=models.ForeignKey(to='planning.UserPlanning', related_name='races'),
+            preserve_default=True,
         ),
     ]

@@ -414,6 +414,8 @@ class Race(ComparableModelMixin, models.Model):
     contact = models.OneToOneField(Contact)
     description = models.TextField(blank=True, null=True, verbose_name='Description de la course')
     location = models.OneToOneField(Location)
+    relay = models.BooleanField(default=False, verbose_name='Relais')
+    timetrial = models.BooleanField(default=False, verbose_name='Contre-la-montre')
     race_mod_source = models.ForeignKey("Race", related_name='race_modified_set', blank=True, null=True)
     to_be_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
