@@ -3,17 +3,17 @@
 {% load humanize %}
 
 {%block title%}
-<title>{{ race.event.name | capfirst  }} {{ race.date | date:'Y' }} - Distance {{ race.distance_cat.race.distance_cat.get_formatted_name}}</title>
+<title>{{ race.event.name | capfirst  }} {{ race.date | date:'Y' }} - Distance {{ race.get_distance_cat_str }}</title>
 {%endblock%}
 
 {% block meta %}
-<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.get_formatted_name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
 {% endblock %}
 
 {% block opengraph %}
-<meta property="og:title" content="{{ race.event.name | capfirst }} {{ race.date | date:'Y' }} - Distance {{ race.distance_cat.race.distance_cat.get_formatted_name }}" />
+<meta property="og:title" content="{{ race.event.name | capfirst }} {{ race.date | date:'Y' }} - Distance {{ race.get_distance_cat_str }}" />
 <meta property="og:type" content="article" />
-<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.distance_cat.get_formatted_name }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
+<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
 {% endblock %}
 
 {% block head_extra %}
@@ -26,7 +26,7 @@
 <script type="application/ld+json">
 { "@context" : "http://schema.org",
   "@type" : "Event",
-  "name" : "{{ race.event.name }} - {{ race.distance_cat.get_formatted_name }} ",
+  "name" : "{{ race.event.name }} - {{ race.get_distance_cat_str }} ",
   "startDate" : "{{race.date | date:'c'}}",
   "organizer" : {
    "@type" : "Organization",
@@ -80,9 +80,9 @@
                             <span class="race-sport">{{ sport }}</span>  
                             {% for r in races %}
                                 {% if r == race %}
-                                    <a class="btn btn-default btn-sm distance-icon active">{{ r.distance_cat.name }}</a>
+                                    <a class="btn btn-default btn-sm distance-icon active">{{ r.get_distance_cat_str }}</a>
                                 {% else %}
-                                    <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.distance_cat.name }}</a>
+                                    <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.get_distance_cat_str }}</a>
                                 {% endif %}
                             {% endfor %}
                         </h3>
@@ -95,7 +95,7 @@
         <div class="race-menu">
             <div class="container">
                 <div class="row">
-                    <span class="race-menu-title">{{race.sport.name}} {{ race.distance_cat.name }}</span>
+                    <span class="race-menu-title">{{race.sport.name}} {{ race.get_distance_cat_str }} </span>
                     <ul class="race-menu-pills nav nav-pills nav-justified">
                             <li role="presentation" class="active"><a href="#">Résumé</a></li>
                             <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible" ><a href="#">Parcours</a></li>
@@ -161,7 +161,7 @@
                 <div class="race-infogroup-details">
                     <dl class="dl-horizontal-perso">
                         <dt>Distance</dt>
-                        <dd id="info-distance">{{ race.distance_cat.get_formatted_name }}</dd>
+                        <dd id="info-distance">{{race.sport.name}} {{ race.get_distance_cat_str }}</dd>
                         <br>
                         {% for distance in race.distances.all %}
                             <dt>{{ distance.stage.name }}</dt>

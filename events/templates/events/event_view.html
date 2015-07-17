@@ -50,7 +50,7 @@
                     {% for race in event.get_races %}
                          <li class="col-xs-9 col-xs-offset-3 list-group-item">
                              <span class="{{race.to_be_deleted|yesno:"deleted,"}}">
-                                <a href="{% url "view_race" race.slug race.pk %}" >{{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} </a>
+                                <a href="{% url "view_race" race.slug race.pk %}" >{{ race }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} </a>
                              </span>
                          </li>
                     {% endfor %}

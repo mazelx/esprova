@@ -69,7 +69,7 @@
                     {% for race in race_list %}
                          <li class="col-xs-9 col-xs-offset-3 list-group-item">
                          <span class="col-xs-10 {{race.to_be_deleted|yesno:"deleted,"}}">
-                            {{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} 
+                            {{ race }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} 
                          </span>
                          <span class="col-xs-2">
                             {% if not race.to_be_deleted %}

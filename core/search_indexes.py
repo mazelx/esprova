@@ -16,7 +16,7 @@ class RaceIndex(indexes.SearchIndex, indexes.Indexable):
     administrative_area_level_1 = indexes.CharField(model_attr='location__administrative_area_level_1', faceted=True)
     administrative_area_level_2 = indexes.CharField(model_attr='location__administrative_area_level_2', faceted=True)
     location = indexes.LocationField(model_attr='location__get_point')
-    distance_cat = indexes.CharField(model_attr='distance_cat__name', faceted=True)
+    distance_cat = indexes.CharField(model_attr='get_distance_cat_str', faceted=True)
     rendered = indexes.CharField(use_template=True, indexed=False)
     slug = indexes.CharField(indexed=False, model_attr='slug')
     validated = indexes.BooleanField(model_attr='event__validated')

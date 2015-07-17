@@ -34,7 +34,7 @@
                     {% for race in race_list %}
                          <li class="col-xs-9 col-xs-offset-3 list-group-item">
                          <span class="col-xs-10">
-                            {{ race.sport }} {{ race.distance_cat.name }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} 
+                            {{ race.sport }} {{ race.distance_cat.get_distance_cat_str }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} 
                          </span>
                          <span class="col-xs-2">
                              <a class="glyphicon glyphicon-edit text-info" aria-hidden="true" href="{% url "update_race" race.slug race.pk %}" title="Modifier la course"></a>

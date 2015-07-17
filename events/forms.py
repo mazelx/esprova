@@ -35,11 +35,13 @@ class RaceForm(forms.ModelForm):
             'date',
             'time',
             'description',
+            'relay',
+            'timetrial'
         ]
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'input-group datepicker'},
+            'date': forms.DateInput(attrs={'class': 'input-group datepicker', 'placeholder': 'aaaa-mm-jj'},
                                     format='%Y-%m-%d'),
-            'time': forms.TimeInput(format='%H:%M'),
+            'time': forms.TimeInput(format='%H:%M', attrs={'placeholder': 'hh:mm'}),
             'description': forms.Textarea(attrs={'placeholder': 'Décrivez la course en quelques mots'})
         }
 

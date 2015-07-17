@@ -404,8 +404,8 @@ class Race(ComparableModelMixin, models.Model):
     sport = models.ForeignKey(Sport, limit_choices_to={'hidden': False})
     event = models.ForeignKey(Event, related_name='races')
     title = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateField(verbose_name='Date (ex. 2015-06-25)')
-    time = models.TimeField(blank=True, null=True, verbose_name='Heure (ex. 23:10)')
+    date = models.DateField(verbose_name='Date')
+    time = models.TimeField(blank=True, null=True, verbose_name='Heure')
     distance_cat = models.ForeignKey(DistanceCategory,
                                      verbose_name="Distance")
     price = models.PositiveIntegerField(blank=True, null=True)
@@ -426,7 +426,11 @@ class Race(ComparableModelMixin, models.Model):
     import_source_id = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return "{0} - {1}".format(self.event.name, self.distance_cat.name)
+        return "{0} - {1} {2} {3} {4}".format(self.event.name,
+                                              self.sport.name,
+                                              self.distance_cat.name,
+                                              (self.relay and 'Relais') or '',
+                                              (self.timetrial and 'CLM') or '')
 
     def natural_key(self):
         return (self.date, self.time, self.distance_cat) + self.event
@@ -521,6 +525,10 @@ class Race(ComparableModelMixin, models.Model):
                     if self.race_mod_source:
                         self.race_mod_source.delete()
                     self.delete()
+
+    def get_distance_cat_str(self):
+        return "{0} {1}".format(self.distance_cat.name,
+                                'Relais' if self.relay else '' + 'CLM' if self.timetrial else '')
 
 
 # @receiver(post_delete, sender=Race)
