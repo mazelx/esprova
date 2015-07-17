@@ -1,5 +1,5 @@
 from django import forms
-from events.models import Event, Race, Location, Contact, Organizer, Label
+from events.models import Event, Race, Location, Contact, Organizer, Label, Challenge
 import pycountry
 import autocomplete_light
 
@@ -24,6 +24,7 @@ class RaceForm(autocomplete_light.ModelForm):
             'sport',
             'distance_cat',
             'label',
+            'challenge',
             'date',
             'time',
             'description',
@@ -47,6 +48,10 @@ class OrganizerForm(forms.ModelForm):
 class LabelForm(forms.ModelForm):
     class Meta:
         model = Label
+
+class ChallengeForm(forms.ModelForm):
+    class Meta:
+        model = Challenge
 
 
 class LocationForm(forms.ModelForm):

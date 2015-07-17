@@ -1,0 +1,64 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+
+{%block navbar %}
+{% endblock %}
+
+{% block content %}
+
+<div class="content ">
+    <div class="container simple-page">
+    <header>
+        {% if pk %}
+        <h1>Modification d'un challenge</h1>
+        {% else %}
+        <h1>Création d'un challenge</h1>
+        {% endif %}
+    </header>
+
+        <form action="" method="post" class="simple-form">
+            {% csrf_token %}
+
+            <div class="row">
+                {% for field in form %}
+                    <div class="fieldWrapper row">
+                        {% if field.errors %}
+                            <span class="col-xs-10 col-xs-offset-3">{{ field.errors.as_text }}</span>
+                        {% endif %}
+
+                        {% if field.field.required %}
+                            <span class="col-xs-3 label required">{{ field.label_tag }}</span>
+                        {% else %}
+                            <span class="col-xs-3 label">{{ field.label_tag }}</span>
+                        {% endif %}
+
+                        <span class="col-xs-9">{{ field }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="form-submit">
+                    {% if cloned %}
+                        <a href="{% url "delete_event" pk %}" class="btn btn-default" role="button">Annuler</a>
+                    {% else %}
+                        <a href="#" onclick="window.close();" class="btn btn-default" role="button">Annuler</a>
+                    {% endif %}
+
+                    {% if pk %}
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}
+

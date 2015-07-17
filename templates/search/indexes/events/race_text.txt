@@ -8,6 +8,7 @@
 {{ object.location.postal_code }}
 {{ object.federation.name }}
 {{ object.label.name }}
+{{ object.challenge.name }}
 {{ object.location.country.name }}
 {{ object.get_distance_cat_str }}
 {% endautoescape %}

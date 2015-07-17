@@ -10,8 +10,8 @@ import autocomplete_light
 
 from core.views import *
 from events.views import *
-from events.models import Organizer, Label
-from events.forms import ContactForm, RaceForm, LocationForm, OrganizerForm, LabelForm
+from events.models import Organizer, Label, Challenge
+from events.forms import ContactForm, RaceForm, LocationForm, OrganizerForm, LabelForm, ChallengeForm
 
 
 from planning.views import *
@@ -105,9 +105,9 @@ urlpatterns = patterns('',
                         model=Label, form_class=LabelForm),
                         name='add_another_label_create'),
 
-                       # url(r'^label/$', UpdateView.as_view(
-                       #  model=Organizer, form_class=OrganizerForm),
-                       #  name='add_another_organizer_update'),
+                       url(r'^challenge/$', autocomplete_light.CreateView.as_view(
+                        model=Challenge, form_class=ChallengeForm),
+                        name='add_another_challenge_create'),
 
                        )
 

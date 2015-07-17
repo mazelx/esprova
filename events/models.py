@@ -378,6 +378,21 @@ class Label(models.Model):
         return self.name
 
 
+class Challenge(models.Model):
+    """
+        Represent a race challenge
+
+    """
+    name = models.CharField(max_length=100, verbose_name='Nom')
+    website = models.URLField(blank=True, null=True)
+
+    def natural_key(self):
+        return (self.name)
+
+    def __str__(self):
+        return self.name
+
+
 class RaceManager(models.Manager):
     def random(self):
         sqs = SearchQuerySet()
@@ -412,6 +427,7 @@ class Race(ComparableModelMixin, models.Model):
     price = models.PositiveIntegerField(blank=True, null=True)
     federation = models.ForeignKey(Federation, blank=True, null=True, related_name='races')
     label = models.ForeignKey(Label, blank=True, null=True, related_name='races')
+    challenge = models.ForeignKey(Challenge, blank=True, null=True, related_name='races')
     contact = models.OneToOneField(Contact)
     description = models.TextField(blank=True, null=True, verbose_name='Description de la course')
     location = models.OneToOneField(Location)
