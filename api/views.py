@@ -244,6 +244,7 @@ def races_formatted_search(sport='',
     for sr in sqs:
         cur_month = sr.date.strftime('%m%Y')
         event_id = sr.get_stored_fields()['event_id']
+        event_title = sr.get_stored_fields()['event_title']
         location = sr.get_stored_fields()['location']
         rendered = sr.get_stored_fields()['rendered']
 
@@ -252,6 +253,7 @@ def races_formatted_search(sport='',
 
         seen[event_id] = 1
         race_data = {'id': int(event_id),
+                     'name': event_title,
                      'score': str(sr.score),
                      # 'rankClass': "primary" if (rank <= 10) else "secondary",
                      'rankClass': "secondary",

@@ -124,10 +124,20 @@ class RaceView(DetailView):
 
 # CRUD
 @login_required
-def create_event(request):
-    eventForm = EventForm(request.POST or None)
+def create_event(request, pk=None):
+    if pk:
+        e = Event.objects.get(pk=pk)
+        eventSrc = e.clone()
+        eventSrc.edition += 1
+        eventSrc.save()
+        return HttpResponseRedirect(reverse('update_event', kwargs={'pk': eventSrc.pk}))
+
+    event_name = request.GET.get('name')
+
+    eventForm = EventForm(request.POST or None, initial={'name': event_name})
 
     if request.method == 'POST':
+        eventForm = EventForm(request.POST)
         if eventForm.is_valid():
             event = eventForm.save()
             return HttpResponseRedirect(reverse('update_event', kwargs={'pk': event.pk}))
@@ -135,6 +145,7 @@ def create_event(request):
     return render(request, 'events/event_edit.html', {'eventForm': eventForm,
                                                       'pk': None,
                                                       'race_list': None})
+
 
 @login_required
 def create_organizer(request):

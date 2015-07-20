@@ -16,7 +16,7 @@
                     </a> 
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href=" {% url "create_event" %}">Ajouter une course</a></li>
+                    <li><a href=" {% url "create_event_intro" %}">Ajouter une course</a></li>
                     <li><a href=" {% url "list_race" %}">Recherche</a></li>
                     <li><a href=" {% url "planning" %}">Programme</a></li>
                     {% if user.is_authenticated %}

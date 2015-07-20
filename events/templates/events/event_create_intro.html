@@ -1,6 +1,78 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %} 
 
+
+{% block head_extra %}
+{% include 'autocomplete_light/static.html' %}
+
+<script type="text/javascript">
+$( document ).ready( function () {
+
+    // prevent form submit by pressing enter key
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+    });
+
+    // init list (for back navigation if supported)
+    init_search_expr = $( "#id_name" ).val()
+    if(init_search_expr !== '') {
+        getEventList(init_search_expr)
+    }
+    // bind event on input change
+    $( "#id_name" ).on('change keyup', function(e) {
+        delay(function () {
+            getEventList(e.target.value)
+        }, 1000)
+    });
+});
+
+function getEventList(search_expr){
+    $.ajax({
+        url: "{% url 'ajx_search_race' %}",
+        type: "GET", 
+        data: 'sport=Triathlon&q=' +  search_expr,
+        dataType: "json",
+        timeout: 1000,
+        })
+        .success(function(response) {
+            if(response.count > 0) {
+                html = '<span>Evénements suggérés : </span>'
+                $.each( response.races, function() {
+                    html += '<li class="list-group-item"> \
+                                        <div class="row"> \
+                                            <span class="col-sm-7"><a href="/events/'+ this.id + '">' + this.name + '</a></span> \
+                                                <span class="col-sm-5"> \
+                                                    <a class="col-sm-6 text-danger" href="/update/'+ this.id +'"><span class="glyphicon glyphicon-edit"></span> Modifier</a> \
+                                                    <a  class="col-sm-6 text-info" href="/create/from/'+ this.id +'"><span class="glyphicon glyphicon-plus"> </span> Nouvelle édition</a> \
+                                            </span> \
+                                        </div> \
+                                    </li>'
+                });
+            }
+            else {
+                html = ''
+            }
+            
+            $(".event-list-results").html(html)
+        })
+}
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+
+</script>
+
+{% endblock %}
+
 {% block content %}
 
 <div class="content ">
@@ -8,17 +80,25 @@
         <header>
             <h1>Création d'événement</h1>
         </header>
-        <div>
-            <a class="col-xs-offset-1 col-xs-2 create_choice_box" href="{% url "create_event" %}">
-                Créer un nouvel événement de A à Z
-            </a>
-            <a class="col-xs-offset-1 col-xs-2 create_choice_box" href="{% url "create_event_from" %}">
-                Créer une nouvelle édition d'un événement (nouvelle saison)
-            </a>
-            <a class="col-xs-offset-1 col-xs-2 create_choice_box" href="{% url "update_event" %}">
-               Ajouter une course à un évenement existant
-            </a>
-        </div>
+        <form action="{%url 'create_event' %}" method="get" class="simple-form">
+            <div class="row event-name">
+                <span class="col-sm-3 label">
+                    <label for="id_name">Evénement</label>
+                </span>
+                <span class="col-sm-9">
+                    <input id="id_name" maxlength="150" name="name" type="text">
+                </span>
+            </div>
+            <ul class="list-group row event-list-results">
+                {# similar events go here #}
+            </ul>
+
+            <div class="row new-event">
+                <div>L'évenement n'est pas présent sur Espròva,</div>
+                <input class="btn btn-danger" type="submit" value="ajouter un nouvel événement">
+
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

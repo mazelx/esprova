@@ -55,7 +55,7 @@ urlpatterns = patterns('',
                            name='create_event_intro'),
 
                        url(r'^create/$', create_event, name='create_event'),
-                       url(r'^create/$', create_event, name='create_event_from'),
+                       url(r'^create/from/(?P<pk>\d+)$', create_event, name='create_event_from'),
                        url(r'^update/(?P<pk>\d+)$', update_event, name='update_event'),
                        url(r'^delete/(?P<pk>\d+)$', EventDelete.as_view(), name='delete_event'),
                        url(r'^soft_delete/(?P<pk>\d+)$', EventSoftDelete.as_view(), name='soft_delete_event'),
