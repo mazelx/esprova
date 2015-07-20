@@ -36,16 +36,28 @@
             <div class="row">
 
                 <div class="row">
-                    <span class="col-xs-3"><label>Site internet : </label></span>
+                    <span class="col-xs-3 label"><label>Site internet : </label></span>
                     <span class="col-xs-9">{{ event.website }}</span>
                 </div>
                 <div class="row">
-                    <span class="col-xs-3"><label>Editon : </label></span>
+                    <span class="col-xs-3 label"><label>Edition : </label></span>
                     <span class="col-xs-9">{{ event.edition }}</span>
+                </div>
+                <div class="row">
+                    <span class="col-xs-3 label"><label>Organisateur : </label></span>
+                    <span class="col-xs-9">
+                      {% if race.event.organizer.website %}
+                            <a href="{{ race.event.organizer.website }}" target="_blank">
+                                {{ event.organizer.name }}
+                            </a>
+                        {% else %}
+                            {{ event.organizer.name | default:"<br>"}}
+                        {%endif%}
+                    </span>
                 </div>
 
                 <br class="row">
-                <div class="row"> <span class="col-xs-3"><label>Races : </label> </span></div>
+                <div class="row"> <span class="col-xs-3 label"><label>Courses : </label> </span></div>
                 <ul class="list-group row">
                     {% for race in event.get_races %}
                          <li class="col-xs-9 col-xs-offset-3 list-group-item">
