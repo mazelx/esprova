@@ -102,17 +102,34 @@ urlpatterns = patterns('',
                         model=Organizer, form_class=OrganizerForm),
                         name='add_another_organizer_create'),
 
-                       # url(r'^organizer/$', UpdateView.as_view(
-                       #  model=Organizer, form_class=OrganizerForm),
-                       #  name='add_another_organizer_update'),
+                       url(r'^organizer/(?P<pk>\d+)/update$', UpdateView.as_view(
+                        model=Organizer, form_class=OrganizerForm),
+                        name='add_another_organizer_update'),
+
+                       url(r'^organizer/(?P<pk>\d+)$', DetailView.as_view(
+                        model=Organizer,
+                        template_name='events/organizer_view.html'),
+                        name='view_organizer_popup'),
+
 
                        url(r'^label/$', autocomplete_light.CreateView.as_view(
                         model=Label, form_class=LabelForm),
                         name='add_another_label_create'),
 
+                       url(r'^label/(?P<pk>\d+)$', DetailView.as_view(
+                        model=Label,
+                        template_name='events/label_view.html'),
+                        name='view_label_popup'),
+
                        url(r'^challenge/$', autocomplete_light.CreateView.as_view(
                         model=Challenge, form_class=ChallengeForm),
                         name='add_another_challenge_create'),
+
+                       url(r'^challenge/(?P<pk>\d+)$', DetailView.as_view(
+                        model=Challenge,
+                        template_name='events/challenge_view.html'),
+                        name='view_challenge_popup'),
+
 
                        )
 

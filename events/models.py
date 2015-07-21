@@ -169,7 +169,12 @@ class Organizer(ComparableModelMixin, models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('add_another_organizer_update', args=(self.pk,))
+        return reverse('view_organizer_popup', args=(self.pk,))
+
+    def get_absolute_update_url(self):
+        url = reverse('add_another_organizer_update', args=(self.pk,))
+        url = '%s?_popup=1" target="_blank" onclick="return showAddAnotherPopup(this);' % url
+        return url
 
 
 
@@ -377,6 +382,9 @@ class Label(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('view_label_popup', args=(self.pk,))
+
 
 class Challenge(models.Model):
     """
@@ -391,6 +399,9 @@ class Challenge(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('view_challenge_popup', args=(self.pk,))
 
 
 class RaceManager(models.Manager):
