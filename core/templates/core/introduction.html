@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load templatetags %}
 
+
 {%block navbar %}
     <nav class="intro-navbar">
         <div class="container-fluid">
@@ -65,6 +66,7 @@
                 <div class="col-sm-5">
                     <select class="form-control" name="sport" id="sport">
                     {% get_sports %}
+
                     {% for sport in sports %}
                         {% if sport.name = request.session.selected_sport %}
                             <option selected>{{ sport.name }}</option>
@@ -177,6 +179,8 @@
     var input;
     var searchBox;
     var submit = false;
+    var list_race_uri_base =  "{% url "list_race" %}";
+
     $( document ).ready(function() {
         var options = {
             types: ['(regions)'],
@@ -190,7 +194,7 @@
     });
 
     function submitForm(evt) {
-        
+        evt.target.action = list_race_uri_base + '/' + $('#sport').val()
 
         var places = searchBox.getPlaces();
 
