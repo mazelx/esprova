@@ -50,6 +50,8 @@ var native_datepicker = Modernizr.touch;
 
 var manualStateChange = false;
 
+var sidebarLoadingLock = false;
+
 var page_title;
 
 
@@ -274,9 +276,6 @@ function initializeDOMComponents(){
     getDistanceInfo(search_sport);
 
     // set map to provided bounds
-    // var str_viewport = getParameterByName("viewport");
-    // viewport = (str_viewport === "") ? default_search_bounds : str_viewport.split(","); 
-
     var lat_lo = viewport[0];
     var lng_lo = viewport[1];
     var lat_hi = viewport[2];
@@ -292,7 +291,15 @@ function initializeDOMComponents(){
             map.setCenter(bounds.getCenter());
             map.setZoom(parseInt(getParameterByName("z")));
         }
-        // viewport = map.getBounds().toUrlValue().split(",");
+        // wait for the map to be ready to get bounds
+        displayLoadingSpinner();
+        sidebarLoadingLock = true;
+        google.maps.event.addListenerOnce(map, 'tilesloaded', function(){ 
+            viewport = map.getBounds().toUrlValue().split(",");
+            sidebarLoadingLock = false;
+            getRaces(new RefreshOptions({"refreshMap": false}))
+        });
+
     }
 
 
@@ -559,9 +566,8 @@ function ajaxLoad(data, options, fallback) {
 
 
     if (options.refreshSidebar) {
-        $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+        displayLoadingSpinner();
     }
-    $("#filter-cde-results").html("<i class='fa fa-spinner fa-pulse'></i>");
 
     if (options.fullRefresh) {
         var tmp_viewport = viewport;
@@ -608,20 +614,28 @@ function ajaxLoad(data, options, fallback) {
 // ----------------------
 // Display results
 // ----------------------
+
+function displayLoadingSpinner(){
+    $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+    $("#filter-cde-results").html("<i class='fa fa-spinner fa-pulse'></i>");
+}
+
+
 function refreshRacesOnSidebar(raceshtml, count) {
-    // replace HTML by ajax provided code
-    $("#racelist").html(raceshtml);
-    $("#filter-cde-results").html(count + (count>1 ? " courses" : " course"));
+    if (sidebarLoadingLock === false) {
+        // replace HTML by ajax provided code
+        $("#racelist").html(raceshtml);
+        $("#filter-cde-results").html(count + (count>1 ? " courses" : " course"));
 
-    addListResultClick();
-    addListHoverSideboxResult();
-    selectEvent(selected_event_id, false);
+        addListResultClick();
+        addListHoverSideboxResult();
+        selectEvent(selected_event_id, false);
 
-    // if no result, try to find if the search expression is a location, and propose a link to search
-    if (count === 0) {
-        handleNoResult();
-    }   
-
+        // if no result, try to find if the search expression is a location, and propose a link to search
+        if (count === 0) {
+            handleNoResult();
+        }   
+    }
 }
        
 function handleNoResult(){
