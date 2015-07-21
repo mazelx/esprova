@@ -1,6 +1,5 @@
 import autocomplete_light
 from events.models import Organizer, Label, Challenge
-from django.conf import settings
 
 
 class AutocompleteCustom(autocomplete_light.AutocompleteModelBase):
@@ -8,6 +7,12 @@ class AutocompleteCustom(autocomplete_light.AutocompleteModelBase):
                                 <a href="%s" target="_blank">%s</a>
                             </span>
                              '''
+
+    widget_attrs = {
+        'data-widget-maximum-values': 4,
+        # Enable modern-style widget !
+        'class': 'modern-style',
+    }
 
     def choice_html(self, choice):
         """
@@ -33,12 +38,6 @@ class OrganizerAutocomplete(AutocompleteCustom):
         # options, the naming conversion is handled by jQuery
         'data-autocomplete-minimum-characters': 1,
     }
-    widget_attrs = {
-        'data-widget-maximum-values': 4,
-        # Enable modern-style widget !
-        'class': 'modern-style',
-    }
-
 autocomplete_light.register(OrganizerAutocomplete, add_another_url_name='add_another_organizer_create')
 
 
@@ -52,11 +51,6 @@ class LabelAutocomplete(AutocompleteCustom):
         # options, the naming conversion is handled by jQuery
         'data-autocomplete-minimum-characters': 1,
     }
-    widget_attrs = {
-        'data-widget-maximum-values': 4,
-        # Enable modern-style widget !
-        'class': 'modern-style',
-    }
 autocomplete_light.register(LabelAutocomplete, add_another_url_name='add_another_label_create')
 
 
@@ -69,10 +63,5 @@ class ChallengeAutocomplete(AutocompleteCustom):
         # This will set the yourlabs.Autocomplete.minimumCharacters
         # options, the naming conversion is handled by jQuery
         'data-autocomplete-minimum-characters': 1,
-    }
-    widget_attrs = {
-        'data-widget-maximum-values': 4,
-        # Enable modern-style widget !
-        'class': 'modern-style',
     }
 autocomplete_light.register(ChallengeAutocomplete, add_another_url_name='add_another_challenge_create')
