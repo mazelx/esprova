@@ -202,7 +202,7 @@ def races_formatted_search(sport='',
         sqs = sqs.filter(content=search_expr)
 
     # search from map bounds
-    if viewport:
+    if len(viewport) == 4:
         lat_lo = viewport[0]
         lng_lo = viewport[1]
         lat_hi = viewport[2]
