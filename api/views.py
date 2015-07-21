@@ -16,7 +16,7 @@ from haystack.utils.geo import Point
 from haystack.management.commands import update_index
 
 from core.models import Sport, DistanceCategory
-from events.models import Race, Location, Event, Contact
+from events.models import Race, Location, Event, Contact, Sport
 
 from datetime import datetime 
 from json import dumps
@@ -82,7 +82,9 @@ def ajx_sport_session(request):
                 return HttpResponse('')
         elif request.method == 'GET':
             sport = request.session['selected_sport']
-            return HttpResponse(dumps(sport), content_type="application/json")
+            if Sport.objects.get(name__iexact='triathlon'):
+                return HttpResponse(dumps(sport), content_type="application/json")
+            return settings.DEFAULT_SPORT
 
     return HttpResponseBadRequest
 
