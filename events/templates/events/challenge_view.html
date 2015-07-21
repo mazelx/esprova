@@ -1,0 +1,32 @@
+{% extends "base.html" %} 
+{% load static from staticfiles %} 
+
+{% block content %}
+
+<div class="content ">
+    <div class="container simple-page">
+    <header>
+        {% if object %}
+            <h1>Détail d'un challenge</h1>
+        {% endif %}
+    </header>
+
+    <div class="simple-form">
+
+        <div class="row">
+
+            <div class="row">
+                <span class="col-xs-3 label"><label>Nom : </label></span>
+                <span class="col-xs-9">{{ object.name }}</span>
+            </div>
+            <div class="row">
+                <span class="col-xs-3 label"><label>Site internet : </label></span>
+                <span class="col-xs-9">{{ object.website |default:'<em class="text-muted">site internet non communiqué</em>' }}</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
