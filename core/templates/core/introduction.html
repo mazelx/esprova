@@ -66,7 +66,6 @@
                 <div class="col-sm-5">
                     <select class="form-control" name="sport" id="sport">
                     {% get_sports %}
-
                     {% for sport in sports %}
                         {% if sport.name = request.session.selected_sport %}
                             <option selected>{{ sport.name }}</option>
@@ -191,6 +190,12 @@
         input = $('#search_expr');
         searchBox = new google.maps.places.SearchBox(input[0]);
 
+
+        $("#sport").on("change", function (event) { 
+            search_sport = event.currentTarget.value
+            saveSportSession(search_sport);
+       });
+
     });
 
     function submitForm(evt) {
@@ -214,6 +219,21 @@
             }
             evt.preventDefault();
     }
+
+    function saveSportSession(sport){
+    // setter
+    if (sport) {
+         $.ajax({
+        url: "/api/sport-session/",
+        data: {sport: sport},
+        type: "POST",
+        }).done(function() { 
+            search_sport = sport;
+        });
+    } 
+
+      
+}
 
 </script>
 
