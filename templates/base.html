@@ -164,7 +164,7 @@
                                 </li>
                                 {% if user.is_authenticated %}
                                     <li class="divider"></li>
-                                    <li><a href="{% url "auth_logout" %}?next={% url "list_race"%}">Se deconnecter</a></li>
+                                    <li><a href="{% url "auth_logout" %}?next={% url "list_race"%}">Se déconnecter</a></li>
                                 {% endif %}
                             </ul>
                         </li>
@@ -215,7 +215,7 @@
                 <li><a href="{% url "auth_login" %}">connexion</a> | </li>
             {% endif %}
             <li><a href="{% url "legal" %}">mentions légales</a> | </li>
-            <li>contact :
+            <li>contact
                 <span class="contact-icons">
                     <a href="mailto:contact@esprova.com">
                         <img alt="mail" src="{% static "images/icon-email.svg" %}">

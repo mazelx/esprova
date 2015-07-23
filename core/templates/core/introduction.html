@@ -62,7 +62,7 @@
         <!-- row -->
         <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" onsubmit="return submitForm(event)" method="GET">
             <div class="form-group form-group-lg">
-                <label for="sport" class=" col-sm-offset-1 col-sm-3 control-label">Sélectionnez un sport :</label>
+                <label for="sport" class=" col-sm-offset-1 col-sm-3 control-label">Sélectionnez un sport</label>
                 <div class="col-sm-5">
                     <select class="form-control" name="sport" id="sport">
                     {% get_sports %}
@@ -78,7 +78,7 @@
             </div>
 
             <div class="form-group form-group-lg">
-                <label for="search_expr" class="col-sm-offset-1 col-sm-3 control-label">Recherchez à proximité de :</label>
+                <label for="search_expr" class="col-sm-offset-1 col-sm-3 control-label">Recherchez à proximité de</label>
                 <div class="col-sm-5">
                     <div class="input-group">
                         <input type="search" id="search_expr" class="form-control" placeholder="Région, Département, Ville ..." name="search_expr"/>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="about-text alt_font">
                        <p>Grâce à notre <strong>moteur de recherche d'épreuves sportives</strong> simple et flexible, vous allez pouvoir facilement parcourir le calendrier de courses de <a href="{% url "list_race_sport" "triathlon" %}">triathlon</a>, <a href="{% url "list_race_sport" "aquathlon" %}">aquathlon</a>, <a href="{% url "list_race_sport" "duathlon" %}">duathlon</a>, ...</p>
-                       <p>Recherchez par <strong>disciplines</strong>, par <strong>périodes</strong>, par <strong>distances</strong> ou par <strong>mots-clés</strong> : Nom de l'événement, département, région, organisateur, etc...</p>
+                       <p>Recherchez par <strong>disciplines</strong>, par <strong>périodes</strong>, par <strong>distances</strong> ou par <strong>mots-clés</strong> : nom de l'événement, département, région, organisateur, etc...</p>
                        <p>En quelques clics, trouvez la course qui vous fera briller !</p>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="about-text">
                         <p>La performance, ça se prépare ! Sélectionnez les courses auxquelles vous souhaitez participer cette saison et sauvegardez-les dans votre <a href="{% url "planning" %}">programme d'épreuves</a>.</p>
-                        <p>Avec cet <strong>agenda</strong> vous ne raterez plus aucune course !</p>
+                        <p>Avec cet <strong>agenda</strong>, vous ne raterez plus aucune course !</p>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -142,7 +142,7 @@
                         Vous êtes organisateur d'épreuves ?
                     </div>
                     <div class="text">
-                        <p>L'organisation d'événements sportifs requièrent un investissement important de la part de tous les acteurs impliqués, bénévoles ou professionnels. Nous savons à quel point il est laborieux d'effectuer une promotion efficace de vos événements sur internet et de les faire vivre sur les réseaux sociaux.</p>
+                        <p>L'organisation d'événements sportifs requièrt un investissement important de la part de tous les acteurs impliqués, bénévoles ou professionnels. Nous savons à quel point il est laborieux d'effectuer une promotion efficace de vos événements sur internet et de les faire vivre sur les réseaux sociaux.</p>
                         <p>Il est temps que cela change : <span class="text-primary">Espròva</span> pense à vous et vous proposera bientôt des offres spécialement conçues pour améliorer la visibilité de vos événements afin de toucher un nombre encore plus important de sportifs amateurs et professionnels. </p>
                         <p>En attendant, n’hésitez pas à nous faire part de votre intérêt par <a href="mailto:contact@esprova.com">email</a> en laissant vos coordonnées.</p>
                         <p>Nous ne manquerons pas de vous contacter lorsque ces fonctionnalités seront misent à disposition.</p>

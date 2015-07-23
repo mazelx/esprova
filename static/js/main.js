@@ -836,6 +836,13 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+
+function eraseMap(){
+    map = null
+    map_hidden = true
+}
+
+
 function pushState(param_query){
     var stateObj = { param_query: param_query,
                      viewport: viewport,

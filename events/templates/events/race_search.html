@@ -75,7 +75,7 @@
                     <form id="race_search_form" class="form-horizontal" role="form" action="{% url "ajx_search_race" %}">
 
                         <div class="row form-group">
-                            <label for="sport-selecter" class="col-sm-3 control-label">Sport :</label>
+                            <label for="sport-selecter" class="col-sm-3 control-label">Sport</label>
                             <div class="col-sm-8">
                                 <select id="sport-selecter" class="form-control" name="sport">
                                 {% get_sports %}
@@ -93,7 +93,7 @@
 
                         {# expression search #}
                         <div class="row form-group" id="race_quicksearch_form">
-                            <label for="search_expr" class="col-sm-3 control-label">Mots-clés :</label>
+                            <label for="search_expr" class="col-sm-3 control-label">Mots-clés</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input type="search" id="search_expr" name="q" class="form-control" placeholder="Nom, Région, Département, ..." value="{{ params.search_expr }}"/>
@@ -109,7 +109,7 @@
 
                         {# date search #}
                         <div class="row form-group">
-                            <label for="start_date" class="col-sm-3 control-label">Période :</label>
+                            <label for="start_date" class="col-sm-3 control-label">Période</label>
                             <div class= "col-sm-8">
                                 <div class="input-daterange datepicker input-group" id="datepicker">
                                   <input type="date" class="input-sm form-control" name="start_date" id="start_date" value="{% now 'Y-m-d' %}"/>
@@ -142,7 +142,7 @@
                                             <input type="checkbox" autocomplete="off" value="XL" name="distances" id="distance_input_XL" class="distance_input" {{ params.distances.XL |yesno:"checked," }}>
                                         </label>
                                     </div>
-                                    <span data-toggle="modal" data-target="#myModal" class="help-search col-xs-2"> <i class="fa fa-info-circle"></i></span>
+                                    <span data-toggle="modal" data-target="#myModal" class="help-search col-xs-2"> <i class="fa fa-question-circle" title="A quoi correspondent ces distances ?"></i></span>
                                 </div>
                             </div>
                         </div>
