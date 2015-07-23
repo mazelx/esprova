@@ -7,13 +7,13 @@
 {%endblock%}
 
 {% block meta %}
-<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ...">
+<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Aquathlon ...">
 {% endblock %}
 
 {% block opengraph %}
 <meta property="og:title" content="{{ race.event.name | capfirst }} {{ race.date | date:'Y' }} - Distance {{ race.get_distance_cat_str }}" />
 <meta property="og:type" content="article" />
-<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Bike and Run ..."/>
+<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Aquathlon ..."/>
 {% endblock %}
 
 {% block head_extra %}
