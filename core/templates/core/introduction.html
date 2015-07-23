@@ -6,8 +6,15 @@
 {%block navbar %}
     <nav class="intro-navbar">
         <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <nav class="navbar-default navbar-static-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
+             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Afficher navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <div class="nav navbar-nav">
                     <a href="http://www.facebook.com/esprova" target="_blank">
                         <img alt="facebook" src="{% static "images/icon-facebook.svg" %}">
@@ -16,29 +23,34 @@
                         <img alt="twitter" src="{% static "images/icon-twitter.svg" %}">
                     </a> 
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href=" {% url "create_event_intro" %}">Ajouter une course</a></li>
-                    <li><a href=" {% url "list_race" %}">Recherche</a></li>
-                    <li><a href=" {% url "planning" %}">Programme</a></li>
-                    {% if user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ request.user.username | capfirst }} <span class="caret"></span></a>
-                   
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{% url "user_settings" %}">Paramètres</a>
-                                </li>
-                                {% if user.is_authenticated %}
-                                    <li class="divider"></li>
-                                    <li><a href="{% url "auth_logout" %}?next={% url "list_race"%}">Se déconnecter</a></li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                    {% else %}
-                       <li><a href="{% url "auth_login" %}">Connexion</a></li>
-                    {% endif %}
-                       <li><a href="https://esprova.zendesk.com/hc/fr" target="_blank">Aide</a></li>
-                </ul>        
             </div>
+
+               
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href=" {% url "create_event_intro" %}">Ajouter une course</a></li>
+                        <li><a href=" {% url "list_race" %}">Recherche</a></li>
+                        <li><a href=" {% url "planning" %}">Programme</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ request.user.username | capfirst }} <span class="caret"></span></a>
+                       
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{% url "user_settings" %}">Paramètres</a>
+                                    </li>
+                                    {% if user.is_authenticated %}
+                                        <li class="divider"></li>
+                                        <li><a href="{% url "auth_logout" %}?next={% url "list_race"%}">Se déconnecter</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% else %}
+                           <li><a href="{% url "auth_login" %}">Connexion</a></li>
+                        {% endif %}
+                           <li><a href="https://esprova.zendesk.com/hc/fr" target="_blank">Aide</a></li>
+                    </ul> 
+                </div>       
+            </nav>
         <!-- /.container-fluid -->
         </div>
     </nav>
