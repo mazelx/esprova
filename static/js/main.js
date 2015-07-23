@@ -294,7 +294,7 @@ function initializeDOMComponents(){
         // wait for the map to be ready to get bounds
         displayLoadingSpinner();
         sidebarLoadingLock = true;
-        google.maps.event.addListenerOnce(map, 'tilesloaded', function(){ 
+        google.maps.event.addListenerOnce(map, 'bounds_changed', function(){ 
             viewport = map.getBounds().toUrlValue().split(",");
             sidebarLoadingLock = false;
             getRaces(new RefreshOptions({"refreshMap": false}))
