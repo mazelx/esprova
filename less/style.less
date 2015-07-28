@@ -14,6 +14,9 @@ html, body{
     // font-weight: 400;
 }
 
+.light {
+    font-weight: 100;
+}
 
 blockquote {
     border:none;
@@ -99,15 +102,30 @@ blockquote:after {
 
 .intro-navbar {
     background-color: @esprova-red;
-    color:white !important;
     line-height: 51px;
-    .nav {
+
+    .icon-bar {
+        background-color: white !important;
+    }
+
+    .navbar-nav {
         // width: 100%;
         margin: 0;
     }
+
+    
+
+    nav {
+        background-color: inherit;
+
+        .navbar-collapse.collapse.in {
+            margin-bottom: 51px
+        }
+    }
+
     a {
-        color: white;
-         background-color: transparent!important;
+        color: white !important;
+        background-color: transparent!important;
     }
 
     // .nav .open>a:focus, .nav .open>a:hover {
