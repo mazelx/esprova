@@ -1,179 +1,45 @@
-# ./manage.py dumpdata --format yaml core.Sport core.DistanceCategory core.SportStage core.StageDistancedefault
-
-- fields: {combinedSport: true, name: Triathlon}
+- fields: {combinedSport: true, hidden: false, name: Triathlon}
   model: core.sport
   pk: 2
-- fields: {combinedSport: true, name: Duathlon}
+- fields: {combinedSport: true, hidden: false, name: Duathlon}
   model: core.sport
   pk: 3
-- fields: {combinedSport: true, name: Triathlon Jeunes}
+- fields: {combinedSport: true, hidden: true, name: Triathlon Jeunes}
   model: core.sport
   pk: 4
-- fields: {combinedSport: true, name: Aquathlon}
+- fields: {combinedSport: true, hidden: false, name: Aquathlon}
   model: core.sport
   pk: 5
-- fields: {combinedSport: true, name: Bike & Run}
+- fields: {combinedSport: true, hidden: true, name: Bike & Run}
   model: core.sport
   pk: 6
-- fields: {combinedSport: true, name: Cross Duathlon}
+- fields: {combinedSport: true, hidden: true, name: Cross Duathlon}
   model: core.sport
   pk: 7
-- fields: {combinedSport: true, name: Cross Triathlon}
+- fields: {combinedSport: true, hidden: true, name: Cross Triathlon}
   model: core.sport
   pk: 8
-- fields: {combinedSport: true, name: Duathlon des Neiges}
+- fields: {combinedSport: true, hidden: true, name: Duathlon des Neiges}
   model: core.sport
   pk: 9
-- fields: {combinedSport: true, name: Triathlon des Neiges}
+- fields: {combinedSport: true, hidden: true, name: Triathlon des Neiges}
   model: core.sport
   pk: 10
-- fields: {combinedSport: true, name: Aquathlon Jeunes}
+- fields: {combinedSport: true, hidden: true, name: Aquathlon Jeunes}
   model: core.sport
   pk: 11
-- fields: {combinedSport: true, name: Duathlon Jeunes}
+- fields: {combinedSport: true, hidden: true, name: Duathlon Jeunes}
   model: core.sport
   pk: 12
-- fields: {combinedSport: true, name: Cross Triathlon Jeunes}
+- fields: {combinedSport: true, hidden: true, name: Cross Triathlon Jeunes}
   model: core.sport
   pk: 13
-- fields: {combinedSport: true, name: Cross Duathlon Jeunes}
+- fields: {combinedSport: true, hidden: true, name: Cross Duathlon Jeunes}
   model: core.sport
   pk: 14
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 2}
-  model: core.distancecategory
-  pk: 4
-- fields: {long_name: Sprint, name: S, order: 2, sport: 2}
-  model: core.distancecategory
-  pk: 5
-- fields: {long_name: Courte Distance, name: M, order: 3, sport: 2}
-  model: core.distancecategory
-  pk: 6
-- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 2}
-  model: core.distancecategory
-  pk: 7
-- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 2}
-  model: core.distancecategory
-  pk: 8
-- fields: {long_name: Jeunes 6-9 ans, name: XS, order: 1, sport: 4}
-  model: core.distancecategory
-  pk: 9
-- fields: {long_name: Jeunes 8-11 ans, name: S, order: 2, sport: 4}
-  model: core.distancecategory
-  pk: 10
-- fields: {long_name: Jeunes 10-13 ans, name: M, order: 3, sport: 4}
-  model: core.distancecategory
-  pk: 11
-- fields: {long_name: Jeunes 12-19ans, name: L, order: 4, sport: 4}
-  model: core.distancecategory
-  pk: 12
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 3}
-  model: core.distancecategory
-  pk: 13
-- fields: {long_name: Sprint, name: S, order: 2, sport: 3}
-  model: core.distancecategory
-  pk: 14
-- fields: {long_name: Courte Distance, name: M, order: 3, sport: 3}
-  model: core.distancecategory
+- fields: {combinedSport: true, hidden: true, name: Aquathlon Jeunes}
+  model: core.sport
   pk: 15
-- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 3}
-  model: core.distancecategory
-  pk: 16
-- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 3}
-  model: core.distancecategory
-  pk: 17
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 5}
-  model: core.distancecategory
-  pk: 18
-- fields: {long_name: Sprint, name: S, order: 2, sport: 5}
-  model: core.distancecategory
-  pk: 19
-- fields: {long_name: Courte Distance, name: M, order: 3, sport: 5}
-  model: core.distancecategory
-  pk: 20
-- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 5}
-  model: core.distancecategory
-  pk: 21
-- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 5}
-  model: core.distancecategory
-  pk: 22
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 7}
-  model: core.distancecategory
-  pk: 23
-- fields: {long_name: Sprint, name: S, order: 2, sport: 7}
-  model: core.distancecategory
-  pk: 24
-- fields: {long_name: Courte Distance, name: M, order: 3, sport: 7}
-  model: core.distancecategory
-  pk: 25
-- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 7}
-  model: core.distancecategory
-  pk: 26
-- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 7}
-  model: core.distancecategory
-  pk: 27
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 8}
-  model: core.distancecategory
-  pk: 28
-- fields: {long_name: Sprint, name: S, order: 2, sport: 8}
-  model: core.distancecategory
-  pk: 29
-- fields: {long_name: Courte Distance, name: M, order: 3, sport: 8}
-  model: core.distancecategory
-  pk: 30
-- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 8}
-  model: core.distancecategory
-  pk: 31
-- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 8}
-  model: core.distancecategory
-  pk: 32
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 10}
-  model: core.distancecategory
-  pk: 33
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 9}
-  model: core.distancecategory
-  pk: 34
-- fields: {long_name: '', name: S, order: 2, sport: 10}
-  model: core.distancecategory
-  pk: 35
-- fields: {long_name: '', name: M, order: 3, sport: 10}
-  model: core.distancecategory
-  pk: 36
-- fields: {long_name: '', name: S, order: 2, sport: 9}
-  model: core.distancecategory
-  pk: 37
-- fields: {long_name: '', name: M, order: 3, sport: 9}
-  model: core.distancecategory
-  pk: 38
-- fields: {long_name: '', name: XS, order: 1, sport: 13}
-  model: core.distancecategory
-  pk: 39
-- fields: {long_name: '', name: S, order: 2, sport: 13}
-  model: core.distancecategory
-  pk: 40
-- fields: {long_name: Courte Distance, name: M, order: 3, sport: 13}
-  model: core.distancecategory
-  pk: 41
-- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 13}
-  model: core.distancecategory
-  pk: 42
-- fields: {long_name: Longue Distance, name: XL, order: 5, sport: 13}
-  model: core.distancecategory
-  pk: 43
-- fields: {long_name: "D\xE9couverte", name: XS, order: 1, sport: 14}
-  model: core.distancecategory
-  pk: 44
-- fields: {long_name: Sprint, name: S, order: 2, sport: 14}
-  model: core.distancecategory
-  pk: 45
-- fields: {long_name: Courte Distance, name: M, order: 3, sport: 14}
-  model: core.distancecategory
-  pk: 46
-- fields: {long_name: Moyenne Distance, name: L, order: 4, sport: 14}
-  model: core.distancecategory
-  pk: 47
-- fields: {long_name: '', name: XL, order: 5, sport: 14}
-  model: core.distancecategory
-  pk: 48
 - fields: {default_order: 1, name: Natation, sport: 2}
   model: core.sportstage
   pk: 4
@@ -186,6 +52,173 @@
 - fields: {default_order: 3, name: Ski de Fond, sport: 10}
   model: core.sportstage
   pk: 7
+- fields:
+    name: FFTri
+    sport: []
+  model: core.federation
+  pk: 1
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, source_name: XS, sport: 2}
+  model: core.distancecategory
+  pk: 4
+- fields: {long_name: Sprint, name: S, order: 2, source_name: S, sport: 2}
+  model: core.distancecategory
+  pk: 5
+- fields: {long_name: Courte Distance, name: M, order: 3, source_name: M, sport: 2}
+  model: core.distancecategory
+  pk: 6
+- fields: {long_name: Moyenne Distance, name: L, order: 4, source_name: L, sport: 2}
+  model: core.distancecategory
+  pk: 7
+- fields: {long_name: Longue Distance, name: XL, order: 5, source_name: XL, sport: 2}
+  model: core.distancecategory
+  pk: 8
+- fields: {long_name: 6 - 9 ans, name: 6-9, order: 1, source_name: Jeunes 6-9, sport: 4}
+  model: core.distancecategory
+  pk: 9
+- fields: {long_name: 8 - 11 ans, name: 8-11, order: 2, source_name: Jeunes 8-11,
+    sport: 4}
+  model: core.distancecategory
+  pk: 10
+- fields: {long_name: 10 - 13 ans, name: 10-13, order: 3, source_name: Jeunes 10-13,
+    sport: 4}
+  model: core.distancecategory
+  pk: 11
+- fields: {long_name: 12 - 19 ans, name: 12-19, order: 4, source_name: Jeunes 12-19,
+    sport: 4}
+  model: core.distancecategory
+  pk: 12
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, source_name: XS, sport: 3}
+  model: core.distancecategory
+  pk: 13
+- fields: {long_name: Sprint, name: S, order: 2, source_name: S, sport: 3}
+  model: core.distancecategory
+  pk: 14
+- fields: {long_name: Courte Distance, name: M, order: 3, source_name: M, sport: 3}
+  model: core.distancecategory
+  pk: 15
+- fields: {long_name: Moyenne Distance, name: L, order: 4, source_name: L, sport: 3}
+  model: core.distancecategory
+  pk: 16
+- fields: {long_name: Longue Distance, name: XL, order: 5, source_name: XL, sport: 3}
+  model: core.distancecategory
+  pk: 17
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, source_name: XS, sport: 5}
+  model: core.distancecategory
+  pk: 18
+- fields: {long_name: Sprint, name: S, order: 2, source_name: S, sport: 5}
+  model: core.distancecategory
+  pk: 19
+- fields: {long_name: Courte Distance, name: M, order: 3, source_name: M, sport: 5}
+  model: core.distancecategory
+  pk: 20
+- fields: {long_name: Moyenne Distance, name: L, order: 4, source_name: L, sport: 5}
+  model: core.distancecategory
+  pk: 21
+- fields: {long_name: Longue Distance, name: XL, order: 5, source_name: XL, sport: 5}
+  model: core.distancecategory
+  pk: 22
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, source_name: XS, sport: 7}
+  model: core.distancecategory
+  pk: 23
+- fields: {long_name: Sprint, name: S, order: 2, source_name: S, sport: 7}
+  model: core.distancecategory
+  pk: 24
+- fields: {long_name: Courte Distance, name: M, order: 3, source_name: M, sport: 7}
+  model: core.distancecategory
+  pk: 25
+- fields: {long_name: Moyenne Distance, name: L, order: 4, source_name: L, sport: 7}
+  model: core.distancecategory
+  pk: 26
+- fields: {long_name: Longue Distance, name: XL, order: 5, source_name: XL, sport: 7}
+  model: core.distancecategory
+  pk: 27
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, source_name: XS, sport: 8}
+  model: core.distancecategory
+  pk: 28
+- fields: {long_name: Sprint, name: S, order: 2, source_name: S, sport: 8}
+  model: core.distancecategory
+  pk: 29
+- fields: {long_name: Courte Distance, name: M, order: 3, source_name: M, sport: 8}
+  model: core.distancecategory
+  pk: 30
+- fields: {long_name: Moyenne Distance, name: L, order: 4, source_name: L, sport: 8}
+  model: core.distancecategory
+  pk: 31
+- fields: {long_name: Longue Distance, name: XL, order: 5, source_name: XL, sport: 8}
+  model: core.distancecategory
+  pk: 32
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, source_name: XS, sport: 10}
+  model: core.distancecategory
+  pk: 33
+- fields: {long_name: "D\xE9couverte", name: XS, order: 1, source_name: XS, sport: 9}
+  model: core.distancecategory
+  pk: 34
+- fields: {long_name: '', name: S, order: 2, source_name: S, sport: 10}
+  model: core.distancecategory
+  pk: 35
+- fields: {long_name: '', name: M, order: 3, source_name: M, sport: 10}
+  model: core.distancecategory
+  pk: 36
+- fields: {long_name: '', name: S, order: 2, source_name: S, sport: 9}
+  model: core.distancecategory
+  pk: 37
+- fields: {long_name: '', name: M, order: 3, source_name: M, sport: 9}
+  model: core.distancecategory
+  pk: 38
+- fields: {long_name: 6 - 9 ans, name: 6-9, order: 1, source_name: Jeunes 6-9, sport: 13}
+  model: core.distancecategory
+  pk: 39
+- fields: {long_name: 8 - 11 ans, name: 8-11, order: 2, source_name: Jeunes 8-11,
+    sport: 13}
+  model: core.distancecategory
+  pk: 40
+- fields: {long_name: 10 - 13 ans, name: 10-13, order: 3, source_name: Jeunes 10-13,
+    sport: 13}
+  model: core.distancecategory
+  pk: 41
+- fields: {long_name: 12 - 19 ans, name: 12-19, order: 4, source_name: Jeunes 12-19,
+    sport: 13}
+  model: core.distancecategory
+  pk: 42
+- fields: {long_name: 6 - 9 ans, name: 6-9, order: 1, source_name: Jeunes 6-9, sport: 14}
+  model: core.distancecategory
+  pk: 44
+- fields: {long_name: 8 - 11 ans, name: 8-11, order: 2, source_name: Jeunes 8-11,
+    sport: 14}
+  model: core.distancecategory
+  pk: 45
+- fields: {long_name: 10 - 13 ans, name: 10-13, order: 3, source_name: Jeunes 10-13,
+    sport: 14}
+  model: core.distancecategory
+  pk: 46
+- fields: {long_name: 12 - 19 ans, name: 12-19, order: 4, source_name: Jeunes 12-19,
+    sport: 14}
+  model: core.distancecategory
+  pk: 47
+- fields: {long_name: 6 - 9 ans, name: 6-9, order: 1, source_name: Jeunes 6-9, sport: 15}
+  model: core.distancecategory
+  pk: 49
+- fields: {long_name: 8 - 11 ans, name: 8-11, order: 2, source_name: Jeunes 8-11,
+    sport: 15}
+  model: core.distancecategory
+  pk: 50
+- fields: {long_name: 10 - 13 ans, name: 10-13, order: 3, source_name: Jeunes 10-13,
+    sport: 15}
+  model: core.distancecategory
+  pk: 51
+- fields: {long_name: 12 - 19 ans, name: 12-19, order: 4, source_name: Jeunes 12-19,
+    sport: 15}
+  model: core.distancecategory
+  pk: 52
+- fields: {long_name: S, name: S, order: 1, source_name: S, sport: 6}
+  model: core.distancecategory
+  pk: 53
+- fields: {long_name: M, name: M, order: 2, source_name: M, sport: 6}
+  model: core.distancecategory
+  pk: 54
+- fields: {long_name: L, name: L, order: 3, source_name: L, sport: 6}
+  model: core.distancecategory
+  pk: 55
 - fields: {distance: 400, distance_cat: 4, order: 1, stage: 4}
   model: core.stagedistancedefault
   pk: 7
@@ -522,15 +555,6 @@
 - fields: {distance: 0, distance_cat: 42, order: 3, stage: 6}
   model: core.stagedistancedefault
   pk: 118
-- fields: {distance: 0, distance_cat: 43, order: 1, stage: 4}
-  model: core.stagedistancedefault
-  pk: 119
-- fields: {distance: 0, distance_cat: 43, order: 2, stage: 5}
-  model: core.stagedistancedefault
-  pk: 120
-- fields: {distance: 0, distance_cat: 43, order: 3, stage: 6}
-  model: core.stagedistancedefault
-  pk: 121
 - fields: {distance: 0, distance_cat: 44, order: 1, stage: 6}
   model: core.stagedistancedefault
   pk: 122
@@ -567,12 +591,27 @@
 - fields: {distance: 0, distance_cat: 47, order: 3, stage: 6}
   model: core.stagedistancedefault
   pk: 133
-- fields: {distance: 0, distance_cat: 48, order: 1, stage: 6}
+- fields: {distance: 50, distance_cat: 49, order: 1, stage: 4}
   model: core.stagedistancedefault
-  pk: 134
-- fields: {distance: 0, distance_cat: 48, order: 2, stage: 5}
+  pk: 137
+- fields: {distance: 500, distance_cat: 49, order: 2, stage: 6}
   model: core.stagedistancedefault
-  pk: 135
-- fields: {distance: 0, distance_cat: 48, order: 3, stage: 6}
+  pk: 138
+- fields: {distance: 100, distance_cat: 50, order: 1, stage: 4}
   model: core.stagedistancedefault
-  pk: 136
+  pk: 139
+- fields: {distance: 1000, distance_cat: 50, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 140
+- fields: {distance: 200, distance_cat: 51, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 141
+- fields: {distance: 1500, distance_cat: 51, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 142
+- fields: {distance: 300, distance_cat: 52, order: 1, stage: 4}
+  model: core.stagedistancedefault
+  pk: 143
+- fields: {distance: 2000, distance_cat: 52, order: 2, stage: 6}
+  model: core.stagedistancedefault
+  pk: 144

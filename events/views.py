@@ -68,14 +68,8 @@ class RaceSearch(TemplateView):
         # if not self.request.GET.get('end_date'):
             # context['params']['end_date'] = "2016-12-31"
 
-        # # Loop through distances parameters as it is a list of values
-        # context['params']['distances'] = []
-        # for dist in self.request.GET.getlist('distances'):
-        #     # directly assign into params.distances.XS for examplew
-        #     context['params']['distances'][dist] = True
         if 'distances' in self.request.GET:
             context['params']['distances'] = self.request.GET.get('distances').split(',')
-
 
         # sport_name = self.request.session['selected_sport'] or Sport.objects.first().name
 
