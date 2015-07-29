@@ -1,0 +1,5 @@
+{% for distance in sport.distances %}
+     <label type="button" id="distance_selector_{{ forloop.counter }}" class="btn btn-default distance_selector">{{ distance.name }}
+        <input type="checkbox" autocomplete="off" value="{{ distance.name }}" name="distances" class="distance_input" {{ params.distances.XS |yesno:"checked," }}>
+    </label>
+{% endfor %}
