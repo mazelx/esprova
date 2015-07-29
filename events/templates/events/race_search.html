@@ -125,22 +125,12 @@
                             <label class="col-sm-3 control-label">Distances</label>
                             <div class="col-sm-8">
                                 <div class="row">
-                                    <div class="btn-group col-xs-10" data-toggle="buttons">
-                                        <label type="button" id="distance_selector_XS" class="btn btn-default distance_selector {{ params.distances.XS |yesno:"active," }}">XS
-                                            <input type="checkbox" autocomplete="off" value="XS" name="distances" id="distance_input_XS" class="distance_input" {{ params.distances.XS |yesno:"checked," }}>
-                                        </label>
-                                        <label type="button" id="distance_selector_S" class="btn btn-default distance_selector {{ params.distances.S |yesno:"active," }}">S
-                                            <input type="checkbox" autocomplete="off" value="S" name="distances" id="distance_input_S" class="distance_input" {{ params.distances.S |yesno:"checked," }}>
-                                        </label>
-                                        <label type="button" id="distance_selector_M" class="btn btn-default distance_selector {{ params.distances.M |yesno:"active," }}">M
-                                            <input type="checkbox" autocomplete="off" value="M" name="distances" id="distance_input_M" class="distance_input" {{ params.distances.M |yesno:"checked," }}>
-                                        </label>
-                                        <label type="button" id="distance_selector_L" class="btn btn-default distance_selector {{ params.distances.L |yesno:"active," }}">L
-                                            <input type="checkbox" autocomplete="off" value="L" name="distances" id="distance_input_L" class="distance_input" {{ params.distances.L |yesno:"checked," }}>
-                                        </label>
-                                        <label type="button" id="distance_selector_XL" class="btn btn-default distance_selector {{ params.distances.XL |yesno:"active," }}">XL
-                                            <input type="checkbox" autocomplete="off" value="XL" name="distances" id="distance_input_XL" class="distance_input" {{ params.distances.XL |yesno:"checked," }}>
-                                        </label>
+                                    <div class="btn-group col-xs-10" data-toggle="buttons" id="distance_selectors">
+                                        {% for distance in sport.distances %}
+                                             <label type="button" id="distance_selector_{{ forloop.counter }}" class="btn btn-default distance_selector {% if distance.name in params.distances %} active {% endif %}">{{ distance.name }}
+                                                <input type="checkbox" autocomplete="off" value="{{ distance.name }}" name="distances" class="distance_input" {{ params.distances.XS |yesno:"checked," }}>
+                                            </label>
+                                        {% endfor %}
                                     </div>
                                     <span data-toggle="modal" data-target="#myModal" class="help-search col-xs-2"> <i class="fa fa-question-circle" title="A quoi correspondent ces distances ?"></i></span>
                                 </div>

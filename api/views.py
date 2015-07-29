@@ -99,7 +99,9 @@ def ajx_get_distances(request, name):
             distances = [d.get('name') for d in sport.distances]
 
         helper_html = render_to_string('html_utils/distance_helper.html', {'sport': sport})
+        distance_selectors_html = render_to_string('html_utils/distance_selectors.html', {'sport': sport})
         response = {'helper_html': helper_html,
+                    'distance_selectors_html': distance_selectors_html,
                     'distances': distances,
                     }
 

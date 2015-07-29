@@ -231,7 +231,8 @@ function getDistanceInfo(sport) {
         })
         .done(function(response) {
             $("#sport-distances-helper").html(response.helper_html);
-            refreshDistances(response.distances);
+            $("#distance_selectors").html(response.distance_selectors_html);
+            // refreshDistancesButtons(response.distances);
         })
         .fail(function(){
             $("#sport-distances-helper").html("");
@@ -273,7 +274,7 @@ function initializeDOMComponents(){
     // $("#sport-selecter").val(search_sport.charAt(0).toUpperCase() + search_sport.slice(1));
 
     // should be done in django view
-    getDistanceInfo(search_sport);
+    // getDistanceInfo(search_sport);
 
     // set map to provided bounds
     var lat_lo = viewport[0];
@@ -437,9 +438,14 @@ function addListSportSelection(){
     // change sport
     $("#sport-selecter").on("change", function (event) { 
         event.preventDefault();
+        event.stopPropagation();
         search_sport = event.currentTarget.value
         saveSportSession(search_sport);
+        // as distance are not common between sports, clear the distance addListSportSelection 
+        search_distances = ''
+        getDistanceInfo(search_sport);
         getRaces();
+        pushState(getParamQuery());
    });
 }
 
@@ -751,13 +757,13 @@ function refreshRacesOnMap(races) {
     selectEvent(selected_event_id, false);
 }
 
-function refreshDistances(distances) {
+function refreshDistancesButtons(distances) {
     $(".distance_selector").removeClass("hidden");
-    if (distances.indexOf("XS") < 0 ) { $("#distance_selector_XS").addClass("hidden"); }
-    if (distances.indexOf("S") < 0 ) { $("#distance_selector_S").addClass("hidden"); }
-    if (distances.indexOf("M") < 0 ) { $("#distance_selector_M").addClass("hidden"); }
-    if (distances.indexOf("L") < 0 ) { $("#distance_selector_L").addClass("hidden"); }
-    if (distances.indexOf("XL") < 0 )  { $("#distance_selector_XL").addClass("hidden"); }
+    if (distances.indexOf("XS") < 0 ) { $("#distance_selector_1").addClass("hidden"); }
+    if (distances.indexOf("S") < 0 ) { $("#distance_selector_2").addClass("hidden"); }
+    if (distances.indexOf("M") < 0 ) { $("#distance_selector_3").addClass("hidden"); }
+    if (distances.indexOf("L") < 0 ) { $("#distance_selector_4").addClass("hidden"); }
+    if (distances.indexOf("XL") < 0 )  { $("#distance_selector_5").addClass("hidden"); }
 }
 
 // ----------------------
