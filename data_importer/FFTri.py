@@ -84,7 +84,7 @@ class FFTri:
             if('Jeunes' in x['format']):
                 x['discipline'] += ' Jeunes'
                 sport = Sport.objects.filter(name=x['discipline'])
-                dc = DistanceCategory.objects.filter(sport=sport, long_name__contains=x['format'])
+                dc = DistanceCategory.objects.filter(sport=sport, source_name=x['format'])
                 if dc.count():
                     x['format'] = dc[0].name
                 else:
