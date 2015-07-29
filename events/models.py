@@ -558,6 +558,9 @@ class Race(ComparableModelMixin, models.Model):
         return "{0} {1}".format(self.distance_cat.name,
                                 'Relais' if self.relay else '' + 'CLM' if self.timetrial else '')
 
+    def get_distance_cat_long_str(self):
+        return "{0} {1}".format(self.distance_cat.long_name,
+                                'Relais' if self.relay else '' + 'CLM' if self.timetrial else '')
 
 # @receiver(post_delete, sender=Race)
 # def post_delete_race(sender, instance, *args, **kwargs):

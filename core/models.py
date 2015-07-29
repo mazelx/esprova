@@ -147,7 +147,7 @@ class DistanceCategory(ComparableModelMixin, models.Model):
 
     """
     sport = models.ForeignKey(Sport)
-    name = models.CharField(max_length=2)
+    name = models.CharField(max_length=5)
     long_name = models.CharField(max_length=20, blank=True, null=True)
     order = models.PositiveSmallIntegerField()
 

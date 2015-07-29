@@ -53,12 +53,9 @@ class FFTri:
 
     def __init__(self, *args, **kwargs):
         self.race_list = self.__get_race_list_from_provider()
-        self.__clean_race_list()
-
+        self.__map_race_distance()
 
     def __get_race_list_from_provider(self):
-        
-
         response = requests.post(self.url, data=self.post_param)
         resp_formatted = response.text
 
@@ -75,7 +72,14 @@ class FFTri:
 
         return sorted_list
 
-    def __clean_race_list(self):
+    def __map_race_distance(self):
+        """
+            This function map provided distance to existing distance :
+            XXS -> XS
+            XXL -> XL
+            Specific distances are mapped according to their long name defined in espròva DB
+
+        """
         for x in self.race_list:
             if('Jeunes' in x['format']):
                 x['discipline'] += ' Jeunes'
@@ -89,7 +93,6 @@ class FFTri:
                 x['format'] = 'XL'
             if('XXS' in x['format']):
                 x['format'] = 'XS'
-
 
     def import_events_in_app(self, sport_restrict, geocode=True, limit=0):
         nb_created, nb_failed = 0, 0

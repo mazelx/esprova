@@ -161,7 +161,7 @@
                 <div class="race-infogroup-details">
                     <dl class="dl-horizontal-perso">
                         <dt>Distance</dt>
-                        <dd id="info-distance">{{race.sport.name}} {{ race.get_distance_cat_str }}</dd>
+                        <dd id="info-distance">{{race.sport.name}} {{ race.get_distance_cat_long_str }}</dd>
                         <br>
                         {% for distance in race.distances.all %}
                             <dt>{{ distance.stage.name }}</dt>
