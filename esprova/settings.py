@@ -317,9 +317,30 @@ DEFAULT_FROM_EMAIL = 'contact@esprova.com'
 DEFAULT_SPORT = 'Triathlon'
 
 
+# remove deprecation warnings
+import logging, copy
+from django.utils.log import DEFAULT_LOGGING
+
+LOGGING = copy.deepcopy(DEFAULT_LOGGING)
+LOGGING['filters']['suppress_deprecated'] = {
+    '()': 'esprova.settings.SuppressDeprecated'  
+}
+LOGGING['handlers']['console']['filters'].append('suppress_deprecated')
+
+class SuppressDeprecated(logging.Filter):
+    def filter(self, record):
+        WARNINGS_TO_SUPPRESS = [
+            'RemovedInDjango18Warning',
+            'RemovedInDjango19Warning'
+        ]
+        # Return false to suppress message.
+        return not any([warn in record.getMessage() for warn in WARNINGS_TO_SUPPRESS])
+
+
 # Development settings :
 # local_settings.py only exists on dev hosts and contains dev specific settings
 try:
     from esprova.local_settings import *
 except ImportError as e:
     pass
+
