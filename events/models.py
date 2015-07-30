@@ -519,7 +519,7 @@ class Race(ComparableModelMixin, models.Model):
         sqs = sqs.filter(date__gte=self.date + datetime.timedelta(days=-1),
                          date__lte=self.date + datetime.timedelta(days=1),
                          distance_cat=self.distance_cat.name,
-                         sport=self.sport.name,
+                         sport__exact=self.sport.name,
                          event_title=self.event.name
                          )
 
