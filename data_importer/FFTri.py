@@ -11,7 +11,7 @@ import traceback
 from core.models import DistanceCategory, Sport, Federation
 from events.models import Race, Event, Location, Contact, Organizer
 
-
+import warnings
 
 class RaceDoubleException(Exception):
     def __init__(self, msg):
@@ -94,7 +94,8 @@ class FFTri:
             if('XXS' in x['format']):
                 x['format'] = 'XS'
 
-    def import_events_in_app(self, sport_restrict, geocode=True, limit=0):
+    def import_events_in_app(self, sport_restrict, geocode=True, limit=0, interactive=False):
+        # ignore deprecation warning for better displaying
         nb_created, nb_failed = 0, 0
         event_re = re.compile('.+(?=\s-\s)')
         address_re = re.compile('(.+)(?=\s-\s\D)')
@@ -108,6 +109,7 @@ class FFTri:
                                     if x['discipline'].lower() == sport_restrict.lower()]
 
         for race_src in restricted_race_list:
+            if interactive: print("--------------------------------------------")
             e, s, c, l, dc, r, o, f = ({} for i in range(8))
             distance_cat, sport, event, contact, location, race, organizer, federation = (None for i in range(8))
 
@@ -153,18 +155,47 @@ class FFTri:
 
                 # check if the race is already in the db to avoid useless treatment
                 has_error = False
+
                 sport = Sport.objects.get(**s)
+                if interactive: print ("sport found : {0}".format(sport))
+
                 distance_cat = DistanceCategory.objects.get(sport=sport, **dc)
+                if interactive: print ("distance found : {0}".format(distance_cat))
+
                 organizer, organizer_created = Organizer.objects.get_or_create(**o)
+                if interactive and organizer_created: print("new organizer : {0}".format(organizer))
+                if interactive and not organizer_created: print("organizer found : {0}".format(organizer))
+
                 # event_ref, event_created = EventReference.objects.get_or_create(organizer=organizer, **eref)
                 event, event_created = Event.objects.get_or_create(organizer=organizer, **e)
+                if interactive and event_created: print("new event : {0}".format(event))
+                if interactive and not event_created: print("event found : {0}".format(event))
+
                 contact = Contact.objects.create(**c)
+                if interactive: print("contact created : {0}".format(contact))
+
                 federation, federation_created = Federation.objects.get_or_create(**f)
+                if interactive and federation_created: print("new federation : {0}".format(federation))
+                if interactive and not federation_created: print("federation found : {0}".format(federation))
 
                 location = Location()
 
                 geocoded = False
 
+                # provide initial data if geocode fails
+                location.lat = l['lat']
+                location.lng = l['lng']
+                location.postal_code = l['postal_code']
+                address = race_src.get('adresse', None)
+                if not address:
+                    raise Exception("no address provided")
+
+                if address_re.search(race_src.get('adresse', None)):
+                    location.route = address_re.search(address).group(0)
+                if locality_re.search(race_src.get('adresse', None)):
+                    location.locality = locality_re.search(address).group(0)
+
+                # try geocode
                 if geocode:
                     country = 'FR'
                     adm2_short = l['postal_code'][:2]
@@ -210,29 +241,50 @@ class FFTri:
                         country = 'NC'
                         adm2_short = l['postal_code'][:3]
 
-                    geocoded = location.geocode_raw_address(raw_address=l['raw'], postal_code=l['postal_code'], country=country)
+                    if interactive: print("geocoding: country: {0} - postal: {1} - address:{2}".format(country,
+                                                                                                       l['postal_code'],
+                                                                                                       l['raw']))
 
+                    geocoded = location.geocode_raw_address(raw_address=l['raw'], 
+                                                            postal_code=l['postal_code'], 
+                                                            country=country)
+
+                    if interactive and geocoded: print("geocoding succeed: lat:{0} - lng:{1}".format(location.lat,
+                                                                                                     location.lng))
+                    if interactive and not geocoded: print("geocoding failed...")
+                    
+
+
+                if geocoded:
                     # fix for google geocoder bug for some french departments
                     # replace postal code and departement with API value
                     location.postal_code = l['postal_code']
                     location.administrative_area_level_2_short_name = adm2_short
+                else:
+                    if interactive:
+                        recode = input('Geocoding failed, try another address (y/N) :  ')
+                    if recode == 'y':
+                        print('initial address = country: {0} - postal: {1} - address:{2}'.format(country,
+                                                                                                  l['postal_code'],
+                                                                                                  l['raw']))
 
-                    # in case the geocode did not find location, switch back to given infos
-                
-                if not geocoded:
-                    location.lat = l['lat']
-                    location.lng = l['lng']
-                    location.postal_code = l['postal_code']
-                    address = race_src.get('adresse', None)
-                    if not address:
-                        raise Exception("no address provided")
+                        country_retry = input('new country code : ')
+                        postal_retry = input('new postal code : ')
+                        address_retry = input('new address : ')
+                        geocoded_retry = location.geocode_raw_address(raw_address=address_retry,
+                                                                      postal_code=postal_retry,
+                                                                      country=country_retry)
+                        if geocoded_retry:
+                            print ("found, saving...")
+                        else:
+                            print ("not found, will use source address")
 
-                    if address_re.search(race_src.get('adresse', None)):
-                        location.route = address_re.search(address).group(0)
-                    if locality_re.search(race_src.get('adresse', None)):
-                        location.locality = locality_re.search(address).group(0)
+
                 # check that location is near lat/lng provided
                 location.save()
+
+                if interactive: print("location saved")
+
 
                 race = Race(**r)
                 race.event = event
@@ -242,12 +294,12 @@ class FFTri:
                 race.sport = sport
                 race.contact = contact
                 race.location = location
-
+                race.save()
 
                 if race.get_potential_doubles():
                     raise RaceDoubleException("Double detected")
 
-                race.save()
+                if interactive: print("race saved, pk:{0}".format(race.pk))
                 nb_created += 1
 
             except Sport.DoesNotExist:
@@ -269,30 +321,45 @@ class FFTri:
 
             finally:
                 if has_error:
+                    if interactive: input('due to errors, race will be deleted.... press any key: ')
                     nb_failed += 1
                     if event:
                         if event.pk:
-                            if len(event.get_races()) == 0:
+                            if len(event.get_races()) == 0:  
                                 event.delete()
+                                if interactive: print('event deleted')                              
                     if contact:
                         if contact.pk:
                             contact.delete()
+                            if interactive: print('contact deleted')                              
+
                     if location:
                         if location.pk:
                             location.delete()
+                            if interactive: print('location deleted')                              
                     if race:
                         if race.pk:
                             race.delete()
+                            if interactive: print('race deleted')                              
+
                 # else:
                     # print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
+                else:
+                    if interactive:
+                        input('race successfully created (total : {0}).... press any key: '.format(nb_created))
+
 
                 if limit == 1:
                     break
                 limit -= 1
 
 
-
+        print("--------------------------------------------")
+        print("--------------------------------------------")
         print ('finished !  created: {0}, failed: {1}'.format(nb_created, nb_failed))
+        print("--------------------------------------------")
+        print("--------------------------------------------")
+
 
 
 #
