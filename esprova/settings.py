@@ -313,7 +313,7 @@ EMAIL_HOST_PASSWORD = '.GNS25eiu.'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'contact@esprova.com'
 
-# Esprova data constant
+# Esprova data constants
 DEFAULT_SPORT = 'Triathlon'
 
 
