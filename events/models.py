@@ -520,7 +520,7 @@ class Race(ComparableModelMixin, models.Model):
                          date__lte=self.date + datetime.timedelta(days=1),
                          distance_cat=self.distance_cat.name,
                          sport__exact=self.sport.name,
-                         event_title=self.event.name
+                         # event_title=self.event.name
                          )
 
         # return race objects instead of haystack searchresul
