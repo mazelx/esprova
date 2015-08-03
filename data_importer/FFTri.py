@@ -6,6 +6,7 @@ from pytz import timezone
 from datetime import datetime
 import sys
 import traceback
+from django.core.exceptions import MultipleObjectsReturned
 
 
 from core.models import DistanceCategory, Sport, Federation
@@ -25,6 +26,7 @@ class FFTri:
     """
         Interface with the FFTri.com race data
         The data DOES NOT come from a public API, therefore the data structure will probably change over time
+        WARNING : be sure to launch this script only if no race is awaiting validation !
 
     """
     race_list = []
@@ -118,7 +120,8 @@ class FFTri:
             f['name'] = federation_name
 
             e['name'] = event_re.search(race_src.get('nom', None)).group(0)
-            e['website'] = race_src.get('site')
+            tmp_website = race_src.get('site')
+            e['website'] = tmp_website if tmp_website[:7] == 'http://' else 'http://' + tmp_website
             e['edition'] = edition_no
             # event = Event(**e)
 
@@ -167,9 +170,25 @@ class FFTri:
                 if interactive and not organizer_created: print("organizer found : {0}".format(organizer))
 
                 # event_ref, event_created = EventReference.objects.get_or_create(organizer=organizer, **eref)
-                event, event_created = Event.objects.get_or_create(organizer=organizer, **e)
+                try: 
+                    event, event_created = Event.objects.get_or_create(organizer=organizer, **e)
+                except MultipleObjectsReturned:
+                    # if multiple objects are returned, one is awaiting validation
+                    if interactive: print("event found not validated yet (existing): {0}".format(event))
+                    e['validated'] = False
+                    event = Event.objects.get(**e)
+                    event_created = False
+
+                # clon the event if the event found is validated
+                if not event_created:
+                    if event.validated:
+                        old_event_pk = event.pk
+                        event = event.clone()
+                        if interactive: print("event {0} cloned into {1}".format(old_event_pk, event.pk))
+                    else:
+                        if interactive: print("event found not validated yet (new) : {0}".format(event))
+
                 if interactive and event_created: print("new event : {0}".format(event))
-                if interactive and not event_created: print("event found : {0}".format(event))
 
                 contact = Contact.objects.create(**c)
                 if interactive: print("contact created : {0}".format(contact))
@@ -261,6 +280,7 @@ class FFTri:
                     location.postal_code = l['postal_code']
                     location.administrative_area_level_2_short_name = adm2_short
                 else:
+                    recode = ''
                     if interactive:
                         recode = input('Geocoding failed, try another address (y/N) :  ')
                     if recode == 'y':
@@ -296,8 +316,13 @@ class FFTri:
                 race.location = location
                 race.save()
 
-                if race.get_potential_doubles():
-                    raise RaceDoubleException("Double detected")
+                doubles = race.get_potential_doubles()
+                if doubles:
+                    print("{0} potential double(s) detected:".format(len(doubles)))
+                    for d in doubles:
+                        print("{0} VS {1}".format(race, d))
+                        if not input("is double (Y/n) ? : ") == 'n':
+                            raise RaceDoubleException("Double detected")
 
                 if interactive: print("race saved, pk:{0}".format(race.pk))
                 nb_created += 1
@@ -345,8 +370,9 @@ class FFTri:
                 # else:
                     # print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
                 else:
+                    print('race {0} successfully created (total : {1})'.format(race.pk, nb_created))
                     if interactive:
-                        input('race successfully created (total : {0}).... press any key: '.format(nb_created))
+                        input('press enter to continue... '.format(nb_created))
 
 
                 if limit == 1:
