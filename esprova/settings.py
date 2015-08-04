@@ -163,13 +163,13 @@ GOOGLE_API_KEY = "AIzaSyAu5lWzzuB7WXLqI9UzK2yL0IVtyr97yOg"
 
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID') or 'UA-60175871-1'
 
-bonsai_url = os.environ.get('BONSAI_URL')
+elasticsearch_url = os.environ.get('SEARCHBOX_SSL_URL')
 
 # Haystack -----------
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'search_backends.elastic_backend.CustomElasticSearchEngine',
-        'URL': bonsai_url,
+        'URL': elasticsearch_url,
         'INDEX_NAME': 'haystack',
     },
 }
