@@ -83,6 +83,9 @@ class FFTri:
 
         """
         for x in self.race_list:
+            if 'Bike & Run' in x['discipline']:
+                x['discipline'] = x['discipline'].replace('Bike & Run', 'Bike and Run')
+
             if('Jeunes' in x['format']):
                 x['discipline'] += ' Jeunes'
                 sport = Sport.objects.filter(name=x['discipline'])
