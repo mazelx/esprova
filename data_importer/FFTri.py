@@ -99,9 +99,13 @@ class FFTri:
             if('XXS' in x['format']):
                 x['format'] = 'XS'
 
-    def import_events_in_app(self, sport_restrict, geocode=True, limit=0, interactive=False):
+            if(len(x['cp'])==4):
+                x['cp'] = '0' + x['cp']
+
+    def import_events_in_app(self, sport_restrict, geocode=True, limit=0, interactive=False, verbose=False):
         # ignore deprecation warning for better displaying
         nb_created, nb_failed = 0, 0
+        event_has_been_cloned = False
         event_re = re.compile('.+(?=\s-\s)')
         address_re = re.compile('(.+)(?=\s-\s\D)')
         locality_re = re.compile('(?<=\s-\s)(.+)(?=\s-\s\w)')
@@ -114,7 +118,7 @@ class FFTri:
                                     if x['discipline'].lower() == sport_restrict.lower()]
 
         for race_src in restricted_race_list:
-            if interactive: print("--------------------------------------------")
+            if verbose: print("--------------------------------------------")
             e, s, c, l, dc, r, o, f = ({} for i in range(8))
             distance_cat, sport, event, contact, location, race, organizer, federation = (None for i in range(8))
 
@@ -124,7 +128,7 @@ class FFTri:
 
             e['name'] = event_re.search(race_src.get('nom', None)).group(0)
             tmp_website = race_src.get('site')
-            e['website'] = tmp_website if tmp_website[:7] == 'http://' else 'http://' + tmp_website
+            e['website'] = tmp_website if tmp_website[:4] == 'http' else 'http://' + tmp_website
             e['edition'] = edition_no
             # event = Event(**e)
 
@@ -163,21 +167,21 @@ class FFTri:
                 has_error = False
 
                 sport = Sport.objects.get(**s)
-                if interactive: print ("sport found : {0}".format(sport))
+                if verbose: print ("sport found : {0}".format(sport))
 
                 distance_cat = DistanceCategory.objects.get(sport=sport, **dc)
-                if interactive: print ("distance found : {0}".format(distance_cat))
+                if verbose: print ("distance found : {0}".format(distance_cat))
 
                 organizer, organizer_created = Organizer.objects.get_or_create(**o)
-                if interactive and organizer_created: print("new organizer : {0}".format(organizer))
-                if interactive and not organizer_created: print("organizer found : {0}".format(organizer))
+                if verbose and organizer_created: print("new organizer : {0}".format(organizer))
+                if verbose and not organizer_created: print("organizer found : {0}".format(organizer))
 
                 # event_ref, event_created = EventReference.objects.get_or_create(organizer=organizer, **eref)
                 try: 
                     event, event_created = Event.objects.get_or_create(organizer=organizer, **e)
                 except MultipleObjectsReturned:
                     # if multiple objects are returned, one is awaiting validation
-                    if interactive: print("event found not validated yet (existing): {0}".format(event))
+                    if verbose: print("event found not validated yet (existing): {0}".format(event))
                     e['validated'] = False
                     event = Event.objects.get(**e)
                     event_created = False
@@ -187,18 +191,19 @@ class FFTri:
                     if event.validated:
                         old_event_pk = event.pk
                         event = event.clone()
-                        if interactive: print("event {0} cloned into {1}".format(old_event_pk, event.pk))
+                        event_has_been_cloned = True
+                        if verbose: print("event {0} cloned into {1}".format(old_event_pk, event.pk))
                     else:
-                        if interactive: print("event found not validated yet (new) : {0}".format(event))
+                        if verbose: print("event found not validated yet (new) : {0}".format(event))
 
-                if interactive and event_created: print("new event : {0}".format(event))
+                if verbose and event_created: print("new event : {0}".format(event))
 
                 contact = Contact.objects.create(**c)
-                if interactive: print("contact created : {0}".format(contact))
+                if verbose: print("contact created : {0}".format(contact))
 
                 federation, federation_created = Federation.objects.get_or_create(**f)
-                if interactive and federation_created: print("new federation : {0}".format(federation))
-                if interactive and not federation_created: print("federation found : {0}".format(federation))
+                if verbose and federation_created: print("new federation : {0}".format(federation))
+                if verbose and not federation_created: print("federation found : {0}".format(federation))
 
                 location = Location()
 
@@ -263,17 +268,15 @@ class FFTri:
                         country = 'NC'
                         adm2_short = l['postal_code'][:3]
 
-                    if interactive: print("geocoding: country: {0} - postal: {1} - address:{2}".format(country,
-                                                                                                       l['postal_code'],
-                                                                                                       l['raw']))
+                    if verbose: print("geocoding: country: {0} - postal: {1} - address:{2}".format(country,
+                                                                                                   location.postal_code,
+                                                                                                   '{0} {1}'.format(location.street_number or '', location.route or '')))
 
-                    geocoded = location.geocode_raw_address(raw_address=l['raw'], 
-                                                            postal_code=l['postal_code'], 
-                                                            country=country)
+                    geocoded = location.geocode(country=country)
 
-                    if interactive and geocoded: print("geocoding succeed: lat:{0} - lng:{1}".format(location.lat,
-                                                                                                     location.lng))
-                    if interactive and not geocoded: print("geocoding failed...")
+                    if verbose and geocoded: print("geocoding succeed: lat:{0} - lng:{1}".format(location.lat,
+                                                                                                 location.lng))
+                    if verbose and not geocoded: print("geocoding failed...")
                     
 
 
@@ -283,30 +286,23 @@ class FFTri:
                     location.postal_code = l['postal_code']
                     location.administrative_area_level_2_short_name = adm2_short
                 else:
-                    recode = ''
-                    if interactive:
-                        recode = input('Geocoding failed, try another address (y/N) :  ')
-                    if recode == 'y':
+                    while input('Geocoding failed, try another address (Y/n) :  ') != 'n':
                         print('initial address = country: {0} - postal: {1} - address:{2}'.format(country,
                                                                                                   l['postal_code'],
                                                                                                   l['raw']))
 
-                        country_retry = input('new country code : ')
-                        postal_retry = input('new postal code : ')
-                        address_retry = input('new address : ')
-                        geocoded_retry = location.geocode_raw_address(raw_address=address_retry,
-                                                                      postal_code=postal_retry,
-                                                                      country=country_retry)
+
+                        address_retry = input('new geocode lookup address (complete) : ')
+                        geocoded_retry = location.geocode_raw_address(raw_address=address_retry)
                         if geocoded_retry:
                             print ("found, saving...")
-                        else:
-                            print ("not found, will use source address")
+                            break
 
 
                 # check that location is near lat/lng provided
                 location.save()
 
-                if interactive: print("location saved")
+                if verbose: print("location saved")
 
 
                 race = Race(**r)
@@ -321,13 +317,16 @@ class FFTri:
 
                 doubles = race.get_potential_doubles()
                 if doubles:
-                    print("{0} potential double(s) detected:".format(len(doubles)))
+                    if verbose: print("{0} potential double(s) detected:".format(len(doubles)))
                     for d in doubles:
-                        print("{0} VS {1}".format(race, d))
-                        if not input("is double (Y/n) ? : ") == 'n':
+                        if verbose: print("{0} VS {1}".format(race, d))
+                        dbl_input = ''
+                        if interactive:
+                            dbl_input = input("is double (Y/n) ? : ")
+                        if not dbl_input == 'n':
                             raise RaceDoubleException("Double detected")
 
-                if interactive: print("race saved, pk:{0}".format(race.pk))
+                if verbose: print("race saved, pk:{0}".format(race.pk))
                 nb_created += 1
 
             except Sport.DoesNotExist:
@@ -351,24 +350,28 @@ class FFTri:
                 if has_error:
                     if interactive: input('due to errors, race will be deleted.... press any key: ')
                     nb_failed += 1
-                    if event:
-                        if event.pk:
-                            if len(event.get_races()) == 0:  
-                                event.delete()
-                                if interactive: print('event deleted')                              
                     if contact:
                         if contact.pk:
+                            if verbose: print('contact deleted ({0})'.format(contact.pk))
                             contact.delete()
-                            if interactive: print('contact deleted')                              
 
                     if location:
                         if location.pk:
+                            if verbose: print('location deleted ({0})'.format(location.pk))
                             location.delete()
-                            if interactive: print('location deleted')                              
+
                     if race:
                         if race.pk:
+                            if verbose: print('race deleted ({0})'.format(race.pk))
                             race.delete()
-                            if interactive: print('race deleted')                              
+
+                    if event:
+                        if event.pk:
+                            if len(event.get_races()) == 0 or event_has_been_cloned:
+                                if verbose: print('event deleted ({0})'.format(event.pk))
+                                event.delete()
+
+
 
                 # else:
                     # print ("[INF][OK] [{0}] : Race event successfully created".format(race_src_id))
