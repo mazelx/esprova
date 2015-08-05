@@ -88,7 +88,15 @@ class Location(ComparableModelMixin, models.Model):
     def natural_key(self):
         return (self.lat, self.lng)
 
-    def geocode_raw_address(self, raw_address, postal_code, country='FR'):
+    def geocode(self, raw_address='', postal_code='', country=''):
+        raw_address = raw_address or '{0} {1}'.format(self.street_number or '', self.route or '')
+        postal_code = postal_code or self.postal_code
+        country = country or self.country.code
+        return self.geocode_raw_address(raw_address=raw_address,
+                                        postal_code=postal_code,
+                                        country=country)
+
+    def geocode_raw_address(self, raw_address='', postal_code='', country='FR'):
         """
             Geocode using the Google maps V3 geocoder
 
@@ -106,9 +114,9 @@ class Location(ComparableModelMixin, models.Model):
 
             self.lat = loc.latitude
             self.lng = loc.longitude
-            return True
+            return loc.raw
         else:
-            return False
+            return None
 
     def get_point(self):
         return Point(float(self.lng), float(self.lat))
