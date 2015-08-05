@@ -229,11 +229,12 @@ def races_formatted_search(sport='',
 
     facet = sqs.facet_counts()
 
-    # convert datetime into serializable isoformat
-    facet_dates = []
-    for f in facet['dates']['date']:
-        facet_dates.append((f[0].isoformat(), f[1]))
-    facet['dates']['date'] = facet_dates
+    if len(facet) > 0:
+        # convert datetime into serializable isoformat
+        facet_dates = []
+        for f in facet['dates']['date']:
+            facet_dates.append((f[0].isoformat(), f[1]))
+        facet['dates']['date'] = facet_dates
 
     # build the JSON response
     races = []
