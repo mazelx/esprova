@@ -17,10 +17,17 @@ class EventAdmin(admin.ModelAdmin):
     ordering = ('name', )
     search_fields = ('name', 'validated')
 
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name', 'email', 'phone',)
+    list_filter = ('name', 'email', 'phone')
+    ordering = ('name', 'email', 'phone')
+    search_fields = ('name', 'email', 'phone',)
+
 admin.site.register(Race, RaceAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Organizer)
-admin.site.register(Contact)
+admin.site.register(Contact, ContactAdmin)
 admin.site.register(Label)
 admin.site.register(Location)
 admin.site.register(Challenge)
