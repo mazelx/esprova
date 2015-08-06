@@ -339,6 +339,7 @@ class Event(ComparableModelMixin, models.Model):
                     # remove _ keys
                     data = {k: v for k, v in data.items() if not k[:1] == '_'}
                     data['validated'] = True
+
                     try:
                         for r in self.get_races():
                             r.validate()
@@ -537,10 +538,14 @@ class Race(ComparableModelMixin, models.Model):
     def validate(self):
         if self.pk:
             # create
+            import pdb; pdb.set_trace()
+
+            # if race has been newly created
             if not self.race_mod_source:
                 self.event = self.event.event_mod_source
                 self.save()
 
+            # if race has been changed
             else:
                 if not self.to_be_deleted:
                     # update
@@ -550,13 +555,31 @@ class Race(ComparableModelMixin, models.Model):
                     del data['id']
                     race_mod_source_id = data.pop('race_mod_source_id')
                     data['event_id'] = self.event.event_mod_source.pk
-                    self.delete()
+
+                    # delete temp race without deleting his dependancies (race & location) used for change
+                    dummy_c = Contact()
+                    dummy_c.save()
+                    self.contact = dummy_c
+                    dummy_l = Location()
+                    dummy_l.geocode(country='FR')
+                    self.location = dummy_l
+                    self.save()
+
+                    src_c = self.race_mod_source.contact
+                    src_l = self.race_mod_source.location
+
                     try:
                         Race.objects.filter(id=race_mod_source_id).update(**data)
+
+                        # still need to delete old contact and location
+                        src_c.delete()
+                        src_l.delete()
+
                     except Exception as e:
                         # if update fails, recreate the deleted object
-                        Race(**data)
+                        # Race(**data)
                         raise e
+
                 else:
                     if self.race_mod_source:
                         self.race_mod_source.delete()
