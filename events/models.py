@@ -147,20 +147,20 @@ class Location(ComparableModelMixin, models.Model):
             addr = self.street_number + ", "
         if self.route:
             addr += self.route
-        return addr
+        return addr or ""
 
     def getFormattedLocality(self):
         loc = self.locality
         if self.administrative_area_level_2_short_name:
             loc += " ({0})".format(self.administrative_area_level_2_short_name)
-        return loc
+        return loc or ""
 
     def getFormattedRegion(self):
         if self.administrative_area_level_1:
-            return self.administrative_area_level_1
+            return self.administrative_area_level_1 or ""
 
     def getFormattedCountry(self):
-        return str(self.country.name)
+        return str(self.country.name) or ""
 
 
 class Organizer(ComparableModelMixin, models.Model):
