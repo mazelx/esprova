@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
     function cancelEdition() {
-        if(confirm("Etes-vous sur de vouloir annuler cette modification ?")){
+        if(confirm("Etes-vous sur de vouloir supprimer cette modification ?")){
             {% if pk %}
                  $.ajax({
                     url: "{% url 'delete_event' pk %}",
@@ -93,13 +93,9 @@
 
             <div class="row">
                 <div class="form-submit">
-                    {% if cloned %}
-                        <a href="{% url "delete_event" pk %}" class="btn btn-default" role="button">Annuler</a>
-                    {% else %}
-                        <a href="#" onclick="cancelEdition();" class="btn btn-default" role="button">Annuler</a>
-                    {% endif %}
-
+                        <a href="{% url "list_race" %}" class="btn btn-default" role="button">Annuler</a>
                     {% if pk %}
+                        <a href="#" onclick="cancelEdition();" class="btn btn-warning" role="button">Supprimer la modification</a>
                         <button type="submit" class="btn btn-primary">Modifier</button>
                     {% else %}
                         <button type="submit" class="btn btn-primary">Enregistrer</button>

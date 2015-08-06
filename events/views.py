@@ -165,6 +165,7 @@ def update_event(request, pk):
 
     eventForm = EventForm(request.POST or None, instance=event)
     race_list = event.get_races()
+    created = request.GET.get('created')
 
     # if form sent
     if request.method == 'POST':
@@ -190,11 +191,13 @@ def update_event(request, pk):
     else:
         if event.validated:
             cloned_event = event.clone()
-            return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}))
+            print("event cloned")
+            return HttpResponseRedirect(reverse('update_event', kwargs={'pk': cloned_event.pk}) + '?created=True')
 
     return render(request, 'events/event_edit.html', {'eventForm': eventForm,
                                                       'pk': pk,
                                                       'race_list': race_list,
+                                                      'created': created or False,
                                                       })
 
 
