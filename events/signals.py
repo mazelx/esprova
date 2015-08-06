@@ -7,14 +7,16 @@ from django.core.exceptions import ObjectDoesNotExist
 @receiver(post_delete, sender=Race)
 def post_delete_race(sender, instance, *args, **kwargs):
     try:
-        if instance.contact.pk:
-            instance.contact.delete()
+        if instance.contact:
+            if instance.contact.pk:
+                instance.contact.delete()
     except ObjectDoesNotExist:
         pass
 
     try:
-        if instance.location.pk:
-            instance.location.delete()
+        if instance.location:
+            if instance.location.pk:
+                instance.location.delete()
     except ObjectDoesNotExist:
         pass
 
@@ -22,8 +24,9 @@ def post_delete_race(sender, instance, *args, **kwargs):
 @receiver(post_delete, sender=Event)
 def post_delete_event(sender, instance, *args, **kwargs):
     try:
-        if instance.organizer.pk:
-            if instance.organizer.event_set.count() == 0:
-                instance.organizer.delete()
+        if instance.organizer:
+            if instance.organizer.pk:
+                if instance.organizer.event_set.count() == 0:
+                    instance.organizer.delete()
     except ObjectDoesNotExist:
         pass
