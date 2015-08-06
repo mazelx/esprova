@@ -277,27 +277,26 @@ class FFTri:
                     if verbose and geocoded: print("geocoding succeed: lat:{0} - lng:{1}".format(location.lat,
                                                                                                  location.lng))
                     if verbose and not geocoded: print("geocoding failed...")
-                    
 
-
-                if geocoded:
-                    # fix for google geocoder bug for some french departments
-                    # replace postal code and departement with API value
-                    location.postal_code = l['postal_code']
-                    location.administrative_area_level_2_short_name = adm2_short
-                else:
+                if not geocoded:
                     while input('Geocoding failed, try another address (Y/n) :  ') != 'n':
                         print('initial address = country: {0} - postal: {1} - address:{2}'.format(country,
                                                                                                   l['postal_code'],
                                                                                                   l['raw']))
 
-
+                        country_retry = input('new country : ')
                         address_retry = input('new geocode lookup address (complete) : ')
-                        geocoded_retry = location.geocode_raw_address(raw_address=address_retry)
-                        if geocoded_retry:
-                            print ("found, saving...")
-                            break
+                        geocoded_retry_result = location.geocode_raw_address(raw_address=address_retry,
+                                                                             country=country_retry)
+                        if geocoded_retry_result:
+                            print ("found : ")
+                            print (geocoded_retry_result)
+                            if input('Save this result (Y/n) : ') != 'n':
+                                break
 
+                # fix for google geocoder bug for some french departments
+                # replace postal code and departement with API value
+                location.administrative_area_level_2_short_name = adm2_short
 
                 # check that location is near lat/lng provided
                 location.save()
