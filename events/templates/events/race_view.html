@@ -136,7 +136,7 @@
                                 <address id="race-location"
                                     data-lat="{{ race.location.lat | stringformat:'.5f' }}" 
                                     data-lng="{{ race.location.lng | stringformat:'.5f' }}">
-                                    <div>{{ race.location.getFormattedStreet }}</div>
+                                    <div>{{ race.location.getFormattedStreet | capfirst}}</div>
                                     <div>{{ race.location.getFormattedLocality }}</div>
                                     <div>{{ race.location.getFormattedRegion }}</div>
                                     <div>{{ race.location.getFormattedCountry }}</div>
