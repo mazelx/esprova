@@ -538,7 +538,6 @@ class Race(ComparableModelMixin, models.Model):
     def validate(self):
         if self.pk:
             # create
-            import pdb; pdb.set_trace()
 
             # if race has been newly created
             if not self.race_mod_source:
