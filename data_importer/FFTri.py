@@ -127,8 +127,11 @@ class FFTri:
             f['name'] = federation_name
 
             e['name'] = event_re.search(race_src.get('nom', None)).group(0)
+
             tmp_website = race_src.get('site')
-            e['website'] = tmp_website if tmp_website[:4] == 'http' else 'http://' + tmp_website
+            if tmp_website:
+                e['website'] = tmp_website if tmp_website[:4] == 'http' else 'http://' + tmp_website
+
             e['edition'] = edition_no
             # event = Event(**e)
 
