@@ -21,6 +21,8 @@ from haystack.query import SearchQuerySet
 from haystack.utils.geo import D, Point
 
 
+
+
 class Location(ComparableModelMixin, models.Model):
     """
         Represent a race location, built upon the Google maps V3 data structure as
@@ -243,30 +245,13 @@ class Event(ComparableModelMixin, models.Model):
     def clone(self):
         try:
             race_list = []
+            e = copy.copy(self)
+
             for r in self.get_races():
-
-                # copy location
-                l = r.location
-                l.pk = None
-                l.save()
-                r.location = l
-
-                # copy contact
-                c = r.contact
-                c.pk = None
-                c.save()
-                r.contact = c
-
-                r.race_mod_source = r
-
-                # copy race
-                r.pk = None
-                r.save()
+                r = r.clone()
 
                 # save race in list
                 race_list.append(r)
-
-            e = copy.copy(self)
 
             # clone event into new event (no pk yet)
             e.pk = None
@@ -359,6 +344,25 @@ class Event(ComparableModelMixin, models.Model):
                 # delete
                 else:
                     self.event_mod_source.delete()
+
+    def get_potential_carryall(self, distance_max=20):
+        race_loc = self.get_races()[0].location.get_point()
+        sqs = SearchQuerySet()
+        sqs_distance = [sr for sr in sqs.filter(event_id=self.pk).distance('location', race_loc).order_by('distance')]
+        suspects = [{'race': sr.object, 'distance': sr.distance} for sr in sqs_distance if sr.distance.km > distance_max]
+
+        # if more suspects than conform, the conforms are probably the suspects !
+        if len(suspects) > (len(self.races.all()) / 2):
+            suspects = [{'race': sr.object, 'distance': sr.distance} for sr in sqs_distance if sr.distance.km > distance_max]
+
+        return suspects
+
+    def merge_with_event(self, event):
+        for r in event.races.all():
+            r.event = self
+            r.save()
+
+        event.delete()
 
 
 class Contact(ComparableModelMixin, models.Model):
@@ -476,6 +480,27 @@ class Race(ComparableModelMixin, models.Model):
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('view_race', args=[self.slug, str(self.id)])
+
+    def clone(self):
+        # copy location
+        l = self.location
+        l.pk = None
+        l.save()
+
+        # copy contact
+        c = self.contact
+        c.pk = None
+        c.save()
+
+        r = copy.copy(self)
+
+        r.pk = None
+        r.location = l
+        r.contact = c
+        r.race_mod_source = self
+
+        r.save()
+        return r
 
     def get_event_races_same_sport(self):
         # races = []
