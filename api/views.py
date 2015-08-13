@@ -263,7 +263,8 @@ def races_formatted_search(sport='',
                      # 'rankClass': "primary" if (rank <= 10) else "secondary",
                      'rankClass': "secondary",
                      'lat': str(location.get_coords()[1]),
-                     'lng': str(location.get_coords()[0])
+                     'lng': str(location.get_coords()[0]),
+                     'date': sr.date.strftime('%Y%m%d'),
                      }
 
         races.append(race_data)
