@@ -55,7 +55,6 @@ INSTALLED_APPS = (
 
     # External modules
     'debug_toolbar',
-
     'django_countries',
     'haystack',
     'rest_framework',
@@ -63,8 +62,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'storages',
     'autocomplete_light',
-
-    # 'passwords',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',
