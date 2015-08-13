@@ -23,22 +23,27 @@ $( document ).ready( function () {
     }
     // bind event on input change
     $( "#id_name" ).on('change keyup', function(e) {
-        delay(function () {
-            getEventList(e.target.value)
-        }, 1000)
+        $(".event-list-results").html('')
+        if(e.target.value !== '') {
+            displayLoadingSpinner();
+            delay(function () {
+                getEventList(e.target.value)
+            }, 1000)    
+        }        
     });
 });
 
-function getEventList(search_expr){
-    $.ajax({
-        url: "{% url 'ajx_search_race' %}",
-        type: "GET", 
-        data: 'sport=Triathlon&q=' +  search_expr,
-        dataType: "json",
-        timeout: 1000,
+function getEventList(search_expr){    
+    if(search_expr !== '') {
+        $.ajax({
+            url: "{% url 'ajx_search_race' %}",
+            type: "GET", 
+            data: 'q=' +  search_expr,
+            dataType: "json",
+            timeout: 1000,
         })
-        .success(function(response) {
-            if(response.count > 0) {
+        .done(function(response) {
+            if (response.count > 0) {
                 html = '<span>Evénements suggérés : </span>'
                 $.each( response.races, function() {
                     html += '<li class="list-group-item"> \
@@ -51,13 +56,10 @@ function getEventList(search_expr){
                                         </div> \
                                     </li>'
                 });
+                $(".event-list-results").html(html)
             }
-            else {
-                html = ''
-            }
-            
-            $(".event-list-results").html(html)
         })
+    }
 }
 
 var delay = (function(){
@@ -67,6 +69,10 @@ var delay = (function(){
     timer = setTimeout(callback, ms);
   };
 })();
+
+function displayLoadingSpinner(){
+    $(".event-list-results").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+}
 
 
 </script>

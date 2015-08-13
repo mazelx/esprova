@@ -138,8 +138,8 @@ def ajx_get_races(request):
     if (request.is_ajax() or settings.DEBUG) and request.method == 'GET':
 
         sport = request.GET.get('sport')
-        if not sport:
-            return HttpResponseBadRequest('Error : no sport has been specified')
+        # if not sport:
+        #     return HttpResponseBadRequest('Error : no sport has been specified')
 
         param_viewport = request.GET.get('viewport')
 
