@@ -24,8 +24,8 @@
         </div>
     </form>
 
-    <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a></p>
-    <p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a></p>
+    <p>Login ou mot de passe oublié ? <a href="{% url 'auth_password_reset' %}">Par ici !</a></p>
+    <p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">Vous inscrire !</a></p>
 </div>
 
 {% endblock %}
