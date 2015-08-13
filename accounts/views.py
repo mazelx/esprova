@@ -17,6 +17,11 @@ from registration.backends.default.views import RegistrationView, ActivationView
 
 from registration.signals import user_activated
 
+import time
+import jwt
+import uuid
+import urllib
+
 
 class CustomRegistrationView(RegistrationView):
     success_url = 'list_race'
@@ -63,3 +68,27 @@ class UserSettingsView(DetailView):
 
     def get_object(self):
         return get_object_or_404(User, pk=self.request.user.pk)
+
+
+# This example relies on you having install PyJWT, `sudo easy_install PyJWT` - you can
+# read more about this in the GitHub repository https://github.com/progrium/pyjwt
+
+def sso_zendesk(request):
+
+    payload = {
+        "iat": int(time.time()),
+        "jti": str(uuid.uuid1()),
+        "name": request.user.get_full_name(),
+        "email": request.user.email
+    }
+
+    subdomain = "esprova"
+    shared_key = "nnMNVBEKLB6woqM2BZwyuFGMNmPz1ddo1Dvl7VpZlAjULmAx"
+    jwt_string = jwt.encode(payload, shared_key)
+    location = "https://" + subdomain + ".zendesk.com/access/jwt?jwt=" + jwt_string.decode()
+    return_to = request.GET.get('return_to')
+
+    if return_to is not None:
+        location += "&return_to=" + urllib.quote(return_to)
+
+    return HttpResponseRedirect(location)
