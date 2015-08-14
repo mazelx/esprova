@@ -70,7 +70,7 @@ urlpatterns = patterns('',
 
                        # Planning
                        url(r'^planning/$', redirect_to_planning, name='planning'),
-                       url(r'^planning/(?P<username>[-\w\d]+)$', PlanningList.as_view(), name='planning'),
+                       url(r'^planning/(?P<username>[\S]+)$', PlanningList.as_view(), name='planning'),
 
                        # Validation
                        url(r'^validation$', EventValidationList.as_view(), name='list_event_validation'),
