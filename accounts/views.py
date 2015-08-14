@@ -1,9 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import get_object_or_404
 
@@ -73,12 +74,12 @@ class UserSettingsView(DetailView):
 # This example relies on you having install PyJWT, `sudo easy_install PyJWT` - you can
 # read more about this in the GitHub repository https://github.com/progrium/pyjwt
 
+@login_required
 def sso_zendesk(request):
-
     payload = {
         "iat": int(time.time()),
         "jti": str(uuid.uuid1()),
-        "name": request.user.get_full_name(),
+        "name": request.user.username,
         "email": request.user.email
     }
 
@@ -90,5 +91,11 @@ def sso_zendesk(request):
 
     if return_to is not None:
         location += "&return_to=" + urllib.parse.quote(return_to)
+
+
+    # from json import dumps
+    # from django.conf import settings
+    # if settings.DEBUG:
+    #     return HttpResponse(dumps(payload))
 
     return HttpResponseRedirect(location)
