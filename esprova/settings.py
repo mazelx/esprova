@@ -303,8 +303,9 @@ LOGIN_REDIRECT_URL = 'list_race'
 
 
 # EMAIL SETTING
-EMAIL_HOST = 'mail.privateemail.com'
-EMAIL_PORT = 25
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'contact@esprova.com'
 EMAIL_HOST_PASSWORD = '.GNS25eiu.'
 EMAIL_USE_TLS = True
