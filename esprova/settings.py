@@ -304,10 +304,10 @@ LOGIN_REDIRECT_URL = 'list_race'
 
 # EMAIL SETTING
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.postmarkapp.com'
+EMAIL_HOST = os.environ.get('POSTMARK_SMTP_SERVER')
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '372dcddf-8a13-4227-a8fd-9f4902348b7f'
-EMAIL_HOST_PASSWORD = '372dcddf-8a13-4227-a8fd-9f4902348b7f'
+EMAIL_HOST_USER = os.environ.get('POSTMARK_API_KEY')
+EMAIL_HOST_PASSWORD = os.environ.get('POSTMARK_API_KEY')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'contact@esprova.com'
 
