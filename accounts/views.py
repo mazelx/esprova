@@ -89,6 +89,6 @@ def sso_zendesk(request):
     return_to = request.GET.get('return_to')
 
     if return_to is not None:
-        location += "&return_to=" + urllib.quote(return_to)
+        location += "&return_to=" + urllib.parse.quote(return_to)
 
     return HttpResponseRedirect(location)
