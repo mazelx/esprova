@@ -66,7 +66,7 @@ urlpatterns = patterns('',
                            RaceDelete.as_view(),
                            name="delete_race"),
 
-                       url(r'^testorganizer/$', create_organizer, name='create_organizer'),
+                       # url(r'^testorganizer/$', create_organizer, name='create_organizer'),
 
                        # Planning
                        url(r'^planning/$', redirect_to_planning, name='planning'),
