@@ -106,7 +106,6 @@
         </form>
         <!-- search-command  -->
 
-
         <div class="informations container">
             <div class="about row">
                 <div class="col-sm-4">
@@ -137,7 +136,7 @@
                     </div>
                     <div class="about-text">
                         <p>Vous souhaitez communiquer sur votre programme de courses ? Vous souhaitez défier vos amis ? </p>
-                        <p>Partagez simplement une course ou tout le programme de votre saison sur <a href="http://www.facebook.com/esprova" target="_blank">facebook</a>, <a href="http://www.twitter.com/esprova">twitter</a> ou par <strong>email.</strong></p>
+                        <p>Partagez simplement une course ou tout le programme de votre saison sur <a href="http://www.facebook.com/esprova" target="_blank">facebook</a>, <a href="http://www.twitter.com/esprova">twitter</a> ou par <a href="mailto:contact@esprova.com">email.</a></p>
                         <p>Que le meilleur gagne !</p>
                     </div>
                 </div>
@@ -199,6 +198,7 @@
             // componentRestrictions: {country: 'fr'}
 
             };
+        $('#search_expr').val("France")
         input = $('#search_expr');
         searchBox = new google.maps.places.SearchBox(input[0]);
 
