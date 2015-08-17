@@ -617,6 +617,15 @@ class Race(ComparableModelMixin, models.Model):
         return "{0} {1}".format(self.distance_cat.long_name,
                                 'Relais' if self.relay else '' + 'CLM' if self.timetrial else '')
 
+    def get_similar_races(self, number=5):
+        lst = []
+        mlt = SearchQuerySet().more_like_this(self)
+        i = 0
+        while i < number:
+            lst.append(mlt[i])
+            i = i + 1
+        return lst
+
 # @receiver(post_delete, sender=Race)
 # def post_delete_race(sender, instance, *args, **kwargs):
 #     try:

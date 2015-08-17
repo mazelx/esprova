@@ -4,7 +4,14 @@ from haystack.backends.elasticsearch_backend import ElasticsearchSearchEngine
 from haystack.fields import EdgeNgramField as BaseEdgeNgramField
 from django.utils import translation
 import locale
-from datetime import datetime 
+from haystack.utils import get_identifier
+from haystack.exceptions import MissingDependency
+
+try:
+    import elasticsearch
+except ImportError:
+    raise MissingDependency("The 'elasticsearch' backend requires the installation of 'elasticsearch'. Please refer to the documentation.")
+
 
 # Custom Backend
 class CustomElasticBackend(ElasticsearchSearchBackend):
@@ -40,6 +47,41 @@ class CustomElasticBackend(ElasticsearchSearchBackend):
 
             mapping.update({field_class.index_fieldname: field_mapping})
         return (content_field_name, mapping)
+
+    def more_like_this(self, model_instance, additional_query_string=None,
+                       start_offset=0, end_offset=None, models=None,
+                       limit_to_registered_models=None, result_class=None, **kwargs):
+        from haystack import connections
+
+        if not self.setup_complete:
+            self.setup()
+
+        # Deferred models will have a different class ("RealClass_Deferred_fieldname")
+        # which won't be in our registry:
+        model_klass = model_instance._meta.concrete_model
+
+        index = connections[self.connection_alias].get_unified_index().get_index(model_klass)
+        field_name = index.get_content_field()
+        params = {}
+
+        if start_offset is not None:
+            params['search_from'] = start_offset
+
+        if end_offset is not None:
+            params['search_size'] = end_offset - start_offset
+
+        doc_id = get_identifier(model_instance)
+
+        try:
+            raw_results = self.conn.mlt(index=self.index_name, doc_type='modelresult', id=doc_id, **params)
+        except elasticsearch.TransportError as e:
+            if not self.silently_fail:
+                raise
+
+            self.log.error("Failed to fetch More Like This from Elasticsearch for document '%s': %s", doc_id, e)
+            raw_results = {}
+
+        return self._process_results(raw_results, result_class=result_class)
 
 
 class CustomElasticSearchEngine(ElasticsearchSearchEngine):

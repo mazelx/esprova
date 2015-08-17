@@ -1,0 +1,170 @@
+{
+    "state": "open",
+    "settings": {
+        "index": {
+            "creation_date": "1439374128436",
+            "analysis": {
+                "filter": {
+                    "haystack_ngram": {
+                        "token_chars": [
+                            "letter",
+                            "digit",
+                            "punctuation",
+                            "symbol"
+                        ],
+                        "min_gram": "3",
+                        "type": "nGram",
+                        "max_gram": "15"
+                    },
+                    "frsnowball": {
+                        "type": "snowball",
+                        "language": "French"
+                    },
+                    "haystack_edgengram": {
+                        "type": "edgeNGram",
+                        "min_gram": "2",
+                        "max_gram": "15"
+                    }
+                },
+                "analyzer": {
+                    "edgengram_analyzer": {
+                        "type": "custom",
+                        "filter": [
+                            "haystack_edgengram",
+                            "lowercase",
+                            "asciifolding"
+                        ],
+                        "tokenizer": "standard"
+                    },
+                    "ngram_analyzer": {
+                        "type": "custom",
+                        "filter": [
+                            "haystack_ngram"
+                        ],
+                        "tokenizer": "standard"
+                    },
+                    "search_analyzer": {
+                        "filter": [
+                            "lowercase",
+                            "asciifolding"
+                        ],
+                        "type": "custom",
+                        "tokenizer": "standard"
+                    }
+                },
+                "tokenizer": {
+                    "haystack_edgengram_tokenizer": {
+                        "min_gram": "2",
+                        "side": "front",
+                        "type": "edgeNGram",
+                        "max_gram": "15"
+                    },
+                    "haystack_ngram_tokenizer": {
+                        "type": "nGram",
+                        "min_gram": "3",
+                        "max_gram": "15"
+                    }
+                }
+            },
+            "number_of_shards": "9",
+            "number_of_replicas": "1",
+            "version": {
+                "created": "1040099"
+            },
+            "uuid": "w9qt_iiySDmhRROmIhDsWw"
+        }
+    },
+    "mappings": {
+        "modelresult": {
+            "_boost": {
+                "null_value": 1,
+                "name": "boost"
+            },
+            "_all": {
+                "auto_boost": true
+            },
+            "properties": {
+                "date": {
+                    "format": "dateOptionalTime",
+                    "type": "date"
+                },
+                "administrative_area_level_2_exact": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "event_title": {
+                    "analyzer": "snowball",
+                    "boost": 1.5,
+                    "type": "string"
+                },
+                "date_exact": {
+                    "format": "dateOptionalTime",
+                    "type": "date"
+                },
+                "distance_cat": {
+                    "analyzer": "snowball",
+                    "type": "string"
+                },
+                "distance_cat_exact": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "event_id": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "administrative_area_level_2": {
+                    "analyzer": "snowball",
+                    "type": "string"
+                },
+                "rendered": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "validated": {
+                    "type": "boolean"
+                },
+                "administrative_area_level_1": {
+                    "analyzer": "snowball",
+                    "type": "string"
+                },
+                "django_id": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "geo_point"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "text": {
+                    "search_analyzer": "search_analyzer",
+                    "index_analyzer": "edgengram_analyzer",
+                    "type": "string"
+                },
+                "django_ct": {
+                    "include_in_all": false,
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "sport": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "slug": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                },
+                "administrative_area_level_1_exact": {
+                    "index": "not_analyzed",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "aliases": []
+}
+
+
