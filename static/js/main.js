@@ -444,7 +444,7 @@ function addListSportSelection(){
         // as distance are not common between sports, clear the distance addListSportSelection 
         search_distances = ''
         getDistanceInfo(search_sport);
-        getRaces();
+        getRaces(new RefreshOptions({"fullRefresh": true}));
         pushState(getParamQuery());
    });
 }
