@@ -5,7 +5,7 @@ var formatted_address;
 var mapOptions;
 var marker;
 
-var countriesArray = ['FR', 'GP', 'MQ', 'GF', 'RE', 'PM', 'YT', 'TF', 'WF', 'PF', 'NC']
+var countriesArray = ['FR', 'GP', 'MQ', 'GF', 'RE', 'PM', 'YT', 'TF', 'WF', 'PF', 'NC', 'BL', 'MF']
 
 
 
