@@ -8,6 +8,9 @@ from django.views.generic.edit import DeleteView
 from django.shortcuts import get_object_or_404, redirect
 from django.core.urlresolvers import reverse
 
+from django.template.loader import render_to_string
+
+
 from django.conf import settings
 
 from json import dumps
@@ -92,6 +95,7 @@ class RaceSearch(TemplateView):
         context.update({'json_races': dumps(data['races'])})
         context['params']['sport'] = sport_name
         context['sport'] = sport
+        context['sport_distances_helper'] = render_to_string('html_utils/distance_helper.html', {'sport': sport})
 
         return context
 
