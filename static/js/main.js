@@ -223,7 +223,7 @@ function initializeMapZoomControl() {
 }
 
 
-function getDistanceInfo(sport) {
+function displayDistanceHelper(sport) {
      $.ajax({
         url: "/api/distance/" + sport,
         type: "GET", 
@@ -274,7 +274,7 @@ function initializeDOMComponents(){
     // $("#sport-selecter").val(search_sport.charAt(0).toUpperCase() + search_sport.slice(1));
 
     // should be done in django view
-    // getDistanceInfo(search_sport);
+    // displayDistanceHelper(search_sport);
 
     // set map to provided bounds
     var lat_lo = viewport[0];
@@ -443,7 +443,7 @@ function addListSportSelection(){
         saveSportSession(search_sport);
         // as distance are not common between sports, clear the distance addListSportSelection 
         search_distances = ''
-        getDistanceInfo(search_sport);
+        displayDistanceHelper(search_sport);
         getRaces(new RefreshOptions({"fullRefresh": true}));
         pushState(getParamQuery());
    });
