@@ -227,7 +227,8 @@
             {% include "shareaholic/shareaholic_buttons.html" %}
 
             <div class="row race-edit">
-                <p>Une erreur ? Vous pouvez proposer une <a href="{% url "update_event" race.event.pk %}">modification</a> de l'épreuve</p>
+                <p><strong>Une erreur ?</strong></p>
+                <p>Vous pouvez proposer une <a href="{% url "update_event" race.event.pk %}">modification</a> ou la <a href="{% url "update_event" race.event.pk %}">suppression</a> de l'épreuve.<br>Ne soyez pas timide : aucun changement ne sera publié sans la validation préalable par nos équipes de modération !</p>
             </div>
 
         </div>        

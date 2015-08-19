@@ -103,8 +103,21 @@
                 </div>
             </div>
             <input type="hidden" name="viewport" value="">
+    
+            <div class="search-example">
+                <div class="col-sm-offset-4 col-sm-5">
+                    <strong>exemples : </strong><a href="{% url "list_race_sport" "triathlon"%}?start_date=2015-01-01&end_date=2016-01-01">Saison entière de Triathlon en France métropolitaine</a>, <a href="{% url "list_race_sport" "bike and run"%}?&q=ile%20de%20france&start_date=2015-08-19&end_date=2016-01-01&viewport=48.28832,1.260925,49.34804,3.296142&z=9">Bike and Run en ile-de-France</a>, <a href="{% url "list_race_sport" "duathlon"%}?&q=nord&start_date=2015-09-01&end_date=2015-09-30&viewport=49.448944,0.296875,51.497214,4.367309&z=8">Duathlons en septembre dans le Nord</a>
+                </div>
+            </div>
+
         </form>
         <!-- search-command  -->
+
+        <div class="collaborative-banner">
+            <p><strong>Espròva est un agenda collaboratif</strong></p>
+            <p>Aidez-nous à l’améliorer : <a href="{% url "create_event_intro" %}">proposez des événements</a> ou complétez les évènements existants (<a href="https://esprova.zendesk.com/hc/fr" target="_blank">comment ?</a>).<br>
+            <small>Ne soyez pas timide ! Aucune modification ne sera publiée sans validation par nos équipes de modération. </small></p>
+        </div>
 
         <div class="informations container">
             <div class="about row">

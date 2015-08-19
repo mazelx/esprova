@@ -184,13 +184,40 @@ blockquote:after {
     .search-command {
         background-color: @esprova-red;
         color: white;
-        padding: 50px 30px 50px 30px;
+        padding: 70px 30px 100px 30px;
         margin-right: -15px;
         margin-left: -15px;
+        
+            label {
+                font-weight: normal;
+            }
+
+        .search-example {
+            font-style: italic;
+            a {
+                color: white;
+            }
+        }
+    }
+
+    .collaborative-banner {
+        text-align: center;
+        background-color: @esprova-lightergray;
+        margin: 0 -15px 0 -15px;
+        padding: 40px 0 40px 0;
+        font-size: 1.2em;
+        border-bottom: 1px solid @esprova-lightgray;
+        border-top: 1px solid @esprova-lightgray;
+
+
+            strong {
+                font-size: 1.5em;
+            }
+
     }
 
     .intro-spacer {
-        background-color: @esprova-red;
+        background-color: @esprova-lightergray;
         height: 1px;
         margin: 60px -15px;
     }
