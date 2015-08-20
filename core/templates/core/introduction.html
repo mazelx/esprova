@@ -65,12 +65,12 @@
                 <div class="typogram">
                     <h1><img alt="Espròva" src="{% static "images/typogramme_esprova.svg" %}"></h1>
                 </div>
-                <h2 class="baseline">L'agenda des courses <br>pour les sportifs et organisateurs pressés !</h2>
+                <h1 class="baseline">L'agenda des courses <br>pour les sportifs et organisateurs pressés !</h1>
             </div>
             <!-- intro-banner -->
         </div>
         <!-- row -->
-        <form class="search-command form-horizontal"  id="search-form" action="{% url "list_race" %}" onsubmit="return submitForm(event)" method="GET">
+        <form class="search-command form-horizontal" id="search-form" action="{% url "list_race" %}" onsubmit="return submitForm(event)" method="GET">
             <div class="form-group form-group-lg">
                 <label for="sport" class=" col-sm-offset-1 col-sm-3 control-label">Sélectionnez un sport</label>
                 <div class="col-sm-5">
@@ -112,7 +112,7 @@
         <!-- search-command  -->
 
         <div class="collaborative-banner">
-            <p><strong>Espròva est un agenda collaboratif</strong></p>
+            <h2>Espròva est un calendrier collaboratif</h2>
             <p>Aidez-nous à l’améliorer : <a href="{% url "create_event_intro" %}">proposez des événements</a> ou complétez les évènements existants (<a href="https://esprova.zendesk.com/hc/fr" target="_blank">comment ?</a>).<br>
             <small>Ne soyez pas timide ! Aucune modification ne sera publiée sans validation par nos équipes de modération. </small></p>
         </div>
