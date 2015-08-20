@@ -36,20 +36,20 @@ def handler500(request):
     return response
 
 
-class PlanningSiteMap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.5
+# class PlanningSiteMap(Sitemap):
+#     changefreq = "weekly"
+#     priority = 0.5
 
-    def items(self):
-        return User.objects.all()
+#     def items(self):
+#         return User.objects.all()
 
-    def location(self, obj):
-        return reverse('planning', args=[obj.username])
+#     def location(self, obj):
+#         return reverse('planning', args=[obj.username])
 
 
 class StaticViewSitemap(Sitemap):
-    changefreq = 'daily'
-    prioritized_items = {'list_race': 0.9, 'intro': 1.0}
+    changefreq = 'weekly'
+    prioritized_items = {'intro': 1.0}
 
     def items(self):
         return [item for item, priority in self.prioritized_items.items()]

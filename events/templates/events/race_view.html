@@ -3,17 +3,17 @@
 {% load humanize %}
 
 {%block title%}
-<title>{{ race.event.name | capfirst  }} {{ race.date | date:'Y' }} - Distance {{ race.get_distance_cat_str }}</title>
+<title>{{ race.event.name | capfirst }} {{ race.date | date:'Y' }} :: {{ race.sport.name }} {{ race.get_distance_cat_str }}</title>
 {%endblock%}
 
 {% block meta %}
-<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Aquathlon ...">
+<meta name="description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }} :: {{ race.sport.name }} {{ race.get_distance_cat_str }} le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}), {{race.location.country.name }}. Consultez le calendrier des courses de {{ race.sport.name }} sur Espròva.">
 {% endblock %}
 
 {% block opengraph %}
-<meta property="og:title" content="{{ race.event.name | capfirst }} {{ race.date | date:'Y' }} - Distance {{ race.get_distance_cat_str }}" />
+<meta property="og:title" content="{{ race.event.name | capfirst }} {{ race.date | date:'Y' }} :: {{ race.sport.name }} {{ race.get_distance_cat_str }}" />
 <meta property="og:type" content="article" />
-<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }}, distance ({{ race.get_distance_cat_str  }}), le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}). Plus d'informations sur Espròva, calendrier des courses de Triathlon, Duathlon, Aquathlon ..."/>
+<meta property="og:description" content="{{ race.event.name  | capfirst  }} {{ race.date | date:'Y' }} :: {{ race.sport.name }} {{ race.get_distance_cat_str }} le {{race.date | date:"j F Y" }} à {{ race.location.locality }}, {{ race.location.administrative_area_level_2 }} ({{race.location.administrative_area_level_2_short_name}}), {{race.location.country.name }}. Consultez le calendrier des courses de {{ race.sport.name }} sur Espròva."/>
 {% endblock %}
 
 {% block head_extra %}

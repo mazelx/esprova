@@ -66,6 +66,10 @@ class Sport(ComparableModelMixin, models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('list_race_sport', args=[self.name])
+
     @property
     def distances(self):
         distances = []
