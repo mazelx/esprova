@@ -207,6 +207,47 @@ function initializeMap() {
 
     map.setOptions({styles: map_styles});
 
+    initializeMapSearchBox();
+
+}
+
+function initializeMapSearchBox() {
+
+        var options = {
+            types: ['geocode'] 
+        };
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('cd-place-searchbox');
+        var searchBox = new google.maps.places.Autocomplete(input, options);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+            searchBox.setBounds(map.getBounds());
+        });
+
+        // [START region_getplaces]
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('place_changed', function() {
+            var place = searchBox.getPlace();
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+        
+            // Create a marker for each place.
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+
+            map.fitBounds(bounds);
+        });
+
+        // [END region_getplaces]
 }
 
 // initialize map zoom controls

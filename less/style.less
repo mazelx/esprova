@@ -332,7 +332,7 @@ blockquote:after {
         position:absolute;
         z-index: 1;
         left: 10px;
-        background-color: @esprova-red;
+        background-color: fade(@esprova-red, 92%);
         font-size: 2.28em;
         color:white;
         text-align: center;
@@ -346,12 +346,24 @@ blockquote:after {
     #cd-zoom-out {
         top: 48px;
     }
+
+    #cd-place-searchbox {
+        margin-left: 50px;
+        margin-top: 15px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+        height: 32px;
+        border: 1px solid @esprova-red; 
+        background-color: fade(white, 92%);
+    }
+
     #cd-follow_map_bounds {
         position: absolute;
         bottom: 10px;
         left: 10px;
         z-index: 1;
-        background: white;
+        background: fade(white, 92%);
         padding: 2px;
         color: @esprova-red;
         font-weight: 300;

@@ -93,7 +93,7 @@
                 <label for="search_expr" class="col-sm-offset-1 col-sm-3 control-label">Recherchez à proximité de</label>
                 <div class="col-sm-5">
                     <div class="input-group">
-                        <input type="search" id="search_expr" class="form-control" placeholder="Région, Département, Ville ..." name="search_expr"/>
+                        <input type="search" id="location_search" class="form-control" placeholder="Région, Département, Ville ..." name="location_search"/>
                         <span class="input-group-btn">
                             <button class="btn btn-default btn-lg" id="search_expr_go"> 
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -206,13 +206,13 @@
 
     $( document ).ready(function() {
         var options = {
-            types: ['(regions)'],
+            types: ['geocode'],
             // 
             // componentRestrictions: {country: 'fr'}
 
             };
 
-        input = $('#search_expr');
+        input = $('#location_search');
         searchBox = new google.maps.places.SearchBox(input[0]);
 
 
