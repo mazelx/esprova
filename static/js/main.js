@@ -334,8 +334,8 @@ function initializeDOMComponents(){
             map.setZoom(parseInt(getParameterByName("z")));
         }
         // wait for the map to be ready to get bounds
-        displayLoadingSpinner();
-        sidebarLoadingLock = true;
+        //displayLoadingSpinner();
+        //sidebarLoadingLock = true;
         google.maps.event.addListenerOnce(map, 'bounds_changed', function(){ 
             viewport = map.getBounds().toUrlValue().split(",");
             sidebarLoadingLock = false;
@@ -610,7 +610,6 @@ function getRaces(options) {
 
 function ajaxLoad(data, options, fallback) {
     if (typeof options === "undefined") { options = new RefreshOptions();}
-
 
     if (options.refreshSidebar) {
         displayLoadingSpinner();
