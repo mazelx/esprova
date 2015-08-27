@@ -166,6 +166,18 @@ function initialize() {
         }
     });
 
+    $(document).on({
+        ajaxStart: function() { 
+            $("#racelist-container").hide();
+            $("#loading-spinner").show();
+        },
+        ajaxStop: function() { 
+            $("#racelist-container").show();
+            $("#loading-spinner").hide();
+        }    
+    });
+
+
 
     // Add custom event listeners
     addListWindowResize();
@@ -334,8 +346,8 @@ function initializeDOMComponents(){
             map.setZoom(parseInt(getParameterByName("z")));
         }
         // wait for the map to be ready to get bounds
-        //displayLoadingSpinner();
-        //sidebarLoadingLock = true;
+        displayLoadingSpinner();
+        sidebarLoadingLock = true;
         google.maps.event.addListenerOnce(map, 'bounds_changed', function(){ 
             viewport = map.getBounds().toUrlValue().split(",");
             sidebarLoadingLock = false;
@@ -662,8 +674,8 @@ function ajaxLoad(data, options, fallback) {
 // ----------------------
 
 function displayLoadingSpinner(){
-    $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
-    $("#filter-cde-results").html("<i class='fa fa-spinner fa-pulse'></i>");
+    // $("#racelist").html("<div class='spinner'><i class='fa fa-spinner fa-pulse'></i></div>");
+    // $("#filter-cde-results").html("<i class='fa fa-spinner fa-pulse'></i>");
 }
 
 

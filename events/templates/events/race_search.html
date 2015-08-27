@@ -142,17 +142,25 @@
             </div>
             {# end searchbox #}
    
-            {# racelist #}
-            <div id="racelist" class="list-group" role="tablist" aria-multiselectable="true">
-            {% autoescape off %}
-                {{ racelist }}
-            {% endautoescape %}
+            {# ajax loading spinner  #}
+            <div id="loading-spinner">
+                <i class='fa fa-spinner fa-pulse'></i>
             </div>
-            <div id="racelist_footer">
-                Il manque une épreuve ? <a href="{% url "create_event_intro" %}">Ajoutez-la</a> en quelques clics
-            </div>
+            
+            <div id="racelist-container">
+                {# racelist #}
+                <div id="racelist" class="list-group" role="tablist" aria-multiselectable="true">
+                {% autoescape off %}
+                    {{ racelist }}
+                {% endautoescape %}
+                </div>
 
+                <div id="racelist_footer">
+                    Il manque une épreuve ? <a href="{% url "create_event_intro" %}">Ajoutez-la</a> en quelques clics
+                </div>
             {# end racelist #}
+
+            </div>
 
         </div>
         {# end sidebox #}
