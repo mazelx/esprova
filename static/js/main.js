@@ -169,11 +169,13 @@ function initialize() {
     $(document).on({
         ajaxStart: function() { 
             $("#racelist-container").hide();
-            $("#loading-spinner").show();
+            $("#filter-cde-results").hide();
+            $(".loading-spinner").show();
         },
         ajaxStop: function() { 
             $("#racelist-container").show();
-            $("#loading-spinner").hide();
+            $("#filter-cde-results").show();
+            $(".loading-spinner").hide();
         }    
     });
 
