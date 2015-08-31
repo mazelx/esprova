@@ -233,6 +233,7 @@ function initializeMapSearchBox() {
 
         // Create the search box and link it to the UI element.
         var input = document.getElementById('cd-place-searchbox');
+        input.style.display = 'inherit'
         var searchBox = new google.maps.places.Autocomplete(input, options);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
