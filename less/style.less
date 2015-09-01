@@ -204,7 +204,7 @@ blockquote:after {
         text-align: center;
         background-color: @esprova-lightergray;
         margin: 0 -15px 0 -15px;
-        padding: 30px 0 40px 0;
+        padding: 30px 10px 40px 10px;
         font-size: 1.2em;
         border-bottom: 1px solid @esprova-lightgray;
         border-top: 1px solid @esprova-lightgray;
@@ -667,7 +667,7 @@ blockquote:after {
     padding-left: 0;
     padding-right: 0;
     margin-top: -30px;
-    margin-bottom: -50px;
+    margin-bottom: -55px;
     background-color: @esprova-lightergray;
 
        
@@ -888,8 +888,8 @@ blockquote:after {
 
             .race-add-planning {
                 .hidden-print();
-                padding: 120px 0;
-                font-size: 1.5em;
+                padding: 120px 15px;
+                font-size: 1.1em;
                 color: @esprova-gray;
                 border-bottom: solid 1px @esprova-lightergray;
                 text-align: center;
@@ -901,6 +901,10 @@ blockquote:after {
                 .race-add-planning-icon {
                     height: 100px;
                     padding-left: 30px;
+                    @media (max-width: @screen-xs-max) {
+                        height: 60px;
+                    }
+
                 }
                 .race-add-planning-icon:hover {
                     .opacity(0.5);
@@ -910,6 +914,7 @@ blockquote:after {
 
         .race-edit {
             .alt_font();
+            padding: 15px 30px;
             color: @esprova-gray;
             font-style: italic;
             text-align: center;
