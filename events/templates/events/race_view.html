@@ -56,10 +56,16 @@
 <div class="content">
 
     <div class="racepage container-fluid">
-        <div class="racebanner"></div>
         <header class="event-header">
+            <div class="event-actions">
+                <a href="{% url "update_event" race.event.pk %}"><img class="icon-event" alt="Modifier l'évènement" src="{% static "images/icon-event-edit.svg" %}"></a>
+                <a href="{% url "delete_event" race.event.pk %}"><img class="icon-event" alt="Supprimer l'évènement" src="{% static "images/icon-event-delete.svg" %}"></a>
+                <div id="event-action-text">Modifier l'évènement</div>
+            </div>
             <div class="container">
-                <div class="race-event-info row">
+                <section class="event-info">    
+                    <div class="section-title">évènement</div>
+                    <div class="section-content">
                         <h1 class="event-name">{{ race.event.name }} {{ race.date | date:'Y' }}</h1>
                         <h2 class="event-detail"> 
                             {{ race.event.edition | ordinal }} édition 
@@ -73,41 +79,47 @@
                                 ({{ race.location.administrative_area_level_2_short_name }})
                             {%endif%}
                         </h2>
-                </div>
-                <div class="race-distances">
-                    {% for sport, races in race.event.get_races_by_sports.items %}
-                        <h3 class="race-sport-distances">
-                            <span class="race-sport">{{ sport }}</span>  
-                            {% for r in races %}
-                                {% if r == race %}
-                                    <a class="btn btn-default btn-sm distance-icon active">{{ r.get_distance_cat_str }}</a>
-                                {% else %}
-                                    <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.get_distance_cat_str }}</a>
-                                {% endif %}
-                            {% endfor %}
-                        </h3>
-                    {% endfor %}
-                </div>
+                    </div>
+                </section>
+                <section class="event-race-info">
+                    <div class="section-title">courses</div>
+                    <div class="section-content">
+                        {% for sport, races in race.event.get_races_by_sports.items %}
+                            <h3 class="race-sport-distances">
+                                <div class="race-sport">{{ sport }}</div>  
+                                <div class="race-distance-buttons">
+                                    {% for r in races %}
+                                        {% if r == race %}
+                                            <a class="btn btn-default btn-sm distance-icon active">{{ r.get_distance_cat_str }}</a>
+                                        {% else %}
+                                            <a href="{% url "view_race" r.slug r.pk %}" class="btn btn-default btn-sm distance-icon">{{ r.get_distance_cat_str }}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </h3>
+                        {% endfor %}
+                </section>
             </div>
         </header>
         
 
-        <div class="race-menu">
-            <div class="container">
-                <div class="row">
-                    <span class="race-menu-title">{{race.sport.name}} {{ race.get_distance_cat_str }} </span>
-                    <ul class="race-menu-pills nav nav-pills nav-justified">
-                            <li role="presentation" class="active"><a href="#">Résumé</a></li>
-                            <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible" ><a href="#">Parcours</a></li>
-                            <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible"><a href="#">Médias</a></li>
-                            <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible"><a href="#">Résultats</a></li>
-                    </ul>
+        <div class="race-content">
+
+            <div class="race-menu">
+                <div class="container">
+                    <div class="row">
+                        <span class="race-menu-title">{{race.sport.name}} {{ race.get_distance_cat_str }} </span>
+                        <ul class="race-menu-pills nav nav-pills nav-justified">
+                                <li role="presentation" class="active"><a href="#">Résumé</a></li>
+                                <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible" ><a href="#">Parcours</a></li>
+                                <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible"><a href="#">Médias</a></li>
+                                <li role="presentation" class="disabled" data-toggle="tooltip" title="Fonctionnalité bientôt disponible"><a href="#">Résultats</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-        <div class="race-content container">
+            <div class="racebanner"></div>
 
             {% if race.description %}
                 {# description #}

@@ -24,6 +24,7 @@ $( document ).ready(function() {
     };
 
     addListRaceDisplayMap(); 
+    addListHoverActionButton();
 
 });
 
@@ -45,6 +46,18 @@ function addListRaceDisplayMap() {
         }
 
     });
+}
+
+function addListHoverActionButton(){
+    $(".icon-event").on( "mouseenter", function (e) {
+        el = $("#event-action-text");
+        el.css("visibility", "visible");
+        el.html(e.target.alt);
+    } );
+    $(".icon-event").on( "mouseleave", function (e) {
+        el = $("#event-action-text");
+        el.css("visibility", "hidden");
+    } );
 }
 
 function createMap(){

@@ -146,7 +146,7 @@ blockquote:after {
 }
 
 .intropage {
-    // background-color: @esprova-red;
+    background-color: white;
     // color:white;
 
     .banner {
@@ -666,33 +666,81 @@ blockquote:after {
     min-height: 100%;
     padding-left: 0;
     padding-right: 0;
+    margin-top: -30px;
+    margin-bottom: -50px;
+    background-color: @esprova-lightergray;
+
        
         .racebanner {
             background: url(../images/race-banner.jpg) no-repeat center;
             vertical-align: text-bottom;
-            top: 51px;
             height: 300px;
-            margin-top: -30px;
             background-size: cover;
             background-position-y: 20%;
             .hidden-print();
         }
 
         .event-header {
+            border: 1px solid @esprova-lightgray;
             background-color: @esprova-red;
             color: white;
-            padding-top: 15px;
+            padding-top: 30px;
             padding-bottom: 30px; 
             font-weight: 400;
+            margin: 40px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,.15);
 
-            .race-event-info{
+            .event-actions {
                 .make-sm-column-offset(2);
                 .make-sm-column(8);
-                
+                position: relative;
+                top: -50px;
+                float: right;
+                text-align: right;
+                color: @esprova-darkgray;
+
+                img {
+                    height: 40px;
+                    margin-left: 5px; 
+                }
+
+                #event-action-text {
+                    visibility: hidden;
+                }
+
+            }
+
+            section {
+                .make-row();
+            }
+
+            .section-title {
+                .make-sm-column-offset(1);
+                .make-sm-column(1);    
+                font-weight: 100;
+                margin-bottom: 30px;
+                color: white;
+                font-size: 1.2em;
+                font-style: italic;
+                color: fade(white, 80%);
+            }
+
+            .section-content {
+                .make-sm-column-offset(1);
+                .make-sm-column(8);  
+            }
+
+            .event-info {
+
+                .section-title {
+                    line-height: 2.5em;
+                }
 
                 .event-name {
                     text-transform: uppercase;
                     font-size: 2.5em;
+                    margin-top: 0px;
+                    font-weight: 600;
                 }
                 .event-detail {
                     font-size: 1.2em;
@@ -700,64 +748,70 @@ blockquote:after {
                 }
             }
 
-            .race-distances {
-                .make-sm-column-offset(2);
-                .make-sm-column(8);
-                // .make-row();
-                margin-top: 30px;
+            .event-race-info {
+                margin-top: 50px;
 
-                .race-sport-distances {
-
-                    font-size: inherit;
-
-
-                    @media (min-width: @screen-md-min) {
-                        display: inline;
-                    }
-
-                    margin-right: 50px;
-                    line-height: 300%;
-
-                    .race-sport {
-                        margin-right: 5px;
-                    }
-
-                    .distance-icon {
-                        color: @esprova-red;
-                        border: solid 1px @esprova-red;
-                        min-width: 40px;
-
-                    }
-                    .distance-icon.active{
-                        color: white;
-                        // border: solid 1px white;
-                        background-color: @esprova-gray;
-                        // border: solid 1px white;
-                    }
-
-
+                .section-title {
+                   line-height: 1.2em;
                 }
-                
-            }
 
+                .section-content {
+
+                    .race-sport-distances {
+                        // font-size: inherit;
+                        // margin-right: 50px;
+                        font-size: 1.2em;
+                        margin-right: 0px;
+                        margin-top: 0;
+                        // .clearfix();
+                        .make-row();
+
+
+                        .race-sport {
+                            .make-sm-column(5);
+                            margin-right: 5px;
+                        }
+
+                        .race-distance-buttons {
+                            .make-sm-column(6);
+                            text-align: left;
+
+                            .distance-icon {
+                                color: @esprova-red;
+                                border: solid 1px @esprova-red;
+                                min-width: 50px;
+
+                            }
+                            .distance-icon.active{
+                                color: white;
+                                background-color: @esprova-gray;
+                            }
+
+                        }
+                    }    
+                }   
+            }
         }
+
         .race-menu {
             // background-color: @esprova-darkgray;
-            background: @esprova-darkgray url(../images/icon-race-notch.svg) no-repeat top right;
+            // background: @esprova-darkgray url(../images/icon-race-notch.svg) no-repeat top right;
+            background-color: @esprova-darkgray;
             color: white;
             @race-menu-height: 60px;
+            text-align: center;
             // height: @race-menu-height;
 
             .race-menu-title {
-                .make-sm-column-offset(2);
-                .make-sm-column(4);
+                .make-sm-column-offset(1);
+                .make-sm-column(5);
                 font-size: 1.5em;
                 line-height: @race-menu-height;
 
             }
 
             .race-menu-pills {
-                .make-sm-column(4);
+                .make-sm-column(5);
                 line-height: @race-menu-height;
                 li > a {
                    padding:0; 
@@ -775,8 +829,12 @@ blockquote:after {
         }
 
         .race-content {
-            .race-auto-padding();
             .alt_font();
+            background-color: white;
+            margin: 70px 15px;
+            border: 1px solid @esprova-lightgray;
+            box-shadow: 0 2px 5px rgba(0,0,0,.15);
+
             .race-infogroup {
                 padding-top: 50px;
                 padding-bottom: 50px;
@@ -855,7 +913,6 @@ blockquote:after {
             color: @esprova-gray;
             font-style: italic;
             text-align: center;
-            margin-bottom: -50px;
         }
 }
 
