@@ -586,6 +586,7 @@ class Race(ComparableModelMixin, models.Model):
                     self.contact = dummy_c
                     dummy_l = Location()
                     dummy_l.geocode(country='FR')
+                    dummy_l.save()
                     self.location = dummy_l
                     self.save()
 

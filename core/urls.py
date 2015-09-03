@@ -17,7 +17,7 @@ search_dict = {
 sitemaps = {
     'static': StaticViewSitemap(),
     'races': GenericSitemap(race_dict, priority=0.8),
-    'search': GenericSitemap(search_dict, priority=1.0),
+    'search': GenericSitemap(search_dict, priority=0.9),
 }
 
 urlpatterns = patterns('', url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
