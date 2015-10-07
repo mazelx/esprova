@@ -277,7 +277,7 @@ class Event(ComparableModelMixin, models.Model):
 
     def get_nb_changes(self):
         if self.pk:
-            return Event.objects.filter(event_mod_source=self.pk).count()
+            return self.event_modified_set.count()
 
     def get_changed_event(self):
         if self.pk:

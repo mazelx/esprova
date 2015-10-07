@@ -29,13 +29,13 @@ import logging
 
 class EventValidationList(LoginRequiredMixin, ListView):
     model = Event
-    queryset = Event.objects.filter(event_mod_source=None)
+    # queryset = Event.objects.filter(event_mod_source=None)
     template_name = "events/event_validation_list.html"
     context_object_name = "event_list"
 
     def get_queryset(self):
         changed_event_list = []
-        qs = super(EventValidationList, self).get_queryset()
+        qs = Event.objects.filter(event_mod_source__isnull=True)
         for event in qs:
             nb_changes = event.get_nb_changes()
             # add event to the list :
