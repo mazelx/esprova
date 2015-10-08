@@ -374,7 +374,7 @@ class Event(ComparableModelMixin, models.Model):
 
         """
         if self.pk is None:
-            seq = (self.name, self.date.edition)
+            seq = (self.name, str(self.edition))
             self.slug = slugify("-".join(seq))
             super(Event, self).save(*args, **kwargs)
 
