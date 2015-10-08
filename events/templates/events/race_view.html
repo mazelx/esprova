@@ -45,21 +45,23 @@
       }
      }
 }
+</script>
 
+<script type="application/ld+json">
 { "@context": "http://schema.org",
   "@type": "BreadcrumbList",
     "itemListElement": [{
     "@type": "ListItem",
     "position": 1,
     "item": {
-      "@id": "{% url "list_race_sport" race.sport.name %}",
+      "@id": "{{ request.META.HTTP_HOST }}{% url "list_race_sport" race.sport.name %}",
       "name": "{{ race.sport.name }}"
     }
   },{
     "@type": "ListItem",
     "position": 2,
     "item": {
-      "@id": "{% url "view_event" race.event.slug race.event.pk %}",
+      "@id": "{{ request.META.HTTP_HOST }}{% url "view_event" race.event.slug race.event.pk %}",
       "name": "{{ race.event.name }}"
     }
   }]
