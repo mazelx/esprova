@@ -1,5 +1,6 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %} 
+{% load humanize %}
 
 
 {% block head_extra %}
@@ -20,67 +21,66 @@
 
 {% block content %}
 
-<div class="content ">
-    <div class="container simple-page">
+<div class="content">
 
-        <header>
-        <h1>{{ event.name }}</h1>
+    <div class="eventpage container-fluid">
 
-        {% if event.to_be_deleted %}
-            <h2 class="text-danger">**** A supprimer ! ****</h2>
-        {% endif %}
+        <div class="eventbanner"></div>
+
+        <header class="event-header">
+            <div class="event-actions">
+                <a href="{% url "update_event" event.pk %}"><img class="icon-event" alt="Modifier l'évènement" src="{% static "images/icon-event-edit.svg" %}"></a>
+                <a href="{% url "delete_event" event.pk %}"><img class="icon-event" alt="Supprimer l'évènement" src="{% static "images/icon-event-delete.svg" %}"></a>
+                <div id="event-action-text">Modifier l'évènement</div>
+            </div>
+
+            <div class="container">
+                <section class="event-info">    
+                    <div class="section-title">évènement</div>
+                    <div class="section-content">
+                        <h1 class="event-name">{{ event.name }} {{ event.get_start_date | date:'Y' }}</h1>
+                        <h2 class="event-detail"> 
+                            {{ event.edition | ordinal }} édition 
+                            {% if event.get_start_date = event.get_end_date %} 
+                                le {{ event.get_start_date }} 
+                            {% else %} 
+                                du {{ event.get_start_date }} au {{ event.get_end_date }} 
+                            {% endif %}
+                            {% with event.get_first_location as location %}
+                                à {{ location.locality }}
+                                {% if location.administrative_area_level_2_short_name %}
+                                    ({{ location.administrative_area_level_2_short_name }})
+                                {%endif%}
+                            {% endwith %}
+                        </h2>
+                    </div>
+                </section>
+                <section class="event-race-info">
+                    <div class="section-title">courses</div>
+                    <div class="section-content">
+                        {% for sport, races in event.get_races_by_sports.items %}
+                            <h3 class="race-sport-distances">
+                                <div class="race-sport">{{ sport }}</div>  
+                                <div class="race-distance-buttons">
+                                    {% for r in races %}
+                                        <div>
+                                            <a href="{% url "view_race" r.slug r.pk %}">
+                                                <span class="btn btn-default btn-sm distance-icon">{{ r.get_distance_cat_str }}</span>
+                                                <span class="race-distance-date">
+                                                    <time datetime="{{r.date| date:"c"}}T{{r.time| time:"H:i"}}"><span>{{r.date | date:"l d F Y" }}</span> <span >{{r.time| time:"à H:i"| default:""}}</span></time>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </h3>
+                        {% endfor %}
+                </section>
+            </div>
         </header>
 
-        <div class="simple-form">
+        <div class="eventbannerbottom"></div>
 
-            <div class="row">
-
-                <div class="row">
-                    <span class="col-xs-3 label"><label>Site internet : </label></span>
-                    <span class="col-xs-9">{{ event.website }}</span>
-                </div>
-                <div class="row">
-                    <span class="col-xs-3 label"><label>Edition : </label></span>
-                    <span class="col-xs-9">{{ event.edition }}</span>
-                </div>
-                <div class="row">
-                    <span class="col-xs-3 label"><label>Organisateur : </label></span>
-                    <span class="col-xs-9">
-                      {% if race.event.organizer.website %}
-                            <a href="{{ race.event.organizer.website }}" target="_blank">
-                                {{ event.organizer.name }}
-                            </a>
-                        {% else %}
-                            {{ event.organizer.name | default:"<br>"}}
-                        {%endif%}
-                    </span>
-                </div>
-
-                <br class="row">
-                <div class="row"> <span class="col-xs-3 label"><label>Courses : </label> </span></div>
-                <ul class="list-group row">
-                    {% for race in event.get_races %}
-                         <li class="col-xs-9 col-xs-offset-3 list-group-item">
-                             <span class="{{race.to_be_deleted|yesno:"deleted,"}}">
-                                <a href="{% url "view_race" race.slug race.pk %}" >{{ race }} -- {{race.date | date:"l d/m/Y" | capfirst }} {{ race.time| time:"à H:i"| default:"<em class='text-muted'>(horaire non communiqué)</em> "}} </a>
-                             </span>
-                         </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="row">
-                <div class="form-submit">
-                    {% if not event.validated %}
-                        <form action="{% url "delete_event" event.pk %}" method="POST" style="display: inline;">
-                         {% csrf_token %}
-                            <button type="submit" class="btn btn-primary" value="DELETE">Ignorer</button>
-                        </form>
-                        <a class="btn btn-warning" href="{% url "update_event" event.pk %}">Modifier</a>
-                        <button class="btn btn-success" onclick="validateRace({{event.pk}})">Accepter</button>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 {% endblock %}

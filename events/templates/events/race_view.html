@@ -29,19 +29,19 @@
   "name" : "{{ race.event.name }} - {{ race.get_distance_cat_str }} ",
   "startDate" : "{{race.date | date:'c'}}",
   "organizer" : {
-   "@type" : "Organization",
-   "name" : "{{race.event.organizer.name}}",
-   "url" : "{{ request.META.HTTP_HOST }}{% url "view_race" race.slug race.pk %}"
-  },
+       "@type" : "Organization",
+       "name" : "{{race.event.organizer.name}}",
+       "url" : "{{ request.META.HTTP_HOST }}{% url "view_race" race.slug race.pk %}"
+      },
   "location" : {
     "@type" : "Place",
     "name" : "{{ race.location.getFormattedLocality }}",
     "address" : {
-      "@type": "PostalAddress",
-      "streetAddress": "{{ race.location.getFormattedStreet }}",
-      "addressLocality": "{{ race.location.locality }}",
-      "addressRegion": "{{ race.location.getFormattedRegion }}",
-      "addressCountry": "{{ race.location.getFormattedCountry }}"
+        "@type": "PostalAddress",
+        "streetAddress": "{{ race.location.getFormattedStreet }}",
+        "addressLocality": "{{ race.location.locality }}",
+        "addressRegion": "{{ race.location.getFormattedRegion }}",
+        "addressCountry": "{{ race.location.getFormattedCountry }}"
       }
      }
 }

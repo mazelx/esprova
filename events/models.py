@@ -196,6 +196,7 @@ class Event(ComparableModelMixin, models.Model):
     # for _compare() method of ComparableModelMixin
     compare_excluded_keys = 'pk', 'id', '_state', 'event_mod_source', 'validated', 'event_mod_source'
 
+    slug = models.SlugField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=150, verbose_name="Nom de l'événement")
     website = models.URLField(blank=True, null=True, verbose_name='Site internet')
     organizer = models.ForeignKey(Organizer, blank=True, null=True, verbose_name='Organisateur')
@@ -217,6 +218,9 @@ class Event(ComparableModelMixin, models.Model):
 
     def get_end_date(self):
         return self.races.all().aggregate(Max('date'))['date__max']
+
+    def get_first_location(self):
+        return self.races.first().location
 
     def get_distance_cat_set(self, unique=False):
         distance_cat_set = []
@@ -363,6 +367,21 @@ class Event(ComparableModelMixin, models.Model):
             r.save()
 
         event.delete()
+
+    def save(self, *args, **kwargs):
+        """
+            Define the slug when the instance is about to be created in the db
+
+        """
+        if self.pk is None:
+            seq = (self.name, self.date.edition)
+            self.slug = slugify("-".join(seq))
+            super(Event, self).save(*args, **kwargs)
+
+            # The instance has just been inserted thus do not insert again even if forced on save() call
+            if kwargs.get('force_insert', None):
+                kwargs.pop('force_insert')
+        super(Event, self).save(force_update=True, *args, **kwargs)
 
 
 class Contact(ComparableModelMixin, models.Model):

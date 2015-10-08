@@ -47,7 +47,9 @@ urlpatterns = patterns('',
 
                        # View
                        url(r'^races/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', RaceView.as_view(), name='view_race'),
-                       url(r'^events/(?P<pk>\d+)$', EventView.as_view(), name='view_event'),
+                       url(r'^events/(?P<pk>\d+)$', EventView.as_view(), name='view_event_pk'),
+                       url(r'^events/(?P<slug>[-\w\d]+)_(?P<pk>\d+)$', EventView.as_view(), name='view_event'),
+
 
                        # CRUD
                        url(r'^create/intro$',

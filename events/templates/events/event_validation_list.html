@@ -16,7 +16,7 @@
                 <div class="list-group-item">
                     <div class="list-group-item-heading row">
                         <div class="col-xs-5">
-                            <div class="event"><a href="{% url "view_event" event.pk %}" title="Plus d'informations">{{ event.name }}</a> </div>
+                            <div class="event"><a href="{% url "view_event" event.slug event.pk %}" title="Plus d'informations">{{ event.name }}</a> </div>
                         </div>
                         <div class="col-xs-4 changes">
                             {% if event.validated %}
@@ -33,7 +33,7 @@
                         <div class="list-group">
                             {% for event_changed in event.get_changed_event %}
                                 <div class="list-group-item">
-                                    <p class="list-group-item-heading"><a href="{% url "view_event" event_changed.pk %}" title="Plus d'informations">{{ event_changed.pk }}</a></p>
+                                    <p class="list-group-item-heading"><a href="{% url "view_event"  event.slug event_changed.pk %}" title="Plus d'informations">{{ event_changed.pk }}</a></p>
                                     <p class="list-group-item-text"> {{ event_changed.get_changes }}</p>
                                 </div>
                             {% endfor %}
