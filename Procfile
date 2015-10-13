@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn esprova.wsgicat
+web: newrelic-admin run-program gunicorn esprova.wsgi
